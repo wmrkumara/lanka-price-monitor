@@ -1,0 +1,709 @@
+{
+ "generated": "2026-05-29T16:50:15",
+ "source": "Central Bank of Sri Lanka \u2013 Daily Price Report",
+ "dates": [
+  "2026-05-15",
+  "2026-05-18",
+  "2026-05-19",
+  "2026-05-20",
+  "2026-05-21",
+  "2026-05-22",
+  "2026-05-25",
+  "2026-05-26",
+  "2026-05-27",
+  "2026-05-29"
+ ],
+ "dateLabels": [
+  "15 May",
+  "18 May",
+  "19 May",
+  "20 May",
+  "21 May",
+  "22 May",
+  "25 May",
+  "26 May",
+  "27 May",
+  "29 May"
+ ],
+ "commodities": [
+  {
+   "name": "Beans",
+   "category": "Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    555.0,
+    530.0,
+    580.0,
+    465.0,
+    605.0,
+    580.0,
+    530.0,
+    580.0,
+    580.0,
+    475.0
+   ],
+   "markets": {
+    "Pettah": 350.0,
+    "Dambulla": 475.0,
+    "Narahenpita": 800.0
+   }
+  },
+  {
+   "name": "Carrot",
+   "category": "Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    240.0,
+    220.0,
+    240.0,
+    230.0,
+    325.0,
+    305.0,
+    280.0,
+    345.0,
+    290.0,
+    335.0
+   ],
+   "markets": {
+    "Pettah": 300.0,
+    "Dambulla": 335.0,
+    "Narahenpita": 480.0
+   }
+  },
+  {
+   "name": "Cabbage",
+   "category": "Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    140.0,
+    150.0,
+    120.0,
+    130.0,
+    155.0,
+    145.0,
+    155.0,
+    170.0,
+    150.0,
+    135.0
+   ],
+   "markets": {
+    "Pettah": 130.0,
+    "Dambulla": 135.0,
+    "Narahenpita": 340.0
+   }
+  },
+  {
+   "name": "Tomato",
+   "category": "Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    430.0,
+    285.0,
+    285.0,
+    285.0,
+    285.0,
+    305.0,
+    320.0,
+    345.0,
+    325.0,
+    305.0
+   ],
+   "markets": {
+    "Pettah": 450.0,
+    "Dambulla": 305.0,
+    "Narahenpita": 500.0
+   }
+  },
+  {
+   "name": "Brinjal",
+   "category": "Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    395.0,
+    455.0,
+    370.0,
+    405.0,
+    430.0,
+    455.0,
+    485.0,
+    455.0,
+    415.0,
+    345.0
+   ],
+   "markets": {
+    "Pettah": 450.0,
+    "Dambulla": 345.0,
+    "Narahenpita": 600.0
+   }
+  },
+  {
+   "name": "Pumpkin",
+   "category": "Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    140.0,
+    145.0,
+    150.0,
+    135.0,
+    125.0,
+    120.0,
+    125.0,
+    130.0,
+    110.0,
+    120.0
+   ],
+   "markets": {
+    "Pettah": 150.0,
+    "Dambulla": 120.0,
+    "Narahenpita": 220.0
+   }
+  },
+  {
+   "name": "Snake gourd",
+   "category": "Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    320.0,
+    285.0,
+    355.0,
+    280.0,
+    320.0,
+    295.0,
+    255.0,
+    305.0,
+    280.0,
+    295.0
+   ],
+   "markets": {
+    "Pettah": 350.0,
+    "Dambulla": 295.0,
+    "Narahenpita": 600.0
+   }
+  },
+  {
+   "name": "Green Chilli",
+   "category": "Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    280.0,
+    180.0,
+    145.0,
+    230.0,
+    245.0,
+    280.0,
+    230.0,
+    225.0,
+    280.0,
+    230.0
+   ],
+   "markets": {
+    "Pettah": 450.0,
+    "Dambulla": 230.0,
+    "Narahenpita": 600.0
+   }
+  },
+  {
+   "name": "Lime",
+   "category": "Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    405.0,
+    355.0,
+    355.0,
+    335.0,
+    370.0,
+    355.0,
+    405.0,
+    435.0,
+    410.0,
+    405.0
+   ],
+   "markets": {
+    "Pettah": 550.0,
+    "Dambulla": 405.0,
+    "Narahenpita": 800.0
+   }
+  },
+  {
+   "name": "Red Onion (Local)",
+   "category": "Other",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    295.0,
+    285.0,
+    285.0,
+    270.0,
+    245.0,
+    270.0,
+    235.0,
+    310.0,
+    245.0,
+    245.0
+   ],
+   "markets": {
+    "Pettah": null,
+    "Dambulla": 245.0,
+    "Narahenpita": null
+   }
+  },
+  {
+   "name": "Red Onion (lmp)",
+   "category": "Other",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    315.0,
+    325.0,
+    325.0,
+    345.0,
+    320.0,
+    335.0,
+    345.0,
+    320.0,
+    335.0,
+    330.0
+   ],
+   "markets": {
+    "Pettah": 383.0,
+    "Dambulla": 330.0,
+    "Narahenpita": 600.0
+   }
+  },
+  {
+   "name": "Big Onion (Imp)",
+   "category": "Other",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    185.0,
+    173.0,
+    178.0,
+    173.0,
+    195.0,
+    225.0,
+    205.0,
+    205.0,
+    215.0,
+    210.0
+   ],
+   "markets": {
+    "Pettah": 233.0,
+    "Dambulla": 210.0,
+    "Narahenpita": 240.0
+   }
+  },
+  {
+   "name": "Potato (Local)",
+   "category": "Other",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    235.0,
+    215.0,
+    225.0,
+    215.0,
+    245.0,
+    235.0,
+    235.0,
+    255.0,
+    235.0,
+    235.0
+   ],
+   "markets": {
+    "Pettah": 300.0,
+    "Dambulla": 235.0,
+    "Narahenpita": 350.0
+   }
+  },
+  {
+   "name": "Potato (Imp)",
+   "category": "Other",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    165.0,
+    158.0,
+    165.0,
+    178.0,
+    183.0,
+    188.0,
+    163.0,
+    185.0,
+    175.0,
+    170.0
+   ],
+   "markets": {
+    "Pettah": 207.0,
+    "Dambulla": 170.0,
+    "Narahenpita": 240.0
+   }
+  },
+  {
+   "name": "Dried Chilli (Imp)",
+   "category": "Other",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    1105.0,
+    935.0,
+    985.0,
+    1043.0,
+    1105.0,
+    1043.0,
+    1105.0,
+    1055.0,
+    1015.0,
+    1005.0
+   ],
+   "markets": {
+    "Pettah": 1083.0,
+    "Dambulla": 1005.0,
+    "Narahenpita": 1080.0
+   }
+  },
+  {
+   "name": "Coconut (Avg.)",
+   "category": "Other",
+   "unit": "Rs./Nut",
+   "primaryMarket": "Dambulla",
+   "series": [
+    118.0,
+    118.0,
+    115.0,
+    120.0,
+    118.0,
+    118.0,
+    118.0,
+    120.0,
+    113.0,
+    130.0
+   ],
+   "markets": {
+    "Pettah": 158.0,
+    "Dambulla": 130.0,
+    "Narahenpita": 165.0
+   }
+  },
+  {
+   "name": "Banana (Sour)",
+   "category": "Fruits",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    120.0,
+    85.0,
+    90.0,
+    130.0,
+    100.0,
+    90.0,
+    120.0,
+    85.0,
+    95.0,
+    95.0
+   ],
+   "markets": {
+    "Pettah": 130.0,
+    "Dambulla": 95.0,
+    "Narahenpita": 200.0
+   }
+  },
+  {
+   "name": "Papaw",
+   "category": "Fruits",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    115.0,
+    90.0,
+    98.0,
+    100.0,
+    95.0,
+    105.0,
+    95.0,
+    145.0,
+    120.0,
+    105.0
+   ],
+   "markets": {
+    "Pettah": 170.0,
+    "Dambulla": 105.0,
+    "Narahenpita": 240.0
+   }
+  },
+  {
+   "name": "Pineapple",
+   "category": "Fruits",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    305.0,
+    255.0,
+    285.0,
+    275.0,
+    275.0,
+    285.0,
+    230.0,
+    255.0,
+    260.0,
+    355.0
+   ],
+   "markets": {
+    "Pettah": 240.0,
+    "Dambulla": 355.0,
+    "Narahenpita": 350.0
+   }
+  },
+  {
+   "name": "Samba",
+   "category": "Rice",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    245.0,
+    245.0,
+    245.0,
+    245.0,
+    245.0,
+    245.0,
+    245.0,
+    245.0,
+    245.0,
+    245.0
+   ],
+   "markets": {
+    "Pettah": 250.0,
+    "Dambulla": 245.0
+   }
+  },
+  {
+   "name": "Nadu",
+   "category": "Rice",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    235.0,
+    235.0,
+    235.0,
+    235.0,
+    235.0,
+    235.0,
+    235.0,
+    235.0,
+    235.0,
+    235.0
+   ],
+   "markets": {
+    "Pettah": 225.0,
+    "Dambulla": 235.0
+   }
+  },
+  {
+   "name": "Kekulu (White)",
+   "category": "Rice",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    224.0,
+    224.0,
+    224.0,
+    224.0,
+    224.0,
+    224.0,
+    224.0,
+    224.0,
+    224.0,
+    204.0
+   ],
+   "markets": {
+    "Pettah": 212.0,
+    "Dambulla": 204.0
+   }
+  },
+  {
+   "name": "Kekulu (Red)",
+   "category": "Rice",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    224.0,
+    224.0,
+    224.0,
+    224.0,
+    224.0,
+    224.0,
+    224.0,
+    224.0,
+    224.0,
+    204.0
+   ],
+   "markets": {
+    "Pettah": 200.0,
+    "Dambulla": 204.0
+   }
+  },
+  {
+   "name": "Ponni Samba (Imp)",
+   "category": "Rice",
+   "unit": "Rs./kg",
+   "primaryMarket": "Dambulla",
+   "series": [
+    240.0,
+    240.0,
+    240.0,
+    240.0,
+    240.0,
+    240.0,
+    240.0,
+    240.0,
+    240.0,
+    240.0
+   ],
+   "markets": {
+    "Pettah": 257.0,
+    "Dambulla": 240.0
+   }
+  },
+  {
+   "name": "Kelawalla",
+   "category": "Fish",
+   "unit": "Rs./kg",
+   "primaryMarket": "Negombo",
+   "series": [
+    2300.0,
+    2300.0,
+    2300.0,
+    2300.0,
+    2300.0,
+    2300.0,
+    2300.0,
+    2300.0,
+    2300.0,
+    2300.0
+   ],
+   "markets": {
+    "Negombo": 2300.0,
+    "Marandagahamula": null
+   }
+  },
+  {
+   "name": "Thalapath",
+   "category": "Fish",
+   "unit": "Rs./kg",
+   "primaryMarket": "Negombo",
+   "series": [
+    2360.0,
+    2360.0,
+    2360.0,
+    2360.0,
+    2360.0,
+    2360.0,
+    2360.0,
+    null,
+    2360.0,
+    2360.0
+   ],
+   "markets": {
+    "Negombo": 2360.0,
+    "Marandagahamula": 2840.0
+   }
+  },
+  {
+   "name": "Paraw",
+   "category": "Fish",
+   "unit": "Rs./kg",
+   "primaryMarket": "Negombo",
+   "series": [
+    2700.0,
+    2375.0,
+    null,
+    null,
+    2400.0,
+    2260.0,
+    2625.0,
+    2625.0,
+    null,
+    2625.0
+   ],
+   "markets": {
+    "Negombo": 2625.0,
+    "Marandagahamula": null
+   }
+  },
+  {
+   "name": "Salaya",
+   "category": "Fish",
+   "unit": "Rs./kg",
+   "primaryMarket": "Negombo",
+   "series": [
+    840.0,
+    920.0,
+    890.0,
+    920.0,
+    960.0,
+    970.0,
+    890.0,
+    810.0,
+    860.0,
+    850.0
+   ],
+   "markets": {
+    "Negombo": 850.0,
+    "Marandagahamula": 960.0
+   }
+  },
+  {
+   "name": "Hurulla",
+   "category": "Fish",
+   "unit": "Rs./kg",
+   "primaryMarket": "Negombo",
+   "series": [
+    1490.0,
+    null,
+    null,
+    null,
+    null,
+    1450.0,
+    1400.0,
+    1380.0,
+    null,
+    1380.0
+   ],
+   "markets": {
+    "Negombo": 1380.0,
+    "Marandagahamula": 1560.0
+   }
+  },
+  {
+   "name": "Linna",
+   "category": "Fish",
+   "unit": "Rs./kg",
+   "primaryMarket": "Negombo",
+   "series": [
+    1320.0,
+    null,
+    1480.0,
+    null,
+    null,
+    1450.0,
+    1400.0,
+    null,
+    null,
+    1450.0
+   ],
+   "markets": {
+    "Negombo": 1450.0,
+    "Marandagahamula": 1020.0
+   }
+  }
+ ]
+}
