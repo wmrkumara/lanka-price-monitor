@@ -271,7 +271,15 @@ function defaultRange(){
 }
 function renderRange(key){
   const host=document.getElementById("chartHost");if(!host)return;
-  host.innerHTML=lineChart(curDetail, rangeIdxs(key));
+  const idxs=rangeIdxs(key);
+  host.innerHTML=lineChart(curDetail, idxs);
+  const win=idxs.map(i=>curDetail.series[i]).filter(v=>v!=null);
+  if(win.length){
+    const lo=Math.min(...win),hi=Math.max(...win);
+    const lE=document.getElementById("statLow"),hE=document.getElementById("statHigh");
+    if(lE)lE.textContent=fmt(lo);
+    if(hE)hE.textContent=fmt(hi);
+  }
   document.querySelectorAll("#ranges button").forEach(b=>b.classList.toggle("on", b.dataset.r===key));
   requestAnimationFrame(()=>wireChart(curDetail));
 }
@@ -280,7 +288,7 @@ function openDetail(id){
   const min=Math.min(...vals),max=Math.max(...vals);
   curDetail=d;
   const rangeBar='<div class="ranges" id="ranges">'+["1M","3M","1Y","All"].map(r=>'<button data-r="'+r+'">'+r+'</button>').join("")+'</div>';
-  modal.innerHTML='<div class="mhead"><div><div class="cat">'+d.category+'</div><h3>'+d.name+'</h3></div><button class="close" onclick="closeDetail()" aria-label="Close">&#10005;</button></div><div class="mbody"><div class="statrow"><div class="stat"><div class="l">Latest</div><div class="v">'+fmt(latestVal(d.series))+'</div></div><div class="stat"><div class="l">Change</div><div class="v" style="color:'+strokeFor(ch.dir)+'">'+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</div></div><div class="stat"><div class="l">Period low</div><div class="v">'+fmt(min)+'</div></div><div class="stat"><div class="l">Period high</div><div class="v">'+fmt(max)+'</div></div></div>'+rangeBar+'<div id="chartHost"></div>'+marketBars(d)+'</div>';
+  modal.innerHTML='<div class="mhead"><div><div class="cat">'+d.category+'</div><h3>'+d.name+'</h3></div><button class="close" onclick="closeDetail()" aria-label="Close">&#10005;</button></div><div class="mbody"><div class="statrow"><div class="stat"><div class="l">Latest</div><div class="v">'+fmt(latestVal(d.series))+'</div></div><div class="stat"><div class="l">Change</div><div class="v" style="color:'+strokeFor(ch.dir)+'">'+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</div></div><div class="stat"><div class="l">Period low</div><div class="v" id="statLow">'+fmt(min)+'</div></div><div class="stat"><div class="l">Period high</div><div class="v" id="statHigh">'+fmt(max)+'</div></div></div>'+rangeBar+'<div id="chartHost"></div>'+marketBars(d)+'</div>';
   scrim.classList.add("open");document.body.style.overflow="hidden";
   requestAnimationFrame(()=>{
     document.getElementById("ranges").addEventListener("click",e=>{if(e.target.dataset.r)renderRange(e.target.dataset.r);});
