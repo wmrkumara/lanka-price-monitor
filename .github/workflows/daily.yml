@@ -1,7 +1,7 @@
 name: Update price data
 on:
   schedule:
-    - cron: "0 12 * * *"
+    - cron: "30 6 * * *"
   workflow_dispatch:
 permissions:
   contents: write
@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
@@ -26,5 +28,6 @@ jobs:
             echo "No changes today."
           else
             git commit -m "Auto-update price data ($(date -u +%Y-%m-%d))"
+            git pull --rebase
             git push
           fi
