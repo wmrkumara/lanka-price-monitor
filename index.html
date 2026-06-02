@@ -414,7 +414,7 @@ function openDetail(id){
   const d=DATA[id],ch=changeOf(d.series),vals=vpts(d.series).map(p=>p[1]);
   const min=Math.min(...vals),max=Math.max(...vals);
   curDetail=d;curMode="retail";
-  const hasWholesale=d.wholesaleSeries&&d.wholesaleSeries.some(v=>v!=null);
+  const hasWholesale=d.wholesaleSeries&&d.wholesaleSeries.some&&d.wholesaleSeries.some(v=>v!=null);
   const toggleBar=hasWholesale
     ?'<div class="price-toggle"><button id="btnRetail" class="on" onclick="switchMode(\'retail\')">Retail</button><button id="btnWholesale" onclick="switchMode(\'wholesale\')">Wholesale</button></div>'
     :'';
