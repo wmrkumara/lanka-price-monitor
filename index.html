@@ -103,6 +103,10 @@
     border:1px solid var(--line-strong);background:var(--card);color:var(--muted);cursor:pointer;transition:.15s}
   .ranges button:hover{border-color:var(--petrol);color:var(--ink-soft)}
   .ranges button.on{background:var(--petrol);color:#fff;border-color:var(--petrol)}
+  .mode-toggle{display:flex;gap:4px}
+  .mode-toggle button{font:inherit;font-size:11.5px;font-weight:700;letter-spacing:.04em;padding:5px 11px;border-radius:8px;border:1px solid var(--line-strong);background:transparent;color:var(--muted);cursor:pointer;transition:.2s}
+  .mode-toggle button.on{background:var(--gold);color:#fff;border-color:var(--gold)}
+  .ctrl-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px}
   .mkt-h{font-family:'Newsreader',serif;font-size:19px;margin:22px 0 4px}
   .mkt-sub{font-size:12px;color:var(--muted);margin-bottom:12px}
   .bars{display:flex;flex-direction:column;gap:11px}
@@ -177,9 +181,9 @@ let DB=EMBEDDED, DATES=[], DATA=[], DATE_OBJS=[];
 /* ---------- i18n (translations live here; data.json is never touched) ---------- */
 let lang="en";
 const I18N={
- en:{kicker:'Data from <span class="org">Central Bank of Sri Lanka</span> website',latestReport:"Latest report",sub:"Retail prices &middot; primary market shown per item &middot; vs. previous report",movers:"Today\u2019s sharpest movements",moversHint:"auto-ranked &middot; tap &rarr;",all:"All commodities",items:"items",searchPh:"Search a commodity\u2026",sortAZ:"Sort: A\u2013Z",sortUp:"Biggest increases",sortDown:"Biggest decreases",sortHigh:"Highest price",lgUp:"Price increased",lgDown:"Price decreased",footNote:"Auto-extracted from CBSL Daily Price Reports. Not an official publication.",creditPre:"Design &amp; development by",vsLast:"vs last",latest:"Latest",change:"Change",low:"Period low",high:"Period high",retail:"retail",across:"Across markets &mdash; latest report",priceOn:"Retail price on",reason:'Moved <b>%A</b> &rarr; <b>%B</b> since the previous report.',noMatch:'No commodity matches &ldquo;%Q&rdquo;.',notEnough:"Not enough data in this range yet.",na:"n.a.",allCat:"All"},
- si:{kicker:'දත්ත <span class="org">ශ්‍රී ලංකා මහ බැංකුවේ</span> වෙබ් අඩවියෙන්',latestReport:"නවතම වාර්තාව",sub:"සිල්ලර මිල &middot; එක් භාණ්ඩයකට ප්‍රධාන වෙළඳපොළ &middot; පෙර වාර්තාවට සාපේක්ෂව",movers:"අද වැඩිම වෙනස්වීම්",moversHint:"ස්වයංක්‍රීයව ශ්‍රේණිගත &middot; තට්ටු කරන්න &rarr;",all:"සියලු භාණ්ඩ",items:"භාණ්ඩ",searchPh:"භාණ්ඩයක් සොයන්න\u2026",sortAZ:"අකාරාදී",sortUp:"වැඩිම වැඩිවීම්",sortDown:"වැඩිම අඩුවීම්",sortHigh:"ඉහළම මිල",lgUp:"මිල ඉහළ ගියා",lgDown:"මිල පහළ ගියා",footNote:"මහ බැංකුවේ දෛනික මිල වාර්තාවලින් ස්වයංක්‍රීයව උපුටා ගන්නා ලදි. නිල ප්‍රකාශනයක් නොවේ.",creditPre:"නිර්මාණය හා සංවර්ධනය:",vsLast:"පෙරට වඩා",latest:"නවතම",change:"වෙනස",low:"අවම",high:"උපරිම",retail:"සිල්ලර",across:"වෙළඳපොළ අතර &mdash; නවතම වාර්තාව",priceOn:"සිල්ලර මිල",reason:'පෙර වාර්තාවට සාපේක්ෂව <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; සඳහා භාණ්ඩයක් හමු නොවීය.',notEnough:"මෙම පරාසය සඳහා තවම ප්‍රමාණවත් දත්ත නැත.",na:"නැත",allCat:"සියල්ල"},
- ta:{kicker:'தரவு <span class="org">இலங்கை மத்திய வங்கி</span> இணையதளத்திலிருந்து',latestReport:"சமீபத்திய அறிக்கை",sub:"சில்லறை விலை &middot; ஒவ்வொரு பொருளுக்கும் முதன்மை சந்தை &middot; முந்தைய அறிக்கையுடன் ஒப்பிடுகையில்",movers:"இன்றைய பெரிய மாற்றங்கள்",moversHint:"தானியங்கி தரவரிசை &middot; தட்டவும் &rarr;",all:"அனைத்து பொருட்கள்",items:"பொருட்கள்",searchPh:"ஒரு பொருளைத் தேடுங்கள்\u2026",sortAZ:"அகர வரிசை",sortUp:"அதிக உயர்வுகள்",sortDown:"அதிக குறைவுகள்",sortHigh:"அதிக விலை",lgUp:"விலை அதிகரித்தது",lgDown:"விலை குறைந்தது",footNote:"மத்திய வங்கியின் தினசரி விலை அறிக்கைகளில் இருந்து தானாக எடுக்கப்பட்டது. அதிகாரப்பூர்வ வெளியீடு அல்ல.",creditPre:"வடிவமைப்பு &amp; உருவாக்கம்:",vsLast:"முந்தையதை விட",latest:"சமீபத்தியது",change:"மாற்றம்",low:"குறைந்தது",high:"அதிகபட்சம்",retail:"சில்லறை",across:"சந்தைகளில் &mdash; சமீபத்திய அறிக்கை",priceOn:"சில்லறை விலை",reason:'முந்தைய அறிக்கையுடன் ஒப்பிடுகையில் <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; உடன் பொருந்தும் பொருள் இல்லை.',notEnough:"இந்த வரம்பில் இன்னும் போதிய தரவு இல்லை.",na:"இல்லை",allCat:"அனைத்தும்"}
+ en:{kicker:'Data from <span class="org">Central Bank of Sri Lanka</span> website',latestReport:"Latest report",sub:"Retail prices &middot; primary market shown per item &middot; vs. previous report",movers:"Today\u2019s sharpest movements",moversHint:"auto-ranked &middot; tap &rarr;",all:"All commodities",items:"items",searchPh:"Search a commodity\u2026",sortAZ:"Sort: A\u2013Z",sortUp:"Biggest increases",sortDown:"Biggest decreases",sortHigh:"Highest price",lgUp:"Price increased",lgDown:"Price decreased",footNote:"Auto-extracted from CBSL Daily Price Reports. Not an official publication.",creditPre:"Design &amp; development by",vsLast:"vs last",latest:"Latest",change:"Change",low:"Period low",high:"Period high",retail:"retail",across:"Across markets &mdash; latest report",priceOn:"Retail price on",reason:'Moved <b>%A</b> &rarr; <b>%B</b> since the previous report.',noMatch:'No commodity matches &ldquo;%Q&rdquo;.',notEnough:"Not enough data in this range yet.",na:"n.a.",allCat:"All",wholesale:"Wholesale",wholesaleLab:"wholesale",margin:"Margin",noWholesale:"No wholesale data."},
+ si:{kicker:'දත්ත <span class="org">ශ්‍රී ලංකා මහ බැංකුවේ</span> වෙබ් අඩවියෙන්',latestReport:"නවතම වාර්තාව",sub:"සිල්ලර මිල &middot; එක් භාණ්ඩයකට ප්‍රධාන වෙළඳපොළ &middot; පෙර වාර්තාවට සාපේක්ෂව",movers:"අද වැඩිම වෙනස්වීම්",moversHint:"ස්වයංක්‍රීයව ශ්‍රේණිගත &middot; තට්ටු කරන්න &rarr;",all:"සියලු භාණ්ඩ",items:"භාණ්ඩ",searchPh:"භාණ්ඩයක් සොයන්න\u2026",sortAZ:"අකාරාදී",sortUp:"වැඩිම වැඩිවීම්",sortDown:"වැඩිම අඩුවීම්",sortHigh:"ඉහළම මිල",lgUp:"මිල ඉහළ ගියා",lgDown:"මිල පහළ ගියා",footNote:"මහ බැංකුවේ දෛනික මිල වාර්තාවලින් ස්වයංක්‍රීයව උපුටා ගන්නා ලදි. නිල ප්‍රකාශනයක් නොවේ.",creditPre:"නිර්මාණය හා සංවර්ධනය:",vsLast:"පෙරට වඩා",latest:"නවතම",change:"වෙනස",low:"අවම",high:"උපරිම",retail:"සිල්ලර",across:"වෙළඳපොළ අතර &mdash; නවතම වාර්තාව",priceOn:"සිල්ලර මිල",reason:'පෙර වාර්තාවට සාපේක්ෂව <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; සඳහා භාණ්ඩයක් හමු නොවීය.',notEnough:"මෙම පරාසය සඳහා තවම ප්‍රමාණවත් දත්ත නැත.",na:"නැත",allCat:"සියල්ල",wholesale:"තොග",wholesaleLab:"තොග",margin:"ලාභය",noWholesale:"තොග දත්ත නොමැත."},
+ ta:{kicker:'தரவு <span class="org">இலங்கை மத்திய வங்கி</span> இணையதளத்திலிருந்து',latestReport:"சமீபத்திய அறிக்கை",sub:"சில்லறை விலை &middot; ஒவ்வொரு பொருளுக்கும் முதன்மை சந்தை &middot; முந்தைய அறிக்கையுடன் ஒப்பிடுகையில்",movers:"இன்றைய பெரிய மாற்றங்கள்",moversHint:"தானியங்கி தரவரிசை &middot; தட்டவும் &rarr;",all:"அனைத்து பொருட்கள்",items:"பொருட்கள்",searchPh:"ஒரு பொருளைத் தேடுங்கள்\u2026",sortAZ:"அகர வரிசை",sortUp:"அதிக உயர்வுகள்",sortDown:"அதிக குறைவுகள்",sortHigh:"அதிக விலை",lgUp:"விலை அதிகரித்தது",lgDown:"விலை குறைந்தது",footNote:"மத்திய வங்கியின் தினசரி விலை அறிக்கைகளில் இருந்து தானாக எடுக்கப்பட்டது. அதிகாரப்பூர்வ வெளியீடு அல்ல.",creditPre:"வடிவமைப்பு &amp; உருவாக்கம்:",vsLast:"முந்தையதை விட",latest:"சமீபத்தியது",change:"மாற்றம்",low:"குறைந்தது",high:"அதிகபட்சம்",retail:"சில்லறை",across:"சந்தைகளில் &mdash; சமீபத்திய அறிக்கை",priceOn:"சில்லறை விலை",reason:'முந்தைய அறிக்கையுடன் ஒப்பிடுகையில் <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; உடன் பொருந்தும் பொருள் இல்லை.',notEnough:"இந்த வரம்பில் இன்னும் போதிய தரவு இல்லை.",na:"இல்லை",allCat:"அனைத்தும்",wholesale:"மொத்த",wholesaleLab:"மொத்த",margin:"இலாபம்",noWholesale:"மொத்த தரவு இல்லை."}
 };
 const CATS={Vegetables:{si:"එළවළු",ta:"காய்கறிகள்"},Other:{si:"වෙනත්",ta:"பிற"},Rice:{si:"සහල්",ta:"அரிசி"},Fish:{si:"මාළු",ta:"மீன்"},Fruits:{si:"පළතුරු",ta:"பழங்கள்"}};
 const MARKETS={Pettah:{si:"පිටකොටුව",ta:"பேட்டை"},Dambulla:{si:"දඹුල්ල",ta:"தம்புள்ள"},Narahenpita:{si:"නාරාහේන්පිට",ta:"நாரஹேன்பிட்ட"},Negombo:{si:"මීගමුව",ta:"நீர்கொழும்பு"},Marandagahamula:{si:"මාරන්දගහමුල",ta:"மரந்தகஹமுல"}};
@@ -269,17 +273,19 @@ function renderMovers(){
 }
 
 function rangeIdxs(key){
-  const days={"1M":31,"3M":92,"1Y":366,"All":1e9}[key]||1e9;
+  const days={"1M":31,"3M":92,"1Y":366,"3Y":1096,"5Y":1827,"All":1e9}[key]||1e9;
   const last=DATE_OBJS[DATE_OBJS.length-1];
   const cutoff=new Date(last.getTime()-days*864e5);
   const idxs=[];for(let i=0;i<DATE_OBJS.length;i++) if(DATE_OBJS[i]>=cutoff) idxs.push(i);
   return idxs.length?idxs:DATE_OBJS.map((_,i)=>i);
 }
-function lineChart(d, idxs){
+function lineChart(d, idxs, mode){
+  const ser=(mode==='wholesale'&&d.wholesaleSeries)?d.wholesaleSeries:d.series;
+  const modeL=mode==='wholesale'?t("wholesaleLab"):t("retail");
   const W=680,H=240,L=46,R=14,T=26,B=30;
-  const sub=idxs.map((origI,pos)=>({pos,origI,v:d.series[origI]})).filter(p=>p.v!=null);
+  const sub=idxs.map((origI,pos)=>({pos,origI,v:ser[origI]})).filter(p=>p.v!=null);
   if(sub.length<2)
-    return '<div class="chart-wrap"><span class="lab">'+tMkt(d.primaryMarket)+' '+t("retail")+' &middot; '+tUnit(d.unit)+'</span><p class="mkt-sub" style="padding:40px 14px;text-align:center">'+t("notEnough")+'</p></div>';
+    return '<div class="chart-wrap"><span class="lab">'+tMkt(d.primaryMarket)+' '+modeL+' &middot; '+tUnit(d.unit)+'</span><p class="mkt-sub" style="padding:40px 14px;text-align:center">'+t("notEnough")+'</p></div>';
   const m=idxs.length||1;
   const vals=sub.map(p=>p.v),min=Math.min(...vals),max=Math.max(...vals);
   const pad=(max-min)*0.15||10,lo=Math.floor((min-pad)/10)*10,hi=Math.ceil((max+pad)/10)*10;
@@ -298,17 +304,32 @@ function lineChart(d, idxs){
     xlab+='<text x="'+X(p.pos).toFixed(1)+'" y="'+(H-10)+'" text-anchor="middle" font-size="9.5" fill="#7a7264" font-family="JetBrains Mono">'+DATES[p.origI]+'</text>';});
   const baseR=sub.length>45?0:3.2;
   const dots=pts.map(p=>'<circle class="pt" data-i="'+p[2]+'" data-base="'+baseR+'" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+baseR+'" fill="#fffdf7" stroke="#0e4f4a" stroke-width="2"/>').join("");
-  return '<div class="chart-wrap"><span class="lab">'+tMkt(d.primaryMarket)+' '+t("retail")+' &middot; '+tUnit(d.unit)+'</span><div class="tip" id="tip"></div><svg id="lc" viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block"><defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0e4f4a" stop-opacity=".16"/><stop offset="1" stop-color="#0e4f4a" stop-opacity="0"/></linearGradient></defs>'+grid+ylab+xlab+'<path d="'+area+'" fill="url(#ar)"/><path d="'+line+'" fill="none" stroke="#0e4f4a" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><line id="cross" x1="0" x2="0" y1="'+T+'" y2="'+(H-B)+'" stroke="#a9802a" stroke-width="1" stroke-dasharray="3 3" opacity="0"/>'+dots+'</svg></div>';
+  return '<div class="chart-wrap"><span class="lab">'+tMkt(d.primaryMarket)+' '+modeL+' &middot; '+tUnit(d.unit)+'</span><div class="tip" id="tip"></div><svg id="lc" viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block"><defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0e4f4a" stop-opacity=".16"/><stop offset="1" stop-color="#0e4f4a" stop-opacity="0"/></linearGradient></defs>'+grid+ylab+xlab+'<path d="'+area+'" fill="url(#ar)"/><path d="'+line+'" fill="none" stroke="#0e4f4a" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><line id="cross" x1="0" x2="0" y1="'+T+'" y2="'+(H-B)+'" stroke="#a9802a" stroke-width="1" stroke-dasharray="3 3" opacity="0"/>'+dots+'</svg></div>';
 }
 
-function marketBars(d){
+function marketBars(d, mode){
+  if(mode==='wholesale'){
+    const wm=d.wholesaleMarkets||{},rm=d.markets||{};
+    const keys=[...new Set([...Object.keys(wm),...Object.keys(rm)])];
+    if(!keys.length)return '<p class="mkt-sub" style="padding:16px 0">'+t("noWholesale")+'</p>';
+    const maxv=Math.max(...keys.map(k=>Math.max(rm[k]||0,wm[k]||0)))||1;
+    return '<h4 class="mkt-h">'+t("across")+' &mdash; '+t("wholesale")+'</h4>'+
+      '<p class="mkt-sub">'+t("priceOn")+' '+DATES[DATES.length-1]+' &middot; '+t("margin")+' = '+t("retail")+' &minus; '+t("wholesaleLab")+'</p>'+
+      '<div class="bars">'+keys.map(k=>{
+        const w=wm[k],r=rm[k],mg=(w!=null&&r!=null)?r-w:null;
+        return '<div class="bar"><span class="bn">'+tMkt(k)+'<small>'+t("wholesale")+'</small></span>'+
+          '<div class="track">'+(w!=null?'<div class="fill" style="width:'+(w/maxv*100).toFixed(0)+'%;background:var(--gold)"></div>':'')+'</div>'+
+          '<span class="bv">'+(w!=null?fmt(w):t("na"))+'</span>'+
+          (mg!=null?'<span style="font-size:11px;font-weight:700;color:var(--down);margin-left:6px">+'+fmt(mg)+'</span>':'')+'</div>';
+      }).join("")+'</div>';
+  }
   const e=Object.entries(d.markets);if(!e.length)return"";
   const maxv=Math.max(...e.map(x=>x[1]||0))||1;
   return '<h4 class="mkt-h">'+t("across")+'</h4><p class="mkt-sub">'+t("priceOn")+' '+DATES[DATES.length-1]+', '+tUnit(d.unit)+'</p><div class="bars">'+e.map(([k,v])=>'<div class="bar"><span class="bn">'+tMkt(k)+'<small>'+t("retail")+'</small></span><div class="track">'+(v!=null?'<div class="fill" style="width:'+(v/maxv*100).toFixed(0)+'%"></div>':'')+'</div><span class="bv '+(v==null?"na":"")+'">'+(v==null?t("na"):fmt(v))+'</span></div>').join("")+'</div>';
 }
 
 const scrim=document.getElementById("scrim"),modal=document.getElementById("modal");
-let curDetail=null;
+let curDetail=null, detailMode='retail';
 function defaultRange(){
   const span=(DATE_OBJS[DATE_OBJS.length-1]-DATE_OBJS[0])/864e5;
   if(span<=31)return "All";
@@ -317,26 +338,37 @@ function defaultRange(){
 function renderRange(key){
   const host=document.getElementById("chartHost");if(!host)return;
   const idxs=rangeIdxs(key);
-  host.innerHTML=lineChart(curDetail, idxs);
-  const win=idxs.map(i=>curDetail.series[i]).filter(v=>v!=null);
+  const ser=(detailMode==='wholesale'&&curDetail.wholesaleSeries)?curDetail.wholesaleSeries:curDetail.series;
+  host.innerHTML=lineChart(curDetail, idxs, detailMode);
+  const win=idxs.map(i=>ser[i]).filter(v=>v!=null);
   if(win.length){
     const lo=Math.min(...win),hi=Math.max(...win);
     const lE=document.getElementById("statLow"),hE=document.getElementById("statHigh");
     if(lE)lE.textContent=fmt(lo);
     if(hE)hE.textContent=fmt(hi);
   }
+  const bH=document.getElementById("barsHost");
+  if(bH)bH.innerHTML=marketBars(curDetail,detailMode);
   document.querySelectorAll("#ranges button").forEach(b=>b.classList.toggle("on", b.dataset.r===key));
-  requestAnimationFrame(()=>wireChart(curDetail));
+  requestAnimationFrame(()=>wireChart(curDetail,ser));
 }
 function openDetail(id){
   const d=DATA[id],ch=changeOf(d.series),vals=vpts(d.series).map(p=>p[1]);
   const min=Math.min(...vals),max=Math.max(...vals);
-  curDetail=d;
-  const rangeBar='<div class="ranges" id="ranges">'+["1M","3M","1Y","All"].map(r=>'<button data-r="'+r+'">'+r+'</button>').join("")+'</div>';
-  modal.innerHTML='<div class="mhead"><div><div class="cat">'+tCat(d.category)+'</div><h3>'+tName(d.name)+'</h3></div><button class="close" onclick="closeDetail()" aria-label="Close">&#10005;</button></div><div class="mbody"><div class="statrow"><div class="stat"><div class="l">'+t("latest")+'</div><div class="v">'+fmt(latestVal(d.series))+'</div></div><div class="stat"><div class="l">'+t("change")+'</div><div class="v" style="color:'+strokeFor(ch.dir)+'">'+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</div></div><div class="stat"><div class="l">'+t("low")+'</div><div class="v" id="statLow">'+fmt(min)+'</div></div><div class="stat"><div class="l">'+t("high")+'</div><div class="v" id="statHigh">'+fmt(max)+'</div></div></div>'+rangeBar+'<div id="chartHost"></div>'+marketBars(d)+'</div>';
+  curDetail=d; detailMode='retail';
+  const modeBar='<div class="mode-toggle" id="modeToggle"><button data-mode="retail" class="on">'+t("retail")+'</button><button data-mode="wholesale">'+t("wholesale")+'</button></div>';
+  const rangeBar='<div class="ranges" id="ranges">'+["1M","3M","1Y","3Y","5Y","All"].map(r=>'<button data-r="'+r+'">'+r+'</button>').join("")+'</div>';
+  modal.innerHTML='<div class="mhead"><div><div class="cat">'+tCat(d.category)+'</div><h3>'+tName(d.name)+'</h3></div><button class="close" onclick="closeDetail()" aria-label="Close">&#10005;</button></div><div class="mbody"><div class="statrow"><div class="stat"><div class="l">'+t("latest")+'</div><div class="v">'+fmt(latestVal(d.series))+'</div></div><div class="stat"><div class="l">'+t("change")+'</div><div class="v" style="color:'+strokeFor(ch.dir)+'">'+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</div></div><div class="stat"><div class="l">'+t("low")+'</div><div class="v" id="statLow">'+fmt(min)+'</div></div><div class="stat"><div class="l">'+t("high")+'</div><div class="v" id="statHigh">'+fmt(max)+'</div></div></div><div class="ctrl-row">'+modeBar+rangeBar+'</div><div id="chartHost"></div><div id="barsHost"></div></div>';
   scrim.classList.add("open");document.body.style.overflow="hidden";
   requestAnimationFrame(()=>{
     document.getElementById("ranges").addEventListener("click",e=>{if(e.target.dataset.r)renderRange(e.target.dataset.r);});
+    document.getElementById("modeToggle").addEventListener("click",e=>{
+      const b=e.target.closest("button[data-mode]");if(!b)return;
+      detailMode=b.dataset.mode;
+      document.querySelectorAll("#modeToggle button").forEach(x=>x.classList.toggle("on",x.dataset.mode===detailMode));
+      const key=document.querySelector("#ranges button.on")?.dataset.r||defaultRange();
+      renderRange(key);
+    });
     renderRange(defaultRange());
   });
 }
@@ -344,7 +376,8 @@ function closeDetail(){scrim.classList.remove("open");document.body.style.overfl
 scrim.addEventListener("click",e=>{if(e.target===scrim)closeDetail();});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDetail();});
 
-function wireChart(d){
+function wireChart(d, ser){
+  const series=ser||d.series;
   const svg=document.getElementById("lc");if(!svg)return;
   const tip=document.getElementById("tip"),cross=document.getElementById("cross"),wrap=svg.closest(".chart-wrap");
   const dots=[...svg.querySelectorAll(".pt")];
@@ -352,7 +385,7 @@ function wireChart(d){
     const vb=svg.viewBox.baseVal,rect=svg.getBoundingClientRect();
     const px=cx/vb.width*rect.width,py=cy/vb.height*rect.height,wr=wrap.getBoundingClientRect();
     tip.style.left=(rect.left-wr.left+px)+"px";tip.style.top=(rect.top-wr.top+py)+"px";
-    tip.innerHTML=DATES[i]+' &nbsp;<b>'+fmt(d.series[i])+'</b>';tip.style.opacity=1;
+    tip.innerHTML=DATES[i]+' &nbsp;<b>'+fmt(series[i])+'</b>';tip.style.opacity=1;
     cross.setAttribute("x1",cx);cross.setAttribute("x2",cx);cross.setAttribute("opacity","1");
     dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));dot.setAttribute("r","5");}
   function hide(){tip.style.opacity=0;cross.setAttribute("opacity","0");dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));}
