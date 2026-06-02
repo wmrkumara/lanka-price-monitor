@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lanka Price Monitor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4efe4;--paper-2:#efe8d8;--card:#fffdf7;--ink:#191d1a;--ink-soft:#3a403a;
+    --muted:#7a7264;--line:#e3d9c4;--line-strong:#cdbf9f;--petrol:#0e4f4a;--petrol-deep:#0a3a36;
+    --gold:#a9802a;--up:#b23a2e;--up-bg:#f7e6e2;--down:#2c7a52;--down-bg:#e3efe6;--flat:#8a8170;
+    --shadow:0 1px 0 rgba(0,0,0,.02), 0 12px 30px -18px rgba(20,40,38,.35);--r:14px;
+  }
+  *{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:'Hanken Grotesk','Noto Sans Sinhala','Noto Sans Tamil',sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.45;
+    background-image:radial-gradient(circle at 12% -10%, rgba(14,79,74,.06), transparent 38%),
+                     radial-gradient(circle at 95% 0%, rgba(169,128,42,.07), transparent 30%);background-attachment:fixed;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .masthead{padding:30px 0 16px;border-bottom:2px solid var(--ink)}
+  .kicker{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap;
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .kicker .org{color:var(--petrol)}
+  .lang{display:flex;gap:2px;border:1px solid var(--line-strong);border-radius:999px;overflow:hidden}
+  .lang button{font:inherit;font-size:11px;letter-spacing:.12em;font-weight:700;text-transform:uppercase;
+    border:0;background:transparent;color:var(--muted);padding:5px 11px;cursor:pointer;transition:.2s}
+  .lang button.on{background:var(--petrol);color:#fff}
+  .title{font-family:'Newsreader',serif;font-weight:500;font-size:clamp(34px,6vw,62px);
+    line-height:.98;letter-spacing:-.015em;margin:14px 0 6px}
+  .title em{font-style:italic;color:var(--petrol)}
+  .dateline{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:13.5px;color:var(--ink-soft)}
+  .dateline .stamp{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--ink)}
+  .dateline .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);display:inline-block}
+  .section-h{display:flex;align-items:center;gap:12px;margin:34px 0 14px}
+  .section-h h2{font-family:'Newsreader',serif;font-weight:500;font-size:24px;margin:0;letter-spacing:-.01em}
+  .section-h .rule{flex:1;height:1px;background:var(--line-strong)}
+  .section-h .hint{font-size:12px;color:var(--muted)}
+  .movers{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(244px,1fr);gap:14px;
+    overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory}
+  .movers::-webkit-scrollbar{height:7px}.movers::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:99px}
+  .mover{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;
+    scroll-snap-align:start;box-shadow:var(--shadow);cursor:pointer;transition:transform .18s, box-shadow .18s}
+  .mover:hover{transform:translateY(-3px);box-shadow:0 18px 36px -20px rgba(20,40,38,.45)}
+  .mover .cat{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .mover .nm{font-family:'Newsreader',serif;font-size:23px;margin:2px 0 8px;line-height:1.05}
+  .mover .row{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+  .price{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:26px;letter-spacing:-.02em}
+  .price small{font-size:11px;font-weight:500;color:var(--muted)}
+  .chg{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;padding:3px 8px;border-radius:8px;white-space:nowrap}
+  .chg.up{color:var(--up);background:var(--up-bg)}.chg.down{color:var(--down);background:var(--down-bg)}
+  .chg.flat{color:var(--flat);background:#efeada}
+  .reason{font-size:12px;color:var(--muted);margin-top:11px;border-top:1px dashed var(--line-strong);padding-top:9px;line-height:1.4}
+  .reason b{font-family:'JetBrains Mono',monospace;color:var(--ink-soft);font-weight:600}
+  .controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:6px 0 18px}
+  .search{flex:1;min-width:200px;position:relative}
+  .search input{width:100%;font:inherit;font-size:15px;padding:12px 14px 12px 40px;border-radius:11px;
+    border:1px solid var(--line-strong);background:var(--card);color:var(--ink);outline:none;transition:.2s}
+  .search input:focus{border-color:var(--petrol);box-shadow:0 0 0 3px rgba(14,79,74,.12)}
+  .search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);opacity:.5}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{font:inherit;font-size:12.5px;font-weight:600;padding:9px 14px;border-radius:999px;cursor:pointer;
+    border:1px solid var(--line-strong);background:var(--card);color:var(--ink-soft);transition:.18s;white-space:nowrap}
+  .chip:hover{border-color:var(--petrol)}.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .sortsel{font:inherit;font-size:12.5px;font-weight:600;padding:9px 12px;border-radius:999px;
+    border:1px solid var(--line-strong);background:var(--card);color:var(--ink-soft);cursor:pointer}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:14px}
+  .item{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;cursor:pointer;
+    box-shadow:var(--shadow);transition:transform .16s, box-shadow .16s, border-color .16s;
+    display:flex;flex-direction:column;gap:10px;position:relative}
+  .item:hover{transform:translateY(-3px);border-color:var(--line-strong);box-shadow:0 18px 36px -22px rgba(20,40,38,.5)}
+  .item .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  .item .nm{font-family:'Newsreader',serif;font-size:20px;line-height:1.05}
+  .item .cat{font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:3px}
+  .item .spark{height:42px;width:100%}
+  .item .foot{display:flex;align-items:flex-end;justify-content:space-between;gap:8px}
+  .empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:48px 0;font-style:italic;font-family:'Newsreader',serif;font-size:18px}
+  .scrim{position:fixed;inset:0;background:rgba(15,28,26,.55);backdrop-filter:blur(3px);
+    display:none;align-items:flex-start;justify-content:center;padding:28px 16px;z-index:50;overflow-y:auto}
+  .scrim.open{display:flex;animation:fade .2s ease}@keyframes fade{from{opacity:0}to{opacity:1}}
+  .modal{background:var(--card);border:1px solid var(--line-strong);border-radius:18px;max-width:760px;width:100%;
+    box-shadow:0 40px 90px -30px rgba(10,30,28,.7);animation:rise .26s cubic-bezier(.2,.8,.2,1);overflow:hidden}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .modal .mhead{padding:20px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+  .modal .mhead .cat{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  .modal .mhead h3{font-family:'Newsreader',serif;font-weight:500;font-size:32px;margin:3px 0 0;line-height:1}
+  .close{border:0;background:var(--paper-2);width:36px;height:36px;border-radius:10px;cursor:pointer;font-size:18px;color:var(--ink-soft);flex-shrink:0;transition:.18s}
+  .close:hover{background:var(--up-bg);color:var(--up)}
+  .mbody{padding:20px 24px 26px}
+  .statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+  .stat{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:11px 12px}
+  .stat .l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .stat .v{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:19px;margin-top:3px}
+  .chart-wrap{position:relative;border:1px solid var(--line);border-radius:12px;background:linear-gradient(180deg,#fffefb,#fbf7ee);padding:8px 6px 4px}
+  .chart-wrap .lab{position:absolute;top:10px;left:14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--paper);font-family:'JetBrains Mono',monospace;
+    font-size:11px;font-weight:600;padding:5px 8px;border-radius:7px;transform:translate(-50%,-130%);white-space:nowrap;opacity:0;transition:opacity .12s;z-index:3}
+  .tip b{color:#ffd98a}
+  .ranges{display:flex;gap:4px;margin:0 0 10px;justify-content:flex-end}
+  .ranges button{font:inherit;font-size:11.5px;font-weight:700;letter-spacing:.04em;padding:5px 11px;border-radius:8px;
+    border:1px solid var(--line-strong);background:var(--card);color:var(--muted);cursor:pointer;transition:.15s}
+  .ranges button:hover{border-color:var(--petrol);color:var(--ink-soft)}
+  .ranges button.on{background:var(--petrol);color:#fff;border-color:var(--petrol)}
+  .mkt-h{font-family:'Newsreader',serif;font-size:19px;margin:22px 0 4px}
+  .mkt-sub{font-size:12px;color:var(--muted);margin-bottom:12px}
+  .bars{display:flex;flex-direction:column;gap:11px}
+  .bar{display:grid;grid-template-columns:150px 1fr auto;align-items:center;gap:12px}
+  .bar .bn{font-size:13.5px;font-weight:600}
+  .bar .bn small{display:block;font-size:10px;color:var(--muted);font-weight:500;letter-spacing:.04em}
+  .bar .track{height:14px;background:var(--paper-2);border-radius:8px;overflow:hidden}
+  .bar .fill{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--petrol),var(--petrol-deep));transform-origin:left;animation:grow .6s cubic-bezier(.2,.8,.2,1)}
+  @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  .bar .bv{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px}
+  .bar .bv.na{color:var(--muted);font-weight:500;font-style:italic}
+  footer{margin:46px 0 60px;padding-top:22px;border-top:1px solid var(--line-strong);font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer .legend{display:flex;gap:14px;align-items:center}
+  footer .dotL{display:inline-flex;align-items:center;gap:6px}
+  footer .sq{width:11px;height:11px;border-radius:3px;display:inline-block}
+  .credit{flex-basis:100%;text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--line);
+    font-size:13.5px;color:var(--ink-soft);letter-spacing:.01em}
+  .credit a{color:var(--petrol);font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--line-strong);transition:.18s}
+  .credit a:hover{border-color:var(--petrol)}
+  @media(max-width:560px){.statrow{grid-template-columns:repeat(2,1fr)}.bar{grid-template-columns:110px 1fr auto;gap:9px}.modal .mhead h3{font-size:26px}}
+  .title,.title em,.section-h h2,.mover .nm,.item .nm,.modal .mhead h3,.empty,.mkt-h{font-family:'Newsreader','Noto Sans Sinhala','Noto Sans Tamil',serif}
+  /* Wholesale toggle */
+  .price-toggle{display:flex;gap:6px;margin-bottom:12px;}
+  .price-toggle button{font:inherit;font-size:12.5px;font-weight:700;padding:7px 16px;border-radius:999px;cursor:pointer;border:1.5px solid var(--line-strong);background:var(--card);color:var(--ink-soft);transition:.18s;}
+  .price-toggle button.on{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .price-toggle button:first-child.on{background:var(--petrol);border-color:var(--petrol);}
+  .margin-tag{font-size:11.5px;font-weight:700;color:var(--down);margin-top:3px;display:block;}
+  .bar .fill.wholesale{background:linear-gradient(90deg,var(--gold),#8a6620);}
+  /* Guide popup */
+  .guide-btn{position:fixed;bottom:22px;right:22px;height:38px;padding:0 16px 0 12px;border-radius:999px;background:var(--petrol);color:#fff;border:0;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(14,79,74,.4);z-index:40;transition:.2s;display:flex;align-items:center;gap:7px;letter-spacing:.02em;}
+  .guide-btn:hover{background:var(--petrol-deep);transform:translateY(-2px);}
+  .guide-scrim{position:fixed;inset:0;background:rgba(15,28,26,.55);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:20px;z-index:60;}
+  .guide-scrim.open{display:flex;animation:fade .2s ease;}
+  .guide-box{background:var(--card);border:1px solid var(--line-strong);border-radius:18px;max-width:480px;width:100%;padding:26px 26px 22px;box-shadow:0 40px 90px -30px rgba(10,30,28,.7);animation:rise .26s cubic-bezier(.2,.8,.2,1);}
+  .guide-box h2{font-family:'Newsreader',serif;font-weight:500;font-size:26px;margin:0 0 16px;color:var(--ink);}
+  .guide-box .gitem{display:flex;gap:12px;margin-bottom:13px;align-items:flex-start;}
+  .guide-box .gicon{width:34px;height:34px;border-radius:10px;background:var(--paper-2);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+  .guide-box .gtxt{font-size:13.5px;color:var(--ink-soft);line-height:1.5;}
+  .guide-box .gtxt b{color:var(--ink);display:block;margin-bottom:2px;}
+  .guide-close{margin-top:18px;width:100%;padding:11px;border-radius:10px;border:0;background:var(--petrol);color:#fff;font:inherit;font-weight:700;font-size:14px;cursor:pointer;transition:.18s;}
+  .guide-close:hover{background:var(--petrol-deep);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="kicker">
+      <span id="kickerTxt">Data from <span class="org">Central Bank of Sri Lanka</span> website</span>
+      <div class="lang" role="group" aria-label="Language"><button data-lang="en" class="on">EN</button><button data-lang="si">&#3523;&#3538;&#3458;</button><button data-lang="ta">&#2980;&#2990;&#3007;&#2996;&#3021;</button></div>
+    </div>
+    <h1 class="title">Lanka <em>Price</em> Monitor</h1>
+    <div class="dateline">
+      <span id="lblLatest">Latest report</span><span class="dot"></span>
+      <span class="stamp" id="stampDate">29 May 2026</span><span class="dot"></span>
+      <span id="lblSub">Retail prices &middot; primary market shown per item &middot; vs. previous report</span>
+    </div>
+  </header>
+
+  <div class="section-h"><h2 id="hMovers">Today&rsquo;s sharpest movements</h2><span class="rule"></span><span class="hint" id="hintMovers">auto-ranked &middot; tap &rarr;</span></div>
+  <div class="movers" id="movers"></div>
+
+  <div class="section-h"><h2 id="hAll">All commodities</h2><span class="rule"></span><span class="hint" id="count"></span></div>
+  <div class="controls">
+    <div class="search">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="search" type="text" placeholder="Search a commodity&hellip;" autocomplete="off">
+    </div>
+    <div class="chips" id="cats"></div>
+    <select class="sortsel" id="sort">
+      <option value="az">Sort: A&ndash;Z</option><option value="up">Biggest increases</option>
+      <option value="down">Biggest decreases</option><option value="high">Highest price</option>
+    </select>
+  </div>
+  <div class="grid" id="grid"></div>
+
+  <footer>
+    <div class="legend">
+      <span class="dotL"><span class="sq" style="background:var(--up)"></span> <span id="lgUp">Price increased</span></span>
+      <span class="dotL"><span class="sq" style="background:var(--down)"></span> <span id="lgDown">Price decreased</span></span>
+    </div>
+    <div id="footNote">Auto-extracted from CBSL Daily Price Reports. Not an official publication.</div>
+    <div class="credit"><span id="creditPre">Design &amp; development by</span> <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a></div>
+  </footer>
+</div>
+
+<div class="scrim" id="scrim"><div class="modal" id="modal" role="dialog" aria-modal="true"></div></div>
+
+<!-- Guide popup -->
+<button class="guide-btn" onclick="document.getElementById('guideScrim').classList.add('open')" aria-label="How to use">
+  <span style="font-size:15px;font-weight:800">?</span> How to use
+</button>
+<div class="guide-scrim" id="guideScrim">
+  <div class="guide-box">
+    <h2>How to use</h2>
+    <div class="gitem"><div class="gicon">👆</div><div class="gtxt"><b>Tap any card</b>Opens the full price chart with history, market comparison, and wholesale prices.</div></div>
+    <div class="gitem"><div class="gicon">📊</div><div class="gtxt"><b>Chart range buttons</b>Switch between 1M · 3M · 1Y · 3Y · 5Y · All to see price trends over time.</div></div>
+    <div class="gitem"><div class="gicon">🏪</div><div class="gtxt"><b>Retail / Wholesale toggle</b>Compare retail prices with wholesale prices. Green margin shows trader profit per kg.</div></div>
+    <div class="gitem"><div class="gicon">🔍</div><div class="gtxt"><b>Search & filter</b>Search by name, filter by category (Vegetables, Fish, Rice…), or sort by biggest price changes.</div></div>
+    <div class="gitem"><div class="gicon">🌐</div><div class="gtxt"><b>3 languages</b>Switch between English, සිංහල and தமிழ் using the buttons at the top right.</div></div>
+    <div class="gitem"><div class="gicon">🕐</div><div class="gtxt"><b>Auto-updated daily at 5:00 PM Sri Lanka time</b>Data is extracted automatically from the Central Bank of Sri Lanka every day.</div></div>
+    <button class="guide-close" onclick="document.getElementById('guideScrim').classList.remove('open')">Got it ✓</button>
+  </div>
+</div>
+
+<script>
+const EMBEDDED = {"generated":"2026-05-29T16:50:15","source":"Central Bank of Sri Lanka \u2013 Daily Price Report","dates":["2026-05-15","2026-05-18","2026-05-19","2026-05-20","2026-05-21","2026-05-22","2026-05-25","2026-05-26","2026-05-27","2026-05-29"],"dateLabels":["15 May","18 May","19 May","20 May","21 May","22 May","25 May","26 May","27 May","29 May"],"commodities":[{"name":"Beans","category":"Vegetables","unit":"Rs./kg","primaryMarket":"Dambulla","series":[555.0,530.0,580.0,465.0,605.0,580.0,530.0,580.0,580.0,475.0],"markets":{"Pettah":350.0,"Dambulla":475.0,"Narahenpita":800.0}},{"name":"Carrot","category":"Vegetables","unit":"Rs./kg","primaryMarket":"Dambulla","series":[240.0,220.0,240.0,230.0,325.0,305.0,280.0,345.0,290.0,335.0],"markets":{"Pettah":300.0,"Dambulla":335.0,"Narahenpita":480.0}},{"name":"Cabbage","category":"Vegetables","unit":"Rs./kg","primaryMarket":"Dambulla","series":[140.0,150.0,120.0,130.0,155.0,145.0,155.0,170.0,150.0,135.0],"markets":{"Pettah":130.0,"Dambulla":135.0,"Narahenpita":340.0}},{"name":"Tomato","category":"Vegetables","unit":"Rs./kg","primaryMarket":"Dambulla","series":[430.0,285.0,285.0,285.0,285.0,305.0,320.0,345.0,325.0,305.0],"markets":{"Pettah":450.0,"Dambulla":305.0,"Narahenpita":500.0}},{"name":"Brinjal","category":"Vegetables","unit":"Rs./kg","primaryMarket":"Dambulla","series":[395.0,455.0,370.0,405.0,430.0,455.0,485.0,455.0,415.0,345.0],"markets":{"Pettah":450.0,"Dambulla":345.0,"Narahenpita":600.0}},{"name":"Pumpkin","category":"Vegetables","unit":"Rs./kg","primaryMarket":"Dambulla","series":[140.0,145.0,150.0,135.0,125.0,120.0,125.0,130.0,110.0,120.0],"markets":{"Pettah":150.0,"Dambulla":120.0,"Narahenpita":220.0}},{"name":"Snake gourd","category":"Vegetables","unit":"Rs./kg","primaryMarket":"Dambulla","series":[320.0,285.0,355.0,280.0,320.0,295.0,255.0,305.0,280.0,295.0],"markets":{"Pettah":350.0,"Dambulla":295.0,"Narahenpita":600.0}},{"name":"Green Chilli","category":"Vegetables","unit":"Rs./kg","primaryMarket":"Dambulla","series":[280.0,180.0,145.0,230.0,245.0,280.0,230.0,225.0,280.0,230.0],"markets":{"Pettah":450.0,"Dambulla":230.0,"Narahenpita":600.0}},{"name":"Lime","category":"Vegetables","unit":"Rs./kg","primaryMarket":"Dambulla","series":[405.0,355.0,355.0,335.0,370.0,355.0,405.0,435.0,410.0,405.0],"markets":{"Pettah":550.0,"Dambulla":405.0,"Narahenpita":800.0}},{"name":"Red Onion (Local)","category":"Other","unit":"Rs./kg","primaryMarket":"Dambulla","series":[295.0,285.0,285.0,270.0,245.0,270.0,235.0,310.0,245.0,245.0],"markets":{"Pettah":null,"Dambulla":245.0,"Narahenpita":null}},{"name":"Red Onion (lmp)","category":"Other","unit":"Rs./kg","primaryMarket":"Dambulla","series":[315.0,325.0,325.0,345.0,320.0,335.0,345.0,320.0,335.0,330.0],"markets":{"Pettah":383.0,"Dambulla":330.0,"Narahenpita":600.0}},{"name":"Big Onion (Imp)","category":"Other","unit":"Rs./kg","primaryMarket":"Dambulla","series":[185.0,173.0,178.0,173.0,195.0,225.0,205.0,205.0,215.0,210.0],"markets":{"Pettah":233.0,"Dambulla":210.0,"Narahenpita":240.0}},{"name":"Potato (Local)","category":"Other","unit":"Rs./kg","primaryMarket":"Dambulla","series":[235.0,215.0,225.0,215.0,245.0,235.0,235.0,255.0,235.0,235.0],"markets":{"Pettah":300.0,"Dambulla":235.0,"Narahenpita":350.0}},{"name":"Potato (Imp)","category":"Other","unit":"Rs./kg","primaryMarket":"Dambulla","series":[165.0,158.0,165.0,178.0,183.0,188.0,163.0,185.0,175.0,170.0],"markets":{"Pettah":207.0,"Dambulla":170.0,"Narahenpita":240.0}},{"name":"Dried Chilli (Imp)","category":"Other","unit":"Rs./kg","primaryMarket":"Dambulla","series":[1105.0,935.0,985.0,1043.0,1105.0,1043.0,1105.0,1055.0,1015.0,1005.0],"markets":{"Pettah":1083.0,"Dambulla":1005.0,"Narahenpita":1080.0}},{"name":"Coconut (Avg.)","category":"Other","unit":"Rs./Nut","primaryMarket":"Dambulla","series":[118.0,118.0,115.0,120.0,118.0,118.0,118.0,120.0,113.0,130.0],"markets":{"Pettah":158.0,"Dambulla":130.0,"Narahenpita":165.0}},{"name":"Banana (Sour)","category":"Fruits","unit":"Rs./kg","primaryMarket":"Dambulla","series":[120.0,85.0,90.0,130.0,100.0,90.0,120.0,85.0,95.0,95.0],"markets":{"Pettah":130.0,"Dambulla":95.0,"Narahenpita":200.0}},{"name":"Papaw","category":"Fruits","unit":"Rs./kg","primaryMarket":"Dambulla","series":[115.0,90.0,98.0,100.0,95.0,105.0,95.0,145.0,120.0,105.0],"markets":{"Pettah":170.0,"Dambulla":105.0,"Narahenpita":240.0}},{"name":"Pineapple","category":"Fruits","unit":"Rs./kg","primaryMarket":"Dambulla","series":[305.0,255.0,285.0,275.0,275.0,285.0,230.0,255.0,260.0,355.0],"markets":{"Pettah":240.0,"Dambulla":355.0,"Narahenpita":350.0}},{"name":"Samba","category":"Rice","unit":"Rs./kg","primaryMarket":"Dambulla","series":[245.0,245.0,245.0,245.0,245.0,245.0,245.0,245.0,245.0,245.0],"markets":{"Pettah":250.0,"Dambulla":245.0}},{"name":"Nadu","category":"Rice","unit":"Rs./kg","primaryMarket":"Dambulla","series":[235.0,235.0,235.0,235.0,235.0,235.0,235.0,235.0,235.0,235.0],"markets":{"Pettah":225.0,"Dambulla":235.0}},{"name":"Kekulu (White)","category":"Rice","unit":"Rs./kg","primaryMarket":"Dambulla","series":[224.0,224.0,224.0,224.0,224.0,224.0,224.0,224.0,224.0,204.0],"markets":{"Pettah":212.0,"Dambulla":204.0}},{"name":"Kekulu (Red)","category":"Rice","unit":"Rs./kg","primaryMarket":"Dambulla","series":[224.0,224.0,224.0,224.0,224.0,224.0,224.0,224.0,224.0,204.0],"markets":{"Pettah":200.0,"Dambulla":204.0}},{"name":"Ponni Samba (Imp)","category":"Rice","unit":"Rs./kg","primaryMarket":"Dambulla","series":[240.0,240.0,240.0,240.0,240.0,240.0,240.0,240.0,240.0,240.0],"markets":{"Pettah":257.0,"Dambulla":240.0}},{"name":"Kelawalla","category":"Fish","unit":"Rs./kg","primaryMarket":"Negombo","series":[2300.0,2300.0,2300.0,2300.0,2300.0,2300.0,2300.0,2300.0,2300.0,2300.0],"markets":{"Negombo":2300.0,"Marandagahamula":null}},{"name":"Thalapath","category":"Fish","unit":"Rs./kg","primaryMarket":"Negombo","series":[2360.0,2360.0,2360.0,2360.0,2360.0,2360.0,2360.0,null,2360.0,2360.0],"markets":{"Negombo":2360.0,"Marandagahamula":2840.0}},{"name":"Paraw","category":"Fish","unit":"Rs./kg","primaryMarket":"Negombo","series":[2700.0,2375.0,null,null,2400.0,2260.0,2625.0,2625.0,null,2625.0],"markets":{"Negombo":2625.0,"Marandagahamula":null}},{"name":"Salaya","category":"Fish","unit":"Rs./kg","primaryMarket":"Negombo","series":[840.0,920.0,890.0,920.0,960.0,970.0,890.0,810.0,860.0,850.0],"markets":{"Negombo":850.0,"Marandagahamula":960.0}},{"name":"Hurulla","category":"Fish","unit":"Rs./kg","primaryMarket":"Negombo","series":[1490.0,null,null,null,null,1450.0,1400.0,1380.0,null,1380.0],"markets":{"Negombo":1380.0,"Marandagahamula":1560.0}},{"name":"Linna","category":"Fish","unit":"Rs./kg","primaryMarket":"Negombo","series":[1320.0,null,1480.0,null,null,1450.0,1400.0,null,null,1450.0],"markets":{"Negombo":1450.0,"Marandagahamula":1020.0}}]};
+let DB=EMBEDDED, DATES=[], DATA=[], DATE_OBJS=[];
+
+/* ---------- i18n (translations live here; data.json is never touched) ---------- */
+let lang="en";
+const I18N={
+ en:{kicker:'Data from <span class="org">Central Bank of Sri Lanka</span> website',latestReport:"Latest report",sub:"Retail prices &middot; primary market shown per item &middot; vs. previous report",movers:"Today\u2019s sharpest movements",moversHint:"auto-ranked &middot; tap &rarr;",all:"All commodities",items:"items",searchPh:"Search a commodity\u2026",sortAZ:"Sort: A\u2013Z",sortUp:"Biggest increases",sortDown:"Biggest decreases",sortHigh:"Highest price",lgUp:"Price increased",lgDown:"Price decreased",footNote:"Auto-extracted from CBSL Daily Price Reports. Not an official publication.",creditPre:"Design &amp; development by",vsLast:"vs last",latest:"Latest",change:"Change",low:"Period low",high:"Period high",retail:"retail",across:"Across markets &mdash; latest report",priceOn:"Retail price on",reason:'Moved <b>%A</b> &rarr; <b>%B</b> since the previous report.',noMatch:'No commodity matches &ldquo;%Q&rdquo;.',notEnough:"Not enough data in this range yet.",na:"n.a.",allCat:"All"},
+ si:{kicker:'දත්ත <span class="org">ශ්‍රී ලංකා මහ බැංකුවේ</span> වෙබ් අඩවියෙන්',latestReport:"නවතම වාර්තාව",sub:"සිල්ලර මිල &middot; එක් භාණ්ඩයකට ප්‍රධාන වෙළඳපොළ &middot; පෙර වාර්තාවට සාපේක්ෂව",movers:"අද වැඩිම වෙනස්වීම්",moversHint:"ස්වයංක්‍රීයව ශ්‍රේණිගත &middot; තට්ටු කරන්න &rarr;",all:"සියලු භාණ්ඩ",items:"භාණ්ඩ",searchPh:"භාණ්ඩයක් සොයන්න\u2026",sortAZ:"අකාරාදී",sortUp:"වැඩිම වැඩිවීම්",sortDown:"වැඩිම අඩුවීම්",sortHigh:"ඉහළම මිල",lgUp:"මිල ඉහළ ගියා",lgDown:"මිල පහළ ගියා",footNote:"මහ බැංකුවේ දෛනික මිල වාර්තාවලින් ස්වයංක්‍රීයව උපුටා ගන්නා ලදි. නිල ප්‍රකාශනයක් නොවේ.",creditPre:"නිර්මාණය හා සංවර්ධනය:",vsLast:"පෙරට වඩා",latest:"නවතම",change:"වෙනස",low:"අවම",high:"උපරිම",retail:"සිල්ලර",across:"වෙළඳපොළ අතර &mdash; නවතම වාර්තාව",priceOn:"සිල්ලර මිල",reason:'පෙර වාර්තාවට සාපේක්ෂව <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; සඳහා භාණ්ඩයක් හමු නොවීය.',notEnough:"මෙම පරාසය සඳහා තවම ප්‍රමාණවත් දත්ත නැත.",na:"නැත",allCat:"සියල්ල"},
+ ta:{kicker:'தரவு <span class="org">இலங்கை மத்திய வங்கி</span> இணையதளத்திலிருந்து',latestReport:"சமீபத்திய அறிக்கை",sub:"சில்லறை விலை &middot; ஒவ்வொரு பொருளுக்கும் முதன்மை சந்தை &middot; முந்தைய அறிக்கையுடன் ஒப்பிடுகையில்",movers:"இன்றைய பெரிய மாற்றங்கள்",moversHint:"தானியங்கி தரவரிசை &middot; தட்டவும் &rarr;",all:"அனைத்து பொருட்கள்",items:"பொருட்கள்",searchPh:"ஒரு பொருளைத் தேடுங்கள்\u2026",sortAZ:"அகர வரிசை",sortUp:"அதிக உயர்வுகள்",sortDown:"அதிக குறைவுகள்",sortHigh:"அதிக விலை",lgUp:"விலை அதிகரித்தது",lgDown:"விலை குறைந்தது",footNote:"மத்திய வங்கியின் தினசரி விலை அறிக்கைகளில் இருந்து தானாக எடுக்கப்பட்டது. அதிகாரப்பூர்வ வெளியீடு அல்ல.",creditPre:"வடிவமைப்பு &amp; உருவாக்கம்:",vsLast:"முந்தையதை விட",latest:"சமீபத்தியது",change:"மாற்றம்",low:"குறைந்தது",high:"அதிகபட்சம்",retail:"சில்லறை",across:"சந்தைகளில் &mdash; சமீபத்திய அறிக்கை",priceOn:"சில்லறை விலை",reason:'முந்தைய அறிக்கையுடன் ஒப்பிடுகையில் <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; உடன் பொருந்தும் பொருள் இல்லை.',notEnough:"இந்த வரம்பில் இன்னும் போதிய தரவு இல்லை.",na:"இல்லை",allCat:"அனைத்தும்"}
+};
+const CATS={Vegetables:{si:"එළවළු",ta:"காய்கறிகள்"},Other:{si:"වෙනත්",ta:"பிற"},Rice:{si:"සහල්",ta:"அரிசி"},Fish:{si:"මාළු",ta:"மீன்"},Fruits:{si:"පළතුරු",ta:"பழங்கள்"}};
+const MARKETS={Pettah:{si:"පිටකොටුව",ta:"பேட்டை"},Dambulla:{si:"දඹුල්ල",ta:"தம்புள்ள"},Narahenpita:{si:"නාරාහේන්පිට",ta:"நாரஹேன்பிட்ட"},Negombo:{si:"මීගමුව",ta:"நீர்கொழும்பு"},Marandagahamula:{si:"මාරන්දගහමුල",ta:"மரந்தகஹமுல"}};
+const UNITS={"Rs./kg":{si:"රු./කි.ග්‍රෑ.",ta:"ரூ./கி."},"Rs./Nut":{si:"රු./ගෙඩිය",ta:"ரூ./காய்"}};
+const NAMES={
+ "Beans":{si:"බෝංචි",ta:"பீன்ஸ்"},"Carrot":{si:"කැරට්",ta:"கேரட்"},"Cabbage":{si:"ගෝවා",ta:"முட்டைக்கோஸ்"},"Tomato":{si:"තක්කාලි",ta:"தக்காளி"},"Brinjal":{si:"වම්බටු",ta:"கத்தரிக்காய்"},"Pumpkin":{si:"වට්ටක්කා",ta:"பூசணி"},"Snake gourd":{si:"පතෝල",ta:"புடலங்காய்"},"Green Chilli":{si:"අමු මිරිස්",ta:"பச்சை மிளகாய்"},"Lime":{si:"දෙහි",ta:"எலுமிச்சை"},
+ "Red Onion (Local)":{si:"රතු ළූණු (දේශීය)",ta:"சிவப்பு வெங்காயம் (உள்ளூர்)"},"Red Onion (lmp)":{si:"රතු ළූණු (ආනයනික)",ta:"சிவப்பு வெங்காயம் (இறக்குமதி)"},"Big Onion (Imp)":{si:"ලොකු ළූණු (ආනයනික)",ta:"பெரிய வெங்காயம் (இறக்குமதி)"},"Potato (Local)":{si:"අර්තාපල් (දේශීය)",ta:"உருளைக்கிழங்கு (உள்ளூர்)"},"Potato (Imp)":{si:"අර්තාපල් (ආනයනික)",ta:"உருளைக்கிழங்கு (இறக்குமதி)"},"Dried Chilli (Imp)":{si:"වියළි මිරිස් (ආනයනික)",ta:"உலர் மிளகாய் (இறக்குமதி)"},"Coconut (Avg.)":{si:"පොල් (සාමාන්‍ය)",ta:"தேங்காய் (சராசரி)"},
+ "Banana (Sour)":{si:"කෙසෙල් (ඇඹුල්)",ta:"வாழைப்பழம் (புளிப்பு)"},"Papaw":{si:"පැපොල්",ta:"பப்பாளி"},"Pineapple":{si:"අන්නාසි",ta:"அன்னாசி"},
+ "Samba":{si:"සම්බා",ta:"சம்பா"},"Nadu":{si:"නාඩු",ta:"நாடு"},"Kekulu (White)":{si:"කැකුළු (සුදු)",ta:"கெகுளு (வெள்ளை)"},"Kekulu (Red)":{si:"කැකුළු (රතු)",ta:"கெகுளு (சிவப்பு)"},"Ponni Samba (Imp)":{si:"පොන්නි සම්බා (ආනයනික)",ta:"பொன்னி சம்பா (இறக்குமதி)"},
+ "Kelawalla":{si:"කෙළවල්ලා",ta:"கெளவல்லா"},"Thalapath":{si:"තලපත්",ta:"தலபத்"},"Paraw":{si:"පරාවා",ta:"பராவ்"},"Salaya":{si:"සාලයා",ta:"சாளை"},"Hurulla":{si:"හුරුල්ලා",ta:"ஹுருல்லா"},"Linna":{si:"ලින්නා",ta:"லின்னா"},
+ "Beetroot":{si:"බීට්රූට්",ta:"பீட்ரூட்"},"Leeks":{si:"ලීක්ස්",ta:"லீக்ஸ்"},"Knol-khol":{si:"නෝල්කෝල්",ta:"நோல்கோல்"},"Drumstick":{si:"මුරුංගා",ta:"முருங்கை"},"Manioc":{si:"මඤ්ඤොක්කා",ta:"மரவள்ளி"},"Ash Plantain":{si:"අල කෙසෙල්",ta:"வாழைக்காய்"},"Keeri Samba":{si:"කීරි සම්බා",ta:"கீரி சம்பா"}
+};
+function t(k){return (I18N[lang]&&I18N[lang][k])||I18N.en[k]||k;}
+function tName(n){return (NAMES[n]&&NAMES[n][lang])||n;}
+function tCat(c){return lang==="en"?c:((CATS[c]&&CATS[c][lang])||c);}
+function tMkt(m){return lang==="en"?m:((MARKETS[m]&&MARKETS[m][lang])||m);}
+function tUnit(u){return lang==="en"?u:((UNITS[u]&&UNITS[u][lang])||u);}
+function applyLang(){
+  document.documentElement.lang=lang;
+  const set=(id,html)=>{const e=document.getElementById(id);if(e)e.innerHTML=html;};
+  set("kickerTxt",t("kicker"));set("lblLatest",t("latestReport"));set("lblSub",t("sub"));
+  set("hMovers",t("movers"));set("hintMovers",t("moversHint"));set("hAll",t("all"));
+  set("lgUp",t("lgUp"));set("lgDown",t("lgDown"));set("footNote",t("footNote"));set("creditPre",t("creditPre"));
+  const s=document.getElementById("search");if(s)s.placeholder=t("searchPh");
+  const sel=document.getElementById("sort");
+  if(sel){const o=sel.options;if(o[0])o[0].text=t("sortAZ");if(o[1])o[1].text=t("sortUp");if(o[2])o[2].text=t("sortDown");if(o[3])o[3].text=t("sortHigh");}
+}
+function setLang(l){
+  lang=l;
+  document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.lang===l));
+  applyLang();
+  if(DATA.length){buildCats();renderMovers();renderGrid();}
+  if(scrim.classList.contains("open")&&curDetail)openDetail(curDetail.id);
+}
+document.querySelector(".lang").addEventListener("click",function(e){var b=e.target.closest("button[data-lang]");if(b)setLang(b.dataset.lang);});
+
+const vpts = s => s.map((v,i)=>[i,v]).filter(p=>p[1]!=null);
+const latestVal = s => {const v=vpts(s);return v.length?v[v.length-1][1]:null;};
+const fmt = n => n==null ? "&mdash;" : Math.round(n).toLocaleString("en-US");
+function changeOf(s){const v=vpts(s);if(v.length<2)return{abs:0,pct:0,dir:"flat"};
+  const cur=v[v.length-1][1],pr=v[v.length-2][1],abs=cur-pr,pct=pr?abs/pr*100:0;
+  return{abs,pct,dir:Math.abs(pct)<0.5?"flat":(abs>0?"up":"down")};}
+const arrow = d => d==="up"?"&#9650;":d==="down"?"&#9660;":"&#9632;";
+const strokeFor = d => d==="up"?"#b23a2e":d==="down"?"#2c7a52":"#8a8170";
+
+function spark(s,w,h,stroke){
+  const pts0=vpts(s),n=s.length;if(pts0.length<2)return"";
+  const vals=pts0.map(p=>p[1]),min=Math.min(...vals),max=Math.max(...vals),rng=(max-min)||1,pad=4;
+  const X=i=>pad+i*(w-2*pad)/(n-1),Y=v=>pad+(h-2*pad)*(1-(v-min)/rng);
+  const pts=pts0.map(p=>[X(p[0]),Y(p[1])]);
+  const line=pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ");
+  const area=line+" L"+pts[pts.length-1][0].toFixed(1)+" "+(h-pad)+" L"+pts[0][0].toFixed(1)+" "+(h-pad)+" Z";
+  const lp=pts[pts.length-1],id="g"+Math.random().toString(36).slice(2,7);
+  return '<svg class="spark" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none"><defs><linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+stroke+'" stop-opacity=".18"/><stop offset="1" stop-color="'+stroke+'" stop-opacity="0"/></linearGradient></defs><path d="'+area+'" fill="url(#'+id+')"/><path d="'+line+'" fill="none" stroke="'+stroke+'" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="'+lp[0].toFixed(1)+'" cy="'+lp[1].toFixed(1)+'" r="3" fill="'+stroke+'"/></svg>';
+}
+
+let state={q:"",cat:"All",sort:"az"};
+function buildCats(){const cats=["All",...new Set(DATA.map(d=>d.category))];
+const catBox=document.getElementById("cats");catBox.innerHTML="";
+cats.forEach(c=>{const b=document.createElement("button");b.className="chip"+(c===state.cat?" on":"");
+  b.dataset.cat=c;b.textContent=(c==="All"?t("allCat"):tCat(c));b.onclick=()=>{state.cat=c;[...catBox.children].forEach(x=>x.classList.remove("on"));b.classList.add("on");renderGrid();};catBox.appendChild(b);});}
+document.getElementById("search").addEventListener("input",e=>{state.q=e.target.value.toLowerCase();renderGrid();});
+document.getElementById("sort").addEventListener("change",e=>{state.sort=e.target.value;renderGrid();});
+
+function renderGrid(){
+  let list=DATA.filter(d=>(state.cat==="All"||d.category===state.cat)&&(d.name.toLowerCase().includes(state.q)||tName(d.name).toLowerCase().includes(state.q)));
+  const c=d=>changeOf(d.series);
+  if(state.sort==="az")list.sort((a,b)=>tName(a.name).localeCompare(tName(b.name)));
+  if(state.sort==="up")list.sort((a,b)=>c(b).pct-c(a).pct);
+  if(state.sort==="down")list.sort((a,b)=>c(a).pct-c(b).pct);
+  if(state.sort==="high")list.sort((a,b)=>(latestVal(b.series)||0)-(latestVal(a.series)||0));
+  const g=document.getElementById("grid");
+  document.getElementById("count").textContent=list.length+" "+t("items");
+  if(!list.length){g.innerHTML='<div class="empty">'+t("noMatch").replace("%Q",state.q)+'</div>';return;}
+  g.innerHTML=list.map(d=>{const ch=c(d),cur=latestVal(d.series);
+    return '<div class="item" onclick="openDetail('+d.id+')"><div class="top"><div><div class="cat">'+tCat(d.category)+'</div><div class="nm">'+tName(d.name)+'</div></div><span class="chg '+ch.dir+'">'+arrow(ch.dir)+' '+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</span></div>'+spark(d.series,220,42,strokeFor(ch.dir))+'<div class="foot"><span class="price">'+fmt(cur)+'<small> '+tUnit(d.unit)+'</small></span><span style="font-size:11px;color:var(--muted)">'+(ch.abs>0?"+":"")+fmt(ch.abs)+' '+t("vsLast")+'</span></div></div>';
+  }).join("");
+}
+
+function renderMovers(){
+  const m=DATA.map(d=>({d,ch:changeOf(d.series)})).filter(x=>x.ch.dir!=="flat")
+    .sort((a,b)=>Math.abs(b.ch.pct)-Math.abs(a.ch.pct)).slice(0,7);
+  document.getElementById("movers").innerHTML=m.map(({d,ch})=>{
+    const v=vpts(d.series),prev=v[v.length-2][1],cur=v[v.length-1][1];
+    return '<div class="mover" onclick="openDetail('+d.id+')"><div class="cat">'+tCat(d.category)+' &middot; '+tMkt(d.primaryMarket)+'</div><div class="nm">'+tName(d.name)+'</div><div class="row"><span class="price">'+fmt(cur)+'<small> '+tUnit(d.unit)+'</small></span><span class="chg '+ch.dir+'">'+arrow(ch.dir)+' '+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</span></div><div class="reason">'+t("reason").replace("%A",fmt(prev)).replace("%B",fmt(cur))+'</div></div>';
+  }).join("");
+}
+
+function rangeIdxs(key){
+  const days={"1M":31,"3M":92,"1Y":366,"3Y":1096,"5Y":1826,"All":1e9}[key]||1e9;
+  const last=DATE_OBJS[DATE_OBJS.length-1];
+  const cutoff=new Date(last.getTime()-days*864e5);
+  const idxs=[];for(let i=0;i<DATE_OBJS.length;i++) if(DATE_OBJS[i]>=cutoff) idxs.push(i);
+  return idxs.length?idxs:DATE_OBJS.map((_,i)=>i);
+}
+function lineChart(d, idxs, series, isWholesale){
+  series=series||d.series;
+  const stroke=isWholesale?"#a9802a":"#0e4f4a";
+  const gradColor=isWholesale?"#a9802a":"#0e4f4a";
+  const modeLabel=isWholesale?"wholesale":"retail";
+  const W=680,H=240,L=46,R=14,T=26,B=30;
+  const sub=idxs.map((origI,pos)=>({pos,origI,v:series[origI]})).filter(p=>p.v!=null);
+  if(sub.length<2)
+    return '<div class="chart-wrap"><span class="lab">'+tMkt(d.primaryMarket)+' '+modeLabel+' &middot; '+tUnit(d.unit)+'</span><p class="mkt-sub" style="padding:40px 14px;text-align:center">'+t("notEnough")+'</p></div>';
+  const m=idxs.length||1;
+  const vals=sub.map(p=>p.v),min=Math.min(...vals),max=Math.max(...vals);
+  const pad=(max-min)*0.15||10,lo=Math.floor((min-pad)/10)*10,hi=Math.ceil((max+pad)/10)*10;
+  const X=pos=>L+pos*(W-L-R)/((m-1)||1),Y=v=>T+(H-T-B)*(1-(v-lo)/((hi-lo)||1));
+  const pts=sub.map(p=>[X(p.pos),Y(p.v),p.origI]);
+  const line=pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ");
+  const area=line+" L"+pts[pts.length-1][0].toFixed(1)+" "+(H-B)+" L"+pts[0][0].toFixed(1)+" "+(H-B)+" Z";
+  let grid="",ylab="";const steps=4;
+  for(let i=0;i<=steps;i++){const v=lo+(hi-lo)*i/steps,y=Y(v);
+    grid+='<line x1="'+L+'" y1="'+y.toFixed(1)+'" x2="'+(W-R)+'" y2="'+y.toFixed(1)+'" stroke="#e3d9c4" stroke-width="1"/>';
+    ylab+='<text x="'+(L-8)+'" y="'+(y+3).toFixed(1)+'" text-anchor="end" font-size="10" fill="#7a7264" font-family="JetBrains Mono">'+Math.round(v)+'</text>';}
+  /* Year separator lines */
+  let ysep="";
+  const firstYear=DATE_OBJS[idxs[0]].getFullYear(),lastYear=DATE_OBJS[idxs[idxs.length-1]].getFullYear();
+  if(lastYear>firstYear){
+    for(let yr=firstYear+1;yr<=lastYear;yr++){
+      /* find position of first date in this year */
+      let pos=-1;
+      for(let ii=0;ii<idxs.length;ii++){if(DATE_OBJS[idxs[ii]].getFullYear()===yr){pos=ii;break;}}
+      if(pos<0)continue;
+      const xp=X(pos);
+      ysep+='<line x1="'+xp.toFixed(1)+'" y1="'+T+'" x2="'+xp.toFixed(1)+'" y2="'+(H-B)+'" stroke="#cdbf9f" stroke-width="1.2" stroke-dasharray="4 3"/>';
+      ysep+='<text x="'+(xp+4).toFixed(1)+'" y="'+(T+11)+'" font-size="10" font-weight="700" fill="#a9802a" font-family="JetBrains Mono">'+yr+'</text>';
+    }
+  }
+  const step=Math.max(1,Math.ceil(sub.length/7));
+  let xlab="";sub.forEach((p,i)=>{
+    const isLast=i===sub.length-1;
+    if(!isLast && (i%step || (sub.length-1-i)<step)) return;
+    xlab+='<text x="'+X(p.pos).toFixed(1)+'" y="'+(H-10)+'" text-anchor="middle" font-size="9.5" fill="#7a7264" font-family="JetBrains Mono">'+DATES[p.origI]+'</text>';});
+  const baseR=sub.length>45?0:3.2;
+  const dots=pts.map(p=>'<circle class="pt" data-i="'+p[2]+'" data-base="'+baseR+'" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+baseR+'" fill="#fffdf7" stroke="'+stroke+'" stroke-width="2"/>').join("");
+  return '<div class="chart-wrap"><span class="lab">'+tMkt(d.primaryMarket)+' '+modeLabel.toUpperCase()+' &middot; '+tUnit(d.unit)+'</span><div class="tip" id="tip"></div><svg id="lc" viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block"><defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+gradColor+'" stop-opacity=".16"/><stop offset="1" stop-color="'+gradColor+'" stop-opacity="0"/></linearGradient></defs>'+grid+ylab+ysep+xlab+'<path d="'+area+'" fill="url(#ar)"/><path d="'+line+'" fill="none" stroke="'+stroke+'" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><line id="cross" x1="0" x2="0" y1="'+T+'" y2="'+(H-B)+'" stroke="#a9802a" stroke-width="1" stroke-dasharray="3 3" opacity="0"/>'+dots+'</svg></div>';
+}
+
+function marketBars(d, mode){
+  mode = mode || "retail";
+  const isWholesale = mode==="wholesale";
+  const markets = isWholesale && d.wholesaleMarkets ? d.wholesaleMarkets : d.markets;
+  const retailMkts = d.markets || {};
+  const e=Object.entries(markets||{});if(!e.length)return"";
+  const maxv=Math.max(...e.map(x=>x[1]||0))||1;
+  const label = isWholesale ? "Wholesale" : "Retail";
+  const fillClass = isWholesale ? "fill wholesale" : "fill";
+  const heading = isWholesale ? t("across")+' &mdash; Wholesale' : t("across");
+  const subline = isWholesale
+    ? 'Wholesale price on '+DATES[DATES.length-1]+' &middot; Margin = retail &minus; wholesale'
+    : t("priceOn")+' '+DATES[DATES.length-1]+', '+tUnit(d.unit);
+  return '<h4 class="mkt-h">'+heading+'</h4><p class="mkt-sub">'+subline+'</p><div class="bars">'+e.map(([k,v])=>{
+    const retail=retailMkts[k];
+    const margin=(isWholesale&&v!=null&&retail!=null)?retail-v:null;
+    const marginHtml=margin!=null?'<span class="margin-tag">Margin: '+(margin>=0?"+":"")+'Rs.'+Math.round(margin)+'/kg</span>':'';
+    return '<div class="bar"><span class="bn">'+tMkt(k)+'<small>'+label+'</small>'+marginHtml+'</span><div class="track">'+(v!=null?'<div class="'+fillClass+'" style="width:'+(v/maxv*100).toFixed(0)+'%"></div>':'')+'</div><span class="bv '+(v==null?"na":"")+'">'+(v==null?t("na"):fmt(v))+'</span></div>';
+  }).join("")+'</div>';
+}
+
+const scrim=document.getElementById("scrim"),modal=document.getElementById("modal");
+let curDetail=null, curMode="retail";
+function defaultRange(){
+  const span=(DATE_OBJS[DATE_OBJS.length-1]-DATE_OBJS[0])/864e5;
+  if(span<=31)return "All";
+  return "3M";
+}
+function renderRange(key, mode){
+  mode=mode||curMode;
+  const host=document.getElementById("chartHost");if(!host)return;
+  const idxs=rangeIdxs(key);
+  const isWholesale=mode==="wholesale";
+  const series=isWholesale&&curDetail.wholesaleSeries?curDetail.wholesaleSeries:curDetail.series;
+  host.innerHTML=lineChart(curDetail,idxs,series,isWholesale);
+  const win=idxs.map(i=>series[i]).filter(v=>v!=null);
+  if(win.length){
+    const lo=Math.min(...win),hi=Math.max(...win);
+    const lE=document.getElementById("statLow"),hE=document.getElementById("statHigh");
+    if(lE)lE.textContent=fmt(lo);if(hE)hE.textContent=fmt(hi);
+  }
+  document.querySelectorAll("#ranges button").forEach(b=>b.classList.toggle("on",b.dataset.r===key));
+  requestAnimationFrame(()=>wireChart(curDetail,series));
+}
+function switchMode(mode){
+  curMode=mode;
+  const br=document.getElementById("btnRetail"),bw=document.getElementById("btnWholesale");
+  if(br)br.classList.toggle("on",mode==="retail");
+  if(bw)bw.classList.toggle("on",mode==="wholesale");
+  const mh=document.getElementById("mktBarsHost");
+  if(mh)mh.innerHTML=marketBars(curDetail,mode);
+  const active=document.querySelector("#ranges button.on");
+  renderRange(active?active.dataset.r:defaultRange(),mode);
+}
+function openDetail(id){
+  const d=DATA[id],ch=changeOf(d.series),vals=vpts(d.series).map(p=>p[1]);
+  const min=Math.min(...vals),max=Math.max(...vals);
+  curDetail=d;curMode="retail";
+  const hasWholesale=d.wholesaleSeries&&d.wholesaleSeries.some(v=>v!=null);
+  const toggleBar=hasWholesale
+    ?'<div class="price-toggle"><button id="btnRetail" class="on" onclick="switchMode(\'retail\')">Retail</button><button id="btnWholesale" onclick="switchMode(\'wholesale\')">Wholesale</button></div>'
+    :'';
+  const rangeBar='<div class="ranges" id="ranges">'+["1M","3M","1Y","3Y","5Y","All"].map(r=>'<button data-r="'+r+'">'+r+'</button>').join("")+'</div>';
+  modal.innerHTML='<div class="mhead"><div><div class="cat">'+tCat(d.category)+'</div><h3>'+tName(d.name)+'</h3></div><button class="close" onclick="closeDetail()" aria-label="Close">&#10005;</button></div><div class="mbody"><div class="statrow"><div class="stat"><div class="l">'+t("latest")+'</div><div class="v">'+fmt(latestVal(d.series))+'</div></div><div class="stat"><div class="l">'+t("change")+'</div><div class="v" style="color:'+strokeFor(ch.dir)+'">'+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</div></div><div class="stat"><div class="l">'+t("low")+'</div><div class="v" id="statLow">'+fmt(min)+'</div></div><div class="stat"><div class="l">'+t("high")+'</div><div class="v" id="statHigh">'+fmt(max)+'</div></div></div>'+toggleBar+rangeBar+'<div id="chartHost"></div><div id="mktBarsHost">'+marketBars(d,"retail")+'</div></div>';
+  scrim.classList.add("open");document.body.style.overflow="hidden";
+  requestAnimationFrame(()=>{
+    document.getElementById("ranges").addEventListener("click",e=>{if(e.target.dataset.r)renderRange(e.target.dataset.r);});
+    renderRange(defaultRange());
+  });
+}
+function closeDetail(){scrim.classList.remove("open");document.body.style.overflow="";}
+scrim.addEventListener("click",e=>{if(e.target===scrim)closeDetail();});
+document.getElementById("guideScrim").addEventListener("click",e=>{if(e.target===document.getElementById("guideScrim"))document.getElementById("guideScrim").classList.remove("open");});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeDetail();document.getElementById("guideScrim").classList.remove("open");}});
+
+function wireChart(d, series){
+  series=series||d.series;
+  const svg=document.getElementById("lc");if(!svg)return;
+  const tip=document.getElementById("tip"),cross=document.getElementById("cross"),wrap=svg.closest(".chart-wrap");
+  const dots=[...svg.querySelectorAll(".pt")];
+  function show(dot){const i=+dot.getAttribute("data-i"),cx=+dot.getAttribute("cx"),cy=+dot.getAttribute("cy");
+    const vb=svg.viewBox.baseVal,rect=svg.getBoundingClientRect();
+    const px=cx/vb.width*rect.width,py=cy/vb.height*rect.height,wr=wrap.getBoundingClientRect();
+    tip.style.left=(rect.left-wr.left+px)+"px";tip.style.top=(rect.top-wr.top+py)+"px";
+    tip.innerHTML=DATES[i]+' &nbsp;<b>'+fmt(series[i])+'</b>';tip.style.opacity=1;
+    cross.setAttribute("x1",cx);cross.setAttribute("x2",cx);cross.setAttribute("opacity","1");
+    dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));dot.setAttribute("r","5");}
+  function hide(){tip.style.opacity=0;cross.setAttribute("opacity","0");dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));}
+  svg.addEventListener("mousemove",e=>{const rect=svg.getBoundingClientRect(),rel=(e.clientX-rect.left)/rect.width;
+    let best=null,bd=1e9;dots.forEach(o=>{const cx=+o.getAttribute("cx")/svg.viewBox.baseVal.width;
+      const dd=Math.abs(cx-rel);if(dd<bd){bd=dd;best=o;}});if(best)show(best);});
+  svg.addEventListener("mouseleave",hide);
+  dots.forEach(o=>o.addEventListener("mouseenter",()=>show(o)));
+}
+function defaultRange(){
+  const span=(DATE_OBJS[DATE_OBJS.length-1]-DATE_OBJS[0])/864e5;
+  if(span<=31)return "All";
+  return "3M";
+}
+function renderRange(key){
+  const host=document.getElementById("chartHost");if(!host)return;
+  const idxs=rangeIdxs(key);
+  host.innerHTML=lineChart(curDetail, idxs);
+  const win=idxs.map(i=>curDetail.series[i]).filter(v=>v!=null);
+  if(win.length){
+    const lo=Math.min(...win),hi=Math.max(...win);
+    const lE=document.getElementById("statLow"),hE=document.getElementById("statHigh");
+    if(lE)lE.textContent=fmt(lo);
+    if(hE)hE.textContent=fmt(hi);
+  }
+  document.querySelectorAll("#ranges button").forEach(b=>b.classList.toggle("on", b.dataset.r===key));
+  requestAnimationFrame(()=>wireChart(curDetail));
+}
+function openDetail(id){
+  const d=DATA[id],ch=changeOf(d.series),vals=vpts(d.series).map(p=>p[1]);
+  const min=Math.min(...vals),max=Math.max(...vals);
+  curDetail=d;
+  const rangeBar='<div class="ranges" id="ranges">'+["1M","3M","1Y","3Y","5Y","All"].map(r=>'<button data-r="'+r+'">'+r+'</button>').join("")+'</div>';
+  modal.innerHTML='<div class="mhead"><div><div class="cat">'+tCat(d.category)+'</div><h3>'+tName(d.name)+'</h3></div><button class="close" onclick="closeDetail()" aria-label="Close">&#10005;</button></div><div class="mbody"><div class="statrow"><div class="stat"><div class="l">'+t("latest")+'</div><div class="v">'+fmt(latestVal(d.series))+'</div></div><div class="stat"><div class="l">'+t("change")+'</div><div class="v" style="color:'+strokeFor(ch.dir)+'">'+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</div></div><div class="stat"><div class="l">'+t("low")+'</div><div class="v" id="statLow">'+fmt(min)+'</div></div><div class="stat"><div class="l">'+t("high")+'</div><div class="v" id="statHigh">'+fmt(max)+'</div></div></div>'+rangeBar+'<div id="chartHost"></div>'+marketBars(d)+'</div>';
+  scrim.classList.add("open");document.body.style.overflow="hidden";
+  requestAnimationFrame(()=>{
+    document.getElementById("ranges").addEventListener("click",e=>{if(e.target.dataset.r)renderRange(e.target.dataset.r);});
+    renderRange(defaultRange());
+  });
+}
+function closeDetail(){scrim.classList.remove("open");document.body.style.overflow="";}
+scrim.addEventListener("click",e=>{if(e.target===scrim)closeDetail();});
+document.getElementById("guideScrim").addEventListener("click",e=>{if(e.target===document.getElementById("guideScrim"))document.getElementById("guideScrim").classList.remove("open");});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeDetail();document.getElementById("guideScrim").classList.remove("open");}});
+
+function wireChart(d){
+  const svg=document.getElementById("lc");if(!svg)return;
+  const tip=document.getElementById("tip"),cross=document.getElementById("cross"),wrap=svg.closest(".chart-wrap");
+  const dots=[...svg.querySelectorAll(".pt")];
+  function show(dot){const i=+dot.getAttribute("data-i"),cx=+dot.getAttribute("cx"),cy=+dot.getAttribute("cy");
+    const vb=svg.viewBox.baseVal,rect=svg.getBoundingClientRect();
+    const px=cx/vb.width*rect.width,py=cy/vb.height*rect.height,wr=wrap.getBoundingClientRect();
+    tip.style.left=(rect.left-wr.left+px)+"px";tip.style.top=(rect.top-wr.top+py)+"px";
+    tip.innerHTML=DATES[i]+' &nbsp;<b>'+fmt(d.series[i])+'</b>';tip.style.opacity=1;
+    cross.setAttribute("x1",cx);cross.setAttribute("x2",cx);cross.setAttribute("opacity","1");
+    dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));dot.setAttribute("r","5");}
+  function hide(){tip.style.opacity=0;cross.setAttribute("opacity","0");dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));}
+  svg.addEventListener("mousemove",e=>{const rect=svg.getBoundingClientRect(),rel=(e.clientX-rect.left)/rect.width;
+    let best=null,bd=1e9;dots.forEach(o=>{const cx=+o.getAttribute("cx")/svg.viewBox.baseVal.width;
+      const dd=Math.abs(cx-rel);if(dd<bd){bd=dd;best=o;}});if(best)show(best);});
+  svg.addEventListener("mouseleave",hide);
+  dots.forEach(o=>o.addEventListener("mouseenter",()=>show(o)));
+}
+
+function init(){
+  DATES=DB.dateLabels;
+  DATE_OBJS=DB.dates.map(s=>new Date(s+"T00:00:00"));
+  DATA=DB.commodities.map((d,i)=>(d.id=i,d));
+  const last=DB.dates[DB.dates.length-1];
+  const dt=new Date(last+"T00:00:00");
+  const opt={day:"numeric",month:"long",year:"numeric"};
+  const el=document.getElementById("stampDate"); if(el) el.textContent=dt.toLocaleDateString("en-GB",opt);
+  applyLang(); buildCats(); renderMovers(); renderGrid();
+}
+(async()=>{
+  try{ const r=await fetch("data.json",{cache:"no-store"}); if(r.ok){ DB=await r.json(); } }catch(e){ /* offline: use embedded */ }
+  init();
+})();
+</script>
+</body>
+</html>
