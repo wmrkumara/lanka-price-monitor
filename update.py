@@ -1,15 +1,7 @@
 #!/usr/bin/env python3
 """
 Daily updater for the Sri Lanka Food Price Monitor.
-
-What it does, every time you run it:
-  1. Reads the CBSL "Daily Price Report" listing page.
-  2. Finds every report PDF and downloads any it doesn't already have (into ./pdfs/).
-  3. Parses page 2 of all downloaded PDFs.
-  4. Writes data.json (which the website reads).
-
-Run locally:   python update.py
-Run on a server / GitHub Actions: same command, on a schedule.
+Extracts both retail AND wholesale prices from CBSL Daily Price Report PDFs.
 """
 
 import os, re, json, glob, datetime, sys
@@ -22,8 +14,14 @@ HEADERS = {"User-Agent": "Mozilla/5.0 (price-monitor data updater)"}
 
 SECTIONS = {"V E G E T A B L E S": "Vegetables", "O T H E R": "Other",
             "R I C E": "Rice", "F I S H": "Fish", "F R U I T S": "Fruits"}
+
+# Primary retail market per category
 PRIMARY = {"Vegetables": "Dambulla", "Other": "Dambulla", "Fruits": "Dambulla",
            "Rice": "Dambulla", "Fish": "Negombo"}
+
+# Primary wholesale market per category
+WHOLESALE_PRIMARY = {"Vegetables": "Dambulla", "Other": "Dambulla", "Fruits": "Dambulla",
+                     "Rice": "Dambulla", "Fish": "Negombo"}
 
 
 # ---------- 1 & 2: discover and download PDFs ----------
@@ -34,7 +32,6 @@ def discover_and_download():
     except Exception as e:
         print("WARN: could not reach listing page:", e)
         return
-    # English reports look like: .../pricerpt/price_report_YYYYMMDD_e[...].pdf
     links = set(re.findall(r"https://[^\s\"']+price_report_\d{8}_e[^\s\"']*\.pdf", html))
     print(f"Found {len(links)} report links on the listing page.")
     for url in sorted(links):
@@ -54,7 +51,7 @@ def discover_and_download():
 
 # ---------- 3: parse one PDF's page 2 ----------
 def parse_values(s):
-    """Source quirk: the leading digit is split off by a space ('6 00.00' -> 600.00)."""
+    """Parse a string of values including n.a. entries."""
     vals, buf = [], ""
     for t in s.split():
         if t in ("n.a.", "n.a"):
@@ -65,6 +62,86 @@ def parse_values(s):
             except ValueError: pass
             buf = ""
     return vals
+
+
+# Fish items that appear under the "Other" category in the PDF
+FISH_IN_OTHER = {"Katta (Imp)", "Katta", "Sprat (Imp)", "Sprat"}
+
+def extract_prices(cat, v, name=""):
+    """Extract wholesale and retail prices from the values list.
+
+    PDF page 2 column layout:
+    Vegetables / Other / Fruits (10 values):
+      v[0]=W-Pettah-Yday   v[1]=W-Pettah-Today
+      v[2]=W-Dambulla-Yday  v[3]=W-Dambulla-Today
+      v[4]=R-Pettah-Yday   v[5]=R-Pettah-Today
+      v[6]=R-Dambulla-Yday  v[7]=R-Dambulla-Today
+      v[8]=R-Narahenpita-Yday  v[9]=R-Narahenpita-Today
+    Produce items with no wholesale (6 values - Oil, Sugar, Dhal, Egg):
+      v[0]=R-Pettah-Yday   v[1]=R-Pettah-Today
+      v[2]=R-Dambulla-Yday  v[3]=R-Dambulla-Today
+      v[4]=R-Narahenpita-Yday  v[5]=R-Narahenpita-Today
+    Fish-in-Other items (Katta, Sprat - 6 values):
+      v[0]=W-Pettah-Yday   v[1]=W-Pettah-Today
+      v[2]=R-Pettah-Yday   v[3]=R-Pettah-Today
+      v[4]=R-Narahenpita-Yday  v[5]=R-Narahenpita-Today
+    Fruits with single market (Apple, Orange - 2 values):
+      v[0]=R-Narahenpita-Yday  v[1]=R-Narahenpita-Today
+    Rice (8-10 values):
+      v[0..3] wholesale, v[4..9] retail Pettah+Dambulla(+Narahenpita)
+    Fish (8 values):
+      v[0]=W-Peliyagoda-Yday  v[1]=W-Peliyagoda-Today
+      v[2]=W-Negombo-Yday     v[3]=W-Negombo-Today
+      v[4]=R-Negombo-Yday     v[5]=R-Negombo-Today
+      v[6]=R-Marandagahamula-Yday  v[7]=R-Marandagahamula-Today
+    """
+    out = {"retail": {}, "wholesale": {}}
+    try:
+        if cat in ("Vegetables", "Other", "Fruits"):
+            if len(v) >= 10:
+                out["wholesale"] = {"Pettah": v[1], "Dambulla": v[3]}
+                out["retail"]    = {"Pettah": v[5], "Dambulla": v[7], "Narahenpita": v[9]}
+            elif len(v) >= 6:
+                if name in FISH_IN_OTHER:
+                    # Fish items under Other: W-Pettah, R-Pettah, R-Narahenpita
+                    out["wholesale"] = {"Pettah": v[1]}
+                    out["retail"]    = {"Pettah": v[3], "Narahenpita": v[5]}
+                else:
+                    # Produce items with no wholesale: R-Pettah, R-Dambulla, R-Narahenpita
+                    out["retail"] = {"Pettah": v[1], "Dambulla": v[3], "Narahenpita": v[5]}
+            elif len(v) >= 2:  # Apple, Orange etc - Narahenpita retail only
+                out["retail"] = {"Narahenpita": v[1]}
+        elif cat == "Rice":
+            if len(v) >= 8:
+                out["wholesale"] = {"Pettah": v[1], "Dambulla": v[3]}
+                out["retail"]    = {"Pettah": v[5], "Dambulla": v[7]}
+                if len(v) >= 10:
+                    out["retail"]["Narahenpita"] = v[9]
+            elif len(v) >= 2:
+                out["retail"] = {"Pettah": v[1]}
+        elif cat == "Fish":
+            if len(v) >= 8:
+                out["wholesale"] = {"Peliyagoda": v[1], "Negombo": v[3]}
+                out["retail"]    = {"Negombo": v[5], "Marandagahamula": v[7]}
+            elif len(v) >= 6:
+                out["wholesale"] = {"Peliyagoda": v[1], "Negombo": v[3]}
+                out["retail"]    = {"Negombo": v[5]}
+            elif len(v) >= 2:
+                out["retail"] = {"Negombo": v[1]}
+    except IndexError:
+        pass
+    return out
+
+
+def pick_primary(markets, preferred):
+    """Return (market_name, value) for the best available market."""
+    if markets.get(preferred) is not None:
+        return preferred, markets[preferred]
+    for m, val in markets.items():
+        if val is not None:
+            return m, val
+    return preferred, None
+
 
 def parse_page2(path):
     with pdfplumber.open(path) as pdf:
@@ -85,21 +162,10 @@ def parse_page2(path):
                                     "values": parse_values(m.group(3))}
     return rows
 
+
 def date_from(path):
     d = re.search(r"(\d{8})", os.path.basename(path)).group(1)
     return f"{d[:4]}-{d[4:6]}-{d[6:]}"
-
-def retail_today(cat, v):
-    try:
-        if cat in ("Vegetables", "Other", "Fruits") and len(v) >= 10:
-            return {"Pettah": v[5], "Dambulla": v[7], "Narahenpita": v[9]}
-        if cat == "Fish" and len(v) >= 8:
-            return {"Negombo": v[5], "Marandagahamula": v[7]}
-        if cat == "Rice" and len(v) >= 8:
-            return {"Pettah": v[5], "Dambulla": v[7]}
-    except IndexError:
-        pass
-    return {}
 
 
 # ---------- 4: build data.json ----------
@@ -109,7 +175,6 @@ def build(pdf_dir=PDF_DIR, out="data.json"):
         print("No PDFs to process.")
         return
     days = [(date_from(f), parse_page2(f)) for f in files]
-    # de-duplicate by date (keep the last file seen for a date), then sort
     by_date = {}
     for d, rows in days:
         by_date[d] = rows
@@ -127,22 +192,41 @@ def build(pdf_dir=PDF_DIR, out="data.json"):
     out_rows = []
     for n in names:
         cat = unit = None
-        series, latest_markets = [], {}
+        retail_series, wholesale_series = [], []
+        latest_retail, latest_wholesale = {}, {}
+
         for _, rows in days:
             if n in rows:
-                cat, unit = rows[n]["category"], rows[n]["unit"]
-                tr = retail_today(cat, rows[n]["values"])
-                series.append(tr.get(PRIMARY.get(cat, "Dambulla")))
-                latest_markets = tr
-            else:
-                series.append(None)
-        if len([x for x in series if x is not None]) < 5:
-            continue
-        out_rows.append({"name": n, "category": cat, "unit": unit,
-                         "primaryMarket": PRIMARY.get(cat, "Dambulla"),
-                         "series": series, "markets": latest_markets})
+                cat = rows[n]["category"]
+                unit = rows[n]["unit"]
+                p = extract_prices(cat, rows[n]["values"], n)
 
-    # simple sanity guard: warn on >60% single-step jumps (possible bad parse)
+                _, rval = pick_primary(p["retail"],    PRIMARY.get(cat, "Dambulla"))
+                _, wval = pick_primary(p["wholesale"], WHOLESALE_PRIMARY.get(cat, "Dambulla"))
+
+                retail_series.append(rval)
+                wholesale_series.append(wval)
+                latest_retail    = p["retail"]
+                latest_wholesale = p["wholesale"]
+            else:
+                retail_series.append(None)
+                wholesale_series.append(None)
+
+        if len([x for x in retail_series if x is not None]) < 5:
+            continue
+
+        primary_mkt, _ = pick_primary(latest_retail, PRIMARY.get(cat, "Dambulla"))
+
+        out_rows.append({
+            "name": n, "category": cat, "unit": unit,
+            "primaryMarket": primary_mkt,
+            "series": retail_series,
+            "markets": latest_retail,
+            "wholesaleSeries": wholesale_series,
+            "wholesaleMarkets": latest_wholesale
+        })
+
+    # sanity guard: warn on >60% single-step jumps
     for r in out_rows:
         vals = [x for x in r["series"] if x is not None]
         for a, b in zip(vals, vals[1:]):
