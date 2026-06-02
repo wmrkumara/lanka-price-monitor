@@ -125,8 +125,8 @@
   @media(max-width:560px){.statrow{grid-template-columns:repeat(2,1fr)}.bar{grid-template-columns:110px 1fr auto;gap:9px}.modal .mhead h3{font-size:26px}}
   .title,.title em,.section-h h2,.mover .nm,.item .nm,.modal .mhead h3,.empty,.mkt-h{font-family:'Newsreader','Noto Sans Sinhala','Noto Sans Tamil',serif}
   /* Guide popup */
-  .guide-btn{position:fixed;bottom:22px;right:22px;width:42px;height:42px;border-radius:50%;background:var(--petrol);color:#fff;border:0;font-size:20px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(14,79,74,.4);z-index:40;transition:.2s;display:flex;align-items:center;justify-content:center;}
-  .guide-btn:hover{background:var(--petrol-deep);transform:scale(1.08);}
+  .guide-btn{position:fixed;bottom:22px;right:22px;height:38px;padding:0 16px 0 12px;border-radius:999px;background:var(--petrol);color:#fff;border:0;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(14,79,74,.4);z-index:40;transition:.2s;display:flex;align-items:center;gap:7px;letter-spacing:.02em;}
+  .guide-btn:hover{background:var(--petrol-deep);transform:translateY(-2px);}
   .guide-scrim{position:fixed;inset:0;background:rgba(15,28,26,.55);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:20px;z-index:60;}
   .guide-scrim.open{display:flex;animation:fade .2s ease;}
   .guide-box{background:var(--card);border:1px solid var(--line-strong);border-radius:18px;max-width:480px;width:100%;padding:26px 26px 22px;box-shadow:0 40px 90px -30px rgba(10,30,28,.7);animation:rise .26s cubic-bezier(.2,.8,.2,1);}
@@ -184,7 +184,9 @@
 <div class="scrim" id="scrim"><div class="modal" id="modal" role="dialog" aria-modal="true"></div></div>
 
 <!-- Guide popup -->
-<button class="guide-btn" onclick="document.getElementById('guideScrim').classList.add('open')" aria-label="How to use">?</button>
+<button class="guide-btn" onclick="document.getElementById('guideScrim').classList.add('open')" aria-label="How to use">
+  <span style="font-size:15px;font-weight:800">?</span> How to use
+</button>
 <div class="guide-scrim" id="guideScrim">
   <div class="guide-box">
     <h2>How to use</h2>
@@ -193,7 +195,7 @@
     <div class="gitem"><div class="gicon">🏪</div><div class="gtxt"><b>Retail / Wholesale toggle</b>Compare retail prices with wholesale prices. Green margin shows trader profit per kg.</div></div>
     <div class="gitem"><div class="gicon">🔍</div><div class="gtxt"><b>Search & filter</b>Search by name, filter by category (Vegetables, Fish, Rice…), or sort by biggest price changes.</div></div>
     <div class="gitem"><div class="gicon">🌐</div><div class="gtxt"><b>3 languages</b>Switch between English, සිංහල and தமிழ் using the buttons at the top right.</div></div>
-    <div class="gitem"><div class="gicon">🕐</div><div class="gtxt"><b>Auto-updated daily</b>Data is extracted automatically from the Central Bank of Sri Lanka every day at 12:00 noon.</div></div>
+    <div class="gitem"><div class="gicon">🕐</div><div class="gtxt"><b>Auto-updated daily at 5:00 PM Sri Lanka time</b>Data is extracted automatically from the Central Bank of Sri Lanka every day.</div></div>
     <button class="guide-close" onclick="document.getElementById('guideScrim').classList.remove('open')">Got it ✓</button>
   </div>
 </div>
