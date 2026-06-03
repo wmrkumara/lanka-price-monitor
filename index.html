@@ -144,6 +144,13 @@
   .guide-box .gtxt b{color:var(--ink);display:block;margin-bottom:2px;}
   .guide-close{margin-top:18px;width:100%;padding:11px;border-radius:10px;border:0;background:var(--petrol);color:#fff;font:inherit;font-weight:700;font-size:14px;cursor:pointer;transition:.18s;}
   .guide-close:hover{background:var(--petrol-deep);}
+  /* WhatsApp buttons */
+  .wa-row{display:flex;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);}
+  .wa-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px 14px;border-radius:10px;border:0;font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:.18s;text-decoration:none;}
+  .wa-share{background:#25D366;color:#fff;}
+  .wa-share:hover{background:#1ebe5d;}
+  .wa-channel{background:var(--paper-2);color:var(--ink-soft);border:1.5px solid var(--line-strong);}
+  .wa-channel:hover{border-color:#25D366;color:#1a7a40;}
 </style>
 </head>
 <body>
@@ -425,7 +432,14 @@ function openDetail(id){
     ?'<div class="price-toggle"><button id="btnRetail" class="on" onclick="switchMode(\'retail\')">Retail</button><button id="btnWholesale" onclick="switchMode(\'wholesale\')">Wholesale</button></div>'
     :'';
   const rangeBar='<div class="ranges" id="ranges">'+["1M","3M","1Y","3Y","5Y","All"].map(r=>'<button data-r="'+r+'">'+r+'</button>').join("")+'</div>';
-  modal.innerHTML='<div class="mhead"><div><div class="cat">'+tCat(d.category)+'</div><h3>'+tName(d.name)+'</h3></div><button class="close" onclick="closeDetail()" aria-label="Close">&#10005;</button></div><div class="mbody">'+toggleBar+'<div class="statrow"><div class="stat"><div class="l">'+t("latest")+'</div><div class="v">'+fmt(latestVal(d.series))+'</div></div><div class="stat"><div class="l">'+t("change")+'</div><div class="v" style="color:'+strokeFor(ch.dir)+'">'+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</div></div><div class="stat"><div class="l">'+t("low")+'</div><div class="v" id="statLow">'+fmt(min)+'</div></div><div class="stat"><div class="l">'+t("high")+'</div><div class="v" id="statHigh">'+fmt(max)+'</div></div></div>'+rangeBar+'<div id="chartHost"></div><div id="mktBarsHost">'+marketBars(d,"retail")+'</div></div>';
+  const waRow='<div class="wa-row">'+
+    '<button class="wa-btn wa-share" onclick="whatsappShare(DATA['+id+'])">'+
+    '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>'+
+    ' Share කරන්න</button>'+
+    '<a class="wa-btn wa-channel" href="https://whatsapp.com/channel/0000000000" target="_blank" rel="noopener">'+
+    '🔔 Daily Alerts</a>'+
+    '</div>';
+  modal.innerHTML='<div class="mhead"><div><div class="cat">'+tCat(d.category)+'</div><h3>'+tName(d.name)+'</h3></div><button class="close" onclick="closeDetail()" aria-label="Close">&#10005;</button></div><div class="mbody">'+toggleBar+'<div class="statrow"><div class="stat"><div class="l">'+t("latest")+'</div><div class="v">'+fmt(latestVal(d.series))+'</div></div><div class="stat"><div class="l">'+t("change")+'</div><div class="v" style="color:'+strokeFor(ch.dir)+'">'+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</div></div><div class="stat"><div class="l">'+t("low")+'</div><div class="v" id="statLow">'+fmt(min)+'</div></div><div class="stat"><div class="l">'+t("high")+'</div><div class="v" id="statHigh">'+fmt(max)+'</div></div></div>'+rangeBar+'<div id="chartHost"></div><div id="mktBarsHost">'+marketBars(d,"retail")+'</div>'+waRow+'</div>';
   scrim.classList.add("open");document.body.style.overflow="hidden";
   setTimeout(()=>{
     document.getElementById("ranges").addEventListener("click",e=>{if(e.target.dataset.r)renderRange(e.target.dataset.r);});
@@ -439,43 +453,4 @@ document.getElementById("guideScrim").addEventListener("click",e=>{if(e.target==
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeDetail();document.getElementById("guideScrim").classList.remove("open");}});
 
 /* ===== SINGLE wireChart — series-aware ===== */
-function wireChart(d, series){
-  series = series || d.series;
-  const svg=document.getElementById("lc");if(!svg)return;
-  const tip=document.getElementById("tip"),cross=document.getElementById("cross"),wrap=svg.closest(".chart-wrap");
-  const dots=[...svg.querySelectorAll(".pt")];
-  function show(dot){const i=+dot.getAttribute("data-i"),cx=+dot.getAttribute("cx"),cy=+dot.getAttribute("cy");
-    const vb=svg.viewBox.baseVal,rect=svg.getBoundingClientRect();
-    const px=cx/vb.width*rect.width,py=cy/vb.height*rect.height,wr=wrap.getBoundingClientRect();
-    tip.style.left=(rect.left-wr.left+px)+"px";tip.style.top=(rect.top-wr.top+py)+"px";
-    tip.innerHTML=DATES[i]+' &nbsp;<b>'+fmt(series[i])+'</b>';tip.style.opacity=1;
-    cross.setAttribute("x1",cx);cross.setAttribute("x2",cx);cross.setAttribute("opacity","1");
-    dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));dot.setAttribute("r","5");}
-  function hide(){tip.style.opacity=0;cross.setAttribute("opacity","0");dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));}
-  svg.addEventListener("mousemove",e=>{const rect=svg.getBoundingClientRect(),rel=(e.clientX-rect.left)/rect.width;
-    let best=null,bd=1e9;dots.forEach(o=>{const cx=+o.getAttribute("cx")/svg.viewBox.baseVal.width;
-      const dd=Math.abs(cx-rel);if(dd<bd){bd=dd;best=o;}});if(best)show(best);});
-  svg.addEventListener("mouseleave",hide);
-  dots.forEach(o=>o.addEventListener("mouseenter",()=>show(o)));
-}
-
-function init(){
-  DATES=DB.dateLabels;
-  DATE_OBJS=DB.dates.map(s=>new Date(s+"T00:00:00"));
-  DATA=DB.commodities.map((d,i)=>(d.id=i,d));
-  const last=DB.dates[DB.dates.length-1];
-  const dt=new Date(last+"T00:00:00");
-  const opt={day:"numeric",month:"long",year:"numeric"};
-  const el=document.getElementById("stampDate"); if(el) el.textContent=dt.toLocaleDateString("en-GB",opt);
-  applyLang(); buildCats(); renderMovers(); renderGrid();
-}
-(async()=>{
-  try{ 
-    const r=await fetch("data.json?v="+Date.now(),{cache:"no-store"}); 
-    if(r.ok){ DB=await r.json(); } 
-  }catch(e){ /* offline: use embedded */ }
-  init();
-})();
-</script>
-</body>
-</html>
+function wireChart(d,
