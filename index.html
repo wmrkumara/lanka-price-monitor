@@ -424,7 +424,7 @@ function openDetail(id){
   setTimeout(()=>{
     document.getElementById("ranges").addEventListener("click",e=>{if(e.target.dataset.r)renderRange(e.target.dataset.r);});
     renderRange(defaultRange());
-  }, 10);
+  }, 100);
 }
 function closeDetail(){scrim.classList.remove("open");document.body.style.overflow="";}
 scrim.addEventListener("click",e=>{if(e.target===scrim)closeDetail();});
@@ -516,7 +516,10 @@ function init(){
   applyLang(); buildCats(); renderMovers(); renderGrid();
 }
 (async()=>{
-  try{ const r=await fetch("data.json",{cache:"no-store"}); if(r.ok){ DB=await r.json(); } }catch(e){ /* offline: use embedded */ }
+  try{ 
+    const r=await fetch("data.json?v="+Date.now(),{cache:"no-store"}); 
+    if(r.ok){ DB=await r.json(); } 
+  }catch(e){ /* offline: use embedded */ }
   init();
 })();
 </script>
