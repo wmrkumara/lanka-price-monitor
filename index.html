@@ -476,10 +476,10 @@ function wireChart(d, series){
 function whatsappShare(d){
   const ch=changeOf(d.series);
   const cur=latestVal(d.series);
-  const arrow=ch.dir==="up"?"📈":ch.dir==="down"?"📉":"➡️";
+  const arr=ch.dir==="up"?"📈":ch.dir==="down"?"📉":"➡️";
   const msg=
     "🇱🇰 *Lanka Price Monitor*\n\n"+
-    arrow+" *"+d.name+"* — අද මිල\n"+
+    arr+" *"+d.name+"* — අද මිල\n"+
     "📍 "+d.primaryMarket+": රු."+Math.round(cur)+"/"+d.unit+"\n"+
     "📊 වෙනස: "+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+"%\n\n"+
     "🔗 https://wmrkumara.github.io/lanka-price-monitor/\n"+
@@ -487,6 +487,7 @@ function whatsappShare(d){
   const url="https://wa.me/?text="+encodeURIComponent(msg);
   window.open(url,"_blank");
 }
+function init(){
   DATES=DB.dateLabels;
   DATE_OBJS=DB.dates.map(s=>new Date(s+"T00:00:00"));
   DATA=DB.commodities.map((d,i)=>(d.id=i,d));
