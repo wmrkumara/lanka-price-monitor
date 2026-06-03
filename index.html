@@ -453,4 +453,56 @@ document.getElementById("guideScrim").addEventListener("click",e=>{if(e.target==
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeDetail();document.getElementById("guideScrim").classList.remove("open");}});
 
 /* ===== SINGLE wireChart — series-aware ===== */
-function wireChart(d,
+function wireChart(d, series){
+  series = series || d.series;
+  const svg=document.getElementById("lc");if(!svg)return;
+  const tip=document.getElementById("tip"),cross=document.getElementById("cross"),wrap=svg.closest(".chart-wrap");
+  const dots=[...svg.querySelectorAll(".pt")];
+  function show(dot){const i=+dot.getAttribute("data-i"),cx=+dot.getAttribute("cx"),cy=+dot.getAttribute("cy");
+    const vb=svg.viewBox.baseVal,rect=svg.getBoundingClientRect();
+    const px=cx/vb.width*rect.width,py=cy/vb.height*rect.height,wr=wrap.getBoundingClientRect();
+    tip.style.left=(rect.left-wr.left+px)+"px";tip.style.top=(rect.top-wr.top+py)+"px";
+    tip.innerHTML=DATES[i]+' &nbsp;<b>'+fmt(series[i])+'</b>';tip.style.opacity=1;
+    cross.setAttribute("x1",cx);cross.setAttribute("x2",cx);cross.setAttribute("opacity","1");
+    dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));dot.setAttribute("r","5");}
+  function hide(){tip.style.opacity=0;cross.setAttribute("opacity","0");dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));}
+  svg.addEventListener("mousemove",e=>{const rect=svg.getBoundingClientRect(),rel=(e.clientX-rect.left)/rect.width;
+    let best=null,bd=1e9;dots.forEach(o=>{const cx=+o.getAttribute("cx")/svg.viewBox.baseVal.width;
+      const dd=Math.abs(cx-rel);if(dd<bd){bd=dd;best=o;}});if(best)show(best);});
+  svg.addEventListener("mouseleave",hide);
+  dots.forEach(o=>o.addEventListener("mouseenter",()=>show(o)));
+}
+
+function whatsappShare(d){
+  const ch=changeOf(d.series);
+  const cur=latestVal(d.series);
+  const arrow=ch.dir==="up"?"📈":ch.dir==="down"?"📉":"➡️";
+  const msg=
+    "🇱🇰 *Lanka Price Monitor*\n\n"+
+    arrow+" *"+d.name+"* — අද මිල\n"+
+    "📍 "+d.primaryMarket+": රු."+Math.round(cur)+"/"+d.unit+"\n"+
+    "📊 වෙනස: "+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+"%\n\n"+
+    "🔗 https://wmrkumara.github.io/lanka-price-monitor/\n"+
+    "_ශ්‍රී ලංකා මහ බැංකු දත්ත | නොමිලේ_";
+  const url="https://wa.me/?text="+encodeURIComponent(msg);
+  window.open(url,"_blank");
+}
+  DATES=DB.dateLabels;
+  DATE_OBJS=DB.dates.map(s=>new Date(s+"T00:00:00"));
+  DATA=DB.commodities.map((d,i)=>(d.id=i,d));
+  const last=DB.dates[DB.dates.length-1];
+  const dt=new Date(last+"T00:00:00");
+  const opt={day:"numeric",month:"long",year:"numeric"};
+  const el=document.getElementById("stampDate"); if(el) el.textContent=dt.toLocaleDateString("en-GB",opt);
+  applyLang(); buildCats(); renderMovers(); renderGrid();
+}
+(async()=>{
+  try{ 
+    const r=await fetch("data.json?v="+Date.now(),{cache:"no-store"}); 
+    if(r.ok){ DB=await r.json(); } 
+  }catch(e){ /* offline: use embedded */ }
+  init();
+})();
+</script>
+</body>
+</html>
