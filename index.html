@@ -421,10 +421,10 @@ function openDetail(id){
   const rangeBar='<div class="ranges" id="ranges">'+["1M","3M","1Y","3Y","5Y","All"].map(r=>'<button data-r="'+r+'">'+r+'</button>').join("")+'</div>';
   modal.innerHTML='<div class="mhead"><div><div class="cat">'+tCat(d.category)+'</div><h3>'+tName(d.name)+'</h3></div><button class="close" onclick="closeDetail()" aria-label="Close">&#10005;</button></div><div class="mbody">'+toggleBar+'<div class="statrow"><div class="stat"><div class="l">'+t("latest")+'</div><div class="v">'+fmt(latestVal(d.series))+'</div></div><div class="stat"><div class="l">'+t("change")+'</div><div class="v" style="color:'+strokeFor(ch.dir)+'">'+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</div></div><div class="stat"><div class="l">'+t("low")+'</div><div class="v" id="statLow">'+fmt(min)+'</div></div><div class="stat"><div class="l">'+t("high")+'</div><div class="v" id="statHigh">'+fmt(max)+'</div></div></div>'+rangeBar+'<div id="chartHost"></div><div id="mktBarsHost">'+marketBars(d,"retail")+'</div></div>';
   scrim.classList.add("open");document.body.style.overflow="hidden";
-  requestAnimationFrame(()=>{
+  setTimeout(()=>{
     document.getElementById("ranges").addEventListener("click",e=>{if(e.target.dataset.r)renderRange(e.target.dataset.r);});
     renderRange(defaultRange());
-  });
+  }, 10);
 }
 function closeDetail(){scrim.classList.remove("open");document.body.style.overflow="";}
 scrim.addEventListener("click",e=>{if(e.target===scrim)closeDetail();});
