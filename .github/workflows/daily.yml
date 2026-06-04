@@ -12,6 +12,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
+          ref: main
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
@@ -23,13 +24,10 @@ jobs:
         run: |
           git config user.name  "price-bot"
           git config user.email "price-bot@users.noreply.github.com"
-          git fetch origin main
-          git reset --hard origin/main
-          python update.py --no-download
           git add data.json pdfs/ || true
           if git diff --staged --quiet; then
             echo "No changes today."
           else
             git commit -m "Auto-update price data ($(date +%Y-%m-%d))"
-            git push origin main
+            git push --force-with-lease origin main
           fi
