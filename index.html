@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lanka Price Monitor</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -495,11 +496,68 @@ function whatsappShare(d){
 function facebookShare(d){
   const ch=changeOf(d.series);
   const cur=latestVal(d.series);
-  const arr=ch.dir==="up"?"📈":ch.dir==="down"?"📉":"➡️";
-  const siteUrl="https://wmrkumara.github.io/lanka-price-monitor/";
-  const quote=arr+" "+d.name+" — රු."+Math.round(cur)+" ("+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+"%) | Lanka Price Monitor — ශ්‍රී ලංකා මහ බැංකු දත්ත";
-  const fbUrl="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(siteUrl)+"&quote="+encodeURIComponent(quote);
-  window.open(fbUrl,"_blank","width=600,height=400");
+  const arr=ch.dir==="up"?"▲":ch.dir==="down"?"▼":"▶";
+  const clr=ch.dir==="up"?"#b23a2e":ch.dir==="down"?"#2c7a52":"#8a8170";
+  const bgClr=ch.dir==="up"?"#f7e6e2":ch.dir==="down"?"#e3efe6":"#efeada";
+  const lastDate=DATES[DATES.length-1];
+
+  /* Build share card div */
+  const card=document.createElement("div");
+  card.style.cssText="position:fixed;left:-9999px;top:0;width:600px;background:#f4efe4;font-family:'Hanken Grotesk',sans-serif;overflow:hidden;border-radius:0";
+  card.innerHTML=`
+    <div style="height:8px;background:#0e4f4a"></div>
+    <div style="background:#0e4f4a;padding:18px 28px;display:flex;justify-content:space-between;align-items:center">
+      <div style="font-family:Georgia,serif;font-size:22px;color:#fff;font-weight:700">Lanka <em style="color:#ffd98a;font-style:italic">Price</em> Monitor</div>
+      <div style="font-family:monospace;font-size:13px;color:#9fd4c8;text-align:right">
+        <div>${lastDate}</div>
+        <div style="font-size:11px;color:#7ab8b0">ශ්‍රී ලංකා මහ බැංකු</div>
+      </div>
+    </div>
+    <div style="padding:28px 28px 20px">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7a7264;font-weight:700;margin-bottom:6px">${tCat(d.category)} · ${tMkt(d.primaryMarket)}</div>
+      <div style="font-family:Georgia,serif;font-size:38px;font-weight:500;color:#191d1a;margin-bottom:16px;line-height:1">${tName(d.name)}</div>
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
+        <div style="font-family:monospace;font-size:48px;font-weight:700;color:#191d1a">රු.${fmt(cur)}</div>
+        <div style="background:${bgClr};color:${clr};font-family:monospace;font-size:20px;font-weight:700;padding:8px 16px;border-radius:10px">${arr} ${Math.abs(ch.pct).toFixed(1)}%</div>
+      </div>
+      <div style="font-size:13px;color:#7a7264;margin-bottom:20px">${tUnit(d.unit)} · ${ch.abs>0?"+":""}${fmt(ch.abs)} vs previous report</div>
+      <div style="height:1px;background:#e3d9c4;margin-bottom:20px"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px">
+        ${Object.entries(d.markets||{}).filter(([k,v])=>v!=null).map(([k,v])=>`
+        <div style="background:#fffdf7;border:1px solid #e3d9c4;border-radius:10px;padding:12px 14px">
+          <div style="font-size:10px;color:#7a7264;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">${k}</div>
+          <div style="font-family:monospace;font-size:18px;font-weight:700;color:#191d1a">රු.${fmt(v)}</div>
+        </div>`).join("")}
+      </div>
+    </div>
+    <div style="background:#0e4f4a;padding:14px 28px;text-align:center">
+      <div style="font-family:monospace;font-size:16px;font-weight:700;color:#ffd98a;letter-spacing:1px">WMRKUMARA.GITHUB.IO/LANKA-PRICE-MONITOR</div>
+      <div style="font-size:11px;color:#9fd4c8;margin-top:4px">ගොවියාට · වෙළෙන්දාට · ව්‍යාපාරිකයාට · නිදහසේ</div>
+    </div>
+    <div style="height:6px;background:#a9802a"></div>
+  `;
+  document.body.appendChild(card);
+
+  /* Generate PNG then share */
+  html2canvas(card,{scale:2,useCORS:true,backgroundColor:"#f4efe4",logging:false}).then(canvas=>{
+    document.body.removeChild(card);
+    /* Download PNG */
+    const link=document.createElement("a");
+    link.download="lanka-price-"+d.name.toLowerCase().replace(/\s+/g,"-")+"-"+lastDate+".png";
+    link.href=canvas.toDataURL("image/png");
+    link.click();
+    /* Open FB share after short delay */
+    setTimeout(()=>{
+      const siteUrl="https://wmrkumara.github.io/lanka-price-monitor/";
+      const quote=arr+" "+tName(d.name)+" — රු."+fmt(cur)+" ("+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+"%)\n\n🇱🇰 LANKA PRICE MONITOR\nWMRKUMARA.GITHUB.IO/LANKA-PRICE-MONITOR";
+      const fbUrl="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(siteUrl)+"&quote="+encodeURIComponent(quote);
+      window.open(fbUrl,"_blank","width=600,height=400");
+    },800);
+  }).catch(()=>{
+    document.body.removeChild(card);
+    const siteUrl="https://wmrkumara.github.io/lanka-price-monitor/";
+    window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(siteUrl),"_blank","width=600,height=400");
+  });
 }
 function init(){
   DATES=DB.dateLabels;
