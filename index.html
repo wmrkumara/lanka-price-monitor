@@ -131,6 +131,12 @@
   .price-toggle button{font:inherit;font-size:12.5px;font-weight:700;padding:7px 16px;border-radius:999px;cursor:pointer;border:1.5px solid var(--line-strong);background:var(--card);color:var(--ink-soft);transition:.18s;}
   .price-toggle button.on{background:var(--gold);color:#fff;border-color:var(--gold);}
   .price-toggle button:first-child.on{background:var(--petrol);border-color:var(--petrol);}
+  .price-toggle button.gap-btn.on{background:#7b3fa0;border-color:#7b3fa0;color:#fff;}
+  .gap-alert{background:linear-gradient(135deg,rgba(123,63,160,.12),rgba(169,128,42,.08));border:1.5px solid #7b3fa0;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:13px;color:#3a403a;display:none;}
+  .gap-alert.show{display:block;}
+  .gap-alert .gap-val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:#7b3fa0;}
+  .gap-alert .gap-advice{font-size:12px;color:#7a7264;margin-top:4px;}
+  .poya-label{font-size:9px;fill:#b23a2e;font-weight:700;}
   .margin-tag{font-size:11.5px;font-weight:700;color:var(--down);margin-top:3px;display:block;}
   .bar .fill.wholesale{background:linear-gradient(90deg,var(--gold),#8a6620);}
   /* Guide popup */
@@ -422,13 +428,21 @@ function renderRange(key, mode){
 /* ===== switchMode — retail/wholesale toggle ===== */
 function switchMode(mode){
   curMode=mode;
-  const br=document.getElementById("btnRetail"),bw=document.getElementById("btnWholesale");
+  const br=document.getElementById("btnRetail"),bw=document.getElementById("btnWholesale"),bg=document.getElementById("btnGap");
   if(br)br.classList.toggle("on",mode==="retail");
   if(bw)bw.classList.toggle("on",mode==="wholesale");
+  if(bg)bg.classList.toggle("on",mode==="gap");
   const mh=document.getElementById("mktBarsHost");
-  if(mh)mh.innerHTML=marketBars(curDetail,mode);
-  const active=document.querySelector("#ranges button.on");
-  renderRange(active?active.dataset.r:defaultRange(), mode);
+  if(mode==="gap"){
+    const host=document.getElementById("chartHost");
+    if(host)host.innerHTML=gapChart(curDetail);
+    if(mh)mh.innerHTML=gapAlert(curDetail);
+    document.querySelectorAll("#ranges button").forEach(b=>b.classList.remove("on"));
+  } else {
+    if(mh)mh.innerHTML=marketBars(curDetail,mode);
+    const active=document.querySelector("#ranges button.on");
+    renderRange(active?active.dataset.r:defaultRange(),mode);
+  }
 }
 
 /* ===== SINGLE openDetail — wholesale aware ===== */
@@ -438,7 +452,7 @@ function openDetail(id){
   curDetail=d; curMode="retail";
   const hasWholesale=d.wholesaleSeries&&d.wholesaleSeries.some&&d.wholesaleSeries.some(v=>v!=null);
   const toggleBar=hasWholesale
-    ?'<div class="price-toggle"><button id="btnRetail" class="on" onclick="switchMode(\'retail\')">Retail</button><button id="btnWholesale" onclick="switchMode(\'wholesale\')">Wholesale</button></div>'
+    ?'<div class="price-toggle"><button id="btnRetail" class="on" onclick="switchMode(\'retail\')">Retail</button><button id="btnWholesale" onclick="switchMode(\'wholesale\')">Wholesale</button><button id="btnGap" class="gap-btn" onclick="switchMode(\'gap\')">💡 Gap</button></div>'
     :'';
   const rangeBar='<div class="ranges" id="ranges">'+["1M","3M","1Y","3Y","5Y","All","YoY"].map(r=>'<button data-r="'+r+'">'+r+'</button>').join("")+'</div>';
   const waRow='<div class="wa-row">'+
@@ -465,6 +479,132 @@ document.getElementById("guideScrim").addEventListener("click",e=>{if(e.target==
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeDetail();document.getElementById("guideScrim").classList.remove("open");}});
 
 /* ===== SINGLE wireChart — series-aware ===== */
+/* ===== Poya days 2024-2026 ===== */
+const POYA_DAYS=["2024-01-25","2024-02-24","2024-03-25","2024-04-23","2024-05-23","2024-06-21","2024-07-21","2024-08-19","2024-09-17","2024-10-17","2024-11-15","2024-12-15","2025-01-13","2025-02-12","2025-03-13","2025-04-12","2025-05-12","2025-06-11","2025-07-10","2025-08-09","2025-09-07","2025-10-07","2025-11-05","2025-12-04","2026-01-03","2026-02-01","2026-03-03","2026-04-01","2026-05-01","2026-05-31","2026-06-29"];
+
+function gapAlert(d){
+  const rt=d.markets||{}, ws=d.wholesaleMarkets||{};
+  const mkts=Object.keys(rt).filter(k=>rt[k]!=null&&ws[k]!=null);
+  if(!mkts.length){
+    /* Inter-market gap */
+    const rtVals=Object.entries(rt).filter(([k,v])=>v!=null);
+    if(rtVals.length<2) return '<p class="mkt-sub" style="padding:8px 0">Not enough market data for gap analysis.</p>';
+    const sorted=rtVals.sort((a,b)=>b[1]-a[1]);
+    const gap=sorted[0][1]-sorted[sorted.length-1][1];
+    const pct=((gap/sorted[sorted.length-1][1])*100).toFixed(1);
+    return `<div class="gap-alert show">
+      <div>💡 <strong>Inter-Market Gap</strong></div>
+      <div class="gap-val">${sorted[0][0]}: රු.${fmt(sorted[0][1])} &nbsp;→&nbsp; ${sorted[sorted.length-1][0]}: රු.${fmt(sorted[sorted.length-1][1])}</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;color:#7b3fa0;margin:4px 0">Gap: රු.${fmt(gap)}/kg (${pct}%)</div>
+      <div class="gap-advice">${gap>100?"🚛 Transport opportunity — price difference worth moving stock!":gap>50?"📊 Moderate gap — consider transport costs before moving.":"✅ Small gap — markets are balanced."}</div>
+    </div>`;
+  }
+  /* Retail vs Wholesale gap */
+  const rows=mkts.map(k=>{
+    const g=rt[k]-ws[k];
+    return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+      <span style="min-width:90px;font-size:13px;font-weight:600">${k}</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#a9802a">W: රු.${fmt(ws[k])}</span>
+      <span style="color:#7a7264">→</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px">R: රු.${fmt(rt[k])}</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#7b3fa0;margin-left:auto">+රු.${fmt(g)}</span>
+    </div>`;
+  }).join("");
+  const maxGap=Math.max(...mkts.map(k=>rt[k]-ws[k]));
+  return `<div class="gap-alert show">
+    <div style="font-size:12px;font-weight:700;color:#7b3fa0;margin-bottom:8px">💡 Retail vs Wholesale Margin — ${DATES[DATES.length-1]}</div>
+    ${rows}
+    <div class="gap-advice">${maxGap>150?"⚠️ Wide margin — retailers keeping large profit. Good buying opportunity at wholesale!":maxGap>75?"📊 Normal margin range.":"✅ Tight margins — competitive market."}</div>
+  </div>`;
+}
+
+function gapChart(d){
+  /* Last 30 days retail vs wholesale shaded area */
+  const n=Math.min(30,DB.dates.length);
+  const idxs=Array.from({length:n},(_,i)=>DB.dates.length-n+i);
+  const rtSeries=d.series, wsSeries=d.wholesaleSeries||[];
+  const labels=idxs.map(i=>DATES[i]);
+  const rtData=idxs.map(i=>rtSeries[i]||null);
+  const wsData=idxs.map(i=>wsSeries[i]||null);
+  const gapData=idxs.map(i=>(rtSeries[i]!=null&&wsSeries[i]!=null)?rtSeries[i]-wsSeries[i]:null);
+  /* Check if we have wholesale data */
+  const hasWS=wsData.some(v=>v!=null);
+  const cid="gap_"+Math.random().toString(36).slice(2,8);
+  window._gapPending=window._gapPending||{};
+  /* Poya annotations */
+  const poyaIdxs=idxs.filter(i=>POYA_DAYS.includes(DB.dates[i])).map(i=>idxs.indexOf(i));
+  window._gapPending[cid]={labels,rtData,wsData,gapData,hasWS,poyaIdxs};
+  setTimeout(()=>{
+    const p=window._gapPending[cid];if(!p)return;
+    const canvas=document.getElementById(cid);if(!canvas)return;
+    const datasets=p.hasWS?[
+      {label:'Retail',data:p.rtData,borderColor:'#0e4f4a',borderWidth:2,pointRadius:2,tension:0.3,fill:'+1',backgroundColor:'rgba(14,79,74,0.15)',spanGaps:false},
+      {label:'Wholesale',data:p.wsData,borderColor:'#a9802a',borderWidth:2,pointRadius:2,tension:0.3,fill:false,spanGaps:false}
+    ]:[
+      {label:'Retail',data:p.rtData,borderColor:'#0e4f4a',borderWidth:2,pointRadius:2,tension:0.3,fill:false,spanGaps:false}
+    ];
+    new Chart(canvas,{
+      type:'line',
+      data:{labels:p.labels,datasets},
+      options:{
+        responsive:true,maintainAspectRatio:false,
+        interaction:{mode:'index',intersect:false},
+        plugins:{
+          legend:{display:true,position:'top',align:'end',labels:{font:{size:11},boxWidth:16,padding:8}},
+          tooltip:{
+            backgroundColor:'#191d1a',titleColor:'#ffd98a',bodyColor:'#d4ede8',padding:8,
+            callbacks:{
+              afterBody:(items)=>{
+                const rt=items.find(i=>i.dataset.label==='Retail');
+                const ws=items.find(i=>i.dataset.label==='Wholesale');
+                if(rt&&ws&&rt.parsed.y!=null&&ws.parsed.y!=null){
+                  return ['Gap: රු.'+(rt.parsed.y-ws.parsed.y).toFixed(0)];
+                }
+                return [];
+              },
+              label:ctx=>ctx.parsed.y==null?ctx.dataset.label+': n/a':ctx.dataset.label+': රු.'+ctx.parsed.y.toLocaleString()
+            }
+          }
+        },
+        scales:{
+          x:{
+            grid:{color:'rgba(0,0,0,0.04)'},
+            ticks:{font:{size:9},color:'#7a7264',maxRotation:45,autoSkip:true,maxTicksLimit:10},
+            afterDraw:(chart)=>{
+              /* Poya day markers */
+              p.poyaIdxs.forEach(pi=>{
+                const meta=chart.getDatasetMeta(0);
+                if(!meta.data[pi])return;
+                const x=meta.data[pi].x;
+                const ctx2=chart.ctx;
+                ctx2.save();
+                ctx2.strokeStyle='rgba(178,58,46,0.3)';
+                ctx2.lineWidth=1;
+                ctx2.setLineDash([3,3]);
+                ctx2.beginPath();
+                ctx2.moveTo(x,chart.chartArea.top);
+                ctx2.lineTo(x,chart.chartArea.bottom);
+                ctx2.stroke();
+                ctx2.fillStyle='#b23a2e';
+                ctx2.font='8px monospace';
+                ctx2.fillText('P',x-3,chart.chartArea.top+10);
+                ctx2.restore();
+              });
+            }
+          },
+          y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#7a7264',callback:v=>'රු.'+v.toLocaleString()},min:0}
+        }
+      }
+    });
+    delete window._gapPending[cid];
+  },100);
+  return `<div class="chart-wrap">
+    <span class="lab">${tMkt(d.primaryMarket)} Retail vs Wholesale &middot; 30D &middot; ${tUnit(d.unit)}</span>
+    <div style="position:relative;height:210px;width:100%"><canvas id="${cid}" role="img" aria-label="Gap chart for ${d.name}"></canvas></div>
+    <div style="font-size:10px;color:#7a7264;text-align:right;margin-top:4px;padding-right:6px">P = Poya Day 🔴</div>
+  </div>`;
+}
+
 function yoyChart(d){
   const yearData={};
   DB.dates.forEach((dateStr,i)=>{
