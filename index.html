@@ -440,7 +440,10 @@ function switchMode(mode){
     /* Auto-init transport calculator */
     setTimeout(()=>{
       const tcInputs=document.querySelectorAll("[id^='tc_']");
-      tcInputs.forEach(inp=>{inp.dispatchEvent(new Event('input'));});
+      tcInputs.forEach(inp=>{
+        const tcid=inp.id.replace("tc_","");
+        calcTransport2(tcid);
+      });
     },150);
     document.querySelectorAll("#ranges button").forEach(b=>b.classList.remove("on"));
   } else {
@@ -486,6 +489,33 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeDetail();docum
 /* ===== SINGLE wireChart — series-aware ===== */
 /* ===== Poya days 2024-2026 ===== */
 const POYA_DAYS=["2024-01-25","2024-02-24","2024-03-25","2024-04-23","2024-05-23","2024-06-21","2024-07-21","2024-08-19","2024-09-17","2024-10-17","2024-11-15","2024-12-15","2025-01-13","2025-02-12","2025-03-13","2025-04-12","2025-05-12","2025-06-11","2025-07-10","2025-08-09","2025-09-07","2025-10-07","2025-11-05","2025-12-04","2026-01-03","2026-02-01","2026-03-03","2026-04-01","2026-05-01","2026-05-31","2026-06-29"];
+
+function calcTransport2(tcid){
+  const inp=document.getElementById("tc_"+tcid);
+  const tc=parseFloat(inp?inp.value:0)||0;
+  const data=(window._tcData||{})[tcid];
+  if(!data||!data.length)return;
+  const results=data.map(r=>({...r,net:r.margin-tc})).sort((a,b)=>b.net-a.net);
+  const best=results[0];
+  const html=results.map((r,i)=>{
+    const color=r.net>0?"#2c7a52":r.net<0?"#b23a2e":"#8a8170";
+    const icon=i===0&&r.net>0?"🏆 ":r.net>0?"✅ ":"❌ ";
+    const bg=i===0&&r.net>0?"#e3efe6":"#f4efe4";
+    const border=i===0&&r.net>0?"#2c7a52":"#e3d9c4";
+    return `<div style="display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:8px;background:${bg};border:1px solid ${border};flex-wrap:wrap">
+      <span style="font-size:13px;font-weight:700;min-width:85px">${icon}${r.k}</span>
+      <span style="font-size:11px;color:#7a7264">Margin: +රු.${fmt(r.margin)}</span>
+      <span style="font-size:11px;color:#7a7264">- රු.${tc}</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;color:${color};margin-left:auto">${r.net>=0?"+":""}රු.${fmt(r.net)}/kg</span>
+    </div>`;
+  }).join("");
+  const advice=best.net>50?"🎯 "+best.k+" වෙළඳපොළට යන්න — හොඳම ලාභය!":
+               best.net>0?"✅ "+best.k+" හොඳයි — ලාභ ඇත.":
+               best.net===0?"⚠️ Break-even — ලාභ නැත.":
+               "❌ Transport cost වැඩියි — අලාභ! යන්න එපා.";
+  const el=document.getElementById("tr_"+tcid);
+  if(el)el.innerHTML=html+`<div style="margin-top:6px;font-size:12px;font-weight:700;padding:8px 12px;border-radius:8px;background:#0e4f4a;color:#ffd98a">${advice}</div>`;
+}
 
 function calcTransport(tcid, mktsJson, rt, ws){
   const tc=parseFloat(document.getElementById("tc_"+tcid).value)||0;
@@ -539,22 +569,22 @@ function gapAlert(d){
     </div>`;
   }).join("");
   const maxGap=Math.max(...mkts.map(k=>rt[k]-ws[k]));
+  /* Store margins for transport calc */
   const tcid="tc_"+Math.random().toString(36).slice(2,7);
-  const mktOpts=mkts.map(k=>`<option value="${k}">${k} (W:රු.${fmt(ws[k])} → R:රු.${fmt(rt[k])})</option>`).join("");
+  window._tcData=window._tcData||{};
+  window._tcData[tcid]=mkts.map(k=>({k,margin:rt[k]-ws[k],rt:rt[k],ws:ws[k]}));
   return `<div class="gap-alert show">
     <div style="font-size:12px;font-weight:700;color:#7b3fa0;margin-bottom:8px">💡 Retail vs Wholesale Margin — ${DATES[DATES.length-1]}</div>
     ${rows}
     <div class="gap-advice">${maxGap>150?"⚠️ Wide margin — retailers keeping large profit. Good buying opportunity at wholesale!":maxGap>75?"📊 Normal margin range.":"✅ Tight margins — competitive market."}</div>
     <div style="border-top:1px dashed #cdbf9f;margin-top:12px;padding-top:12px">
       <div style="font-size:12px;font-weight:700;color:#0e4f4a;margin-bottom:8px">🚛 ගොවි Transport Calculator</div>
-      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px">
-        <div style="display:flex;align-items:center;gap:6px">
-          <label style="font-size:12px;color:#3a403a">Transport cost:</label>
-          <input id="tc_${tcid}" type="number" min="0" max="200" value="10" 
-            style="width:70px;font:inherit;font-size:13px;font-weight:700;padding:5px 8px;border:1.5px solid #cdbf9f;border-radius:7px;background:#fffdf7;color:#191d1a;font-family:'JetBrains Mono',monospace"
-            oninput="calcTransport('${tcid}','${JSON.stringify(mkts).replace(/'/g,"\'")}',${JSON.stringify(rt)},${JSON.stringify(ws)})">
-          <span style="font-size:12px;color:#7a7264">රු./kg</span>
-        </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <label style="font-size:12px;color:#3a403a">Transport cost:</label>
+        <input id="tc_${tcid}" type="number" min="0" max="500" value="10"
+          style="width:75px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:6px 8px;border:1.5px solid #cdbf9f;border-radius:7px;background:#fffdf7;color:#191d1a"
+          oninput="calcTransport2('${tcid}')">
+        <span style="font-size:12px;color:#7a7264">රු./kg</span>
       </div>
       <div id="tr_${tcid}" style="display:flex;flex-direction:column;gap:6px"></div>
     </div>
