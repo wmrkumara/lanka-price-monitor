@@ -486,7 +486,7 @@ function yoyChart(d){
   window._yoyPending[cid]={years,monthlyAvg,colors,months,d};
   const html=`<div class="chart-wrap">
     <span class="lab">${tMkt(d.primaryMarket)} YoY &middot; ${tUnit(d.unit)}</span>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 8px 46px">${legendHtml}</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;margin:6px 8px 8px 0">${legendHtml}</div>
     <div style="position:relative;height:210px;width:100%"><canvas id="${cid}" role="img" aria-label="YoY chart for ${d.name}"></canvas></div>
   </div>`;
   /* Init after DOM ready */
