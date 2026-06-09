@@ -137,7 +137,12 @@
   .gap-alert .gap-val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:#7b3fa0;}
   .gap-alert .gap-advice{font-size:12px;color:#7a7264;margin-top:4px;}
   .poya-label{font-size:9px;fill:#b23a2e;font-weight:700;}
-  .margin-tag{font-size:11.5px;font-weight:700;color:var(--down);margin-top:3px;display:block;}
+  .insight-box{background:linear-gradient(135deg,rgba(14,79,74,.06),rgba(169,128,42,.04));border:1.5px solid var(--petrol);border-radius:12px;padding:13px 16px;margin-bottom:14px}
+  .insight-box .ihead{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--petrol);margin-bottom:8px}
+  .insight-box .irow{font-size:12.5px;color:var(--ink-soft);margin-bottom:5px;line-height:1.5;display:flex;gap:6px}
+  .insight-box .irow.warn{color:var(--up);font-weight:600}
+  .insight-box .irow.good{color:var(--down);font-weight:600}
+  .insight-box .irow.gold{color:var(--gold);font-weight:600}
   .bar .fill.wholesale{background:linear-gradient(90deg,var(--gold),#8a6620);}
   /* Guide popup */
   .guide-btn{position:fixed;bottom:22px;right:22px;height:38px;padding:0 16px 0 12px;border-radius:999px;background:var(--petrol);color:#fff;border:0;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(14,79,74,.4);z-index:40;transition:.2s;display:flex;align-items:center;gap:7px;letter-spacing:.02em;}
@@ -454,6 +459,84 @@ function switchMode(mode){
   }
 }
 
+/* ===== AI Insight Box — rule-based ===== */
+function aiInsight(d){
+  const ch=changeOf(d.series);
+  const cur=latestVal(d.series);
+  const vals=vpts(d.series).map(p=>p[1]);
+  if(!vals.length)return"";
+  const rows=[];
+
+  /* 1. Price change alert */
+  if(Math.abs(ch.pct)>=25)
+    rows.push({cls:ch.dir==="up"?"warn":"good",icon:ch.dir==="up"?"⚠️":"✅",
+      text:`මිල ${ch.dir==="up"?"ඉහළ spike":"පහළ drop"} — ${Math.abs(ch.pct).toFixed(1)}% ${ch.dir==="up"?"ඉහළ":"පහළ"} ගොස් ඇත`});
+  else if(Math.abs(ch.pct)>=10)
+    rows.push({cls:"",icon:"📊",text:`මිල ${ch.dir==="up"?"ඉහළ":"පහළ"} — ${Math.abs(ch.pct).toFixed(1)}% ${ch.dir==="up"?"වැඩිවීමක්":"අඩුවීමක්"}`});
+
+  /* 2. Position in range */
+  const allMin=Math.min(...vals),allMax=Math.max(...vals),rng=allMax-allMin||1;
+  const pos=(cur-allMin)/rng;
+  if(pos>=0.85)rows.push({cls:"warn",icon:"🔴",text:`වර්තමාන මිල ඉතිහාසයේ ඉහළ පරාසයට ආසන්නයි (${fmt(allMin)}–${fmt(allMax)})`});
+  else if(pos<=0.15)rows.push({cls:"good",icon:"🟢",text:`වර්තමාන මිල ඉතිහාසයේ පහළ පරාසයට ආසන්නයි (${fmt(allMin)}–${fmt(allMax)})`});
+  else rows.push({cls:"",icon:"📈",text:`මිල සාමාන්‍ය පරාසයේ — ${fmt(allMin)} සිට ${fmt(allMax)} දක්වා`});
+
+  /* 3. 3M trend */
+  const idxs3m=rangeIdxs("3M");
+  const win3m=idxs3m.map(i=>d.series[i]).filter(v=>v!=null);
+  if(win3m.length>=4){
+    const half=Math.floor(win3m.length/2);
+    const avg1=win3m.slice(0,half).reduce((a,b)=>a+b,0)/half;
+    const avg2=win3m.slice(half).reduce((a,b)=>a+b,0)/(win3m.length-half);
+    const trend=((avg2-avg1)/avg1*100).toFixed(1);
+    if(Math.abs(trend)>5)
+      rows.push({cls:avg2>avg1?"warn":"good",icon:avg2>avg1?"📈":"📉",
+        text:`පසුගිය මාස 3 — ${avg2>avg1?"ඉහළ":"පහළ"} trend (${avg2>avg1?"+":""}${trend}%)`});
+  }
+
+  /* 4. Seasonal YoY insight */
+  const now=new Date();
+  const curMo=now.getMonth();
+  const moNames=["ජනවාරි","පෙබරවාරි","මාර්තු","අප්‍රේල්","මැයි","ජූනි","ජූලි","අගෝස්තු","සැප්තැම්බර්","ඔක්තෝබර්","නොවැම්බර්","දෙසැම්බර්"];
+  const yearData={};
+  DB.dates.forEach((ds,i)=>{
+    const v=d.series[i];if(v==null)return;
+    const dt=new Date(ds+"T00:00:00"),yr=dt.getFullYear(),mo=dt.getMonth();
+    if(!yearData[yr])yearData[yr]=Array(12).fill(null).map(()=>[]);
+    yearData[yr][mo].push(v);
+  });
+  const years=Object.keys(yearData).filter(yr=>yearData[yr][curMo].length>0);
+  if(years.length>=2){
+    const moAvgs=years.map(yr=>{const v=yearData[yr][curMo];return v.reduce((a,b)=>a+b,0)/v.length;});
+    const moAvg=moAvgs.reduce((a,b)=>a+b,0)/moAvgs.length;
+    const nextMo=(curMo+1)%12;
+    const nextAvgs=years.map(yr=>{const v=yearData[yr][nextMo]||[];return v.length?v.reduce((a,b)=>a+b,0)/v.length:null;}).filter(v=>v!=null);
+    if(nextAvgs.length>=2){
+      const nextAvg=nextAvgs.reduce((a,b)=>a+b,0)/nextAvgs.length;
+      const diff=((nextAvg-moAvg)/moAvg*100).toFixed(1);
+      if(Math.abs(diff)>8)
+        rows.push({cls:nextAvg>moAvg?"warn":"good",icon:"🌦️",
+          text:`${moNames[nextMo]} හි මිල ${nextAvg>moAvg?"ඉහළ":"පහළ"} pattern — ${Math.abs(diff)}% ${nextAvg>moAvg?"වැඩිවීමේ":"අඩුවීමේ"} ප්‍රවණතාවයක් (${years.length}Y data)`});
+    }
+  }
+
+  /* 5. Market gap */
+  const mkts=Object.entries(d.markets||{}).filter(([k,v])=>v!=null);
+  if(mkts.length>=2){
+    const srt=mkts.sort((a,b)=>b[1]-a[1]);
+    const gap=srt[0][1]-srt[srt.length-1][1];
+    if(gap>50)
+      rows.push({cls:"gold",icon:"💰",
+        text:`${srt[0][0]} vs ${srt[srt.length-1][0]} — රු.${fmt(gap)}/kg වෙළඳපොළ gap${gap>100?" — transport opportunity!":""}`});
+  }
+
+  if(!rows.length)return"";
+  return`<div class="insight-box">
+    <div class="ihead">🧠 Insight — ${tName(d.name)}</div>
+    ${rows.map(r=>`<div class="irow ${r.cls}">${r.icon} ${r.text}</div>`).join("")}
+  </div>`;
+}
+
 /* ===== SINGLE openDetail — wholesale aware ===== */
 function openDetail(id){
   const d=DATA[id],ch=changeOf(d.series),vals=vpts(d.series).map(p=>p[1]);
@@ -474,7 +557,7 @@ function openDetail(id){
     '<a class="wa-btn wa-channel" href="https://whatsapp.com/channel/0000000000" target="_blank" rel="noopener">'+
     '🔔 Daily Alerts</a>'+
     '</div>';
-  modal.innerHTML='<div class="mhead"><div><div class="cat">'+tCat(d.category)+'</div><h3>'+tName(d.name)+'</h3></div><button class="close" onclick="closeDetail()" aria-label="Close">&#10005;</button></div><div class="mbody">'+toggleBar+'<div class="statrow"><div class="stat"><div class="l">'+t("latest")+'</div><div class="v">'+fmt(latestVal(d.series))+'</div></div><div class="stat"><div class="l">'+t("change")+'</div><div class="v" style="color:'+strokeFor(ch.dir)+'">'+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</div></div><div class="stat"><div class="l">'+t("low")+'</div><div class="v" id="statLow">'+fmt(min)+'</div></div><div class="stat"><div class="l">'+t("high")+'</div><div class="v" id="statHigh">'+fmt(max)+'</div></div></div>'+rangeBar+'<div id="chartHost"></div><div id="mktBarsHost">'+marketBars(d,"retail")+'</div>'+waRow+'</div>';
+  modal.innerHTML='<div class="mhead"><div><div class="cat">'+tCat(d.category)+'</div><h3>'+tName(d.name)+'</h3></div><button class="close" onclick="closeDetail()" aria-label="Close">&#10005;</button></div><div class="mbody">'+aiInsight(d)+toggleBar+'<div class="statrow"><div class="stat"><div class="l">'+t("latest")+'</div><div class="v">'+fmt(latestVal(d.series))+'</div></div><div class="stat"><div class="l">'+t("change")+'</div><div class="v" style="color:'+strokeFor(ch.dir)+'">'+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</div></div><div class="stat"><div class="l">'+t("low")+'</div><div class="v" id="statLow">'+fmt(min)+'</div></div><div class="stat"><div class="l">'+t("high")+'</div><div class="v" id="statHigh">'+fmt(max)+'</div></div></div>'+rangeBar+'<div id="chartHost"></div><div id="mktBarsHost">'+marketBars(d,"retail")+'</div>'+waRow+'</div>';
   scrim.classList.add("open");document.body.style.overflow="hidden";
   setTimeout(()=>{
     document.getElementById("ranges").addEventListener("click",e=>{if(e.target.dataset.r)renderRange(e.target.dataset.r);});
