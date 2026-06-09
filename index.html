@@ -442,9 +442,10 @@ function switchMode(mode){
       const tcInputs=document.querySelectorAll("[id^='tc_']");
       tcInputs.forEach(inp=>{
         const tcid=inp.id.replace("tc_","");
+        inp.value=10;
         calcTransport2(tcid);
       });
-    },150);
+    },200);
     document.querySelectorAll("#ranges button").forEach(b=>b.classList.remove("on"));
   } else {
     if(mh)mh.innerHTML=marketBars(curDetail,mode);
