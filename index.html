@@ -271,6 +271,7 @@ const EMOJIS={
 };
 function tEmoji(n){return EMOJIS[n]||"🌿";}
 function t(k){return (I18N[lang]&&I18N[lang][k])||I18N.en[k]||k;}
+function tName(n){return (NAMES[n]&&NAMES[n][lang])||n;}
 function tCat(c){return lang==="en"?c:((CATS[c]&&CATS[c][lang])||c);}
 function tMkt(m){return lang==="en"?m:((MARKETS[m]&&MARKETS[m][lang])||m);}
 function tUnit(u){return lang==="en"?u:((UNITS[u]&&UNITS[u][lang])||u);}
