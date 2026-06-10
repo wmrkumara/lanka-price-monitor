@@ -132,6 +132,7 @@
   .price-toggle button.on{background:var(--gold);color:#fff;border-color:var(--gold);}
   .price-toggle button:first-child.on{background:var(--petrol);border-color:var(--petrol);}
   .price-toggle button.gap-btn.on{background:#7b3fa0;border-color:#7b3fa0;color:#fff;}
+  .price-toggle button.calc-btn.on{background:#c17d11;border-color:#c17d11;color:#fff;}
   .gap-alert{background:linear-gradient(135deg,rgba(123,63,160,.12),rgba(169,128,42,.08));border:1.5px solid #7b3fa0;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:13px;color:#3a403a;display:none;}
   .gap-alert.show{display:block;}
   .gap-alert .gap-val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:#7b3fa0;}
@@ -251,7 +252,24 @@ const NAMES={
  "Kelawalla":{si:"කෙළවල්ලා",ta:"கெளவல்லா"},"Thalapath":{si:"තලපත්",ta:"தலபத்"},"Paraw":{si:"පරාවා",ta:"பராவ்"},"Salaya":{si:"සාලයා",ta:"சாளை"},"Hurulla":{si:"හුරුල්ලා",ta:"ஹுருல்லா"},"Linna":{si:"ලින්නා",ta:"லின்னா"},
  "Beetroot":{si:"බීට්රූට්",ta:"பீட்ரூட்"},"Leeks":{si:"ලීක්ස්",ta:"லீக்ஸ்"},"Knol-khol":{si:"නෝල්කෝල්",ta:"நோல்கோல்"},"Drumstick":{si:"මුරුංගා",ta:"முருங்கை"},"Manioc":{si:"මඤ්ඤොක්කා",ta:"மரவள்ளி"},"Ash Plantain":{si:"අල කෙසෙල්",ta:"வாழைக்காய்"},"Keeri Samba":{si:"කීරි සම්බා",ta:"கீரி சம்பா"}
 };
-function t(k){return (I18N[lang]&&I18N[lang][k])||I18N.en[k]||k;}
+const EMOJIS={
+  "Beans":"🫘","Carrot":"🥕","Cabbage":"🥬","Tomato":"🍅","Brinjal":"🍆",
+  "Pumpkin":"🎃","Snake gourd":"🥒","Green Chilli":"🫑","Lime":"🍋",
+  "Red Onion (Local)":"🧅","Red Onion (lmp)":"🧅","Big Onion (Imp)":"🧅",
+  "Big Onion (Local)":"🧅","Potato (Local)":"🥔","Potato (Imp)":"🥔",
+  "Dried Chilli (Imp)":"🌶️","Coconut (Avg.)":"🥥","Coconut oil":"🫙",
+  "Banana (Sour)":"🍌","Papaw":"🥭","Pineapple":"🍍",
+  "Apple (Imp)":"🍎","Orange (Imp)":"🍊",
+  "Samba":"🍚","Nadu":"🍚","Kekulu (White)":"🍚","Kekulu (Red)":"🍚",
+  "Ponni Samba (Imp)":"🍚","Nadu (Imp)":"🍚","Keeri Samba":"🍚",
+  "Kelawalla":"🐟","Thalapath":"🐠","Paraw":"🐡","Salaya":"🐟",
+  "Hurulla":"🦈","Linna":"🐟","Balaya":"🐟",
+  "Red Dhal":"🫘","Sugar (White)":"🍬","Egg (White)":"🥚",
+  "Katta (Imp)":"🦐","Sprat (Imp)":"🐟","Beetroot":"🟣",
+  "Leeks":"🌿","Knol-khol":"🥦","Drumstick":"🌿","Manioc":"🥕",
+  "Ash Plantain":"🍌"
+};
+function tEmoji(n){return EMOJIS[n]||"🌿";}
 function tName(n){return (NAMES[n]&&NAMES[n][lang])||n;}
 function tCat(c){return lang==="en"?c:((CATS[c]&&CATS[c][lang])||c);}
 function tMkt(m){return lang==="en"?m:((MARKETS[m]&&MARKETS[m][lang])||m);}
@@ -314,7 +332,7 @@ function renderGrid(){
   document.getElementById("count").textContent=list.length+" "+t("items");
   if(!list.length){g.innerHTML='<div class="empty">'+t("noMatch").replace("%Q",state.q)+'</div>';return;}
   g.innerHTML=list.map(d=>{const ch=c(d),cur=latestVal(d.series);
-    return '<div class="item" onclick="openDetail('+d.id+')"><div class="top"><div><div class="cat">'+tCat(d.category)+'</div><div class="nm">'+tName(d.name)+'</div></div><span class="chg '+ch.dir+'">'+arrow(ch.dir)+' '+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</span></div>'+spark(d.series,220,42,strokeFor(ch.dir))+'<div class="foot"><span class="price">'+fmt(cur)+'<small> '+tUnit(d.unit)+'</small></span><span style="font-size:11px;color:var(--muted)">'+(ch.abs>0?"+":"")+fmt(ch.abs)+' '+t("vsLast")+'</span></div></div>';
+    return '<div class="item" onclick="openDetail('+d.id+')"><div class="top"><div><div class="cat">'+tCat(d.category)+'</div><div class="nm">'+tEmoji(d.name)+' '+tName(d.name)+'</div></div><span class="chg '+ch.dir+'">'+arrow(ch.dir)+' '+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</span></div>'+spark(d.series,220,42,strokeFor(ch.dir))+'<div class="foot"><span class="price">'+fmt(cur)+'<small> '+tUnit(d.unit)+'</small></span><span style="font-size:11px;color:var(--muted)">'+(ch.abs>0?"+":"")+fmt(ch.abs)+' '+t("vsLast")+'</span></div></div>';
   }).join("");
 }
 
@@ -323,7 +341,7 @@ function renderMovers(){
     .sort((a,b)=>Math.abs(b.ch.pct)-Math.abs(a.ch.pct)).slice(0,7);
   document.getElementById("movers").innerHTML=m.map(({d,ch})=>{
     const v=vpts(d.series),prev=v[v.length-2][1],cur=v[v.length-1][1];
-    return '<div class="mover" onclick="openDetail('+d.id+')"><div class="cat">'+tCat(d.category)+' &middot; '+tMkt(d.primaryMarket)+'</div><div class="nm">'+tName(d.name)+'</div><div class="row"><span class="price">'+fmt(cur)+'<small> '+tUnit(d.unit)+'</small></span><span class="chg '+ch.dir+'">'+arrow(ch.dir)+' '+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</span></div><div class="reason">'+t("reason").replace("%A",fmt(prev)).replace("%B",fmt(cur))+'</div></div>';
+    return '<div class="mover" onclick="openDetail('+d.id+')"><div class="cat">'+tCat(d.category)+' &middot; '+tMkt(d.primaryMarket)+'</div><div class="nm">'+tEmoji(d.name)+' '+tName(d.name)+'</div><div class="row"><span class="price">'+fmt(cur)+'<small> '+tUnit(d.unit)+'</small></span><span class="chg '+ch.dir+'">'+arrow(ch.dir)+' '+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</span></div><div class="reason">'+t("reason").replace("%A",fmt(prev)).replace("%B",fmt(cur))+'</div></div>';
   }).join("");
 }
 
@@ -433,30 +451,109 @@ function renderRange(key, mode){
 /* ===== switchMode — retail/wholesale toggle ===== */
 function switchMode(mode){
   curMode=mode;
-  const br=document.getElementById("btnRetail"),bw=document.getElementById("btnWholesale"),bg=document.getElementById("btnGap");
+  const br=document.getElementById("btnRetail"),bw=document.getElementById("btnWholesale"),
+        bg=document.getElementById("btnGap"),bc=document.getElementById("btnCalc");
   if(br)br.classList.toggle("on",mode==="retail");
   if(bw)bw.classList.toggle("on",mode==="wholesale");
   if(bg)bg.classList.toggle("on",mode==="gap");
+  if(bc)bc.classList.toggle("on",mode==="calc");
   const mh=document.getElementById("mktBarsHost");
   if(mode==="gap"){
     const host=document.getElementById("chartHost");
     if(host)host.innerHTML=gapChart(curDetail);
     if(mh)mh.innerHTML=gapAlert(curDetail);
-    /* Auto-init transport calculator */
     setTimeout(()=>{
       const tcInputs=document.querySelectorAll("[id^='tc_']");
       tcInputs.forEach(inp=>{
         const tcid=inp.id.replace("tc_","");
-        inp.value=10;
-        calcTransport2(tcid);
+        inp.value=10;calcTransport2(tcid);
       });
     },200);
+    document.querySelectorAll("#ranges button").forEach(b=>b.classList.remove("on"));
+  } else if(mode==="calc"){
+    const host=document.getElementById("chartHost");
+    if(host)host.innerHTML=calcPanel(curDetail);
+    if(mh)mh.innerHTML="";
+    setTimeout(()=>{
+      const cid=document.querySelector("[id^='cp_']");
+      if(cid){const id=cid.id.replace("cp_","");calcFarmer(id);calcTransport2(id);}
+    },150);
     document.querySelectorAll("#ranges button").forEach(b=>b.classList.remove("on"));
   } else {
     if(mh)mh.innerHTML=marketBars(curDetail,mode);
     const active=document.querySelector("#ranges button.on");
     renderRange(active?active.dataset.r:defaultRange(),mode);
   }
+}
+
+/* ===== Standalone Calculator Panel ===== */
+function calcPanel(d){
+  const rt=d.markets||{}, ws=d.wholesaleMarkets||{};
+  const mkts=Object.keys(rt).filter(k=>rt[k]!=null);
+  if(!mkts.length) return '<p class="mkt-sub" style="padding:20px">Market data not available.</p>';
+  const cid="cp_"+Math.random().toString(36).slice(2,8);
+  window._tcData=window._tcData||{};
+  window._tcData[cid]=mkts.map(k=>({k,margin:(rt[k]||0)-(ws[k]||0),rt:rt[k]||0,ws:ws[k]||0}));
+  return `<div style="background:linear-gradient(135deg,rgba(14,79,74,.04),rgba(169,128,42,.04));border:1.5px solid var(--line-strong);border-radius:14px;padding:18px 20px;margin-bottom:10px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+      <div style="font-size:15px;font-weight:700;color:#0e4f4a">🧮 ${tEmoji(d.name)} ${tName(d.name)} — Profit Calculator</div>
+      <div style="display:flex;gap:0;border:1.5px solid #cdbf9f;border-radius:999px;overflow:hidden">
+        <button id="mode_trader_${cid}" onclick="setCalcMode('${cid}','trader')"
+          style="font:inherit;font-size:12px;font-weight:700;padding:5px 14px;border:none;background:#0e4f4a;color:#fff;cursor:pointer">💰 Trader</button>
+        <button id="mode_farmer_${cid}" onclick="setCalcMode('${cid}','farmer')"
+          style="font:inherit;font-size:12px;font-weight:700;padding:5px 14px;border:none;background:transparent;color:#7a7264;cursor:pointer">🌾 Farmer</button>
+      </div>
+    </div>
+
+    <!-- Market prices quick view -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:14px">
+      ${mkts.map(k=>`<div style="background:#fffdf7;border:1px solid #e3d9c4;border-radius:8px;padding:8px 10px;text-align:center">
+        <div style="font-size:10px;color:#7a7264;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px">${k}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:#191d1a">රු.${fmt(rt[k])}</div>
+        ${ws[k]?`<div style="font-size:10px;color:#a9802a">W: රු.${fmt(ws[k])}</div>`:''}
+      </div>`).join("")}
+    </div>
+
+    <!-- TRADER INPUTS -->
+    <div id="trader_inputs_${cid}">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+        <label style="font-size:13px;color:#3a403a;min-width:120px">Transport cost:</label>
+        <input id="tc_${cid}" type="number" min="0" max="500" value="10"
+          style="width:80px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
+          oninput="calcTransport2('${cid}')">
+        <span style="font-size:13px;color:#7a7264">රු./kg</span>
+      </div>
+    </div>
+
+    <!-- FARMER INPUTS -->
+    <div id="farmer_inputs_${cid}" style="display:none">
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <label style="font-size:13px;color:#3a403a;min-width:130px">Total harvest:</label>
+          <input id="fkg_${cid}" type="number" min="0" value="500"
+            style="width:80px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
+            oninput="calcFarmer('${cid}')">
+          <span style="font-size:13px;color:#7a7264">kg</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <label style="font-size:13px;color:#3a403a;min-width:130px">Transport cost:</label>
+          <input id="ftc_${cid}" type="number" min="0" value="10"
+            style="width:80px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
+            oninput="calcFarmer('${cid}')">
+          <span style="font-size:13px;color:#7a7264">රු./kg</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <label style="font-size:13px;color:#3a403a;min-width:130px">Production cost: <span style="font-size:10px;color:#7a7264">(optional)</span></label>
+          <input id="fpc_${cid}" type="number" min="0" value="" placeholder="0"
+            style="width:80px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
+            oninput="calcFarmer('${cid}')">
+          <span style="font-size:13px;color:#7a7264">රු./kg</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="tr_${cid}" style="display:flex;flex-direction:column;gap:6px"></div>
+  </div>`;
 }
 
 /* ===== AI Insight Box — rule-based ===== */
@@ -544,7 +641,7 @@ function openDetail(id){
   curDetail=d; curMode="retail";
   const hasWholesale=d.wholesaleSeries&&d.wholesaleSeries.some&&d.wholesaleSeries.some(v=>v!=null);
   const toggleBar=hasWholesale
-    ?'<div class="price-toggle"><button id="btnRetail" class="on" onclick="switchMode(\'retail\')">Retail</button><button id="btnWholesale" onclick="switchMode(\'wholesale\')">Wholesale</button><button id="btnGap" class="gap-btn" onclick="switchMode(\'gap\')">💡 Gap</button></div>'
+    ?'<div class="price-toggle"><button id="btnRetail" class="on" onclick="switchMode(\'retail\')">Retail</button><button id="btnWholesale" onclick="switchMode(\'wholesale\')">Wholesale</button><button id="btnGap" class="gap-btn" onclick="switchMode(\'gap\')">💡 Gap</button><button id="btnCalc" class="calc-btn" onclick="switchMode(\'calc\')">🧮 Calculator</button></div>'
     :'';
   const rangeBar='<div class="ranges" id="ranges">'+["1M","3M","1Y","3Y","5Y","All","YoY"].map(r=>'<button data-r="'+r+'">'+r+'</button>').join("")+'</div>';
   const waRow='<div class="wa-row">'+
@@ -557,7 +654,7 @@ function openDetail(id){
     '<a class="wa-btn wa-channel" href="https://whatsapp.com/channel/0000000000" target="_blank" rel="noopener">'+
     '🔔 Daily Alerts</a>'+
     '</div>';
-  modal.innerHTML='<div class="mhead"><div><div class="cat">'+tCat(d.category)+'</div><h3>'+tName(d.name)+'</h3></div><button class="close" onclick="closeDetail()" aria-label="Close">&#10005;</button></div><div class="mbody">'+aiInsight(d)+toggleBar+'<div class="statrow"><div class="stat"><div class="l">'+t("latest")+'</div><div class="v">'+fmt(latestVal(d.series))+'</div></div><div class="stat"><div class="l">'+t("change")+'</div><div class="v" style="color:'+strokeFor(ch.dir)+'">'+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</div></div><div class="stat"><div class="l">'+t("low")+'</div><div class="v" id="statLow">'+fmt(min)+'</div></div><div class="stat"><div class="l">'+t("high")+'</div><div class="v" id="statHigh">'+fmt(max)+'</div></div></div>'+rangeBar+'<div id="chartHost"></div><div id="mktBarsHost">'+marketBars(d,"retail")+'</div>'+waRow+'</div>';
+  modal.innerHTML='<div class="mhead"><div><div class="cat">'+tCat(d.category)+'</div><h3>'+tEmoji(d.name)+' '+tName(d.name)+'</h3></div><button class="close" onclick="closeDetail()" aria-label="Close">&#10005;</button></div><div class="mbody">'+aiInsight(d)+toggleBar+'<div class="statrow"><div class="stat"><div class="l">'+t("latest")+'</div><div class="v">'+fmt(latestVal(d.series))+'</div></div><div class="stat"><div class="l">'+t("change")+'</div><div class="v" style="color:'+strokeFor(ch.dir)+'">'+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</div></div><div class="stat"><div class="l">'+t("low")+'</div><div class="v" id="statLow">'+fmt(min)+'</div></div><div class="stat"><div class="l">'+t("high")+'</div><div class="v" id="statHigh">'+fmt(max)+'</div></div></div>'+rangeBar+'<div id="chartHost"></div><div id="mktBarsHost">'+marketBars(d,"retail")+'</div>'+waRow+'</div>';
   scrim.classList.add("open");document.body.style.overflow="hidden";
   setTimeout(()=>{
     document.getElementById("ranges").addEventListener("click",e=>{if(e.target.dataset.r)renderRange(e.target.dataset.r);});
@@ -573,6 +670,64 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeDetail();docum
 /* ===== SINGLE wireChart — series-aware ===== */
 /* ===== Poya days 2024-2026 ===== */
 const POYA_DAYS=["2024-01-25","2024-02-24","2024-03-25","2024-04-23","2024-05-23","2024-06-21","2024-07-21","2024-08-19","2024-09-17","2024-10-17","2024-11-15","2024-12-15","2025-01-13","2025-02-12","2025-03-13","2025-04-12","2025-05-12","2025-06-11","2025-07-10","2025-08-09","2025-09-07","2025-10-07","2025-11-05","2025-12-04","2026-01-03","2026-02-01","2026-03-03","2026-04-01","2026-05-01","2026-05-31","2026-06-29"];
+
+function setCalcMode(tcid, mode){
+  const traderBtn=document.getElementById("mode_trader_"+tcid);
+  const farmerBtn=document.getElementById("mode_farmer_"+tcid);
+  const traderInputs=document.getElementById("trader_inputs_"+tcid);
+  const farmerInputs=document.getElementById("farmer_inputs_"+tcid);
+  if(!traderBtn)return;
+  if(mode==="trader"){
+    traderBtn.style.background="#0e4f4a";traderBtn.style.color="#fff";
+    farmerBtn.style.background="transparent";farmerBtn.style.color="#7a7264";
+    traderInputs.style.display="block";farmerInputs.style.display="none";
+    calcTransport2(tcid);
+  } else {
+    farmerBtn.style.background="#2c7a52";farmerBtn.style.color="#fff";
+    traderBtn.style.background="transparent";traderBtn.style.color="#7a7264";
+    traderInputs.style.display="none";farmerInputs.style.display="block";
+    calcFarmer(tcid);
+  }
+}
+
+function calcFarmer(tcid){
+  const kg=parseFloat(document.getElementById("fkg_"+tcid)?.value)||0;
+  const tc=parseFloat(document.getElementById("ftc_"+tcid)?.value)||0;
+  const pc=parseFloat(document.getElementById("fpc_"+tcid)?.value)||0;
+  const data=(window._tcData||{})[tcid];
+  if(!data||!data.length)return;
+  /* Farmer sells at WHOLESALE price */
+  const results=data.map(r=>({
+    k:r.k,
+    ws:r.ws,
+    netPerKg:r.ws-tc-pc,
+    total:(r.ws-tc-pc)*kg
+  })).sort((a,b)=>b.total-a.total);
+  const best=results[0];
+  const html=results.map((r,i)=>{
+    const color=r.netPerKg>0?"#2c7a52":"#b23a2e";
+    const bg=i===0&&r.netPerKg>0?"#e3efe6":"#f4efe4";
+    const border=i===0&&r.netPerKg>0?"#2c7a52":"#e3d9c4";
+    const icon=i===0&&r.netPerKg>0?"🏆 ":"   ";
+    return `<div style="padding:8px 12px;border-radius:8px;background:${bg};border:1px solid ${border};margin-bottom:4px">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <span style="font-size:13px;font-weight:700">${icon}${r.k}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:${color}">${r.netPerKg>=0?"+":""}රු.${fmt(r.netPerKg)}/kg</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:4px">
+        <span style="font-size:11px;color:#7a7264">W: රු.${fmt(r.ws)} - ${tc>0?"Transport:රු."+tc:""}${pc>0?" - Production:රු."+pc:""}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:${color}">${r.total>=0?"":"❌ "}රු.${fmt(Math.abs(r.total))}</span>
+      </div>
+      ${kg>0?`<div style="font-size:11px;color:#7a7264;margin-top:2px">${kg}kg × රු.${fmt(r.netPerKg)} = <strong style="color:${color}">රු.${fmt(r.total)}</strong></div>`:""}
+    </div>`;
+  }).join("");
+  const advice=best.netPerKg>0
+    ?"🎯 "+best.k+" වෙළඳපොළට යන්න — රු."+fmt(best.total)+" ලැබේ!"
+    :"❌ සියලු වෙළඳපොළ — අලාභ! Transport/Production cost අඩු කරන්න.";
+  const el=document.getElementById("tr_"+tcid);
+  if(el)el.innerHTML=`<div style="font-size:11px;font-weight:700;color:#2c7a52;margin-bottom:6px">🌾 Farmer Profit Summary (${kg}kg):</div>`+html+
+    `<div style="margin-top:6px;font-size:12px;font-weight:700;padding:8px 12px;border-radius:8px;background:#0e4f4a;color:#ffd98a">${advice}</div>`;
+}
 
 function calcTransport2(tcid){
   const inp=document.getElementById("tc_"+tcid);
@@ -662,14 +817,57 @@ function gapAlert(d){
     ${rows}
     <div class="gap-advice">${maxGap>150?"⚠️ Wide margin — retailers keeping large profit. Good buying opportunity at wholesale!":maxGap>75?"📊 Normal margin range.":"✅ Tight margins — competitive market."}</div>
     <div style="border-top:1px dashed #cdbf9f;margin-top:12px;padding-top:12px">
-      <div style="font-size:12px;font-weight:700;color:#0e4f4a;margin-bottom:8px">💰 Trader Profit Calculator</div>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-        <label style="font-size:12px;color:#3a403a">Transport cost:</label>
-        <input id="tc_${tcid}" type="number" min="0" max="500" value="10"
-          style="width:75px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:6px 8px;border:1.5px solid #cdbf9f;border-radius:7px;background:#fffdf7;color:#191d1a"
-          oninput="calcTransport2('${tcid}')">
-        <span style="font-size:12px;color:#7a7264">රු./kg</span>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <div style="font-size:12px;font-weight:700;color:#0e4f4a">🧮 Profit Calculator</div>
+        <div style="display:flex;gap:0;border:1.5px solid #cdbf9f;border-radius:999px;overflow:hidden">
+          <button id="mode_trader_${tcid}" onclick="setCalcMode('${tcid}','trader')"
+            style="font:inherit;font-size:11px;font-weight:700;padding:4px 12px;border:none;background:#0e4f4a;color:#fff;cursor:pointer">💰 Trader</button>
+          <button id="mode_farmer_${tcid}" onclick="setCalcMode('${tcid}','farmer')"
+            style="font:inherit;font-size:11px;font-weight:700;padding:4px 12px;border:none;background:transparent;color:#7a7264;cursor:pointer">🌾 Farmer</button>
+        </div>
       </div>
+
+      <!-- TRADER MODE -->
+      <div id="trader_inputs_${tcid}">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <label style="font-size:12px;color:#3a403a;min-width:110px">Transport cost:</label>
+          <input id="tc_${tcid}" type="number" min="0" max="500" value="10"
+            style="width:75px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:6px 8px;border:1.5px solid #cdbf9f;border-radius:7px;background:#fffdf7;color:#191d1a"
+            oninput="calcTransport2('${tcid}')">
+          <span style="font-size:12px;color:#7a7264">රු./kg</span>
+        </div>
+      </div>
+
+      <!-- FARMER MODE -->
+      <div id="farmer_inputs_${tcid}" style="display:none">
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <label style="font-size:12px;color:#3a403a;min-width:130px">Total harvest:</label>
+            <input id="fkg_${tcid}" type="number" min="0" value="500"
+              style="width:80px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:6px 8px;border:1.5px solid #cdbf9f;border-radius:7px;background:#fffdf7;color:#191d1a"
+              oninput="calcFarmer('${tcid}')">
+            <span style="font-size:12px;color:#7a7264">kg</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <label style="font-size:12px;color:#3a403a;min-width:130px">Transport cost:</label>
+            <input id="ftc_${tcid}" type="number" min="0" value="10"
+              style="width:80px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:6px 8px;border:1.5px solid #cdbf9f;border-radius:7px;background:#fffdf7;color:#191d1a"
+              oninput="calcFarmer('${tcid}')">
+            <span style="font-size:12px;color:#7a7264">රු./kg</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <label style="font-size:12px;color:#3a403a;min-width:130px">Production cost:
+              <span style="font-size:10px;color:#7a7264;font-weight:400">(optional)</span>
+            </label>
+            <input id="fpc_${tcid}" type="number" min="0" value=""
+              placeholder="0"
+              style="width:80px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:6px 8px;border:1.5px solid #cdbf9f;border-radius:7px;background:#fffdf7;color:#191d1a"
+              oninput="calcFarmer('${tcid}')">
+            <span style="font-size:12px;color:#7a7264">රු./kg</span>
+          </div>
+        </div>
+      </div>
+
       <div id="tr_${tcid}" style="display:flex;flex-direction:column;gap:6px"></div>
     </div>
   </div>`;
