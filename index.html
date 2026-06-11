@@ -776,7 +776,7 @@ function openDetail(id){
   curDetail=d; curMode="retail";
   const hasWholesale=d.wholesaleSeries&&d.wholesaleSeries.some&&d.wholesaleSeries.some(v=>v!=null);
   const toggleBar=hasWholesale
-    ?'<div class="price-toggle"><button id="btnRetail" class="on" onclick="switchMode(\'retail\')">Retail</button><button id="btnWholesale" onclick="switchMode(\'wholesale\')">Wholesale</button><button id="btnGap" class="gap-btn" onclick="switchMode(\'gap\')">💡 Gap</button><button id="btnCalc" class="calc-btn" onclick="switchMode(\'calc\')">🧮 Calculator</button></div>'
+    ?'<div class="price-toggle"><button id="btnRetail" class="on" onclick="switchMode(\'retail\')">Retail</button><button id="btnWholesale" onclick="switchMode(\'wholesale\')">Wholesale</button><button id="btnGap" class="gap-btn" onclick="switchMode(\'gap\')">💡 Gap</button><button id="btnCalc" class="calc-btn" onclick="switchMode(\'calc\')">🧮 Calculator</button></div><div style="font-size:11px;color:var(--gold);margin:-6px 0 8px;text-align:right">🌾 ගොවි ලාභය &nbsp;|&nbsp; 💰 වෙළෙන්ද ලාභය — ගණනය කරන්න</div>'
     :'';
   const rangeBar='<div class="ranges" id="ranges">'+["1M","3M","1Y","3Y","5Y","All","YoY"].map(r=>'<button data-r="'+r+'">'+r+'</button>').join("")+'</div>';
   const waRow='<div class="wa-row">'+
