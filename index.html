@@ -1,9 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="si">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lanka Price Monitor</title>
+
+<!-- SEO: Primary Title -->
+<title>Vegetable Price in Sri Lanka Today | TopGoviya Lanka Price Monitor</title>
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="Daily vegetable, fish &amp; rice prices in Sri Lanka from Central Bank data. Farmer profit calculator, trader margins, wholesale vs retail, 4-year price history. Sinhala · Tamil · English. Dambulla · Pettah · Narahenpita.">
+<meta name="keywords" content="vegetable price in sri lanka today, dambulla market price today, pettah wholesale market price, daily vegetable prices sri lanka, cbsl daily price report, rice price sri lanka today, fish price sri lanka, farmer profit calculator, trader margin calculator, wholesale vs retail price sri lanka, vegetable price history sri lanka, best time to sell vegetables sri lanka, ada elavalu mila, dambulla market elavalu mila, අද එළවළු මිල, දෛනික එළවළු මිල, ශ්‍රී ලංකාවේ එළවළු මිල, ගොවි ලාභ ගණකය, වෙළෙන්දා ලාභ ගණකය, තොග එළවළු මිල, සහල් මිල, මාළු මිල, topgoviya, lanka price monitor, topgoviya.lk">
+<meta name="author" content="TopGoviya.lk | ebooklanka.com">
+<meta name="robots" content="index, follow">
+<meta name="language" content="Sinhala, Tamil, English">
+<meta name="revisit-after" content="1 day">
+<meta name="geo.region" content="LK">
+<meta name="geo.placename" content="Sri Lanka">
+
+<!-- Open Graph (Facebook & WhatsApp) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://topgoviya.lk/">
+<meta property="og:title" content="Vegetable Price in Sri Lanka Today | TopGoviya Lanka Price Monitor">
+<meta property="og:description" content="Daily vegetable, fish &amp; rice prices from Central Bank of Sri Lanka. Farmer profit calculator, trader margins, wholesale vs retail, 4-year history. Sinhala · Tamil · English.">
+<meta property="og:site_name" content="TopGoviya Lanka Price Monitor">
+<meta property="og:locale" content="si_LK">
+<meta property="og:locale:alternate" content="ta_LK">
+<meta property="og:locale:alternate" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sri Lanka Daily Vegetable, Fish & Rice Prices | TopGoviya">
+<meta name="twitter:description" content="Free daily market prices + Farmer profit calculator + 4-year history. Sinhala · Tamil · English. Data from CBSL.">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://topgoviya.lk/">
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Lanka Price Monitor | TopGoviya",
+  "url": "https://topgoviya.lk",
+  "description": "Daily vegetable, fish and rice prices in Sri Lanka from Central Bank data. Farmer profit calculator, trader margin analysis, wholesale vs retail comparison.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "inLanguage": ["si", "ta", "en"],
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "LKR"},
+  "author": {"@type": "Organization", "name": "TopGoviya.lk", "url": "https://topgoviya.lk"},
+  "keywords": "vegetable price sri lanka, dambulla market, pettah market, farmer profit calculator"
+}
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -828,13 +876,19 @@ function openDetail(id){
     '</div>';
   modal.innerHTML='<div class="mhead"><div><div class="cat">'+tCat(d.category)+'</div><h3>'+tEmoji(d.name)+' '+tName(d.name)+'</h3></div><button class="close" onclick="closeDetail()" aria-label="Close">&#10005;</button></div><div class="mbody">'+aiInsight(d)+toggleBar+'<div class="statrow"><div class="stat"><div class="l">'+t("latest")+'</div><div class="v">'+fmt(latestVal(d.series))+'</div></div><div class="stat"><div class="l">'+t("change")+'</div><div class="v" style="color:'+strokeFor(ch.dir)+'">'+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</div></div><div class="stat"><div class="l">'+t("low")+'</div><div class="v" id="statLow">'+fmt(min)+'</div></div><div class="stat"><div class="l">'+t("high")+'</div><div class="v" id="statHigh">'+fmt(max)+'</div></div></div>'+rangeBar+'<div id="chartHost"></div><div id="mktBarsHost">'+marketBars(d,"retail")+'</div>'+waRow+'</div>';
   scrim.classList.add("open");document.body.style.overflow="hidden";
+  /* Dynamic SEO title update */
+  document.title=tName(d.name)+" ("+tEmoji(d.name)+") Price Today Sri Lanka | TopGoviya Lanka Price Monitor";
   setTimeout(()=>{
     document.getElementById("ranges").addEventListener("click",e=>{if(e.target.dataset.r)renderRange(e.target.dataset.r);});
     renderRange(defaultRange());
   }, 100);
 }
 
-function closeDetail(){scrim.classList.remove("open");document.body.style.overflow="";}
+function closeDetail(){
+  scrim.classList.remove("open");
+  document.body.style.overflow="";
+  document.title="Vegetable Price in Sri Lanka Today | TopGoviya Lanka Price Monitor";
+}
 scrim.addEventListener("click",e=>{if(e.target===scrim)closeDetail();});
 document.getElementById("guideScrim").addEventListener("click",e=>{if(e.target===document.getElementById("guideScrim"))document.getElementById("guideScrim").classList.remove("open");});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeDetail();document.getElementById("guideScrim").classList.remove("open");}});
