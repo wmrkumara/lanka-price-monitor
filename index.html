@@ -124,7 +124,54 @@
     font-size:13.5px;color:var(--ink-soft);letter-spacing:.01em}
   .credit a{color:var(--petrol);font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--line-strong);transition:.18s}
   .credit a:hover{border-color:var(--petrol)}
-  @media(max-width:560px){.statrow{grid-template-columns:repeat(2,1fr)}.bar{grid-template-columns:110px 1fr auto;gap:9px}.modal .mhead h3{font-size:26px}}
+  @media(max-width:560px){
+    .statrow{grid-template-columns:repeat(2,1fr)}
+    .bar{grid-template-columns:110px 1fr auto;gap:9px}
+    .modal .mhead h3{font-size:22px}
+    /* Modal full screen on mobile */
+    .scrim{padding:0}
+    .modal{border-radius:14px 14px 0 0;max-width:100%;width:100%;margin-top:auto;max-height:92vh;overflow-y:auto}
+    /* Price toggle wrap */
+    .price-toggle{flex-wrap:wrap;gap:5px}
+    .price-toggle button{font-size:11px;padding:6px 10px}
+    /* Calculator inputs stack */
+    .calc-inputs-row{flex-direction:column!important;align-items:flex-start!important}
+    /* Chart height reduce */
+    canvas{max-height:180px}
+    /* Movers cards smaller */
+    .mover{padding:12px}
+    .mover .nm{font-size:19px}
+    /* Grid cards */
+    .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+    /* Ranges wrap */
+    .ranges{flex-wrap:wrap}
+    /* Gap alert */
+    .gap-alert{font-size:12px}
+    /* Guide box */
+    .guide-box{padding:18px 16px 16px;border-radius:14px}
+    .guide-box h2{font-size:20px}
+    .guide-box .gtxt{font-size:12.5px}
+    /* Masthead */
+    .title{font-size:clamp(28px,10vw,62px)}
+    /* Disclaimer */
+    #disclaimer{font-size:10.5px}
+    /* Insight box */
+    .insight-box .irow{font-size:11.5px}
+    /* Stat values */
+    .stat .v{font-size:16px}
+    /* Calculator panel labels */
+    .calc-label{min-width:100px!important;font-size:11px!important}
+    /* FB/WA buttons */
+    .wa-row{flex-wrap:wrap}
+    .wa-btn{font-size:12px;padding:9px 8px}
+  }
+  @media(max-width:400px){
+    .wrap{padding:0 12px}
+    .modal .mhead{padding:14px 16px}
+    .mbody{padding:14px 16px 20px}
+    .price-toggle button{font-size:10px;padding:5px 8px}
+    .ranges button{font-size:10px;padding:4px 7px}
+  }
   .title,.title em,.section-h h2,.mover .nm,.item .nm,.modal .mhead h3,.empty,.mkt-h{font-family:'Newsreader','Noto Sans Sinhala','Noto Sans Tamil',serif}
   /* Wholesale toggle */
   .price-toggle{display:flex;gap:6px;margin-bottom:12px;}
@@ -252,7 +299,7 @@ const GUIDE={
       {icon:"📈",title:"YoY Chart",text:"2022-2026 years monthly averages — seasonal patterns clearly compare කරන්න."},
       {icon:"🔍",title:"Search & Filter",text:"නමින් search කරන්න, category filter කරන්න, හෝ biggest changes sort කරන්න."},
       {icon:"🌐",title:"භාෂා 3ක්",text:"English, සිංහල, தமிழ் — top right corner buttons use කරන්න."},
-      {icon:"🕐",title:"දෛනිකව auto-update",text:"ශ්‍රී ලංකා මහ බැංකු data — දිනපතා දහවල් 12:00 ට automatic update."},
+      {icon:"🕐",title:"දෛනිකව auto-update",text:"ශ්‍රී ලංකා මහ බැංකු data — දිනපතා සවස 5:00 ට automatic update."},
     ]
   },
   en:{
@@ -557,12 +604,21 @@ function switchMode(mode){
     if(host)host.innerHTML=calcPanel(curDetail);
     if(mh)mh.innerHTML="";
     setTimeout(()=>{
-      const cid=document.querySelector("[id^='cp_']");
-      if(cid){
-        const id=cid.id.replace("cp_","");
-        setCalcMode(id,'farmer');
+      const cp=document.querySelector("[id^='cp_']");
+      if(cp){
+        const id=cp.id.replace("cp_","");
+        /* Force farmer mode — hide trader, show farmer */
+        const ti=document.getElementById("trader_inputs_"+id);
+        const fi=document.getElementById("farmer_inputs_"+id);
+        const tb=document.getElementById("mode_trader_"+id);
+        const fb=document.getElementById("mode_farmer_"+id);
+        if(ti) ti.style.display="none";
+        if(fi) fi.style.display="block";
+        if(tb){tb.style.background="transparent";tb.style.color="#7a7264";}
+        if(fb){fb.style.background="#2c7a52";fb.style.color="#fff";}
+        calcFarmer(id);
       }
-    },150);
+    },250);
     document.querySelectorAll("#ranges button").forEach(b=>b.classList.remove("on"));
   } else {
     if(mh)mh.innerHTML=marketBars(curDetail,mode);
@@ -604,7 +660,7 @@ function calcPanel(d){
 
     <!-- TRADER INPUTS -->
     <div id="trader_inputs_${cid}">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap" class="calc-inputs-row">
         <label style="font-size:13px;color:#3a403a;min-width:120px">Transport cost:</label>
         <input id="tc_${cid}" type="number" min="0" max="500" value="10"
           style="width:80px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
@@ -615,16 +671,16 @@ function calcPanel(d){
 
     <!-- FARMER INPUTS -->
     <div id="farmer_inputs_${cid}" style="display:none">
-      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px" id="farmer-fields">
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-          <label style="font-size:13px;color:#3a403a;min-width:130px">Total harvest:</label>
+          <label class="calc-label" style="font-size:13px;color:#3a403a;min-width:130px">Total harvest:</label>
           <input id="fkg_${cid}" type="number" min="0" value="500"
             style="width:80px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
             oninput="calcFarmer('${cid}')">
           <span style="font-size:13px;color:#7a7264">kg</span>
         </div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-          <label style="font-size:13px;color:#3a403a;min-width:130px">Transport cost:</label>
+          <label class="calc-label" style="font-size:13px;color:#3a403a;min-width:130px">Transport cost:</label>
           <input id="ftc_${cid}" type="number" min="0" value="10"
             style="width:80px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
             oninput="calcFarmer('${cid}')">
