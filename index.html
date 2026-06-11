@@ -621,11 +621,18 @@ function switchMode(mode){
 /* ===== Standalone Calculator Panel ===== */
 function calcPanel(d){
   const rt=d.markets||{}, ws=d.wholesaleMarkets||{};
-  const mkts=Object.keys(rt).filter(k=>rt[k]!=null);
+  const allMkts=Object.keys(rt).filter(k=>rt[k]!=null);
+  /* Markets with BOTH retail + wholesale — for Trader mode */
+  const traderMkts=allMkts.filter(k=>ws[k]!=null);
+  /* All retail markets — for Farmer mode */
+  const farmerMkts=allMkts;
+  const mkts=allMkts;
   if(!mkts.length) return '<p class="mkt-sub" style="padding:20px">Market data not available.</p>';
   const cid="cp_"+Math.random().toString(36).slice(2,8);
   window._tcData=window._tcData||{};
-  window._tcData[cid]=mkts.map(k=>({k,margin:(rt[k]||0)-(ws[k]||0),rt:rt[k]||0,ws:ws[k]||0}));
+  window._tcData[cid]=traderMkts.map(k=>({k,margin:(rt[k]||0)-(ws[k]||0),rt:rt[k]||0,ws:ws[k]||0}));
+  window._tcFarmerData=window._tcFarmerData||{};
+  window._tcFarmerData[cid]=farmerMkts.map(k=>({k,rt:rt[k]||0,ws:ws[k]||null}));
   return `<div style="background:linear-gradient(135deg,rgba(14,79,74,.04),rgba(169,128,42,.04));border:1.5px solid var(--line-strong);border-radius:14px;padding:18px 20px;margin-bottom:10px">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
       <div>
@@ -752,14 +759,14 @@ function aiInsight(d){
     }
   }
 
-  /* 5. Market gap */
-  const mkts=Object.entries(d.markets||{}).filter(([k,v])=>v!=null);
-  if(mkts.length>=2){
-    const srt=mkts.sort((a,b)=>b[1]-a[1]);
+  /* 5. Market gap — retail price difference only */
+  const mktsRetail=Object.entries(d.markets||{}).filter(([k,v])=>v!=null);
+  if(mktsRetail.length>=2){
+    const srt=mktsRetail.sort((a,b)=>b[1]-a[1]);
     const gap=srt[0][1]-srt[srt.length-1][1];
     if(gap>50)
       rows.push({cls:"gold",icon:"💰",
-        text:`${srt[0][0]} vs ${srt[srt.length-1][0]} — රු.${fmt(gap)}/kg වෙළඳපොළ gap${gap>100?" — transport opportunity!":""}`});
+        text:`${srt[0][0]} vs ${srt[srt.length-1][0]} — සිල්ලර මිල gap රු.${fmt(gap)}/kg`});
   }
 
   if(!rows.length)return"";
@@ -829,28 +836,31 @@ function calcFarmer(tcid){
   const kg=parseFloat(document.getElementById("fkg_"+tcid)?.value)||0;
   const tc=parseFloat(document.getElementById("ftc_"+tcid)?.value)||0;
   const pc=parseFloat(document.getElementById("fpc_"+tcid)?.value)||0;
-  const data=(window._tcData||{})[tcid];
+  /* Use farmer data if available, fall back to trader data */
+  const farmerData=(window._tcFarmerData||{})[tcid];
+  const traderData=(window._tcData||{})[tcid];
+  const data=farmerData||traderData;
   if(!data||!data.length)return;
-  /* Farmer sells at WHOLESALE price */
-  const results=data.map(r=>({
-    k:r.k,
-    ws:r.ws,
-    netPerKg:r.ws-tc-pc,
-    total:(r.ws-tc-pc)*kg
-  })).sort((a,b)=>b.total-a.total);
+  /* Farmer sells at WHOLESALE price if available, else retail */
+  const results=data.map(r=>{
+    const sellPrice=r.ws!=null?r.ws:r.rt;
+    const netPerKg=sellPrice-tc-pc;
+    return {k:r.k, sellPrice, ws:r.ws, netPerKg, total:netPerKg*kg, hasWS:r.ws!=null};
+  }).sort((a,b)=>b.total-a.total);
   const best=results[0];
   const html=results.map((r,i)=>{
     const color=r.netPerKg>0?"#2c7a52":"#b23a2e";
     const bg=i===0&&r.netPerKg>0?"#e3efe6":"#f4efe4";
     const border=i===0&&r.netPerKg>0?"#2c7a52":"#e3d9c4";
     const icon=i===0&&r.netPerKg>0?"🏆 ":"   ";
+    const priceLabel=r.hasWS?`W: රු.${fmt(r.sellPrice)}`:`R: රු.${fmt(r.sellPrice)}`;
     return `<div style="padding:8px 12px;border-radius:8px;background:${bg};border:1px solid ${border};margin-bottom:4px">
       <div style="display:flex;align-items:center;justify-content:space-between">
         <span style="font-size:13px;font-weight:700">${icon}${r.k}</span>
         <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:${color}">${r.netPerKg>=0?"+":""}රු.${fmt(r.netPerKg)}/kg</span>
       </div>
       <div style="display:flex;justify-content:space-between;margin-top:4px">
-        <span style="font-size:11px;color:#7a7264">W: රු.${fmt(r.ws)} - ${tc>0?"Transport:රු."+tc:""}${pc>0?" - Production:රු."+pc:""}</span>
+        <span style="font-size:11px;color:#7a7264">${priceLabel}${tc>0?" - Transport:රු."+tc:""}${pc>0?" - Production:රු."+pc:""}</span>
         <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:${color}">${r.total>=0?"":"❌ "}රු.${fmt(Math.abs(r.total))}</span>
       </div>
       ${kg>0?`<div style="font-size:11px;color:#7a7264;margin-top:2px">${kg}kg × රු.${fmt(r.netPerKg)} = <strong style="color:${color}">රු.${fmt(r.total)}</strong></div>`:""}
