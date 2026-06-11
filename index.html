@@ -1116,7 +1116,7 @@ function gapChart(d){
         responsive:true,maintainAspectRatio:false,
         interaction:{mode:'index',intersect:false},
         plugins:{
-          legend:{display:true,position:'top',align:'end',labels:{font:{size:11},boxWidth:16,padding:8}},
+          legend:{display:false},
           tooltip:{
             backgroundColor:'#191d1a',titleColor:'#ffd98a',bodyColor:'#d4ede8',padding:8,
             callbacks:{
@@ -1165,7 +1165,13 @@ function gapChart(d){
     delete window._gapPending[cid];
   },100);
   return `<div class="chart-wrap">
-    <span class="lab">${tMkt(d.primaryMarket)} Retail vs Wholesale &middot; 30D &middot; ${tUnit(d.unit)}</span>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-bottom:4px;padding:0 4px">
+      <span class="lab" style="position:relative;top:0;left:0">${tMkt(d.primaryMarket)} · 30D · ${tUnit(d.unit)}</span>
+      <div style="display:flex;gap:10px;font-size:11px;color:#3a403a">
+        <span style="display:flex;align-items:center;gap:4px"><span style="width:16px;height:3px;background:#0e4f4a;display:inline-block;border-radius:2px"></span>Retail</span>
+        <span style="display:flex;align-items:center;gap:4px"><span style="width:16px;height:3px;background:#a9802a;display:inline-block;border-radius:2px"></span>Wholesale</span>
+      </div>
+    </div>
     <div style="position:relative;height:210px;width:100%"><canvas id="${cid}" role="img" aria-label="Gap chart for ${d.name}"></canvas></div>
     <div style="font-size:10px;color:#7a7264;text-align:right;margin-top:4px;padding-right:6px">P = Poya Day 🔴</div>
   </div>`;
@@ -1191,8 +1197,10 @@ function yoyChart(d){
   window._yoyPending=window._yoyPending||{};
   window._yoyPending[cid]={years,monthlyAvg,colors,months,d};
   const html=`<div class="chart-wrap">
-    <span class="lab">${tMkt(d.primaryMarket)} YoY &middot; ${tUnit(d.unit)}</span>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;margin:6px 8px 8px 0">${legendHtml}</div>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-bottom:6px;padding:0 4px">
+      <span class="lab" style="position:relative;top:0;left:0">${tMkt(d.primaryMarket)} YoY &middot; ${tUnit(d.unit)}</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">${legendHtml}</div>
+    </div>
     <div style="position:relative;height:210px;width:100%"><canvas id="${cid}" role="img" aria-label="YoY chart for ${d.name}"></canvas></div>
   </div>`;
   /* Init after DOM ready */
