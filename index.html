@@ -669,12 +669,30 @@ function calcPanel(d){
 
     <!-- TRADER INPUTS -->
     <div id="trader_inputs_${cid}" style="display:none">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap" class="calc-inputs-row">
-        <label style="font-size:13px;color:#3a403a;min-width:120px">Transport cost:</label>
-        <input id="tc_${cid}" type="number" min="0" max="500" value="10"
-          style="width:80px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
-          oninput="calcTransport2('${cid}')">
-        <span style="font-size:13px;color:#7a7264">රු./kg</span>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <label style="font-size:13px;color:#3a403a;min-width:130px">Buy from:</label>
+          <select id="tbuy_${cid}"
+            style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a;cursor:pointer"
+            onchange="calcTransport2('${cid}')">
+            ${traderMkts.map(k=>`<option value="${k}">${k} — W: රු.${fmt(ws[k])}/kg</option>`).join("")}
+          </select>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <label style="font-size:13px;color:#3a403a;min-width:130px">Transport cost:</label>
+          <input id="tc_${cid}" type="number" min="0" max="500" value="10"
+            style="width:80px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
+            oninput="calcTransport2('${cid}')">
+          <span style="font-size:13px;color:#7a7264">රු./kg</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <label style="font-size:13px;color:#3a403a;min-width:130px">Your sell price:</label>
+          <input id="tsell_${cid}" type="number" min="0" max="9999" value=""
+            placeholder="රු./kg"
+            style="width:100px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #a9802a;border-radius:8px;background:#fffdf7;color:#191d1a"
+            oninput="calcTransport2('${cid}')">
+          <span style="font-size:13px;color:#7a7264">රු./kg</span>
+        </div>
       </div>
     </div>
 
@@ -886,10 +904,49 @@ function calcFarmer(tcid){
 }
 
 function calcTransport2(tcid){
-  const inp=document.getElementById("tc_"+tcid);
-  const tc=parseFloat(inp?inp.value:0)||0;
+  const tc=parseFloat(document.getElementById("tc_"+tcid)?.value)||0;
+  const sellInput=document.getElementById("tsell_"+tcid);
+  const buySelect=document.getElementById("tbuy_"+tcid);
   const data=(window._tcData||{})[tcid];
   if(!data||!data.length)return;
+  const el=document.getElementById("tr_"+tcid);
+  if(!el)return;
+
+  /* If sell price entered — use custom sell price */
+  if(sellInput&&sellInput.value&&buySelect){
+    const sellPrice=parseFloat(sellInput.value)||0;
+    const buyMkt=buySelect.value;
+    const buyData=data.find(r=>r.k===buyMkt);
+    if(!buyData)return;
+    const buyPrice=buyData.ws;
+    const net=sellPrice-buyPrice-tc;
+    const color=net>0?"#2c7a52":net<0?"#b23a2e":"#8a8170";
+    el.innerHTML=`
+      <div style="background:#f4efe4;border-radius:8px;padding:10px 12px;font-size:12px;color:#7a7264;margin-bottom:6px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+          <span>ගෙනා මිල (${buyMkt}):</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-weight:700">රු.${fmt(buyPrice)}/kg</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+          <span>Transport cost:</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-weight:700">- රු.${tc}/kg</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;border-top:1px dashed #cdbf9f;padding-top:4px;margin-top:4px">
+          <span>ඔබේ sell මිල:</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#a9802a">රු.${fmt(sellPrice)}/kg</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:10px;background:${net>0?"#e3efe6":"#f7e6e2"};border:1.5px solid ${net>0?"#2c7a52":"#b23a2e"}">
+        <span style="font-size:14px;font-weight:700">${net>0?"✅":"❌"} ශුද්ධ ලාභය</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:20px;color:${color}">${net>=0?"+":""}රු.${fmt(net)}/kg</span>
+      </div>
+      <div style="margin-top:6px;font-size:12px;font-weight:700;padding:8px 12px;border-radius:8px;background:#0e4f4a;color:#ffd98a">
+        ${net>50?"🎯 හොඳ ලාභයක්! විකුණන්න!":net>0?"✅ ලාభ ලැබේ.":net===0?"⚠️ Break-even — ලාභ නැත.":"❌ අලාභ! sell price ඉහළ කරන්න."}
+      </div>`;
+    return;
+  }
+
+  /* No sell price — show market margins */
   const results=data.map(r=>({...r,net:r.margin-tc})).sort((a,b)=>b.net-a.net);
   const best=results[0];
   const html=results.map((r,i)=>{
@@ -899,18 +956,15 @@ function calcTransport2(tcid){
     const border=i===0&&r.net>0?"#2c7a52":"#e3d9c4";
     return `<div style="display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:8px;background:${bg};border:1px solid ${border};flex-wrap:wrap">
       <span style="font-size:13px;font-weight:700;min-width:85px">${icon}${r.k}</span>
-      <span style="font-size:11px;color:#7a7264">Margin: +රු.${fmt(r.margin)}</span>
-      <span style="font-size:11px;color:#7a7264">- රු.${tc}</span>
+      <span style="font-size:11px;color:#7a7264">W:රු.${fmt(r.ws)} → R:රු.${fmt(r.rt)}</span>
       <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;color:${color};margin-left:auto">${r.net>=0?"+":""}රු.${fmt(r.net)}/kg</span>
     </div>`;
   }).join("");
-  const advice=best.net>50?"🎯 "+best.k+" වෙළඳපොළට යන්න — හොඳම ලාභය!":
-               best.net>0?"✅ "+best.k+" හොඳයි — ලාභ ඇත.":
-               best.net===0?"⚠️ Break-even — ලාභ නැත.":
-               "❌ Transport cost වැඩියි — අලාභ! යන්න එපා.";
-  const el=document.getElementById("tr_"+tcid);
-  if(el)el.innerHTML=html+`<div style="margin-top:6px;font-size:12px;font-weight:700;padding:8px 12px;border-radius:8px;background:#0e4f4a;color:#ffd98a">${advice}</div>`;
+  const advice=best.net>0?"🎯 "+best.k+" — හොඳම margin! ඔබේ sell price enter කළොත් precise ලාභය!":"❌ Transport cost වැඩියි!";
+  el.innerHTML=html+`<div style="margin-top:6px;font-size:11px;color:#7a7264;font-style:italic;padding:6px 10px">💡 ඔබේ sell price enter කළොත් precise ලාභය ගණනය වෙනවා!</div>`+
+    `<div style="margin-top:4px;font-size:12px;font-weight:700;padding:8px 12px;border-radius:8px;background:#0e4f4a;color:#ffd98a">${advice}</div>`;
 }
+
 
 function calcTransport(tcid, mktsJson, rt, ws){
   const tc=parseFloat(document.getElementById("tc_"+tcid).value)||0;
