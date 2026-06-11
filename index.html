@@ -182,6 +182,11 @@
       <span class="stamp" id="stampDate">29 May 2026</span><span class="dot"></span>
       <span id="lblSub">Retail prices &middot; primary market shown per item &middot; vs. previous report</span>
     </div>
+    <div id="disclaimer" style="margin-top:8px;font-size:11.5px;color:var(--muted);font-style:italic;line-height:1.5">
+      <span class="disc-en">⚠️ Prices are indicative only. Use at your own discretion. Decisions are your responsibility.</span>
+      <span class="disc-si" style="display:none">⚠️ මෙහි සඳහන් මිල ගණන් මඟ පෙන්වීමක් පමණි. ඔබගේ තීරණ ඔබගේ වගකීම වේ.</span>
+      <span class="disc-ta" style="display:none">⚠️ இங்கு குறிப்பிட்ட விலைகள் வழிகாட்டல் மட்டுமே. உங்கள் முடிவுகளுக்கு நீங்களே பொறுப்பாவீர்கள்.</span>
+    </div>
   </header>
 
   <div class="section-h"><h2 id="hMovers">Today&rsquo;s sharpest movements</h2><span class="rule"></span><span class="hint" id="hintMovers">auto-ranked &middot; tap &rarr;</span></div>
@@ -284,6 +289,13 @@ function applyLang(){
   const s=document.getElementById("search");if(s)s.placeholder=t("searchPh");
   const sel=document.getElementById("sort");
   if(sel){const o=sel.options;if(o[0])o[0].text=t("sortAZ");if(o[1])o[1].text=t("sortUp");if(o[2])o[2].text=t("sortDown");if(o[3])o[3].text=t("sortHigh");}
+  /* Disclaimer language switch */
+  const de=document.querySelector(".disc-en"),ds=document.querySelector(".disc-si"),dt=document.querySelector(".disc-ta");
+  if(de&&ds&&dt){
+    de.style.display=lang==="en"?"inline":"none";
+    ds.style.display=lang==="si"?"inline":"none";
+    dt.style.display=lang==="ta"?"inline":"none";
+  }
 }
 function setLang(l){
   lang=l;
@@ -477,7 +489,10 @@ function switchMode(mode){
     if(mh)mh.innerHTML="";
     setTimeout(()=>{
       const cid=document.querySelector("[id^='cp_']");
-      if(cid){const id=cid.id.replace("cp_","");calcFarmer(id);calcTransport2(id);}
+      if(cid){
+        const id=cid.id.replace("cp_","");
+        setCalcMode(id,'farmer');
+      }
     },150);
     document.querySelectorAll("#ranges button").forEach(b=>b.classList.remove("on"));
   } else {
@@ -496,13 +511,16 @@ function calcPanel(d){
   window._tcData=window._tcData||{};
   window._tcData[cid]=mkts.map(k=>({k,margin:(rt[k]||0)-(ws[k]||0),rt:rt[k]||0,ws:ws[k]||0}));
   return `<div style="background:linear-gradient(135deg,rgba(14,79,74,.04),rgba(169,128,42,.04));border:1.5px solid var(--line-strong);border-radius:14px;padding:18px 20px;margin-bottom:10px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-      <div style="font-size:15px;font-weight:700;color:#0e4f4a">🧮 ${tEmoji(d.name)} ${tName(d.name)} — Profit Calculator</div>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+      <div>
+        <div style="font-size:15px;font-weight:700;color:#0e4f4a">🧮 ${tEmoji(d.name)} ${tName(d.name)} — Profit Calculator</div>
+        <div style="font-size:11px;color:#7a7264;margin-top:3px">🌾 ගොවි: අස්වැන්නෙන් මුළු ආදායම | 💰 වෙළෙන්ද: Wholesale→Retail ලාභය</div>
+      </div>
       <div style="display:flex;gap:0;border:1.5px solid #cdbf9f;border-radius:999px;overflow:hidden">
-        <button id="mode_trader_${cid}" onclick="setCalcMode('${cid}','trader')"
-          style="font:inherit;font-size:12px;font-weight:700;padding:5px 14px;border:none;background:#0e4f4a;color:#fff;cursor:pointer">💰 Trader</button>
         <button id="mode_farmer_${cid}" onclick="setCalcMode('${cid}','farmer')"
-          style="font:inherit;font-size:12px;font-weight:700;padding:5px 14px;border:none;background:transparent;color:#7a7264;cursor:pointer">🌾 Farmer</button>
+          style="font:inherit;font-size:12px;font-weight:700;padding:5px 14px;border:none;background:#2c7a52;color:#fff;cursor:pointer">🌾 Farmer</button>
+        <button id="mode_trader_${cid}" onclick="setCalcMode('${cid}','trader')"
+          style="font:inherit;font-size:12px;font-weight:700;padding:5px 14px;border:none;background:transparent;color:#7a7264;cursor:pointer">💰 Trader</button>
       </div>
     </div>
 
@@ -678,16 +696,16 @@ function setCalcMode(tcid, mode){
   const traderInputs=document.getElementById("trader_inputs_"+tcid);
   const farmerInputs=document.getElementById("farmer_inputs_"+tcid);
   if(!traderBtn)return;
-  if(mode==="trader"){
-    traderBtn.style.background="#0e4f4a";traderBtn.style.color="#fff";
-    farmerBtn.style.background="transparent";farmerBtn.style.color="#7a7264";
-    traderInputs.style.display="block";farmerInputs.style.display="none";
-    calcTransport2(tcid);
-  } else {
+  if(mode==="farmer"){
     farmerBtn.style.background="#2c7a52";farmerBtn.style.color="#fff";
     traderBtn.style.background="transparent";traderBtn.style.color="#7a7264";
     traderInputs.style.display="none";farmerInputs.style.display="block";
     calcFarmer(tcid);
+  } else {
+    traderBtn.style.background="#0e4f4a";traderBtn.style.color="#fff";
+    farmerBtn.style.background="transparent";farmerBtn.style.color="#7a7264";
+    traderInputs.style.display="block";farmerInputs.style.display="none";
+    calcTransport2(tcid);
   }
 }
 
@@ -821,9 +839,9 @@ function gapAlert(d){
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
         <div style="font-size:12px;font-weight:700;color:#0e4f4a">🧮 Profit Calculator</div>
         <div style="display:flex;gap:0;border:1.5px solid #cdbf9f;border-radius:999px;overflow:hidden">
-          <button id="mode_trader_${tcid}" onclick="setCalcMode('${tcid}','trader')"
-            style="font:inherit;font-size:11px;font-weight:700;padding:4px 12px;border:none;background:#0e4f4a;color:#fff;cursor:pointer">💰 Trader</button>
           <button id="mode_farmer_${tcid}" onclick="setCalcMode('${tcid}','farmer')"
+            style="font:inherit;font-size:11px;font-weight:700;padding:4px 12px;border:none;background:#2c7a52;color:#fff;cursor:pointer">🌾 Farmer</button>
+          <button id="mode_trader_${tcid}" onclick="setCalcMode('${tcid}','trader')"
             style="font:inherit;font-size:11px;font-weight:700;padding:4px 12px;border:none;background:transparent;color:#7a7264;cursor:pointer">🌾 Farmer</button>
         </div>
       </div>
