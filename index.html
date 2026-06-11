@@ -607,15 +607,6 @@ function switchMode(mode){
       const cp=document.querySelector("[id^='cp_']");
       if(cp){
         const id=cp.id.replace("cp_","");
-        /* Force farmer mode — hide trader, show farmer */
-        const ti=document.getElementById("trader_inputs_"+id);
-        const fi=document.getElementById("farmer_inputs_"+id);
-        const tb=document.getElementById("mode_trader_"+id);
-        const fb=document.getElementById("mode_farmer_"+id);
-        if(ti) ti.style.display="none";
-        if(fi) fi.style.display="block";
-        if(tb){tb.style.background="transparent";tb.style.color="#7a7264";}
-        if(fb){fb.style.background="#2c7a52";fb.style.color="#fff";}
         calcFarmer(id);
       }
     },250);
@@ -659,7 +650,7 @@ function calcPanel(d){
     </div>
 
     <!-- TRADER INPUTS -->
-    <div id="trader_inputs_${cid}">
+    <div id="trader_inputs_${cid}" style="display:none">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap" class="calc-inputs-row">
         <label style="font-size:13px;color:#3a403a;min-width:120px">Transport cost:</label>
         <input id="tc_${cid}" type="number" min="0" max="500" value="10"
@@ -670,7 +661,7 @@ function calcPanel(d){
     </div>
 
     <!-- FARMER INPUTS -->
-    <div id="farmer_inputs_${cid}" style="display:none">
+    <div id="farmer_inputs_${cid}">
       <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px" id="farmer-fields">
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
           <label class="calc-label" style="font-size:13px;color:#3a403a;min-width:130px">Total harvest:</label>
