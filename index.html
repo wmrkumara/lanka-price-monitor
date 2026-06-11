@@ -631,10 +631,9 @@ function switchMode(mode){
 function calcPanel(d){
   const rt=d.markets||{}, ws=d.wholesaleMarkets||{};
   const allMkts=Object.keys(rt).filter(k=>rt[k]!=null);
-  /* Markets with BOTH retail + wholesale — for Trader mode */
+  /* Markets with BOTH retail + wholesale — for Trader AND Farmer mode */
   const traderMkts=allMkts.filter(k=>ws[k]!=null);
-  /* All retail markets — for Farmer mode */
-  const farmerMkts=allMkts;
+  const farmerMkts=traderMkts; /* Farmer sells at wholesale — need WS data */
   const mkts=allMkts;
   if(!mkts.length) return '<p class="mkt-sub" style="padding:20px">Market data not available.</p>';
   const cid="cp_"+Math.random().toString(36).slice(2,8);
