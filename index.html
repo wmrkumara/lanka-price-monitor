@@ -607,9 +607,18 @@ function switchMode(mode){
       const cp=document.querySelector("[id^='cp_']");
       if(cp){
         const id=cp.id.replace("cp_","");
+        /* Force farmer mode visually */
+        const ti=document.getElementById("trader_inputs_"+id);
+        const fi=document.getElementById("farmer_inputs_"+id);
+        const tb=document.getElementById("mode_trader_"+id);
+        const fb=document.getElementById("mode_farmer_"+id);
+        if(ti)ti.style.display="none";
+        if(fi)fi.style.display="block";
+        if(tb){tb.style.background="transparent";tb.style.color="#7a7264";}
+        if(fb){fb.style.background="#2c7a52";fb.style.color="#fff";}
         calcFarmer(id);
       }
-    },250);
+    },300);
     document.querySelectorAll("#ranges button").forEach(b=>b.classList.remove("on"));
   } else {
     if(mh)mh.innerHTML=marketBars(curDetail,mode);
@@ -649,10 +658,12 @@ function calcPanel(d){
 
     <!-- Market prices quick view -->
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:14px">
-      ${mkts.map(k=>`<div style="background:#fffdf7;border:1px solid #e3d9c4;border-radius:8px;padding:8px 10px;text-align:center">
+      ${mkts.map(k=>`<div style="background:#fffdf7;border:1px solid ${ws[k]?'#e3d9c4':'#f0d9c4'};border-radius:8px;padding:8px 10px;text-align:center;opacity:${ws[k]?1:0.7}">
         <div style="font-size:10px;color:#7a7264;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px">${k}</div>
         <div style="font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:#191d1a">රු.${fmt(rt[k])}</div>
-        ${ws[k]?`<div style="font-size:10px;color:#a9802a">W: රු.${fmt(ws[k])}</div>`:''}
+        ${ws[k]
+          ?`<div style="font-size:10px;color:#a9802a">W: රු.${fmt(ws[k])}</div>`
+          :`<div style="font-size:9px;color:#b23a2e">⚠️ W data නැහැ</div>`}
       </div>`).join("")}
     </div>
 
