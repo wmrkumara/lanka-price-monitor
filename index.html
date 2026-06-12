@@ -1019,39 +1019,56 @@ function speakPrice(d){
   const cur=latestVal(d.series);
   const vals=vpts(d.series).map(p=>p[1]);
   const min=Math.min(...vals),max=Math.max(...vals);
-  const markets=Object.entries(d.markets||{}).filter(([k,v])=>v!=null);
+  const rtMarkets=Object.entries(d.markets||{}).filter(([k,v])=>v!=null);
+  const wsMarkets=Object.entries(d.wholesaleMarkets||{}).filter(([k,v])=>v!=null);
 
   let text="";
   if(lang==="si"){
     const dir=ch.dir==="up"?"ඉහළ ගොස් ඇත":ch.dir==="down"?"පහළ ගොස් ඇත":"සාමාන්‍ය";
-    const mktText=markets.map(([k,v])=>`${tMkt(k)} රුපියල් ${Math.round(v)}`).join(", ");
     text=`${tName(d.name)}. `;
-    text+=`අද ${tMkt(d.primaryMarket)} වෙළඳපොළේ මිල රුපියල් ${Math.round(cur)}. `;
+    text+=`අද ${tMkt(d.primaryMarket)} වෙළඳපොළේ සිල්ලර මිල රුපියල් ${Math.round(cur)}. `;
     text+=`පෙර වාර්තාවට සාපේක්ෂව ${Math.abs(ch.pct).toFixed(1)} ශතමානයකින් ${dir}. `;
-    text+=`කාල සීමාවේ අවම මිල රුපියල් ${Math.round(min)}. උපරිම රුපියල් ${Math.round(max)}. `;
-    if(markets.length>1) text+=`වෙළඳපොළ අතර: ${mktText}.`;
+    text+=`කාල සීමාවේ අවම සිල්ලර මිල රුපියල් ${Math.round(min)}. උපරිම රුපියල් ${Math.round(max)}. `;
+    if(rtMarkets.length>1){
+      const mktText=rtMarkets.map(([k,v])=>`${tMkt(k)} සිල්ලර රුපියල් ${Math.round(v)}`).join(". ");
+      text+=`සිල්ලර මිල: ${mktText}. `;
+    }
+    if(wsMarkets.length>0){
+      const wsMktText=wsMarkets.map(([k,v])=>`${tMkt(k)} තොග රුපියල් ${Math.round(v)}`).join(". ");
+      text+=`තොග මිල: ${wsMktText}.`;
+    }
   } else if(lang==="ta"){
     const dir=ch.dir==="up"?"அதிகரித்துள்ளது":ch.dir==="down"?"குறைந்துள்ளது":"மாறவில்லை";
-    const mktText=markets.map(([k,v])=>`${tMkt(k)} ${Math.round(v)} ரூபாய்`).join(", ");
     text=`${tName(d.name)}. `;
-    text+=`இன்று ${tMkt(d.primaryMarket)} சந்தையில் விலை ${Math.round(cur)} ரூபாய். `;
+    text+=`இன்று ${tMkt(d.primaryMarket)} சந்தையில் சில்லறை விலை ${Math.round(cur)} ரூபாய். `;
     text+=`முந்தைய அறிக்கையில் இருந்து ${Math.abs(ch.pct).toFixed(1)} சதவீதம் ${dir}. `;
-    text+=`குறைந்தபட்ச விலை ${Math.round(min)} ரூபாய். அதிகபட்சம் ${Math.round(max)} ரூபாய். `;
-    if(markets.length>1) text+=`சந்தைகளில்: ${mktText}.`;
+    text+=`குறைந்தபட்ச சில்லறை விலை ${Math.round(min)} ரூபாய். அதிகபட்சம் ${Math.round(max)} ரூபாய். `;
+    if(rtMarkets.length>1){
+      const mktText=rtMarkets.map(([k,v])=>`${tMkt(k)} சில்லறை ${Math.round(v)} ரூபாய்`).join(". ");
+      text+=`சில்லறை விலைகள்: ${mktText}. `;
+    }
+    if(wsMarkets.length>0){
+      const wsMktText=wsMarkets.map(([k,v])=>`${tMkt(k)} மொத்த ${Math.round(v)} ரூபாய்`).join(". ");
+      text+=`மொத்த விலைகள்: ${wsMktText}.`;
+    }
   } else {
     const dir=ch.dir==="up"?"increased":ch.dir==="down"?"decreased":"unchanged";
-    const mktText=markets.map(([k,v])=>`${k} ${Math.round(v)} rupees`).join(", ");
     text=`${d.name}. `;
-    text+=`Today's price at ${d.primaryMarket} market is ${Math.round(cur)} rupees per kilogram. `;
-    text+=`${Math.abs(ch.pct).toFixed(1)}% ${dir} from previous report. `;
-    text+=`Period low ${Math.round(min)}, high ${Math.round(max)} rupees. `;
-    if(markets.length>1) text+=`Market prices: ${mktText}.`;
+    text+=`Today's retail price at ${d.primaryMarket} market is ${Math.round(cur)} rupees per kilogram. `;
+    text+=`${Math.abs(ch.pct).toFixed(1)}% ${dir} from the previous report. `;
+    text+=`Period low retail price ${Math.round(min)} rupees, high ${Math.round(max)} rupees. `;
+    if(rtMarkets.length>1){
+      const mktText=rtMarkets.map(([k,v])=>`${k} retail ${Math.round(v)} rupees`).join(". ");
+      text+=`Retail prices: ${mktText}. `;
+    }
+    if(wsMarkets.length>0){
+      const wsMktText=wsMarkets.map(([k,v])=>`${k} wholesale ${Math.round(v)} rupees`).join(". ");
+      text+=`Wholesale prices: ${wsMktText}.`;
+    }
   }
 
   window.speechSynthesis.cancel();
   const utt=new SpeechSynthesisUtterance(text);
-
-  /* Try to find best matching voice */
   const voices=window.speechSynthesis.getVoices();
   let voice=null;
   if(lang==="si"){
