@@ -35,7 +35,24 @@
 <!-- Canonical -->
 <link rel="canonical" href="https://topgoviya.lk/">
 
-<!-- Structured Data (JSON-LD) -->
+<!-- FAQ Schema Markup -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Is Lanka Price Monitor free to use?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely free. No login, no registration, no subscription required. Lanka Price Monitor is 100% free for farmers, traders, and consumers."}},
+    {"@type":"Question","name":"How often is the price data updated?","acceptedAnswer":{"@type":"Answer","text":"Price data is updated daily at 5:00 PM Sri Lanka time, automatically extracted from the Central Bank of Sri Lanka Daily Price Report."}},
+    {"@type":"Question","name":"Where does the price data come from?","acceptedAnswer":{"@type":"Answer","text":"All price data is sourced from the Central Bank of Sri Lanka (CBSL) Daily Price Reports — official publicly available government publications."}},
+    {"@type":"Question","name":"How do I use the Farmer Profit Calculator?","acceptedAnswer":{"@type":"Answer","text":"Click any commodity card, tap the Calculator button, select Farmer mode, enter your harvest kg, transport cost, and optional production cost. The calculator shows net profit for each market."}},
+    {"@type":"Question","name":"What is the difference between Retail and Wholesale prices?","acceptedAnswer":{"@type":"Answer","text":"Retail price is what consumers pay. Wholesale price is the bulk price traders pay. The difference is the trader's potential profit margin."}},
+    {"@type":"Question","name":"Which markets are tracked?","acceptedAnswer":{"@type":"Answer","text":"Lanka Price Monitor tracks Dambulla Economic Centre, Pettah (Colombo), Narahenpita, Negombo, and Peliyagoda markets."}},
+    {"@type":"Question","name":"Can I use this on my mobile phone?","acceptedAnswer":{"@type":"Answer","text":"Yes! Lanka Price Monitor is fully mobile-optimized. Open topgoviya.lk in any mobile browser. No app download required."}},
+    {"@type":"Question","name":"Is the data available in Sinhala and Tamil?","acceptedAnswer":{"@type":"Answer","text":"Yes! Full platform in Sinhala, Tamil, and English. Use language toggle buttons at top right to switch instantly."}}
+  ]
+}
+</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -307,6 +324,90 @@
       <span class="dotL"><span class="sq" style="background:var(--down)"></span> <span id="lgDown">Price decreased</span></span>
     </div>
     <div id="footNote">Auto-extracted from CBSL Daily Price Reports. Not an official publication.</div>
+
+    <!-- FAQ SECTION — SEO Rich Snippets -->
+    <div style="margin:40px 0 0">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+        <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:22px;margin:0;letter-spacing:-.01em">Frequently Asked Questions</h2>
+        <span style="flex:1;height:1px;background:var(--line-strong)"></span>
+      </div>
+
+      <div id="faqList" style="display:flex;flex-direction:column;gap:8px">
+
+        <details style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:0;overflow:hidden">
+          <summary style="padding:14px 18px;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink);list-style:none;display:flex;justify-content:space-between;align-items:center">
+            Is Lanka Price Monitor free to use? &nbsp;<span style="color:var(--petrol);font-size:18px">+</span>
+          </summary>
+          <div style="padding:0 18px 14px;font-size:13.5px;color:var(--ink-soft);line-height:1.6;border-top:1px solid var(--line)">
+            Yes, completely free. No login, no registration, no subscription required. Lanka Price Monitor is 100% free for farmers, traders, and consumers.
+          </div>
+        </details>
+
+        <details style="background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden">
+          <summary style="padding:14px 18px;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink);list-style:none;display:flex;justify-content:space-between;align-items:center">
+            How often is the price data updated? &nbsp;<span style="color:var(--petrol);font-size:18px">+</span>
+          </summary>
+          <div style="padding:0 18px 14px;font-size:13.5px;color:var(--ink-soft);line-height:1.6;border-top:1px solid var(--line)">
+            Price data is updated daily at 5:00 PM Sri Lanka time, automatically extracted from the Central Bank of Sri Lanka Daily Price Report. Weekend and public holiday data may not be available as CBSL does not publish on those days.
+          </div>
+        </details>
+
+        <details style="background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden">
+          <summary style="padding:14px 18px;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink);list-style:none;display:flex;justify-content:space-between;align-items:center">
+            Where does the price data come from? &nbsp;<span style="color:var(--petrol);font-size:18px">+</span>
+          </summary>
+          <div style="padding:0 18px 14px;font-size:13.5px;color:var(--ink-soft);line-height:1.6;border-top:1px solid var(--line)">
+            All price data is sourced from the <strong>Central Bank of Sri Lanka (CBSL) Daily Price Reports</strong> — official publicly available government publications. TopGoviya.lk is an independent platform and is not affiliated with CBSL or any government institution.
+          </div>
+        </details>
+
+        <details style="background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden">
+          <summary style="padding:14px 18px;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink);list-style:none;display:flex;justify-content:space-between;align-items:center">
+            How do I use the Farmer Profit Calculator? &nbsp;<span style="color:var(--petrol);font-size:18px">+</span>
+          </summary>
+          <div style="padding:0 18px 14px;font-size:13.5px;color:var(--ink-soft);line-height:1.6;border-top:1px solid var(--line)">
+            Click any commodity card → tap the <strong>🧮 Calculator</strong> button → select <strong>🌾 Farmer</strong> mode → enter your total harvest (kg), transport cost per kg, and optional production cost per kg. The calculator automatically shows your net profit for each market and recommends the best market to sell.
+          </div>
+        </details>
+
+        <details style="background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden">
+          <summary style="padding:14px 18px;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink);list-style:none;display:flex;justify-content:space-between;align-items:center">
+            What is the difference between Retail and Wholesale prices? &nbsp;<span style="color:var(--petrol);font-size:18px">+</span>
+          </summary>
+          <div style="padding:0 18px 14px;font-size:13.5px;color:var(--ink-soft);line-height:1.6;border-top:1px solid var(--line)">
+            <strong>Retail price</strong> is what consumers pay at the market. <strong>Wholesale price</strong> is the bulk price traders pay to purchase from farmers or suppliers. The difference (margin) is the trader's potential profit. Use the 💡 Gap button to see the margin analysis visually.
+          </div>
+        </details>
+
+        <details style="background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden">
+          <summary style="padding:14px 18px;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink);list-style:none;display:flex;justify-content:space-between;align-items:center">
+            Which markets are tracked? &nbsp;<span style="color:var(--petrol);font-size:18px">+</span>
+          </summary>
+          <div style="padding:0 18px 14px;font-size:13.5px;color:var(--ink-soft);line-height:1.6;border-top:1px solid var(--line)">
+            Lanka Price Monitor tracks prices at <strong>Dambulla Economic Centre</strong>, <strong>Pettah (Colombo)</strong>, and <strong>Narahenpita</strong> for vegetables, rice, and other commodities. Fish prices are tracked at <strong>Negombo</strong> and <strong>Peliyagoda</strong> markets.
+          </div>
+        </details>
+
+        <details style="background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden">
+          <summary style="padding:14px 18px;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink);list-style:none;display:flex;justify-content:space-between;align-items:center">
+            Can I use this on my mobile phone? &nbsp;<span style="color:var(--petrol);font-size:18px">+</span>
+          </summary>
+          <div style="padding:0 18px 14px;font-size:13.5px;color:var(--ink-soft);line-height:1.6;border-top:1px solid var(--line)">
+            Yes! Lanka Price Monitor is fully mobile-optimized. Open <strong>topgoviya.lk</strong> in any mobile browser — no app download required. Works on all Android and iOS devices.
+          </div>
+        </details>
+
+        <details style="background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden">
+          <summary style="padding:14px 18px;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink);list-style:none;display:flex;justify-content:space-between;align-items:center">
+            Is the data available in Sinhala and Tamil? &nbsp;<span style="color:var(--petrol);font-size:18px">+</span>
+          </summary>
+          <div style="padding:0 18px 14px;font-size:13.5px;color:var(--ink-soft);line-height:1.6;border-top:1px solid var(--line)">
+            Yes! The full platform is available in <strong>සිංහල (Sinhala)</strong>, <strong>தமிழ் (Tamil)</strong>, and <strong>English</strong>. Use the language toggle buttons at the top right corner to switch languages instantly.
+          </div>
+        </details>
+
+      </div>
+    </div>
 
     <!-- SEO Footer Content -->
     <div style="flex-basis:100%;border-top:1px solid var(--line);margin-top:16px;padding-top:16px">
