@@ -123,15 +123,23 @@
   .reason b{font-family:'JetBrains Mono',monospace;color:var(--ink-soft);font-weight:600}
   .controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:6px 0 18px}
   .search{flex:1;min-width:200px;position:relative}
-  .search input{width:100%;font:inherit;font-size:15px;padding:12px 44px 12px 40px;border-radius:11px;
+  .search input{width:100%;font:inherit;font-size:15px;padding:12px 80px 12px 40px;border-radius:11px;
     border:1px solid var(--line-strong);background:var(--card);color:var(--ink);outline:none;transition:.2s}
   .search input:focus{border-color:var(--petrol);box-shadow:0 0 0 3px rgba(14,79,74,.12)}
   .search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);opacity:.5}
-  .mic-btn{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;
-    cursor:pointer;padding:4px;border-radius:6px;color:var(--muted);transition:.2s;font-size:16px}
-  .mic-btn:hover{color:var(--petrol);background:var(--paper-2)}
-  .mic-btn.listening{color:#b23a2e;animation:micpulse 1s infinite}
-  @keyframes micpulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .mic-btn{position:absolute;right:8px;top:50%;transform:translateY(-50%);
+    background:var(--petrol);border:none;cursor:pointer;
+    padding:6px 10px;border-radius:8px;color:#fff;
+    font-size:15px;font-weight:700;transition:.2s;
+    display:flex;align-items:center;gap:4px;
+    box-shadow:0 2px 8px rgba(14,79,74,.3)}
+  .mic-btn:hover{background:var(--petrol-deep);box-shadow:0 4px 12px rgba(14,79,74,.4);transform:translateY(-50%) scale(1.05)}
+  .mic-btn .mic-label{font-size:11px;font-weight:700;letter-spacing:.04em}
+  .mic-btn.listening{background:#b23a2e;animation:micpulse 1s infinite}
+  .mic-btn::before{content:'';position:absolute;inset:-3px;border-radius:10px;
+    border:2px solid var(--petrol);opacity:0;animation:micring 2s infinite}
+  @keyframes micring{0%{opacity:.6;transform:scale(1)}100%{opacity:0;transform:scale(1.3)}}
+  @keyframes micpulse{0%,100%{opacity:1}50%{opacity:.5}}
   .voice-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);
     color:var(--paper);font-size:13px;font-weight:600;padding:10px 20px;border-radius:999px;
     z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
@@ -318,7 +326,7 @@
     <div class="search">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       <input id="search" type="text" placeholder="Search a commodity&hellip;" autocomplete="off">
-      <button class="mic-btn" id="micBtn" onclick="startVoiceSearch()" title="Voice search">🎤</button>
+      <button class="mic-btn" id="micBtn" onclick="startVoiceSearch()" title="Voice Search">🎤 <span class="mic-label">Voice</span></button>
     </div>
     <div class="chips" id="cats"></div>
     <select class="sortsel" id="sort">
@@ -466,7 +474,7 @@ function setGuide(l){
   });
 }
 /* Init guide with Sinhala default */
-document.addEventListener("DOMContentLoaded",()=>setGuide("si"));
+document.addEventListener("DOMContentLoaded",()=>{setGuide("si");});
 </script>
 
 <script>
@@ -572,6 +580,8 @@ function applyLang(){
   const s=document.getElementById("search");if(s)s.placeholder=t("searchPh");
   const sel=document.getElementById("sort");
   if(sel){const o=sel.options;if(o[0])o[0].text=t("sortAZ");if(o[1])o[1].text=t("sortUp");if(o[2])o[2].text=t("sortDown");if(o[3])o[3].text=t("sortHigh");}
+  const micLabel=document.querySelector(".mic-label");
+  if(micLabel){micLabel.textContent=lang==="si"?"හඬ":lang==="ta"?"குரல்":"Voice";}
   /* Disclaimer language switch */
   const de=document.querySelector(".disc-en"),ds=document.querySelector(".disc-si"),dt=document.querySelector(".disc-ta");
   if(de&&ds&&dt){
@@ -589,8 +599,6 @@ function setLang(l){
   if(scrim.classList.contains("open")&&curDetail)openDetail(curDetail.id);
 }
 document.querySelector(".lang").addEventListener("click",function(e){var b=e.target.closest("button[data-lang]");if(b)setLang(b.dataset.lang);});
-/* Render FAQ on page load */
-document.addEventListener("DOMContentLoaded",()=>renderFAQ(lang));
 
 const vpts = s => s.map((v,i)=>[i,v]).filter(p=>p[1]!=null);
 const latestVal = s => {const v=vpts(s);return v.length?v[v.length-1][1]:null;};
@@ -1711,7 +1719,7 @@ function init(){
   const dt=new Date(last+"T00:00:00");
   const opt={day:"numeric",month:"long",year:"numeric"};
   const el=document.getElementById("stampDate"); if(el) el.textContent=dt.toLocaleDateString("en-GB",opt);
-  applyLang(); buildCats(); renderMovers(); renderGrid(); renderFAQ(lang);
+  applyLang(); buildCats(); renderMovers(); renderGrid(); renderFAQ("en");
 }
 (async()=>{
   try{ 
