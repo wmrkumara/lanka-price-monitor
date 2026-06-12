@@ -1023,75 +1023,45 @@ function speakPrice(d){
   const min=Math.min(...vals),max=Math.max(...vals);
   const rtMarkets=Object.entries(d.markets||{}).filter(([k,v])=>v!=null);
   const wsMarkets=Object.entries(d.wholesaleMarkets||{}).filter(([k,v])=>v!=null);
+  const dir=ch.dir==="up"?"increased":ch.dir==="down"?"decreased":"unchanged";
 
-  let text="";
-  if(lang==="si"){
-    const dir=ch.dir==="up"?"ඉහළ ගොස් ඇත":ch.dir==="down"?"පහළ ගොස් ඇත":"සාමාන්‍ය";
-    text=`${tName(d.name)}. `;
-    text+=`අද ${tMkt(d.primaryMarket)} වෙළඳපොළේ සිල්ලර මිල රුපියල් ${Math.round(cur)}. `;
-    text+=`පෙර වාර්තාවට සාපේක්ෂව ${Math.abs(ch.pct).toFixed(1)} ශතමානයකින් ${dir}. `;
-    text+=`කාල සීමාවේ අවම සිල්ලර මිල රුපියල් ${Math.round(min)}. උපරිම රුපියල් ${Math.round(max)}. `;
-    if(rtMarkets.length>1){
-      const mktText=rtMarkets.map(([k,v])=>`${tMkt(k)} සිල්ලර රුපියල් ${Math.round(v)}`).join(". ");
-      text+=`සිල්ලර මිල: ${mktText}. `;
-    }
-    if(wsMarkets.length>0){
-      const wsMktText=wsMarkets.map(([k,v])=>`${tMkt(k)} තොග රුපියල් ${Math.round(v)}`).join(". ");
-      text+=`තොග මිල: ${wsMktText}.`;
-    }
-  } else if(lang==="ta"){
-    const dir=ch.dir==="up"?"அதிகரித்துள்ளது":ch.dir==="down"?"குறைந்துள்ளது":"மாறவில்லை";
-    text=`${tName(d.name)}. `;
-    text+=`இன்று ${tMkt(d.primaryMarket)} சந்தையில் சில்லறை விலை ${Math.round(cur)} ரூபாய். `;
-    text+=`முந்தைய அறிக்கையில் இருந்து ${Math.abs(ch.pct).toFixed(1)} சதவீதம் ${dir}. `;
-    text+=`குறைந்தபட்ச சில்லறை விலை ${Math.round(min)} ரூபாய். அதிகபட்சம் ${Math.round(max)} ரூபாய். `;
-    if(rtMarkets.length>1){
-      const mktText=rtMarkets.map(([k,v])=>`${tMkt(k)} சில்லறை ${Math.round(v)} ரூபாய்`).join(". ");
-      text+=`சில்லறை விலைகள்: ${mktText}. `;
-    }
-    if(wsMarkets.length>0){
-      const wsMktText=wsMarkets.map(([k,v])=>`${tMkt(k)} மொத்த ${Math.round(v)} ரூபாய்`).join(". ");
-      text+=`மொத்த விலைகள்: ${wsMktText}.`;
-    }
-  } else {
-    const dir=ch.dir==="up"?"increased":ch.dir==="down"?"decreased":"unchanged";
-    text=`${d.name}. `;
-    text+=`Today's retail price at ${d.primaryMarket} market is ${Math.round(cur)} rupees per kilogram. `;
-    text+=`${Math.abs(ch.pct).toFixed(1)}% ${dir} from the previous report. `;
-    text+=`Period low retail price ${Math.round(min)} rupees, high ${Math.round(max)} rupees. `;
-    if(rtMarkets.length>1){
-      const mktText=rtMarkets.map(([k,v])=>`${k} retail ${Math.round(v)} rupees`).join(". ");
-      text+=`Retail prices: ${mktText}. `;
-    }
-    if(wsMarkets.length>0){
-      const wsMktText=wsMarkets.map(([k,v])=>`${k} wholesale ${Math.round(v)} rupees`).join(". ");
-      text+=`Wholesale prices: ${wsMktText}.`;
-    }
+  /* Always speak in English — best TTS support on all devices */
+  let text=`${d.name}. `;
+  text+=`Today's retail price at ${d.primaryMarket} market is ${Math.round(cur)} rupees. `;
+  text+=`${Math.abs(ch.pct).toFixed(1)} percent ${dir} from previous report. `;
+  text+=`Period low ${Math.round(min)}, high ${Math.round(max)} rupees. `;
+  if(rtMarkets.length>1){
+    const mktText=rtMarkets.map(([k,v])=>`${k} retail ${Math.round(v)}`).join(". ");
+    text+=`Retail prices: ${mktText}. `;
   }
+  if(wsMarkets.length>0){
+    const wsMktText=wsMarkets.map(([k,v])=>`${k} wholesale ${Math.round(v)}`).join(". ");
+    text+=`Wholesale prices: ${wsMktText}.`;
+  }
+
+  /* Show native language toast while speaking */
+  let toastMsg="";
+  if(lang==="si"){
+    const dirSi=ch.dir==="up"?"▲":ch.dir==="down"?"▼":"▶";
+    toastMsg=`🔊 ${tName(d.name)} — රු.${Math.round(cur)} ${dirSi}${Math.abs(ch.pct).toFixed(1)}%`;
+  } else if(lang==="ta"){
+    const dirTa=ch.dir==="up"?"▲":ch.dir==="down"?"▼":"▶";
+    toastMsg=`🔊 ${tName(d.name)} — ரூ.${Math.round(cur)} ${dirTa}${Math.abs(ch.pct).toFixed(1)}%`;
+  } else {
+    toastMsg=`🔊 ${d.name} — Rs.${Math.round(cur)}`;
+  }
+  showToast(toastMsg, 4000);
 
   window.speechSynthesis.cancel();
   const utt=new SpeechSynthesisUtterance(text);
   const voices=window.speechSynthesis.getVoices();
-  let voice=null;
-  if(lang==="si"){
-    voice=voices.find(v=>v.lang.startsWith("si"))||
-          voices.find(v=>v.lang.startsWith("en-IN"))||
-          voices.find(v=>v.lang.startsWith("en"));
-    utt.lang=voice?voice.lang:"en-IN";
-  } else if(lang==="ta"){
-    voice=voices.find(v=>v.lang.startsWith("ta"))||
-          voices.find(v=>v.lang.startsWith("en-IN"))||
-          voices.find(v=>v.lang.startsWith("en"));
-    utt.lang=voice?voice.lang:"ta-IN";
-  } else {
-    voice=voices.find(v=>v.lang.startsWith("en-US"))||
-          voices.find(v=>v.lang.startsWith("en"));
-    utt.lang="en-US";
-  }
+  const voice=voices.find(v=>v.lang.startsWith("en-US"))||
+              voices.find(v=>v.lang.startsWith("en-GB"))||
+              voices.find(v=>v.lang.startsWith("en"));
   if(voice)utt.voice=voice;
-  utt.rate=0.85;utt.pitch=1;utt.volume=1;
+  utt.lang="en-US";
+  utt.rate=0.88;utt.pitch=1;utt.volume=1;
   window.speechSynthesis.speak(utt);
-  showToast("🔊 "+tName(d.name),2000);
 }
 
 function findAndOpenCommodity(query){
