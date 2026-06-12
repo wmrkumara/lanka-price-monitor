@@ -1701,6 +1701,13 @@ function facebookShare(d){
   const cur=latestVal(d.series);
   const arr=ch.dir==="up"?"▲":ch.dir==="down"?"▼":"▶";
   const lastDate=DATES[DATES.length-1];
+  /* Pre-calculate — mobile compatibility */
+  const dEmoji=tEmoji(d.name);
+  const dName=tName(d.name);
+  const dCat=tCat(d.category);
+  const dMkt=tMkt(d.primaryMarket);
+  const dUnit=tUnit(d.unit);
+  const dQuote=randomQuote();
 
   /* Step 1 — Generate + download PNG card */
   const card=document.createElement("div");
@@ -1715,9 +1722,9 @@ function facebookShare(d){
       </div>
     </div>
     <div style="padding:28px 28px 20px">
-      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7a7264;font-weight:700;margin-bottom:6px">${tCat(d.category)} · ${tMkt(d.primaryMarket)}</div>
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7a7264;font-weight:700;margin-bottom:6px">${dCat} · ${dMkt}</div>
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px">
-        <div style="font-family:Georgia,serif;font-size:38px;font-weight:500;color:#191d1a;line-height:1">${tEmoji(d.name)} ${tName(d.name)}</div>
+        <div style="font-family:Georgia,serif;font-size:38px;font-weight:500;color:#191d1a;line-height:1">${dEmoji} ${dName}</div>
         <div style="text-align:right;margin-top:6px">
           <div style="font-family:monospace;font-size:13px;font-weight:700;color:#0F5C4D;letter-spacing:.5px">www.TopGoviya.lk</div>
           <div style="font-size:10px;color:#D4A017;font-weight:700;letter-spacing:.5px">📊 දත්ත බලලා තීරණ ගන්න</div>
@@ -1738,7 +1745,7 @@ function facebookShare(d){
     </div>
     <div style="background:#0e4f4a;padding:14px 28px;text-align:center">
       <div style="font-family:monospace;font-size:16px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
-      <div style="font-size:11px;color:#9fd4c8;margin-top:4px;font-style:italic">"${randomQuote()}"</div>
+      <div style="font-size:11px;color:#9fd4c8;margin-top:4px;font-style:italic">"${dQuote}"</div>
       <div style="font-size:10px;color:#7ab8b0;margin-top:3px">ගොවියාට · වෙළෙන්දාට · ව්‍යාපාරිකයාට · නිදහසේ</div>
     </div>
   `;
