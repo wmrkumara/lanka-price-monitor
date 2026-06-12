@@ -589,6 +589,8 @@ function setLang(l){
   if(scrim.classList.contains("open")&&curDetail)openDetail(curDetail.id);
 }
 document.querySelector(".lang").addEventListener("click",function(e){var b=e.target.closest("button[data-lang]");if(b)setLang(b.dataset.lang);});
+/* Render FAQ on page load */
+document.addEventListener("DOMContentLoaded",()=>renderFAQ(lang));
 
 const vpts = s => s.map((v,i)=>[i,v]).filter(p=>p[1]!=null);
 const latestVal = s => {const v=vpts(s);return v.length?v[v.length-1][1]:null;};
