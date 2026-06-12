@@ -1708,18 +1708,18 @@ function facebookShare(d){
   const dCat=tCat(d.category);
   const dMkt=tMkt(d.primaryMarket);
   const dUnit=tUnit(d.unit);
-  const dQuote=randomQuote();
+  const dQuote=QUOTES.en[Math.floor(Math.random()*QUOTES.en.length)];
 
   /* Step 1 — Generate + download PNG card */
   const card=document.createElement("div");
-  card.style.cssText="position:absolute;left:-9999px;top:0;width:600px;background:#f4efe4;font-family:Georgia,serif;overflow:hidden;border-radius:0;z-index:-1";
+  card.style.cssText="position:absolute;left:-9999px;top:0;width:600px;height:auto;background:#f4efe4;font-family:Georgia,serif;overflow:hidden;border-radius:0;z-index:-1";
   card.innerHTML=`
     <div style="height:8px;background:#0e4f4a"></div>
     <div style="background:#0e4f4a;padding:18px 28px;display:flex;justify-content:space-between;align-items:center">
       <div style="font-family:Georgia,serif;font-size:22px;color:#fff;font-weight:700">Lanka <em style="color:#ffd98a;font-style:italic">Price</em> Monitor</div>
       <div style="font-family:monospace;font-size:13px;color:#9fd4c8;text-align:right">
         <div>${lastDate}</div>
-        <div style="font-size:11px;color:#7ab8b0">දත්ත ශ්‍රී ලංකා මහා බැංකුවෙන් දෛනිකව නිකුත් කරන වාර්තා මගින්</div>
+        <div style="font-size:11px;color:#7ab8b0">Data: Central Bank of Sri Lanka</div>
       </div>
     </div>
     <div style="padding:20px 24px 16px">
@@ -1729,7 +1729,7 @@ function facebookShare(d){
           <div style="font-family:Georgia,serif;font-size:32px;font-weight:500;color:#191d1a;line-height:1.1;flex:1;padding-right:10px">${dEmoji} ${dNameSimple}</div>
           <div style="text-align:right;flex-shrink:0">
             <div style="font-family:monospace;font-size:12px;font-weight:700;color:#0F5C4D;letter-spacing:.5px">www.TopGoviya.lk</div>
-            <div style="font-size:9px;color:#D4A017;font-weight:700;letter-spacing:.3px">📊 දත්ත බලලා තීරණ ගන්න</div>
+            <div style="font-size:9px;color:#D4A017;font-weight:700;letter-spacing:.3px">TopGoviya.lk</div>
           </div>
         </div>
       </div>
@@ -1749,7 +1749,7 @@ function facebookShare(d){
     <div style="background:#0e4f4a;padding:14px 28px;text-align:center">
       <div style="font-family:monospace;font-size:16px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
       <div style="font-size:11px;color:#9fd4c8;margin-top:4px;font-style:italic">"${dQuote}"</div>
-      <div style="font-size:10px;color:#7ab8b0;margin-top:3px">ගොවියාට · වෙළෙන්දාට · ව්‍යාපාරිකයාට · නිදහසේ</div>
+      <div style="font-size:10px;color:#7ab8b0;margin-top:3px">For Farmers. For Traders. Free.</div>
     </div>
   `;
   document.body.appendChild(card);
