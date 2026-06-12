@@ -1588,66 +1588,33 @@ function wireChart(d, series){
 }
 
 function downloadModalPNG(id){
+  const modal=document.getElementById("modal");
+  if(!modal)return;
   const d=DATA[id];
-  if(!d)return;
+  const lastDate=DATES[DATES.length-1];
   const btn=document.querySelector('[onclick*="downloadModalPNG"]');
   if(btn){btn.textContent="⏳ Creating...";btn.disabled=true;}
-  const ch=changeOf(d.series);
-  const cur=latestVal(d.series);
-  const arr=ch.dir==="up"?"▲":ch.dir==="down"?"▼":"▶";
-  const lastDate=DATES[DATES.length-1];
-  const card=document.createElement("div");
-  card.style.cssText="position:absolute;left:-9999px;top:0;width:600px;background:#f4efe4;overflow:hidden;border-radius:0;z-index:-1";
-  card.innerHTML=`
-    <div style="height:8px;background:#0e4f4a"></div>
-    <div style="background:#0e4f4a;padding:18px 28px;display:flex;justify-content:space-between;align-items:center">
-      <div style="font-family:Georgia,serif;font-size:22px;color:#fff;font-weight:700">Lanka <em style="color:#ffd98a;font-style:italic">Price</em> Monitor</div>
-      <div style="font-family:monospace;font-size:13px;color:#9fd4c8;text-align:right">
-        <div>${lastDate}</div>
-        <div style="font-size:11px;color:#7ab8b0">දත්ත ශ්‍රී ලංකා මහා බැංකුවෙන්</div>
-      </div>
-    </div>
-    <div style="padding:28px 28px 20px">
-      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7a7264;font-weight:700;margin-bottom:6px">${tCat(d.category)} · ${tMkt(d.primaryMarket)}</div>
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px">
-        <div style="font-family:Georgia,serif;font-size:38px;font-weight:500;color:#191d1a;line-height:1">${tEmoji(d.name)} ${tName(d.name)}</div>
-        <div style="text-align:right;margin-top:6px">
-          <div style="font-family:monospace;font-size:13px;font-weight:700;color:#0F5C4D;letter-spacing:.5px">www.TopGoviya.lk</div>
-          <div style="font-size:10px;color:#D4A017;font-weight:700;letter-spacing:.5px">📊 දත්ත බලලා තීරණ ගන්න</div>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
-        <div style="font-family:monospace;font-size:48px;font-weight:700;color:#191d1a">රු.${fmt(cur)}</div>
-        <div style="background:${ch.dir==="up"?"#f7e6e2":"#e3efe6"};color:${ch.dir==="up"?"#b23a2e":"#2c7a52"};font-family:monospace;font-size:20px;font-weight:700;padding:8px 16px;border-radius:10px">${arr} ${Math.abs(ch.pct).toFixed(1)}%</div>
-      </div>
-      <div style="height:1px;background:#e3d9c4;margin-bottom:20px"></div>
-      <div style="display:grid;grid-template-columns:${Object.entries(d.markets||{}).filter(([k,v])=>v!=null).length>2?"1fr 1fr 1fr":"1fr 1fr"};gap:12px;margin-bottom:20px">
-        ${Object.entries(d.markets||{}).filter(([k,v])=>v!=null).map(([k,v])=>`
-        <div style="background:#fffdf7;border:1px solid #e3d9c4;border-radius:10px;padding:12px 14px">
-          <div style="font-size:10px;color:#7a7264;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">${k}</div>
-          <div style="font-family:monospace;font-size:18px;font-weight:700;color:#191d1a">රු.${fmt(v)}</div>
-        </div>`).join("")}
-      </div>
-    </div>
-    <div style="background:#0e4f4a;padding:14px 28px;text-align:center">
-      <div style="font-family:monospace;font-size:16px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
-      <div style="font-size:11px;color:#9fd4c8;margin-top:4px">ගොවියාට · වෙළෙන්දාට · ව්‍යාපාරිකයාට · නිදහසේ</div>
-    </div>
-    <div style="height:6px;background:#a9802a"></div>
-  `;
-  document.body.appendChild(card);
-  html2canvas(card,{scale:2,useCORS:true,allowTaint:true,backgroundColor:"#f4efe4",logging:false,imageTimeout:8000,foreignObjectRendering:false}).then(canvas=>{
-    document.body.removeChild(card);
+  html2canvas(modal,{
+    scale:2,
+    useCORS:true,
+    allowTaint:true,
+    backgroundColor:"#fffdf7",
+    logging:false,
+    scrollX:0,
+    scrollY:0,
+    windowWidth:modal.scrollWidth,
+    windowHeight:modal.scrollHeight
+  }).then(canvas=>{
     const link=document.createElement("a");
     link.download="topgoviya-"+d.name.toLowerCase().replace(/\s+/g,"-")+"-"+lastDate+".png";
     link.href=canvas.toDataURL("image/png");
     link.click();
     if(btn){btn.textContent="📸 Share as Image";btn.disabled=false;}
   }).catch(()=>{
-    if(document.body.contains(card))document.body.removeChild(card);
     if(btn){btn.textContent="📸 Share as Image";btn.disabled=false;}
   });
 }
+
 
 
 function whatsappShare(d){
