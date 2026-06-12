@@ -904,7 +904,41 @@ function calcPanel(d){
   </div>`;
 }
 
-/* ===== AI Insight Box — rule-based ===== */
+/* ===== Random Quotes ===== */
+const QUOTES={
+  si:[
+    "දැනුම ලාභයේ රහස යි",
+    "හොඳ තීරණයක් හොඳ අස්වැන්නකට වඩා වටිනවා",
+    "ගොවියාගේ දහදිය — රටේ ජීවය",
+    "දත්ත බලලා තීරණ ගන්න",
+    "දැනුවත් ගොවියා සමෘද්ධිමත් වෙයි",
+    "හොඳ වෙළඳපොළ — හොඳ ජීවිතය",
+    "මිල දන්නා ගොවියා කවදාවත් රවටන්නේ නැහැ",
+    "දත්ත සමඟ ගිය ගොවියා ජය ගනී",
+  ],
+  en:[
+    "Knowledge is the seed of prosperity",
+    "Data today, profit tomorrow",
+    "Smart farmer, better harvest",
+    "Informed decisions, better returns",
+    "Every price tells a story",
+    "Know your market, grow your profit",
+    "The informed farmer never gets cheated",
+    "Data-driven farming is the future",
+  ],
+  ta:[
+    "அறிவே லாபத்தின் ரகசியம்",
+    "தரவு இன்று, லாபம் நாளை",
+    "அறிவுள்ள விவசாயி, சிறந்த விளைச்சல்",
+    "சரியான முடிவு, சிறந்த வருமானம்",
+    "விலை தெரிந்த விவசாயி ஏமாற மாட்டான்",
+    "தரவுடன் செல்லும் விவசாயி வெற்றி பெறுவான்",
+  ]
+};
+function randomQuote(){
+  const qs=QUOTES[lang]||QUOTES.en;
+  return qs[Math.floor(Math.random()*qs.length)];
+}
 function aiInsight(d){
   const ch=changeOf(d.series);
   const cur=latestVal(d.series);
@@ -1011,10 +1045,15 @@ function openDetail(id){
     '<a class="wa-btn wa-channel" href="https://whatsapp.com/channel/0000000000" target="_blank" rel="noopener">'+
     '🔔 Daily Alerts</a>'+
     '</div>';
-  const brandBar='<div style="background:var(--petrol);padding:10px 18px;display:flex;justify-content:space-between;align-items:center;border-radius:0 0 12px 12px;margin-top:14px">'+
-    '<div style="font-family:\'JetBrains Mono\',monospace;font-size:12px;font-weight:700;color:#ffd98a">www.TopGoviya.lk</div>'+
-    '<div style="font-size:11px;color:#9fd4c8">📅 Price as of '+DATES[DATES.length-1]+'</div>'+
-    '</div>';
+  const brandBar='<div style="background:var(--petrol);padding:12px 18px;border-radius:0 0 12px 12px;margin-top:14px">'+
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">'+
+      '<div style="font-family:\'JetBrains Mono\',monospace;font-size:12px;font-weight:700;color:#ffd98a">www.TopGoviya.lk</div>'+
+      '<div style="font-size:11px;color:#9fd4c8">📅 '+DATES[DATES.length-1]+'</div>'+
+    '</div>'+
+    '<div style="font-size:11px;font-style:italic;color:#9fd4c8;border-top:1px solid rgba(255,255,255,.1);padding-top:6px;margin-top:2px">'+
+      '"'+randomQuote()+'"'+
+    '</div>'+
+  '</div>';
   modal.innerHTML='<div class="mhead">'+
     '<div>'+
       '<div class="cat">'+tCat(d.category)+'</div>'+
@@ -1699,9 +1738,9 @@ function facebookShare(d){
     </div>
     <div style="background:#0e4f4a;padding:14px 28px;text-align:center">
       <div style="font-family:monospace;font-size:16px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
-      <div style="font-size:11px;color:#9fd4c8;margin-top:4px">ගොවියාට · වෙළෙන්දාට · ව්‍යාපාරිකයාට · නිදහසේ</div>
+      <div style="font-size:11px;color:#9fd4c8;margin-top:4px;font-style:italic">"${randomQuote()}"</div>
+      <div style="font-size:10px;color:#7ab8b0;margin-top:3px">ගොවියාට · වෙළෙන්දාට · ව්‍යාපාරිකයාට · නිදහසේ</div>
     </div>
-    <div style="height:6px;background:#a9802a"></div>
   `;
   document.body.appendChild(card);
 
