@@ -1633,7 +1633,7 @@ function facebookShare(d){
 
   /* Step 1 — Generate + download PNG card */
   const card=document.createElement("div");
-  card.style.cssText="position:fixed;left:-9999px;top:0;width:600px;background:#f4efe4;font-family:'Hanken Grotesk',sans-serif;overflow:hidden;border-radius:0";
+  card.style.cssText="position:absolute;left:-9999px;top:0;width:600px;background:#f4efe4;font-family:Georgia,serif;overflow:hidden;border-radius:0;z-index:-1";
   card.innerHTML=`
     <div style="height:8px;background:#0e4f4a"></div>
     <div style="background:#0e4f4a;padding:18px 28px;display:flex;justify-content:space-between;align-items:center">
@@ -1679,7 +1679,9 @@ function facebookShare(d){
     allowTaint:true,
     backgroundColor:"#f4efe4",
     logging:false,
-    imageTimeout:5000
+    imageTimeout:8000,
+    removeContainer:true,
+    foreignObjectRendering:false
   }).then(canvas=>{
     document.body.removeChild(card);
     /* Download PNG */
