@@ -1017,24 +1017,62 @@ function speakPrice(d){
   if(!window.speechSynthesis)return;
   const ch=changeOf(d.series);
   const cur=latestVal(d.series);
-  const dir=ch.dir==="up"?"ඉහළ ගොස් ඇත":ch.dir==="down"?"පහළ ගොස් ඇත":"සාමාන්‍ය මට්ටමේ";
-  const dirEn=ch.dir==="up"?"increased":ch.dir==="down"?"decreased":"unchanged";
-  const dirTa=ch.dir==="up"?"அதிகரித்துள்ளது":ch.dir==="down"?"குறைந்துள்ளது":"மாறவில்லை";
+  const vals=vpts(d.series).map(p=>p[1]);
+  const min=Math.min(...vals),max=Math.max(...vals);
+  const markets=Object.entries(d.markets||{}).filter(([k,v])=>v!=null);
 
   let text="";
   if(lang==="si"){
-    text=`${tName(d.name)}. අද මිල රුපියල් ${Math.round(cur)}. ${tMkt(d.primaryMarket)} වෙළඳපොළේ. ${ch.pct.toFixed(1)}% කින් ${dir}.`;
+    const dir=ch.dir==="up"?"ඉහළ ගොස් ඇත":ch.dir==="down"?"පහළ ගොස් ඇත":"සාමාන්‍ය";
+    const mktText=markets.map(([k,v])=>`${tMkt(k)} රුපියල් ${Math.round(v)}`).join(", ");
+    text=`${tName(d.name)}. `;
+    text+=`අද ${tMkt(d.primaryMarket)} වෙළඳපොළේ මිල රුපියල් ${Math.round(cur)}. `;
+    text+=`පෙර වාර්තාවට සාපේක්ෂව ${Math.abs(ch.pct).toFixed(1)} ශතමානයකින් ${dir}. `;
+    text+=`කාල සීමාවේ අවම මිල රුපියල් ${Math.round(min)}. උපරිම රුපියල් ${Math.round(max)}. `;
+    if(markets.length>1) text+=`වෙළඳපොළ අතර: ${mktText}.`;
   } else if(lang==="ta"){
-    text=`${tName(d.name)}. இன்றைய விலை ${Math.round(cur)} ரூபாய். ${tMkt(d.primaryMarket)} சந்தையில். ${Math.abs(ch.pct).toFixed(1)}% ${dirTa}.`;
+    const dir=ch.dir==="up"?"அதிகரித்துள்ளது":ch.dir==="down"?"குறைந்துள்ளது":"மாறவில்லை";
+    const mktText=markets.map(([k,v])=>`${tMkt(k)} ${Math.round(v)} ரூபாய்`).join(", ");
+    text=`${tName(d.name)}. `;
+    text+=`இன்று ${tMkt(d.primaryMarket)} சந்தையில் விலை ${Math.round(cur)} ரூபாய். `;
+    text+=`முந்தைய அறிக்கையில் இருந்து ${Math.abs(ch.pct).toFixed(1)} சதவீதம் ${dir}. `;
+    text+=`குறைந்தபட்ச விலை ${Math.round(min)} ரூபாய். அதிகபட்சம் ${Math.round(max)} ரூபாய். `;
+    if(markets.length>1) text+=`சந்தைகளில்: ${mktText}.`;
   } else {
-    text=`${d.name}. Today's price is ${Math.round(cur)} rupees per ${d.unit.replace('Rs./','').trim()}. At ${d.primaryMarket} market. ${Math.abs(ch.pct).toFixed(1)}% ${dirEn}.`;
+    const dir=ch.dir==="up"?"increased":ch.dir==="down"?"decreased":"unchanged";
+    const mktText=markets.map(([k,v])=>`${k} ${Math.round(v)} rupees`).join(", ");
+    text=`${d.name}. `;
+    text+=`Today's price at ${d.primaryMarket} market is ${Math.round(cur)} rupees per kilogram. `;
+    text+=`${Math.abs(ch.pct).toFixed(1)}% ${dir} from previous report. `;
+    text+=`Period low ${Math.round(min)}, high ${Math.round(max)} rupees. `;
+    if(markets.length>1) text+=`Market prices: ${mktText}.`;
   }
 
   window.speechSynthesis.cancel();
   const utt=new SpeechSynthesisUtterance(text);
-  utt.lang=lang==="si"?"si-LK":lang==="ta"?"ta-LK":"en-US";
-  utt.rate=0.9;utt.pitch=1;utt.volume=1;
+
+  /* Try to find best matching voice */
+  const voices=window.speechSynthesis.getVoices();
+  let voice=null;
+  if(lang==="si"){
+    voice=voices.find(v=>v.lang.startsWith("si"))||
+          voices.find(v=>v.lang.startsWith("en-IN"))||
+          voices.find(v=>v.lang.startsWith("en"));
+    utt.lang=voice?voice.lang:"en-IN";
+  } else if(lang==="ta"){
+    voice=voices.find(v=>v.lang.startsWith("ta"))||
+          voices.find(v=>v.lang.startsWith("en-IN"))||
+          voices.find(v=>v.lang.startsWith("en"));
+    utt.lang=voice?voice.lang:"ta-IN";
+  } else {
+    voice=voices.find(v=>v.lang.startsWith("en-US"))||
+          voices.find(v=>v.lang.startsWith("en"));
+    utt.lang="en-US";
+  }
+  if(voice)utt.voice=voice;
+  utt.rate=0.85;utt.pitch=1;utt.volume=1;
   window.speechSynthesis.speak(utt);
+  showToast("🔊 "+tName(d.name),2000);
 }
 
 function findAndOpenCommodity(query){
