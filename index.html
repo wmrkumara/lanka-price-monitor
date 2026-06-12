@@ -1673,7 +1673,14 @@ function facebookShare(d){
   `;
   document.body.appendChild(card);
 
-  html2canvas(card,{scale:2,useCORS:true,backgroundColor:"#f4efe4",logging:false}).then(canvas=>{
+  html2canvas(card,{
+    scale:2,
+    useCORS:true,
+    allowTaint:true,
+    backgroundColor:"#f4efe4",
+    logging:false,
+    imageTimeout:5000
+  }).then(canvas=>{
     document.body.removeChild(card);
     /* Download PNG */
     const link=document.createElement("a");
