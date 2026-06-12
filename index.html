@@ -639,7 +639,7 @@ function renderGrid(){
   document.getElementById("count").textContent=list.length+" "+t("items");
   if(!list.length){g.innerHTML='<div class="empty">'+t("noMatch").replace("%Q",state.q)+'</div>';return;}
   g.innerHTML=list.map(d=>{const ch=c(d),cur=latestVal(d.series);
-    return '<div class="item" onclick="openDetail('+d.id+')"><div class="top"><div><div class="cat">'+tCat(d.category)+'</div><div class="nm">'+tEmoji(d.name)+' '+tName(d.name)+'</div></div><span class="chg '+ch.dir+'">'+arrow(ch.dir)+' '+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</span></div>'+spark(d.series,220,42,strokeFor(ch.dir))+'<div class="foot"><span class="price">'+fmt(cur)+'<small> '+tUnit(d.unit)+'</small></span><span style="font-size:11px;color:var(--muted)">'+(ch.abs>0?"+":"")+fmt(ch.abs)+' '+t("vsLast")+'</span></div></div>';
+    return '<div class="item" onclick="openDetail('+d.id+')"><div class="top"><div><div class="cat" style="display:flex;justify-content:space-between;align-items:center">'+tCat(d.category)+'<span style="font-family:monospace;font-size:9px;font-weight:700;color:#0F5C4D;letter-spacing:.3px">TopGoviya.lk</span></div><div class="nm">'+tEmoji(d.name)+' '+tName(d.name)+'</div></div><span class="chg '+ch.dir+'">'+arrow(ch.dir)+' '+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</span></div>'+spark(d.series,220,42,strokeFor(ch.dir))+'<div class="foot"><span class="price">'+fmt(cur)+'<small> '+tUnit(d.unit)+'</small></span><span style="font-size:11px;color:var(--muted)">'+(ch.abs>0?"+":"")+fmt(ch.abs)+' '+t("vsLast")+'</span></div></div>';
   }).join("");
 }
 
