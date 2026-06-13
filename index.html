@@ -318,6 +318,16 @@
     </div>
   </header>
 
+
+  <!-- Weather Bar -->
+  <div id="weatherBar" style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 16px;margin:14px 0;display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+    <div style="font-size:10px;font-weight:700;color:var(--petrol);letter-spacing:.1em;text-transform:uppercase;flex-shrink:0">🌤️ Weather</div>
+    <div id="weatherData" style="display:flex;gap:12px;flex-wrap:wrap;flex:1">
+      <span style="font-size:12px;color:var(--muted)">Loading...</span>
+    </div>
+    <div style="font-size:9px;color:var(--muted)">Open-Meteo · Auto-update</div>
+  </div>
+
   <div class="section-h"><h2 id="hMovers">Today&rsquo;s sharpest movements</h2><span class="rule"></span><span class="hint" id="hintMovers">auto-ranked &middot; tap &rarr;</span></div>
   <div class="movers" id="movers"></div>
 
@@ -902,6 +912,49 @@ function calcPanel(d){
 
     <div id="tr_${cid}" style="display:flex;flex-direction:column;gap:6px"></div>
   </div>`;
+}
+
+/* ===== Weather — Open-Meteo (Free, No API Key) ===== */
+const WEATHER_LOCATIONS=[
+  {name:"Dambulla",lat:7.87,lon:80.65,emoji:"🥬"},
+  {name:"Pettah",lat:6.93,lon:79.84,emoji:"🏪"},
+  {name:"Negombo",lat:7.21,lon:79.84,emoji:"🐟"},
+];
+const WX_CODE={
+  0:"☀️",1:"🌤️",2:"⛅",3:"☁️",
+  45:"🌫️",48:"🌫️",
+  51:"🌦️",53:"🌦️",55:"🌧️",
+  61:"🌧️",63:"🌧️",65:"🌧️",
+  71:"❄️",73:"❄️",75:"❄️",
+  80:"🌦️",81:"🌧️",82:"⛈️",
+  95:"⛈️",96:"⛈️",99:"⛈️",
+};
+async function fetchWeather(){
+  const el=document.getElementById("weatherData");
+  if(!el)return;
+  try{
+    const results=await Promise.all(WEATHER_LOCATIONS.map(async loc=>{
+      const url=`https://api.open-meteo.com/v1/forecast?latitude=${loc.lat}&longitude=${loc.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&timezone=Asia%2FColombo&forecast_days=2`;
+      const r=await fetch(url);
+      const d=await r.json();
+      return {loc,d};
+    }));
+    el.innerHTML=results.map(({loc,d})=>{
+      const wx=WX_CODE[d.daily.weathercode[0]]||"🌤️";
+      const tmax=Math.round(d.daily.temperature_2m_max[0]);
+      const tmin=Math.round(d.daily.temperature_2m_min[0]);
+      const rain=d.daily.precipitation_sum[0];
+      const wxTmr=WX_CODE[d.daily.weathercode[1]]||"🌤️";
+      const rainAlert=rain>10?'<span style="color:#b23a2e;font-size:9px;font-weight:700"> ⚠️ Rain!</span>':'';
+      return `<div style="display:flex;flex-direction:column;gap:1px;padding:4px 10px;background:var(--paper);border-radius:8px;border:1px solid var(--line)">
+        <div style="font-size:10px;font-weight:700;color:var(--petrol)">${loc.emoji} ${loc.name}</div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink)">${wx} ${tmax}°C${rainAlert}</div>
+        <div style="font-size:9px;color:var(--muted)">Tomorrow: ${wxTmr} · Low: ${tmin}°</div>
+      </div>`;
+    }).join("");
+  }catch(e){
+    el.innerHTML='<span style="font-size:11px;color:var(--muted)">Weather unavailable</span>';
+  }
 }
 
 /* ===== Random Quotes ===== */
@@ -1821,6 +1874,8 @@ function init(){
   const opt={day:"numeric",month:"long",year:"numeric"};
   const el=document.getElementById("stampDate"); if(el) el.textContent=dt.toLocaleDateString("en-GB",opt);
   applyLang(); buildCats(); renderMovers(); renderGrid(); renderFAQ("en");
+  fetchWeather();
+  setInterval(fetchWeather, 3600000); /* Update every hour */
 }
 (async()=>{
   try{ 
