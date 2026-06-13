@@ -427,7 +427,7 @@ const GUIDE={
     close:"තේරුණා ✓",
     items:[
       {icon:"👆",title:"ඕනෑම card එකක් tap කරන්න",text:"සම්පූර්ණ price chart, ඉතිහාසය, වෙළඳපොළ සැසඳීම සහ AI insight බලන්න."},
-      {icon:"📊",title:"Chart range buttons",text:"1M · 3M · 1Y · 3Y · 5Y · All — කාල සීමාව තෝරන්න. YoY = වාර්ෂික සැසඳීම."},
+      {icon:"📊",title:"Chart range buttons",text:"1M · 3M · 1Y · 3Y · 2026 · All — කාල සීමාව තෝරන්න. 2026 = මෙ වසරේ Jan සිට. YoY = වාර්ෂික සැසඳීම."},
       {icon:"🔄",title:"Retail / Wholesale / 💡 Gap / 🧮 Calculator",text:"Retail = සිල්ලර. Wholesale = තොග. Gap = margin chart + Poya markers. Calculator = ලාභ ගණනය."},
       {icon:"🌾",title:"ගොවි Profit Calculator",text:"ඔබේ kg ප්‍රමාණය, transport cost, production cost (optional) දාලා හොඳම වෙළඳපොළ සොයා ගන්න."},
       {icon:"💰",title:"Trader Profit Calculator",text:"Wholesale ගෙන Retail ට transport cost අඩු කර ලාභය ගණනය කරන්න."},
@@ -443,7 +443,7 @@ const GUIDE={
     close:"Got it ✓",
     items:[
       {icon:"👆",title:"Tap any card",text:"Opens full price chart, history, market comparison, and AI insight."},
-      {icon:"📊",title:"Chart range buttons",text:"Switch between 1M · 3M · 1Y · 3Y · 5Y · All for different time ranges. YoY = year-over-year comparison."},
+      {icon:"📊",title:"Chart range buttons",text:"Switch between 1M · 3M · 1Y · 3Y · 2026 · All. 2026 = This year from Jan 1st. YoY = year-over-year comparison."},
       {icon:"🔄",title:"Retail / Wholesale / 💡 Gap / 🧮 Calculator",text:"Retail = consumer prices. Wholesale = bulk prices. Gap = margin chart + Poya markers. Calculator = profit analysis."},
       {icon:"🌾",title:"Farmer Profit Calculator",text:"Enter your harvest kg, transport cost, and optional production cost to find the best market to sell."},
       {icon:"💰",title:"Trader Profit Calculator",text:"Calculate net profit per kg after deducting transport from the wholesale-to-retail margin."},
@@ -459,7 +459,7 @@ const GUIDE={
     close:"புரிந்தது ✓",
     items:[
       {icon:"👆",title:"எந்த அட்டையையும் தட்டவும்",text:"முழு விலை வரைபடம், வரலாறு, சந்தை ஒப்பீடு மற்றும் AI நுண்ணறிவு காண்க."},
-      {icon:"📊",title:"வரைபட வரம்பு பொத்தான்கள்",text:"1M · 3M · 1Y · 3Y · 5Y · All — கால வரம்பை தேர்ந்தெடுக்கவும். YoY = வருடாந்திர ஒப்பீடு."},
+      {icon:"📊",title:"வரைபட வரம்பு பொத்தான்கள்",text:"1M · 3M · 1Y · 3Y · 2026 · All — கால வரம்பை தேர்ந்தெடுக்கவும். 2026 = இந்த ஆண்டு Jan முதல். YoY = வருடாந்திர ஒப்பீடு."},
       {icon:"🔄",title:"சில்லறை / மொத்த / 💡 இடைவெளி / 🧮 கணிப்பி",text:"சில்லறை = நுகர்வோர் விலை. மொத்த = மொத்த விலை. இடைவெளி = இலாப வரைபடம். கணிப்பி = லாப பகுப்பாய்வு."},
       {icon:"🌾",title:"விவசாயி லாப கணிப்பி",text:"உங்கள் மகசூல் kg, போக்குவரத்து செலவு, உற்பத்தி செலவு (விருப்பம்) உள்ளிட்டு சிறந்த சந்தையை கண்டறியவும்."},
       {icon:"💰",title:"வியாபாரி லாப கணிப்பி",text:"மொத்த முதல் சில்லறை வரை போக்குவரத்து கழித்து நிகர லாபம் கணக்கிடவும்."},
@@ -665,7 +665,12 @@ function renderMovers(){
 }
 
 function rangeIdxs(key){
-  const days={"1M":31,"3M":92,"1Y":366,"3Y":1096,"5Y":1826,"All":1e9}[key]||1e9;
+  const thisYr=new Date().getFullYear().toString();
+  if(key==="2026"){
+    const idxs=DB.dates.map((dt,i)=>dt.startsWith(thisYr)?i:-1).filter(i=>i>=0);
+    return idxs.length?idxs:DATE_OBJS.map((_,i)=>i);
+  }
+  const days={"1M":31,"3M":92,"1Y":366,"3Y":1096,"All":1e9}[key]||1e9;
   const last=DATE_OBJS[DATE_OBJS.length-1];
   const cutoff=new Date(last.getTime()-days*864e5);
   const idxs=[];for(let i=0;i<DATE_OBJS.length;i++) if(DATE_OBJS[i]>=cutoff) idxs.push(i);
@@ -1086,7 +1091,7 @@ function openDetail(id){
   const toggleBar=hasWholesale
     ?'<div class="price-toggle"><button id="btnRetail" class="on" onclick="switchMode(\'retail\')">Retail</button><button id="btnWholesale" onclick="switchMode(\'wholesale\')">Wholesale</button><button id="btnGap" class="gap-btn" onclick="switchMode(\'gap\')">💡 Gap</button><button id="btnCalc" class="calc-btn" onclick="switchMode(\'calc\')">🧮 Calculator</button></div><div style="font-size:11px;color:var(--gold);margin:-6px 0 8px;text-align:right">🌾 ගොවි ලාභය &nbsp;|&nbsp; 💰 වෙළෙන්ද ලාභය — ගණනය කරන්න</div>'
     :'';
-  const rangeBar='<div class="ranges" id="ranges">'+["1M","3M","1Y","3Y","5Y","All","YoY"].map(r=>'<button data-r="'+r+'">'+r+'</button>').join("")+'</div>';
+  const rangeBar='<div class="ranges" id="ranges">'+["1M","3M","1Y","3Y","2026","All","YoY"].map(r=>'<button data-r="'+r+'">'+r+'</button>').join("")+'</div>';
   const waRow='<div class="wa-row">'+
     '<button class="wa-btn" style="background:var(--petrol);color:#fff;border:none;flex:0 0 auto;padding:10px 14px;font-size:13px;font-weight:700;gap:5px;box-shadow:0 2px 8px rgba(14,79,74,.3)" onclick="speakPrice(DATA['+id+'])" title="Read price aloud">🔊 <span style="font-size:11px">Read</span></button>'+
     '<button class="wa-btn wa-share" onclick="whatsappShare(DATA['+id+'])">'+
