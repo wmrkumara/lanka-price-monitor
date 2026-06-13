@@ -1123,14 +1123,8 @@ function speakPrice(d){
     const wsMktText=wsMarkets.map(([k,v])=>`${k} wholesale ${Math.round(v)}`).join(". ");
     text+=`Wholesale prices: ${wsMktText}. `;
   }
-  /* Localized outro */
-  if(lang==="si"){
-    text+="ඔබට ජය වේවා! නැවත එන්න!";
-  } else if(lang==="ta"){
-    text+="உங்களுக்கு வெற்றி வாழ்க! மீண்டும் வாருங்கள்!";
-  } else {
-    text+="Obata Jayawewa! Nawatha Enna!";
-  }
+  /* Singlish outro — works on all devices! */
+  text+="Obata Jayawewa! Nawatha Enna!";
 
   /* Show native language toast while speaking */
   let toastMsg="";
