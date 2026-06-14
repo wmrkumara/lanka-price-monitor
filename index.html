@@ -1339,43 +1339,56 @@ function speakPrice(d){
   const yearMin=yVals.length?Math.min(...yVals):min;
   const yearMax=yVals.length?Math.max(...yVals):max;
   const rtMarkets=Object.entries(d.markets||{}).filter(([k,v])=>v!=null);
+  const wsMarkets=Object.entries(d.wholesaleMarkets||{}).filter(([k,v])=>v!=null);
 
   let text="";
   let ttsLang="en-US";
 
   if(lang==="si"){
-    /* සිංහල TTS text */
     const dir=ch.dir==="up"?"ඉහළ ගොස් ඇත":ch.dir==="down"?"පහළ ගොස් ඇත":"වෙනස් නැත";
     text=`${tName(d.name)}. `;
     text+=`${tMkt(d.primaryMarket)} වෙළඳපොළේ සිල්ලර මිල රුපියල් ${Math.round(cur)}. `;
     text+=`${Math.abs(ch.pct).toFixed(1)} ප්‍රතිශතයකින් ${dir}. `;
     text+=`${thisYear} අවම රුපියල් ${Math.round(yearMin)}, උපරිම රුපියල් ${Math.round(yearMax)}. `;
     if(rtMarkets.length>1){
-      rtMarkets.forEach(([k,v])=>{ text+=`${tMkt(k)} සිල්ලර රුපියල් ${Math.round(v)}. `; });
+      text+=`සිල්ලර මිල: `;
+      rtMarkets.forEach(([k,v])=>{ text+=`${tMkt(k)} රුපියල් ${Math.round(v)}. `; });
+    }
+    if(wsMarkets.length>0){
+      text+=`තොග මිල: `;
+      wsMarkets.forEach(([k,v])=>{ text+=`${tMkt(k)} රුපියල් ${Math.round(v)}. `; });
     }
     text+="ඔබට ජය වේවා! නැවත එන්න!";
     ttsLang="si-LK";
   } else if(lang==="ta"){
-    /* தமிழ் TTS text */
     const dir=ch.dir==="up"?"அதிகரித்துள்ளது":ch.dir==="down"?"குறைந்துள்ளது":"மாறவில்லை";
     text=`${tName(d.name)}. `;
     text+=`${tMkt(d.primaryMarket)} சந்தையில் சில்லறை விலை ரூபாய் ${Math.round(cur)}. `;
     text+=`${Math.abs(ch.pct).toFixed(1)} சதவீதம் ${dir}. `;
     text+=`${thisYear} குறைந்தது ரூபாய் ${Math.round(yearMin)}, அதிகபட்சம் ரூபாய் ${Math.round(yearMax)}. `;
     if(rtMarkets.length>1){
-      rtMarkets.forEach(([k,v])=>{ text+=`${tMkt(k)} சில்லறை ரூபாய் ${Math.round(v)}. `; });
+      text+=`சில்லறை விலைகள்: `;
+      rtMarkets.forEach(([k,v])=>{ text+=`${tMkt(k)} ரூபாய் ${Math.round(v)}. `; });
+    }
+    if(wsMarkets.length>0){
+      text+=`மொத்த விலைகள்: `;
+      wsMarkets.forEach(([k,v])=>{ text+=`${tMkt(k)} ரூபாய் ${Math.round(v)}. `; });
     }
     text+="வணக்கம்! மீண்டும் வாருங்கள்!";
     ttsLang="ta-IN";
   } else {
-    /* English TTS text */
     const dir=ch.dir==="up"?"increased":ch.dir==="down"?"decreased":"unchanged";
     text=`${d.name}. `;
     text+=`Today's retail price at ${d.primaryMarket} market is ${Math.round(cur)} rupees. `;
     text+=`${Math.abs(ch.pct).toFixed(1)} percent ${dir} from previous report. `;
     text+=`${thisYear} low ${Math.round(yearMin)}, high ${Math.round(yearMax)} rupees. `;
     if(rtMarkets.length>1){
-      rtMarkets.forEach(([k,v])=>{ text+=`${k} retail ${Math.round(v)} rupees. `; });
+      text+=`Retail prices: `;
+      rtMarkets.forEach(([k,v])=>{ text+=`${k} ${Math.round(v)} rupees. `; });
+    }
+    if(wsMarkets.length>0){
+      text+=`Wholesale prices: `;
+      wsMarkets.forEach(([k,v])=>{ text+=`${k} ${Math.round(v)} rupees. `; });
     }
     text+="Have a great day! Visit our website again!";
     ttsLang="en-US";
@@ -1397,7 +1410,6 @@ function speakPrice(d){
   window.speechSynthesis.cancel();
   const utt=new SpeechSynthesisUtterance(text);
   const voices=window.speechSynthesis.getVoices();
-  /* Find best voice for selected language */
   const voice=voices.find(v=>v.lang===ttsLang)
     ||voices.find(v=>v.lang.startsWith(ttsLang.split('-')[0]))
     ||voices.find(v=>v.lang.startsWith("en"));
