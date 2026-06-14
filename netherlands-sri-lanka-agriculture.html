@@ -327,14 +327,18 @@ const TTS_LABELS = {
 };
 
 function getTTSText(l) {
+  // First try DOM (already rendered)
   const art = document.getElementById('art');
-  if(!art) return '';
-  // Get all text content, clean up
-  let text = art.innerText || art.textContent || '';
-  // Clean up extra whitespace
-  text = text.replace(/\s+/g, ' ').trim();
-  // Limit to reasonable length
-  return text.substring(0, 5000);
+  let text = '';
+  if(art && art.innerText && art.innerText.trim().length > 50) {
+    text = art.innerText;
+  } else if(D && D[l] && D[l].body) {
+    // Fallback: strip HTML from body string
+    const tmp = document.createElement('div');
+    tmp.innerHTML = D[l].body;
+    text = tmp.innerText || tmp.textContent || '';
+  }
+  return text.replace(/\s+/g, ' ').trim().substring(0, 8000);
 }
 
 function ttsUpdateUI(state) {
