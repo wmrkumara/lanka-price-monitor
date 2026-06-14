@@ -341,25 +341,22 @@ function ttsUpdateUI(state) {
   const lb = TTS_LABELS[ttsCurrentLang] || TTS_LABELS.si;
   const playBtn = document.getElementById('ttsPlay');
   const playLabel = document.getElementById('ttsPlayLabel');
-  const stopLabel = document.getElementById('ttsStopLabel');
   const ttsLabel = document.getElementById('ttsLabel');
   const progress = document.getElementById('ttsProgress');
-  
   if(state === 'playing') {
-    if(playLabel) playLabel.textContent = lb.pause.replace(/.*?\s/,'⏸️ ').replace('⏸️ ⏸️','⏸️');
-    if(playLabel) playLabel.parentElement.querySelector('span').textContent = lb.pause;
+    if(playLabel) playLabel.textContent = lb.pause;
     if(playBtn) playBtn.style.background = '#ff9f43';
     if(ttsLabel) ttsLabel.textContent = lb.reading;
-    if(progress) progress.textContent = '●';
+    if(progress) progress.textContent = '🔴';
   } else if(state === 'paused') {
     if(playLabel) playLabel.textContent = lb.play;
     if(playBtn) playBtn.style.background = '#ffd98a';
     if(ttsLabel) ttsLabel.textContent = lb.label;
-    if(progress) progress.textContent = '⏸';
+    if(progress) progress.textContent = '⏸️';
   } else {
     if(playLabel) playLabel.textContent = lb.play;
     if(playBtn) playBtn.style.background = '#ffd98a';
-    if(ttsLabel) ttsLabel.textContent = '🔊 ' + (ttsCurrentLang==='si'?'සිංහල / English / தமிழ் — Language button click → voice changes':ttsCurrentLang==='ta'?'மொழி பொத்தானை கிளிக் செய்யுங்கள்':'Click language button to change voice');
+    if(ttsLabel) ttsLabel.textContent = lb.label;
     if(progress) progress.textContent = '';
   }
 }
@@ -410,18 +407,14 @@ function ttsStop() {
   ttsUpdateUI('stopped');
 }
 
-// Update TTS lang when article language changes
+// Update TTS when language changes
 const origL = L;
-window.L = function(l) {
+function L(l) {
   origL(l);
   ttsCurrentLang = l;
-  ttsStop(); // Stop when language changes
+  ttsStop();
   ttsUpdateUI('stopped');
-  // Update button labels
-  const lb = TTS_LABELS[l] || TTS_LABELS.si;
-  const pl = document.getElementById('ttsPlayLabel');
-  if(pl) pl.textContent = lb.play;
-};
+}
 L('si');
 </script>
 </body>
