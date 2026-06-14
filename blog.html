@@ -106,7 +106,10 @@ footer{padding:22px 0;text-align:center;border-top:1px solid var(--line-strong);
           <span>·</span>
           <span id="a1date">ජූනි 2026</span>
         </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
         <a href="netherlands-sri-lanka-agriculture.html" class="read-btn" id="a1btn">කියවන්න →</a>
+        <a href="netherlands-sri-lanka-agriculture.html" class="read-btn" style="background:var(--gold)" id="a1speak">🔊 <span id="a1speakLabel">ශ්‍රවණය</span></a>
+      </div>
       </div>
 
       <!-- Coming Soon 1 -->
@@ -160,7 +163,7 @@ const L = {
     nlH:"📰 ගොවි පුවත් — Monthly Newsletter",
     nlP:"සෑම මාසයකම 1 වෙනිදා — ශ්‍රී ලංකා කෘෂිකාර්මික price analysis, market insights, seasonal tips — නිදහස් PDF download",
     nlBtn:"🌾 සජීවී මිල බලන්න",
-    fLive:"← සජීවී මිල",fAbout:"අප ගැන",
+    fLive:"← සජීවී මිල",fAbout:"අප ගැන",a1speak:"🔊 ශ්‍රවණය",a1speakLabel:"ශ්‍රවණය",
   },
   en:{
     nLive:"← Live Prices",nInsights:"Insights",nAbout:"About Us",
@@ -194,7 +197,7 @@ const L = {
     nlH:"📰 கோவி புவத் — மாதாந்திர செய்திமடல்",
     nlP:"ஒவ்வொரு மாதமும் 1ஆம் தேதி — இலங்கை விவசாய விலை பகுப்பாய்வு, சந்தை insights, பருவகால tips — இலவச PDF",
     nlBtn:"🌾 நேரடி விலைகள் காண",
-    fLive:"← நேரடி விலைகள்",fAbout:"எங்களை பற்றி",
+    fLive:"← நேரடி விலைகள்",fAbout:"எங்களை பற்றி",a1speak:"🔊 கேளுங்கள்",a1speakLabel:"கேளுங்கள்",
   }
 };
 
@@ -209,7 +212,7 @@ function setLang(l){
   s('a1tag',d.a1tag);s('a1h',d.a1h);s('a1p',d.a1p);s('a1date',d.a1date);s('a1btn',d.a1btn);
   s('cs1',d.cs1);s('cs2',d.cs2);
   s('nlH',d.nlH);s('nlP',d.nlP);s('nlBtn',d.nlBtn);
-  s('fLive',d.fLive);s('fAbout',d.fAbout);
+  s('fLive',d.fLive);s('fAbout',d.fAbout);if(d.a1speakLabel)s('a1speakLabel',d.a1speakLabel);
   document.getElementById('a1btn').href='netherlands-sri-lanka-agriculture.html';
 }
 setLang('si');

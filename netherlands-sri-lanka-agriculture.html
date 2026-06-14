@@ -63,6 +63,14 @@ tr.hl3 td{background:#fff8e7;font-weight:700;color:var(--up)}
 .cta h3{font-family:'Newsreader','Noto Sans Sinhala',serif;font-size:21px;color:#fff;margin-bottom:8px}
 .cta p{font-size:13.5px;color:#fff;margin-bottom:16px;line-height:1.6;background:var(--gold);padding:10px 16px;border-radius:8px;font-weight:600}
 .cta a{display:inline-block;background:var(--gold);color:#fff;font-weight:700;font-size:14px;padding:11px 22px;border-radius:8px;text-decoration:none}
+.tts-bar{display:flex;align-items:center;gap:10px;background:var(--petrol);border-radius:10px;padding:10px 16px;margin:18px 0;flex-wrap:wrap}
+.tts-btn{font:inherit;font-size:13px;font-weight:700;padding:7px 16px;border-radius:8px;border:none;cursor:pointer;transition:.18s;display:flex;align-items:center;gap:6px}
+.tts-play{background:#ffd98a;color:#0e4f4a}
+.tts-play:hover{background:#f5cc70}
+.tts-stop{background:rgba(255,255,255,.15);color:#fff}
+.tts-stop:hover{background:rgba(255,255,255,.25)}
+.tts-label{font-size:12px;color:#9fd4c8;flex:1}
+.tts-progress{font-size:11px;color:#ffd98a;font-family:'JetBrains Mono',monospace}
 .src{font-size:11.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:13px;margin-top:22px;line-height:2}
 footer{padding:22px 0;text-align:center;border-top:1px solid var(--line-strong);margin-top:14px}
 .fb{font-family:'Newsreader',serif;font-size:17px;color:var(--petrol);margin-bottom:5px}
@@ -98,6 +106,13 @@ footer{padding:22px 0;text-align:center;border-top:1px solid var(--line-strong);
       <button onclick="L('ta')">தமிழ்</button>
     </div>
   </div>
+  <!-- TTS Bar -->
+  <div class="tts-bar" id="ttsBar">
+    <button class="tts-btn tts-play" id="ttsPlay" onclick="ttsToggle()">▶️ <span id="ttsPlayLabel">ලිපිය කියවන්න</span></button>
+    <button class="tts-btn tts-stop" onclick="ttsStop()">⏹️ <span id="ttsStopLabel">නවතන්න</span></button>
+    <span class="tts-label" id="ttsLabel">🔊 සිංහල / English / தமிழ் — Language button click → voice changes</span>
+    <span class="tts-progress" id="ttsProgress"></span>
+  </div>
   <div id="art"></div>
 </article>
 </div>
@@ -127,26 +142,26 @@ si:{
   th:["ශ්‍රේණිය","රට","2024 අපනයන වටිනාකම"],
   body:`<h2>ගෝලීය කෘෂිකාර්මික ක්ෂේත්‍රයේ ලොකුම විස්මය</h2>
 <p>නෙදර්ලන්තය — භූමි ප්‍රමාණය <strong>41,543 km²</strong>. ශ්‍රී ලංකාව — <strong>65,610 km²</strong>. ශ්‍රී ලංකාව නෙදර්ලන්තයට වඩා <strong>58% ලොකු</strong>.</p>
-<p>2024 දී නෙදර්ලන්තය <strong>€128.9 billion</strong> (~$133.9B) කෘෂිකාර්මික නිෂ්පාදන export කළේය — ලෝකයේ <strong>#3</strong>. ශ්‍රී ලංකාව export කළේ <strong>~$2.2–2.6 billion</strong> පමණි. මෙය strategy, technology සහ data ගේ ප්‍රශ්නයකි.</p>
+<p>2024 දී නෙදර්ලන්තය <strong>€128.9 billion</strong> (~$133.9B) කෘෂිකාර්මික නිෂ්පාදන export කළේය — ලෝකයේ <strong>#3</strong>. ශ්‍රී ලංකාව export කළේ <strong>~$2.2–2.6 billion</strong> පමණි. මෙය strategy, technology සහ දත්ත භාවිතයේ ප්‍රශ්නයකි.</p>
 <h2>ලෝකයේ ඉහළම කෘෂිකාර්මික අපනයන රටවල් — 2024</h2>
 <h2>නෙදර්ලන්තයේ සාර්ථකත්වයේ රහස් 5ක්</h2>
-<div class="lb"><div class="ln">01</div><h3>🏗️ High-Tech Greenhouses</h3><p>Acres 24,000 ක් glass greenhouses (කාච ගෘහ). Dutch tomato yields — ගෝලීය සාමාන්‍යයේ <strong>12 ගුණයකි</strong>. ජල භාවිතය <strong>90% අඩු</strong>. Pesticide — ඉවත් කර ඇත.</p></div>
-<div class="lb"><div class="ln">02</div><h3>🔬 Wageningen University — Research First</h3><p><strong>Triple Helix</strong> — රජය + ගොවීන් + විශ්ව විද්‍යාල. Research — lab සිට ගොවිතැනට <strong>මාස ඇතුළත</strong>.</p></div>
-<div class="lb"><div class="ln">03</div><h3>📱 Precision Agriculture — Data</h3><p>IoT sensors, AI, drones, satellites. Fertilizer — exact quantity, exact time, exact place. <strong>TopGoviya.lk</strong> ශ්‍රී ලංකා ගොවීන් සඳහා ඒ foundation ගොඩනඟමින්.</p></div>
-<div class="lb"><div class="ln">04</div><h3>🚢 Rotterdam Port — ශ්‍රේෂ්ඨ Logistics</h3><p>ශීතකරණ logistics — refrigerated storage, ඉක්මන් customs. Dutch නිෂ්පාදන <strong>පැය 24</strong> ඇතුළත යුරෝපා supermarkets.</p></div>
+<div class="lb"><div class="ln">01</div><h3>🏗️ High-Tech Greenhouses</h3><p>Acres 24,000 ක් glass greenhouses (කාච ගෘහ). Dutch තක්කාලි අස්වැන්න — ගෝලීය සාමාන්‍යයේ <strong>12 ගුණයකි</strong>. ජල භාවිතය <strong>90% අඩු</strong>. Pesticide — ශූන්‍යයට ළඟ.</p></div>
+<div class="lb"><div class="ln">02</div><h3>🔬 Wageningen University — Research First</h3><p><strong>Triple Helix</strong> — රජය + ගොවීන් + විශ්ව විද්‍යාල. Research ප්‍රතිඵල — lab සිට ගොවිතැනට <strong>මාස ඇතුළත</strong>.</p></div>
+<div class="lb"><div class="ln">03</div><h3>📱 Precision Agriculture — Data</h3><p>IoT sensors, AI, drones, satellites. පොහොර — නිවැරදි ප්‍රමාණය, නිවැරදි වේලාව, නිවැරදි ස්ථානය. <strong>TopGoviya.lk</strong> ශ්‍රී ලංකා ගොවීන් සඳහා ඒ දත්ත පදනම ගොඩනඟමින්.</p></div>
+<div class="lb"><div class="ln">04</div><h3>🚢 Rotterdam Port — ශ්‍රේෂ්ඨ Logistics</h3><p>ශීතකරණ logistics — refrigerated storage, ඉක්මන් customs clearance. Dutch නිෂ්පාදන <strong>පැය 24</strong> ඇතුළත යුරෝපා supermarkets.</p></div>
 <div class="lb"><div class="ln">05</div><h3>🤝 Farmer Co-operatives — සාමූහිකව</h3><p>FrieslandCampina, The Greenery — ගොවීන් විසින් owned. ගෝලීය buyers, shared ශීතකරණ ගබඩා, bulk shipping. ශ්‍රී ලංකා ගොවි සමිති ද ඒ ආකාරයට ක්‍රියා කළ හැකිය.</p></div>
 <h2>ශ්‍රී ලංකාව සඳහා Action Plan</h2>
-<h3>⚡ Short Term — 1–2 Years</h3>
-<p><strong>1.</strong> TopGoviya.lk expand — export price data, international buyers. <strong>2.</strong> Cold-chain — දඹුල්ල, නුවරඑළිය, හම්බන්තොට, යාපනය. <strong>3.</strong> ගොවි සමිති — එකතුව export contracts negotiate.</p>
-<h3>🌱 Medium Term — 3–5 Years</h3>
+<h3>⚡ කෙටි කාලය — වසර 1–2</h3>
+<p><strong>1.</strong> TopGoviya.lk expand — අපනයන මිල දත්ත, ගෝලීය buyers. <strong>2.</strong> ශීතකරණ ජාලය — දඹුල්ල, නුවරඑළිය, හම්බන්තොට, යාපනය. <strong>3.</strong> ගොවි සමිති — එකතුව export contracts negotiate කිරීම.</p>
+<h3>🌱 මධ්‍යම කාලය — වසර 3–5</h3>
 <p><strong>4.</strong> Glass house නිදර්ශන — නුවරඑළිය, බදුල්ල — ස්ට්‍රෝබෙරි, ඖෂධ පැළෑටි. <strong>5.</strong> පේරාදෙණිය කෘෂිකර්ම පීඨය → ගොවීන් වෙත කෙලින් සම්බන්ධ. <strong>6.</strong> අගය-එකතු කිරීම — පොල් තෙල් 3×, virgin coconut oil 10×.</p>
-<h3>🚀 Long Term — 5–10 Years</h3>
-<p><strong>7.</strong> අපනයන විවිධාංගීකරණය — organic එළවළු, ඖෂධ පැළෑටි, මාළු නිෂ්පාදන. <strong>8.</strong> ශ්‍රී ලංකාවට අදාළ කෘෂි-technology develop කොට export.</p>
+<h3>🚀 දිගු කාලය — වසර 5–10</h3>
+<p><strong>7.</strong> අපනයන විවිධාංගීකරණය — ජෛව (organic) එළවළු, ඖෂධ පැළෑටි, මුහුදු නිෂ්පාදන. <strong>8.</strong> ශ්‍රී ලංකාවට ගැළපෙන කෘෂි-technology develop කොට ලෝකයට export.</p>
 <h2>Data ගේ භූමිකාව — TopGoviya.lk</h2>
-<p>ගම්පොළේ ගොවියෙකුට TopGoviya.lk open කළ විට <strong>තත්පර 30</strong> ඇතුළත දැනගත හැකිය — දඹුල්ල හෝ පිටකොටු prices ඉහළ යන තෙක් wait කළ යුතුද?</p>
-<div class="hl"><p>✅ දෛනික මිල — දඹුල්ල, පිටකොටුව, නාරාහේන්පිට, මීගමුව<br>✅ වසර 4 ක් ඉතිහාසය · ✅ ගොවි ලාභ ගණකය · ✅ Market gap analysis<br>✅ AI insights · ✅ Voice search — සිංහල/தமிழ் · ✅ 100% නිදහස්</p></div>
+<p>ගම්පොළේ ගොවියෙකුට TopGoviya.lk open කළ විට <strong>තත්පර 30</strong> ඇතුළත දැනගත හැකිය — දඹුල්ල හෝ පිටකොටු prices ඉහළ යන තෙක් රැඳී සිටිය යුතුද?</p>
+<div class="hl"><p>✅ දෛනික මිල — දඹුල්ල, පිටකොටුව, නාරාහේන්පිට, මීගමුව<br>✅ වසර 4 ක් ඉතිහාසය · ✅ ගොවි ලාභ ගණකය · ✅ Market gap analysis<br>✅ AI insights · ✅ හඬ සෙවුම (Voice search) — සිංහල/தமிழ் · ✅ 100% නිදහස්</p></div>
 <h2>අවසාන සිතුවිල්ල — "පෙරදිග ධාන්‍යාගාරය"</h2>
-<p>රජ පරාක්‍රමබාහු — "රටේ වැසිදිය කිසිවක් නාස්ති නොවන ලෙස" — ශතවර්ෂ ගණනාවකට ඉදිරියේ precision agriculture. ශ්‍රී ලංකාව Netherlands export ගේ 10% ළඟා කළ හොත් — <strong>$13 billion</strong> — 5 ගුණ increase. ඒ වෙනස ආරම්භ වෙන්නේ data සමඟ — ගොවිතැනේ දත්ත සමඟ.</p>`,
+<p>රජ පරාක්‍රමබාහු — "රටේ වැසිදිය කිසිවක් නාස්ති නොවන ලෙස" — ශතවර්ෂ ගණනාවකට ඉදිරියේ precision agriculture. ශ්‍රී ලංකාව Netherlands export ගේ 10% ළඟා කළ හොත් — <strong>$13 billion</strong> — 5 ගුණ increase. ඒ වෙනස ආරම්භ වෙන්නේ දත්ත සමඟ — ගොවිතැනේ දෛනික දත්ත සමඟ.</p>`,
   stat2:"ශ්‍රී ලංකාව Netherlands export ගේ 10% ළඟා කළ හොත් —<br>දැනෙ ~$2.2–2.6B සිට 5 ගුණ increase.<br><small>(CBS Netherlands, EDB Sri Lanka)</small>",
   ctaH:"📊 අද කෘෂිකාර්මික මිල Check කරන්න",
   ctaP:"TopGoviya.lk — නිදහස් දෛනික වෙළඳපොළ මිල · ගොවි ලාභ ගණකය · AI insights",
@@ -296,6 +311,117 @@ function L(l){
   document.getElementById('art').innerHTML = body + stat2 + cta + SRC;
 }
 
+L('si');
+
+/* ===== Text to Speech ===== */
+let ttsUtterance = null;
+let ttsPlaying = false;
+let ttsPaused = false;
+let ttsCurrentLang = 'si';
+
+const TTS_LANG = {si:'si-LK', en:'en-US', ta:'ta-IN'};
+const TTS_LABELS = {
+  si:{play:'▶️ ලිපිය කියවන්න', pause:'⏸️ විරාම කරන්න', stop:'⏹️ නවතන්න', reading:'📖 කියවමින්...', label:'🔊 සිංහල හඬින් ලිපිය කියවනවා'},
+  en:{play:'▶️ Read Article', pause:'⏸️ Pause', stop:'⏹️ Stop', reading:'📖 Reading...', label:'🔊 Reading article in English'},
+  ta:{play:'▶️ கட்டுரை படிக்க', pause:'⏸️ நிறுத்து', stop:'⏹️ நிறுத்து', reading:'📖 படிக்கிறது...', label:'🔊 தமிழ் குரலில் படிக்கிறது'},
+};
+
+function getTTSText(l) {
+  const art = document.getElementById('art');
+  if(!art) return '';
+  // Get all text content, clean up
+  let text = art.innerText || art.textContent || '';
+  // Clean up extra whitespace
+  text = text.replace(/\s+/g, ' ').trim();
+  // Limit to reasonable length
+  return text.substring(0, 5000);
+}
+
+function ttsUpdateUI(state) {
+  const lb = TTS_LABELS[ttsCurrentLang] || TTS_LABELS.si;
+  const playBtn = document.getElementById('ttsPlay');
+  const playLabel = document.getElementById('ttsPlayLabel');
+  const stopLabel = document.getElementById('ttsStopLabel');
+  const ttsLabel = document.getElementById('ttsLabel');
+  const progress = document.getElementById('ttsProgress');
+  
+  if(state === 'playing') {
+    if(playLabel) playLabel.textContent = lb.pause.replace(/.*?\s/,'⏸️ ').replace('⏸️ ⏸️','⏸️');
+    if(playLabel) playLabel.parentElement.querySelector('span').textContent = lb.pause;
+    if(playBtn) playBtn.style.background = '#ff9f43';
+    if(ttsLabel) ttsLabel.textContent = lb.reading;
+    if(progress) progress.textContent = '●';
+  } else if(state === 'paused') {
+    if(playLabel) playLabel.textContent = lb.play;
+    if(playBtn) playBtn.style.background = '#ffd98a';
+    if(ttsLabel) ttsLabel.textContent = lb.label;
+    if(progress) progress.textContent = '⏸';
+  } else {
+    if(playLabel) playLabel.textContent = lb.play;
+    if(playBtn) playBtn.style.background = '#ffd98a';
+    if(ttsLabel) ttsLabel.textContent = '🔊 ' + (ttsCurrentLang==='si'?'සිංහල / English / தமிழ் — Language button click → voice changes':ttsCurrentLang==='ta'?'மொழி பொத்தானை கிளிக் செய்யுங்கள்':'Click language button to change voice');
+    if(progress) progress.textContent = '';
+  }
+}
+
+function ttsToggle() {
+  if(!window.speechSynthesis) {
+    alert(ttsCurrentLang==='si'?'ඔබගේ browser TTS support කරන්නේ නැහැ':'TTS not supported in your browser');
+    return;
+  }
+  
+  if(ttsPlaying && !ttsPaused) {
+    // Pause
+    window.speechSynthesis.pause();
+    ttsPaused = true;
+    ttsPlaying = false;
+    ttsUpdateUI('paused');
+  } else if(ttsPaused) {
+    // Resume
+    window.speechSynthesis.resume();
+    ttsPaused = false;
+    ttsPlaying = true;
+    ttsUpdateUI('playing');
+  } else {
+    // Start new
+    ttsStop();
+    const text = getTTSText(ttsCurrentLang);
+    if(!text) return;
+    
+    ttsUtterance = new SpeechSynthesisUtterance(text);
+    ttsUtterance.lang = TTS_LANG[ttsCurrentLang] || 'si-LK';
+    ttsUtterance.rate = 0.9;
+    ttsUtterance.pitch = 1;
+    ttsUtterance.volume = 1;
+    
+    ttsUtterance.onstart = () => { ttsPlaying=true; ttsPaused=false; ttsUpdateUI('playing'); };
+    ttsUtterance.onend = () => { ttsPlaying=false; ttsPaused=false; ttsUpdateUI('stopped'); };
+    ttsUtterance.onerror = () => { ttsPlaying=false; ttsPaused=false; ttsUpdateUI('stopped'); };
+    
+    window.speechSynthesis.speak(ttsUtterance);
+    ttsUpdateUI('playing');
+  }
+}
+
+function ttsStop() {
+  if(window.speechSynthesis) window.speechSynthesis.cancel();
+  ttsPlaying = false;
+  ttsPaused = false;
+  ttsUpdateUI('stopped');
+}
+
+// Update TTS lang when article language changes
+const origL = L;
+window.L = function(l) {
+  origL(l);
+  ttsCurrentLang = l;
+  ttsStop(); // Stop when language changes
+  ttsUpdateUI('stopped');
+  // Update button labels
+  const lb = TTS_LABELS[l] || TTS_LABELS.si;
+  const pl = document.getElementById('ttsPlayLabel');
+  if(pl) pl.textContent = lb.play;
+};
 L('si');
 </script>
 </body>
