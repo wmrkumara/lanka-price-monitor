@@ -61,7 +61,7 @@ tr.hl2 td{background:#e8f4f1;font-weight:700;color:var(--petrol)}
 tr.hl3 td{background:#fff8e7;font-weight:700;color:var(--up)}
 .cta{background:var(--petrol);border-radius:14px;padding:26px 30px;margin:28px 0;text-align:center}
 .cta h3{font-family:'Newsreader','Noto Sans Sinhala',serif;font-size:21px;color:#fff;margin-bottom:8px}
-.cta p{font-size:13.5px;color:#9fd4c8;margin-bottom:16px;line-height:1.6}
+.cta p{font-size:13.5px;color:#fff;margin-bottom:16px;line-height:1.6;background:var(--gold);padding:10px 16px;border-radius:8px;font-weight:600}
 .cta a{display:inline-block;background:var(--gold);color:#fff;font-weight:700;font-size:14px;padding:11px 22px;border-radius:8px;text-decoration:none}
 .src{font-size:11.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:13px;margin-top:22px;line-height:2}
 footer{padding:22px 0;text-align:center;border-top:1px solid var(--line-strong);margin-top:14px}
@@ -261,13 +261,13 @@ function L(l){
   s('nLive',d.nLive);s('nAbout',d.nAbout);s('ctag',d.ctag);s('h1',d.h1);s('dlbl',d.dlbl);s('fLive',d.fLive);s('fAbout',d.fAbout);
 
   const compare=`<div class="compare">
-    <div class="cc nl"><div class="flag">🇳🇱</div><div class="cn">${d.nl}</div>
+    <div class="cc nl"><div class="flag">🇳🇱</div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--petrol);letter-spacing:.1em;margin-bottom:4px">NLD</div><div class="cn">${d.nl}</div>
       <div class="sl2">${d.land}</div><div class="sv">41,543 km²</div>
       <div style="font-size:11px;color:var(--petrol);font-style:italic;margin-bottom:8px;line-height:1.4">${d.nlsize}</div>
       <div class="sl2">${d.exp}</div><div class="sv" style="color:var(--down)">€128.9 Billion</div>
       <div class="sl2" style="margin-top:9px">${d.rank}</div><div class="sv">${d.rankv}</div>
     </div>
-    <div class="cc sl"><div class="flag">🇱🇰</div><div class="cn">${d.sl}</div>
+    <div class="cc sl"><div class="flag">🇱🇰</div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.1em;margin-bottom:4px">LKA</div><div class="cn">${d.sl}</div>
       <div class="sl2">${d.land}</div><div class="sv">65,610 km²</div>
       <div style="font-size:11px;color:var(--gold);font-style:italic;margin-bottom:8px;line-height:1.4">${d.slsize}</div>
       <div class="sl2">${d.exp}</div><div class="sv" style="color:var(--up)">~$2.2–2.6B</div>
