@@ -42,7 +42,7 @@ h1 em{font-style:italic;color:var(--petrol)}
 .cc{border-radius:12px;padding:18px;text-align:center}
 .cc.nl{background:linear-gradient(135deg,#e8f4f1,#d4edea)}
 .cc.sl{background:linear-gradient(135deg,#fff8e7,#ffedb8)}
-.cc .flag{font-size:38px;margin-bottom:6px}
+.cc .flag{font-size:52px;margin-bottom:8px;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,.15))}
 .cc .cn{font-weight:700;font-size:14px;color:var(--petrol);margin-bottom:12px}
 .cc .sv{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;color:var(--ink);margin:3px 0}
 .cc .sl2{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
@@ -61,7 +61,7 @@ tr.hl2 td{background:#e8f4f1;font-weight:700;color:var(--petrol)}
 tr.hl3 td{background:#fff8e7;font-weight:700;color:var(--up)}
 .cta{background:var(--petrol);border-radius:14px;padding:26px 30px;margin:28px 0;text-align:center}
 .cta h3{font-family:'Newsreader','Noto Sans Sinhala',serif;font-size:21px;color:#fff;margin-bottom:8px}
-.cta p{font-size:13.5px;color:#9fd4c8;margin-bottom:16px}
+.cta p{font-size:13.5px;color:#9fd4c8;margin-bottom:16px;line-height:1.6}
 .cta a{display:inline-block;background:var(--gold);color:#fff;font-weight:700;font-size:14px;padding:11px 22px;border-radius:8px;text-decoration:none}
 .src{font-size:11.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:13px;margin-top:22px;line-height:2}
 footer{padding:22px 0;text-align:center;border-top:1px solid var(--line-strong);margin-top:14px}
@@ -119,8 +119,8 @@ si:{
   h1:"නෙදර්ලන්තය කළේ කුමක්ද?<br><em>ශ්‍රී ලංකාවේ කෘෂිකාර්මික අපනයනය 50 ගුණයකින් වැඩිකරගත හැකිද?</em>",
   dlbl:"ජූනි 2026",fLive:"← සජීවී මිල",fAbout:"අප ගැන",
   nl:"නෙදර්ලන්තය",sl:"ශ්‍රී ලංකාව",land:"භූමි ප්‍රමාණය",exp:"2024 කෘෂි අපනයනය",rank:"ලෝක ශ්‍රේණිය",rankv:"#3 ගෝලීයව",pot:"ළඟා නොකළ විභවය",potv:"🔥 විශාලයි",
-  nlsize:"≈ Sri Lanka භූමියේ 63% · Maryland (USA) ට සමාන",
-  slsize:"≈ Netherlands ට වඩා 58% ලොකු · ඉන්දියාවේ Kerala ට සමාන",
+  nlsize:"≈ Maryland (USA) ට සමාන · ශ්‍රී ලංකාවේ 63%",
+  slsize:"≈ Kerala (India) ට සමාන · Netherlands ට 58% ලොකු",
   stat1:"නෙදර්ලන්තය ශ්‍රී ලංකාවට වඩා 58% කුඩා —<br>නමුත් කෘෂිකාර්මික අපනයනය ~50 ගුණයකට ආසන්නයි.<br><small>(CBS Netherlands, EDB/CBSL)</small>",
   warn:"<strong>⚠️ වැදගත්:</strong> නෙදර්ලන්තයේ export ගෙන් 2/3 ස්වදේශීය. 1/3 re-export. (WUR)",
   hl:"<strong>ප්‍රධාන observation:</strong> නෙදර්ලන්තය — ශ්‍රී ලංකාවට වඩා කුඩා — නමුත් ලෝකයේ #3. භූමිය නිසා නොවේ — technology, systems, strategy නිסාය.",
@@ -149,7 +149,7 @@ si:{
 <p>රජ පරාක්‍රමබාහු — "රටේ වැසිදිය කිසිවක් නාස්ති නොවන ලෙස" — ශතවර්ෂ ගණනාවකට ඉදිරියේ precision agriculture. ශ්‍රී ලංකාව Netherlands export ගේ 10% ළඟා කළ හොත් — <strong>$13 billion</strong> — 5 ගුණ increase. ඒ වෙනස ආරම්භ වෙන්නේ data සමඟ — ගොවිතැනේ දත්ත සමඟ.</p>`,
   stat2:"ශ්‍රී ලංකාව Netherlands export ගේ 10% ළඟා කළ හොත් —<br>දැනෙ ~$2.2–2.6B සිට 5 ගුණ increase.<br><small>(CBS Netherlands, EDB Sri Lanka)</small>",
   ctaH:"📊 අද කෘෂිකාර්මික මිල Check කරන්න",
-  ctaP:"TopGoviya.lk — නිදහස් දෛනික වෙළඳපොළ මිල, ගොවි ලාභ ගණකය, AI insights",
+  ctaP:"TopGoviya.lk — නිදහස් දෛනික වෙළඳපොළ මිල · ගොවි ලාභ ගණකය · AI insights",
   ctaB:"🌾 TopGoviya.lk යන්න",
 },
 en:{
@@ -157,8 +157,8 @@ en:{
   h1:"What Did the Netherlands Do?<br><em>Can Sri Lanka Increase Agricultural Exports 50×?</em>",
   dlbl:"June 2026",fLive:"← Live Prices",fAbout:"About Us",
   nl:"Netherlands",sl:"Sri Lanka",land:"Land Area",exp:"2024 Agri Exports",rank:"World Rank",rankv:"#3 Globally",pot:"Untapped Potential",potv:"🔥 Massive",
-  nlsize:"≈ 63% of Sri Lanka · Similar size to Maryland, USA",
-  slsize:"≈ 58% larger than Netherlands · Similar to Kerala, India",
+  nlsize:"≈ Size of Maryland, USA · 63% of Sri Lanka",
+  slsize:"≈ Size of Kerala, India · 58% larger than Netherlands",
   stat1:"The Netherlands exports ~50× more agricultural products than Sri Lanka —<br>despite being 58% smaller in land area.<br><small>(Source: CBS Netherlands, EDB/CBSL Sri Lanka)</small>",
   warn:"<strong>⚠️ Note:</strong> Dutch agri exports include ~2/3 domestic production and ~1/3 re-exports of foreign goods. (Source: WUR)",
   hl:"<strong>Key insight:</strong> Netherlands — smaller than Sri Lanka — ranks #3 globally. This is not about land. It is about technology, systems, and strategy.",
@@ -195,8 +195,8 @@ ta:{
   h1:"நெதர்லாந்து என்ன செய்தது?<br><em>இலங்கையின் விவசாய ஏற்றுமதியை 50 மடங்கு அதிகரிக்க முடியுமா?</em>",
   dlbl:"ஜூன் 2026",fLive:"← நேரடி விலைகள்",fAbout:"எங்களை பற்றி",
   nl:"நெதர்லாந்து",sl:"இலங்கை",land:"நிலப்பரப்பு",exp:"2024 விவசாய ஏற்றுமதி",rank:"உலக தரவரிசை",rankv:"#3 உலகளவில்",pot:"பயன்படுத்தப்படாத திறன்",potv:"🔥 மிகப் பெரியது",
-  nlsize:"≈ இலங்கையின் 63% · Maryland (USA) அளவு",
-  slsize:"≈ நெதர்லாந்தை விட 58% பெரியது · கேரளா அளவு",
+  nlsize:"≈ Maryland (USA) அளவு · இலங்கையின் 63%",
+  slsize:"≈ கேரளா (India) அளவு · நெதர்லாந்தை விட 58% பெரியது",
   stat1:"நெதர்லாந்து இலங்கையை விட 58% சிறியது —<br>ஆனால் விவசாய ஏற்றுமதி ~50 மடங்கு அதிகம்.<br><small>(CBS Netherlands, EDB/CBSL Sri Lanka)</small>",
   warn:"<strong>⚠️ குறிப்பு:</strong> நெதர்லாந்தின் ஏற்றுமதியில் ~2/3 உள்நாட்டு உற்பத்தி, ~1/3 மறு-ஏற்றுமதி. (Source: WUR)",
   hl:"<strong>முக்கிய தகவல்:</strong> நெதர்லாந்து — இலங்கையை விட சிறியது — ஆனால் உலகில் #3. நிலம் காரணமில்லை — தொழில்நுட்பம், அமைப்புகள், திட்டம்.",
@@ -263,13 +263,13 @@ function L(l){
   const compare=`<div class="compare">
     <div class="cc nl"><div class="flag">🇳🇱</div><div class="cn">${d.nl}</div>
       <div class="sl2">${d.land}</div><div class="sv">41,543 km²</div>
-      <div style="font-size:11px;color:var(--muted);margin-bottom:8px">${d.nlsize}</div>
+      <div style="font-size:11px;color:var(--petrol);font-style:italic;margin-bottom:8px;line-height:1.4">${d.nlsize}</div>
       <div class="sl2">${d.exp}</div><div class="sv" style="color:var(--down)">€128.9 Billion</div>
       <div class="sl2" style="margin-top:9px">${d.rank}</div><div class="sv">${d.rankv}</div>
     </div>
     <div class="cc sl"><div class="flag">🇱🇰</div><div class="cn">${d.sl}</div>
       <div class="sl2">${d.land}</div><div class="sv">65,610 km²</div>
-      <div style="font-size:11px;color:var(--muted);margin-bottom:8px">${d.slsize}</div>
+      <div style="font-size:11px;color:var(--gold);font-style:italic;margin-bottom:8px;line-height:1.4">${d.slsize}</div>
       <div class="sl2">${d.exp}</div><div class="sv" style="color:var(--up)">~$2.2–2.6B</div>
       <div class="sl2" style="margin-top:9px">${d.pot}</div><div class="sv">${d.potv}</div>
     </div>
