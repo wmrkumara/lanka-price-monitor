@@ -101,9 +101,9 @@ footer{padding:22px 0;text-align:center;border-top:1px solid var(--line-strong);
       <span>📊 CBS · FAO · WUR · USDA · EDB</span>
     </div>
     <div class="lang-bar">
-      <button class="on" onclick="L('si')">සිංහල</button>
-      <button onclick="L('en')">English</button>
-      <button onclick="L('ta')">தமிழ்</button>
+      <button class="on" onclick="L('si');setTTSLang('si')">සිංහල</button>
+      <button onclick="L('en');setTTSLang('en')">English</button>
+      <button onclick="L('ta');setTTSLang('ta')">தமிழ்</button>
     </div>
   </div>
   <!-- TTS Bar -->
@@ -407,14 +407,8 @@ function ttsStop() {
   ttsUpdateUI('stopped');
 }
 
-// Update TTS when language changes
-const origL = L;
-function L(l) {
-  origL(l);
-  ttsCurrentLang = l;
-  ttsStop();
-  ttsUpdateUI('stopped');
-}
+// TTS language sync — called from lang buttons
+function setTTSLang(l){ ttsCurrentLang=l; ttsStop(); ttsUpdateUI('stopped'); }
 L('si');
 </script>
 </body>
