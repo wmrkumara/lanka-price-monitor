@@ -584,7 +584,21 @@ const NAMES={
  "Banana (Sour)":{si:"කෙසෙල් (ඇඹුල්)",ta:"வாழைப்பழம் (புளிப்பு)"},"Papaw":{si:"පැපොල්",ta:"பப்பாளி"},"Pineapple":{si:"අන්නාසි",ta:"அன்னாசி"},
  "Samba":{si:"සම්බා",ta:"சம்பா"},"Nadu":{si:"නාඩු",ta:"நாடு"},"Kekulu (White)":{si:"කැකුළු (සුදු)",ta:"கெகுளு (வெள்ளை)"},"Kekulu (Red)":{si:"කැකුළු (රතු)",ta:"கெகுளு (சிவப்பு)"},"Ponni Samba (Imp)":{si:"පොන්නි සම්බා (ආනයනික)",ta:"பொன்னி சம்பா (இறக்குமதி)"},
  "Kelawalla":{si:"කෙළවල්ලා",ta:"கெளவல்லா"},"Thalapath":{si:"තලපත්",ta:"தலபத்"},"Paraw":{si:"පරාවා",ta:"பராவ்"},"Salaya":{si:"සාලයා",ta:"சாளை"},"Hurulla":{si:"හුරුල්ලා",ta:"ஹுருல்லா"},"Linna":{si:"ලින්නා",ta:"லின்னா"},
- "Beetroot":{si:"බීට්රූට්",ta:"பீட்ரூட்"},"Leeks":{si:"ලීක්ස්",ta:"லீக்ஸ்"},"Knol-khol":{si:"නෝල්කෝල්",ta:"நோல்கோல்"},"Drumstick":{si:"මුරුංගා",ta:"முருங்கை"},"Manioc":{si:"මඤ්ඤොක්කා",ta:"மரவள்ளி"},"Ash Plantain":{si:"අල කෙසෙල්",ta:"வாழைக்காய்"},"Keeri Samba":{si:"කීරි සම්බා",ta:"கீரி சம்பா"}
+ "Beetroot":{si:"බීට්රූට්",ta:"பீட்ரூட்"},"Leeks":{si:"ලීක්ස්",ta:"லீக்ஸ்"},"Knol-khol":{si:"නෝල්කෝල්",ta:"நோல்கோல்"},"Drumstick":{si:"මුරුංගා",ta:"முருங்கை"},"Manioc":{si:"මඤ්ඤොක්කා",ta:"மரவள்ளி"},"Ash Plantain":{si:"අල කෙසෙල්",ta:"வாழைக்காய்"},"Keeri Samba":{si:"කීරි සම්බා",ta:"கீரி சம்பா"},
+ "Apple (Imp)":{si:"ඇපල් (ආනයනික)",ta:"ஆப்பிள் (இறக்குமதி)"},
+ "Balaya":{si:"බලයා",ta:"பாலாயா"},
+ "Big Onion (Local)":{si:"ලොකු ළූණු (දේශීය)",ta:"பெரிய வெங்காயம் (உள்ளூர்)"},
+ "Coconut oil":{si:"පොල් තෙල්",ta:"தேங்காய் எண்ணெய்"},
+ "Coconut Oil":{si:"පොල් තෙල්",ta:"தேங்காய் எண்ணெய்"},
+ "Egg (White)":{si:"බිත්තර (සුදු)",ta:"முட்டை (வெள்ளை)"},
+ "Katta":{si:"කට්ටා",ta:"கட்டா"},
+ "Katta (Imp)":{si:"කට්ටා (ආනයනික)",ta:"கட்டா (இறக்குமதி)"},
+ "Kekulu (White) (Imp)":{si:"කැකුළු (සුදු) (ආනයනික)",ta:"கெகுளு (வெள்ளை) (இறக்குமதி)"},
+ "Nadu (Imp)":{si:"නාඩු (ආනයනික)",ta:"நாடு (இறக்குமதி)"},
+ "Orange (Imp)":{si:"දොඩම් (ආනයනික)",ta:"ஆரஞ்சு (இறக்குமதி)"},
+ "Red Dhal":{si:"රතු පරිප්පු",ta:"சிவப்பு பருப்பு"},
+ "Sprat (Imp)":{si:"හාල් මැස්සෝ (ආනයනික)",ta:"மத்தி (இறக்குமதி)"},
+ "Sugar (White)":{si:"සීනි (සුදු)",ta:"சர்க்கரை (வெள்ளை)"}
 };
 const EMOJIS={
   "Beans":"🫘","Carrot":"🥕","Cabbage":"🥬","Tomato":"🍅","Brinjal":"🍆",
@@ -1052,7 +1066,7 @@ async function fetchWeather(){
       const wxTmr=WX_CODE[d.daily.weathercode[1]]||"🌤️";
       const rainAlert=rain>10?'<span style="color:#b23a2e;font-size:9px;font-weight:700"> ⚠️ Rain!</span>':'';
       return `<div style="display:flex;flex-direction:column;gap:1px;padding:4px 10px;background:var(--paper);border-radius:8px;border:1px solid var(--line)">
-        <div style="font-size:10px;font-weight:700;color:var(--petrol)">${loc.emoji} ${loc.name}</div>
+        <div style="font-size:10px;font-weight:700;color:var(--petrol)">${loc.emoji} ${tMkt(loc.name)}</div>
         <div style="font-size:13px;font-weight:700;color:var(--ink)">${wx} ${tmax}°C${rainAlert}</div>
         <div style="font-size:9px;color:var(--muted)">Tomorrow: ${wxTmr} · Low: ${tmin}°</div>
       </div>`;
@@ -1114,8 +1128,8 @@ function aiInsight(d){
   /* 2. Position in range */
   const allMin=Math.min(...vals),allMax=Math.max(...vals),rng=allMax-allMin||1;
   const pos=(cur-allMin)/rng;
-  if(pos>=0.85)rows.push({cls:"warn",icon:"🔴",text:`වර්තමාන මිල ඉතිහාසයේ ඉහළ පරාසයට ආසන්නයි (${fmt(allMin)}–${fmt(allMax)})`});
-  else if(pos<=0.15)rows.push({cls:"good",icon:"🟢",text:`වර්තමාන මිල ඉතිහාසයේ පහළ පරාසයට ආසන්නයි (${fmt(allMin)}–${fmt(allMax)})`});
+  if(pos>=0.85)rows.push({cls:"warn",icon:"🔴",text:lang==="si"?`වර්තමාන මිල ඉතිහාසයේ ඉහළ පරාසයට ආසන්නයි (${fmt(allMin)}–${fmt(allMax)})`:lang==="ta"?`தற்போதைய விலை வரலாற்று உச்ச வரம்பில் உள்ளது (${fmt(allMin)}–${fmt(allMax)})`:`Current price near historical HIGH range (${fmt(allMin)}–${fmt(allMax)})`});
+  else if(pos<=0.15)rows.push({cls:"good",icon:"🟢",text:lang==="si"?`වර්තමාන මිල ඉතිහාසයේ පහළ පරාසයට ආසන්නයි (${fmt(allMin)}–${fmt(allMax)})`:lang==="ta"?`தற்போதைய விலை வரலாற்று குறைந்த வரம்பில் உள்ளது (${fmt(allMin)}–${fmt(allMax)})`:`Current price near historical LOW range (${fmt(allMin)}–${fmt(allMax)})`});
   else rows.push({cls:"",icon:"📈",text:lang==="si"?`මිල සාමාන්‍ය පරාසයේ — ${fmt(allMin)} සිට ${fmt(allMax)} දක්වා`:lang==="ta"?`விலை சாதாரண வரம்பில் — ${fmt(allMin)} முதல் ${fmt(allMax)} வரை`:`Price in normal range — ${fmt(allMin)} to ${fmt(allMax)}`});
 
   /* 3. 3M trend */
@@ -1190,7 +1204,7 @@ function openDetail(id){
   curDetail=d; curMode="retail";
   const hasWholesale=d.wholesaleSeries&&d.wholesaleSeries.some&&d.wholesaleSeries.some(v=>v!=null);
   const toggleBar=hasWholesale
-    ?'<div class="price-toggle"><button id="btnRetail" class="on" onclick="switchMode(\'retail\')">'+t("btnRetail")+'</button><button id="btnWholesale" onclick="switchMode(\'wholesale\')">'+t("btnWholesale")+'</button><button id="btnGap" class="gap-btn" onclick="switchMode(\'gap\')">'+t("btnGap")+'</button><button id="btnCalc" class="calc-btn" onclick="switchMode(\'calc\')">'+t("btnCalc")+'</button></div><div style="font-size:11px;color:var(--gold);margin:-6px 0 8px;text-align:right">🌾 ගොවි ලාභය &nbsp;|&nbsp; 💰 වෙළෙන්ද ලාභය — ගණනය කරන්න</div>'
+    ?'<div class="price-toggle"><button id="btnRetail" class="on" onclick="switchMode(\'retail\')">'+t("btnRetail")+'</button><button id="btnWholesale" onclick="switchMode(\'wholesale\')">'+t("btnWholesale")+'</button><button id="btnGap" class="gap-btn" onclick="switchMode(\'gap\')">'+t("btnGap")+'</button><button id="btnCalc" class="calc-btn" onclick="switchMode(\'calc\')">'+t("btnCalc")+'</button></div><div style="font-size:11px;color:var(--gold);margin:-6px 0 8px;text-align:right">'+(lang==="si"?"🌾 ගොවි ලාභය &nbsp;|&nbsp; 💰 වෙළෙන්ද ලාභය — ගණනය කරන්න":lang==="ta"?"🌾 விவசாயி லாபம் &nbsp;|&nbsp; 💰 வியாபாரி லாபம் — கணக்கிடுங்கள்":"🌾 Farmer profit &nbsp;|&nbsp; 💰 Trader profit — Calculate")+'</div>'
     :'';
   const rangeBar='<div class="ranges" id="ranges">'+["1M","3M","1Y","3Y","2026","All","YoY"].map(r=>'<button data-r="'+r+'">'+r+'</button>').join("")+'</div>';
   const waRow='<div class="wa-row">'+
