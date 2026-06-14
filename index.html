@@ -720,6 +720,7 @@ function setLang(l){
   applyLang();
   if(DATA.length){buildCats();renderMovers();renderGrid();}
   renderFAQ(l);
+  renderWeather();
   if(scrim.classList.contains("open")&&curDetail)openDetail(curDetail.id);
 }
 document.querySelector(".lang").addEventListener("click",function(e){var b=e.target.closest("button[data-lang]");if(b)setLang(b.dataset.lang);});
@@ -1034,6 +1035,26 @@ function calcPanel(d){
 }
 
 /* ===== Weather — Open-Meteo (Free, No API Key) ===== */
+let WEATHER_RESULTS = null;
+function renderWeather(){
+  const el=document.getElementById("weatherData");
+  if(!el||!WEATHER_RESULTS)return;
+  el.innerHTML=WEATHER_RESULTS.map(({loc,d})=>{
+    const wx=WX_CODE[d.daily.weathercode[0]]||"🌤️";
+    const tmax=Math.round(d.daily.temperature_2m_max[0]);
+    const tmin=Math.round(d.daily.temperature_2m_min[0]);
+    const rain=d.daily.precipitation_sum[0];
+    const wxTmr=WX_CODE[d.daily.weathercode[1]]||"🌤️";
+    const rainAlert=rain>10?`<span style="color:#b23a2e;font-size:9px;font-weight:700"> ⚠️ ${lang==="si"?"වැස්ස!":lang==="ta"?"மழை!":"Rain!"}</span>`:"";
+    const tmrLabel=lang==="si"?"හෙට":lang==="ta"?"நாளை":"Tomorrow";
+    const lowLabel=lang==="si"?"අවම":lang==="ta"?"குறைந்தது":"Low";
+    return `<div style="display:flex;flex-direction:column;gap:1px;padding:4px 10px;background:var(--paper);border-radius:8px;border:1px solid var(--line)">
+      <div style="font-size:10px;font-weight:700;color:var(--petrol)">${loc.emoji} ${tMkt(loc.name)}</div>
+      <div style="font-size:13px;font-weight:700;color:var(--ink)">${wx} ${tmax}°C${rainAlert}</div>
+      <div style="font-size:9px;color:var(--muted)">${tmrLabel}: ${wxTmr} · ${lowLabel}: ${tmin}°</div>
+    </div>`;
+  }).join("");
+}
 const WEATHER_LOCATIONS=[
   {name:"Dambulla",lat:7.87,lon:80.65,emoji:"🥬"},
   {name:"Pettah",lat:6.93,lon:79.84,emoji:"🏪"},
@@ -1058,17 +1079,35 @@ async function fetchWeather(){
       const d=await r.json();
       return {loc,d};
     }));
+    WEATHER_RESULTS=results;
+    renderWeather();
+  }catch(e){
+    el.innerHTML='<span style="font-size:11px;color:var(--muted)">Weather unavailable</span>';
+  }
+}
+async function fetchWeatherOLD(){
+  const el=document.getElementById("weatherData");
+  if(!el)return;
+  try{
+    const results=await Promise.all(WEATHER_LOCATIONS.map(async loc=>{
+      const url=`https://api.open-meteo.com/v1/forecast?latitude=${loc.lat}&longitude=${loc.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&timezone=Asia%2FColombo&forecast_days=2`;
+      const r=await fetch(url);
+      const d=await r.json();
+      return {loc,d};
+    }));
     el.innerHTML=results.map(({loc,d})=>{
       const wx=WX_CODE[d.daily.weathercode[0]]||"🌤️";
       const tmax=Math.round(d.daily.temperature_2m_max[0]);
       const tmin=Math.round(d.daily.temperature_2m_min[0]);
       const rain=d.daily.precipitation_sum[0];
       const wxTmr=WX_CODE[d.daily.weathercode[1]]||"🌤️";
-      const rainAlert=rain>10?'<span style="color:#b23a2e;font-size:9px;font-weight:700"> ⚠️ Rain!</span>':'';
+      const rainAlert=rain>10?`<span style="color:#b23a2e;font-size:9px;font-weight:700"> ⚠️ ${lang==="si"?"වැස්ස!":lang==="ta"?"மழை!":"Rain!"}</span>`:''
+      const tmrLabel=lang==="si"?"හෙට":lang==="ta"?"நாளை":"Tomorrow";
+      const lowLabel=lang==="si"?"අවම":lang==="ta"?"குறைந்தது":"Low";
       return `<div style="display:flex;flex-direction:column;gap:1px;padding:4px 10px;background:var(--paper);border-radius:8px;border:1px solid var(--line)">
         <div style="font-size:10px;font-weight:700;color:var(--petrol)">${loc.emoji} ${tMkt(loc.name)}</div>
         <div style="font-size:13px;font-weight:700;color:var(--ink)">${wx} ${tmax}°C${rainAlert}</div>
-        <div style="font-size:9px;color:var(--muted)">Tomorrow: ${wxTmr} · Low: ${tmin}°</div>
+        <div style="font-size:9px;color:var(--muted)">${tmrLabel}: ${wxTmr} · ${lowLabel}: ${tmin}°</div>
       </div>`;
     }).join("");
   }catch(e){
