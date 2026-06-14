@@ -48,7 +48,11 @@
     {"@type":"Question","name":"What is the difference between Retail and Wholesale prices?","acceptedAnswer":{"@type":"Answer","text":"Retail price is what consumers pay. Wholesale price is the bulk price traders pay. The difference is the trader's potential profit margin."}},
     {"@type":"Question","name":"Which markets are tracked?","acceptedAnswer":{"@type":"Answer","text":"Lanka Price Monitor tracks Dambulla Economic Centre, Pettah (Colombo), Narahenpita, Negombo, and Peliyagoda markets."}},
     {"@type":"Question","name":"Can I use this on my mobile phone?","acceptedAnswer":{"@type":"Answer","text":"Yes! Lanka Price Monitor is fully mobile-optimized. Open topgoviya.lk in any mobile browser. No app download required."}},
-    {"@type":"Question","name":"Is the data available in Sinhala and Tamil?","acceptedAnswer":{"@type":"Answer","text":"Yes! Full platform in Sinhala, Tamil, and English. Use language toggle buttons at top right to switch instantly."}}
+    {"@type":"Question","name":"Is the data available in Sinhala and Tamil?","acceptedAnswer":{"@type":"Answer","text":"Yes! Full platform in Sinhala, Tamil, and English. Use language toggle buttons at top right to switch instantly."}},
+    {"@type":"Question","name":"What is the current vegetable price in Sri Lanka?","acceptedAnswer":{"@type":"Answer","text":"According to TopGoviya.lk CBSL data as of June 2026: Tomato Rs.455/kg, Lime Rs.418/kg, Brinjal Rs.230/kg at Dambulla market. Updated daily at 5PM Sri Lanka time."}},
+    {"@type":"Question","name":"Is Dambulla market cheaper than Pettah?","acceptedAnswer":{"@type":"Answer","text":"Yes. Dambulla Economic Centre has lower wholesale prices while Pettah has higher retail prices. TopGoviya.lk Gap chart shows exact price differences."}},
+    {"@type":"Question","name":"What is the rice price in Sri Lanka?","acceptedAnswer":{"@type":"Answer","text":"Current rice prices: Samba Rs.245/kg, Nadu Rs.235/kg, Kekulu Rs.225/kg at Dambulla market per Central Bank of Sri Lanka data."}},
+    {"@type":"Question","name":"Why is lime price high in Sri Lanka?","acceptedAnswer":{"@type":"Answer","text":"Lime is seasonal. June-July sees peak demand with low supply pushing prices high. January-March is cheapest. TopGoviya.lk YoY chart shows the full 4-year seasonal pattern."}}
   ]
 }
 </script>
@@ -361,7 +365,10 @@
 </head>
 <body>
 <div class="wrap">
-  <header class="masthead">
+  <header class="masthead" itemscope itemtype="https://schema.org/WebSite">
+  <meta itemprop="name" content="Lanka Price Monitor | TopGoviya.lk">
+  <meta itemprop="url" content="https://topgoviya.lk">
+  <meta itemprop="description" content="Free daily agricultural prices in Sri Lanka. Vegetable, fish, rice prices from Central Bank of Sri Lanka.">
     <div class="kicker">
       <span id="kickerTxt">Data from <span class="org">Central Bank of Sri Lanka</span> website</span>
       <div class="lang" role="group" aria-label="Language"><button data-lang="en" class="on">EN</button><button data-lang="si">&#3523;&#3538;&#3458;</button><button data-lang="ta">&#2980;&#2990;&#3007;&#2996;&#3021;</button></div>
@@ -598,6 +605,10 @@ const FAQ={
     {q:"කොයි වෙළඳපොළවල් track කරනවාද?",a:"<strong>දඹුල්ල ආර්ථික මධ්‍යස්ථානය</strong>, <strong>පිටකොටුව (කොළඹ)</strong>, <strong>නාරාහේන්පිට</strong> — එළවළු, සහල්. <strong>මීගමුව</strong>, <strong>Peliyagoda</strong> — මාළු."},
     {q:"Mobile phone එකෙන් use කරන්න පුළුවන්ද?",a:"ඔව්! Lanka Price Monitor සම්පූර්ණයෙන් mobile-optimized. <strong>topgoviya.lk</strong> mobile browser එකෙන් open කරන්න — app download ඕනේ නැහැ. Android සහ iOS — සියලු devices."},
     {q:"සිංහල සහ தமிழ் භාෂාවලින් available ද?",a:"ඔව්! සම්පූර්ණ platform — <strong>සිංහල</strong>, <strong>தமிழ்</strong>, <strong>English</strong> — top right corner language buttons use කරන්න."},
+    {q:"අද ශ්‍රී ලංකාවේ එළවළු මිල කීයද?",a:"TopGoviya.lk CBSL දත්ත අනුව: තක්කාලි රු.455/kg, දෙහි රු.418/kg, වම්බටු රු.230/kg, බෝංචි රු.455/kg — Dambulla සිල්ලර මිල."},
+    {q:"දඹුල්ල සහ පිටකොටුව — කොයි ලාභද?",a:"ගොවීන්ට දඹුල්ල wholesale market හොඳයි. Pettah retail market. Gap chart click කළාම දෙකේ වෙනස clear!"},
+    {q:"දෙහි මිල ඉහළ ඇත්තේ ඇයි?",a:"දෙහි seasonal crop. ජූනි-ජූලි = peak demand, low supply. ජනවාරි-මාර්තු = cheapest. YoY chart click කළාම seasonal pattern දිස් වේ."},
+    {q:"සහල් මිල කීයද?",a:"Samba රු.245/kg, Nadu රු.235/kg, Kekulu රු.225/kg, Ponni Samba රු.240/kg — Dambulla."},
   ],
   en:[
     {q:"Is Lanka Price Monitor free to use?",a:"Yes, completely free. No login, no registration, no subscription required. Lanka Price Monitor is 100% free for farmers, traders, and consumers."},
@@ -608,6 +619,11 @@ const FAQ={
     {q:"Which markets are tracked?",a:"<strong>Dambulla Economic Centre</strong>, <strong>Pettah (Colombo)</strong>, and <strong>Narahenpita</strong> for vegetables and rice. <strong>Negombo</strong> and <strong>Peliyagoda</strong> for fish prices."},
     {q:"Can I use this on my mobile phone?",a:"Yes! Fully mobile-optimized. Open <strong>topgoviya.lk</strong> in any mobile browser — no app download required. Works on all Android and iOS devices."},
     {q:"Is the data available in Sinhala and Tamil?",a:"Yes! Full platform in <strong>සිංහල</strong>, <strong>தமிழ்</strong>, and <strong>English</strong>. Use the language toggle buttons at the top right corner."},
+    {q:"What is the current vegetable price in Sri Lanka?",a:"According to TopGoviya.lk CBSL data: Tomato Rs.455/kg, Lime Rs.418/kg, Brinjal Rs.230/kg, Beans Rs.455/kg at Dambulla market as of June 2026."},
+    {q:"Is Dambulla cheaper than Pettah market?",a:"Yes! Dambulla Economic Centre has lower wholesale prices. Pettah has higher retail prices. The Gap chart shows the exact difference for each commodity."},
+    {q:"What is the rice price in Sri Lanka today?",a:"Samba Rs.245/kg, Nadu Rs.235/kg, Kekulu Rs.225/kg, Ponni Samba Rs.240/kg at Dambulla market."},
+    {q:"Why is lime price high in Sri Lanka?",a:"Lime is seasonal. June-July sees peak demand with low supply. January-March is cheapest. Check the YoY chart on TopGoviya.lk for the full seasonal pattern."},
+    {q:"What is the fish price in Sri Lanka today?",a:"Kelawalla Rs.2,480/kg, Thalapath Rs.2,400/kg, Salaya Rs.690/kg, Hurulla Rs.1,500/kg at Negombo market."},
   ],
   ta:[
     {q:"Lanka Price Monitor இலவசமா?",a:"ஆம், முற்றிலும் இலவசம். உள்நுழைவு, பதிவு, சந்தா தேவையில்லை. விவசாயிகள், வியாபாரிகள், நுகர்வோருக்கு 100% இலவசம்."},
