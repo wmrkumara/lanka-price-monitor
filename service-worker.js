@@ -1,8 +1,8 @@
 /* ===== TopGoviya PWA Service Worker ===== */
 /* Version: 1.0 | topgoviya.lk | Built in Gampola 🇱🇰 */
 
-const CACHE_NAME = 'topgoviya-v1';
-const DATA_CACHE = 'topgoviya-data-v1';
+const CACHE_NAME = 'topgoviya-v2';
+const DATA_CACHE = 'topgoviya-data-v2';
 
 /* Static files to cache for offline use */
 const STATIC_ASSETS = [
@@ -56,7 +56,7 @@ self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
   /* data.json — always try network first (fresh prices!) */
-  if (url.pathname.includes('data.json')) {
+  if (url.pathname.includes('data.json') || url.href.includes('data.json')) {
     event.respondWith(
       fetch(event.request)
         .then(response => {
