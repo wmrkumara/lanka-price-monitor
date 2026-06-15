@@ -1181,7 +1181,7 @@ function aiInsight(d){
     rows.push({cls:ch.dir==="up"?"warn":"good",icon:ch.dir==="up"?"⚠️":"✅",
       text:lang==="si"?`මිල ${ch.dir==="up"?"ඉහළ නැගීමක්":"පහළ වැටීම"} — ${Math.abs(ch.pct).toFixed(1)}% ${ch.dir==="up"?"ඉහළ":"පහළ"} ගොස් ඇත`:lang==="ta"?`விலை ${ch.dir==="up"?"ஏற்றம்":"வீழ்ச்சி"} — ${Math.abs(ch.pct).toFixed(1)}% ${ch.dir==="up"?"அதிகரித்தது":"குறைந்தது"}`:`${ch.dir==="up"?"Price spike":"Price drop"} — ${Math.abs(ch.pct).toFixed(1)}% ${ch.dir==="up"?"increase":"decrease"}`});
   else if(Math.abs(ch.pct)>=10)
-    rows.push({cls:"",icon:"📊",text:`මිල ${ch.dir==="up"?"ඉහළ":"පහළ"} — ${Math.abs(ch.pct).toFixed(1)}% ${ch.dir==="up"?"වැඩිවීමක්":"අඩුවීමක්"}`});
+    rows.push({cls:"",icon:"📊",text:lang==="si"?`මිල ${ch.dir==="up"?"ඉහළ":"පහළ"} — ${Math.abs(ch.pct).toFixed(1)}% ${ch.dir==="up"?"වැඩිවීමක්":"අඩුවීමක්"}`:lang==="ta"?`விலை ${ch.dir==="up"?"உயர்வு":"வீழ்ச்சி"} — ${Math.abs(ch.pct).toFixed(1)}% ${ch.dir==="up"?"அதிகரிப்பு":"குறைப்பு"}`:`Price ${ch.dir==="up"?"increase":"decrease"} — ${Math.abs(ch.pct).toFixed(1)}% ${ch.dir==="up"?"rise":"drop"}`});
 
   /* 2. Position in range */
   const allMin=Math.min(...vals),allMax=Math.max(...vals),rng=allMax-allMin||1;
