@@ -508,7 +508,7 @@
 <div class="guide-scrim" id="guideScrim">
   <div class="guide-box">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-      <h2 id="guideTitle">භාවිත මඟ පෙන්වීම</h2>
+      <h2 id="guideTitle">භාවිත කරන ආකාරය</h2>
       <div style="display:flex;gap:4px">
         <button onclick="setGuide('si')" id="gLang_si" style="font:inherit;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;border:1.5px solid var(--petrol);background:var(--petrol);color:#fff;cursor:pointer">සිං</button>
         <button onclick="setGuide('en')" id="gLang_en" style="font:inherit;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;border:1.5px solid var(--line-strong);background:var(--card);color:var(--muted);cursor:pointer">EN</button>
@@ -523,10 +523,10 @@
 <script>
 const GUIDE={
   si:{
-    title:"භාවිත මඟ පෙන්වීම",
+    title:"භාවිත කරන ආකාරය",
     close:"තේරුණා ✓",
     items:[
-      {icon:"🎤",title:"හඬ සෙවුම (Voice Search)",text:"🎤 bar tap කරන්න → 'අමු මිරිස්' කියන්න → Card automatically open වී price read කරනවා! සිංහල, தமிழ், English support."},
+      {icon:"🎤",title:"🌟 හඬ සෙවුම — ශ්‍රේෂ්ඨතම feature!",text:"<strong>'ඔබට අවශ්‍ය දේ අහන්න'</strong><br><br>🎤 bar tap කරන්න<br>→ 'අමු මිරිස්' කියන්න<br>→ Card automatically open<br>→ Price 3 languages හඬින් read!<br><br>සිංහල · தமிழ் · English support ✅"},
       {icon:"🔊",title:"Card Reading — 3 Languages",text:"Card click → 🔊 කියවන්න tap → සිල්ලර + තොග මිල සිංහල/தமிழ்/English හඬින් කියවනවා! Language button select කරලා tap!"},
       {icon:"🌾",title:"දැන් හොඳම භාණ්ඩය",text:"Home page → 🟢 දැන් විකිණීමට + 🔴 දැන් ගැනීමට. Primary market සිල්ලර මිල අනුව auto-ranked. Card click → detail!"},
       {icon:"👆",title:"ඕනෑම card එකක් tap කරන්න",text:"සම්පූර්ණ price chart, ඉතිහාසය, වෙළඳපොළ සැසඳීම සහ AI insight බලන්න."},
@@ -545,7 +545,7 @@ const GUIDE={
     title:"How to Use",
     close:"Got it ✓",
     items:[
-      {icon:"🎤",title:"Voice Search",text:"Tap the 🎤 bar → Say 'Green Chilli' → Card opens + price read automatically! Supports Sinhala, Tamil & English."},
+      {icon:"🎤",title:"🌟 Voice Search — Most Advanced Feature!",text:"<strong>'Ask what you need'</strong><br><br>Tap the 🎤 bar<br>→ Say 'Green Chilli'<br>→ Card opens automatically<br>→ Price read in 3 languages!<br><br>Sinhala · Tamil · English ✅"},
       {icon:"🔊",title:"Card Reading — 3 Languages",text:"Click card → Tap 🔊 Read → Retail + Wholesale prices read in Sinhala, Tamil or English! Select language first."},
       {icon:"🌾",title:"Best Crop Right Now",text:"Home page → 🟢 Sell Now + 🔴 Buy Now tables. Auto-ranked by primary market retail price. Click card for details!"},
       {icon:"👆",title:"Tap any card",text:"Opens full price chart, history, market comparison, and AI insight."},
@@ -564,7 +564,7 @@ const GUIDE={
     title:"பயன்பாட்டு வழிகாட்டி",
     close:"புரிந்தது ✓",
     items:[
-      {icon:"🎤",title:"குரல் தேடல் (Voice Search)",text:"🎤 பட்டையை தட்டவும் → 'பச்சை மிளகாய்' சொல்லுங்கள் → அட்டை திறந்து விலை படிக்கும்! சிங்களம், தமிழ், ஆங்கிலம் ஆதரிக்கிறது."},
+      {icon:"🎤",title:"🌟 குரல் தேடல் — மிகவும் மேம்பட்ட அம்சம்!",text:"<strong>'உங்களுக்குத் தேவையானதைக் கேளுங்கள்'</strong><br><br>🎤 பட்டையை தட்டவும்<br>→ 'பச்சை மிளகாய்' சொல்லுங்கள்<br>→ அட்டை தானாக திறக்கும்<br>→ 3 மொழிகளில் விலை படிக்கும்!<br><br>சிங்களம் · தமிழ் · ஆங்கிலம் ✅"},
       {icon:"🔊",title:"அட்டை வாசிப்பு — 3 மொழிகள்",text:"அட்டையை கிளிக் → 🔊 தட்டவும் → சில்லறை + மொத்த விலைகள் சிங்களம்/தமிழ்/ஆங்கிலத்தில் படிக்கும்!"},
       {icon:"🌾",title:"இப்போது சிறந்த பயிர்",text:"முகப்பு → 🟢 இப்போது விற்க + 🔴 இப்போது வாங்க. முதன்மை சந்தை விலை படி தானாக வரிசை!"},
       {icon:"👆",title:"எந்த அட்டையையும் தட்டவும்",text:"முழு விலை வரைபடம், வரலாறு, சந்தை ஒப்பீடு மற்றும் AI நுண்ணறிவு காண்க."},
@@ -756,7 +756,7 @@ function setLang(l){
   vhIdx=0; updateVoiceHint();
   /* Guide button label */
   const gbl=document.getElementById("guideBtnLabel");
-  if(gbl)gbl.textContent=lang==="si"?"භාවිත මඟ":lang==="ta"?"வழிகாட்டி":"How to use";
+  if(gbl)gbl.textContent=lang==="si"?"භාවිත කරන ආකාරය":lang==="ta"?"பயன்படுத்துவது எப்படி":"How to use";
   if(scrim.classList.contains("open")&&curDetail)openDetail(curDetail.id);
 }
 document.querySelector(".lang").addEventListener("click",function(e){var b=e.target.closest("button[data-lang]");if(b)setLang(b.dataset.lang);});
