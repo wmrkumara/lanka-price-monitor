@@ -82,8 +82,8 @@ footer{padding:22px 0;text-align:center;border-top:1px solid var(--line-strong);
 <div class="wrap">
   <div class="hero">
     <div class="hero-kicker" id="kicker">🌾 ගොවි පුවත් | TopGoviya.lk</div>
-    <h1 id="h1">ගොවීන්ට <em>TopGoviya.lk</em> —<br>හොඳම වෙළඳපොළ තෝරාගෙන<br>ලාභය වැඩිකරගන්න!</h1>
-    <p class="hero-sub" id="sub">ශ්‍රී ලංකාවේ ගොවියෙකුගේ ලොකුම ප්‍රශ්නය — "මගේ අස්වැන්න කොහෙට විකිණුවොත් හොඳද?" TopGoviya.lk තත්පර 30කින් answer දෙනවා!</p>
+    <h1 id="h1">ගොවි මහතුන් සඳහා — <em>ඉහළම ලාභයක්</em> ලැබිය හැකි<br>හොඳම වෙළඳපොළ තෝරාගන්න!</h1>
+    <p class="hero-sub" id="sub">"මගේ අස්වැන්න විකුණන්න හොඳම තැන කොහේද?" — ශ්‍රී ලාංකීය ගොවි ජනතාව මුහුණ දෙන මෙම ප්‍රධානතම ගැටලුවට, තත්පර 30ක් ඇතුළත නිවැරදි විසඳුම TopGoviya.lk වෙතින් ලබා දෙයි!</p>
     <div class="lang-bar">
       <button class="on" onclick="L('si');setTTSLang('si')">සිංහල</button>
       <button onclick="L('en');setTTSLang('en')">English</button>
@@ -121,50 +121,52 @@ footer{padding:22px 0;text-align:center;border-top:1px solid var(--line-strong);
 const D = {
   si:{
     kicker:"🌾 ගොවි පුවත් | TopGoviya.lk",
-    h1:"ගොවීන්ට <em>TopGoviya.lk</em> —<br>හොඳම වෙළඳපොළ තෝරාගෙන<br>ලාභය වැඩිකරගන්න!",
-    sub:"ශ්‍රී ලංකාවේ ගොවියෙකුගේ ලොකුම ප්‍රශ්නය — \"මගේ අස්වැන්න කොහෙට විකිණුවොත් හොඳද?\" TopGoviya.lk තත්පර 30කින් answer දෙනවා!",
+    h1:"ගොවි මහතුන් සඳහා — <em>ඉහළම ලාභයක්</em> ලැබිය හැකි<br>හොඳම වෙළඳපොළ තෝරාගන්න!",
+    sub:"\"මගේ අස්වැන්න විකුණන්න හොඳම තැන කොහේද?\" — ශ්‍රී ලාංකීය ගොවි ජනතාව මුහුණ දෙන මෙම ප්‍රධානතම ගැටලුවට, තත්පර 30ක් ඇතුළත නිවැරදි විසඳුම TopGoviya.lk වෙතින් ලබා දෙයි!",
     ttsPlay:"▶️ ලිපිය කියවන්න",ttsStop:"⏹️ නවතන්න",ttsLabel:"🔊 ලිපිය හඬින් කියවනවා",
     ctaH:"📊 දැන් try කරන්නකෝ!",ctaP:"TopGoviya.lk — 100% නිදහස් · Login නැහැ · Mobile App available",ctaBtn:"🌾 TopGoviya.lk යන්න",
     nLive:"← සජීවී මිල",nBlog:"ගොවි පුවත්",fLive:"← සජීවී මිල",fBlog:"ගොවි පුවත්",
     body:`
-<h2>ශ්‍රී ලංකාවේ ගොවියෙකුගේ ලොකුම ප්‍රශ්නය</h2>
-<p>ගම්පොළේ හෝ දඹුල්ලේ ගොවියෙකු, ඔහුගේ අස්වැන්න දවස් ගණනක් වෙහෙස මහන්සි වී නෙලා, ට්‍රක් රථයකට පටවා <strong>කොහෙට යන්නද?</strong> යන ප්‍රශ්නයට මුහුණ දෙනවා. දඹුල්ලද? පිටකොටුවද? නාරාහේන්පිටද?</p>
-<p>මේ ප්‍රශ්නයට නිවැරදි answer නොදී රුපියල් දහස් ගණනක් අලාභ විඳින ගොවීන් ශ්‍රී ලංකාවේ බොහොමයි. <strong>TopGoviya.lk</strong> හදුන්වාදෙනු ලබන්නේ ඒ ගැටලුවට නිදහස් digital විසඳුමක් ලෙස.</p>
+<h2>ශ්‍රී ලාංකීය ගොවි ජනතාව මුහුණ දෙන ප්‍රධානතම අභියෝගය</h2>
+<p>ගම්පොළ හෝ දඹුල්ල ප්‍රදේශවල ගොවි මහතුන් දින ගණනාවක් පුරා දැඩි වෙහෙස මහන්සියෙන් නෙළාගත් තම අස්වැන්න රැගෙන යා යුත්තේ කොහේටද? <strong>දඹුල්ලටද? පිටකොටුවටද? නාරාහේන්පිටටද?</strong></p>
+<p>මෙම ප්‍රශ්නයට නිසි පිළිතුරක් නොමැතිකම නිසා දිනපතා දහස් ගණන් ගොවි මහතුන්ට තමන්ට හිමි විය යුතු නියම ලාභය අහිමි වේ. <strong>TopGoviya.lk</strong> යනු මෙම ගැටලුවට නොමිලේ ලබා දෙන සාර්ථක ඩිජිටල් විසඳුමකි.</p>
 
-<h2>🎤 හඬ සෙවුම — ශ්‍රේෂ්ඨතම අංගය</h2>
-<p>ශ්‍රී ලංකාවේ ගොවීන් බොහෝ දෙනෙකු smartphone use කළත්, type කිරීම අපහසුයි. ඒ නිසා <strong>TopGoviya.lk</strong> හඬ සෙවුම (Voice Search) feature එක හඳුන්වා දීලා.</p>
-<div class="hl"><p>🎤 <strong>කරන්නේ මෙච්චරයි:</strong><br>Phone ගෙනලා → TopGoviya.lk open → 🎤 tap → <strong>"අමු මිරිස්"</strong> කියන්න → Card open වෙලා price read කරනවා!</p></div>
+<h2>🎤 හඬ මඟින් සෙවීම — වඩාත්ම දියුණු සේවා අංගය</h2>
+<p>බොහෝ ශ්‍රී ලාංකීය ගොවි මහතුන් ස්මාර්ට් ජංගම දුරකථන භාවිතා කළද, අකුරු ටයිප් කිරීම අපහසු කාර්යයක් විය හැක. එම නිසා, <strong>TopGoviya.lk</strong> විසින් 'හඬ මඟින් සෙවීමේ' (Voice Search) සේවාව හඳුන්වා දී ඇත.</p>
+
+<div class="hl"><p>🎤 <strong>එය මේ තරම් සරලයි:</strong><br>TopGoviya.lk වෙත පිවිසෙන්න → 🎤 සලකුණ ස්පර්ශ කරන්න → <strong>"අමු මිරිස්"</strong> යන්න පවසන්න → අදාළ මිල දර්ශකය විවෘත වී, මිල ගණන් ශබ්ද නඟා කියවනු ඇත!</p></div>
 
 <div class="steps">
-  <div class="step"><div class="num">1</div><p><strong>topgoviya.lk</strong> Chrome browser එකේ open කරන්න</p></div>
-  <div class="step"><div class="num">2</div><p>🎤 blinking mic bar tap කරන්න</p></div>
-  <div class="step"><div class="num">3</div><p><strong>"අමු මිරිස්"</strong> හෝ <strong>"තක්කාලි"</strong> කියන්න</p></div>
-  <div class="step"><div class="num">4</div><p>Card open වෙලා <strong>සිල්ලර + තොග මිල සිංහලෙන් read කරනවා!</strong></p></div>
+  <div class="step"><div class="num">1</div><p>Google Chrome බ්‍රවුසරය හරහා <strong>topgoviya.lk</strong> වෙත පිවිසෙන්න</p></div>
+  <div class="step"><div class="num">2</div><p>නිවෙමින් දැල්වෙන මයික්‍රෆෝන සලකුණ (🎤 mic bar) ස්පර්ශ කරන්න</p></div>
+  <div class="step"><div class="num">3</div><p><strong>"අමු මිරිස්"</strong> හෝ <strong>"තක්කාලි"</strong> (නැතහොත් අදාළ එළවළු වර්ගය) පවසන්න</p></div>
+  <div class="step"><div class="num">4</div><p>අදාළ මිල දර්ශකය විවෘත වී, <strong>තොග සහ සිල්ලර මිල ගණන් ශබ්ද නඟා කියවනු ඇත!</strong></p></div>
 </div>
 
-<h2>🌾 ගොවි ලාභ ගණකය</h2>
-<p>ඔබේ අස්වැන්නෙන් කොපමණ ලාභයක් ලැබෙනවාද? <strong>ගොවි ලාභ ගණකය</strong> භාවිතා කිරීමෙන් තත්පර 30කින් හොඳම වෙළඳපොළ සොයාගන්න.</p>
+<h2>🌾 ගොවි ලාභ ගණකය (Farmer Profit Calculator)</h2>
+<p>ඔබේ අස්වැන්නෙන් ඔබට කොපමණ ලාභයක් ලැබිය හැකිද? <strong>තත්පර 30ක් ඇතුළත</strong> ඔබට වඩාත්ම වාසිදායක වෙළඳපොළ කුමක්දැයි හඳුනා ගැනීමට ගොවි ලාභ ගණකය භාවිතා කරන්න.</p>
 
 <div class="feature-grid">
-  <div class="feature-card"><div class="icon">🧮</div><h4>ගොවි ලාභ ගණකය</h4><p>kg ප්‍රමාණය, transport cost enter කරන්න → හොඳම market auto-recommend!</p></div>
-  <div class="feature-card"><div class="icon">🌾</div><h4>දැන් හොඳම භාණ්ඩය</h4><p>🟢 දැන් විකිණීමට — ඉහළ trend commodities. 🔴 දැන් ගැනීමට — low price!</p></div>
-  <div class="feature-card"><div class="icon">🧠</div><h4>AI Market Insights</h4><p>Price spike, seasonal pattern, 3M trend — automatic analysis. ගොවීන්ට actionable!</p></div>
-  <div class="feature-card"><div class="icon">📊</div><h4>වසර 4ක් ඉතිහාසය</h4><p>2022-2026 මිල ඉතිහාසය. Seasonal patterns — කවදා ලාබද, කවදා අහලෙ මිලද?</p></div>
-  <div class="feature-card"><div class="icon">🔊</div><h4>Card Reading</h4><p>සිල්ලර + තොග මිල සිංහල හඬින් read කරනවා! Type කරන්න ඕනේ නැහැ!</p></div>
-  <div class="feature-card"><div class="icon">📱</div><h4>Mobile App FREE</h4><p>Chrome → Install → Home screen! Real app feel. 100% නිදහස්!</p></div>
+  <div class="feature-card"><div class="icon">🧮</div><h4>ලාභ ගණකය</h4><p>අස්වැන්නේ බර (කිලෝග්‍රෑම්) සහ ප්‍රවාහන වියදම ඇතුළත් කරන්න → ඔබට වඩාත්ම ලාභදායී වෙළඳපොළ ස්වයංක්‍රීයව නිර්දේශ කෙරේ!</p></div>
+  <div class="feature-card"><div class="icon">🌾</div><h4>වත්මන් හොඳම බෝගය</h4><p>🟢 දැන් විකුණන්න — මිල ඉහළ යමින් පවතී. 🔴 දැන් මිලදී ගන්න — මිල පහත වැටී ඇත!</p></div>
+  <div class="feature-card"><div class="icon">🧠</div><h4>AI වෙළඳපොළ තීක්ෂණ බුද්ධිය</h4><p>මිල ක්ෂණිකව ඉහළ යාම්, කාලීන රටාවන් සහ මාස 3ක මිල ප්‍රවණතා — ස්වයංක්‍රීය විශ්ලේෂණය!</p></div>
+  <div class="feature-card"><div class="icon">📊</div><h4>වසර 4ක මිල ඉතිහාසය</h4><p>2023-2026 වකවානුවල මිල ඉතිහාසය — උපරිම මිලක් ලබා ගැනීමට විකුණන්නේ කවදාද?</p></div>
+  <div class="feature-card"><div class="icon">🔊</div><h4>මිල ශබ්ද නඟා කියවීම</h4><p>තොග සහ සිල්ලර මිල ගණන් <strong>භාෂා 3කින්ම</strong> ශබ්ද නඟා කියවීමේ හැකියාව!</p></div>
+  <div class="feature-card"><div class="icon">📱</div><h4>නොමිලේ ජංගම ඇප්</h4><p>Chrome → Install → Home screen! නියම ඇප් අත්දැකීම. <strong>100%ක් නොමිලේ!</strong></p></div>
 </div>
 
 <div class="story-box">
-  <h3>🌾 Real Example — ගොවි success story</h3>
-  <p>ගම්පොළේ ගොවියෙකු TopGoviya.lk open කරලා "තක්කාලි" voice search කළා. දඹුල්ල රු.305, පිටකොටුව රු.450, නාරාහේන්පිට රු.500 — ගණකය click කළා. Transport cost add කළාට පස්සේ <strong>නාරාහේන්පිට හොඳම option</strong> show වුණා. Extra රු.45,000ක් ලාභය!</p>
+  <h3>🌾 සැබෑ උදාහරණයක් — ගොවි මහතෙකුගේ සාර්ථකත්වය</h3>
+  <p>ගම්පොළ ප්‍රදේශයේ ගොවි මහතෙකු TopGoviya.lk හරහා "Tomato" (තක්කාලි) ලෙස හඬ මඟින් සෙවීමක් සිදු කළේය. දඹුල්ල රු. 305, පිටකොටුව රු. 450 සහ නාරාහේන්පිට රු. 500 ලෙස මිල ගණන් පෙන්වීය. ලාභ ගණකය මඟින් ප්‍රවාහන වියදම් අඩු කිරීමෙන් පසුවද <strong>නාරාහේන්පිට වඩාත්ම වාසිදායක</strong> බව සොයා ගත්තේය. මේ නිසා ඔහුට <strong>රුපියල් 45,000ක අතිරේක ලාභයක්</strong> උපයා ගැනීමට හැකි විය!</p>
 </div>
 
-<h2>🌐 3 Languages — සිංහල · தமிழ் · English</h2>
-<p>උතුරේ, නැගෙනහිරේ, දකුණේ — ශ්‍රී ලංකාවේ ඕනෑම ගොවියෙකුට TopGoviya.lk භාවිතා කරන්න පුළුවන්. <strong>සිංහල default</strong> — Voice search සිංහලෙන් work කරනවා!</p>
+<h2>🌐 භාෂා 3ක් — සිංහල · தமிழ் · English</h2>
+<p>උතුරේ, නැගෙනහිරේ, දකුණේ — ශ්‍රී ලංකාවේ ඕනෑම ගොවි මහතෙකුට TopGoviya.lk භාවිතා කළ හැක. <strong>සිංහල default</strong> — හඬ සෙවුම සිංහලෙන් ක්‍රියාත්මක වේ!</p>
 
-<h2>💰 100% නිදහස් — Forever</h2>
-<p>TopGoviya.lk <strong>සදාකාලිකවම නිදහස්</strong>. Login නැහැ. Registration නැහැ. Credit card නැහැ. ශ්‍රී ලංකාවේ සෑම ගොවියෙකුටම, ඕනෑම phone එකෙන්, ඕනෑම වෙලාවක access!</p>
-<div class="hl"><p>✅ <strong>දෛනික මිල</strong> — දඹුල්ල · පිටකොටුව · නාරාහේන්පිට · මීගමුව<br>✅ <strong>ශ්‍රී ලංකා මහ බැංකු දත්ත</strong> — official, trustworthy<br>✅ <strong>දිනපතා update</strong> — සෑම දිනකම සවස 5:00 ට<br>✅ <strong>Offline support</strong> — Internet නැතිවත් last data!</p></div>`
+<h2>💰 සදාකාලිකවම 100%ක් නොමිලේ</h2>
+<p>TopGoviya.lk සේවාව <strong>සැමදා නොමිලේම</strong> සැපයෙන අතර, කිසිදු ලොග් වීමක් (Login), ලියාපදිංචි වීමක් හෝ ක්‍රෙඩිට් කාඩ් පතක් අවශ්‍ය නොවේ. ඕනෑම ශ්‍රී ලාංකීය ගොවි මහතෙකුට, ඕනෑම දුරකථනයකින්, ඕනෑම වේලාවක මෙයට පිවිසිය හැක!</p>
+
+<div class="hl"><p>✅ <strong>දෛනික මිල ගණන්</strong> — දඹුල්ල · පිටකොටුව · නාරාහේන්පිට · මීගමුව<br>✅ <strong>ශ්‍රී ලංකා මහ බැංකුවේ (CBSL) නිල දත්ත</strong> — විශ්වාසදායකයි<br>✅ <strong>දිනපතා යාවත්කාලීන කිරීම්</strong> — සෑම දිනකම පස්වරු 5:00 ට<br>✅ <strong>නොබැඳි පහසුකම (Offline Support)</strong> — අන්තර්ජාලය නොමැතිව වුවද ක්‍රියාත්මක වේ!</p></div>`
   },
   en:{
     kicker:"🌾 Govi Puwath | TopGoviya.lk",
