@@ -2211,7 +2211,7 @@ function init(){
 
 <!-- ===== PWA Install Banner ===== -->
 <div id="pwa-banner" style="display:none;position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:var(--petrol);color:#fff;padding:12px 18px;border-radius:14px;box-shadow:0 8px 32px rgba(10,30,28,.4);z-index:999;display:none;align-items:center;gap:12px;max-width:340px;width:calc(100% - 32px)">
-  <img src="icons/icon-72.png" width="40" height="40" style="border-radius:8px;flex-shrink:0" onerror="this.style.display='none'">
+  <img src="icon-72x72.png" width="40" height="40" style="border-radius:8px;flex-shrink:0" onerror="this.style.display='none'">
   <div style="flex:1">
     <div style="font-weight:700;font-size:14px" id="pwaBannerTitle">📱 App Install කරන්න</div>
     <div style="font-size:11px;color:#9fd4c8" id="pwaBannerSub">Home screen එකේ TopGoviya App!</div>
@@ -2238,17 +2238,16 @@ const installBtn=document.getElementById('pwaInstallBtn');
 window.addEventListener('beforeinstallprompt',e=>{
   e.preventDefault();
   pwaPrompt=e;
-  /* Show banner after 3 seconds */
+  /* Show banner after 5 seconds */
   setTimeout(()=>{
-    if(banner){
+    if(banner && pwaPrompt){
       banner.style.display='flex';
-      /* Update banner text based on language */
       const t=document.getElementById('pwaBannerTitle');
       const s=document.getElementById('pwaBannerSub');
       if(t)t.textContent=lang==='si'?'📱 App Install කරන්න':lang==='ta'?'📱 App நிறுவுங்கள்':'📱 Install App';
       if(s)s.textContent=lang==='si'?'Home screen එකේ TopGoviya App!':lang==='ta'?'TopGoviya App ஐ நிறுவவும்!':'Add TopGoviya to your home screen!';
     }
-  },3000);
+  },5000);
 });
 
 if(installBtn){
