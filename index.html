@@ -502,8 +502,8 @@
 <div class="scrim" id="scrim"><div class="modal" id="modal" role="dialog" aria-modal="true"></div></div>
 
 <!-- Guide popup -->
-<button class="guide-btn" onclick="document.getElementById('guideScrim').classList.add('open')" aria-label="How to use">
-  <span style="font-size:15px;font-weight:800">?</span> How to use
+<button class="guide-btn" onclick="document.getElementById('guideScrim').classList.add('open');setGuide(lang)" aria-label="How to use">
+  <span style="font-size:15px;font-weight:800">?</span> <span id="guideBtnLabel">භාවිත මඟ</span>
 </button>
 <div class="guide-scrim" id="guideScrim">
   <div class="guide-box">
@@ -526,48 +526,57 @@ const GUIDE={
     title:"භාවිත මඟ පෙන්වීම",
     close:"තේරුණා ✓",
     items:[
+      {icon:"🎤",title:"හඬ සෙවුම (Voice Search)",text:"🎤 bar tap කරන්න → 'අමු මිරිස්' කියන්න → Card automatically open වී price read කරනවා! සිංහල, தமிழ், English support."},
+      {icon:"🔊",title:"Card Reading — 3 Languages",text:"Card click → 🔊 කියවන්න tap → සිල්ලර + තොග මිල සිංහල/தமிழ்/English හඬින් කියවනවා! Language button select කරලා tap!"},
+      {icon:"🌾",title:"දැන් හොඳම භාණ්ඩය",text:"Home page → 🟢 දැන් විකිණීමට + 🔴 දැන් ගැනීමට. Primary market සිල්ලර මිල අනුව auto-ranked. Card click → detail!"},
       {icon:"👆",title:"ඕනෑම card එකක් tap කරන්න",text:"සම්පූර්ණ price chart, ඉතිහාසය, වෙළඳපොළ සැසඳීම සහ AI insight බලන්න."},
-      {icon:"📊",title:"Chart range buttons",text:"1M · 3M · 1Y · 3Y · 2026 · All — කාල සීමාව තෝරන්න. 2026 = මෙ වසරේ Jan සිට. YoY = වාර්ෂික සැසඳීම."},
-      {icon:"🔄",title:"Retail / Wholesale / 💡 Gap / 🧮 Calculator",text:"Retail = සිල්ලර. Wholesale = තොග. Gap = margin chart + Poya markers. Calculator = ලාභ ගණනය."},
-      {icon:"🌾",title:"ගොවි Profit Calculator",text:"ඔබේ kg ප්‍රමාණය, transport cost, production cost (optional) දාලා හොඳම වෙළඳපොළ සොයා ගන්න."},
-      {icon:"💰",title:"Trader Profit Calculator",text:"Wholesale ගෙන Retail ට transport cost අඩු කර ලාභය ගණනය කරන්න."},
-      {icon:"🧠",title:"AI Insight Box",text:"Price spike, seasonal pattern, market gap — rule-based automatic analysis. ML නැහැ!"},
-      {icon:"📈",title:"YoY Chart",text:"2022-2026 years monthly averages — seasonal patterns clearly compare කරන්න."},
-      {icon:"🔍",title:"Search & Filter",text:"නමින් search කරන්න, category filter කරන්න, හෝ biggest changes sort කරන්න."},
-      {icon:"🌐",title:"භාෂා 3ක්",text:"English, සිංහල, தமிழ் — top right corner buttons use කරන්න."},
+      {icon:"📊",title:"Chart range buttons",text:"1M · 3M · 1Y · 3Y · 2026 (default) · All · YoY. 2026 = මෙ වසරේ Jan සිට Low & High instant!"},
+      {icon:"🔄",title:"සිල්ලර / තොග / 💡 පරතරය / 🧮 ගණකය",text:"සිල්ලර = consumer. තොග = wholesale. පරතරය = margin chart. ගණකය = ලාභ ගණනය."},
+      {icon:"🌾",title:"ගොවි ලාභ ගණකය",text:"kg, transport cost, production cost (optional) enter → හොඳම market auto-recommend!"},
+      {icon:"💰",title:"වෙළෙන්ද ලාභ ගණකය",text:"Wholesale සිට Retail transport cost අඩු කර ලාභය ගණනය."},
+      {icon:"🧠",title:"AI Insight Box",text:"Price spike, seasonal pattern, market gap, 3M trend — automatic. 3 languages!"},
+      {icon:"📸",title:"Share & WhatsApp",text:"Card → 📸 Share as Image → PNG download → WhatsApp share! FB → Facebook direct. TopGoviya.lk brand visible!"},
+      {icon:"🗞️",title:"ගොවි පුවත් Blog",text:"Footer → 📝 Blog → Articles read කරන්න. ▶️ tap → 3 languages හඬින් article කියවනවා!"},
+      {icon:"🔍",title:"Search & Filter",text:"නමින් search, category filter, biggest changes sort."},
       {icon:"🕐",title:"දෛනිකව auto-update",text:"ශ්‍රී ලංකා මහ බැංකු data — දිනපතා සවස 5:00 ට automatic update."},
     ]
   },
   en:{
-    title:"How to use",
+    title:"How to Use",
     close:"Got it ✓",
     items:[
+      {icon:"🎤",title:"Voice Search",text:"Tap the 🎤 bar → Say 'Green Chilli' → Card opens + price read automatically! Supports Sinhala, Tamil & English."},
+      {icon:"🔊",title:"Card Reading — 3 Languages",text:"Click card → Tap 🔊 Read → Retail + Wholesale prices read in Sinhala, Tamil or English! Select language first."},
+      {icon:"🌾",title:"Best Crop Right Now",text:"Home page → 🟢 Sell Now + 🔴 Buy Now tables. Auto-ranked by primary market retail price. Click card for details!"},
       {icon:"👆",title:"Tap any card",text:"Opens full price chart, history, market comparison, and AI insight."},
-      {icon:"📊",title:"Chart range buttons",text:"Switch between 1M · 3M · 1Y · 3Y · 2026 · All. 2026 = This year from Jan 1st. YoY = year-over-year comparison."},
-      {icon:"🔄",title:"Retail / Wholesale / 💡 Gap / 🧮 Calculator",text:"Retail = consumer prices. Wholesale = bulk prices. Gap = margin chart + Poya markers. Calculator = profit analysis."},
-      {icon:"🌾",title:"Farmer Profit Calculator",text:"Enter your harvest kg, transport cost, and optional production cost to find the best market to sell."},
-      {icon:"💰",title:"Trader Profit Calculator",text:"Calculate net profit per kg after deducting transport from the wholesale-to-retail margin."},
-      {icon:"🧠",title:"AI Insight Box",text:"Automatic price spike alerts, seasonal patterns, 3M trend, and market gap analysis — no ML needed!"},
-      {icon:"📈",title:"YoY Chart",text:"Compare 2022–2026 monthly averages to spot seasonal price patterns for each commodity."},
-      {icon:"🔍",title:"Search & Filter",text:"Search by name, filter by category (Vegetables, Fish, Rice…), or sort by biggest price changes."},
-      {icon:"🌐",title:"3 languages",text:"Switch between English, සිංහල and தமிழ் using buttons at the top right."},
-      {icon:"🕐",title:"Auto-updated daily",text:"Data extracted automatically from Central Bank of Sri Lanka every day at noon Sri Lanka time."},
+      {icon:"📊",title:"Chart range buttons",text:"1M · 3M · 1Y · 3Y · 2026 (default) · All · YoY. 2026 = This year Low & High instantly!"},
+      {icon:"🔄",title:"Retail / Wholesale / 💡 Gap / 🧮 Calculator",text:"Retail = consumer prices. Wholesale = bulk. Gap = margin chart. Calculator = profit analysis."},
+      {icon:"🌾",title:"Farmer Profit Calculator",text:"Enter harvest kg, transport & production cost → Best market auto-recommended!"},
+      {icon:"💰",title:"Trader Profit Calculator",text:"Wholesale to retail margin minus transport = net profit per kg."},
+      {icon:"🧠",title:"AI Insight Box",text:"Price spike alerts, seasonal patterns, 3M trend, market gap — automatic. 3 languages!"},
+      {icon:"📸",title:"Share & WhatsApp",text:"Card → 📸 Share as Image → PNG → WhatsApp! FB button → Facebook direct. TopGoviya.lk brand visible!"},
+      {icon:"🗞️",title:"Govi Puwath Blog",text:"Footer → 📝 Blog → Read articles. Tap ▶️ → Article read aloud in 3 languages!"},
+      {icon:"🔍",title:"Search & Filter",text:"Search by name, filter by category, or sort by biggest price changes."},
+      {icon:"🕐",title:"Auto-updated daily",text:"Central Bank of Sri Lanka data — automatic update every day at 5PM."},
     ]
   },
   ta:{
     title:"பயன்பாட்டு வழிகாட்டி",
     close:"புரிந்தது ✓",
     items:[
+      {icon:"🎤",title:"குரல் தேடல் (Voice Search)",text:"🎤 பட்டையை தட்டவும் → 'பச்சை மிளகாய்' சொல்லுங்கள் → அட்டை திறந்து விலை படிக்கும்! சிங்களம், தமிழ், ஆங்கிலம் ஆதரிக்கிறது."},
+      {icon:"🔊",title:"அட்டை வாசிப்பு — 3 மொழிகள்",text:"அட்டையை கிளிக் → 🔊 தட்டவும் → சில்லறை + மொத்த விலைகள் சிங்களம்/தமிழ்/ஆங்கிலத்தில் படிக்கும்!"},
+      {icon:"🌾",title:"இப்போது சிறந்த பயிர்",text:"முகப்பு → 🟢 இப்போது விற்க + 🔴 இப்போது வாங்க. முதன்மை சந்தை விலை படி தானாக வரிசை!"},
       {icon:"👆",title:"எந்த அட்டையையும் தட்டவும்",text:"முழு விலை வரைபடம், வரலாறு, சந்தை ஒப்பீடு மற்றும் AI நுண்ணறிவு காண்க."},
-      {icon:"📊",title:"வரைபட வரம்பு பொத்தான்கள்",text:"1M · 3M · 1Y · 3Y · 2026 · All — கால வரம்பை தேர்ந்தெடுக்கவும். 2026 = இந்த ஆண்டு Jan முதல். YoY = வருடாந்திர ஒப்பீடு."},
-      {icon:"🔄",title:"சில்லறை / மொத்த / 💡 இடைவெளி / 🧮 கணிப்பி",text:"சில்லறை = நுகர்வோர் விலை. மொத்த = மொத்த விலை. இடைவெளி = இலாப வரைபடம். கணிப்பி = லாப பகுப்பாய்வு."},
-      {icon:"🌾",title:"விவசாயி லாப கணிப்பி",text:"உங்கள் மகசூல் kg, போக்குவரத்து செலவு, உற்பத்தி செலவு (விருப்பம்) உள்ளிட்டு சிறந்த சந்தையை கண்டறியவும்."},
-      {icon:"💰",title:"வியாபாரி லாப கணிப்பி",text:"மொத்த முதல் சில்லறை வரை போக்குவரத்து கழித்து நிகர லாபம் கணக்கிடவும்."},
-      {icon:"🧠",title:"AI நுண்ணறிவு பெட்டி",text:"விலை உயர்வு எச்சரிக்கை, பருவகால வடிவங்கள், 3M போக்கு மற்றும் சந்தை இடைவெளி பகுப்பாய்வு."},
-      {icon:"📈",title:"YoY வரைபடம்",text:"2022-2026 மாதாந்திர சராசரிகளை ஒப்பிட்டு பருவகால விலை வடிவங்களை கண்டறியவும்."},
-      {icon:"🔍",title:"தேடல் மற்றும் வடிகட்டல்",text:"பெயரால் தேடவும், வகையால் வடிகட்டவும், அல்லது பெரிய விலை மாற்றங்களால் வரிசைப்படுத்தவும்."},
-      {icon:"🌐",title:"3 மொழிகள்",text:"மேல் வலது மூலையில் உள்ள பொத்தான்களைப் பயன்படுத்தி English, සිංහල, தமிழ் மாற்றவும்."},
-      {icon:"🕐",title:"தினசரி தானியங்கி புதுப்பிப்பு",text:"இலங்கை மத்திய வங்கி தரவு — ஒவ்வொரு நாளும் நண்பகல் 12:00 மணிக்கு தானாக புதுப்பிக்கப்படுகிறது."},
+      {icon:"📊",title:"வரைபட வரம்பு பொத்தான்கள்",text:"1M · 3M · 1Y · 3Y · 2026 (இயல்பு) · All · YoY. 2026 = இந்த ஆண்டு குறைந்தது & அதிகபட்சம்!"},
+      {icon:"🔄",title:"சில்லறை / மொத்தம் / 💡 இடைவெளி / 🧮 கணிப்பி",text:"சில்லறை = நுகர்வோர். மொத்தம் = மொத்த விலை. இடைவெளி = இலாப வரைபடம். கணிப்பி = லாப பகுப்பாய்வு."},
+      {icon:"🌾",title:"விவசாயி லாப கணிப்பி",text:"மகசூல் kg, போக்குவரத்து, உற்பத்தி செலவு → சிறந்த சந்தை பரிந்துரை!"},
+      {icon:"💰",title:"வியாபாரி லாப கணிப்பி",text:"மொத்த முதல் சில்லறை வரை போக்குவரத்து கழித்து நிகர லாபம்."},
+      {icon:"🧠",title:"AI நுண்ணறிவு பெட்டி",text:"விலை உயர்வு, பருவகால வடிவம், 3M போக்கு, சந்தை இடைவெளி — தானியங்கி. 3 மொழிகள்!"},
+      {icon:"📸",title:"பகிர் & WhatsApp",text:"அட்டை → 📸 PNG பதிவிறக்கம் → WhatsApp பகிர்! FB → Facebook நேரடி பகிர்!"},
+      {icon:"🗞️",title:"கோவி புவத் Blog",text:"Footer → 📝 Blog → கட்டுரைகள். ▶️ தட்டவும் → 3 மொழிகளில் கட்டுரை படிக்கும்!"},
+      {icon:"🔍",title:"தேடல் மற்றும் வடிகட்டல்",text:"பெயரால் தேடவும், வகையால் வடிகட்டவும், பெரிய மாற்றங்களால் வரிசைப்படுத்தவும்."},
+      {icon:"🕐",title:"தினசரி தானியங்கி புதுப்பிப்பு",text:"இலங்கை மத்திய வங்கி தரவு — ஒவ்வொரு நாளும் மாலை 5:00 மணிக்கு தானாக புதுப்பிக்கப்படுகிறது."},
     ]
   }
 };
@@ -745,6 +754,9 @@ function setLang(l){
   renderFAQ(l);
   renderWeather();
   vhIdx=0; updateVoiceHint();
+  /* Guide button label */
+  const gbl=document.getElementById("guideBtnLabel");
+  if(gbl)gbl.textContent=lang==="si"?"භාවිත මඟ":lang==="ta"?"வழிகாட்டி":"How to use";
   if(scrim.classList.contains("open")&&curDetail)openDetail(curDetail.id);
 }
 document.querySelector(".lang").addEventListener("click",function(e){var b=e.target.closest("button[data-lang]");if(b)setLang(b.dataset.lang);});
