@@ -400,7 +400,7 @@
 
 
   <!-- Voice Search Hint Bar -->
-  <div id="voiceHintBar" style="background:linear-gradient(135deg,var(--petrol),#0a3a36);border-radius:12px;padding:12px 18px;margin:14px 0;display:flex;gap:14px;align-items:center;cursor:pointer" onclick="startVoice()">
+  <div id="voiceHintBar" style="background:linear-gradient(135deg,var(--petrol),#0a3a36);border-radius:12px;padding:12px 18px;margin:14px 0;display:flex;gap:14px;align-items:center;cursor:pointer" onclick="startVoiceSearch()">
     <div style="font-size:28px;animation:micPulse 1.5s ease-in-out infinite">🎤</div>
     <div style="flex:1">
       <div id="voiceHintText" style="font-size:14px;font-weight:700;color:#fff;line-height:1.4"></div>
@@ -744,6 +744,7 @@ function setLang(l){
   if(DATA.length){buildCats();renderMovers();renderGrid();renderBestCrop();}
   renderFAQ(l);
   renderWeather();
+  vhIdx=0; updateVoiceHint();
   if(scrim.classList.contains("open")&&curDetail)openDetail(curDetail.id);
 }
 document.querySelector(".lang").addEventListener("click",function(e){var b=e.target.closest("button[data-lang]");if(b)setLang(b.dataset.lang);});
@@ -2161,13 +2162,7 @@ setTimeout(()=>{
   setInterval(updateVoiceHint, 2500);
 }, 500);
 
-/* Also update on language change */
-const _origSetLang = setLang;
-function setLang(l){
-  _origSetLang(l);
-  vhIdx = 0;
-  updateVoiceHint();
-}
+/* Voice hint updates on lang change — handled in setLang below */
 
 function init(){
   DATES=DB.dateLabels;
