@@ -383,7 +383,7 @@
   <meta itemprop="description" content="Free daily agricultural prices in Sri Lanka. Vegetable, fish, rice prices from Central Bank of Sri Lanka.">
     <div class="kicker">
       <span id="kickerTxt">Data from <span class="org">Central Bank of Sri Lanka</span> website</span>
-      <div class="lang" role="group" aria-label="Language"><button data-lang="en" class="on">EN</button><button data-lang="si">සිංහල</button><button data-lang="ta">தமிழ்</button></div>
+      <div class="lang" role="group" aria-label="Language"><button data-lang="si" class="on">සිංහල</button><button data-lang="ta">தமிழ்</button><button data-lang="en">EN</button></div>
     </div>
     <h1 class="title">Lanka <em>Price</em> Monitor</h1>
     <div class="dateline">
@@ -592,7 +592,7 @@ const EMBEDDED = {"generated":"2026-05-29T16:50:15","source":"Central Bank of Sr
 let DB=EMBEDDED, DATES=[], DATA=[], DATE_OBJS=[];
 
 /* ---------- i18n ---------- */
-let lang="en";
+let lang="si";
 const I18N={
  en:{kicker:'Data from <span class="org">Central Bank of Sri Lanka</span> website',latestReport:"Latest report",sub:"Retail prices &middot; primary market shown per item &middot; vs. previous report",movers:"Today\u2019s sharpest movements",moversHint:"auto-ranked &middot; tap &rarr;",all:"All commodities",items:"items",searchPh:"Search a commodity\u2026",sortAZ:"Sort: A\u2013Z",sortUp:"Biggest increases",sortDown:"Biggest decreases",sortHigh:"Highest price",lgUp:"Price increased",lgDown:"Price decreased",footNote:"Auto-extracted from CBSL Daily Price Reports. Not an official publication.",creditPre:"Design &amp; development by",vsLast:"vs last",latest:"Latest",change:"Change",low:"2026 Low",high:"2026 High",retail:"retail",across:"Across markets \u2014 latest report",priceOn:"Retail price on",reason:'Moved <b>%A</b> &rarr; <b>%B</b> since the previous report.',noMatch:'No commodity matches &ldquo;%Q&rdquo;.',notEnough:"Not enough data in this range yet.",na:"n.a.",allCat:"All",weather:"🌤️ Weather",btnRetail:"Retail",btnWholesale:"Wholesale",btnGap:"💡 Gap",btnCalc:"🧮 Calculator",btnRead:"Read",btnShare:"Share",btnFB:"Facebook",btnPNG:"📸 Share as Image",btnAlerts:"🔔 Daily Alerts",bestTitle:"🌾 Best Crop Right Now",bestSell:"🟢 Sell Now",bestBuy:"🔴 Buy Now",bestHint:"live data · 📍 Primary market retail price · tap →",insightLabel:"🧠 Insight",retailLabel:"Retail",wholesaleLabel:"Wholesale",spikeUp:"Price spike up",spikeDown:"Price drop"},
  si:{kicker:'දත්ත <span class="org">ශ්‍රී ලංකා මහ බැංකුවේ</span> වෙබ් අඩවියෙන්',latestReport:"නවතම වාර්තාව",sub:"සිල්ලර මිල &middot; එක් භාණ්ඩයකට ප්‍රධාන වෙළඳපොළ &middot; පෙර වාර්තාවට සාපේක්ෂව",movers:"අද වැඩිම වෙනස්වීම්",moversHint:"ස්වයංක්‍රීයව ශ්‍රේණිගත &middot; තට්ටු කරන්න &rarr;",all:"සියලු භාණ්ඩ",items:"භාණ්ඩ",searchPh:"භාණ්ඩයක් සොයන්න\u2026",sortAZ:"අකාරාදී",sortUp:"වැඩිම වැඩිවීම්",sortDown:"වැඩිම අඩුවීම්",sortHigh:"ඉහළම මිල",lgUp:"මිල ඉහළ ගියා",lgDown:"මිල පහළ ගියා",footNote:"මහ බැංකුවේ දෛනික මිල වාර්තාවලින් ස්වයංක්‍රීයව උපුටා ගන්නා ලදි. නිල ප්‍රකාශනයක් නොවේ.",creditPre:"නිර්මාණය හා සංවර්ධනය:",vsLast:"පෙරට වඩා",latest:"නවතම",change:"වෙනස",low:"2026 අවම",high:"2026 උපරිම",retail:"සිල්ලර",across:"වෙළඳපොළ අතර &mdash; නවතම වාර්තාව",priceOn:"සිල්ලර මිල",reason:'පෙර වාර්තාවට සාපේක්ෂව <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; සඳහා භාණ්ඩයක් හමු නොවීය.',notEnough:"මෙම පරාසය සඳහා තවම ප්‍රමාණවත් දත්ත නැත.",na:"නැත",allCat:"සියල්ල",weather:"🌤️ කාලගුණය",btnRetail:"සිල්ලර",btnWholesale:"තොග",btnGap:"💡 පරතරය",btnCalc:"🧮 ගණකය",btnRead:"කියවන්න",btnShare:"Share කරන්න",btnFB:"ෆේස්බුක්",btnPNG:"📸  රූපයක් ලෙස Share",btnAlerts:"🔔 දෛනික දැනුම්දීම්",bestTitle:"🌾 දැන් හොඳම භාණ්ඩය",bestSell:"🟢 දැන් විකිණීමට",bestBuy:"🔴 දැන් ගැනීමට",bestHint:"සජීවී දත්ත · 📍 ප්‍රධාන වෙළඳපොළ සිල්ලර මිල · tap →",insightLabel:"🧠 තොරතුරු",retailLabel:"සිල්ලර",wholesaleLabel:"තොග",spikeUp:"ඉහළ නැගීමක්",spikeDown:"පහළ වැටීම"},
@@ -2172,7 +2172,7 @@ function init(){
   const dt=new Date(last+"T00:00:00");
   const opt={day:"numeric",month:"long",year:"numeric"};
   const el=document.getElementById("stampDate"); if(el) el.textContent=dt.toLocaleDateString("en-GB",opt);
-  applyLang(); buildCats(); renderMovers(); renderGrid(); renderBestCrop(); renderFAQ("en");
+  applyLang(); buildCats(); renderMovers(); renderGrid(); renderBestCrop(); renderFAQ("si");
   fetchWeather();
   setInterval(fetchWeather, 3600000); /* Update every hour */
 }
