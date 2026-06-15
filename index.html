@@ -261,6 +261,7 @@
   .bar .track{height:14px;background:var(--paper-2);border-radius:8px;overflow:hidden}
   .bar .fill{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--petrol),var(--petrol-deep));transform-origin:left;animation:grow .6s cubic-bezier(.2,.8,.2,1)}
   @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @keyframes micPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.25);opacity:.8}}
   .bar .bv{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px}
   .bar .bv.na{color:var(--muted);font-weight:500;font-style:italic}
   footer{margin:46px 0 60px;padding-top:22px;border-top:1px solid var(--line-strong);font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -382,7 +383,7 @@
   <meta itemprop="description" content="Free daily agricultural prices in Sri Lanka. Vegetable, fish, rice prices from Central Bank of Sri Lanka.">
     <div class="kicker">
       <span id="kickerTxt">Data from <span class="org">Central Bank of Sri Lanka</span> website</span>
-      <div class="lang" role="group" aria-label="Language"><button data-lang="en" class="on">EN</button><button data-lang="si">&#3523;&#3538;&#3458;</button><button data-lang="ta">&#2980;&#2990;&#3007;&#2996;&#3021;</button></div>
+      <div class="lang" role="group" aria-label="Language"><button data-lang="en" class="on">EN</button><button data-lang="si">සිංහල</button><button data-lang="ta">தமிழ்</button></div>
     </div>
     <h1 class="title">Lanka <em>Price</em> Monitor</h1>
     <div class="dateline">
@@ -398,14 +399,17 @@
   </header>
 
 
-  <!-- Weather Bar -->
-  <div id="weatherBar" style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 16px;margin:14px 0;display:flex;gap:16px;flex-wrap:wrap;align-items:center">
-    <div id="weatherLabel" style="font-size:10px;font-weight:700;color:var(--petrol);letter-spacing:.1em;text-transform:uppercase;flex-shrink:0">🌤️ Weather</div>
-    <div id="weatherData" style="display:flex;gap:12px;flex-wrap:wrap;flex:1">
-      <span style="font-size:12px;color:var(--muted)">Loading...</span>
+  <!-- Voice Search Hint Bar -->
+  <div id="voiceHintBar" style="background:linear-gradient(135deg,var(--petrol),#0a3a36);border-radius:12px;padding:12px 18px;margin:14px 0;display:flex;gap:14px;align-items:center;cursor:pointer" onclick="startVoice()">
+    <div style="font-size:28px;animation:micPulse 1.5s ease-in-out infinite">🎤</div>
+    <div style="flex:1">
+      <div id="voiceHintText" style="font-size:14px;font-weight:700;color:#fff;line-height:1.4"></div>
+      <div id="voiceHintExample" style="font-size:12px;color:#ffd98a;margin-top:2px"></div>
     </div>
-    <div style="font-size:9px;color:var(--muted)">Open-Meteo · Auto-update</div>
+    <div style="font-size:10px;color:#9fd4c8;text-align:right;line-height:1.5" id="voiceHintSub">tap to<br>search</div>
   </div>
+  <!-- Hidden weather data still loaded -->
+  <div id="weatherData" style="display:none"></div>
 
   <div class="section-h"><h2 id="hMovers">Today&rsquo;s sharpest movements</h2><span class="rule"></span><span class="hint" id="hintMovers">auto-ranked &middot; tap &rarr;</span></div>
   <div class="movers" id="movers"></div>
@@ -2110,6 +2114,59 @@ function renderBestCrop(){
   if(hb)hb.innerHTML=t("bestTitle");
   const hint=document.getElementById("hintBest");
   if(hint)hint.textContent=t("bestHint");
+}
+
+
+/* ===== Voice Search Hint Rotation ===== */
+const VOICE_HINTS = {
+  si: {
+    text: "ඔබට අවශ්‍ය දේ අහන්න",
+    sub: "tap කරන්න · සොයන්න",
+    examples: ["අමු මිරිස්","තක්කාලි","බෝංචි","දෙහි","කෙසෙල්","සම්බා","කෙළවල්ලා","වම්බටු","ගෝවා","කැරට්"]
+  },
+  en: {
+    text: "Ask what you need",
+    sub: "tap to search",
+    examples: ["Green Chilli","Tomato","Beans","Lime","Banana","Samba Rice","Kelawalla","Brinjal","Cabbage","Carrot"]
+  },
+  ta: {
+    text: "உங்களுக்குத் தேவையானதைக் கேளுங்கள்",
+    sub: "தட்டி தேடுங்கள்",
+    examples: ["பச்சை மிளகாய்","தக்காளி","பீன்ஸ்","எலுமிச்சை","வாழைப்பழம்","சம்பா","கெளவல்லா","கத்தரிக்காய்","முட்டைக்கோஸ்","கேரட்"]
+  }
+};
+
+let vhIdx = 0;
+function updateVoiceHint(){
+  const h = VOICE_HINTS[lang] || VOICE_HINTS.si;
+  const txt = document.getElementById('voiceHintText');
+  const ex = document.getElementById('voiceHintExample');
+  const sub = document.getElementById('voiceHintSub');
+  if(txt) txt.textContent = h.text;
+  if(ex){
+    ex.style.opacity = '0';
+    setTimeout(()=>{
+      ex.textContent = '🔍 "' + h.examples[vhIdx % h.examples.length] + '"';
+      ex.style.transition = 'opacity 0.5s';
+      ex.style.opacity = '1';
+      vhIdx++;
+    }, 300);
+  }
+  if(sub) sub.innerHTML = h.sub.replace('·','·<br>');
+}
+
+/* Start rotation */
+setTimeout(()=>{
+  updateVoiceHint();
+  setInterval(updateVoiceHint, 2500);
+}, 500);
+
+/* Also update on language change */
+const _origSetLang = setLang;
+function setLang(l){
+  _origSetLang(l);
+  vhIdx = 0;
+  updateVoiceHint();
 }
 
 function init(){
