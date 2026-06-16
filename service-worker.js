@@ -1,21 +1,22 @@
 /* ===== TopGoviya PWA Service Worker ===== */
 /* Version: 1.0 | topgoviya.lk | Built in Gampola 🇱🇰 */
 
-const CACHE_NAME = 'topgoviya-v2';
-const DATA_CACHE = 'topgoviya-data-v2';
+const CACHE_NAME = 'topgoviya-v3';
+const DATA_CACHE = 'topgoviya-data-v3';
 
 /* Static files to cache for offline use */
 const STATIC_ASSETS = [
-  '/lanka-price-monitor/',
-  '/lanka-price-monitor/index.html',
-  '/lanka-price-monitor/insights.html',
-  '/lanka-price-monitor/blog.html',
-  '/lanka-price-monitor/about.html',
-  '/lanka-price-monitor/privacy.html',
-  '/lanka-price-monitor/netherlands-sri-lanka-agriculture.html',
-  '/lanka-price-monitor/manifest.json',
-  '/lanka-price-monitor/icons/icon-192.png',
-  '/lanka-price-monitor/icons/icon-512.png',
+  '/',
+  '/index.html',
+  '/insights.html',
+  '/blog.html',
+  '/about.html',
+  '/privacy.html',
+  '/netherlands-sri-lanka-agriculture.html',
+  '/farmers-guide-topgoviya.html',
+  '/manifest.json',
+  '/icon-192x192.png',
+  '/icon-512x512.png',
   /* Google Fonts — cache for offline */
   'https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Sinhala:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;600&display=swap'
 ];
