@@ -1,0 +1,1295 @@
+{
+ "generated": "2026-06-16T10:52:25",
+ "source": "Hector Kobbekaduwa Agrarian Research and Training Institute - Daily Wholesale Price Report",
+ "dates": [
+  "2026-01-15",
+  "2026-02-20",
+  "2026-03-20"
+ ],
+ "dateLabels": [
+  "15 Jan",
+  "20 Feb",
+  "20 Mar"
+ ],
+ "markets": [
+  "Peliyagoda",
+  "Kandy",
+  "Dambulla",
+  "Meegoda",
+  "Norochchole",
+  "Thambuththegama",
+  "Keppetipola",
+  "Nuwaraeliya",
+  "Bandarawela",
+  "Veyangoda"
+ ],
+ "commodities": [
+  {
+   "id": 0,
+   "name": "Beans",
+   "category": "Up Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 250,
+     "max": 300,
+     "mid": 275
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    425,
+    275
+   ]
+  },
+  {
+   "id": 1,
+   "name": "Carrot",
+   "category": "Up Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 260,
+     "max": 300,
+     "mid": 280
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    215,
+    280
+   ]
+  },
+  {
+   "id": 2,
+   "name": "Leeks",
+   "category": "Up Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 150,
+     "max": 160,
+     "mid": 155
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    180,
+    155
+   ]
+  },
+  {
+   "id": 3,
+   "name": "Beetroot",
+   "category": "Up Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 100,
+     "max": 120,
+     "mid": 110
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    190,
+    110
+   ]
+  },
+  {
+   "id": 4,
+   "name": "Knolkhol",
+   "category": "Up Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 120,
+     "max": 150,
+     "mid": 135
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    140,
+    135
+   ]
+  },
+  {
+   "id": 5,
+   "name": "Raddish",
+   "category": "Up Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 50,
+     "max": 60,
+     "mid": 55
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    45,
+    55
+   ]
+  },
+  {
+   "id": 6,
+   "name": "Cabbage (N.Eliya)",
+   "category": "Up Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 130,
+     "max": 140,
+     "mid": 135
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    175,
+    135
+   ]
+  },
+  {
+   "id": 7,
+   "name": "Cabbage (Kandy)",
+   "category": "Up Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 100,
+     "max": 120,
+     "mid": 110
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    100,
+    110
+   ]
+  },
+  {
+   "id": 8,
+   "name": "Tomato",
+   "category": "Up Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 80,
+     "max": 100,
+     "mid": 90
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    140,
+    90
+   ]
+  },
+  {
+   "id": 9,
+   "name": "Ladies Fingers",
+   "category": "Low Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 100,
+     "max": 120,
+     "mid": 110
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    110,
+    110
+   ]
+  },
+  {
+   "id": 10,
+   "name": "Brinjals",
+   "category": "Low Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 250,
+     "max": 350,
+     "mid": 300
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    105,
+    300
+   ]
+  },
+  {
+   "id": 11,
+   "name": "Capsicum",
+   "category": "Low Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 120,
+     "max": 200,
+     "mid": 160
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    475,
+    160
+   ]
+  },
+  {
+   "id": 12,
+   "name": "Pumpkin",
+   "category": "Low Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 120,
+     "max": 130,
+     "mid": 125
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    115,
+    125
+   ]
+  },
+  {
+   "id": 13,
+   "name": "Cucumber",
+   "category": "Low Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 60,
+     "max": 80,
+     "mid": 70
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    50,
+    70
+   ]
+  },
+  {
+   "id": 14,
+   "name": "Bitter Gourd",
+   "category": "Low Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 120,
+     "max": 150,
+     "mid": 135
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    325,
+    135
+   ]
+  },
+  {
+   "id": 15,
+   "name": "Snake Gourd",
+   "category": "Low Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 100,
+     "max": 120,
+     "mid": 110
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    125,
+    110
+   ]
+  },
+  {
+   "id": 16,
+   "name": "Luffa",
+   "category": "Low Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 160,
+     "max": 180,
+     "mid": 170
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    205,
+    170
+   ]
+  },
+  {
+   "id": 17,
+   "name": "Long Beans",
+   "category": "Low Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 60,
+     "max": 100,
+     "mid": 80
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    135,
+    80
+   ]
+  },
+  {
+   "id": 18,
+   "name": "Ash Plantains",
+   "category": "Low Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 130,
+     "max": 160,
+     "mid": 145
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    155,
+    145
+   ]
+  },
+  {
+   "id": 19,
+   "name": "Green Chillies",
+   "category": "Low Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 300,
+     "max": 350,
+     "mid": 325
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    225,
+    325
+   ]
+  },
+  {
+   "id": 20,
+   "name": "Lime",
+   "category": "Low Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 50,
+     "max": 80,
+     "mid": 65
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    70,
+    65
+   ]
+  },
+  {
+   "id": 21,
+   "name": "Sweet Potato",
+   "category": "Low Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 120,
+     "max": 140,
+     "mid": 130
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    160,
+    130
+   ]
+  },
+  {
+   "id": 22,
+   "name": "Manioc",
+   "category": "Low Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 120,
+     "max": 140,
+     "mid": 130
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    110,
+    130
+   ]
+  },
+  {
+   "id": 23,
+   "name": "Eggplant",
+   "category": "Low Country Vegetables",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 100,
+     "max": 130,
+     "mid": 115
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    115,
+    115
+   ]
+  },
+  {
+   "id": 24,
+   "name": "Potato (Imported)",
+   "category": "Potatoes & Onions",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 145,
+     "max": 200,
+     "mid": 172
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    190,
+    172
+   ]
+  },
+  {
+   "id": 25,
+   "name": "Potato (Welimada)",
+   "category": "Potatoes & Onions",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 240,
+     "max": 260,
+     "mid": 250
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    265,
+    250
+   ]
+  },
+  {
+   "id": 26,
+   "name": "Potato (N.Eliya)",
+   "category": "Potatoes & Onions",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 280,
+     "max": 310,
+     "mid": 295
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    310,
+    295
+   ]
+  },
+  {
+   "id": 27,
+   "name": "Big Onion (Imported)",
+   "category": "Potatoes & Onions",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 120,
+     "max": 150,
+     "mid": 135
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    138,
+    135
+   ]
+  },
+  {
+   "id": 28,
+   "name": "Banana Ambul",
+   "category": "Fruits & Banana",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 100,
+     "max": 140,
+     "mid": 120
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    140,
+    120
+   ]
+  },
+  {
+   "id": 29,
+   "name": "Banana Kolikuttu",
+   "category": "Fruits & Banana",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 250,
+     "max": 320,
+     "mid": 285
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    315,
+    285
+   ]
+  },
+  {
+   "id": 30,
+   "name": "Banana Seeni",
+   "category": "Fruits & Banana",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 100,
+     "max": 140,
+     "mid": 120
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    140,
+    120
+   ]
+  },
+  {
+   "id": 31,
+   "name": "Papaya",
+   "category": "Fruits & Banana",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 200,
+     "max": 300,
+     "mid": 250
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    400,
+    250
+   ]
+  },
+  {
+   "id": 32,
+   "name": "Pineapple (Large)",
+   "category": "Fruits & Banana",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 350,
+     "max": 420,
+     "mid": 385
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    415,
+    385
+   ]
+  },
+  {
+   "id": 33,
+   "name": "Avocado",
+   "category": "Fruits & Banana",
+   "unit": "Rs./kg",
+   "primaryMarket": "Peliyagoda",
+   "markets": {
+    "Peliyagoda": {
+     "min": 170,
+     "max": 200,
+     "mid": 185
+    },
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": null,
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": null,
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    302,
+    185
+   ]
+  },
+  {
+   "id": 34,
+   "name": "Samba 1",
+   "category": "Rice",
+   "unit": "Rs./kg",
+   "primaryMarket": "Pettah",
+   "markets": {
+    "Pettah": 125
+   },
+   "series": [
+    null,
+    122,
+    125
+   ],
+   "pettahRange": {
+    "min": 0,
+    "max": 250,
+    "mid": 125
+   },
+   "pettahAvg": 248.0
+  },
+  {
+   "id": 35,
+   "name": "Samba 2",
+   "category": "Rice",
+   "unit": "Rs./kg",
+   "primaryMarket": "Pettah",
+   "markets": {
+    "Pettah": 121
+   },
+   "series": [
+    null,
+    119,
+    121
+   ],
+   "pettahRange": {
+    "min": 0,
+    "max": 242,
+    "mid": 121
+   },
+   "pettahAvg": 241.0
+  },
+  {
+   "id": 36,
+   "name": "Keeri Samba",
+   "category": "Rice",
+   "unit": "Rs./kg",
+   "primaryMarket": "Pettah",
+   "markets": {
+    "Pettah": 170
+   },
+   "series": [
+    null,
+    160,
+    170
+   ],
+   "pettahRange": {
+    "min": 0,
+    "max": 340,
+    "mid": 170
+   },
+   "pettahAvg": 335.0
+  },
+  {
+   "id": 37,
+   "name": "Nadu 1",
+   "category": "Rice",
+   "unit": "Rs./kg",
+   "primaryMarket": "Pettah",
+   "markets": {
+    "Pettah": 105
+   },
+   "series": [
+    null,
+    102,
+    105
+   ],
+   "pettahRange": {
+    "min": 0,
+    "max": 210,
+    "mid": 105
+   },
+   "pettahAvg": 206.25
+  },
+  {
+   "id": 38,
+   "name": "Nadu 2",
+   "category": "Rice",
+   "unit": "Rs./kg",
+   "primaryMarket": "Pettah",
+   "markets": {
+    "Pettah": 101
+   },
+   "series": [
+    null,
+    98,
+    101
+   ],
+   "pettahRange": {
+    "min": 0,
+    "max": 202,
+    "mid": 101
+   },
+   "pettahAvg": 200.5
+  },
+  {
+   "id": 39,
+   "name": "Raw Red",
+   "category": "Rice",
+   "unit": "Rs./kg",
+   "primaryMarket": "Pettah",
+   "markets": {
+    "Pettah": 100
+   },
+   "series": [
+    null,
+    100,
+    100
+   ],
+   "pettahRange": {
+    "min": 0,
+    "max": 200,
+    "mid": 100
+   },
+   "pettahAvg": 194.0
+  },
+  {
+   "id": 40,
+   "name": "Raw White",
+   "category": "Rice",
+   "unit": "Rs./kg",
+   "primaryMarket": "Pettah",
+   "markets": {
+    "Pettah": 98
+   },
+   "series": [
+    null,
+    100,
+    98
+   ],
+   "pettahRange": {
+    "min": 0,
+    "max": 195,
+    "mid": 98
+   },
+   "pettahAvg": 192.0
+  },
+  {
+   "id": 41,
+   "name": "Dried Chillies (Imp)",
+   "category": "Pulses & Essentials",
+   "unit": "Rs./kg",
+   "primaryMarket": "Pettah",
+   "markets": {
+    "Pettah": 100
+   },
+   "series": [
+    null,
+    125,
+    100
+   ],
+   "pettahRange": {
+    "min": 0,
+    "max": 200,
+    "mid": 100
+   },
+   "pettahAvg": 169.0
+  },
+  {
+   "id": 42,
+   "name": "Green Gram",
+   "category": "Pulses & Essentials",
+   "unit": "Rs./kg",
+   "primaryMarket": "Pettah",
+   "markets": {
+    "Pettah": 400
+   },
+   "series": [
+    null,
+    330,
+    400
+   ],
+   "pettahRange": {
+    "min": 0,
+    "max": 800,
+    "mid": 400
+   },
+   "pettahAvg": 780.0
+  },
+  {
+   "id": 43,
+   "name": "Cowpea",
+   "category": "Pulses & Essentials",
+   "unit": "Rs./kg",
+   "primaryMarket": "Pettah",
+   "markets": {
+    "Pettah": 375
+   },
+   "series": [
+    null,
+    400,
+    375
+   ],
+   "pettahRange": {
+    "min": 0,
+    "max": 750,
+    "mid": 375
+   },
+   "pettahAvg": 725.0
+  },
+  {
+   "id": 44,
+   "name": "Red Dhal",
+   "category": "Pulses & Essentials",
+   "unit": "Rs./kg",
+   "primaryMarket": "Pettah",
+   "markets": {
+    "Pettah": 150
+   },
+   "series": [
+    null,
+    125,
+    150
+   ],
+   "pettahRange": {
+    "min": 0,
+    "max": 300,
+    "mid": 150
+   },
+   "pettahAvg": 296.0
+  },
+  {
+   "id": 45,
+   "name": "Sugar (White)",
+   "category": "Pulses & Essentials",
+   "unit": "Rs./kg",
+   "primaryMarket": "Pettah",
+   "markets": {
+    "Pettah": 105
+   },
+   "series": [
+    null,
+    98,
+    105
+   ],
+   "pettahRange": {
+    "min": 0,
+    "max": 210,
+    "mid": 105
+   },
+   "pettahAvg": 209.5
+  },
+  {
+   "id": 46,
+   "name": "Wheat Flour",
+   "category": "Pulses & Essentials",
+   "unit": "Rs./kg",
+   "primaryMarket": "Pettah",
+   "markets": {
+    "Pettah": 89
+   },
+   "series": [
+    null,
+    88,
+    89
+   ],
+   "pettahRange": {
+    "min": 0,
+    "max": 178,
+    "mid": 89
+   },
+   "pettahAvg": 164.0
+  },
+  {
+   "id": 47,
+   "name": "Eggs (Brown)",
+   "category": "Eggs",
+   "unit": "Rs./Egg",
+   "primaryMarket": "Pettah",
+   "markets": {
+    "Pettah": 20
+   },
+   "series": [
+    null,
+    18,
+    20
+   ],
+   "pettahRange": {
+    "min": 0,
+    "max": 40,
+    "mid": 20
+   },
+   "pettahAvg": 39.5
+  },
+  {
+   "id": 48,
+   "name": "Eggs (White)",
+   "category": "Eggs",
+   "unit": "Rs./Egg",
+   "primaryMarket": "Pettah",
+   "markets": {
+    "Pettah": 19
+   },
+   "series": [
+    null,
+    17,
+    19
+   ],
+   "pettahRange": {
+    "min": 0,
+    "max": 38,
+    "mid": 19
+   },
+   "pettahAvg": 37.5
+  }
+ ]
+}
