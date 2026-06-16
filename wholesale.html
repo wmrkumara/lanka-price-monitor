@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lanka Price Monitor — Wholesale Prices</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4efe4;--paper-2:#efe8d8;--card:#fffdf7;--ink:#191d1a;--ink-soft:#3a403a;
+    --muted:#7a7264;--line:#e3d9c4;--line-strong:#cdbf9f;--petrol:#0e4f4a;--petrol-deep:#0a3a36;
+    --gold:#a9802a;--up:#b23a2e;--up-bg:#f7e6e2;--down:#2c7a52;--down-bg:#e3efe6;--flat:#8a8170;
+    --shadow:0 1px 0 rgba(0,0,0,.02), 0 12px 30px -18px rgba(20,40,38,.35);--r:14px;
+    --wholesale:#1a5c8a;--wholesale-bg:#e6f0f7;--wholesale-deep:#133f60;
+  }
+  *{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:'Hanken Grotesk','Noto Sans Sinhala','Noto Sans Tamil',sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.45;
+    background-image:radial-gradient(circle at 12% -10%, rgba(14,79,74,.06), transparent 38%),
+                     radial-gradient(circle at 95% 0%, rgba(169,128,42,.07), transparent 30%);background-attachment:fixed;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+
+  /* ── TOP NAV BAR ── */
+  .topnav{background:var(--petrol-deep);border-bottom:2px solid var(--gold);padding:0}
+  .topnav-inner{max-width:1160px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:0}
+  .topnav-brand{font-family:'Newsreader',serif;font-size:16px;font-weight:500;color:#fff;
+    padding:12px 18px 12px 0;border-right:1px solid rgba(255,255,255,.18);margin-right:4px;white-space:nowrap;
+    text-decoration:none;letter-spacing:-.01em}
+  .topnav-brand em{font-style:italic;color:#ffd98a}
+  .navlinks{display:flex;gap:2px;padding:8px 0}
+  .navlink{font:inherit;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    padding:7px 16px;border-radius:8px;text-decoration:none;transition:.18s;white-space:nowrap;border:0;cursor:pointer}
+  .navlink.retail{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+  .navlink.retail:hover{background:rgba(255,255,255,.18);color:#fff}
+  .navlink.wholesale{background:var(--gold);color:#fff}
+  .navlink.wholesale:hover{background:#c4921f}
+  .navlink-badge{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.08em;
+    background:rgba(255,255,255,.25);padding:2px 5px;border-radius:4px;margin-left:5px;vertical-align:middle}
+
+  /* ── MASTHEAD ── */
+  .masthead{padding:26px 0 16px;border-bottom:2px solid var(--ink)}
+  .kicker{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap;
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .kicker .org{color:var(--wholesale)}
+  .kicker .source-badge{display:inline-flex;align-items:center;gap:6px;background:var(--wholesale-bg);
+    color:var(--wholesale);border:1px solid rgba(26,92,138,.2);border-radius:999px;
+    padding:4px 12px;font-size:10px;font-weight:700;letter-spacing:.1em}
+  .lang{display:flex;gap:2px;border:1px solid var(--line-strong);border-radius:999px;overflow:hidden}
+  .lang button{font:inherit;font-size:11px;letter-spacing:.12em;font-weight:700;text-transform:uppercase;
+    border:0;background:transparent;color:var(--muted);padding:5px 11px;cursor:pointer;transition:.2s}
+  .lang button.on{background:var(--petrol);color:#fff}
+  .title{font-family:'Newsreader',serif;font-weight:500;font-size:clamp(30px,5vw,54px);
+    line-height:.98;letter-spacing:-.015em;margin:12px 0 4px}
+  .title em{font-style:italic;color:var(--wholesale)}
+  .dateline{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:13.5px;color:var(--ink-soft)}
+  .dateline .stamp{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--ink)}
+  .dateline .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);display:inline-block}
+  .wholesale-note{display:inline-flex;align-items:center;gap:7px;background:var(--wholesale-bg);
+    border:1px solid rgba(26,92,138,.2);border-radius:10px;padding:8px 14px;
+    font-size:12.5px;color:var(--wholesale);font-weight:600;margin-top:10px}
+  .wholesale-note svg{flex-shrink:0}
+
+  /* ── SECTIONS ── */
+  .section-h{display:flex;align-items:center;gap:12px;margin:32px 0 14px}
+  .section-h h2{font-family:'Newsreader',serif;font-weight:500;font-size:22px;margin:0;letter-spacing:-.01em}
+  .section-h .rule{flex:1;height:1px;background:var(--line-strong)}
+  .section-h .hint{font-size:12px;color:var(--muted)}
+
+  /* ── MOVERS ── */
+  .movers{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(244px,1fr);gap:14px;
+    overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory}
+  .movers::-webkit-scrollbar{height:7px}.movers::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:99px}
+  .mover{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;
+    scroll-snap-align:start;box-shadow:var(--shadow);cursor:pointer;transition:transform .18s,box-shadow .18s}
+  .mover:hover{transform:translateY(-3px);box-shadow:0 18px 36px -20px rgba(20,40,38,.45)}
+  .mover .cat{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .mover .nm{font-family:'Newsreader',serif;font-size:21px;margin:2px 0 8px;line-height:1.05}
+  .mover .row{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+  .price{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:22px;letter-spacing:-.02em}
+  .price small{font-size:11px;font-weight:500;color:var(--muted)}
+  .price-range{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-top:3px}
+  .mover-markets{font-size:11px;color:var(--muted);margin-top:8px;border-top:1px dashed var(--line-strong);padding-top:7px}
+
+  /* ── CONTROLS ── */
+  .controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:6px 0 18px}
+  .search{flex:1;min-width:200px;position:relative}
+  .search input{width:100%;font:inherit;font-size:15px;padding:12px 14px 12px 40px;border-radius:11px;
+    border:1px solid var(--line-strong);background:var(--card);color:var(--ink);outline:none;transition:.2s}
+  .search input:focus{border-color:var(--wholesale);box-shadow:0 0 0 3px rgba(26,92,138,.12)}
+  .search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);opacity:.5}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{font:inherit;font-size:12.5px;font-weight:600;padding:9px 14px;border-radius:999px;cursor:pointer;
+    border:1px solid var(--line-strong);background:var(--card);color:var(--ink-soft);transition:.18s;white-space:nowrap}
+  .chip:hover{border-color:var(--wholesale)}.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .sortsel{font:inherit;font-size:12.5px;font-weight:600;padding:9px 12px;border-radius:999px;
+    border:1px solid var(--line-strong);background:var(--card);color:var(--ink-soft);cursor:pointer}
+
+  /* ── GRID ── */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+  .item{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;cursor:pointer;
+    box-shadow:var(--shadow);transition:transform .16s,box-shadow .16s,border-color .16s;
+    display:flex;flex-direction:column;gap:8px;position:relative}
+  .item:hover{transform:translateY(-3px);border-color:var(--line-strong);box-shadow:0 18px 36px -22px rgba(20,40,38,.5)}
+  .item .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  .item .nm{font-family:'Newsreader',serif;font-size:19px;line-height:1.05}
+  .item .cat{font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:3px}
+  .item .foot{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;margin-top:4px}
+  .item .mkt-count{font-size:11px;color:var(--muted);font-style:italic}
+  .w-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;
+    letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:6px;
+    background:var(--wholesale-bg);color:var(--wholesale)}
+  .empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:48px 0;font-style:italic;font-family:'Newsreader',serif;font-size:18px}
+
+  /* ── MODAL ── */
+  .scrim{position:fixed;inset:0;background:rgba(15,28,26,.55);backdrop-filter:blur(3px);
+    display:none;align-items:flex-start;justify-content:center;padding:28px 16px;z-index:50;overflow-y:auto}
+  .scrim.open{display:flex;animation:fade .2s ease}@keyframes fade{from{opacity:0}to{opacity:1}}
+  .modal{background:var(--card);border:1px solid var(--line-strong);border-radius:18px;max-width:820px;width:100%;
+    box-shadow:0 40px 90px -30px rgba(10,30,28,.7);animation:rise .26s cubic-bezier(.2,.8,.2,1);overflow:hidden}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .modal .mhead{padding:20px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+  .modal .mhead .cat{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--wholesale);font-weight:700}
+  .modal .mhead h3{font-family:'Newsreader',serif;font-weight:500;font-size:30px;margin:3px 0 0;line-height:1}
+  .close{border:0;background:var(--paper-2);width:36px;height:36px;border-radius:10px;cursor:pointer;font-size:18px;color:var(--ink-soft);flex-shrink:0;transition:.18s}
+  .close:hover{background:var(--up-bg);color:var(--up)}
+  .mbody{padding:20px 24px 26px}
+  .statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+  .stat{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:11px 12px}
+  .stat .l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .stat .v{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;margin-top:3px}
+
+  /* ── MARKET TABLE ── */
+  .mkt-h{font-family:'Newsreader',serif;font-size:19px;margin:20px 0 4px}
+  .mkt-sub{font-size:12px;color:var(--muted);margin-bottom:14px}
+  .mkt-table{width:100%;border-collapse:collapse;font-size:13.5px}
+  .mkt-table th{text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);font-weight:700;padding:6px 10px;border-bottom:2px solid var(--line-strong)}
+  .mkt-table td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+  .mkt-table tr:last-child td{border-bottom:0}
+  .mkt-table tr:hover td{background:var(--paper)}
+  .mkt-name{font-weight:600}
+  .mkt-type{font-size:10px;color:var(--muted);display:block;font-weight:400;letter-spacing:.04em}
+  .mkt-range{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:13px}
+  .mkt-mid{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:var(--wholesale)}
+  .mkt-na{color:var(--muted);font-style:italic;font-size:12px}
+  .bar-track{height:8px;background:var(--paper-2);border-radius:6px;overflow:hidden;min-width:80px}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--wholesale),var(--wholesale-deep));
+    transform-origin:left;animation:grow .5s cubic-bezier(.2,.8,.2,1)}
+  @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+  /* ── FOOTER ── */
+  footer{margin:46px 0 60px;padding-top:22px;border-top:1px solid var(--line-strong);font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .credit{flex-basis:100%;text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--line);
+    font-size:13.5px;color:var(--ink-soft);letter-spacing:.01em}
+  .credit a{color:var(--petrol);font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--line-strong);transition:.18s}
+  .credit a:hover{border-color:var(--petrol)}
+  .source-row{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+  .src{display:inline-flex;align-items:center;gap:6px;font-size:12px}
+  .src-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+
+  @media(max-width:560px){
+    .statrow{grid-template-columns:repeat(2,1fr)}
+    .modal .mhead h3{font-size:24px}
+    .navlinks{gap:1px}
+    .navlink{font-size:11px;padding:6px 10px}
+  }
+  .title,.section-h h2,.mover .nm,.item .nm,.modal .mhead h3,.empty,.mkt-h{
+    font-family:'Newsreader','Noto Sans Sinhala','Noto Sans Tamil',serif}
+</style>
+</head>
+<body>
+
+<!-- ══ TOP NAV BAR ══ -->
+<nav class="topnav" role="navigation">
+  <div class="topnav-inner">
+    <a href="index.html" class="topnav-brand">Lanka <em>Price</em> Monitor</a>
+    <div class="navlinks">
+      <a href="index.html" class="navlink retail" id="navRetail">📊 Retail Prices <span class="navlink-badge">CBSL</span></a>
+      <a href="wholesale.html" class="navlink wholesale" id="navWholesale">📦 Wholesale <span class="navlink-badge">HARTI</span></a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="masthead">
+    <div class="kicker">
+      <span id="kickerTxt">Wholesale data from <span class="org">Hector Kobbekaduwa Agrarian Research &amp; Training Institute</span></span>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <span class="source-badge">📦 WHOLESALE PRICES</span>
+        <div class="lang" role="group" aria-label="Language">
+          <button data-lang="en" class="on">EN</button>
+          <button data-lang="si">සිං</button>
+          <button data-lang="ta">தமி</button>
+        </div>
+      </div>
+    </div>
+    <h1 class="title">Wholesale <em>Market</em> Prices</h1>
+    <div class="dateline">
+      <span id="lblLatest">Latest report</span><span class="dot"></span>
+      <span class="stamp" id="stampDate">15 June 2026</span><span class="dot"></span>
+      <span id="lblSub">Wholesale prices &middot; 10 markets &middot; price range shown per commodity</span>
+    </div>
+    <div class="wholesale-note">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span id="wholesaleNote">These are <strong>wholesale</strong> prices — lower than retail. Midpoint of range shown.</span>
+    </div>
+  </header>
+
+  <div class="section-h"><h2 id="hMovers">Sharpest movements today</h2><span class="rule"></span><span class="hint" id="hintMovers">Peliyagoda midpoint &middot; tap &rarr;</span></div>
+  <div class="movers" id="movers"></div>
+
+  <div class="section-h"><h2 id="hAll">All commodities</h2><span class="rule"></span><span class="hint" id="count"></span></div>
+  <div class="controls">
+    <div class="search">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="search" type="text" placeholder="Search a commodity…" autocomplete="off">
+    </div>
+    <div class="chips" id="cats"></div>
+    <select class="sortsel" id="sort">
+      <option value="az">Sort: A–Z</option>
+      <option value="high">Highest midpoint</option>
+      <option value="markets">Most markets</option>
+    </select>
+  </div>
+  <div class="grid" id="grid"></div>
+
+  <footer>
+    <div class="source-row">
+      <span class="src"><span class="src-dot" style="background:var(--wholesale)"></span> Wholesale — HARTI Daily Report</span>
+      <span class="src"><span class="src-dot" style="background:var(--petrol)"></span> <a href="index.html" style="color:var(--petrol);text-decoration:none;font-weight:600">Retail prices → CBSL</a></span>
+    </div>
+    <div id="footNote">Auto-extracted from HARTI Daily Wholesale Price Reports. Not an official publication.</div>
+    <div class="credit"><span id="creditPre">Design &amp; development by</span> <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a></div>
+  </footer>
+</div>
+
+<div class="scrim" id="scrim"><div class="modal" id="modal" role="dialog" aria-modal="true"></div></div>
+
+<script>
+// ══════════════════════════════════════════════
+//  HARTI WHOLESALE DATA — 2026.06.15
+// ══════════════════════════════════════════════
+const HARTI = {
+  date: "2026-06-15",
+  dateLabel: "15 June 2026",
+  source: "Hector Kobbekaduwa Agrarian Research and Training Institute",
+  markets: ["Peliyagoda","Kandy","Dambulla","Meegoda","Norochchole","Thambuththegama","Keppetipola","Nuwaraeliya","Bandarawela","Veyangoda"],
+  marketDates: ["2026.06.15","2026.06.15","2026.06.15","2026.06.14","2026.06.15","2026.06.15","2026.06.15","2026.06.15","2026.06.15","2026.06.14"],
+  commodities: [
+    // UP COUNTRY VEGETABLES
+    {id:0,name:"Beans",category:"Up Country Vegetables",unit:"Rs./kg",
+     prices:[{min:550,max:600},{min:500,max:550},{min:350,max:450},{min:500,max:550},null,{min:500,max:560},{min:450,max:500},{min:480,max:520},null,null]},
+    {id:1,name:"Carrot",category:"Up Country Vegetables",unit:"Rs./kg",
+     prices:[{min:260,max:300},{min:300,max:330},{min:280,max:350},{min:340,max:370},null,{min:340,max:380},{min:250,max:300},{min:310,max:330},null,null]},
+    {id:2,name:"Leeks",category:"Up Country Vegetables",unit:"Rs./kg",
+     prices:[{min:360,max:400},{min:300,max:320},{min:300,max:350},{min:330,max:360},null,{min:300,max:350},{min:260,max:280},{min:290,max:310},null,null]},
+    {id:3,name:"Beetroot",category:"Up Country Vegetables",unit:"Rs./kg",
+     prices:[{min:300,max:320},{min:280,max:320},{min:200,max:260},{min:290,max:320},{min:180,max:250},{min:350,max:380},null,null,null,null]},
+    {id:4,name:"Beetroot (N.Eliya)",category:"Up Country Vegetables",unit:"Rs./kg",
+     prices:[{min:350,max:380},{min:350,max:370},{min:350,max:400},null,null,null,{min:260,max:300},{min:300,max:320},null,null]},
+    {id:5,name:"Knolkhol",category:"Up Country Vegetables",unit:"Rs./kg",
+     prices:[{min:200,max:250},{min:280,max:320},{min:250,max:300},{min:330,max:370},null,null,{min:220,max:250},{min:230,max:250},null,null]},
+    {id:6,name:"Raddish",category:"Up Country Vegetables",unit:"Rs./kg",
+     prices:[{min:100,max:130},{min:140,max:160},{min:90,max:120},{min:140,max:170},{min:60,max:80},{min:130,max:150},{min:100,max:120},{min:120,max:140},null,null]},
+    {id:7,name:"Cabbage (N.Eliya)",category:"Up Country Vegetables",unit:"Rs./kg",
+     prices:[null,{min:160,max:170},null,null,null,null,{min:100,max:120},{min:130,max:140},null,null]},
+    {id:8,name:"Cabbage (Kandy)",category:"Up Country Vegetables",unit:"Rs./kg",
+     prices:[{min:120,max:150},{min:120,max:140},{min:120,max:140},{min:130,max:170},null,{min:120,max:150},null,null,null,null]},
+    {id:9,name:"Tomato",category:"Up Country Vegetables",unit:"Rs./kg",
+     prices:[{min:650,max:700},{min:600,max:620},{min:600,max:650},{min:600,max:700},null,{min:600,max:650},{min:580,max:620},{min:580,max:630},null,null]},
+    // LOW COUNTRY VEGETABLES
+    {id:10,name:"Ladies Fingers",category:"Low Country Vegetables",unit:"Rs./kg",
+     prices:[{min:200,max:250},{min:200,max:220},{min:200,max:250},{min:160,max:210},{min:180,max:200},{min:230,max:270},null,null,null,null]},
+    {id:11,name:"Brinjals",category:"Low Country Vegetables",unit:"Rs./kg",
+     prices:[{min:150,max:250},{min:220,max:250},{min:180,max:250},{min:230,max:280},{min:130,max:200},{min:170,max:200},{min:250,max:280},null,null,null]},
+    {id:12,name:"Capsicum",category:"Low Country Vegetables",unit:"Rs./kg",
+     prices:[{min:350,max:400},{min:400,max:430},{min:380,max:450},{min:360,max:400},null,{min:350,max:420},{min:350,max:400},{min:360,max:380},null,null]},
+    {id:13,name:"Pumpkin",category:"Low Country Vegetables",unit:"Rs./kg",
+     prices:[{min:90,max:110},{min:80,max:90},{min:80,max:100},{min:90,max:100},{min:70,max:80},{min:90,max:110},{min:80,max:100},null,null,null]},
+    {id:14,name:"Cucumber",category:"Low Country Vegetables",unit:"Rs./kg",
+     prices:[{min:120,max:160},{min:100,max:120},{min:80,max:110},{min:110,max:140},{min:70,max:100},{min:60,max:80},{min:120,max:120},null,null,null]},
+    {id:15,name:"Bitter Gourd",category:"Low Country Vegetables",unit:"Rs./kg",
+     prices:[{min:550,max:600},{min:530,max:550},{min:500,max:550},{min:550,max:600},null,{min:420,max:460},null,null,null,null]},
+    {id:16,name:"Snake Gourd",category:"Low Country Vegetables",unit:"Rs./kg",
+     prices:[{min:200,max:250},{min:180,max:200},{min:200,max:250},null,{min:120,max:150},{min:160,max:210},null,null,null,null]},
+    {id:17,name:"Drumstick",category:"Low Country Vegetables",unit:"Rs./kg",
+     prices:[{min:1100,max:1200},null,{min:700,max:700},null,null,null,null,null,null,null]},
+    {id:18,name:"Luffa",category:"Low Country Vegetables",unit:"Rs./kg",
+     prices:[{min:300,max:350},{min:230,max:250},{min:240,max:280},{min:270,max:320},{min:170,max:240},{min:280,max:330},null,null,null,null]},
+    {id:19,name:"Long Beans",category:"Low Country Vegetables",unit:"Rs./kg",
+     prices:[{min:250,max:300},{min:270,max:300},{min:200,max:280},{min:260,max:340},{min:280,max:300},{min:250,max:280},null,null,null,null]},
+    {id:20,name:"Ash Plantains",category:"Low Country Vegetables",unit:"Rs./kg",
+     prices:[{min:100,max:130},{min:130,max:150},{min:90,max:120},{min:100,max:120},{min:100,max:120},{min:60,max:100},null,null,null,null]},
+    {id:21,name:"Green Chillies",category:"Low Country Vegetables",unit:"Rs./kg",
+     prices:[{min:450,max:500},{min:550,max:600},{min:550,max:650},{min:600,max:700},{min:500,max:500},{min:550,max:600},{min:500,max:550},null,null,null]},
+    {id:22,name:"Lime",category:"Low Country Vegetables",unit:"Rs./kg",
+     prices:[{min:450,max:500},{min:500,max:550},{min:400,max:450},{min:470,max:530},null,{min:320,max:350},null,null,null,null]},
+    {id:23,name:"Sweet Potato",category:"Low Country Vegetables",unit:"Rs./kg",
+     prices:[{min:130,max:180},{min:140,max:160},{min:110,max:130},{min:120,max:140},null,{min:150,max:170},{min:160,max:170},null,null,null]},
+    {id:24,name:"Manioc",category:"Low Country Vegetables",unit:"Rs./kg",
+     prices:[{min:100,max:140},{min:120,max:130},{min:120,max:140},{min:110,max:120},{min:120,max:150},{min:100,max:130},{min:130,max:140},null,null,null]},
+    {id:25,name:"Eggplant",category:"Low Country Vegetables",unit:"Rs./kg",
+     prices:[{min:200,max:250},{min:220,max:250},{min:200,max:250},{min:300,max:340},{min:160,max:200},{min:150,max:200},null,null,null,null]},
+    // POTATOES & ONIONS
+    {id:26,name:"Potato (Imported)",category:"Potatoes & Onions",unit:"Rs./kg",
+     prices:[{min:160,max:210},{min:185,max:210},{min:170,max:180},{min:180,max:185},null,{min:175,max:180},null,null,null,null]},
+    {id:27,name:"Potato (Welimada)",category:"Potatoes & Onions",unit:"Rs./kg",
+     prices:[null,{min:250,max:270},{min:240,max:250},null,null,null,{min:230,max:250},null,null,null]},
+    {id:28,name:"Potato (N.Eliya)",category:"Potatoes & Onions",unit:"Rs./kg",
+     prices:[{min:290,max:300},{min:290,max:300},{min:260,max:270},{min:290,max:300},null,null,null,{min:260,max:275},null,null]},
+    {id:29,name:"Big Onion (Imported)",category:"Potatoes & Onions",unit:"Rs./kg",
+     prices:[{min:140,max:175},{min:170,max:185},{min:155,max:165},{min:168,max:175},null,{min:160,max:165},{min:180,max:190},null,null,null]},
+    // RICE
+    {id:30,name:"Samba 1",category:"Rice",unit:"Rs./kg",
+     prices:[{min:240,max:245},null,null,null,null,null,null,null,null,null],
+     pettahAvg:241.25,marandaAvg:283.00},
+    {id:31,name:"Samba 2",category:"Rice",unit:"Rs./kg",
+     prices:[{min:235,max:238},null,null,null,null,null,null,null,null,null],
+     pettahAvg:236.50,marandaAvg:237.20},
+    {id:32,name:"Keeri Samba",category:"Rice",unit:"Rs./kg",
+     prices:[{min:320,max:340},null,null,null,null,null,null,null,null,null],
+     pettahAvg:330.00,marandaAvg:345.40},
+    {id:33,name:"Nadu 1",category:"Rice",unit:"Rs./kg",
+     prices:[{min:200,max:205},null,null,null,null,null,null,null,null,null],
+     pettahAvg:203.00,marandaAvg:227.67},
+    {id:34,name:"Nadu 2",category:"Rice",unit:"Rs./kg",
+     prices:[{min:195,max:198},null,null,null,null,null,null,null,null,null],
+     pettahAvg:196.50,marandaAvg:196.40},
+    // PULSES & ESSENTIALS
+    {id:35,name:"Green Gram",category:"Pulses & Essentials",unit:"Rs./kg",
+     prices:[{min:770,max:850},null,null,null,null,null,null,null,null,null],pettahAvg:818},
+    {id:36,name:"Cowpea",category:"Pulses & Essentials",unit:"Rs./kg",
+     prices:[{min:700,max:750},null,null,null,null,null,null,null,null,null],pettahAvg:725},
+    {id:37,name:"Red Dhal",category:"Pulses & Essentials",unit:"Rs./kg",
+     prices:[{min:225,max:240},null,null,null,null,null,null,null,null,null],pettahAvg:233},
+    {id:38,name:"Dried Chillies (Imp)",category:"Pulses & Essentials",unit:"Rs./kg",
+     prices:[{min:970,max:1050},null,null,null,null,null,null,null,null,null],pettahAvg:1010},
+    {id:39,name:"Sugar (White)",category:"Pulses & Essentials",unit:"Rs./kg",
+     prices:[{min:205,max:208},null,null,null,null,null,null,null,null,null],pettahAvg:206.50},
+    {id:40,name:"Wheat Flour",category:"Pulses & Essentials",unit:"Rs./kg",
+     prices:[{min:160,max:175},null,null,null,null,null,null,null,null,null],pettahAvg:167.50},
+    // EGGS
+    {id:41,name:"Eggs (Brown)",category:"Eggs",unit:"Rs./Egg",
+     prices:[{min:38,max:39},null,null,null,null,null,null,null,null,null],pettahAvg:38.50},
+    {id:42,name:"Eggs (White)",category:"Eggs",unit:"Rs./Egg",
+     prices:[{min:35,max:36},null,null,null,null,null,null,null,null,null],pettahAvg:35.50},
+    // BANANA & FRUITS
+    {id:43,name:"Banana Ambul",category:"Fruits & Banana",unit:"Rs./kg",
+     prices:[{min:120,max:140},{min:100,max:120},null,null,null,null,null,null,null,null]},
+    {id:44,name:"Banana Kolikuttu",category:"Fruits & Banana",unit:"Rs./kg",
+     prices:[{min:300,max:350},{min:270,max:280},null,null,null,null,null,null,null,null]},
+    {id:45,name:"Papaya",category:"Fruits & Banana",unit:"Rs./kg",
+     prices:[{min:150,max:200},{min:150,max:160},null,null,null,null,null,null,null,null]},
+    {id:46,name:"Pineapple (Large)",category:"Fruits & Banana",unit:"Rs./Fruit",
+     prices:[{min:300,max:320},null,null,null,null,null,null,null,null,null]},
+    {id:47,name:"Avocado",category:"Fruits & Banana",unit:"Rs./Fruit",
+     prices:[{min:135,max:170},null,null,null,null,null,null,null,null,null]},
+  ]
+};
+
+// ── Helpers ──
+const mid = r => r ? Math.round((r.min+r.max)/2) : null;
+const fmt = n => n==null ? "—" : Math.round(n).toLocaleString("en-US");
+const fmtRange = r => r ? r.min+"–"+r.max : "—";
+const marketCount = c => c.prices.filter(p=>p!=null).length;
+const primaryMid = c => {
+  const p=c.prices[0];
+  if(p) return mid(p);
+  const first=c.prices.find(x=>x!=null);
+  return first?mid(first):null;
+};
+
+// ── i18n ──
+let lang="en";
+const I18N={
+  en:{
+    kicker:'Wholesale data from <span class="org">Hector Kobbekaduwa Agrarian Research &amp; Training Institute</span>',
+    latestReport:"Latest report",sub:"Wholesale prices &middot; 10 markets &middot; price range shown per commodity",
+    movers:"Sharpest movements today",moversHint:"Peliyagoda midpoint &middot; tap →",
+    all:"All commodities",items:"items",searchPh:"Search a commodity…",
+    sortAZ:"Sort: A–Z",sortHigh:"Highest midpoint",sortMarkets:"Most markets",
+    footNote:"Auto-extracted from HARTI Daily Wholesale Price Reports. Not an official publication.",
+    creditPre:"Design &amp; development by",
+    wholesaleNote:'These are <strong>wholesale</strong> prices — lower than retail. Midpoint of range shown.',
+    allCat:"All",markets:"markets",midpoint:"Midpoint",range:"Range",na:"n.a.",
+    across:"Prices across markets — "+HARTI.dateLabel,noMatch:'No commodity matches "%Q".'
+  },
+  si:{
+    kicker:'තොග මිල දත්ත <span class="org">හෙක්ටර් කොබ්බෑකඩුව ගොවිගටයුතු පර්යේෂණ ආයතනයෙන්</span>',
+    latestReport:"නවතම වාර්තාව",sub:"තොග මිල &middot; වෙළඳපොළ 10ක් &middot; මිල පරාසය",
+    movers:"අද වැඩිම වෙනස්වීම්",moversHint:"පෑලියගොඩ මධ්‍යගතය &middot; තට්ටු කරන්න",
+    all:"සියලු භාණ්ඩ",items:"භාණ්ඩ",searchPh:"භාණ්ඩයක් සොයන්න…",
+    sortAZ:"අකාරාදී",sortHigh:"ඉහළම මිල",sortMarkets:"වැඩිම වෙළඳපොළ",
+    footNote:"HARTI දෛනික තොග මිල වාර්තාවලින් ස්වයංක්‍රීයව. නිල ප්‍රකාශනයක් නොවේ.",
+    creditPre:"නිර්මාණය හා සංවර්ධනය:",
+    wholesaleNote:'මේවා <strong>තොග</strong> මිල — සිල්ලර මිලට වඩා අඩුය. මිල පරාසයේ මධ්‍යගතය දක්වා ඇත.',
+    allCat:"සියල්ල",markets:"වෙළඳපොළ",midpoint:"මධ්‍යගතය",range:"පරාසය",na:"නැත",
+    across:"වෙළඳපොළ අතර මිල — "+HARTI.dateLabel,noMatch:'"%Q" සඳහා භාණ්ඩයක් හමු නොවීය.'
+  },
+  ta:{
+    kicker:'மொத்த விலை தரவு <span class="org">ஹெக்டர் கொப்பேகடுவ வேளாண் ஆராய்ச்சி நிறுவனம்</span>',
+    latestReport:"சமீபத்திய அறிக்கை",sub:"மொத்த விலைகள் &middot; 10 சந்தைகள் &middot; விலை வரம்பு",
+    movers:"இன்றைய பெரிய மாற்றங்கள்",moversHint:"பேலியகோட நடுப்புள்ளி &middot; தட்டவும்",
+    all:"அனைத்து பொருட்கள்",items:"பொருட்கள்",searchPh:"ஒரு பொருளைத் தேடுங்கள்…",
+    sortAZ:"அகர வரிசை",sortHigh:"அதிக விலை",sortMarkets:"அதிக சந்தைகள்",
+    footNote:"HARTI தினசரி மொத்த விலை அறிக்கைகளில் இருந்து. அதிகாரப்பூர்வமற்றது.",
+    creditPre:"வடிவமைப்பு &amp; உருவாக்கம்:",
+    wholesaleNote:'இவை <strong>மொத்த</strong> விலைகள் — சில்லறையை விட குறைவு. வரம்பின் நடுப்புள்ளி காட்டப்படுகிறது.',
+    allCat:"அனைத்தும்",markets:"சந்தைகள்",midpoint:"நடுப்புள்ளி",range:"வரம்பு",na:"இல்லை",
+    across:"சந்தைகளில் விலைகள் — "+HARTI.dateLabel,noMatch:'"%Q" பொருந்தும் பொருள் இல்லை.'
+  }
+};
+
+const MARKET_NAMES={
+  "Peliyagoda":{si:"පෑලියගොඩ",ta:"பேலியகோட"},
+  "Kandy":{si:"මහනුවර",ta:"கண்டி"},
+  "Dambulla":{si:"දඹුල්ල",ta:"தம்புள்ள"},
+  "Meegoda":{si:"මීගොඩ",ta:"மீகொட"},
+  "Norochchole":{si:"නොරොච්චෝලේ",ta:"நொரோச்சோலே"},
+  "Thambuththegama":{si:"තඹුත්තේගම",ta:"தம்புத்தேகம"},
+  "Keppetipola":{si:"කෑප්පෙටිපොළ",ta:"கெப்பெட்டிபொல"},
+  "Nuwaraeliya":{si:"නුවරඑළිය",ta:"நுவரெலியா"},
+  "Bandarawela":{si:"බණ්ඩාරවෙල",ta:"பண்டாரவெல"},
+  "Veyangoda":{si:"වේයන්ගොඩ",ta:"வேயன்கொட"}
+};
+const CAT_NAMES={
+  "Up Country Vegetables":{si:"උඩරට එළවළු",ta:"மலை நாட்டு காய்கறிகள்"},
+  "Low Country Vegetables":{si:"පහතරට එළවළු",ta:"தாழ்நாட்டு காய்கறிகள்"},
+  "Potatoes & Onions":{si:"අර්තාපල් සහ ළූණු",ta:"உருளை & வெங்காயம்"},
+  "Rice":{si:"සහල්",ta:"அரிசி"},
+  "Pulses & Essentials":{si:"රනිල සහ අත්‍යවශ්‍ය",ta:"பருப்பு & அத்தியாவசியம்"},
+  "Eggs":{si:"බිත්තර",ta:"முட்டைகள்"},
+  "Fruits & Banana":{si:"පළතුරු",ta:"பழங்கள்"}
+};
+const COMM_NAMES={
+  "Beans":{si:"බෝංචි",ta:"பீன்ஸ்"},"Carrot":{si:"කැරට්",ta:"கேரட்"},
+  "Leeks":{si:"ලීක්ස්",ta:"லீக்ஸ்"},"Beetroot":{si:"බීට්රූට්",ta:"பீட்ரூட்"},
+  "Beetroot (N.Eliya)":{si:"බීට්රූට් (නුවරඑළිය)",ta:"பீட்ரூட் (நுவரெலியா)"},
+  "Knolkhol":{si:"නෝල්කෝල්",ta:"நோல்கோல்"},"Raddish":{si:"රාබු",ta:"ராடிஷ்"},
+  "Cabbage (N.Eliya)":{si:"ගෝවා (නුවරඑළිය)",ta:"முட்டைக்கோஸ் (நுவரெலியா)"},
+  "Cabbage (Kandy)":{si:"ගෝවා (නුවර)",ta:"முட்டைக்கோஸ் (கண்டி)"},
+  "Tomato":{si:"තක්කාලි",ta:"தக்காளி"},
+  "Ladies Fingers":{si:"බණ්ඩක්කා",ta:"வெண்டைக்காய்"},
+  "Brinjals":{si:"වම්බටු",ta:"கத்தரிக்காய்"},
+  "Capsicum":{si:"මාළු මිරිස්",ta:"குடை மிளகாய்"},
+  "Pumpkin":{si:"වට්ටක්කා",ta:"பூசணி"},
+  "Cucumber":{si:"පිපිඤ්ඤා",ta:"வெள்ளரிக்காய்"},
+  "Bitter Gourd":{si:"කරවිල",ta:"பாகற்காய்"},
+  "Snake Gourd":{si:"පතෝල",ta:"புடலங்காய்"},
+  "Drumstick":{si:"මුරුංගා",ta:"முருங்கை"},
+  "Luffa":{si:"වැටකොළු",ta:"பீர்க்கங்காய்"},
+  "Long Beans":{si:"මෑකරල්",ta:"தட்டைப்பயறு"},
+  "Ash Plantains":{si:"අළු කෙසෙල්",ta:"வாழைக்காய்"},
+  "Green Chillies":{si:"අමු මිරිස්",ta:"பச்சை மிளகாய்"},
+  "Lime":{si:"දෙහි",ta:"எலுமிச்சை"},
+  "Sweet Potato":{si:"බතල",ta:"சர்க்கரைவள்ளி"},
+  "Manioc":{si:"මඤ්ඤොක්කා",ta:"மரவள்ளி"},
+  "Eggplant":{si:"එළබටු",ta:"கத்திரிக்காய்"},
+  "Potato (Imported)":{si:"අර්තාපල් (ආනයනික)",ta:"உருளை (இறக்குமதி)"},
+  "Potato (Welimada)":{si:"අර්තාපල් (වැලිමඩ)",ta:"உருளை (வெலிமட)"},
+  "Potato (N.Eliya)":{si:"අර්තාපල් (නුවරඑළිය)",ta:"உருளை (நுவரெலியா)"},
+  "Big Onion (Imported)":{si:"ලොකු ළූණු (ආනයනික)",ta:"பெரிய வெங்காயம் (இறக்குமதி)"},
+  "Samba 1":{si:"සම්බා 1",ta:"சம்பா 1"},"Samba 2":{si:"සම්බා 2",ta:"சம்பா 2"},
+  "Keeri Samba":{si:"කීරි සම්බා",ta:"கீரி சம்பா"},
+  "Nadu 1":{si:"නාඩු 1",ta:"நாடு 1"},"Nadu 2":{si:"නාඩු 2",ta:"நாடு 2"},
+  "Green Gram":{si:"මුං ඇට",ta:"பச்சைப் பயறு"},
+  "Cowpea":{si:"මෑ ඇට",ta:"தட்டைப்பயறு"},
+  "Red Dhal":{si:"රතු පරිප්පු",ta:"சிவப்பு பருப்பு"},
+  "Dried Chillies (Imp)":{si:"වියළි මිරිස් (ආනයනික)",ta:"உலர் மிளகாய் (இறக்குமதி)"},
+  "Sugar (White)":{si:"සීනි (සුදු)",ta:"சர்க்கரை (வெள்ளை)"},
+  "Wheat Flour":{si:"තිරිඟු පිටි",ta:"கோதுமை மாவு"},
+  "Eggs (Brown)":{si:"බිත්තර (දුඹුරු)",ta:"முட்டை (பழுப்பு)"},
+  "Eggs (White)":{si:"බිත්තර (සුදු)",ta:"முட்டை (வெள்ளை)"},
+  "Banana Ambul":{si:"ඇඹුල් කෙසෙල්",ta:"ஆம்பல் வாழை"},
+  "Banana Kolikuttu":{si:"කොලිකුට්ටු",ta:"கொலிக்குட்டு"},
+  "Papaya":{si:"පැපොල්",ta:"பப்பாளி"},
+  "Pineapple (Large)":{si:"අන්නාසි (ලොකු)",ta:"அன்னாசி (பெரியது)"},
+  "Avocado":{si:"අලිගැටපේර",ta:"அவோகேடோ"}
+};
+
+function t(k){return (I18N[lang]&&I18N[lang][k])||I18N.en[k]||k;}
+function tName(n){return (COMM_NAMES[n]&&COMM_NAMES[n][lang])||n;}
+function tCat(c){return lang==="en"?c:((CAT_NAMES[c]&&CAT_NAMES[c][lang])||c);}
+function tMkt(m){return lang==="en"?m:((MARKET_NAMES[m]&&MARKET_NAMES[m][lang])||m);}
+
+function applyLang(){
+  document.documentElement.lang=lang;
+  const set=(id,html)=>{const e=document.getElementById(id);if(e)e.innerHTML=html;};
+  set("kickerTxt",t("kicker"));set("lblLatest",t("latestReport"));set("lblSub",t("sub"));
+  set("hMovers",t("movers"));set("hintMovers",t("moversHint"));set("hAll",t("all"));
+  set("footNote",t("footNote"));set("creditPre",t("creditPre"));set("wholesaleNote",t("wholesaleNote"));
+  const s=document.getElementById("search");if(s)s.placeholder=t("searchPh");
+  const sel=document.getElementById("sort");
+  if(sel){sel.options[0].text=t("sortAZ");sel.options[1].text=t("sortHigh");sel.options[2].text=t("sortMarkets");}
+  // Nav labels
+  set("navRetail",'📊 ' + (lang==='si'?'සිල්ලර මිල':'lang'==='ta'?'சில்லறை விலை':'Retail Prices') + ' <span class="navlink-badge">CBSL</span>');
+}
+function setLang(l){
+  lang=l;
+  document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.lang===l));
+  applyLang();
+  buildCats();renderMovers();renderGrid();
+}
+document.querySelector(".lang").addEventListener("click",function(e){
+  var b=e.target.closest("button[data-lang]");if(b)setLang(b.dataset.lang);
+});
+
+// ── State & Render ──
+let state={q:"",cat:"All",sort:"az"};
+const DATA=HARTI.commodities;
+const MARKETS=HARTI.markets;
+
+function buildCats(){
+  const cats=["All",...new Set(DATA.map(d=>d.category))];
+  const box=document.getElementById("cats");box.innerHTML="";
+  cats.forEach(c=>{
+    const b=document.createElement("button");
+    b.className="chip"+(c===state.cat?" on":"");b.dataset.cat=c;
+    b.textContent=(c==="All"?t("allCat"):tCat(c));
+    b.onclick=()=>{state.cat=c;[...box.children].forEach(x=>x.classList.remove("on"));b.classList.add("on");renderGrid();};
+    box.appendChild(b);
+  });
+}
+
+function renderGrid(){
+  let list=DATA.filter(d=>(state.cat==="All"||d.category===state.cat)&&
+    (d.name.toLowerCase().includes(state.q)||tName(d.name).toLowerCase().includes(state.q)));
+  if(state.sort==="az")list.sort((a,b)=>tName(a.name).localeCompare(tName(b.name)));
+  if(state.sort==="high")list.sort((a,b)=>(primaryMid(b)||0)-(primaryMid(a)||0));
+  if(state.sort==="markets")list.sort((a,b)=>marketCount(b)-marketCount(a));
+  const g=document.getElementById("grid");
+  document.getElementById("count").textContent=list.length+" "+t("items");
+  if(!list.length){g.innerHTML='<div class="empty">'+t("noMatch").replace("%Q",state.q)+'</div>';return;}
+  g.innerHTML=list.map(d=>{
+    const pm=primaryMid(d),mc=marketCount(d);
+    const p0=d.prices[0];
+    return `<div class="item" onclick="openDetail(${d.id})">
+      <div class="top">
+        <div><div class="cat">${tCat(d.category)}</div><div class="nm">${tName(d.name)}</div></div>
+        <span class="w-badge">📦 WS</span>
+      </div>
+      <div class="foot">
+        <span class="price">${fmt(pm)}<small> ${d.unit}</small></span>
+        <span class="item mkt-count">${mc} ${t("markets")}</span>
+      </div>
+      ${p0?`<div class="price-range">${t("range")}: Rs. ${fmtRange(p0)} &middot; Peliyagoda</div>`:''}
+    </div>`;
+  }).join("");
+}
+
+function renderMovers(){
+  // Show top commodities by highest Peliyagoda midpoint
+  const top=DATA.filter(d=>d.prices[0]!=null)
+    .sort((a,b)=>(primaryMid(b)||0)-(primaryMid(a)||0)).slice(0,7);
+  document.getElementById("movers").innerHTML=top.map(d=>{
+    const pm=primaryMid(d),p0=d.prices[0];
+    return `<div class="mover" onclick="openDetail(${d.id})">
+      <div class="cat">${tCat(d.category)}</div>
+      <div class="nm">${tName(d.name)}</div>
+      <div class="row">
+        <span class="price">${fmt(pm)}<small> ${d.unit}</small></span>
+        <span class="w-badge">📦</span>
+      </div>
+      <div class="price-range">Rs. ${fmtRange(p0)} — Peliyagoda</div>
+      <div class="mover-markets">${marketCount(d)} ${t("markets")} reporting</div>
+    </div>`;
+  }).join("");
+}
+
+function openDetail(id){
+  const d=DATA[id];
+  const allMids=d.prices.map(p=>p?mid(p):null).filter(v=>v!=null);
+  const minMid=allMids.length?Math.min(...allMids):0;
+  const maxMid=allMids.length?Math.max(...allMids):0;
+  const avgMid=allMids.length?Math.round(allMids.reduce((a,b)=>a+b,0)/allMids.length):0;
+  const mc=marketCount(d);
+
+  // Market rows
+  const maxM=Math.max(...d.prices.map(p=>p?mid(p):0));
+  const mktRows=MARKETS.map((m,i)=>{
+    const p=d.prices[i];const mv=p?mid(p):null;
+    const pct=mv&&maxM?Math.round(mv/maxM*100):0;
+    return `<tr>
+      <td><span class="mkt-name">${tMkt(m)}</span><span class="mkt-type">${HARTI.marketDates[i]}</span></td>
+      <td class="mkt-range">${p?fmtRange(p):'<span class="mkt-na">${t("na")}</span>'}</td>
+      <td class="mkt-mid">${mv!=null?fmt(mv):'<span class="mkt-na">—</span>'}</td>
+      <td style="min-width:100px">${mv!=null?`<div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>`:''}
+      </td>
+    </tr>`;
+  }).join("");
+
+  const modal=document.getElementById("modal");
+  modal.innerHTML=`
+    <div class="mhead">
+      <div><div class="cat">${tCat(d.category)}</div><h3>${tName(d.name)}</h3></div>
+      <button class="close" onclick="closeDetail()" aria-label="Close">&#10005;</button>
+    </div>
+    <div class="mbody">
+      <div class="statrow">
+        <div class="stat"><div class="l">${t("midpoint")} avg</div><div class="v">${fmt(avgMid)}</div></div>
+        <div class="stat"><div class="l">Low market</div><div class="v" style="color:var(--down)">${fmt(minMid)}</div></div>
+        <div class="stat"><div class="l">High market</div><div class="v" style="color:var(--up)">${fmt(maxMid)}</div></div>
+        <div class="stat"><div class="l">${t("markets")}</div><div class="v">${mc} / 10</div></div>
+      </div>
+      <h4 class="mkt-h">${t("across")}</h4>
+      <p class="mkt-sub">${d.unit} &middot; Midpoint of wholesale range shown</p>
+      <div style="overflow-x:auto">
+        <table class="mkt-table">
+          <thead><tr>
+            <th>${lang==='si'?'වෙළඳපොළ':lang==='ta'?'சந்தை':'Market'}</th>
+            <th>${t("range")} (Rs.)</th>
+            <th>${t("midpoint")}</th>
+            <th style="min-width:100px"></th>
+          </tr></thead>
+          <tbody>${mktRows}</tbody>
+        </table>
+      </div>
+      ${d.pettahAvg?`<div style="margin-top:16px;padding:12px 14px;background:var(--paper);border-radius:10px;border:1px solid var(--line);font-size:13px">
+        <strong>Pettah avg:</strong> Rs. ${fmt(d.pettahAvg)}
+        ${d.marandaAvg?` &nbsp;&middot;&nbsp; <strong>Marandagahamula avg:</strong> Rs. ${fmt(d.marandaAvg)}`:''}
+      </div>`:''}
+    </div>`;
+
+  document.getElementById("scrim").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+function closeDetail(){
+  document.getElementById("scrim").classList.remove("open");
+  document.body.style.overflow="";
+}
+document.getElementById("scrim").addEventListener("click",e=>{if(e.target===document.getElementById("scrim"))closeDetail();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDetail();});
+document.getElementById("search").addEventListener("input",e=>{state.q=e.target.value.toLowerCase();renderGrid();});
+document.getElementById("sort").addEventListener("change",e=>{state.sort=e.target.value;renderGrid();});
+
+// ── Init ──
+applyLang();buildCats();renderMovers();renderGrid();
+</script>
+</body>
+</html>
