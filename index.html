@@ -1,9 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="si">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lanka Price Monitor</title>
+<!-- ===== PWA: TopGoviya App ===== -->
+<link rel="manifest" href="manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TopGoviya">
+<meta name="application-name" content="TopGoviya">
+<meta name="theme-color" content="#0e4f4a">
+<link rel="apple-touch-icon" href="icon-192x192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png">
+
+<!-- SEO: Primary Title -->
+<title>Vegetable Price in Sri Lanka Today | TopGoviya Lanka Price Monitor</title>
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="Daily vegetable, fish &amp; rice prices in Sri Lanka from Central Bank data. Farmer profit calculator, trader margins, wholesale vs retail, 4-year price history. Sinhala · Tamil · English. Dambulla · Pettah · Narahenpita.">
+<meta name="keywords" content="vegetable price in sri lanka today, dambulla market price today, pettah wholesale market price, daily vegetable prices sri lanka, cbsl daily price report, rice price sri lanka today, fish price sri lanka, farmer profit calculator, trader margin calculator, wholesale vs retail price sri lanka, vegetable price history sri lanka, best time to sell vegetables sri lanka, ada elavalu mila, dambulla market elavalu mila, අද එළවළු මිල, දෛනික එළවළු මිල, ශ්‍රී ලංකාවේ එළවළු මිල, ගොවි ලාභ ගණකය, වෙළෙන්දා ලාභ ගණකය, තොග එළවළු මිල, සහල් මිල, මාළු මිල, topgoviya, lanka price monitor, topgoviya.lk">
+<meta name="author" content="TopGoviya.lk | ebooklanka.com">
+<meta name="robots" content="index, follow">
+<meta name="language" content="Sinhala, Tamil, English">
+<meta name="revisit-after" content="1 day">
+<meta name="geo.region" content="LK">
+<meta name="geo.placename" content="Sri Lanka">
+
+<!-- Open Graph (Facebook & WhatsApp) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://topgoviya.lk/">
+<meta property="og:title" content="Vegetable Price in Sri Lanka Today | TopGoviya Lanka Price Monitor">
+<meta property="og:description" content="Daily vegetable, fish &amp; rice prices from Central Bank of Sri Lanka. Farmer profit calculator, trader margins, wholesale vs retail, 4-year history. Sinhala · Tamil · English.">
+<meta property="og:site_name" content="TopGoviya Lanka Price Monitor">
+<meta property="og:locale" content="si_LK">
+<meta property="og:locale:alternate" content="ta_LK">
+<meta property="og:locale:alternate" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sri Lanka Daily Vegetable, Fish & Rice Prices | TopGoviya">
+<meta name="twitter:description" content="Free daily market prices + Farmer profit calculator + 4-year history. Sinhala · Tamil · English. Data from CBSL.">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://topgoviya.lk/">
+
+<!-- FAQ Schema Markup -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Is Lanka Price Monitor free to use?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely free. No login, no registration, no subscription required. Lanka Price Monitor is 100% free for farmers, traders, and consumers."}},
+    {"@type":"Question","name":"How often is the price data updated?","acceptedAnswer":{"@type":"Answer","text":"Price data is updated daily at 5:00 PM Sri Lanka time, automatically extracted from the Central Bank of Sri Lanka Daily Price Report."}},
+    {"@type":"Question","name":"Where does the price data come from?","acceptedAnswer":{"@type":"Answer","text":"All price data is sourced from the Central Bank of Sri Lanka (CBSL) Daily Price Reports — official publicly available government publications."}},
+    {"@type":"Question","name":"How do I use the Farmer Profit Calculator?","acceptedAnswer":{"@type":"Answer","text":"Click any commodity card, tap the Calculator button, select Farmer mode, enter your harvest kg, transport cost, and optional production cost. The calculator shows net profit for each market."}},
+    {"@type":"Question","name":"What is the difference between Retail and Wholesale prices?","acceptedAnswer":{"@type":"Answer","text":"Retail price is what consumers pay. Wholesale price is the bulk price traders pay. The difference is the trader's potential profit margin."}},
+    {"@type":"Question","name":"Which markets are tracked?","acceptedAnswer":{"@type":"Answer","text":"Lanka Price Monitor tracks Dambulla Economic Centre, Pettah (Colombo), Narahenpita, Negombo, and Peliyagoda markets."}},
+    {"@type":"Question","name":"Can I use this on my mobile phone?","acceptedAnswer":{"@type":"Answer","text":"Yes! Lanka Price Monitor is fully mobile-optimized. Open topgoviya.lk in any mobile browser. No app download required."}},
+    {"@type":"Question","name":"Is the data available in Sinhala and Tamil?","acceptedAnswer":{"@type":"Answer","text":"Yes! Full platform in Sinhala, Tamil, and English. Use language toggle buttons at top right to switch instantly."}},
+    {"@type":"Question","name":"What is the current vegetable price in Sri Lanka?","acceptedAnswer":{"@type":"Answer","text":"According to TopGoviya.lk CBSL data as of June 2026: Tomato Rs.455/kg, Lime Rs.418/kg, Brinjal Rs.230/kg at Dambulla market. Updated daily at 5PM Sri Lanka time."}},
+    {"@type":"Question","name":"Is Dambulla market cheaper than Pettah?","acceptedAnswer":{"@type":"Answer","text":"Yes. Dambulla Economic Centre has lower wholesale prices while Pettah has higher retail prices. TopGoviya.lk Gap chart shows exact price differences."}},
+    {"@type":"Question","name":"What is the rice price in Sri Lanka?","acceptedAnswer":{"@type":"Answer","text":"Current rice prices: Samba Rs.245/kg, Nadu Rs.235/kg, Kekulu Rs.225/kg at Dambulla market per Central Bank of Sri Lanka data."}},
+    {"@type":"Question","name":"Why is lime price high in Sri Lanka?","acceptedAnswer":{"@type":"Answer","text":"Lime is seasonal. June-July sees peak demand with low supply pushing prices high. January-March is cheapest. TopGoviya.lk YoY chart shows the full 4-year seasonal pattern."}}
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Lanka Price Monitor | TopGoviya",
+  "url": "https://topgoviya.lk",
+  "description": "Daily vegetable, fish and rice prices in Sri Lanka from Central Bank data. Farmer profit calculator, trader margin analysis, wholesale vs retail comparison.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "inLanguage": ["si", "ta", "en"],
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "LKR"},
+  "author": {"@type": "Organization", "name": "TopGoviya.lk", "url": "https://topgoviya.lk"},
+  "keywords": "vegetable price sri lanka, dambulla market, pettah market, farmer profit calculator"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Sri Lanka Daily Agricultural Price Data",
+  "description": "Daily retail and wholesale prices for 43+ commodities including vegetables, fish, rice and fruits from Central Bank of Sri Lanka. Covers Dambulla, Pettah and Narahenpita markets from 2023 to present.",
+  "url": "https://topgoviya.lk",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "creator": {"@type": "Organization","name": "TopGoviya.lk","url": "https://topgoviya.lk"},
+  "publisher": {"@type": "Organization","name": "Central Bank of Sri Lanka","url": "https://www.cbsl.gov.lk"},
+  "spatialCoverage": {"@type": "Place","name": "Sri Lanka"},
+  "temporalCoverage": "2023-01-01/",
+  "variableMeasured": ["Retail vegetable prices","Wholesale vegetable prices","Fish prices","Rice prices"],
+  "isAccessibleForFree": true,
+  "inLanguage": ["si", "ta", "en"]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "TopGoviya.lk",
+  "url": "https://topgoviya.lk",
+  "description": "Sri Lanka Agricultural Intelligence Platform — Free daily prices, farmer calculators, market insights.",
+  "foundingLocation": {"@type": "Place","name": "Gampola, Sri Lanka"},
+  "areaServed": "Sri Lanka",
+  "knowsAbout": ["Agricultural prices","Sri Lanka vegetable market","Farmer profit analysis","Market intelligence"],
+  "sameAs": ["https://wmrkumara.github.io/lanka-price-monitor/","https://ebooklanka.com"]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem","position": 1,"name": "Home","item": "https://topgoviya.lk"},
+    {"@type": "ListItem","position": 2,"name": "Daily Prices","item": "https://topgoviya.lk/prices"},
+    {"@type": "ListItem","position": 3,"name": "About","item": "https://topgoviya.lk/about.html"},
+    {"@type": "ListItem","position": 4,"name": "Privacy","item": "https://topgoviya.lk/privacy.html"}
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Lanka Price Monitor",
+  "operatingSystem": "Web, Android, iOS",
+  "applicationCategory": "Agriculture",
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "LKR"},
+  "description": "Free Sri Lanka agricultural price monitoring with voice search, farmer profit calculator and AI insights.",
+  "featureList": "Voice Search, Price Read Aloud, Farmer Calculator, Trader Calculator, Weather Updates, 3 Languages, FAQ",
+  "softwareVersion": "2.0",
+  "isAccessibleForFree": true
+}
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -56,10 +198,27 @@
   .reason b{font-family:'JetBrains Mono',monospace;color:var(--ink-soft);font-weight:600}
   .controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:6px 0 18px}
   .search{flex:1;min-width:200px;position:relative}
-  .search input{width:100%;font:inherit;font-size:15px;padding:12px 14px 12px 40px;border-radius:11px;
+  .search input{width:100%;font:inherit;font-size:15px;padding:12px 80px 12px 40px;border-radius:11px;
     border:1px solid var(--line-strong);background:var(--card);color:var(--ink);outline:none;transition:.2s}
   .search input:focus{border-color:var(--petrol);box-shadow:0 0 0 3px rgba(14,79,74,.12)}
   .search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);opacity:.5}
+  .mic-btn{position:absolute;right:8px;top:50%;transform:translateY(-50%);
+    background:var(--petrol);border:none;cursor:pointer;
+    padding:6px 10px;border-radius:8px;color:#fff;
+    font-size:15px;font-weight:700;transition:.2s;
+    display:flex;align-items:center;gap:4px;
+    box-shadow:0 2px 8px rgba(14,79,74,.3)}
+  .mic-btn:hover{background:var(--petrol-deep);box-shadow:0 4px 12px rgba(14,79,74,.4);transform:translateY(-50%) scale(1.05)}
+  .mic-btn .mic-label{font-size:11px;font-weight:700;letter-spacing:.04em}
+  .mic-btn.listening{background:#b23a2e;animation:micpulse 1s infinite}
+  .mic-btn::before{content:'';position:absolute;inset:-3px;border-radius:10px;
+    border:2px solid var(--petrol);opacity:0;animation:micring 2s infinite}
+  @keyframes micring{0%{opacity:.6;transform:scale(1)}100%{opacity:0;transform:scale(1.3)}}
+  @keyframes micpulse{0%,100%{opacity:1}50%{opacity:.5}}
+  .voice-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);
+    color:var(--paper);font-size:13px;font-weight:600;padding:10px 20px;border-radius:999px;
+    z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+  .voice-toast.show{opacity:1}
   .chips{display:flex;gap:6px;flex-wrap:wrap}
   .chip{font:inherit;font-size:12.5px;font-weight:600;padding:9px 14px;border-radius:999px;cursor:pointer;
     border:1px solid var(--line-strong);background:var(--card);color:var(--ink-soft);transition:.18s;white-space:nowrap}
@@ -112,9 +271,21 @@
   .bar .track{height:14px;background:var(--paper-2);border-radius:8px;overflow:hidden}
   .bar .fill{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--petrol),var(--petrol-deep));transform-origin:left;animation:grow .6s cubic-bezier(.2,.8,.2,1)}
   @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @keyframes micPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.25);opacity:.8}}
   .bar .bv{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px}
   .bar .bv.na{color:var(--muted);font-weight:500;font-style:italic}
   footer{margin:46px 0 60px;padding-top:22px;border-top:1px solid var(--line-strong);font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  /* Best Crop Right Now */
+  .best-col{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;box-shadow:var(--shadow)}
+  .best-col h3{font-family:'Newsreader',serif;font-size:16px;font-weight:500;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .best-col h3.sell{color:var(--down)}.best-col h3.buy{color:var(--up)}
+  .best-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+  .best-row:last-child{border:none}
+  .best-name{display:flex;align-items:center;gap:6px;font-weight:600;color:var(--ink-soft)}
+  .best-badge{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px}
+  .best-badge.up{background:var(--down-bg);color:var(--down)}
+  .best-badge.down{background:var(--up-bg);color:var(--up)}
+  .best-price{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
   footer .legend{display:flex;gap:14px;align-items:center}
   footer .dotL{display:inline-flex;align-items:center;gap:6px}
   footer .sq{width:11px;height:11px;border-radius:3px;display:inline-block}
@@ -122,8 +293,98 @@
     font-size:13.5px;color:var(--ink-soft);letter-spacing:.01em}
   .credit a{color:var(--petrol);font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--line-strong);transition:.18s}
   .credit a:hover{border-color:var(--petrol)}
-  @media(max-width:560px){.statrow{grid-template-columns:repeat(2,1fr)}.bar{grid-template-columns:110px 1fr auto;gap:9px}.modal .mhead h3{font-size:26px}}
+  @media(max-width:560px){
+    .statrow{grid-template-columns:repeat(2,1fr)}
+    .bar{grid-template-columns:110px 1fr auto;gap:9px}
+    .modal .mhead h3{font-size:22px}
+    /* Modal full screen on mobile */
+    .scrim{padding:0}
+    .modal{border-radius:14px 14px 0 0;max-width:100%;width:100%;margin-top:auto;max-height:92vh;overflow-y:auto}
+    /* Price toggle wrap */
+    .price-toggle{flex-wrap:wrap;gap:5px}
+    .price-toggle button{font-size:11px;padding:6px 10px}
+    /* Calculator inputs stack */
+    .calc-inputs-row{flex-direction:column!important;align-items:flex-start!important}
+    /* Chart height reduce */
+    canvas{max-height:180px}
+    /* Movers cards smaller */
+    .mover{padding:12px}
+    .mover .nm{font-size:19px}
+    /* Grid cards */
+    .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+    /* Ranges wrap */
+    .ranges{flex-wrap:wrap}
+    /* Gap alert */
+    .gap-alert{font-size:12px}
+    /* Guide box */
+    .guide-box{padding:18px 16px 16px;border-radius:14px}
+    .guide-box h2{font-size:20px}
+    .guide-box .gtxt{font-size:12.5px}
+    /* Masthead */
+    .title{font-size:clamp(28px,10vw,62px)}
+    /* Disclaimer */
+    #disclaimer{font-size:10.5px}
+    /* Insight box */
+    .insight-box .irow{font-size:11.5px}
+    /* Stat values */
+    .stat .v{font-size:16px}
+    /* Calculator panel labels */
+    .calc-label{min-width:100px!important;font-size:11px!important}
+    /* FB/WA buttons */
+    .wa-row{flex-wrap:wrap}
+    .wa-btn{font-size:12px;padding:9px 8px}
+  }
+  @media(max-width:400px){
+    .wrap{padding:0 12px}
+    .modal .mhead{padding:14px 16px}
+    .mbody{padding:14px 16px 20px}
+    .price-toggle button{font-size:10px;padding:5px 8px}
+    .ranges button{font-size:10px;padding:4px 7px}
+  }
   .title,.title em,.section-h h2,.mover .nm,.item .nm,.modal .mhead h3,.empty,.mkt-h{font-family:'Newsreader','Noto Sans Sinhala','Noto Sans Tamil',serif}
+  /* Wholesale toggle */
+  .price-toggle{display:flex;gap:6px;margin-bottom:12px;}
+  .price-toggle button{font:inherit;font-size:12.5px;font-weight:700;padding:7px 16px;border-radius:999px;cursor:pointer;border:1.5px solid var(--line-strong);background:var(--card);color:var(--ink-soft);transition:.18s;}
+  .price-toggle button.on{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .price-toggle button:first-child.on{background:var(--petrol);border-color:var(--petrol);}
+  .price-toggle button.gap-btn.on{background:#7b3fa0;border-color:#7b3fa0;color:#fff;}
+  .price-toggle button.calc-btn.on{background:#c17d11;border-color:#c17d11;color:#fff;}
+  .gap-alert{background:linear-gradient(135deg,rgba(123,63,160,.12),rgba(169,128,42,.08));border:1.5px solid #7b3fa0;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:13px;color:#3a403a;display:none;}
+  .gap-alert.show{display:block;}
+  .gap-alert .gap-val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:#7b3fa0;}
+  .gap-alert .gap-advice{font-size:12px;color:#7a7264;margin-top:4px;}
+  .poya-label{font-size:9px;fill:#b23a2e;font-weight:700;}
+  .insight-box{background:linear-gradient(135deg,rgba(14,79,74,.06),rgba(169,128,42,.04));border:1.5px solid var(--petrol);border-radius:12px;padding:13px 16px;margin-bottom:14px}
+  .insight-box .ihead{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--petrol);margin-bottom:8px}
+  .insight-box .irow{font-size:12.5px;color:var(--ink-soft);margin-bottom:5px;line-height:1.5;display:flex;gap:6px}
+  .insight-box .irow.warn{color:var(--up);font-weight:600}
+  .insight-box .irow.good{color:var(--down);font-weight:600}
+  .insight-box .irow.gold{color:var(--gold);font-weight:600}
+  .bar .fill.wholesale{background:linear-gradient(90deg,var(--gold),#8a6620);}
+  /* Guide popup */
+  .guide-btn{position:fixed;bottom:22px;right:22px;height:38px;padding:0 16px 0 12px;border-radius:999px;background:var(--petrol);color:#fff;border:0;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(14,79,74,.4);z-index:40;transition:.2s;display:flex;align-items:center;gap:7px;letter-spacing:.02em;}
+  .guide-btn:hover{background:var(--petrol-deep);transform:translateY(-2px);}
+  .guide-scrim{position:fixed;inset:0;background:rgba(15,28,26,.55);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:20px;z-index:60;}
+  .guide-scrim.open{display:flex;animation:fade .2s ease;}
+  .guide-box{background:var(--card);border:1px solid var(--line-strong);border-radius:18px;max-width:480px;width:100%;padding:26px 26px 22px;box-shadow:0 40px 90px -30px rgba(10,30,28,.7);animation:rise .26s cubic-bezier(.2,.8,.2,1);max-height:85vh;display:flex;flex-direction:column;}
+  .guide-box h2{font-family:'Newsreader',serif;font-weight:500;font-size:26px;margin:0 0 16px;color:var(--ink);flex-shrink:0;}
+  #guideContent{overflow-y:auto;flex:1;padding-right:4px;}
+  #guideContent::-webkit-scrollbar{width:5px}#guideContent::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:99px}
+  .guide-box .gitem{display:flex;gap:12px;margin-bottom:13px;align-items:flex-start;}
+  .guide-box .gicon{width:34px;height:34px;border-radius:10px;background:var(--paper-2);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+  .guide-box .gtxt{font-size:13.5px;color:var(--ink-soft);line-height:1.5;}
+  .guide-box .gtxt b{color:var(--ink);display:block;margin-bottom:2px;}
+  .guide-close{margin-top:14px;width:100%;padding:11px;border-radius:10px;border:0;background:var(--petrol);color:#fff;font:inherit;font-weight:700;font-size:14px;cursor:pointer;transition:.18s;flex-shrink:0;}
+  .guide-close:hover{background:var(--petrol-deep);}
+  /* WhatsApp buttons */
+  .wa-row{display:flex;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);}
+  .wa-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px 14px;border-radius:10px;border:0;font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:.18s;text-decoration:none;}
+  .wa-share{background:#25D366;color:#fff;}
+  .wa-share:hover{background:#1ebe5d;}
+  .fb-share{background:#1877F2;color:#fff;}
+  .fb-share:hover{background:#0d65d9;}
+  .wa-channel{background:var(--paper-2);color:var(--ink-soft);border:1.5px solid var(--line-strong);}
+  .wa-channel:hover{border-color:#25D366;color:#1a7a40;}
   /* ── TOP NAV BAR ── */
   .topnav{background:var(--petrol-deep);border-bottom:2px solid var(--gold);padding:0}
   .topnav-inner{max-width:1160px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:0}
@@ -155,10 +416,13 @@
   </div>
 </nav>
 <div class="wrap">
-  <header class="masthead">
+  <header class="masthead" itemscope itemtype="https://schema.org/WebSite">
+  <meta itemprop="name" content="Lanka Price Monitor | TopGoviya.lk">
+  <meta itemprop="url" content="https://topgoviya.lk">
+  <meta itemprop="description" content="Free daily agricultural prices in Sri Lanka. Vegetable, fish, rice prices from Central Bank of Sri Lanka.">
     <div class="kicker">
       <span id="kickerTxt">Data from <span class="org">Central Bank of Sri Lanka</span> website</span>
-      <div class="lang" role="group" aria-label="Language"><button data-lang="en" class="on">EN</button><button data-lang="si">&#3523;&#3538;&#3458;</button><button data-lang="ta">&#2980;&#2990;&#3007;&#2996;&#3021;</button></div>
+      <div class="lang" role="group" aria-label="Language"><button data-lang="si" class="on">සිංහල</button><button data-lang="ta">தமிழ்</button><button data-lang="en">EN</button></div>
     </div>
     <h1 class="title">Lanka <em>Price</em> Monitor</h1>
     <div class="dateline">
@@ -166,16 +430,43 @@
       <span class="stamp" id="stampDate">29 May 2026</span><span class="dot"></span>
       <span id="lblSub">Retail prices &middot; primary market shown per item &middot; vs. previous report</span>
     </div>
+    <div id="disclaimer" style="margin-top:8px;font-size:11.5px;color:var(--gold);font-style:italic;line-height:1.5">
+      <span class="disc-en">⚠️ Prices are indicative only. Use at your own discretion. Decisions are your responsibility.</span>
+      <span class="disc-si" style="display:none">⚠️ මෙහි සඳහන් මිල ගණන් මඟ පෙන්වීමක් පමණි. ඔබගේ තීරණ ඔබගේ වගකීම වේ.</span>
+      <span class="disc-ta" style="display:none">⚠️ இங்கு குறிப்பிட்ட விலைகள் வழிகாட்டல் மட்டுமே. உங்கள் முடிவுகளுக்கு நீங்களே பொறுப்பாவீர்கள்.</span>
+    </div>
   </header>
+
+
+  <!-- Voice Search Hint Bar -->
+  <div id="voiceHintBar" style="background:linear-gradient(135deg,var(--petrol),#0a3a36);border-radius:12px;padding:12px 18px;margin:14px 0;display:flex;gap:14px;align-items:center;cursor:pointer" onclick="startVoiceSearch()">
+    <div style="font-size:28px;animation:micPulse 1.5s ease-in-out infinite">🎤</div>
+    <div style="flex:1">
+      <div id="voiceHintText" style="font-size:14px;font-weight:700;color:#fff;line-height:1.4"></div>
+      <div id="voiceHintExample" style="font-size:12px;color:#ffd98a;margin-top:2px"></div>
+    </div>
+    <div style="font-size:10px;color:#9fd4c8;text-align:right;line-height:1.5" id="voiceHintSub">tap to<br>search</div>
+  </div>
+  <!-- Hidden weather data still loaded -->
+  <div id="weatherData" style="display:none"></div>
 
   <div class="section-h"><h2 id="hMovers">Today&rsquo;s sharpest movements</h2><span class="rule"></span><span class="hint" id="hintMovers">auto-ranked &middot; tap &rarr;</span></div>
   <div class="movers" id="movers"></div>
+
+  <!-- Best Crop Right Now -->
+  <div class="section-h" style="margin-top:28px">
+    <h2 id="hBest">🌾 Best Crop Right Now</h2>
+    <span class="rule"></span>
+    <span class="hint" id="hintBest">live data · tap →</span>
+  </div>
+  <div id="bestCrop" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px"></div>
 
   <div class="section-h"><h2 id="hAll">All commodities</h2><span class="rule"></span><span class="hint" id="count"></span></div>
   <div class="controls">
     <div class="search">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       <input id="search" type="text" placeholder="Search a commodity&hellip;" autocomplete="off">
+      <button class="mic-btn" id="micBtn" onclick="startVoiceSearch()" title="Voice Search">🎤 <span class="mic-label">Voice</span></button>
     </div>
     <div class="chips" id="cats"></div>
     <select class="sortsel" id="sort">
@@ -183,6 +474,7 @@
       <option value="down">Biggest decreases</option><option value="high">Highest price</option>
     </select>
   </div>
+  <div class="voice-toast" id="voiceToast">🎤 Listening...</div>
   <div class="grid" id="grid"></div>
 
   <footer>
@@ -191,22 +483,168 @@
       <span class="dotL"><span class="sq" style="background:var(--down)"></span> <span id="lgDown">Price decreased</span></span>
     </div>
     <div id="footNote">Auto-extracted from CBSL Daily Price Reports. Not an official publication.</div>
-    <div class="credit"><span id="creditPre">Design &amp; development by</span> <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a></div>
+
+    <!-- FAQ SECTION — SEO Rich Snippets -->
+    <div style="margin:40px 0 0">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+        <h2 id="faqTitle" style="font-family:'Newsreader',serif;font-weight:500;font-size:22px;margin:0;letter-spacing:-.01em">නිතර අසන ප්‍රශ්න</h2>
+        <span style="flex:1;height:1px;background:var(--line-strong)"></span>
+      </div>
+      <div id="faqList" style="display:flex;flex-direction:column;gap:8px"></div>
+    </div>
+
+    <!-- SEO Footer Content -->
+    <div style="flex-basis:100%;border-top:1px solid var(--line);margin-top:16px;padding-top:16px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:16px">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--petrol);margin-bottom:6px">About Lanka Price Monitor</div>
+          <p style="font-size:12px;color:var(--muted);line-height:1.6">Lanka Price Monitor (TopGoviya.lk) provides daily vegetable, fish, and rice prices in Sri Lanka. Track wholesale &amp; retail prices at Dambulla, Pettah &amp; Narahenpita markets.</p>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--petrol);margin-bottom:6px">Features</div>
+          <p style="font-size:12px;color:var(--muted);line-height:1.6">Farmer profit calculator · Trader margin analysis · 4-year price history · YoY seasonal trends · AI market insights · Gap &amp; opportunity charts</p>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--petrol);margin-bottom:6px">Commodities</div>
+          <p style="font-size:12px;color:var(--muted);line-height:1.6">Vegetables · Rice · Fish · Fruits · Onions · Potatoes · Green Chilli · Lime · Tomato · Beans · Carrot · Coconut · 43+ items daily</p>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--petrol);margin-bottom:6px">Data Source</div>
+          <p style="font-size:12px;color:var(--muted);line-height:1.6">Data: <strong style="color:var(--ink-soft)">Central Bank of Sri Lanka Daily Price Report</strong> | Free | No login | Updated daily at 5:00 PM Sri Lanka time</p>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--petrol);margin-bottom:6px">Pages</div>
+          <p style="font-size:12px;color:var(--muted);line-height:1.8">
+            <a href="blog.html" style="color:var(--petrol);font-weight:600;text-decoration:none">📝 ගොවි පුවත් Blog</a><br>
+            <a href="insights.html" style="color:var(--petrol);font-weight:600;text-decoration:none">📊 Price Insights 2026</a><br>
+            <a href="about.html" style="color:var(--petrol);font-weight:600;text-decoration:none">ℹ️ About TopGoviya.lk</a><br>
+            <a href="privacy.html" style="color:var(--petrol);font-weight:600;text-decoration:none">🔒 Privacy Policy</a>
+          </p>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);text-align:center;padding-top:10px;border-top:1px dashed var(--line)">
+        🌐 <strong>topgoviya.lk</strong> &nbsp;·&nbsp; 
+        අද එළවළු මිල &nbsp;·&nbsp; 
+        Vegetable Price Sri Lanka &nbsp;·&nbsp; 
+        Dambulla Market Price &nbsp;·&nbsp;
+        Pettah Wholesale Price &nbsp;·&nbsp;
+        Ada Elavalu Mila &nbsp;·&nbsp;
+        ගොවි ලාභ ගණකය &nbsp;·&nbsp;
+        Farmer Profit Calculator
+      </div>
+    </div>
+
+    <div class="credit"><span id="creditPre">Design &amp; development by</span> <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a> &nbsp;·&nbsp; <a href="https://www.facebook.com/TopGoviyaLK" target="_blank" rel="noopener" title="TopGoviya.lk on Facebook" style="display:inline-flex;align-items:center;gap:5px;background:#1877F2;color:#fff;font-weight:700;font-size:12px;padding:4px 10px;border-radius:6px;text-decoration:none;vertical-align:middle"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Facebook</a></div>
   </footer>
 </div>
 
 <div class="scrim" id="scrim"><div class="modal" id="modal" role="dialog" aria-modal="true"></div></div>
 
+<!-- Guide popup -->
+<button class="guide-btn" onclick="document.getElementById('guideScrim').classList.add('open');setGuide(lang)" aria-label="How to use">
+  <span style="font-size:15px;font-weight:800">?</span> <span id="guideBtnLabel">භාවිත මඟ</span>
+</button>
+<div class="guide-scrim" id="guideScrim">
+  <div class="guide-box">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <h2 id="guideTitle">භාවිත කරන ආකාරය</h2>
+      <div style="display:flex;gap:4px">
+        <button onclick="setGuide('si')" id="gLang_si" style="font:inherit;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;border:1.5px solid var(--petrol);background:var(--petrol);color:#fff;cursor:pointer">සිං</button>
+        <button onclick="setGuide('en')" id="gLang_en" style="font:inherit;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;border:1.5px solid var(--line-strong);background:var(--card);color:var(--muted);cursor:pointer">EN</button>
+        <button onclick="setGuide('ta')" id="gLang_ta" style="font:inherit;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;border:1.5px solid var(--line-strong);background:var(--card);color:var(--muted);cursor:pointer">த</button>
+      </div>
+    </div>
+    <div id="guideContent"><!-- filled by setGuide() --></div>
+    <button class="guide-close" id="guideClose" onclick="document.getElementById('guideScrim').classList.remove('open')">තේරුණා ✓</button>
+  </div>
+</div>
+
+<script>
+const GUIDE={
+  si:{
+    title:"භාවිත කරන ආකාරය",
+    close:"තේරුණා ✓",
+    items:[
+      {icon:"🎤",title:"🌟 හඬ සෙවුම — සුවිශේෂීම අංගය!",text:"<strong>'ඔබට අවශ්‍ය දේ අහන්න'</strong><br><br>🎤 bar tap කරන්න<br>→ 'අමු මිරිස්' කියන්න<br>→ Card automatically open<br>→ Price 3 languages හඬින් read!<br><br>සිංහල · தமிழ் · English support ✅"},
+      {icon:"🔊",title:"Card Reading — 3 Languages",text:"Card click → 🔊 කියවන්න tap → සිල්ලර + තොග මිල සිංහල/தமிழ்/English හඬින් කියවනවා! Language button select කරලා tap!"},
+      {icon:"🌾",title:"දැන් හොඳම භාණ්ඩය",text:"Home page → 🟢 දැන් විකිණීමට + 🔴 දැන් ගැනීමට. Primary market සිල්ලර මිල අනුව auto-ranked. Card click → detail!"},
+      {icon:"👆",title:"ඕනෑම card එකක් tap කරන්න",text:"සම්පූර්ණ price chart, ඉතිහාසය, වෙළඳපොළ සැසඳීම සහ AI insight බලන්න."},
+      {icon:"📊",title:"Chart range buttons",text:"1M · 3M · 1Y · 3Y · 2026 (default) · All · YoY. 2026 = මෙ වසරේ Jan සිට Low & High instant!"},
+      {icon:"🔄",title:"සිල්ලර / තොග / 💡 පරතරය / 🧮 ගණකය",text:"සිල්ලර = consumer. තොග = wholesale. පරතරය = margin chart. ගණකය = ලාභ ගණනය."},
+      {icon:"🌾",title:"ගොවි ලාභ ගණකය",text:"kg, transport cost, production cost (optional) enter → හොඳම market auto-recommend!"},
+      {icon:"💰",title:"වෙළඳ ලාභ ගණකය",text:"Wholesale සිට Retail transport cost අඩු කර ලාභය ගණනය."},
+      {icon:"🧠",title:"AI Insight Box",text:"Price spike, seasonal pattern, market gap, 3M trend — automatic. 3 languages!"},
+      {icon:"📸",title:"Share & WhatsApp",text:"Card → 📸 Share as Image → PNG download → WhatsApp share! FB → Facebook direct. TopGoviya.lk brand visible!"},
+      {icon:"🗞️",title:"ගොවි පුවත් Blog",text:"Footer → 📝 Blog → Articles read කරන්න. ▶️ tap → 3 languages හඬින් article කියවනවා!"},
+      {icon:"🔍",title:"Search & Filter",text:"නමින් search, category filter, biggest changes sort."},
+      {icon:"🕐",title:"දෛනිකව auto-update",text:"ශ්‍රී ලංකා මහ බැංකු data — දිනපතා සවස 5:00 ට automatic update."},
+    ]
+  },
+  en:{
+    title:"How to Use",
+    close:"Got it ✓",
+    items:[
+      {icon:"🎤",title:"🌟 Voice Search — Most Advanced Feature!",text:"<strong>'Ask what you need'</strong><br><br>Tap the 🎤 bar<br>→ Say 'Green Chilli'<br>→ Card opens automatically<br>→ Price read in 3 languages!<br><br>Sinhala · Tamil · English ✅"},
+      {icon:"🔊",title:"Card Reading — 3 Languages",text:"Click card → Tap 🔊 Read → Retail + Wholesale prices read in Sinhala, Tamil or English! Select language first."},
+      {icon:"🌾",title:"Best Crop Right Now",text:"Home page → 🟢 Sell Now + 🔴 Buy Now tables. Auto-ranked by primary market retail price. Click card for details!"},
+      {icon:"👆",title:"Tap any card",text:"Opens full price chart, history, market comparison, and AI insight."},
+      {icon:"📊",title:"Chart range buttons",text:"1M · 3M · 1Y · 3Y · 2026 (default) · All · YoY. 2026 = This year Low & High instantly!"},
+      {icon:"🔄",title:"Retail / Wholesale / 💡 Gap / 🧮 Calculator",text:"Retail = consumer prices. Wholesale = bulk. Gap = margin chart. Calculator = profit analysis."},
+      {icon:"🌾",title:"Farmer Profit Calculator",text:"Enter harvest kg, transport & production cost → Best market auto-recommended!"},
+      {icon:"💰",title:"Trader Profit Calculator",text:"Wholesale to retail margin minus transport = net profit per kg."},
+      {icon:"🧠",title:"AI Insight Box",text:"Price spike alerts, seasonal patterns, 3M trend, market gap — automatic. 3 languages!"},
+      {icon:"📸",title:"Share & WhatsApp",text:"Card → 📸 Share as Image → PNG → WhatsApp! FB button → Facebook direct. TopGoviya.lk brand visible!"},
+      {icon:"🗞️",title:"Govi Puwath Blog",text:"Footer → 📝 Blog → Read articles. Tap ▶️ → Article read aloud in 3 languages!"},
+      {icon:"🔍",title:"Search & Filter",text:"Search by name, filter by category, or sort by biggest price changes."},
+      {icon:"🕐",title:"Auto-updated daily",text:"Central Bank of Sri Lanka data — automatic update every day at 5PM."},
+    ]
+  },
+  ta:{
+    title:"பயன்பாட்டு வழிகாட்டி",
+    close:"புரிந்தது ✓",
+    items:[
+      {icon:"🎤",title:"🌟 குரல் தேடல் — மிகவும் மேம்பட்ட அம்சம்!",text:"<strong>'உங்களுக்குத் தேவையானதைக் கேளுங்கள்'</strong><br><br>🎤 பட்டையை தட்டவும்<br>→ 'பச்சை மிளகாய்' சொல்லுங்கள்<br>→ அட்டை தானாக திறக்கும்<br>→ 3 மொழிகளில் விலை படிக்கும்!<br><br>சிங்களம் · தமிழ் · ஆங்கிலம் ✅"},
+      {icon:"🔊",title:"அட்டை வாசிப்பு — 3 மொழிகள்",text:"அட்டையை கிளிக் → 🔊 தட்டவும் → சில்லறை + மொத்த விலைகள் சிங்களம்/தமிழ்/ஆங்கிலத்தில் படிக்கும்!"},
+      {icon:"🌾",title:"இப்போது சிறந்த பயிர்",text:"முகப்பு → 🟢 இப்போது விற்க + 🔴 இப்போது வாங்க. முதன்மை சந்தை விலை படி தானாக வரிசை!"},
+      {icon:"👆",title:"எந்த அட்டையையும் தட்டவும்",text:"முழு விலை வரைபடம், வரலாறு, சந்தை ஒப்பீடு மற்றும் AI நுண்ணறிவு காண்க."},
+      {icon:"📊",title:"வரைபட வரம்பு பொத்தான்கள்",text:"1M · 3M · 1Y · 3Y · 2026 (இயல்பு) · All · YoY. 2026 = இந்த ஆண்டு குறைந்தது & அதிகபட்சம்!"},
+      {icon:"🔄",title:"சில்லறை / மொத்தம் / 💡 இடைவெளி / 🧮 கணிப்பி",text:"சில்லறை = நுகர்வோர். மொத்தம் = மொத்த விலை. இடைவெளி = இலாப வரைபடம். கணிப்பி = லாப பகுப்பாய்வு."},
+      {icon:"🌾",title:"விவசாயி லாப கணிப்பி",text:"மகசூல் kg, போக்குவரத்து, உற்பத்தி செலவு → சிறந்த சந்தை பரிந்துரை!"},
+      {icon:"💰",title:"வியாபாரி லாப கணிப்பி",text:"மொத்த முதல் சில்லறை வரை போக்குவரத்து கழித்து நிகர லாபம்."},
+      {icon:"🧠",title:"AI நுண்ணறிவு பெட்டி",text:"விலை உயர்வு, பருவகால வடிவம், 3M போக்கு, சந்தை இடைவெளி — தானியங்கி. 3 மொழிகள்!"},
+      {icon:"📸",title:"பகிர் & WhatsApp",text:"அட்டை → 📸 PNG பதிவிறக்கம் → WhatsApp பகிர்! FB → Facebook நேரடி பகிர்!"},
+      {icon:"🗞️",title:"கோவி புவத் Blog",text:"Footer → 📝 Blog → கட்டுரைகள். ▶️ தட்டவும் → 3 மொழிகளில் கட்டுரை படிக்கும்!"},
+      {icon:"🔍",title:"தேடல் மற்றும் வடிகட்டல்",text:"பெயரால் தேடவும், வகையால் வடிகட்டவும், பெரிய மாற்றங்களால் வரிசைப்படுத்தவும்."},
+      {icon:"🕐",title:"தினசரி தானியங்கி புதுப்பிப்பு",text:"இலங்கை மத்திய வங்கி தரவு — ஒவ்வொரு நாளும் மாலை 5:00 மணிக்கு தானாக புதுப்பிக்கப்படுகிறது."},
+    ]
+  }
+};
+function setGuide(l){
+  const g=GUIDE[l];if(!g)return;
+  document.getElementById("guideTitle").textContent=g.title;
+  document.getElementById("guideClose").textContent=g.close;
+  document.getElementById("guideContent").innerHTML=g.items.map(i=>
+    `<div class="gitem"><div class="gicon">${i.icon}</div><div class="gtxt"><b>${i.title}</b>${i.text}</div></div>`
+  ).join("");
+  ["si","en","ta"].forEach(x=>{
+    const b=document.getElementById("gLang_"+x);
+    if(b){b.style.background=x===l?"var(--petrol)":"var(--card)";b.style.color=x===l?"#fff":"var(--muted)";b.style.borderColor=x===l?"var(--petrol)":"var(--line-strong)";}
+  });
+}
+/* Init guide with Sinhala default */
+document.addEventListener("DOMContentLoaded",()=>{setGuide("si");});
+</script>
+
 <script>
 const EMBEDDED = {"generated":"2026-05-29T16:50:15","source":"Central Bank of Sri Lanka \u2013 Daily Price Report","dates":["2026-05-15","2026-05-18","2026-05-19","2026-05-20","2026-05-21","2026-05-22","2026-05-25","2026-05-26","2026-05-27","2026-05-29"],"dateLabels":["15 May","18 May","19 May","20 May","21 May","22 May","25 May","26 May","27 May","29 May"],"commodities":[{"name":"Beans","category":"Vegetables","unit":"Rs./kg","primaryMarket":"Dambulla","series":[555.0,530.0,580.0,465.0,605.0,580.0,530.0,580.0,580.0,475.0],"markets":{"Pettah":350.0,"Dambulla":475.0,"Narahenpita":800.0}},{"name":"Carrot","category":"Vegetables","unit":"Rs./kg","primaryMarket":"Dambulla","series":[240.0,220.0,240.0,230.0,325.0,305.0,280.0,345.0,290.0,335.0],"markets":{"Pettah":300.0,"Dambulla":335.0,"Narahenpita":480.0}},{"name":"Cabbage","category":"Vegetables","unit":"Rs./kg","primaryMarket":"Dambulla","series":[140.0,150.0,120.0,130.0,155.0,145.0,155.0,170.0,150.0,135.0],"markets":{"Pettah":130.0,"Dambulla":135.0,"Narahenpita":340.0}},{"name":"Tomato","category":"Vegetables","unit":"Rs./kg","primaryMarket":"Dambulla","series":[430.0,285.0,285.0,285.0,285.0,305.0,320.0,345.0,325.0,305.0],"markets":{"Pettah":450.0,"Dambulla":305.0,"Narahenpita":500.0}},{"name":"Brinjal","category":"Vegetables","unit":"Rs./kg","primaryMarket":"Dambulla","series":[395.0,455.0,370.0,405.0,430.0,455.0,485.0,455.0,415.0,345.0],"markets":{"Pettah":450.0,"Dambulla":345.0,"Narahenpita":600.0}},{"name":"Pumpkin","category":"Vegetables","unit":"Rs./kg","primaryMarket":"Dambulla","series":[140.0,145.0,150.0,135.0,125.0,120.0,125.0,130.0,110.0,120.0],"markets":{"Pettah":150.0,"Dambulla":120.0,"Narahenpita":220.0}},{"name":"Snake gourd","category":"Vegetables","unit":"Rs./kg","primaryMarket":"Dambulla","series":[320.0,285.0,355.0,280.0,320.0,295.0,255.0,305.0,280.0,295.0],"markets":{"Pettah":350.0,"Dambulla":295.0,"Narahenpita":600.0}},{"name":"Green Chilli","category":"Vegetables","unit":"Rs./kg","primaryMarket":"Dambulla","series":[280.0,180.0,145.0,230.0,245.0,280.0,230.0,225.0,280.0,230.0],"markets":{"Pettah":450.0,"Dambulla":230.0,"Narahenpita":600.0}},{"name":"Lime","category":"Vegetables","unit":"Rs./kg","primaryMarket":"Dambulla","series":[405.0,355.0,355.0,335.0,370.0,355.0,405.0,435.0,410.0,405.0],"markets":{"Pettah":550.0,"Dambulla":405.0,"Narahenpita":800.0}},{"name":"Red Onion (Local)","category":"Other","unit":"Rs./kg","primaryMarket":"Dambulla","series":[295.0,285.0,285.0,270.0,245.0,270.0,235.0,310.0,245.0,245.0],"markets":{"Pettah":null,"Dambulla":245.0,"Narahenpita":null}},{"name":"Red Onion (lmp)","category":"Other","unit":"Rs./kg","primaryMarket":"Dambulla","series":[315.0,325.0,325.0,345.0,320.0,335.0,345.0,320.0,335.0,330.0],"markets":{"Pettah":383.0,"Dambulla":330.0,"Narahenpita":600.0}},{"name":"Big Onion (Imp)","category":"Other","unit":"Rs./kg","primaryMarket":"Dambulla","series":[185.0,173.0,178.0,173.0,195.0,225.0,205.0,205.0,215.0,210.0],"markets":{"Pettah":233.0,"Dambulla":210.0,"Narahenpita":240.0}},{"name":"Potato (Local)","category":"Other","unit":"Rs./kg","primaryMarket":"Dambulla","series":[235.0,215.0,225.0,215.0,245.0,235.0,235.0,255.0,235.0,235.0],"markets":{"Pettah":300.0,"Dambulla":235.0,"Narahenpita":350.0}},{"name":"Potato (Imp)","category":"Other","unit":"Rs./kg","primaryMarket":"Dambulla","series":[165.0,158.0,165.0,178.0,183.0,188.0,163.0,185.0,175.0,170.0],"markets":{"Pettah":207.0,"Dambulla":170.0,"Narahenpita":240.0}},{"name":"Dried Chilli (Imp)","category":"Other","unit":"Rs./kg","primaryMarket":"Dambulla","series":[1105.0,935.0,985.0,1043.0,1105.0,1043.0,1105.0,1055.0,1015.0,1005.0],"markets":{"Pettah":1083.0,"Dambulla":1005.0,"Narahenpita":1080.0}},{"name":"Coconut (Avg.)","category":"Other","unit":"Rs./Nut","primaryMarket":"Dambulla","series":[118.0,118.0,115.0,120.0,118.0,118.0,118.0,120.0,113.0,130.0],"markets":{"Pettah":158.0,"Dambulla":130.0,"Narahenpita":165.0}},{"name":"Banana (Sour)","category":"Fruits","unit":"Rs./kg","primaryMarket":"Dambulla","series":[120.0,85.0,90.0,130.0,100.0,90.0,120.0,85.0,95.0,95.0],"markets":{"Pettah":130.0,"Dambulla":95.0,"Narahenpita":200.0}},{"name":"Papaw","category":"Fruits","unit":"Rs./kg","primaryMarket":"Dambulla","series":[115.0,90.0,98.0,100.0,95.0,105.0,95.0,145.0,120.0,105.0],"markets":{"Pettah":170.0,"Dambulla":105.0,"Narahenpita":240.0}},{"name":"Pineapple","category":"Fruits","unit":"Rs./kg","primaryMarket":"Dambulla","series":[305.0,255.0,285.0,275.0,275.0,285.0,230.0,255.0,260.0,355.0],"markets":{"Pettah":240.0,"Dambulla":355.0,"Narahenpita":350.0}},{"name":"Samba","category":"Rice","unit":"Rs./kg","primaryMarket":"Dambulla","series":[245.0,245.0,245.0,245.0,245.0,245.0,245.0,245.0,245.0,245.0],"markets":{"Pettah":250.0,"Dambulla":245.0}},{"name":"Nadu","category":"Rice","unit":"Rs./kg","primaryMarket":"Dambulla","series":[235.0,235.0,235.0,235.0,235.0,235.0,235.0,235.0,235.0,235.0],"markets":{"Pettah":225.0,"Dambulla":235.0}},{"name":"Kekulu (White)","category":"Rice","unit":"Rs./kg","primaryMarket":"Dambulla","series":[224.0,224.0,224.0,224.0,224.0,224.0,224.0,224.0,224.0,204.0],"markets":{"Pettah":212.0,"Dambulla":204.0}},{"name":"Kekulu (Red)","category":"Rice","unit":"Rs./kg","primaryMarket":"Dambulla","series":[224.0,224.0,224.0,224.0,224.0,224.0,224.0,224.0,224.0,204.0],"markets":{"Pettah":200.0,"Dambulla":204.0}},{"name":"Ponni Samba (Imp)","category":"Rice","unit":"Rs./kg","primaryMarket":"Dambulla","series":[240.0,240.0,240.0,240.0,240.0,240.0,240.0,240.0,240.0,240.0],"markets":{"Pettah":257.0,"Dambulla":240.0}},{"name":"Kelawalla","category":"Fish","unit":"Rs./kg","primaryMarket":"Negombo","series":[2300.0,2300.0,2300.0,2300.0,2300.0,2300.0,2300.0,2300.0,2300.0,2300.0],"markets":{"Negombo":2300.0,"Marandagahamula":null}},{"name":"Thalapath","category":"Fish","unit":"Rs./kg","primaryMarket":"Negombo","series":[2360.0,2360.0,2360.0,2360.0,2360.0,2360.0,2360.0,null,2360.0,2360.0],"markets":{"Negombo":2360.0,"Marandagahamula":2840.0}},{"name":"Paraw","category":"Fish","unit":"Rs./kg","primaryMarket":"Negombo","series":[2700.0,2375.0,null,null,2400.0,2260.0,2625.0,2625.0,null,2625.0],"markets":{"Negombo":2625.0,"Marandagahamula":null}},{"name":"Salaya","category":"Fish","unit":"Rs./kg","primaryMarket":"Negombo","series":[840.0,920.0,890.0,920.0,960.0,970.0,890.0,810.0,860.0,850.0],"markets":{"Negombo":850.0,"Marandagahamula":960.0}},{"name":"Hurulla","category":"Fish","unit":"Rs./kg","primaryMarket":"Negombo","series":[1490.0,null,null,null,null,1450.0,1400.0,1380.0,null,1380.0],"markets":{"Negombo":1380.0,"Marandagahamula":1560.0}},{"name":"Linna","category":"Fish","unit":"Rs./kg","primaryMarket":"Negombo","series":[1320.0,null,1480.0,null,null,1450.0,1400.0,null,null,1450.0],"markets":{"Negombo":1450.0,"Marandagahamula":1020.0}}]};
 let DB=EMBEDDED, DATES=[], DATA=[], DATE_OBJS=[];
 
-/* ---------- i18n (translations live here; data.json is never touched) ---------- */
-let lang="en";
+/* ---------- i18n ---------- */
+let lang="si";
 const I18N={
- en:{kicker:'Data from <span class="org">Central Bank of Sri Lanka</span> website',latestReport:"Latest report",sub:"Retail prices &middot; primary market shown per item &middot; vs. previous report",movers:"Today\u2019s sharpest movements",moversHint:"auto-ranked &middot; tap &rarr;",all:"All commodities",items:"items",searchPh:"Search a commodity\u2026",sortAZ:"Sort: A\u2013Z",sortUp:"Biggest increases",sortDown:"Biggest decreases",sortHigh:"Highest price",lgUp:"Price increased",lgDown:"Price decreased",footNote:"Auto-extracted from CBSL Daily Price Reports. Not an official publication.",creditPre:"Design &amp; development by",vsLast:"vs last",latest:"Latest",change:"Change",low:"Period low",high:"Period high",retail:"retail",across:"Across markets &mdash; latest report",priceOn:"Retail price on",reason:'Moved <b>%A</b> &rarr; <b>%B</b> since the previous report.',noMatch:'No commodity matches &ldquo;%Q&rdquo;.',notEnough:"Not enough data in this range yet.",na:"n.a.",allCat:"All"},
- si:{kicker:'දත්ත <span class="org">ශ්‍රී ලංකා මහ බැංකුවේ</span> වෙබ් අඩවියෙන්',latestReport:"නවතම වාර්තාව",sub:"සිල්ලර මිල &middot; එක් භාණ්ඩයකට ප්‍රධාන වෙළඳපොළ &middot; පෙර වාර්තාවට සාපේක්ෂව",movers:"අද වැඩිම වෙනස්වීම්",moversHint:"ස්වයංක්‍රීයව ශ්‍රේණිගත &middot; තට්ටු කරන්න &rarr;",all:"සියලු භාණ්ඩ",items:"භාණ්ඩ",searchPh:"භාණ්ඩයක් සොයන්න\u2026",sortAZ:"අකාරාදී",sortUp:"වැඩිම වැඩිවීම්",sortDown:"වැඩිම අඩුවීම්",sortHigh:"ඉහළම මිල",lgUp:"මිල ඉහළ ගියා",lgDown:"මිල පහළ ගියා",footNote:"මහ බැංකුවේ දෛනික මිල වාර්තාවලින් ස්වයංක්‍රීයව උපුටා ගන්නා ලදි. නිල ප්‍රකාශනයක් නොවේ.",creditPre:"නිර්මාණය හා සංවර්ධනය:",vsLast:"පෙරට වඩා",latest:"නවතම",change:"වෙනස",low:"අවම",high:"උපරිම",retail:"සිල්ලර",across:"වෙළඳපොළ අතර &mdash; නවතම වාර්තාව",priceOn:"සිල්ලර මිල",reason:'පෙර වාර්තාවට සාපේක්ෂව <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; සඳහා භාණ්ඩයක් හමු නොවීය.',notEnough:"මෙම පරාසය සඳහා තවම ප්‍රමාණවත් දත්ත නැත.",na:"නැත",allCat:"සියල්ල"},
- ta:{kicker:'தரவு <span class="org">இலங்கை மத்திய வங்கி</span> இணையதளத்திலிருந்து',latestReport:"சமீபத்திய அறிக்கை",sub:"சில்லறை விலை &middot; ஒவ்வொரு பொருளுக்கும் முதன்மை சந்தை &middot; முந்தைய அறிக்கையுடன் ஒப்பிடுகையில்",movers:"இன்றைய பெரிய மாற்றங்கள்",moversHint:"தானியங்கி தரவரிசை &middot; தட்டவும் &rarr;",all:"அனைத்து பொருட்கள்",items:"பொருட்கள்",searchPh:"ஒரு பொருளைத் தேடுங்கள்\u2026",sortAZ:"அகர வரிசை",sortUp:"அதிக உயர்வுகள்",sortDown:"அதிக குறைவுகள்",sortHigh:"அதிக விலை",lgUp:"விலை அதிகரித்தது",lgDown:"விலை குறைந்தது",footNote:"மத்திய வங்கியின் தினசரி விலை அறிக்கைகளில் இருந்து தானாக எடுக்கப்பட்டது. அதிகாரப்பூர்வ வெளியீடு அல்ல.",creditPre:"வடிவமைப்பு &amp; உருவாக்கம்:",vsLast:"முந்தையதை விட",latest:"சமீபத்தியது",change:"மாற்றம்",low:"குறைந்தது",high:"அதிகபட்சம்",retail:"சில்லறை",across:"சந்தைகளில் &mdash; சமீபத்திய அறிக்கை",priceOn:"சில்லறை விலை",reason:'முந்தைய அறிக்கையுடன் ஒப்பிடுகையில் <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; உடன் பொருந்தும் பொருள் இல்லை.',notEnough:"இந்த வரம்பில் இன்னும் போதிய தரவு இல்லை.",na:"இல்லை",allCat:"அனைத்தும்"}
+ en:{kicker:'Data from <span class="org">Central Bank of Sri Lanka</span> website',latestReport:"Latest report",sub:"Retail prices &middot; primary market shown per item &middot; vs. previous report",movers:"Today\u2019s sharpest movements",moversHint:"auto-ranked &middot; tap &rarr;",all:"All commodities",items:"items",searchPh:"Search a commodity\u2026",sortAZ:"Sort: A\u2013Z",sortUp:"Biggest increases",sortDown:"Biggest decreases",sortHigh:"Highest price",lgUp:"Price increased",lgDown:"Price decreased",footNote:"Auto-extracted from CBSL Daily Price Reports. Not an official publication.",creditPre:"Design &amp; development by",vsLast:"vs last",latest:"Latest",change:"Change",low:"2026 Low",high:"2026 High",retail:"retail",across:"Across markets \u2014 latest report",priceOn:"Retail price on",reason:'Moved <b>%A</b> &rarr; <b>%B</b> since the previous report.',noMatch:'No commodity matches &ldquo;%Q&rdquo;.',notEnough:"Not enough data in this range yet.",na:"n.a.",allCat:"All",weather:"🌤️ Weather",btnRetail:"Retail",btnWholesale:"Wholesale",btnGap:"💡 Gap",btnCalc:"🧮 Calculator",btnRead:"Read",btnShare:"Share",btnFB:"Facebook",btnPNG:"📸 Share as Image",btnAlerts:"🔔 Daily Alerts",bestTitle:"🌾 Best Crop Right Now",bestSell:"🟢 Sell Now",bestBuy:"🔴 Buy Now",bestHint:"live data · 📍 Primary market retail price · tap →",insightLabel:"🧠 Insight",retailLabel:"Retail",wholesaleLabel:"Wholesale",spikeUp:"Price spike up",spikeDown:"Price drop"},
+ si:{kicker:'දත්ත <span class="org">ශ්‍රී ලංකා මහ බැංකුවේ</span> වෙබ් අඩවියෙන්',latestReport:"නවතම වාර්තාව",sub:"සිල්ලර මිල &middot; එක් භාණ්ඩයකට ප්‍රධාන වෙළඳපොළ &middot; පෙර වාර්තාවට සාපේක්ෂව",movers:"අද වැඩිම වෙනස්වීම්",moversHint:"ස්වයංක්‍රීයව ශ්‍රේණිගත &middot; තට්ටු කරන්න &rarr;",all:"සියලු භාණ්ඩ",items:"භාණ්ඩ",searchPh:"භාණ්ඩයක් සොයන්න\u2026",sortAZ:"අකාරාදී",sortUp:"වැඩිම වැඩිවීම්",sortDown:"වැඩිම අඩුවීම්",sortHigh:"ඉහළම මිල",lgUp:"මිල ඉහළ ගියා",lgDown:"මිල පහළ ගියා",footNote:"මහ බැංකුවේ දෛනික මිල වාර්තාවලින් ස්වයංක්‍රීයව උපුටා ගන්නා ලදි. නිල ප්‍රකාශනයක් නොවේ.",creditPre:"නිර්මාණය හා සංවර්ධනය:",vsLast:"පෙරට වඩා",latest:"නවතම",change:"වෙනස",low:"2026 අවම",high:"2026 උපරිම",retail:"සිල්ලර",across:"වෙළඳපොළ අතර &mdash; නවතම වාර්තාව",priceOn:"සිල්ලර මිල",reason:'පෙර වාර්තාවට සාපේක්ෂව <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; සඳහා භාණ්ඩයක් හමු නොවීය.',notEnough:"මෙම පරාසය සඳහා තවම ප්‍රමාණවත් දත්ත නැත.",na:"නැත",allCat:"සියල්ල",weather:"🌤️ කාලගුණය",btnRetail:"සිල්ලර",btnWholesale:"තොග",btnGap:"💡 පරතරය",btnCalc:"🧮 ගණකය",btnRead:"කියවන්න",btnShare:"Share කරන්න",btnFB:"ෆේස්බුක්",btnPNG:"📸  රූපයක් ලෙස Share",btnAlerts:"🔔 දෛනික දැනුම්දීම්",bestTitle:"🌾 දැන් හොඳම භාණ්ඩය",bestSell:"🟢 දැන් විකිණීමට",bestBuy:"🔴 දැන් ගැනීමට",bestHint:"සජීවී දත්ත · 📍 ප්‍රධාන වෙළඳපොළ සිල්ලර මිල · tap →",insightLabel:"🧠 තොරතුරු",retailLabel:"සිල්ලර",wholesaleLabel:"තොග",spikeUp:"ඉහළ නැගීමක්",spikeDown:"පහළ වැටීම"},
+ ta:{kicker:'தரவு <span class="org">இலங்கை மத்திய வங்கி</span> இணையதளத்திலிருந்து',latestReport:"சமீபத்திய அறிக்கை",sub:"சில்லறை விலை &middot; ஒவ்வொரு பொருளுக்கும் முதன்மை சந்தை &middot; முந்தைய அறிக்கையுடன் ஒப்பிடுகையில்",movers:"இன்றைய பெரிய மாற்றங்கள்",moversHint:"தானியங்கி தரவரிசை &middot; தட்டவும் &rarr;",all:"அனைத்து பொருட்கள்",items:"பொருட்கள்",searchPh:"ஒரு பொருளைத் தேடுங்கள்\u2026",sortAZ:"அகர வரிசை",sortUp:"அதிக உயர்வுகள்",sortDown:"அதிக குறைவுகள்",sortHigh:"அதிக விலை",lgUp:"விலை அதிகரித்தது",lgDown:"விலை குறைந்தது",footNote:"மத்திய வங்கியின் தினசரி விலை அறிக்கைகளில் இருந்து தானாக எடுக்கப்பட்டது. அதிகாரப்பூர்வ வெளியீடு அல்ல.",creditPre:"வடிவமைப்பு &amp; உருவாக்கம்:",vsLast:"முந்தையதை விட",latest:"சமீபத்தியது",change:"மாற்றம்",low:"2026 குறைந்தது",high:"2026 அதிகபட்சம்",retail:"சில்லறை",across:"சந்தைகளில் &mdash; சமீபத்திய அறிக்கை",priceOn:"சில்லறை விலை",reason:'முந்தைய அறிக்கையுடன் ஒப்பிடுகையில் <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; உடன் பொருந்தும் பொருள் இல்லை.',notEnough:"இந்த வரம்பில் இன்னும் போதிய தரவு இல்லை.",na:"இல்லை",allCat:"அனைத்தும்",weather:"🌤️ வானிலை",btnRetail:"சில்லறை",btnWholesale:"மொத்தம்",btnGap:"💡 இடைவெளி",btnCalc:"🧮 கணிப்பி",btnRead:"படிக்க",btnShare:"பகிர்",btnFB:"பேஸ்புக்",btnPNG:"📸 படமாக பகிர்",btnAlerts:"🔔 தினசரி விழிப்பூட்டல்",bestTitle:"🌾 இப்போது சிறந்த பயிர்",bestSell:"🟢 இப்போது விற்க",bestBuy:"🔴 இப்போது வாங்க",bestHint:"நேரடி தரவு · 📍 முதன்மை சந்தை சில்லறை விலை · தட்டவும் →",insightLabel:"🧠 நுண்ணறிவு",retailLabel:"சில்லறை",wholesaleLabel:"மொத்தம்",spikeUp:"விலை உயர்வு",spikeDown:"விலை வீழ்ச்சி"}
 };
 const CATS={Vegetables:{si:"එළවළු",ta:"காய்கறிகள்"},Other:{si:"වෙනත්",ta:"பிற"},Rice:{si:"සහල්",ta:"அரிசி"},Fish:{si:"මාළු",ta:"மீன்"},Fruits:{si:"පළතුරු",ta:"பழங்கள்"}};
 const MARKETS={Pettah:{si:"පිටකොටුව",ta:"பேட்டை"},Dambulla:{si:"දඹුල්ල",ta:"தம்புள்ள"},Narahenpita:{si:"නාරාහේන්පිට",ta:"நாரஹேன்பிட்ட"},Negombo:{si:"මීගමුව",ta:"நீர்கொழும்பு"},Marandagahamula:{si:"මාරන්දගහමුල",ta:"மரந்தகஹமுல"}};
@@ -217,8 +655,98 @@ const NAMES={
  "Banana (Sour)":{si:"කෙසෙල් (ඇඹුල්)",ta:"வாழைப்பழம் (புளிப்பு)"},"Papaw":{si:"පැපොල්",ta:"பப்பாளி"},"Pineapple":{si:"අන්නාසි",ta:"அன்னாசி"},
  "Samba":{si:"සම්බා",ta:"சம்பா"},"Nadu":{si:"නාඩු",ta:"நாடு"},"Kekulu (White)":{si:"කැකුළු (සුදු)",ta:"கெகுளு (வெள்ளை)"},"Kekulu (Red)":{si:"කැකුළු (රතු)",ta:"கெகுளு (சிவப்பு)"},"Ponni Samba (Imp)":{si:"පොන්නි සම්බා (ආනයනික)",ta:"பொன்னி சம்பா (இறக்குமதி)"},
  "Kelawalla":{si:"කෙළවල්ලා",ta:"கெளவல்லா"},"Thalapath":{si:"තලපත්",ta:"தலபத்"},"Paraw":{si:"පරාවා",ta:"பராவ்"},"Salaya":{si:"සාලයා",ta:"சாளை"},"Hurulla":{si:"හුරුල්ලා",ta:"ஹுருல்லா"},"Linna":{si:"ලින්නා",ta:"லின்னா"},
- "Beetroot":{si:"බීට්රූට්",ta:"பீட்ரூட்"},"Leeks":{si:"ලීක්ස්",ta:"லீக்ஸ்"},"Knol-khol":{si:"නෝල්කෝල්",ta:"நோல்கோல்"},"Drumstick":{si:"මුරුංගා",ta:"முருங்கை"},"Manioc":{si:"මඤ්ඤොක්කා",ta:"மரவள்ளி"},"Ash Plantain":{si:"අල කෙසෙල්",ta:"வாழைக்காய்"},"Keeri Samba":{si:"කීරි සම්බා",ta:"கீரி சம்பா"}
+ "Beetroot":{si:"බීට්රූට්",ta:"பீட்ரூட்"},"Leeks":{si:"ලීක්ස්",ta:"லீக்ஸ்"},"Knol-khol":{si:"නෝල්කෝල්",ta:"நோல்கோல்"},"Drumstick":{si:"මුරුංගා",ta:"முருங்கை"},"Manioc":{si:"මඤ්ඤොක්කා",ta:"மரவள்ளி"},"Ash Plantain":{si:"අල කෙසෙල්",ta:"வாழைக்காய்"},"Keeri Samba":{si:"කීරි සම්බා",ta:"கீரி சம்பா"},
+ "Apple (Imp)":{si:"ඇපල් (ආනයනික)",ta:"ஆப்பிள் (இறக்குமதி)"},
+ "Balaya":{si:"බලයා",ta:"பாலாயா"},
+ "Big Onion (Local)":{si:"ලොකු ළූණු (දේශීය)",ta:"பெரிய வெங்காயம் (உள்ளூர்)"},
+ "Coconut oil":{si:"පොල් තෙල්",ta:"தேங்காய் எண்ணெய்"},
+ "Coconut Oil":{si:"පොල් තෙල්",ta:"தேங்காய் எண்ணெய்"},
+ "Egg (White)":{si:"බිත්තර (සුදු)",ta:"முட்டை (வெள்ளை)"},
+ "Katta":{si:"කට්ටා",ta:"கட்டா"},
+ "Katta (Imp)":{si:"කට්ටා (ආනයනික)",ta:"கட்டா (இறக்குமதி)"},
+ "Kekulu (White) (Imp)":{si:"කැකුළු (සුදු) (ආනයනික)",ta:"கெகுளு (வெள்ளை) (இறக்குமதி)"},
+ "Nadu (Imp)":{si:"නාඩු (ආනයනික)",ta:"நாடு (இறக்குமதி)"},
+ "Orange (Imp)":{si:"දොඩම් (ආනයනික)",ta:"ஆரஞ்சு (இறக்குமதி)"},
+ "Red Dhal":{si:"රතු පරිප්පු",ta:"சிவப்பு பருப்பு"},
+ "Sprat (Imp)":{si:"හාල් මැස්සෝ (ආනයනික)",ta:"மத்தி (இறக்குமதி)"},
+ "Sugar (White)":{si:"සීනි (සුදු)",ta:"சர்க்கரை (வெள்ளை)"}
 };
+const EMOJIS={
+  "Beans":"🫘","Carrot":"🥕","Cabbage":"🥬","Tomato":"🍅","Brinjal":"🍆",
+  "Pumpkin":"🎃","Snake gourd":"🥒","Green Chilli":"🫑","Lime":"🍋",
+  "Red Onion (Local)":"🧅","Red Onion (lmp)":"🧅","Big Onion (Imp)":"🧅",
+  "Big Onion (Local)":"🧅","Potato (Local)":"🥔","Potato (Imp)":"🥔",
+  "Dried Chilli (Imp)":"🌶️","Coconut (Avg.)":"🥥","Coconut oil":"🫙",
+  "Banana (Sour)":"🍌","Papaw":"🥭","Pineapple":"🍍",
+  "Apple (Imp)":"🍎","Orange (Imp)":"🍊",
+  "Samba":"🍚","Nadu":"🍚","Kekulu (White)":"🍚","Kekulu (Red)":"🍚",
+  "Ponni Samba (Imp)":"🍚","Nadu (Imp)":"🍚","Keeri Samba":"🍚",
+  "Kelawalla":"🐟","Thalapath":"🐠","Paraw":"🐡","Salaya":"🐟",
+  "Hurulla":"🦈","Linna":"🐟","Balaya":"🐟",
+  "Red Dhal":"🫘","Sugar (White)":"🍬","Egg (White)":"🥚",
+  "Katta (Imp)":"🦐","Sprat (Imp)":"🐟","Beetroot":"🟣",
+  "Leeks":"🌿","Knol-khol":"🥦","Drumstick":"🌿","Manioc":"🥕",
+  "Ash Plantain":"🍌"
+};
+function tEmoji(n){return EMOJIS[n]||"🌿";}
+const FAQ={
+  si:[
+    {q:"Lanka Price Monitor නිදහස් ද?",a:"ඔව්, සම්පූර්ණයෙන්ම නිදහස්. Login, registration, subscription නැහැ. ගොවීන්ට, වෙළෙන්දන්ට, පාරිභෝගිකයන්ට 100% නිදහසේ."},
+    {q:"දත්ත කොපමණ කාලයකට වරක් update වෙනවාද?",a:"දිනපතා සවස 5:00 ට — ශ්‍රී ලංකා මහ බැංකු Daily Price Report එකෙන් ස්වයංක්‍රීයව extract කරනවා. Weekend සහ රජයේ නිවාඩු දිනවල data නොලැබිය හැකිය."},
+    {q:"දත්ත ලැබෙන්නේ කොහෙන්ද?",a:"සියලු මිල දත්ත <strong>ශ්‍රී ලංකා මහා බැංකු (CBSL) Daily Price Reports</strong> — official publicly available government publications — වලින් ලබා ගනී. TopGoviya.lk ස්වාධීන platform එකක් — CBSL සමඟ affiliated නොවේ."},
+    {q:"ගොවි Profit Calculator use කරන්නේ කොහොමද?",a:"ඕනෑම commodity card click කරන්න → <strong>🧮 Calculator</strong> button tap කරන්න → <strong>🌾 Farmer</strong> mode select කරන්න → harvest kg, transport cost, production cost (optional) enter කරන්න. Calculator ස්වයංක්‍රීයව හොඳම market recommend කරනවා."},
+    {q:"Retail සහ Wholesale මිල අතර වෙනස කුමක්ද?",a:"<strong>Retail මිල</strong> = පාරිභෝගිකයා ගෙවන මිල. <strong>Wholesale මිල</strong> = trader ලා bulk ගෙනෙන මිල. ඒ වෙනස = trader ගේ ලාභය. 💡 Gap button click කළාම visually දකිනවා."},
+    {q:"කොයි වෙළඳපොළවල් track කරනවාද?",a:"<strong>දඹුල්ල ආර්ථික මධ්‍යස්ථානය</strong>, <strong>පිටකොටුව (කොළඹ)</strong>, <strong>නාරාහේන්පිට</strong> — එළවළු, සහල්. <strong>මීගමුව</strong>, <strong>Peliyagoda</strong> — මාළු."},
+    {q:"Mobile phone එකෙන් use කරන්න පුළුවන්ද?",a:"ඔව්! Lanka Price Monitor සම්පූර්ණයෙන් mobile-optimized. <strong>topgoviya.lk</strong> mobile browser එකෙන් open කරන්න — app download ඕනේ නැහැ. Android සහ iOS — සියලු devices."},
+    {q:"සිංහල සහ தமிழ் භාෂාවලින් available ද?",a:"ඔව්! සම්පූර්ණ platform — <strong>සිංහල</strong>, <strong>தமிழ்</strong>, <strong>English</strong> — top right corner language buttons use කරන්න."},
+    {q:"අද ශ්‍රී ලංකාවේ එළවළු මිල කීයද?",a:"TopGoviya.lk CBSL දත්ත අනුව: තක්කාලි රු.455/kg, දෙහි රු.418/kg, වම්බටු රු.230/kg, බෝංචි රු.455/kg — Dambulla සිල්ලර මිල."},
+    {q:"දඹුල්ල සහ පිටකොටුව — කොයි ලාභද?",a:"ගොවීන්ට දඹුල්ල wholesale market හොඳයි. Pettah retail market. Gap chart click කළාම දෙකේ වෙනස clear!"},
+    {q:"දෙහි මිල ඉහළ ඇත්තේ ඇයි?",a:"දෙහි seasonal crop. ජූනි-ජූලි = peak demand, low supply. ජනවාරි-මාර්තු = cheapest. YoY chart click කළාම seasonal pattern දිස් වේ."},
+    {q:"සහල් මිල කීයද?",a:"Samba රු.245/kg, Nadu රු.235/kg, Kekulu රු.225/kg, Ponni Samba රු.240/kg — Dambulla."},
+  ],
+  en:[
+    {q:"Is Lanka Price Monitor free to use?",a:"Yes, completely free. No login, no registration, no subscription required. Lanka Price Monitor is 100% free for farmers, traders, and consumers."},
+    {q:"How often is the price data updated?",a:"Price data is updated daily at 5:00 PM Sri Lanka time, automatically extracted from the Central Bank of Sri Lanka Daily Price Report. Weekend and public holiday data may not be available."},
+    {q:"Where does the price data come from?",a:"All price data is sourced from the <strong>Central Bank of Sri Lanka (CBSL) Daily Price Reports</strong> — official publicly available government publications. TopGoviya.lk is independent and not affiliated with CBSL."},
+    {q:"How do I use the Farmer Profit Calculator?",a:"Click any commodity card → tap <strong>🧮 Calculator</strong> → select <strong>🌾 Farmer</strong> mode → enter harvest kg, transport cost, and optional production cost. The calculator automatically recommends the best market."},
+    {q:"What is the difference between Retail and Wholesale prices?",a:"<strong>Retail price</strong> is what consumers pay. <strong>Wholesale price</strong> is the bulk price traders pay. The difference is the trader's potential profit margin. Use the 💡 Gap button to see visual analysis."},
+    {q:"Which markets are tracked?",a:"<strong>Dambulla Economic Centre</strong>, <strong>Pettah (Colombo)</strong>, and <strong>Narahenpita</strong> for vegetables and rice. <strong>Negombo</strong> and <strong>Peliyagoda</strong> for fish prices."},
+    {q:"Can I use this on my mobile phone?",a:"Yes! Fully mobile-optimized. Open <strong>topgoviya.lk</strong> in any mobile browser — no app download required. Works on all Android and iOS devices."},
+    {q:"Is the data available in Sinhala and Tamil?",a:"Yes! Full platform in <strong>සිංහල</strong>, <strong>தமிழ்</strong>, and <strong>English</strong>. Use the language toggle buttons at the top right corner."},
+    {q:"What is the current vegetable price in Sri Lanka?",a:"According to TopGoviya.lk CBSL data: Tomato Rs.455/kg, Lime Rs.418/kg, Brinjal Rs.230/kg, Beans Rs.455/kg at Dambulla market as of June 2026."},
+    {q:"Is Dambulla cheaper than Pettah market?",a:"Yes! Dambulla Economic Centre has lower wholesale prices. Pettah has higher retail prices. The Gap chart shows the exact difference for each commodity."},
+    {q:"What is the rice price in Sri Lanka today?",a:"Samba Rs.245/kg, Nadu Rs.235/kg, Kekulu Rs.225/kg, Ponni Samba Rs.240/kg at Dambulla market."},
+    {q:"Why is lime price high in Sri Lanka?",a:"Lime is seasonal. June-July sees peak demand with low supply. January-March is cheapest. Check the YoY chart on TopGoviya.lk for the full seasonal pattern."},
+    {q:"What is the fish price in Sri Lanka today?",a:"Kelawalla Rs.2,480/kg, Thalapath Rs.2,400/kg, Salaya Rs.690/kg, Hurulla Rs.1,500/kg at Negombo market."},
+  ],
+  ta:[
+    {q:"Lanka Price Monitor இலவசமா?",a:"ஆம், முற்றிலும் இலவசம். உள்நுழைவு, பதிவு, சந்தா தேவையில்லை. விவசாயிகள், வியாபாரிகள், நுகர்வோருக்கு 100% இலவசம்."},
+    {q:"தரவு எவ்வளவு அடிக்கடி புதுப்பிக்கப்படுகிறது?",a:"இலங்கை நேரம் மாலை 5:00 மணிக்கு தினசரி — இலங்கை மத்திய வங்கி Daily Price Report இலிருந்து தானாக பிரித்தெடுக்கப்படுகிறது. வார இறுதி மற்றும் பொது விடுமுறை நாட்களில் தரவு கிடைக்காமல் போகலாம்."},
+    {q:"தரவு எங்கிருந்து வருகிறது?",a:"அனைத்து விலை தரவும் <strong>இலங்கை மத்திய வங்கி (CBSL) Daily Price Reports</strong> இலிருந்து பெறப்படுகிறது. TopGoviya.lk சுயாதீன தளம் — CBSL உடன் தொடர்புடையதல்ல."},
+    {q:"விவசாயி லாப கணிப்பியை எவ்வாறு பயன்படுத்துவது?",a:"எந்த commodity card ஐயும் click செய்யுங்கள் → <strong>🧮 Calculator</strong> தட்டவும் → <strong>🌾 Farmer</strong> mode தேர்ந்தெடுக்கவும் → மகசூல் kg, போக்குவரத்து செலவு உள்ளிடவும். சிறந்த சந்தை தானாக பரிந்துரைக்கப்படும்."},
+    {q:"சில்லறை மற்றும் மொத்த விலைகளுக்கு என்ன வித்தியாசம்?",a:"<strong>சில்லறை விலை</strong> = நுகர்வோர் செலுத்தும் விலை. <strong>மொத்த விலை</strong> = வியாபாரிகள் வாங்கும் விலை. வித்தியாசம் = வியாபாரியின் லாபம். 💡 Gap பொத்தானை பயன்படுத்தி காண்க."},
+    {q:"எந்த சந்தைகள் கண்காணிக்கப்படுகின்றன?",a:"<strong>தம்புள்ள பொருளாதார மையம்</strong>, <strong>பேட்டை (கொழும்பு)</strong>, <strong>நாரஹேன்பிட்ட</strong> — காய்கறிகள், அரிசி. <strong>நீர்கொழும்பு</strong>, <strong>Peliyagoda</strong> — மீன்."},
+    {q:"மொபைல் போனில் பயன்படுத்த முடியுமா?",a:"ஆம்! முழுவதும் மொபைல் உகந்தது. <strong>topgoviya.lk</strong> எந்த மொபைல் உலாவியிலும் திறக்கவும் — பயன்பாடு தேவையில்லை. Android மற்றும் iOS அனைத்து சாதனங்களிலும்."},
+    {q:"சிங்களம் மற்றும் தமிழில் கிடைக்கிறதா?",a:"ஆம்! முழு தளமும் <strong>සිංහල</strong>, <strong>தமிழ்</strong>, <strong>English</strong> மூன்று மொழிகளில். மேல் வலது மூலையில் உள்ள மொழி பொத்தான்களைப் பயன்படுத்தவும்."},
+  ]
+};
+
+function renderFAQ(l){
+  const qs=FAQ[l]||FAQ.en;
+  const title={si:"නිතර අසන ප්‍රශ්න",en:"Frequently Asked Questions",ta:"அடிக்கடி கேட்கப்படும் கேள்விகள்"};
+  const el=document.getElementById("faqTitle");
+  if(el)el.textContent=title[l]||title.en;
+  const list=document.getElementById("faqList");
+  if(!list)return;
+  list.innerHTML=qs.map(({q,a})=>`
+    <details style="background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden">
+      <summary style="padding:14px 18px;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink);list-style:none;display:flex;justify-content:space-between;align-items:center">
+        ${q} &nbsp;<span style="color:var(--petrol);font-size:18px;flex-shrink:0">+</span>
+      </summary>
+      <div style="padding:0 18px 14px;font-size:13.5px;color:var(--ink-soft);line-height:1.6;border-top:1px solid var(--line);margin-top:0">${a}</div>
+    </details>`).join("");
+}
+
 function t(k){return (I18N[lang]&&I18N[lang][k])||I18N.en[k]||k;}
 function tName(n){return (NAMES[n]&&NAMES[n][lang])||n;}
 function tCat(c){return lang==="en"?c:((CATS[c]&&CATS[c][lang])||c);}
@@ -233,12 +761,41 @@ function applyLang(){
   const s=document.getElementById("search");if(s)s.placeholder=t("searchPh");
   const sel=document.getElementById("sort");
   if(sel){const o=sel.options;if(o[0])o[0].text=t("sortAZ");if(o[1])o[1].text=t("sortUp");if(o[2])o[2].text=t("sortDown");if(o[3])o[3].text=t("sortHigh");}
+  const wLabel=document.getElementById("weatherLabel");
+  if(wLabel)wLabel.textContent=t("weather");
+  const micLabel=document.querySelector(".mic-label");
+  if(micLabel)micLabel.textContent=lang==="si"?"හඬ":lang==="ta"?"குரல்":"Voice";
+  /* Toggle buttons */
+  const bR=document.getElementById("btnRetail");
+  const bW=document.getElementById("btnWholesale");
+  const bG=document.getElementById("btnGap");
+  const bC=document.getElementById("btnCalc");
+  if(bR)bR.textContent=t("btnRetail");
+  if(bW)bW.textContent=t("btnWholesale");
+  if(bG)bG.innerHTML=t("btnGap");
+  if(bC)bC.innerHTML=t("btnCalc");
+  /* Share buttons */
+  const readBtn=document.querySelector('[onclick*="speakPrice"] span');
+  if(readBtn)readBtn.textContent=t("btnRead");
+  /* Disclaimer language switch */
+  const de=document.querySelector(".disc-en"),ds=document.querySelector(".disc-si"),dt=document.querySelector(".disc-ta");
+  if(de&&ds&&dt){
+    de.style.display=lang==="en"?"inline":"none";
+    ds.style.display=lang==="si"?"inline":"none";
+    dt.style.display=lang==="ta"?"inline":"none";
+  }
 }
 function setLang(l){
   lang=l;
   document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.lang===l));
   applyLang();
-  if(DATA.length){buildCats();renderMovers();renderGrid();}
+  if(DATA.length){buildCats();renderMovers();renderGrid();renderBestCrop();}
+  renderFAQ(l);
+  renderWeather();
+  vhIdx=0; updateVoiceHint();
+  /* Guide button label */
+  const gbl=document.getElementById("guideBtnLabel");
+  if(gbl)gbl.textContent=lang==="si"?"භාවිත කරන ආකාරය":lang==="ta"?"பயன்படுத்துவது எப்படி":"How to use";
   if(scrim.classList.contains("open")&&curDetail)openDetail(curDetail.id);
 }
 document.querySelector(".lang").addEventListener("click",function(e){var b=e.target.closest("button[data-lang]");if(b)setLang(b.dataset.lang);});
@@ -282,7 +839,7 @@ function renderGrid(){
   document.getElementById("count").textContent=list.length+" "+t("items");
   if(!list.length){g.innerHTML='<div class="empty">'+t("noMatch").replace("%Q",state.q)+'</div>';return;}
   g.innerHTML=list.map(d=>{const ch=c(d),cur=latestVal(d.series);
-    return '<div class="item" onclick="openDetail('+d.id+')"><div class="top"><div><div class="cat">'+tCat(d.category)+'</div><div class="nm">'+tName(d.name)+'</div></div><span class="chg '+ch.dir+'">'+arrow(ch.dir)+' '+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</span></div>'+spark(d.series,220,42,strokeFor(ch.dir))+'<div class="foot"><span class="price">'+fmt(cur)+'<small> '+tUnit(d.unit)+'</small></span><span style="font-size:11px;color:var(--muted)">'+(ch.abs>0?"+":"")+fmt(ch.abs)+' '+t("vsLast")+'</span></div></div>';
+    return '<div class="item" onclick="openDetail('+d.id+')"><div class="top"><div><div class="cat" style="display:flex;justify-content:space-between;align-items:center">'+tCat(d.category)+'<span style="font-family:monospace;font-size:9px;font-weight:700;color:#0F5C4D;letter-spacing:.3px">TopGoviya.lk</span></div><div class="nm">'+tEmoji(d.name)+' '+tName(d.name)+'</div></div><span class="chg '+ch.dir+'">'+arrow(ch.dir)+' '+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</span></div>'+spark(d.series,220,42,strokeFor(ch.dir))+'<div class="foot"><span class="price">'+fmt(cur)+'<small> '+tUnit(d.unit)+'</small></span><span style="font-size:11px;color:var(--muted)">'+(ch.abs>0?"+":"")+fmt(ch.abs)+' '+t("vsLast")+'</span></div></div>';
   }).join("");
 }
 
@@ -291,22 +848,32 @@ function renderMovers(){
     .sort((a,b)=>Math.abs(b.ch.pct)-Math.abs(a.ch.pct)).slice(0,7);
   document.getElementById("movers").innerHTML=m.map(({d,ch})=>{
     const v=vpts(d.series),prev=v[v.length-2][1],cur=v[v.length-1][1];
-    return '<div class="mover" onclick="openDetail('+d.id+')"><div class="cat">'+tCat(d.category)+' &middot; '+tMkt(d.primaryMarket)+'</div><div class="nm">'+tName(d.name)+'</div><div class="row"><span class="price">'+fmt(cur)+'<small> '+tUnit(d.unit)+'</small></span><span class="chg '+ch.dir+'">'+arrow(ch.dir)+' '+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</span></div><div class="reason">'+t("reason").replace("%A",fmt(prev)).replace("%B",fmt(cur))+'</div></div>';
+    return '<div class="mover" onclick="openDetail('+d.id+')"><div class="cat">'+tCat(d.category)+' &middot; '+tMkt(d.primaryMarket)+'</div><div class="nm">'+tEmoji(d.name)+' '+tName(d.name)+'</div><div class="row"><span class="price">'+fmt(cur)+'<small> '+tUnit(d.unit)+'</small></span><span class="chg '+ch.dir+'">'+arrow(ch.dir)+' '+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</span></div><div class="reason">'+t("reason").replace("%A",fmt(prev)).replace("%B",fmt(cur))+'</div></div>';
   }).join("");
 }
 
 function rangeIdxs(key){
-  const days={"1M":31,"3M":92,"1Y":366,"All":1e9}[key]||1e9;
+  const thisYr=new Date().getFullYear().toString();
+  if(key==="2026"){
+    const idxs=DB.dates.map((dt,i)=>dt.startsWith(thisYr)?i:-1).filter(i=>i>=0);
+    return idxs.length?idxs:DATE_OBJS.map((_,i)=>i);
+  }
+  const days={"1M":31,"3M":92,"1Y":366,"3Y":1096,"All":1e9}[key]||1e9;
   const last=DATE_OBJS[DATE_OBJS.length-1];
   const cutoff=new Date(last.getTime()-days*864e5);
   const idxs=[];for(let i=0;i<DATE_OBJS.length;i++) if(DATE_OBJS[i]>=cutoff) idxs.push(i);
   return idxs.length?idxs:DATE_OBJS.map((_,i)=>i);
 }
-function lineChart(d, idxs){
+
+function lineChart(d, idxs, series, isWholesale){
+  series=series||d.series;
+  const stroke=isWholesale?"#a9802a":"#0e4f4a";
+  const gradColor=isWholesale?"#a9802a":"#0e4f4a";
+  const modeLabel=isWholesale?"wholesale":"retail";
   const W=680,H=240,L=46,R=14,T=26,B=30;
-  const sub=idxs.map((origI,pos)=>({pos,origI,v:d.series[origI]})).filter(p=>p.v!=null);
+  const sub=idxs.map((origI,pos)=>({pos,origI,v:series[origI]})).filter(p=>p.v!=null);
   if(sub.length<2)
-    return '<div class="chart-wrap"><span class="lab">'+tMkt(d.primaryMarket)+' '+t("retail")+' &middot; '+tUnit(d.unit)+'</span><p class="mkt-sub" style="padding:40px 14px;text-align:center">'+t("notEnough")+'</p></div>';
+    return '<div class="chart-wrap"><span class="lab">'+tMkt(d.primaryMarket)+' '+(lang==="en"?modeLabel.toUpperCase():lang==="si"?(modeLabel==="retail"?"සිල්ලර":modeLabel==="wholesale"?"තොග":modeLabel.toUpperCase()):(modeLabel==="retail"?"சில்லறை":modeLabel==="wholesale"?"மொத்தம்":modeLabel.toUpperCase()))+' &middot; '+tUnit(d.unit)+'</span><p class="mkt-sub" style="padding:40px 14px;text-align:center">'+t("notEnough")+'</p></div>';
   const m=idxs.length||1;
   const vals=sub.map(p=>p.v),min=Math.min(...vals),max=Math.max(...vals);
   const pad=(max-min)*0.15||10,lo=Math.floor((min-pad)/10)*10,hi=Math.ceil((max+pad)/10)*10;
@@ -318,60 +885,1082 @@ function lineChart(d, idxs){
   for(let i=0;i<=steps;i++){const v=lo+(hi-lo)*i/steps,y=Y(v);
     grid+='<line x1="'+L+'" y1="'+y.toFixed(1)+'" x2="'+(W-R)+'" y2="'+y.toFixed(1)+'" stroke="#e3d9c4" stroke-width="1"/>';
     ylab+='<text x="'+(L-8)+'" y="'+(y+3).toFixed(1)+'" text-anchor="end" font-size="10" fill="#7a7264" font-family="JetBrains Mono">'+Math.round(v)+'</text>';}
+  let ysep="";
+  const firstYear=DATE_OBJS[idxs[0]].getFullYear(),lastYear=DATE_OBJS[idxs[idxs.length-1]].getFullYear();
+  if(lastYear>firstYear){
+    for(let yr=firstYear+1;yr<=lastYear;yr++){
+      let pos=-1;
+      for(let ii=0;ii<idxs.length;ii++){if(DATE_OBJS[idxs[ii]].getFullYear()===yr){pos=ii;break;}}
+      if(pos<0)continue;
+      const xp=X(pos);
+      ysep+='<line x1="'+xp.toFixed(1)+'" y1="'+T+'" x2="'+xp.toFixed(1)+'" y2="'+(H-B)+'" stroke="#cdbf9f" stroke-width="1.2" stroke-dasharray="4 3"/>';
+      ysep+='<text x="'+(xp+4).toFixed(1)+'" y="'+(T+11)+'" font-size="10" font-weight="700" fill="#a9802a" font-family="JetBrains Mono">'+yr+'</text>';
+    }
+  }
   const step=Math.max(1,Math.ceil(sub.length/7));
   let xlab="";sub.forEach((p,i)=>{
     const isLast=i===sub.length-1;
     if(!isLast && (i%step || (sub.length-1-i)<step)) return;
     xlab+='<text x="'+X(p.pos).toFixed(1)+'" y="'+(H-10)+'" text-anchor="middle" font-size="9.5" fill="#7a7264" font-family="JetBrains Mono">'+DATES[p.origI]+'</text>';});
   const baseR=sub.length>45?0:3.2;
-  const dots=pts.map(p=>'<circle class="pt" data-i="'+p[2]+'" data-base="'+baseR+'" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+baseR+'" fill="#fffdf7" stroke="#0e4f4a" stroke-width="2"/>').join("");
-  return '<div class="chart-wrap"><span class="lab">'+tMkt(d.primaryMarket)+' '+t("retail")+' &middot; '+tUnit(d.unit)+'</span><div class="tip" id="tip"></div><svg id="lc" viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block"><defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0e4f4a" stop-opacity=".16"/><stop offset="1" stop-color="#0e4f4a" stop-opacity="0"/></linearGradient></defs>'+grid+ylab+xlab+'<path d="'+area+'" fill="url(#ar)"/><path d="'+line+'" fill="none" stroke="#0e4f4a" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><line id="cross" x1="0" x2="0" y1="'+T+'" y2="'+(H-B)+'" stroke="#a9802a" stroke-width="1" stroke-dasharray="3 3" opacity="0"/>'+dots+'</svg></div>';
+  const dots=pts.map(p=>'<circle class="pt" data-i="'+p[2]+'" data-base="'+baseR+'" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+baseR+'" fill="#fffdf7" stroke="'+stroke+'" stroke-width="2"/>').join("");
+  return '<div class="chart-wrap"><span class="lab">'+tMkt(d.primaryMarket)+' '+(lang==="en"?modeLabel.toUpperCase():lang==="si"?(modeLabel==="retail"?"සිල්ලර":modeLabel==="wholesale"?"තොග":modeLabel.toUpperCase()):(modeLabel==="retail"?"சில்லறை":modeLabel==="wholesale"?"மொத்தம்":modeLabel.toUpperCase()))+' &middot; '+tUnit(d.unit)+'</span><div class="tip" id="tip"></div><svg id="lc" viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block"><defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+gradColor+'" stop-opacity=".16"/><stop offset="1" stop-color="'+gradColor+'" stop-opacity="0"/></linearGradient></defs>'+grid+ylab+ysep+xlab+'<path d="'+area+'" fill="url(#ar)"/><path d="'+line+'" fill="none" stroke="'+stroke+'" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><line id="cross" x1="0" x2="0" y1="'+T+'" y2="'+(H-B)+'" stroke="#a9802a" stroke-width="1" stroke-dasharray="3 3" opacity="0"/>'+dots+'</svg></div>';
 }
 
-function marketBars(d){
-  const e=Object.entries(d.markets);if(!e.length)return"";
+function marketBars(d, mode){
+  mode = mode || "retail";
+  const isWholesale = mode==="wholesale";
+  const markets = isWholesale && d.wholesaleMarkets ? d.wholesaleMarkets : d.markets;
+  const retailMkts = d.markets || {};
+  const e=Object.entries(markets||{});if(!e.length)return"";
   const maxv=Math.max(...e.map(x=>x[1]||0))||1;
-  return '<h4 class="mkt-h">'+t("across")+'</h4><p class="mkt-sub">'+t("priceOn")+' '+DATES[DATES.length-1]+', '+tUnit(d.unit)+'</p><div class="bars">'+e.map(([k,v])=>'<div class="bar"><span class="bn">'+tMkt(k)+'<small>'+t("retail")+'</small></span><div class="track">'+(v!=null?'<div class="fill" style="width:'+(v/maxv*100).toFixed(0)+'%"></div>':'')+'</div><span class="bv '+(v==null?"na":"")+'">'+(v==null?t("na"):fmt(v))+'</span></div>').join("")+'</div>';
+  const label = isWholesale ? t("wholesaleLabel") : t("retailLabel");
+  const fillClass = isWholesale ? "fill wholesale" : "fill";
+  const heading = isWholesale ? t("across")+' &mdash; Wholesale' : t("across");
+  const subline = isWholesale
+    ? 'Wholesale price on '+DATES[DATES.length-1]+' &middot; Margin = retail &minus; wholesale'
+    : t("priceOn")+' '+DATES[DATES.length-1]+', '+tUnit(d.unit);
+  return '<h4 class="mkt-h">'+heading+'</h4><p class="mkt-sub">'+subline+'</p><div class="bars">'+e.map(([k,v])=>{
+    const retail=retailMkts[k];
+    const margin=(isWholesale&&v!=null&&retail!=null)?retail-v:null;
+    const marginHtml=margin!=null?'<span class="margin-tag">Margin: '+(margin>=0?"+":"")+'Rs.'+Math.round(margin)+'/kg</span>':'';
+    return '<div class="bar"><span class="bn">'+tMkt(k)+'<small>'+label+'</small>'+marginHtml+'</span><div class="track">'+(v!=null?'<div class="'+fillClass+'" style="width:'+(v/maxv*100).toFixed(0)+'%"></div>':'')+'</div><span class="bv '+(v==null?"na":"")+'">'+(v==null?t("na"):fmt(v))+'</span></div>';
+  }).join("")+'</div>';
 }
 
 const scrim=document.getElementById("scrim"),modal=document.getElementById("modal");
-let curDetail=null;
+let curDetail=null, curMode="retail";
+
 function defaultRange(){
   const span=(DATE_OBJS[DATE_OBJS.length-1]-DATE_OBJS[0])/864e5;
   if(span<=31)return "All";
-  return "3M";
+  return "2026";
 }
-function renderRange(key){
+
+/* ===== SINGLE renderRange — wholesale aware ===== */
+function renderRange(key, mode){
+  mode = mode || curMode;
   const host=document.getElementById("chartHost");if(!host)return;
+  if(key==="YoY"){
+    host.innerHTML=yoyChart(curDetail);
+    document.querySelectorAll("#ranges button").forEach(b=>b.classList.toggle("on",b.dataset.r==="YoY"));
+    return;
+  }
   const idxs=rangeIdxs(key);
-  host.innerHTML=lineChart(curDetail, idxs);
-  const win=idxs.map(i=>curDetail.series[i]).filter(v=>v!=null);
+  const isWholesale = mode==="wholesale";
+  const series = isWholesale && curDetail.wholesaleSeries ? curDetail.wholesaleSeries : curDetail.series;
+  host.innerHTML=lineChart(curDetail, idxs, series, isWholesale);
+  const win=idxs.map(i=>series[i]).filter(v=>v!=null);
   if(win.length){
     const lo=Math.min(...win),hi=Math.max(...win);
     const lE=document.getElementById("statLow"),hE=document.getElementById("statHigh");
-    if(lE)lE.textContent=fmt(lo);
-    if(hE)hE.textContent=fmt(hi);
+    if(lE)lE.textContent=fmt(lo);if(hE)hE.textContent=fmt(hi);
   }
-  document.querySelectorAll("#ranges button").forEach(b=>b.classList.toggle("on", b.dataset.r===key));
-  requestAnimationFrame(()=>wireChart(curDetail));
+  document.querySelectorAll("#ranges button").forEach(b=>b.classList.toggle("on",b.dataset.r===key));
+  requestAnimationFrame(()=>wireChart(curDetail, series));
 }
+
+/* ===== switchMode — retail/wholesale toggle ===== */
+function switchMode(mode){
+  curMode=mode;
+  const br=document.getElementById("btnRetail"),bw=document.getElementById("btnWholesale"),
+        bg=document.getElementById("btnGap"),bc=document.getElementById("btnCalc");
+  if(br)br.classList.toggle("on",mode==="retail");
+  if(bw)bw.classList.toggle("on",mode==="wholesale");
+  if(bg)bg.classList.toggle("on",mode==="gap");
+  if(bc)bc.classList.toggle("on",mode==="calc");
+  const mh=document.getElementById("mktBarsHost");
+  if(mode==="gap"){
+    const host=document.getElementById("chartHost");
+    if(host)host.innerHTML=gapChart(curDetail);
+    if(mh)mh.innerHTML=gapAlert(curDetail);
+    setTimeout(()=>{
+      const tcInputs=document.querySelectorAll("[id^='tc_']");
+      tcInputs.forEach(inp=>{
+        const tcid=inp.id.replace("tc_","");
+        inp.value=10;calcTransport2(tcid);
+      });
+    },200);
+    document.querySelectorAll("#ranges button").forEach(b=>b.classList.remove("on"));
+  } else if(mode==="calc"){
+    const host=document.getElementById("chartHost");
+    if(host)host.innerHTML=calcPanel(curDetail);
+    if(mh)mh.innerHTML="";
+    setTimeout(()=>{
+      const cp=document.querySelector("[id^='cp_']");
+      if(cp){
+        const id=cp.id.replace("cp_","");
+        /* Force farmer mode visually */
+        const ti=document.getElementById("trader_inputs_"+id);
+        const fi=document.getElementById("farmer_inputs_"+id);
+        const tb=document.getElementById("mode_trader_"+id);
+        const fb=document.getElementById("mode_farmer_"+id);
+        if(ti)ti.style.display="none";
+        if(fi)fi.style.display="block";
+        if(tb){tb.style.background="transparent";tb.style.color="#7a7264";}
+        if(fb){fb.style.background="#2c7a52";fb.style.color="#fff";}
+        calcFarmer(id);
+      }
+    },300);
+    document.querySelectorAll("#ranges button").forEach(b=>b.classList.remove("on"));
+  } else {
+    if(mh)mh.innerHTML=marketBars(curDetail,mode);
+    const active=document.querySelector("#ranges button.on");
+    renderRange(active?active.dataset.r:defaultRange(),mode);
+  }
+}
+
+/* ===== Standalone Calculator Panel ===== */
+function calcPanel(d){
+  const rt=d.markets||{}, ws=d.wholesaleMarkets||{};
+  const allMkts=Object.keys(rt).filter(k=>rt[k]!=null);
+  /* Markets with BOTH retail + wholesale — for Trader AND Farmer mode */
+  const traderMkts=allMkts.filter(k=>ws[k]!=null);
+  const farmerMkts=traderMkts; /* Farmer sells at wholesale — need WS data */
+  const mkts=allMkts;
+  if(!mkts.length) return '<p class="mkt-sub" style="padding:20px">Market data not available.</p>';
+  const cid="cp_"+Math.random().toString(36).slice(2,8);
+  window._tcData=window._tcData||{};
+  window._tcData[cid]=traderMkts.map(k=>({k,margin:(rt[k]||0)-(ws[k]||0),rt:rt[k]||0,ws:ws[k]||0}));
+  window._tcFarmerData=window._tcFarmerData||{};
+  window._tcFarmerData[cid]=farmerMkts.map(k=>({k,rt:rt[k]||0,ws:ws[k]||null}));
+  return `<div style="background:linear-gradient(135deg,rgba(14,79,74,.04),rgba(169,128,42,.04));border:1.5px solid var(--line-strong);border-radius:14px;padding:18px 20px;margin-bottom:10px">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+      <div>
+        <div style="font-size:15px;font-weight:700;color:#0e4f4a">🧮 ${tEmoji(d.name)} ${tName(d.name)} — ${lang==="si"?"ලාභ ගණකය":lang==="ta"?"லாப கணிப்பி":"Profit Calculator"}</div>
+        <div style="font-size:11px;color:#7a7264;margin-top:3px">${lang==="si"?"🌾 ගොවි: අස්වැන්නෙන් මුළු ආදායම | 💰 වෙළෙන්ද: Wholesale→Retail ලාභය":lang==="ta"?"🌾 விவசாயி: மொத்த வருமானம் | 💰 வியாபாரி: Wholesale→Retail லாபம்":"🌾 Farmer: total revenue from harvest | 💰 Trader: Wholesale→Retail profit"}</div>
+      </div>
+      <div style="display:flex;gap:0;border:1.5px solid #cdbf9f;border-radius:999px;overflow:hidden">
+        <button id="mode_farmer_${cid}" onclick="setCalcMode('${cid}','farmer')"
+          style="font:inherit;font-size:12px;font-weight:700;padding:5px 14px;border:none;background:#2c7a52;color:#fff;cursor:pointer">${lang==="si"?"🌾 ගොවියා":lang==="ta"?"🌾 விவசாயி":"🌾 Farmer"}</button>
+        <button id="mode_trader_${cid}" onclick="setCalcMode('${cid}','trader')"
+          style="font:inherit;font-size:12px;font-weight:700;padding:5px 14px;border:none;background:transparent;color:#7a7264;cursor:pointer">${lang==="si"?"💰 වෙළෙන්දා":lang==="ta"?"💰 வியாபாரி":"💰 Trader"}</button>
+      </div>
+    </div>
+
+    <!-- Market prices quick view -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:14px">
+      ${mkts.map(k=>`<div style="background:#fffdf7;border:1px solid ${ws[k]?'#e3d9c4':'#f0d9c4'};border-radius:8px;padding:8px 10px;text-align:center;opacity:${ws[k]?1:0.7}">
+        <div style="font-size:10px;color:#7a7264;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px">${tMkt(k)}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:#191d1a">රු.${fmt(rt[k])}</div>
+        ${ws[k]
+          ?`<div style="font-size:10px;color:#a9802a">${lang==="si"?"තොග":lang==="ta"?"மொத்தம்":"W"}: රු.${fmt(ws[k])}</div>`
+          :`<div style="font-size:9px;color:#b23a2e">⚠️ ${lang==="si"?"තොග දත්ත නැහැ":lang==="ta"?"மொத்த தரவு இல்லை":"No W data"}</div>`}
+      </div>`).join("")}
+    </div>
+
+    <!-- TRADER INPUTS -->
+    <div id="trader_inputs_${cid}" style="display:none">
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <label style="font-size:13px;color:#3a403a;min-width:130px">${lang==="si"?"ගන්නේ කොහෙන්ද:":lang==="ta"?"எங்கிருந்து வாங்க:":"Buy from:"}</label>
+          <select id="tbuy_${cid}"
+            style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a;cursor:pointer"
+            onchange="calcTransport2('${cid}')">
+            ${traderMkts.map(k=>`<option value="${k}">${tMkt(k)} — ${lang==="si"?"තොග":lang==="ta"?"மொத்தம்":"W"}: රු.${fmt(ws[k])}/kg</option>`).join("")}
+          </select>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <label style="font-size:13px;color:#3a403a;min-width:130px">${lang==="si"?"ප්‍රවාහන පිරිවැය:":lang==="ta"?"போக்குவரத்து செலவு:":"Transport cost:"}</label>
+          <input id="tc_${cid}" type="number" min="0" max="500" value="10"
+            style="width:80px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
+            oninput="calcTransport2('${cid}')">
+          <span style="font-size:13px;color:#7a7264">රු./kg</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <label style="font-size:13px;color:#3a403a;min-width:130px">${lang==="si"?"ඔබේ විකිණුම් මිල:":lang==="ta"?"உங்கள் விற்பனை விலை:":"Your sell price:"}</label>
+          <input id="tsell_${cid}" type="number" min="0" max="9999" value=""
+            placeholder="රු./kg"
+            style="width:100px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #a9802a;border-radius:8px;background:#fffdf7;color:#191d1a"
+            oninput="calcTransport2('${cid}')">
+          <span style="font-size:13px;color:#7a7264">රු./kg</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FARMER INPUTS -->
+    <div id="farmer_inputs_${cid}">
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px" id="farmer-fields">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <label class="calc-label" style="font-size:13px;color:#3a403a;min-width:130px">${lang==="si"?"මුළු අස්වැන්න:":lang==="ta"?"மொத்த அறுவடை:":"Total harvest:"}</label>
+          <input id="fkg_${cid}" type="number" min="0" value="500"
+            style="width:80px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
+            oninput="calcFarmer('${cid}')">
+          <span style="font-size:13px;color:#7a7264">kg</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <label class="calc-label" style="font-size:13px;color:#3a403a;min-width:130px">${lang==="si"?"ප්‍රවාහන පිරිවැය:":lang==="ta"?"போக்குவரத்து செலவு:":"Transport cost:"}</label>
+          <input id="ftc_${cid}" type="number" min="0" value="10"
+            style="width:80px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
+            oninput="calcFarmer('${cid}')">
+          <span style="font-size:13px;color:#7a7264">රු./kg</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <label style="font-size:13px;color:#3a403a;min-width:130px">${lang==="si"?"නිෂ්පාදන පිරිවැය:":lang==="ta"?"உற்பத்தி செலவு:":"Production cost:"} <span style="font-size:10px;color:#7a7264">${lang==="si"?"(විකල්ප)":lang==="ta"?"(விருப்பம்)":"(optional)"}</span></label>
+          <input id="fpc_${cid}" type="number" min="0" value="" placeholder="0"
+            style="width:80px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
+            oninput="calcFarmer('${cid}')">
+          <span style="font-size:13px;color:#7a7264">රු./kg</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="tr_${cid}" style="display:flex;flex-direction:column;gap:6px"></div>
+  </div>`;
+}
+
+/* ===== Weather — Open-Meteo (Free, No API Key) ===== */
+let WEATHER_RESULTS = null;
+function renderWeather(){
+  const el=document.getElementById("weatherData");
+  if(!el||!WEATHER_RESULTS)return;
+  el.innerHTML=WEATHER_RESULTS.map(({loc,d})=>{
+    const wx=WX_CODE[d.daily.weathercode[0]]||"🌤️";
+    const tmax=Math.round(d.daily.temperature_2m_max[0]);
+    const tmin=Math.round(d.daily.temperature_2m_min[0]);
+    const rain=d.daily.precipitation_sum[0];
+    const wxTmr=WX_CODE[d.daily.weathercode[1]]||"🌤️";
+    const rainAlert=rain>10?`<span style="color:#b23a2e;font-size:9px;font-weight:700"> ⚠️ ${lang==="si"?"වැස්ස!":lang==="ta"?"மழை!":"Rain!"}</span>`:"";
+    const tmrLabel=lang==="si"?"හෙට":lang==="ta"?"நாளை":"Tomorrow";
+    const lowLabel=lang==="si"?"අවම":lang==="ta"?"குறைந்தது":"Low";
+    return `<div style="display:flex;flex-direction:column;gap:1px;padding:4px 10px;background:var(--paper);border-radius:8px;border:1px solid var(--line)">
+      <div style="font-size:10px;font-weight:700;color:var(--petrol)">${loc.emoji} ${tMkt(loc.name)}</div>
+      <div style="font-size:13px;font-weight:700;color:var(--ink)">${wx} ${tmax}°C${rainAlert}</div>
+      <div style="font-size:9px;color:var(--muted)">${tmrLabel}: ${wxTmr} · ${lowLabel}: ${tmin}°</div>
+    </div>`;
+  }).join("");
+}
+const WEATHER_LOCATIONS=[
+  {name:"Dambulla",lat:7.87,lon:80.65,emoji:"🥬"},
+  {name:"Pettah",lat:6.93,lon:79.84,emoji:"🏪"},
+  {name:"Negombo",lat:7.21,lon:79.84,emoji:"🐟"},
+];
+const WX_CODE={
+  0:"☀️",1:"🌤️",2:"⛅",3:"☁️",
+  45:"🌫️",48:"🌫️",
+  51:"🌦️",53:"🌦️",55:"🌧️",
+  61:"🌧️",63:"🌧️",65:"🌧️",
+  71:"❄️",73:"❄️",75:"❄️",
+  80:"🌦️",81:"🌧️",82:"⛈️",
+  95:"⛈️",96:"⛈️",99:"⛈️",
+};
+async function fetchWeather(){
+  const el=document.getElementById("weatherData");
+  if(!el)return;
+  try{
+    const results=await Promise.all(WEATHER_LOCATIONS.map(async loc=>{
+      const url=`https://api.open-meteo.com/v1/forecast?latitude=${loc.lat}&longitude=${loc.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&timezone=Asia%2FColombo&forecast_days=2`;
+      const r=await fetch(url);
+      const d=await r.json();
+      return {loc,d};
+    }));
+    WEATHER_RESULTS=results;
+    renderWeather();
+  }catch(e){
+    el.innerHTML='<span style="font-size:11px;color:var(--muted)">Weather unavailable</span>';
+  }
+}
+async function fetchWeatherOLD(){
+  const el=document.getElementById("weatherData");
+  if(!el)return;
+  try{
+    const results=await Promise.all(WEATHER_LOCATIONS.map(async loc=>{
+      const url=`https://api.open-meteo.com/v1/forecast?latitude=${loc.lat}&longitude=${loc.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&timezone=Asia%2FColombo&forecast_days=2`;
+      const r=await fetch(url);
+      const d=await r.json();
+      return {loc,d};
+    }));
+    el.innerHTML=results.map(({loc,d})=>{
+      const wx=WX_CODE[d.daily.weathercode[0]]||"🌤️";
+      const tmax=Math.round(d.daily.temperature_2m_max[0]);
+      const tmin=Math.round(d.daily.temperature_2m_min[0]);
+      const rain=d.daily.precipitation_sum[0];
+      const wxTmr=WX_CODE[d.daily.weathercode[1]]||"🌤️";
+      const rainAlert=rain>10?`<span style="color:#b23a2e;font-size:9px;font-weight:700"> ⚠️ ${lang==="si"?"වැස්ස!":lang==="ta"?"மழை!":"Rain!"}</span>`:''
+      const tmrLabel=lang==="si"?"හෙට":lang==="ta"?"நாளை":"Tomorrow";
+      const lowLabel=lang==="si"?"අවම":lang==="ta"?"குறைந்தது":"Low";
+      return `<div style="display:flex;flex-direction:column;gap:1px;padding:4px 10px;background:var(--paper);border-radius:8px;border:1px solid var(--line)">
+        <div style="font-size:10px;font-weight:700;color:var(--petrol)">${loc.emoji} ${tMkt(loc.name)}</div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink)">${wx} ${tmax}°C${rainAlert}</div>
+        <div style="font-size:9px;color:var(--muted)">${tmrLabel}: ${wxTmr} · ${lowLabel}: ${tmin}°</div>
+      </div>`;
+    }).join("");
+  }catch(e){
+    el.innerHTML='<span style="font-size:11px;color:var(--muted)">Weather unavailable</span>';
+  }
+}
+
+/* ===== Random Quotes ===== */
+const QUOTES={
+  si:[
+    "දැනුම ලාභයේ රහස යි",
+    "හොඳ තීරණයක් හොඳ අස්වැන්නකට වඩා වටිනවා",
+    "ගොවියාගේ දහදිය — රටේ ජීවය",
+    "දත්ත බලලා තීරණ ගන්න",
+    "දැනුවත් ගොවියා සමෘද්ධිමත් වෙයි",
+    "හොඳ වෙළඳපොළ — හොඳ ජීවිතය",
+    "මිල දන්නා ගොවියා කවදාවත් රවටන්නේ නැහැ",
+    "දත්ත සමඟ ගිය ගොවියා ජය ගනී",
+  ],
+  en:[
+    "Knowledge is the seed of prosperity",
+    "Data today, profit tomorrow",
+    "Smart farmer, better harvest",
+    "Informed decisions, better returns",
+    "Every price tells a story",
+    "Know your market, grow your profit",
+    "The informed farmer never gets cheated",
+    "Data-driven farming is the future",
+  ],
+  ta:[
+    "அறிவே லாபத்தின் ரகசியம்",
+    "தரவு இன்று, லாபம் நாளை",
+    "அறிவுள்ள விவசாயி, சிறந்த விளைச்சல்",
+    "சரியான முடிவு, சிறந்த வருமானம்",
+    "விலை தெரிந்த விவசாயி ஏமாற மாட்டான்",
+    "தரவுடன் செல்லும் விவசாயி வெற்றி பெறுவான்",
+  ]
+};
+function randomQuote(){
+  const qs=QUOTES[lang]||QUOTES.en;
+  return qs[Math.floor(Math.random()*qs.length)];
+}
+function aiInsight(d){
+  const ch=changeOf(d.series);
+  const cur=latestVal(d.series);
+  const vals=vpts(d.series).map(p=>p[1]);
+  if(!vals.length)return"";
+  const rows=[];
+
+  /* 1. Price change alert */
+  if(Math.abs(ch.pct)>=25)
+    rows.push({cls:ch.dir==="up"?"warn":"good",icon:ch.dir==="up"?"⚠️":"✅",
+      text:lang==="si"?`මිල ${ch.dir==="up"?"ඉහළ නැගීමක්":"පහළ වැටීම"} — ${Math.abs(ch.pct).toFixed(1)}% ${ch.dir==="up"?"ඉහළ":"පහළ"} ගොස් ඇත`:lang==="ta"?`விலை ${ch.dir==="up"?"ஏற்றம்":"வீழ்ச்சி"} — ${Math.abs(ch.pct).toFixed(1)}% ${ch.dir==="up"?"அதிகரித்தது":"குறைந்தது"}`:`${ch.dir==="up"?"Price spike":"Price drop"} — ${Math.abs(ch.pct).toFixed(1)}% ${ch.dir==="up"?"increase":"decrease"}`});
+  else if(Math.abs(ch.pct)>=10)
+    rows.push({cls:"",icon:"📊",text:lang==="si"?`මිල ${ch.dir==="up"?"ඉහළ":"පහළ"} — ${Math.abs(ch.pct).toFixed(1)}% ${ch.dir==="up"?"වැඩිවීමක්":"අඩුවීමක්"}`:lang==="ta"?`விலை ${ch.dir==="up"?"உயர்வு":"வீழ்ச்சி"} — ${Math.abs(ch.pct).toFixed(1)}% ${ch.dir==="up"?"அதிகரிப்பு":"குறைப்பு"}`:`Price ${ch.dir==="up"?"increase":"decrease"} — ${Math.abs(ch.pct).toFixed(1)}% ${ch.dir==="up"?"rise":"drop"}`});
+
+  /* 2. Position in range */
+  const allMin=Math.min(...vals),allMax=Math.max(...vals),rng=allMax-allMin||1;
+  const pos=(cur-allMin)/rng;
+  if(pos>=0.85)rows.push({cls:"warn",icon:"🔴",text:lang==="si"?`වර්තමාන මිල ඉතිහාසයේ ඉහළ පරාසයට ආසන්නයි (${fmt(allMin)}–${fmt(allMax)})`:lang==="ta"?`தற்போதைய விலை வரலாற்று உச்ச வரம்பில் உள்ளது (${fmt(allMin)}–${fmt(allMax)})`:`Current price near historical HIGH range (${fmt(allMin)}–${fmt(allMax)})`});
+  else if(pos<=0.15)rows.push({cls:"good",icon:"🟢",text:lang==="si"?`වර්තමාන මිල ඉතිහාසයේ පහළ පරාසයට ආසන්නයි (${fmt(allMin)}–${fmt(allMax)})`:lang==="ta"?`தற்போதைய விலை வரலாற்று குறைந்த வரம்பில் உள்ளது (${fmt(allMin)}–${fmt(allMax)})`:`Current price near historical LOW range (${fmt(allMin)}–${fmt(allMax)})`});
+  else rows.push({cls:"",icon:"📈",text:lang==="si"?`මිල සාමාන්‍ය පරාසයේ — ${fmt(allMin)} සිට ${fmt(allMax)} දක්වා`:lang==="ta"?`விலை சாதாரண வரம்பில் — ${fmt(allMin)} முதல் ${fmt(allMax)} வரை`:`Price in normal range — ${fmt(allMin)} to ${fmt(allMax)}`});
+
+  /* 3. 3M trend */
+  const idxs3m=rangeIdxs("3M");
+  const win3m=idxs3m.map(i=>d.series[i]).filter(v=>v!=null);
+  if(win3m.length>=4){
+    const half=Math.floor(win3m.length/2);
+    const avg1=win3m.slice(0,half).reduce((a,b)=>a+b,0)/half;
+    const avg2=win3m.slice(half).reduce((a,b)=>a+b,0)/(win3m.length-half);
+    const trend=((avg2-avg1)/avg1*100).toFixed(1);
+    if(Math.abs(trend)>5)
+      rows.push({cls:avg2>avg1?"warn":"good",icon:avg2>avg1?"📈":"📉",
+        text:lang==="si"?`පසුගිය මාස 3 — ${avg2>avg1?"ඉහළ":"පහළ"} ප්‍රවණතාව (${avg2>avg1?"+":""}${trend}%)`:lang==="ta"?`கடந்த 3 மாதங்கள் — ${avg2>avg1?"உயர்வு":"வீழ்ச்சி"} போக்கு (${avg2>avg1?"+":""}${trend}%)`:`Past 3 months — ${avg2>avg1?"upward":"downward"} trend (${avg2>avg1?"+":""}${trend}%)`});
+  }
+
+  /* 4. Seasonal YoY insight */
+  const now=new Date();
+  const curMo=now.getMonth();
+  const moNames=["ජනවාරි","පෙබරවාරි","මාර්තු","අප්‍රේල්","මැයි","ජූනි","ජූලි","අගෝස්තු","සැප්තැම්බර්","ඔක්තෝබර්","නොවැම්බර්","දෙසැම්බර්"];
+  const moNamesEN=["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const moNamesTA=["ஜனவரி","பிப்ரவரி","மார்ச்","ஏப்ரல்","மே","ஜூன்","ஜூலை","ஆகஸ்ட்","செப்டம்பர்","அக்டோபர்","நவம்பர்","டிசம்பர்"];
+  const mo=lang==="en"?moNamesEN:lang==="ta"?moNamesTA:moNames;
+  const yearData={};
+  DB.dates.forEach((ds,i)=>{
+    const v=d.series[i];if(v==null)return;
+    const dt=new Date(ds+"T00:00:00"),yr=dt.getFullYear(),mo=dt.getMonth();
+    if(!yearData[yr])yearData[yr]=Array(12).fill(null).map(()=>[]);
+    yearData[yr][mo].push(v);
+  });
+  const years=Object.keys(yearData).filter(yr=>yearData[yr][curMo].length>0);
+  if(years.length>=2){
+    const moAvgs=years.map(yr=>{const v=yearData[yr][curMo];return v.reduce((a,b)=>a+b,0)/v.length;});
+    const moAvg=moAvgs.reduce((a,b)=>a+b,0)/moAvgs.length;
+    const nextMo=(curMo+1)%12;
+    const nextAvgs=years.map(yr=>{const v=yearData[yr][nextMo]||[];return v.length?v.reduce((a,b)=>a+b,0)/v.length:null;}).filter(v=>v!=null);
+    if(nextAvgs.length>=2){
+      const nextAvg=nextAvgs.reduce((a,b)=>a+b,0)/nextAvgs.length;
+      const diff=((nextAvg-moAvg)/moAvg*100).toFixed(1);
+      if(Math.abs(diff)>8)
+        rows.push({cls:nextAvg>moAvg?"warn":"good",icon:"🌦️",
+          text:lang==="si"?`${mo[nextMo]} හි මිල ${nextAvg>moAvg?"ඉහළ":"පහළ"} රටාව — ${Math.abs(diff)}% ${nextAvg>moAvg?"වැඩිවීමේ":"අඩුවීමේ"} ප්‍රවණතාවයක් (${years.length}Y ${lang==="si"?"දත්ත":lang==="ta"?"தரவு":"data"})`:lang==="ta"?`${mo[nextMo]} இல் விலை ${nextAvg>moAvg?"உயர்வு":"வீழ்ச்சி"} வடிவம் — ${Math.abs(diff)}% ${nextAvg>moAvg?"அதிகரிக்கும்":"குறையும்"} போக்கு (${years.length}Y ${lang==="si"?"දත්ත":lang==="ta"?"தரவு":"data"})`:`${mo[nextMo]} price ${nextAvg>moAvg?"higher":"lower"} pattern — ${Math.abs(diff)}% ${nextAvg>moAvg?"increase":"decrease"} trend (${years.length}Y ${lang==="si"?"දත්ත":lang==="ta"?"தரவு":"data"})`});
+    }
+  }
+
+  /* 5. Market gap — retail price difference only */
+  const mktsRetail=Object.entries(d.markets||{}).filter(([k,v])=>v!=null);
+  if(mktsRetail.length>=2){
+    const srt=mktsRetail.sort((a,b)=>b[1]-a[1]);
+    const gap=srt[0][1]-srt[srt.length-1][1];
+    if(gap>50)
+      rows.push({cls:"gold",icon:"💰",
+        text:lang==="si"?`${tMkt(srt[0][0])} vs ${tMkt(srt[srt.length-1][0])} — සිල්ලර මිල පරතරය රු.${fmt(gap)}/kg`:lang==="ta"?`${tMkt(srt[0][0])} vs ${tMkt(srt[srt.length-1][0])} — சில்லறை விலை இடைவெளி ரூ.${fmt(gap)}/kg`:`${srt[0][0]} vs ${srt[srt.length-1][0]} — Retail price gap Rs.${fmt(gap)}/kg`});
+  }
+
+  if(!rows.length)return"";
+  return`<div class="insight-box">
+    <div class="ihead">${t('insightLabel')} — ${tName(d.name)}</div>
+    ${rows.map(r=>`<div class="irow ${r.cls}">${r.icon} ${r.text}</div>`).join("")}
+  </div>`;
+}
+
+/* ===== SINGLE openDetail — wholesale aware ===== */
 function openDetail(id){
   const d=DATA[id],ch=changeOf(d.series),vals=vpts(d.series).map(p=>p[1]);
   const min=Math.min(...vals),max=Math.max(...vals);
-  curDetail=d;
-  const rangeBar='<div class="ranges" id="ranges">'+["1M","3M","1Y","All"].map(r=>'<button data-r="'+r+'">'+r+'</button>').join("")+'</div>';
-  modal.innerHTML='<div class="mhead"><div><div class="cat">'+tCat(d.category)+'</div><h3>'+tName(d.name)+'</h3></div><button class="close" onclick="closeDetail()" aria-label="Close">&#10005;</button></div><div class="mbody"><div class="statrow"><div class="stat"><div class="l">'+t("latest")+'</div><div class="v">'+fmt(latestVal(d.series))+'</div></div><div class="stat"><div class="l">'+t("change")+'</div><div class="v" style="color:'+strokeFor(ch.dir)+'">'+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</div></div><div class="stat"><div class="l">'+t("low")+'</div><div class="v" id="statLow">'+fmt(min)+'</div></div><div class="stat"><div class="l">'+t("high")+'</div><div class="v" id="statHigh">'+fmt(max)+'</div></div></div>'+rangeBar+'<div id="chartHost"></div>'+marketBars(d)+'</div>';
+  /* 2026 only — this year low/high */
+  const thisYear=new Date().getFullYear().toString();
+  const yearIdxs=DB.dates.map((dt,i)=>dt.startsWith(thisYear)?i:-1).filter(i=>i>=0);
+  const yearVals=yearIdxs.map(i=>d.series[i]).filter(v=>v!=null);
+  const yearMin=yearVals.length?Math.min(...yearVals):min;
+  const yearMax=yearVals.length?Math.max(...yearVals):max;
+  curDetail=d; curMode="retail";
+  const hasWholesale=d.wholesaleSeries&&d.wholesaleSeries.some&&d.wholesaleSeries.some(v=>v!=null);
+  const toggleBar=hasWholesale
+    ?'<div class="price-toggle" style="display:flex;align-items:center;flex-wrap:wrap;gap:6px"><div style="display:flex;gap:0"><button id="btnRetail" class="on" onclick="switchMode(\'retail\')">'+t("btnRetail")+'</button><button id="btnWholesale" onclick="switchMode(\'wholesale\')">'+t("btnWholesale")+'</button><button id="btnGap" class="gap-btn" onclick="switchMode(\'gap\')">'+t("btnGap")+'</button><button id="btnCalc" class="calc-btn" onclick="switchMode(\'calc\')">'+t("btnCalc")+'</button></div><span style="font-size:10px;color:var(--gold);font-weight:600;flex:1;text-align:right">'+(lang==="si"?"ගොවියාගේ ලාභය | වෙළෙන්දාගේ ලාභය ගණනය කරගන්න":lang==="ta"?"விவசாயி லாபம் | வியாபாரி லாபம் கணக்கிடுங்கள்":"Calculate Farmer profit | Trader profit")+'</span></div>'
+    :'';
+  const rangeBar='<div class="ranges" id="ranges">'+["1M","3M","1Y","3Y","2026","All","YoY"].map(r=>'<button data-r="'+r+'">'+r+'</button>').join("")+'</div>';
+  const waRow='<div class="wa-row">'+
+    '<button class="wa-btn" style="background:var(--petrol);color:#fff;border:none;flex:0 0 auto;padding:10px 14px;font-size:13px;font-weight:700;gap:5px;box-shadow:0 2px 8px rgba(14,79,74,.3)" onclick="speakPrice(DATA['+id+'])" title="Read price aloud">🔊 <span style="font-size:11px">'+t('btnRead')+'</span></button>'+
+    '<button class="wa-btn wa-share" onclick="whatsappShare(DATA['+id+'])">'+
+    '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>'+
+    ' '+t('btnShare')+'</button>'+
+    '<button class="wa-btn fb-share" onclick="facebookShare(DATA['+id+'])">'+
+    '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>'+
+    ' '+t('btnFB')+'</button>'+
+    '<button class="wa-btn" style="background:#e8f4f1;color:#0e4f4a;border:1.5px solid #0e4f4a;" onclick="downloadModalPNG('+id+')">'+
+    t('btnPNG')+'</button>'+
+    '<a class="wa-btn wa-channel" href="https://whatsapp.com/channel/0000000000" target="_blank" rel="noopener">'+
+    t('btnAlerts')+'</a>'+
+    '</div>';
+  const brandBar='<div style="background:var(--petrol);padding:12px 18px;border-radius:0 0 12px 12px;margin-top:14px">'+
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">'+
+      '<div style="font-family:\'JetBrains Mono\',monospace;font-size:12px;font-weight:700;color:#ffd98a">www.TopGoviya.lk</div>'+
+      '<div style="font-size:11px;color:#9fd4c8">📅 '+DATES[DATES.length-1]+'</div>'+
+    '</div>'+
+    '<div style="font-size:11px;font-style:italic;color:#9fd4c8;border-top:1px solid rgba(255,255,255,.1);padding-top:6px;margin-top:2px">'+
+      '"'+randomQuote()+'"'+
+    '</div>'+
+  '</div>';
+  modal.innerHTML='<div class="mhead">'+
+    '<div>'+
+      '<div class="cat">'+tCat(d.category)+'</div>'+
+      '<h3>'+tEmoji(d.name)+' '+tName(d.name)+'</h3>'+
+    '</div>'+
+    '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">'+
+      '<button class="close" onclick="closeDetail()" aria-label="Close">&#10005;</button>'+
+      '<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;font-weight:700;color:var(--petrol)">TopGoviya.lk</div>'+
+      '<div style="font-size:10px;color:var(--muted)">'+DATES[DATES.length-1]+'</div>'+
+    '</div>'+
+  '</div>'+
+  '<div class="mbody">'+aiInsight(d)+toggleBar+
+  '<div class="statrow">'+
+    '<div class="stat"><div class="l">'+t("latest")+'</div><div class="v">'+fmt(latestVal(d.series))+'</div></div>'+
+    '<div class="stat"><div class="l">'+t("change")+'</div><div class="v" style="color:'+strokeFor(ch.dir)+'">'+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</div></div>'+
+    '<div class="stat"><div class="l">'+t("low")+'</div><div class="v" id="statLow">'+fmt(yearMin)+'</div></div>'+
+    '<div class="stat"><div class="l">'+t("high")+'</div><div class="v" id="statHigh">'+fmt(yearMax)+'</div></div>'+
+  '</div>'+
+  rangeBar+
+  '<div id="chartHost"></div>'+
+  '<div id="mktBarsHost">'+marketBars(d,"retail")+'</div>'+
+  waRow+brandBar+
+  '</div>';
   scrim.classList.add("open");document.body.style.overflow="hidden";
-  requestAnimationFrame(()=>{
+  /* Dynamic SEO title update */
+  document.title=tName(d.name)+" ("+tEmoji(d.name)+") Price Today Sri Lanka | TopGoviya Lanka Price Monitor";
+  setTimeout(()=>{
     document.getElementById("ranges").addEventListener("click",e=>{if(e.target.dataset.r)renderRange(e.target.dataset.r);});
     renderRange(defaultRange());
-  });
+  }, 100);
 }
-function closeDetail(){scrim.classList.remove("open");document.body.style.overflow="";}
-scrim.addEventListener("click",e=>{if(e.target===scrim)closeDetail();});
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDetail();});
 
-function wireChart(d){
+/* ===== Voice Search + Text to Speech ===== */
+function showToast(msg, duration){
+  const t=document.getElementById("voiceToast");
+  if(!t)return;
+  t.textContent=msg;t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),duration||2500);
+}
+
+function speakPrice(d){
+  if(!window.speechSynthesis)return;
+  const ch=changeOf(d.series);
+  const cur=latestVal(d.series);
+  const vals=vpts(d.series).map(p=>p[1]);
+  const min=Math.min(...vals),max=Math.max(...vals);
+  const thisYear=new Date().getFullYear().toString();
+  const yIdxs=DB.dates.map((dt,i)=>dt.startsWith(thisYear)?i:-1).filter(i=>i>=0);
+  const yVals=yIdxs.map(i=>d.series[i]).filter(v=>v!=null);
+  const yearMin=yVals.length?Math.min(...yVals):min;
+  const yearMax=yVals.length?Math.max(...yVals):max;
+  const rtMarkets=Object.entries(d.markets||{}).filter(([k,v])=>v!=null);
+  const wsMarkets=Object.entries(d.wholesaleMarkets||{}).filter(([k,v])=>v!=null);
+
+  let text="";
+  let ttsLang="en-US";
+
+  if(lang==="si"){
+    const dir=ch.dir==="up"?"ඉහළ ගොස් ඇත":ch.dir==="down"?"පහළ ගොස් ඇත":"වෙනස් නැත";
+    text=`${tName(d.name)}. `;
+    text+=`${tMkt(d.primaryMarket)} වෙළඳපොළේ සිල්ලර මිල රුපියල් ${Math.round(cur)}. `;
+    text+=`${Math.abs(ch.pct).toFixed(1)} ප්‍රතිශතයකින් ${dir}. `;
+    text+=`${thisYear} අවම රුපියල් ${Math.round(yearMin)}, උපරිම රුපියල් ${Math.round(yearMax)}. `;
+    if(rtMarkets.length>1){
+      text+=`සිල්ලර මිල: `;
+      rtMarkets.forEach(([k,v])=>{ text+=`${tMkt(k)} රුපියල් ${Math.round(v)}. `; });
+    }
+    if(wsMarkets.length>0){
+      text+=`තොග මිල: `;
+      wsMarkets.forEach(([k,v])=>{ text+=`${tMkt(k)} රුපියල් ${Math.round(v)}. `; });
+    }
+    text+="ඔබට ජය වේවා! නැවත එන්න!";
+    ttsLang="si-LK";
+  } else if(lang==="ta"){
+    const dir=ch.dir==="up"?"அதிகரித்துள்ளது":ch.dir==="down"?"குறைந்துள்ளது":"மாறவில்லை";
+    text=`${tName(d.name)}. `;
+    text+=`${tMkt(d.primaryMarket)} சந்தையில் சில்லறை விலை ரூபாய் ${Math.round(cur)}. `;
+    text+=`${Math.abs(ch.pct).toFixed(1)} சதவீதம் ${dir}. `;
+    text+=`${thisYear} குறைந்தது ரூபாய் ${Math.round(yearMin)}, அதிகபட்சம் ரூபாய் ${Math.round(yearMax)}. `;
+    if(rtMarkets.length>1){
+      text+=`சில்லறை விலைகள்: `;
+      rtMarkets.forEach(([k,v])=>{ text+=`${tMkt(k)} ரூபாய் ${Math.round(v)}. `; });
+    }
+    if(wsMarkets.length>0){
+      text+=`மொத்த விலைகள்: `;
+      wsMarkets.forEach(([k,v])=>{ text+=`${tMkt(k)} ரூபாய் ${Math.round(v)}. `; });
+    }
+    text+="வணக்கம்! மீண்டும் வாருங்கள்!";
+    ttsLang="ta-IN";
+  } else {
+    const dir=ch.dir==="up"?"increased":ch.dir==="down"?"decreased":"unchanged";
+    text=`${d.name}. `;
+    text+=`Today's retail price at ${d.primaryMarket} market is ${Math.round(cur)} rupees. `;
+    text+=`${Math.abs(ch.pct).toFixed(1)} percent ${dir} from previous report. `;
+    text+=`${thisYear} low ${Math.round(yearMin)}, high ${Math.round(yearMax)} rupees. `;
+    if(rtMarkets.length>1){
+      text+=`Retail prices: `;
+      rtMarkets.forEach(([k,v])=>{ text+=`${k} ${Math.round(v)} rupees. `; });
+    }
+    if(wsMarkets.length>0){
+      text+=`Wholesale prices: `;
+      wsMarkets.forEach(([k,v])=>{ text+=`${k} ${Math.round(v)} rupees. `; });
+    }
+    text+="Have a great day! Visit our website again!";
+    ttsLang="en-US";
+  }
+
+  /* Show toast */
+  let toastMsg="";
+  if(lang==="si"){
+    const dirSi=ch.dir==="up"?"▲":ch.dir==="down"?"▼":"▶";
+    toastMsg=`🔊 ${tName(d.name)} — රු.${Math.round(cur)} ${dirSi}${Math.abs(ch.pct).toFixed(1)}%`;
+  } else if(lang==="ta"){
+    const dirTa=ch.dir==="up"?"▲":ch.dir==="down"?"▼":"▶";
+    toastMsg=`🔊 ${tName(d.name)} — ரூ.${Math.round(cur)} ${dirTa}${Math.abs(ch.pct).toFixed(1)}%`;
+  } else {
+    toastMsg=`🔊 ${d.name} — Rs.${Math.round(cur)}`;
+  }
+  showToast(toastMsg, 4000);
+
+  window.speechSynthesis.cancel();
+  const utt=new SpeechSynthesisUtterance(text);
+  const voices=window.speechSynthesis.getVoices();
+  const voice=voices.find(v=>v.lang===ttsLang)
+    ||voices.find(v=>v.lang.startsWith(ttsLang.split('-')[0]))
+    ||voices.find(v=>v.lang.startsWith("en"));
+  if(voice)utt.voice=voice;
+  utt.lang=ttsLang;
+  utt.rate=lang==="si"?0.85:0.88;
+  utt.pitch=1;utt.volume=1;
+  window.speechSynthesis.speak(utt);
+}
+
+function findAndOpenCommodity(query){
+  if(!DATA.length)return false;
+  const q=query.toLowerCase().trim();
+  /* Check all name variations */
+  const match=DATA.find(d=>
+    d.name.toLowerCase().includes(q)||
+    tName(d.name).toLowerCase().includes(q)||
+    (NAMES[d.name]&&Object.values(NAMES[d.name]).some(n=>n.toLowerCase().includes(q)))
+  );
+  if(match){
+    /* Update search box */
+    const searchEl=document.getElementById("search");
+    if(searchEl){searchEl.value=query;state.q=q;renderGrid();}
+    /* Open detail after short delay */
+    setTimeout(()=>{
+      openDetail(match.id);
+      setTimeout(()=>speakPrice(match),600);
+    },400);
+    return true;
+  }
+  return false;
+}
+
+function startVoiceSearch(){
+  const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SpeechRecognition){
+    showToast("⚠️ Voice search not supported in this browser");
+    return;
+  }
+  const btn=document.getElementById("micBtn");
+  const recognition=new SpeechRecognition();
+  recognition.lang=lang==="si"?"si-LK":lang==="ta"?"ta-LK":"en-US";
+  recognition.interimResults=false;
+  recognition.maxAlternatives=3;
+
+  recognition.onstart=()=>{
+    btn.classList.add("listening");
+    const msg=lang==="si"?"🎤 කතා කරන්න...":lang==="ta"?"🎤 பேசுங்கள்...":"🎤 Listening...";
+    showToast(msg,5000);
+  };
+
+  recognition.onresult=(e)=>{
+    const results=Array.from(e.results[0]).map(r=>r.transcript);
+    let found=false;
+    for(const transcript of results){
+      if(findAndOpenCommodity(transcript)){found=true;break;}
+    }
+    if(!found){
+      const msg=lang==="si"?"හමු නොවීය: "+results[0]:
+                lang==="ta"?"கிடைக்கவில்லை: "+results[0]:
+                "Not found: "+results[0];
+      showToast("❌ "+msg);
+    }
+  };
+
+  recognition.onerror=(e)=>{
+    btn.classList.remove("listening");
+    const msg=lang==="si"?"Voice search error":lang==="ta"?"குரல் தேடல் பிழை":"Voice search error";
+    showToast("⚠️ "+msg);
+  };
+
+  recognition.onend=()=>{
+    btn.classList.remove("listening");
+    document.getElementById("voiceToast").classList.remove("show");
+  };
+
+  recognition.start();
+}
+
+function closeDetail(){
+  scrim.classList.remove("open");
+  document.body.style.overflow="";
+  document.title="Vegetable Price in Sri Lanka Today | TopGoviya Lanka Price Monitor";
+}
+scrim.addEventListener("click",e=>{if(e.target===scrim)closeDetail();});
+document.getElementById("guideScrim").addEventListener("click",e=>{if(e.target===document.getElementById("guideScrim"))document.getElementById("guideScrim").classList.remove("open");});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeDetail();document.getElementById("guideScrim").classList.remove("open");}});
+
+/* ===== SINGLE wireChart — series-aware ===== */
+/* ===== Poya days 2024-2026 ===== */
+const POYA_DAYS=["2024-01-25","2024-02-24","2024-03-25","2024-04-23","2024-05-23","2024-06-21","2024-07-21","2024-08-19","2024-09-17","2024-10-17","2024-11-15","2024-12-15","2025-01-13","2025-02-12","2025-03-13","2025-04-12","2025-05-12","2025-06-11","2025-07-10","2025-08-09","2025-09-07","2025-10-07","2025-11-05","2025-12-04","2026-01-03","2026-02-01","2026-03-03","2026-04-01","2026-05-01","2026-05-31","2026-06-29"];
+
+function setCalcMode(tcid, mode){
+  const traderBtn=document.getElementById("mode_trader_"+tcid);
+  const farmerBtn=document.getElementById("mode_farmer_"+tcid);
+  const traderInputs=document.getElementById("trader_inputs_"+tcid);
+  const farmerInputs=document.getElementById("farmer_inputs_"+tcid);
+  if(!traderBtn)return;
+  if(mode==="farmer"){
+    farmerBtn.style.background="#2c7a52";farmerBtn.style.color="#fff";
+    traderBtn.style.background="transparent";traderBtn.style.color="#7a7264";
+    traderInputs.style.display="none";farmerInputs.style.display="block";
+    calcFarmer(tcid);
+  } else {
+    traderBtn.style.background="#0e4f4a";traderBtn.style.color="#fff";
+    farmerBtn.style.background="transparent";farmerBtn.style.color="#7a7264";
+    traderInputs.style.display="block";farmerInputs.style.display="none";
+    calcTransport2(tcid);
+  }
+}
+
+function calcFarmer(tcid){
+  const kg=parseFloat(document.getElementById("fkg_"+tcid)?.value)||0;
+  const tc=parseFloat(document.getElementById("ftc_"+tcid)?.value)||0;
+  const pc=parseFloat(document.getElementById("fpc_"+tcid)?.value)||0;
+  /* Use farmer data if available, fall back to trader data */
+  const farmerData=(window._tcFarmerData||{})[tcid];
+  const traderData=(window._tcData||{})[tcid];
+  const data=farmerData||traderData;
+  if(!data||!data.length)return;
+  /* Farmer sells at WHOLESALE price if available, else retail */
+  const results=data.map(r=>{
+    const sellPrice=r.ws!=null?r.ws:r.rt;
+    const netPerKg=sellPrice-tc-pc;
+    return {k:r.k, sellPrice, ws:r.ws, netPerKg, total:netPerKg*kg, hasWS:r.ws!=null};
+  }).sort((a,b)=>b.total-a.total);
+  const best=results[0];
+  const html=results.map((r,i)=>{
+    const color=r.netPerKg>0?"#2c7a52":"#b23a2e";
+    const bg=i===0&&r.netPerKg>0?"#e3efe6":"#f4efe4";
+    const border=i===0&&r.netPerKg>0?"#2c7a52":"#e3d9c4";
+    const icon=i===0&&r.netPerKg>0?"🏆 ":"   ";
+    const priceLabel=r.hasWS?`W: රු.${fmt(r.sellPrice)}`:`R: රු.${fmt(r.sellPrice)}`;
+    return `<div style="padding:8px 12px;border-radius:8px;background:${bg};border:1px solid ${border};margin-bottom:4px">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <span style="font-size:13px;font-weight:700">${icon}${r.k}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:${color}">${r.netPerKg>=0?"+":""}රු.${fmt(r.netPerKg)}/kg</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:4px">
+        <span style="font-size:11px;color:#7a7264">${priceLabel}${tc>0?" - Transport:රු."+tc:""}${pc>0?" - Production:රු."+pc:""}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:${color}">${r.total>=0?"":"❌ "}රු.${fmt(Math.abs(r.total))}</span>
+      </div>
+      ${kg>0?`<div style="font-size:11px;color:#7a7264;margin-top:2px">${kg}kg × රු.${fmt(r.netPerKg)} = <strong style="color:${color}">රු.${fmt(r.total)}</strong></div>`:""}
+    </div>`;
+  }).join("");
+  const advice=best.netPerKg>0
+    ?"🎯 "+best.k+" වෙළඳපොළට යන්න — රු."+fmt(best.total)+" ලැබේ!"
+    :"❌ සියලු වෙළඳපොළ — අලාභ! Transport/Production cost අඩු කරන්න.";
+  const el=document.getElementById("tr_"+tcid);
+  if(el)el.innerHTML=`<div style="font-size:11px;font-weight:700;color:#2c7a52;margin-bottom:6px">🌾 Farmer Profit Summary (${kg}kg):</div>`+html+
+    `<div style="margin-top:6px;font-size:12px;font-weight:700;padding:8px 12px;border-radius:8px;background:#0e4f4a;color:#ffd98a">${advice}</div>`;
+}
+
+function calcTransport2(tcid){
+  const tc=parseFloat(document.getElementById("tc_"+tcid)?.value)||0;
+  const sellInput=document.getElementById("tsell_"+tcid);
+  const buySelect=document.getElementById("tbuy_"+tcid);
+  const data=(window._tcData||{})[tcid];
+  if(!data||!data.length)return;
+  const el=document.getElementById("tr_"+tcid);
+  if(!el)return;
+
+  /* If sell price entered — use custom sell price */
+  if(sellInput&&sellInput.value&&buySelect){
+    const sellPrice=parseFloat(sellInput.value)||0;
+    const buyMkt=buySelect.value;
+    const buyData=data.find(r=>r.k===buyMkt);
+    if(!buyData)return;
+    const buyPrice=buyData.ws;
+    const net=sellPrice-buyPrice-tc;
+    const color=net>0?"#2c7a52":net<0?"#b23a2e":"#8a8170";
+    el.innerHTML=`
+      <div style="background:#f4efe4;border-radius:8px;padding:10px 12px;font-size:12px;color:#7a7264;margin-bottom:6px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+          <span>ගෙනා මිල (${buyMkt}):</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-weight:700">රු.${fmt(buyPrice)}/kg</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+          <span>Transport cost:</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-weight:700">- රු.${tc}/kg</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;border-top:1px dashed #cdbf9f;padding-top:4px;margin-top:4px">
+          <span>ඔබේ sell මිල:</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#a9802a">රු.${fmt(sellPrice)}/kg</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:10px;background:${net>0?"#e3efe6":"#f7e6e2"};border:1.5px solid ${net>0?"#2c7a52":"#b23a2e"}">
+        <span style="font-size:14px;font-weight:700">${net>0?"✅":"❌"} ශුද්ධ ලාභය</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:20px;color:${color}">${net>=0?"+":""}රු.${fmt(net)}/kg</span>
+      </div>
+      <div style="margin-top:6px;font-size:12px;font-weight:700;padding:8px 12px;border-radius:8px;background:#0e4f4a;color:#ffd98a">
+        ${net>50?"🎯 හොඳ ලාභයක්! විකුණන්න!":net>0?"✅ ලාభ ලැබේ.":net===0?"⚠️ Break-even — ලාභ නැත.":"❌ අලාභ! sell price ඉහළ කරන්න."}
+      </div>`;
+    return;
+  }
+
+  /* No sell price — show market margins */
+  const results=data.map(r=>({...r,net:r.margin-tc})).sort((a,b)=>b.net-a.net);
+  const best=results[0];
+  const html=results.map((r,i)=>{
+    const color=r.net>0?"#2c7a52":r.net<0?"#b23a2e":"#8a8170";
+    const icon=i===0&&r.net>0?"🏆 ":r.net>0?"✅ ":"❌ ";
+    const bg=i===0&&r.net>0?"#e3efe6":"#f4efe4";
+    const border=i===0&&r.net>0?"#2c7a52":"#e3d9c4";
+    return `<div style="display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:8px;background:${bg};border:1px solid ${border};flex-wrap:wrap">
+      <span style="font-size:13px;font-weight:700;min-width:85px">${icon}${r.k}</span>
+      <span style="font-size:11px;color:#7a7264">W:රු.${fmt(r.ws)} → R:රු.${fmt(r.rt)}</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;color:${color};margin-left:auto">${r.net>=0?"+":""}රු.${fmt(r.net)}/kg</span>
+    </div>`;
+  }).join("");
+  const advice=best.net>0?"🎯 "+best.k+" — හොඳම margin! ඔබේ sell price enter කළොත් precise ලාභය!":"❌ Transport cost වැඩියි!";
+  el.innerHTML=html+`<div style="margin-top:6px;font-size:11px;color:#7a7264;font-style:italic;padding:6px 10px">💡 ඔබේ sell price enter කළොත් precise ලාභය ගණනය වෙනවා!</div>`+
+    `<div style="margin-top:4px;font-size:12px;font-weight:700;padding:8px 12px;border-radius:8px;background:#0e4f4a;color:#ffd98a">${advice}</div>`;
+}
+
+
+function calcTransport(tcid, mktsJson, rt, ws){
+  const tc=parseFloat(document.getElementById("tc_"+tcid).value)||0;
+  const mkts=JSON.parse(mktsJson);
+  const results=mkts.map(k=>{
+    const margin=rt[k]-ws[k];
+    const net=margin-tc;
+    return {k,margin,net};
+  }).sort((a,b)=>b.net-a.net);
+  const best=results[0];
+  const html=results.map((r,i)=>{
+    const color=r.net>0?"#2c7a52":r.net===0?"#8a8170":"#b23a2e";
+    const icon=i===0&&r.net>0?"🏆 ":r.net>0?"✅ ":"❌ ";
+    return `<div style="display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;background:${i===0&&r.net>0?"#e3efe6":"#f4efe4"};border:1px solid ${i===0&&r.net>0?"#2c7a52":"#e3d9c4"}">
+      <span style="font-size:13px;font-weight:700;min-width:80px">${icon}${r.k}</span>
+      <span style="font-size:11px;color:#7a7264">Margin: +රු.${fmt(r.margin)}</span>
+      <span style="font-size:11px;color:#7a7264">Transport: -රු.${tc}</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:${color};margin-left:auto">${r.net>=0?"+":""}රු.${fmt(r.net)}/kg</span>
+    </div>`;
+  }).join("");
+  const advice=best.net>50?"🎯 "+best.k+" වෙළඳපොළට යන්න! හොඳම ලාභය!":best.net>0?"✅ "+best.k+" හොඳයි — ලාභ ඇත.":best.net===0?"⚠️ Break-even — ලාභ නැත.":"❌ Transport cost වැඩියි — අලාභ!";
+  document.getElementById("tr_"+tcid).innerHTML=html+`<div style="margin-top:6px;font-size:12px;font-weight:700;padding:6px 10px;border-radius:7px;background:#0e4f4a;color:#ffd98a">${advice}</div>`;
+}
+
+function gapAlert(d){
+  const rt=d.markets||{}, ws=d.wholesaleMarkets||{};
+  const mkts=Object.keys(rt).filter(k=>rt[k]!=null&&ws[k]!=null);
+  if(!mkts.length){
+    /* Inter-market gap */
+    const rtVals=Object.entries(rt).filter(([k,v])=>v!=null);
+    if(rtVals.length<2) return '<p class="mkt-sub" style="padding:8px 0">Not enough market data for gap analysis.</p>';
+    const sorted=rtVals.sort((a,b)=>b[1]-a[1]);
+    const gap=sorted[0][1]-sorted[sorted.length-1][1];
+    const pct=((gap/sorted[sorted.length-1][1])*100).toFixed(1);
+    return `<div class="gap-alert show">
+      <div>💡 <strong>Inter-Market Gap</strong></div>
+      <div class="gap-val">${sorted[0][0]}: රු.${fmt(sorted[0][1])} &nbsp;→&nbsp; ${sorted[sorted.length-1][0]}: රු.${fmt(sorted[sorted.length-1][1])}</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;color:#7b3fa0;margin:4px 0">Gap: රු.${fmt(gap)}/kg (${pct}%)</div>
+      <div class="gap-advice">${gap>100?"🚛 Transport opportunity — price difference worth moving stock!":gap>50?"📊 Moderate gap — consider transport costs before moving.":"✅ Small gap — markets are balanced."}</div>
+    </div>`;
+  }
+  /* Retail vs Wholesale gap */
+  const rows=mkts.map(k=>{
+    const g=rt[k]-ws[k];
+    return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+      <span style="min-width:90px;font-size:13px;font-weight:600">${k}</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#a9802a">W: රු.${fmt(ws[k])}</span>
+      <span style="color:#7a7264">→</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px">R: රු.${fmt(rt[k])}</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#7b3fa0;margin-left:auto">+රු.${fmt(g)}</span>
+    </div>`;
+  }).join("");
+  const maxGap=Math.max(...mkts.map(k=>rt[k]-ws[k]));
+  /* Store margins for transport calc */
+  const tcid="tc_"+Math.random().toString(36).slice(2,7);
+  window._tcData=window._tcData||{};
+  window._tcData[tcid]=mkts.map(k=>({k,margin:rt[k]-ws[k],rt:rt[k],ws:ws[k]}));
+  return `<div class="gap-alert show">
+    <div style="font-size:12px;font-weight:700;color:#7b3fa0;margin-bottom:8px">💡 Retail vs Wholesale Margin — ${DATES[DATES.length-1]}</div>
+    ${rows}
+    <div class="gap-advice">${maxGap>150?"⚠️ Wide margin — retailers keeping large profit. Good buying opportunity at wholesale!":maxGap>75?"📊 Normal margin range.":"✅ Tight margins — competitive market."}</div>
+    <div style="border-top:1px dashed #cdbf9f;margin-top:12px;padding-top:12px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <div style="font-size:12px;font-weight:700;color:#0e4f4a">🧮 Profit Calculator</div>
+        <div style="display:flex;gap:0;border:1.5px solid #cdbf9f;border-radius:999px;overflow:hidden">
+          <button id="mode_farmer_${tcid}" onclick="setCalcMode('${tcid}','farmer')"
+            style="font:inherit;font-size:11px;font-weight:700;padding:4px 12px;border:none;background:#2c7a52;color:#fff;cursor:pointer">${lang==="si"?"🌾 ගොවියා":lang==="ta"?"🌾 விவசாயி":"🌾 Farmer"}</button>
+          <button id="mode_trader_${tcid}" onclick="setCalcMode('${tcid}','trader')"
+            style="font:inherit;font-size:11px;font-weight:700;padding:4px 12px;border:none;background:transparent;color:#7a7264;cursor:pointer">${lang==="si"?"🌾 ගොවියා":lang==="ta"?"🌾 விவசாயி":"🌾 Farmer"}</button>
+        </div>
+      </div>
+
+      <!-- TRADER MODE -->
+      <div id="trader_inputs_${tcid}">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <label style="font-size:12px;color:#3a403a;min-width:110px">Transport cost:</label>
+          <input id="tc_${tcid}" type="number" min="0" max="500" value="10"
+            style="width:75px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:6px 8px;border:1.5px solid #cdbf9f;border-radius:7px;background:#fffdf7;color:#191d1a"
+            oninput="calcTransport2('${tcid}')">
+          <span style="font-size:12px;color:#7a7264">රු./kg</span>
+        </div>
+      </div>
+
+      <!-- FARMER MODE -->
+      <div id="farmer_inputs_${tcid}" style="display:none">
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <label style="font-size:12px;color:#3a403a;min-width:130px">Total harvest:</label>
+            <input id="fkg_${tcid}" type="number" min="0" value="500"
+              style="width:80px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:6px 8px;border:1.5px solid #cdbf9f;border-radius:7px;background:#fffdf7;color:#191d1a"
+              oninput="calcFarmer('${tcid}')">
+            <span style="font-size:12px;color:#7a7264">kg</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <label style="font-size:12px;color:#3a403a;min-width:130px">Transport cost:</label>
+            <input id="ftc_${tcid}" type="number" min="0" value="10"
+              style="width:80px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:6px 8px;border:1.5px solid #cdbf9f;border-radius:7px;background:#fffdf7;color:#191d1a"
+              oninput="calcFarmer('${tcid}')">
+            <span style="font-size:12px;color:#7a7264">රු./kg</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <label style="font-size:12px;color:#3a403a;min-width:130px">Production cost:
+              <span style="font-size:10px;color:#7a7264;font-weight:400">(optional)</span>
+            </label>
+            <input id="fpc_${tcid}" type="number" min="0" value=""
+              placeholder="0"
+              style="width:80px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:6px 8px;border:1.5px solid #cdbf9f;border-radius:7px;background:#fffdf7;color:#191d1a"
+              oninput="calcFarmer('${tcid}')">
+            <span style="font-size:12px;color:#7a7264">රු./kg</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="tr_${tcid}" style="display:flex;flex-direction:column;gap:6px"></div>
+    </div>
+  </div>`;
+}
+
+function gapChart(d){
+  /* Last 30 days retail vs wholesale shaded area */
+  const n=Math.min(30,DB.dates.length);
+  const idxs=Array.from({length:n},(_,i)=>DB.dates.length-n+i);
+  const rtSeries=d.series, wsSeries=d.wholesaleSeries||[];
+  const labels=idxs.map(i=>DATES[i]);
+  const rtData=idxs.map(i=>rtSeries[i]||null);
+  const wsData=idxs.map(i=>wsSeries[i]||null);
+  const gapData=idxs.map(i=>(rtSeries[i]!=null&&wsSeries[i]!=null)?rtSeries[i]-wsSeries[i]:null);
+  /* Check if we have wholesale data */
+  const hasWS=wsData.some(v=>v!=null);
+  const cid="gap_"+Math.random().toString(36).slice(2,8);
+  window._gapPending=window._gapPending||{};
+  /* Poya annotations */
+  const poyaIdxs=idxs.filter(i=>POYA_DAYS.includes(DB.dates[i])).map(i=>idxs.indexOf(i));
+  window._gapPending[cid]={labels,rtData,wsData,gapData,hasWS,poyaIdxs};
+  setTimeout(()=>{
+    const p=window._gapPending[cid];if(!p)return;
+    const canvas=document.getElementById(cid);if(!canvas)return;
+    const datasets=p.hasWS?[
+      {label:'Retail',data:p.rtData,borderColor:'#0e4f4a',borderWidth:2,pointRadius:2,tension:0.3,fill:'+1',backgroundColor:'rgba(14,79,74,0.15)',spanGaps:false},
+      {label:'Wholesale',data:p.wsData,borderColor:'#a9802a',borderWidth:2,pointRadius:2,tension:0.3,fill:false,spanGaps:false}
+    ]:[
+      {label:'Retail',data:p.rtData,borderColor:'#0e4f4a',borderWidth:2,pointRadius:2,tension:0.3,fill:false,spanGaps:false}
+    ];
+    new Chart(canvas,{
+      type:'line',
+      data:{labels:p.labels,datasets},
+      options:{
+        responsive:true,maintainAspectRatio:false,
+        interaction:{mode:'index',intersect:false},
+        plugins:{
+          legend:{display:false},
+          tooltip:{
+            backgroundColor:'#191d1a',titleColor:'#ffd98a',bodyColor:'#d4ede8',padding:8,
+            callbacks:{
+              afterBody:(items)=>{
+                const rt=items.find(i=>i.dataset.label==='Retail');
+                const ws=items.find(i=>i.dataset.label==='Wholesale');
+                if(rt&&ws&&rt.parsed.y!=null&&ws.parsed.y!=null){
+                  return ['Gap: රු.'+(rt.parsed.y-ws.parsed.y).toFixed(0)];
+                }
+                return [];
+              },
+              label:ctx=>ctx.parsed.y==null?ctx.dataset.label+': n/a':ctx.dataset.label+': රු.'+ctx.parsed.y.toLocaleString()
+            }
+          }
+        },
+        scales:{
+          x:{
+            grid:{color:'rgba(0,0,0,0.04)'},
+            ticks:{font:{size:9},color:'#7a7264',maxRotation:45,autoSkip:true,maxTicksLimit:10},
+            afterDraw:(chart)=>{
+              /* Poya day markers */
+              p.poyaIdxs.forEach(pi=>{
+                const meta=chart.getDatasetMeta(0);
+                if(!meta.data[pi])return;
+                const x=meta.data[pi].x;
+                const ctx2=chart.ctx;
+                ctx2.save();
+                ctx2.strokeStyle='rgba(178,58,46,0.3)';
+                ctx2.lineWidth=1;
+                ctx2.setLineDash([3,3]);
+                ctx2.beginPath();
+                ctx2.moveTo(x,chart.chartArea.top);
+                ctx2.lineTo(x,chart.chartArea.bottom);
+                ctx2.stroke();
+                ctx2.fillStyle='#b23a2e';
+                ctx2.font='8px monospace';
+                ctx2.fillText('P',x-3,chart.chartArea.top+10);
+                ctx2.restore();
+              });
+            }
+          },
+          y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#7a7264',callback:v=>'රු.'+v.toLocaleString()},min:0}
+        }
+      }
+    });
+    delete window._gapPending[cid];
+  },100);
+  return `<div class="chart-wrap">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-bottom:4px;padding:0 4px">
+      <span class="lab" style="position:relative;top:0;left:0">${tMkt(d.primaryMarket)} · 30D · ${tUnit(d.unit)}</span>
+      <div style="display:flex;gap:10px;font-size:11px;color:#3a403a">
+        <span style="display:flex;align-items:center;gap:4px"><span style="width:16px;height:3px;background:#0e4f4a;display:inline-block;border-radius:2px"></span>Retail</span>
+        <span style="display:flex;align-items:center;gap:4px"><span style="width:16px;height:3px;background:#a9802a;display:inline-block;border-radius:2px"></span>Wholesale</span>
+      </div>
+    </div>
+    <div style="position:relative;height:210px;width:100%"><canvas id="${cid}" role="img" aria-label="Gap chart for ${d.name}"></canvas></div>
+    <div style="font-size:10px;color:#7a7264;text-align:right;margin-top:4px;padding-right:6px">P = Poya Day 🔴</div>
+  </div>`;
+}
+
+function yoyChart(d){
+  const yearData={};
+  DB.dates.forEach((dateStr,i)=>{
+    const v=d.series[i];if(v==null)return;
+    const dt=new Date(dateStr+"T00:00:00");
+    const yr=dt.getFullYear(),mo=dt.getMonth();
+    if(!yearData[yr])yearData[yr]=Array(12).fill(null).map(()=>[]);
+    yearData[yr][mo].push(v);
+  });
+  const years=Object.keys(yearData).sort();
+  const monthlyAvg={};
+  years.forEach(yr=>{monthlyAvg[yr]=yearData[yr].map(vals=>vals.length?Math.round(vals.reduce((a,b)=>a+b,0)/vals.length):null);});
+  const colors=["#378ADD","#1D9E75","#a9802a","#b23a2e","#9b59b6"];
+  const months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const cid="yoy_"+Math.random().toString(36).slice(2,8);
+  const legendHtml=years.map((yr,i)=>`<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#3a403a"><span style="width:20px;height:3px;background:${colors[i%colors.length]};display:inline-block;border-radius:2px"></span>${yr}</span>`).join("");
+  /* Store data for deferred init */
+  window._yoyPending=window._yoyPending||{};
+  window._yoyPending[cid]={years,monthlyAvg,colors,months,d};
+  const html=`<div class="chart-wrap">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-bottom:6px;padding:0 4px">
+      <span class="lab" style="position:relative;top:0;left:0">${tMkt(d.primaryMarket)} YoY &middot; ${tUnit(d.unit)}</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">${legendHtml}</div>
+    </div>
+    <div style="position:relative;height:210px;width:100%"><canvas id="${cid}" role="img" aria-label="YoY chart for ${d.name}"></canvas></div>
+  </div>`;
+  /* Init after DOM ready */
+  setTimeout(()=>{
+    const p=window._yoyPending[cid];if(!p)return;
+    const canvas=document.getElementById(cid);if(!canvas)return;
+    new Chart(canvas,{
+      type:'line',
+      data:{
+        labels:p.months,
+        datasets:p.years.map((yr,i)=>({
+          label:yr,
+          data:p.monthlyAvg[yr],
+          borderColor:p.colors[i%p.colors.length],
+          borderWidth:2.2,
+          borderDash:i===p.years.length-1?[6,4]:[],
+          pointRadius:3,pointHoverRadius:5,
+          pointBackgroundColor:p.colors[i%p.colors.length],
+          backgroundColor:p.colors[i%p.colors.length]+'15',
+          tension:0.3,fill:false,spanGaps:false
+        }))
+      },
+      options:{
+        responsive:true,maintainAspectRatio:false,
+        interaction:{mode:'index',intersect:false},
+        plugins:{
+          legend:{display:false},
+          tooltip:{
+            backgroundColor:'#191d1a',titleColor:'#ffd98a',bodyColor:'#d4ede8',padding:8,
+            callbacks:{label:ctx=>ctx.parsed.y==null?ctx.dataset.label+': n/a':ctx.dataset.label+': රු.'+ctx.parsed.y.toLocaleString()}
+          }
+        },
+        scales:{
+          x:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#7a7264',autoSkip:false,maxRotation:0}},
+          y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#7a7264',callback:v=>'රු.'+v.toLocaleString()},min:0}
+        }
+      }
+    });
+    delete window._yoyPending[cid];
+  },100);
+  return html;
+}
+
+function wireChart(d, series){
+  series = series || d.series;
   const svg=document.getElementById("lc");if(!svg)return;
   const tip=document.getElementById("tip"),cross=document.getElementById("cross"),wrap=svg.closest(".chart-wrap");
   const dots=[...svg.querySelectorAll(".pt")];
@@ -379,7 +1968,7 @@ function wireChart(d){
     const vb=svg.viewBox.baseVal,rect=svg.getBoundingClientRect();
     const px=cx/vb.width*rect.width,py=cy/vb.height*rect.height,wr=wrap.getBoundingClientRect();
     tip.style.left=(rect.left-wr.left+px)+"px";tip.style.top=(rect.top-wr.top+py)+"px";
-    tip.innerHTML=DATES[i]+' &nbsp;<b>'+fmt(d.series[i])+'</b>';tip.style.opacity=1;
+    tip.innerHTML=DATES[i]+' &nbsp;<b>'+fmt(series[i])+'</b>';tip.style.opacity=1;
     cross.setAttribute("x1",cx);cross.setAttribute("x2",cx);cross.setAttribute("opacity","1");
     dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));dot.setAttribute("r","5");}
   function hide(){tip.style.opacity=0;cross.setAttribute("opacity","0");dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));}
@@ -390,6 +1979,242 @@ function wireChart(d){
   dots.forEach(o=>o.addEventListener("mouseenter",()=>show(o)));
 }
 
+function downloadModalPNG(id){
+  const modal=document.getElementById("modal");
+  if(!modal)return;
+  const d=DATA[id];
+  const lastDate=DATES[DATES.length-1];
+  const btn=document.querySelector('[onclick*="downloadModalPNG"]');
+  if(btn){btn.textContent="⏳ Creating...";btn.disabled=true;}
+  html2canvas(modal,{
+    scale:2,
+    useCORS:true,
+    allowTaint:true,
+    backgroundColor:"#fffdf7",
+    logging:false,
+    scrollX:0,
+    scrollY:0,
+    windowWidth:modal.scrollWidth,
+    windowHeight:modal.scrollHeight
+  }).then(canvas=>{
+    const link=document.createElement("a");
+    link.download="topgoviya-"+d.name.toLowerCase().replace(/\s+/g,"-")+"-"+lastDate+".png";
+    link.href=canvas.toDataURL("image/png");
+    link.click();
+    if(btn){btn.textContent="📸 Share as Image";btn.disabled=false;}
+  }).catch(()=>{
+    if(btn){btn.textContent="📸 Share as Image";btn.disabled=false;}
+  });
+}
+
+
+
+function whatsappShare(d){
+  const ch=changeOf(d.series);
+  const cur=latestVal(d.series);
+  const arr=ch.dir==="up"?"📈":ch.dir==="down"?"📉":"➡️";
+  const msg=
+    "🇱🇰 *Lanka Price Monitor*\n\n"+
+    arr+" *"+d.name+"* — අද මිල\n"+
+    "📍 "+d.primaryMarket+": රු."+Math.round(cur)+"/"+d.unit+"\n"+
+    "📊 වෙනස: "+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+"%\n\n"+
+    "🔗 https://wmrkumara.github.io/lanka-price-monitor/\n"+
+    "_ශ්‍රී ලංකා මහ බැංකු දත්ත | නොමිලේ_";
+  const url="https://wa.me/?text="+encodeURIComponent(msg);
+  window.open(url,"_blank");
+}
+function facebookShare(d){
+  const ch=changeOf(d.series);
+  const cur=latestVal(d.series);
+  const arr=ch.dir==="up"?"▲":ch.dir==="down"?"▼":"▶";
+  const lastDate=DATES[DATES.length-1];
+  /* Pre-calculate — mobile compatibility */
+  const dEmoji=tEmoji(d.name);
+  const dName=lang==="en"?d.name:d.name+" ("+tName(d.name)+")";
+  const dNameSimple=d.name; /* Always English for PNG */
+  const dCat=tCat(d.category);
+  const dMkt=tMkt(d.primaryMarket);
+  const dUnit=tUnit(d.unit);
+  const dQuote=QUOTES.en[Math.floor(Math.random()*QUOTES.en.length)];
+
+  /* Step 1 — Generate + download PNG card */
+  const card=document.createElement("div");
+  card.style.cssText="position:absolute;left:-9999px;top:0;width:600px;height:auto;background:#f4efe4;font-family:Georgia,serif;overflow:hidden;border-radius:0;z-index:-1";
+  card.innerHTML=`
+    <div style="height:8px;background:#0e4f4a"></div>
+    <div style="background:#0e4f4a;padding:18px 28px;display:flex;justify-content:space-between;align-items:center">
+      <div style="font-family:Georgia,serif;font-size:22px;color:#fff;font-weight:700">Lanka <em style="color:#ffd98a;font-style:italic">Price</em> Monitor</div>
+      <div style="font-family:monospace;font-size:13px;color:#9fd4c8;text-align:right">
+        <div>${lastDate}</div>
+        <div style="font-size:11px;color:#7ab8b0">Data: Central Bank of Sri Lanka</div>
+      </div>
+    </div>
+    <div style="padding:20px 24px 16px">
+      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#7a7264;font-weight:700;margin-bottom:8px">${d.category} · ${d.primaryMarket}</div>
+      <div style="margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div style="flex:1;padding-right:10px">
+            <div style="font-size:26px;line-height:1;margin-bottom:2px">${dEmoji}</div>
+            <div style="font-family:Georgia,serif;font-size:30px;font-weight:500;color:#191d1a;line-height:1.1">${dNameSimple}</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0">
+            <div style="font-family:monospace;font-size:12px;font-weight:700;color:#0F5C4D;letter-spacing:.5px">www.TopGoviya.lk</div>
+            <div style="font-size:9px;color:#D4A017;font-weight:700;letter-spacing:.3px">TopGoviya.lk</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
+        <div style="font-family:monospace;font-size:48px;font-weight:700;color:#191d1a">Rs.${fmt(cur)}</div>
+        <div style="background:${ch.dir==="up"?"#f7e6e2":"#e3efe6"};color:${ch.dir==="up"?"#b23a2e":"#2c7a52"};font-family:monospace;font-size:20px;font-weight:700;padding:8px 16px;border-radius:10px">${arr} ${Math.abs(ch.pct).toFixed(1)}%</div>
+      </div>
+      <div style="height:1px;background:#e3d9c4;margin-bottom:20px"></div>
+      <div style="display:grid;grid-template-columns:${Object.entries(d.markets||{}).filter(([k,v])=>v!=null).length>2?"1fr 1fr 1fr":"1fr 1fr"};gap:12px;margin-bottom:20px">
+        ${Object.entries(d.markets||{}).filter(([k,v])=>v!=null).map(([k,v])=>`
+        <div style="background:#fffdf7;border:1px solid #e3d9c4;border-radius:10px;padding:12px 14px">
+          <div style="font-size:10px;color:#7a7264;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">${k}</div>
+          <div style="font-family:monospace;font-size:18px;font-weight:700;color:#191d1a">Rs.${fmt(v)}</div>
+        </div>`).join("")}
+      </div>
+    </div>
+    <div style="background:#0e4f4a;padding:14px 28px;text-align:center">
+      <div style="font-family:monospace;font-size:16px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
+      <div style="font-size:11px;color:#9fd4c8;margin-top:4px;font-style:italic">"${dQuote}"</div>
+      <div style="font-size:10px;color:#7ab8b0;margin-top:3px">For Farmers. For Traders. Free.</div>
+    </div>
+  `;
+  document.body.appendChild(card);
+
+  html2canvas(card,{
+    scale:2,
+    useCORS:true,
+    allowTaint:true,
+    backgroundColor:"#f4efe4",
+    logging:false,
+    imageTimeout:8000,
+    removeContainer:true,
+    foreignObjectRendering:false
+  }).then(canvas=>{
+    document.body.removeChild(card);
+    /* Download PNG */
+    const link=document.createElement("a");
+    link.download="lanka-price-"+d.name.toLowerCase().replace(/\s+/g,"-")+"-"+lastDate+".png";
+    link.href=canvas.toDataURL("image/png");
+    link.click();
+
+    /* Step 2 — Show instruction popup */
+    setTimeout(()=>{
+      const popup=document.createElement("div");
+      popup.id="fbSharePopup";
+      popup.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px";
+      popup.innerHTML=`
+        <div style="background:#fffdf7;border-radius:16px;max-width:400px;width:100%;padding:24px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.4)">
+          <div style="font-size:32px;margin-bottom:12px">📸✅</div>
+          <div style="font-family:Georgia,serif;font-size:20px;font-weight:500;color:#0e4f4a;margin-bottom:8px">PNG Download වුනා!</div>
+          <div style="font-size:13px;color:#7a7264;line-height:1.7;margin-bottom:20px">
+            <strong style="color:#191d1a">Facebook post කරන්නේ:</strong><br>
+            1. Facebook app open කරන්න<br>
+            2. "Photo/Video" add කරන්න<br>
+            3. Download වුන PNG select කරන්න<br>
+            4. Caption paste කරන්න → Post!
+          </div>
+          <div style="display:flex;gap:8px">
+            <button onclick="document.getElementById('fbSharePopup').remove();window.open('https://www.facebook.com','_blank')" 
+              style="flex:1;background:#1877F2;color:#fff;border:none;border-radius:8px;padding:12px;font-size:14px;font-weight:700;cursor:pointer">
+              📘 Facebook Open
+            </button>
+            <button onclick="document.getElementById('fbSharePopup').remove()"
+              style="flex:1;background:#f4efe4;color:#3a403a;border:1.5px solid #cdbf9f;border-radius:8px;padding:12px;font-size:14px;font-weight:700;cursor:pointer">
+              ✓ OK
+            </button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(popup);
+    },500);
+
+  }).catch(()=>{
+    document.body.removeChild(card);
+    window.open("https://www.facebook.com","_blank");
+  });
+}
+function renderBestCrop(){
+  const el=document.getElementById("bestCrop");
+  if(!el||!DATA.length)return;
+  const ranked=DATA.map(d=>({d,ch:changeOf(d.series)}))
+    .filter(x=>latestVal(x.d.series)!==null)
+    .sort((a,b)=>b.ch.pct-a.ch.pct);
+  const sell=ranked.filter(x=>x.ch.pct>0).slice(0,5);
+  const buy=ranked.filter(x=>x.ch.pct<0).slice(-5).reverse();
+  const row=({d,ch})=>`<div class="best-row" onclick="openDetail(${d.id})" style="cursor:pointer">
+    <span class="best-name">${tEmoji(d.name)} ${tName(d.name)}</span>
+    <span style="display:flex;align-items:center;gap:6px">
+      <span class="best-price">රු.${fmt(latestVal(d.series))}<small style="font-size:9px;color:var(--muted)"> ${tUnit(d.unit)}</small></span>
+      <span class="best-badge ${ch.pct>0?'up':'down'}">${ch.pct>0?'▲':'▼'} ${Math.abs(ch.pct).toFixed(1)}%</span>
+    </span>
+  </div>`;
+  el.innerHTML=`
+    <div class="best-col">
+      <h3 class="sell">${t('bestSell')} 💰</h3>
+      ${sell.map(row).join('')}
+    </div>
+    <div class="best-col">
+      <h3 class="buy">${t('bestBuy')} 🛒</h3>
+      ${buy.map(row).join('')}
+    </div>`;
+  // Update labels
+  const hb=document.getElementById("hBest");
+  if(hb)hb.innerHTML=t("bestTitle");
+  const hint=document.getElementById("hintBest");
+  if(hint)hint.textContent=t("bestHint");
+}
+
+
+/* ===== Voice Search Hint Rotation ===== */
+const VOICE_HINTS = {
+  si: {
+    text: "ඔබට අවශ්‍ය දේ අහන්න",
+    sub: "tap කරන්න · සොයන්න",
+    examples: ["අමු මිරිස්","තක්කාලි","බෝංචි","දෙහි","කෙසෙල්","සම්බා","කෙළවල්ලා","වම්බටු","ගෝවා","කැරට්"]
+  },
+  en: {
+    text: "Ask what you need",
+    sub: "tap to search",
+    examples: ["Green Chilli","Tomato","Beans","Lime","Banana","Samba Rice","Kelawalla","Brinjal","Cabbage","Carrot"]
+  },
+  ta: {
+    text: "உங்களுக்குத் தேவையானதைக் கேளுங்கள்",
+    sub: "தட்டி தேடுங்கள்",
+    examples: ["பச்சை மிளகாய்","தக்காளி","பீன்ஸ்","எலுமிச்சை","வாழைப்பழம்","சம்பா","கெளவல்லா","கத்தரிக்காய்","முட்டைக்கோஸ்","கேரட்"]
+  }
+};
+
+let vhIdx = 0;
+function updateVoiceHint(){
+  const h = VOICE_HINTS[lang] || VOICE_HINTS.si;
+  const txt = document.getElementById('voiceHintText');
+  const ex = document.getElementById('voiceHintExample');
+  const sub = document.getElementById('voiceHintSub');
+  if(txt) txt.textContent = h.text;
+  if(ex){
+    ex.style.opacity = '0';
+    setTimeout(()=>{
+      ex.textContent = '🔍 "' + h.examples[vhIdx % h.examples.length] + '"';
+      ex.style.transition = 'opacity 0.5s';
+      ex.style.opacity = '1';
+      vhIdx++;
+    }, 300);
+  }
+  if(sub) sub.innerHTML = h.sub.replace('·','·<br>');
+}
+
+/* Start rotation */
+setTimeout(()=>{
+  updateVoiceHint();
+  setInterval(updateVoiceHint, 2500);
+}, 500);
+
+/* Voice hint updates on lang change — handled in setLang below */
+
 function init(){
   DATES=DB.dateLabels;
   DATE_OBJS=DB.dates.map(s=>new Date(s+"T00:00:00"));
@@ -398,12 +2223,78 @@ function init(){
   const dt=new Date(last+"T00:00:00");
   const opt={day:"numeric",month:"long",year:"numeric"};
   const el=document.getElementById("stampDate"); if(el) el.textContent=dt.toLocaleDateString("en-GB",opt);
-  applyLang(); buildCats(); renderMovers(); renderGrid();
+  applyLang(); buildCats(); renderMovers(); renderGrid(); renderBestCrop(); renderFAQ("si");
+  fetchWeather();
+  setInterval(fetchWeather, 3600000); /* Update every hour */
 }
 (async()=>{
-  try{ const r=await fetch("data.json",{cache:"no-store"}); if(r.ok){ DB=await r.json(); } }catch(e){ /* offline: use embedded */ }
+  try{ 
+    const r=await fetch("data.json?v="+Date.now(),{cache:"no-store"}); 
+    if(r.ok){ DB=await r.json(); } 
+  }catch(e){ /* offline: use embedded */ }
   init();
 })();
+</script>
+
+<!-- ===== PWA Install Banner ===== -->
+<div id="pwa-banner" style="display:none;position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:var(--petrol);color:#fff;padding:12px 18px;border-radius:14px;box-shadow:0 8px 32px rgba(10,30,28,.4);z-index:999;display:none;align-items:center;gap:12px;max-width:340px;width:calc(100% - 32px)">
+  <img src="icon-72x72.png" width="40" height="40" style="border-radius:8px;flex-shrink:0" onerror="this.style.display='none'">
+  <div style="flex:1">
+    <div style="font-weight:700;font-size:14px" id="pwaBannerTitle">📱 App Install කරන්න</div>
+    <div style="font-size:11px;color:#9fd4c8" id="pwaBannerSub">Home screen එකේ TopGoviya App!</div>
+  </div>
+  <button id="pwaInstallBtn" style="background:#ffd98a;color:#0e4f4a;border:none;border-radius:8px;padding:7px 14px;font-weight:700;font-size:13px;cursor:pointer" id="pwaBannerBtn">Install</button>
+  <button onclick="document.getElementById('pwa-banner').style.display='none'" style="background:none;border:none;color:#9fd4c8;cursor:pointer;font-size:18px;padding:0 4px">✕</button>
+</div>
+
+<!-- ===== PWA Service Worker ===== -->
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('/lanka-price-monitor/service-worker.js')
+      .then(r=>console.log('[TopGoviya] SW registered ✅'))
+      .catch(e=>console.log('[TopGoviya] SW error:',e));
+  });
+}
+
+/* PWA Install Prompt */
+let pwaPrompt=null;
+const banner=document.getElementById('pwa-banner');
+const installBtn=document.getElementById('pwaInstallBtn');
+
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();
+  pwaPrompt=e;
+  /* Show banner after 5 seconds */
+  setTimeout(()=>{
+    if(banner && pwaPrompt){
+      banner.style.display='flex';
+      const t=document.getElementById('pwaBannerTitle');
+      const s=document.getElementById('pwaBannerSub');
+      if(t)t.textContent=lang==='si'?'📱 App Install කරන්න':lang==='ta'?'📱 App நிறுவுங்கள்':'📱 Install App';
+      if(s)s.textContent=lang==='si'?'Home screen එකේ TopGoviya App!':lang==='ta'?'TopGoviya App ஐ நிறுவவும்!':'Add TopGoviya to your home screen!';
+    }
+  },5000);
+});
+
+if(installBtn){
+  installBtn.addEventListener('click',async()=>{
+    if(!pwaPrompt)return;
+    pwaPrompt.prompt();
+    const {outcome}=await pwaPrompt.userChoice;
+    if(outcome==='accepted'){
+      console.log('[TopGoviya] PWA installed ✅');
+      if(banner)banner.style.display='none';
+    }
+    pwaPrompt=null;
+  });
+}
+
+/* Hide banner if already installed */
+window.addEventListener('appinstalled',()=>{
+  if(banner)banner.style.display='none';
+  console.log('[TopGoviya] App installed!');
+});
 </script>
 </body>
 </html>
