@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — TopGoviya.lk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4efe4;--paper2:#efe8d8;--card:#fffdf7;--ink:#191d1a;--ink-soft:#3a403a;
+  --muted:#7a7264;--line:#e3d9c4;--line-strong:#cdbf9f;--petrol:#0e4f4a;--petrol-deep:#0a3a36;
+  --gold:#a9802a;--up:#b23a2e;--down:#2c7a52;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--ink);font-family:'Hanken Grotesk','Noto Sans Sinhala','Noto Sans Tamil',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6}
+body{background-image:radial-gradient(circle at 12% -10%,rgba(14,79,74,.06),transparent 38%),radial-gradient(circle at 95% 0%,rgba(169,128,42,.07),transparent 30%);background-attachment:fixed}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+
+/* NAV */
+.nav{background:var(--petrol);padding:14px 0;border-bottom:3px solid var(--gold)}
+.nav .inner{max-width:860px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center}
+.nav-brand{font-family:'Newsreader',serif;font-size:22px;color:#fff;text-decoration:none}
+.nav-brand em{color:#ffd98a;font-style:italic}
+.nav-link{color:#9fd4c8;font-size:13px;font-weight:600;text-decoration:none;transition:.2s}
+.nav-link:hover{color:#ffd98a}
+
+/* HERO */
+.hero{padding:60px 0 50px;border-bottom:2px solid var(--ink)}
+.hero-kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:14px}
+.hero-kicker span{color:var(--petrol)}
+.hero-title{font-family:'Newsreader',serif;font-size:clamp(38px,7vw,68px);font-weight:500;line-height:.95;letter-spacing:-.02em;margin-bottom:18px}
+.hero-title em{font-style:italic;color:var(--petrol)}
+.hero-sub{font-size:18px;color:var(--ink-soft);max-width:580px;line-height:1.55;margin-bottom:24px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1.5px solid var(--line-strong);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--petrol)}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:#4caf50;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* MISSION */
+.mission{padding:50px 0;border-bottom:1px solid var(--line-strong)}
+.section-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px}
+.mission-text{font-family:'Newsreader',serif;font-size:clamp(22px,3.5vw,30px);font-weight:500;line-height:1.3;color:var(--ink);max-width:680px;margin-bottom:20px}
+.mission-body{font-size:15.5px;color:var(--ink-soft);max-width:640px;line-height:1.7}
+
+/* QUOTE */
+.quote-block{background:var(--petrol);border-radius:14px;padding:32px 36px;margin:40px 0;position:relative;overflow:hidden}
+.quote-block::before{content:'"';font-family:'Newsreader',serif;font-size:120px;color:rgba(255,255,255,.08);position:absolute;top:-10px;left:20px;line-height:1}
+.quote-block p{font-family:'Newsreader',serif;font-size:clamp(20px,3vw,26px);font-style:italic;color:#fff;line-height:1.4;position:relative;z-index:1}
+.quote-block .attr{font-size:12px;color:#9fd4c8;margin-top:12px;letter-spacing:.1em;font-weight:600;position:relative;z-index:1}
+
+/* FEATURES */
+.features{padding:50px 0;border-bottom:1px solid var(--line-strong)}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:24px}
+.feat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;transition:transform .16s,box-shadow .16s}
+.feat:hover{transform:translateY(-3px);box-shadow:0 12px 28px -14px rgba(14,79,74,.3)}
+.feat-icon{font-size:28px;margin-bottom:10px}
+.feat-title{font-family:'Newsreader',serif;font-size:17px;font-weight:500;color:var(--ink);margin-bottom:6px}
+.feat-text{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* DATA SOURCE */
+.data-section{padding:50px 0;border-bottom:1px solid var(--line-strong)}
+.data-card{background:var(--card);border:1.5px solid var(--petrol);border-radius:14px;padding:24px 28px;display:flex;gap:20px;align-items:flex-start}
+.data-icon{font-size:36px;flex-shrink:0}
+.data-title{font-family:'Newsreader',serif;font-size:20px;font-weight:500;margin-bottom:8px}
+.data-body{font-size:14px;color:var(--ink-soft);line-height:1.6}
+
+/* INDEPENDENCE */
+.independence{padding:50px 0;border-bottom:1px solid var(--line-strong)}
+.notice{background:#fff8ec;border:1.5px solid var(--gold);border-radius:12px;padding:18px 22px;font-size:14px;color:var(--ink-soft);line-height:1.6}
+.notice strong{color:var(--gold)}
+
+/* VISION */
+.vision{padding:50px 0;border-bottom:1px solid var(--line-strong)}
+.vision-text{font-family:'Newsreader',serif;font-size:clamp(22px,3vw,28px);font-style:italic;color:var(--petrol);line-height:1.35;max-width:620px}
+
+/* BUILT IN SL */
+.built{padding:50px 0;border-bottom:1px solid var(--line-strong)}
+.built-card{background:linear-gradient(135deg,var(--petrol),var(--petrol-deep));border-radius:16px;padding:36px;text-align:center}
+.built-flag{font-size:48px;margin-bottom:14px}
+.built-title{font-family:'Newsreader',serif;font-size:28px;font-weight:500;color:#fff;margin-bottom:10px}
+.built-sub{font-size:15px;color:#9fd4c8;line-height:1.6;max-width:500px;margin:0 auto 20px}
+.built-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-top:24px}
+.stat-item{text-align:center}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:#ffd98a}
+.stat-lbl{font-size:11px;color:#9fd4c8;letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
+
+/* LANG TOGGLE */
+.lang-bar{display:flex;gap:8px;margin-bottom:20px}
+.lang-bar button{font:inherit;font-size:12px;font-weight:700;padding:5px 14px;border-radius:999px;border:1.5px solid var(--line-strong);background:var(--card);color:var(--muted);cursor:pointer;transition:.18s}
+.lang-bar button.on{background:var(--petrol);color:#fff;border-color:var(--petrol)}
+
+/* FOOTER */
+footer{padding:32px 0;text-align:center}
+.footer-brand{font-family:'Newsreader',serif;font-size:20px;color:var(--petrol);margin-bottom:8px}
+.footer-brand em{font-style:italic;color:var(--gold)}
+.footer-text{font-size:12.5px;color:var(--muted)}
+.footer-link{color:var(--petrol);font-weight:600;text-decoration:none}
+
+/* DIVIDER */
+.rule{display:flex;align-items:center;gap:12px;margin:14px 0 28px}
+.rule span{height:1px;flex:1;background:var(--line-strong)}
+.rule em{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:700}
+
+@media(max-width:600px){
+  .hero{padding:40px 0 36px}
+  .data-card{flex-direction:column;gap:12px}
+  .built-stats{gap:20px}
+  .quote-block{padding:24px 22px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="inner">
+    <a href="/" class="nav-brand">Top<em>Goviya</em>.lk</a>
+    <a href="https://wmrkumara.github.io/lanka-price-monitor/" class="nav-link" id="navLink">← Live Prices</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="lang-bar">
+      <button class="on" onclick="setLang('si')">සිංහල</button>
+      <button onclick="setLang('en')">English</button>
+      <button onclick="setLang('ta')">தமிழ்</button>
+    </div>
+    <div class="hero-kicker">About <span>TopGoviya.lk</span></div>
+    <h1 class="hero-title" id="heroTitle">ශ්‍රී ලංකාවේ<br><em>ගොවි බුද්ධිමත්</em><br>platform එක</h1>
+    <p class="hero-sub" id="heroSub">ගොවීන්ට, වෙළෙන්දන්ට, අපනයනකරුවන්ට සහ කෘෂිකාර්මික ව්‍යාපාරිකයන්ට — සැබෑ වෙළඳ දත්ත සහ agricultural intelligence භාවිතයෙන් වඩා හොඳ තීරණ ගැනීමට.</p>
+    <div class="hero-badge"><div class="dot"></div> <span id="heroBadge">දිනපතා live data — නිදහස් — login නැහැ</span></div>
+    <div style="margin-top:16px;font-size:14px;font-weight:600;color:var(--petrol)" id="heroTagline">📊 දත්ත බලලා තීරණ ගන්න</div>
+    <div style="margin-top:6px;font-size:13px;color:var(--muted)">📍 Proudly built with ❤️ in Gampola 🇱🇰 for Sri Lankan farmers.</div>
+  </section>
+
+  <!-- MISSION -->
+  <section class="mission">
+    <div class="section-label" id="missionLabel">අපේ මෙහෙවර</div>
+    <p class="mission-text" id="missionTitle">"කෘෂිකාර්මික දත්ත වඩා හොඳ තීරණ බවට පත් කිරීම."</p>
+    <p class="mission-body" id="missionBody">සෑම දිනකම කෘෂිකාර්මික වෙළඳපොළවල් මිල චලනයන්, සැපයුම් ප්‍රවණතා සහ වෙළඳ අවස්ථා ඔස්සේ වටිනා තොරතුරු ජනනය කරයි. නමුත් මෙම තොරතුරු බොහෝ විට ප්‍රවේශ ගැනීමට, විශ්ලේෂණය කිරීමට සහ effectively භාවිත කිරීමට අපහසු වේ.<br><br>TopGoviya.lk ඒ හිස්තැන පිරවීමට නිර්මාණය කරන ලදී.</p>
+  </section>
+
+  <!-- QUOTE -->
+  <div class="quote-block">
+    <p id="quoteText">"අද මිල කියන්නේ තොරතුරක්. Trend එක කියන්නේ අවස්ථාවක්. Data මත ගන්න තීරණ තමයි ඔබට ලාභය ලබා දෙන්නේ."</p>
+    <div class="attr">— TopGoviya.lk</div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="section-label" id="featLabel">අපි සපයන දේ</div>
+    <div class="rule"><span></span><em>Features</em><span></span></div>
+    <div class="features-grid">
+      <div class="feat">
+        <div class="feat-icon">📈</div>
+        <div class="feat-title" id="f1t">දෛනික වෙළඳ මිල</div>
+        <div class="feat-text" id="f1b">ශ්‍රී ලංකාවේ ප්‍රධාන වෙළඳපොළ 3ක් — දඹුල්ල, පිටකොටුව, නාරාහේන්පිට — සෑම දිනකම.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🌾</div>
+        <div class="feat-title" id="f2t">ගොවි ලාභ ගණකය</div>
+        <div class="feat-text" id="f2b">ඔබේ අස්වැන්නෙන් ලැබෙන ආදායම දැනගන්න — ප්‍රවාහන හා නිෂ්පාදන වියදම් අඩු කර හොඳම වෙළඳපොළ ස්වයංක්‍රීයව නිර්දේශ කරයි.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">💰</div>
+        <div class="feat-title" id="f3t">වෙළෙන්දා ලාභ ගණකය</div>
+        <div class="feat-text" id="f3b">තොග මිලට ගෙන සිල්ලර මිලට විකිණීමේ ලාභය — ප්‍රවාහන වියදම අඩු කර — වෙළඳපොළ අනුව ශුද්ධ ලාභය ගණනය කරයි.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">📊</div>
+        <div class="feat-title" id="f4t">වසර 4ක ඉතිහාසය</div>
+        <div class="feat-text" id="f4b">1M · 3M · 1Y · 3Y · 4Y · All · YoY — ඕනෑම time range chart කරන්න.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🧠</div>
+        <div class="feat-title" id="f5t">AI-Powered Insights</div>
+        <div class="feat-text" id="f5b">මිල හදිසි ඉහළ යාම් පිළිබඳ අනතුරු ඇඟවීම්, වාර්ෂික ගනුදෙනු රටා, මාස 3ක ගතිය සහ වෙළඳපොළ අතර ගැප් විශ්ලේෂණය.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">💡</div>
+        <div class="feat-title" id="f6t">Gap හා අවස්ථා Chart</div>
+        <div class="feat-text" id="f6b">සිල්ලර සහ තොග මිල අතර වෙනස දෘශ්‍යමාන කරයි — පොහොය දින indicators — දින 30ක දර්ශනය.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">📅</div>
+        <div class="feat-title" id="f7t">වාර්ෂික මිල සැසඳීම</div>
+        <div class="feat-text" id="f7b">2023-2026 මාසික සාමාන්‍ය මිල — ගෙදරදී ගැනීමට හා වගා කිරීමට හොඳම කාලය දැනගන්න.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🌐</div>
+        <div class="feat-title" id="f8t">සිංහල | தமிழ் | English</div>
+        <div class="feat-text" id="f8b">සම්පූර්ණ platform — භාෂා 3කින් — ඕනෑම ශ්‍රී ලාංකිකයෙකුට භාවිත කළ හැකිය.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🎤</div>
+        <div class="feat-title" id="f9t">හඬ සෙවුම</div>
+        <div class="feat-text" id="f9b">Voice search — "තක්කාලි" කියන්න → card auto-open! සිංහල, தமிழ், English — ශ්‍රී ලංකාවේ පළමු agricultural voice search!</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🔊</div>
+        <div class="feat-title" id="f10t">මිල කියවීම</div>
+        <div class="feat-text" id="f10b">🔊 Read button — click කළාම සම්පූර්ණ card කියවනවා! Retail මිල, Wholesale මිල, % වෙනස, වෙළඳපොළ සියල්ල! "Obata Jayawewa!"</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATA SOURCE -->
+  <section class="data-section">
+    <div class="section-label" id="dataLabel">දත්ත මූලාශ්‍රය</div>
+    <div class="rule"><span></span><em>Our Data</em><span></span></div>
+    <div class="data-card">
+      <div class="data-icon">🏦</div>
+      <div>
+        <div class="data-title" id="dataTitle">ශ්‍රී ලංකා මහා බැංකුව</div>
+        <p class="data-body" id="dataBody">TopGoviya.lk හි මිල දත්ත <strong>Central Bank of Sri Lanka (CBSL) Daily Price Reports</strong> ඇතුළු publicly available reports වලින් ලබා ගනී.<br><br>TopGoviya.lk ස්වාධීනව මෙම දත්ත process, analyze සහ visualize කර වෙළඳ insights සහ decision-support tools ලෙස ඉදිරිපත් කරයි.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDEPENDENCE -->
+  <section class="independence">
+    <div class="section-label" id="indLabel">ස්වාධීනත්වය සහ විනිවිදභාවය</div>
+    <div class="rule"><span></span><em>Independence</em><span></span></div>
+    <div class="notice">
+      <strong>⚠️ Important Notice:</strong><br>
+      <span id="indBody">TopGoviya.lk යනු ස්වාධීන කෘෂිකාර්මික intelligence platform එකකි. අපි Central Bank of Sri Lanka හෝ ඕනෑම රජයේ ආයතනයක් සමඟ affiliated, endorsed හෝ operated නොවෙමු.<br><br>මෙහි සඳහන් මිල ගණන් <strong>මඟ පෙන්වීමක් පමණි.</strong> ඔබගේ තීරණ ඔබගේ වගකීම වේ.</span>
+    </div>
+  </section>
+
+  <!-- VISION -->
+  <section class="vision">
+    <div class="section-label" id="visLabel">අපේ දැක්ම</div>
+    <div class="rule"><span></span><em>Vision</em><span></span></div>
+    <p class="vision-text" id="visText">"ශ්‍රී ලංකාවේ වඩාත්ම විශ්වාසනීය කෘෂිකාර්මික වෙළඳ intelligence platform බවට පත්වීම."</p>
+  </section>
+
+  <!-- OUR STORY -->
+  <section style="padding:50px 0;border-bottom:1px solid var(--line-strong)">
+    <div class="section-label" id="storyLabel">අපේ කතාව</div>
+    <div class="rule"><span></span><em>Our Story</em><span></span></div>
+
+    <!-- Timeline -->
+    <div style="position:relative;padding-left:28px;border-left:2px solid var(--line-strong)">
+
+      <!-- Step 1 -->
+      <div style="margin-bottom:28px;position:relative">
+        <div style="position:absolute;left:-37px;top:0;width:18px;height:18px;border-radius:50%;background:var(--gold);border:3px solid var(--paper)"></div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:4px">📺 Inspiration</div>
+        <p class="mission-body" id="story1">
+          <a href="https://www.youtube.com/@BusinessAdvisorLK" target="_blank" rel="noopener" style="color:var(--petrol);font-weight:700">Business Advisor LK</a> YouTube channel එකේ වැඩසටහනක් නරඹමින් — ශ්‍රී ලංකා මහ බැංකුව දෛනිකව PDF ලෙස භාණ්ඩ මිල නිකුත් කරන බව දැනගත්තා.
+        </p>
+      </div>
+
+      <!-- Step 2 -->
+      <div style="margin-bottom:28px;position:relative">
+        <div style="position:absolute;left:-37px;top:0;width:18px;height:18px;border-radius:50%;background:var(--petrol);border:3px solid var(--paper)"></div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--petrol);margin-bottom:4px">💡 Idea</div>
+        <p class="mission-body" id="story2">"මෙම දත්ත වඩා කාර්යක්ෂම ලෙස — live විදිහට — ගොවීන්ට සහ වෙළෙන්දන්ට ලබා දිය හැකිද?" — ඒ ප්‍රශ්නය TopGoviya.lk හි ආරම්භයයි.</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div style="margin-bottom:28px;position:relative">
+        <div style="position:absolute;left:-37px;top:0;width:18px;height:18px;border-radius:50%;background:var(--petrol);border:3px solid var(--paper)"></div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--petrol);margin-bottom:4px">🛠️ Build</div>
+        <p class="mission-body" id="story3">දින 11 කින් — Web app එකක් නිර්මාණය කළා. 1M · 3M · 365 දින price history, live data, ගොවි ලාභ ගණකය, trader margin analysis — සිංහල, தமிழ், English — සියල්ල නිදහසේ.</p>
+      </div>
+
+      <!-- Step 4 — Vesak -->
+      <div style="margin-bottom:0;position:relative">
+        <div style="position:absolute;left:-37px;top:0;width:18px;height:18px;border-radius:50%;background:var(--gold);border:3px solid var(--paper)"></div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:4px">🌸 Launch — වෙසක් පෝය</div>
+        <p class="mission-body" id="story4">2026 වෙසක් පෝය දවසේ — TopGoviya Lanka Price Monitor launch කළා. "අද වෙසක් පෝය දවසේ මට මෙය කිරීමට ලැබීම ගැන ඇත්තේ ඉමහත් සතුටක්. ගොවිජනතාවට සහ වෙළෙන්දන්ට ඉමහත් ප්‍රයෝජනයක් ලැබේවා."</p>
+      </div>
+
+    </div>
+
+    <!-- Quote -->
+    <div style="background:var(--petrol);border-radius:14px;padding:24px 28px;margin-top:32px;position:relative;overflow:hidden">
+      <div style="font-size:80px;color:rgba(255,255,255,.06);position:absolute;top:-10px;left:16px;font-family:Georgia,serif;line-height:1">"</div>
+      <p style="font-family:'Newsreader',serif;font-size:clamp(16px,2.5vw,20px);font-style:italic;color:#fff;line-height:1.5;position:relative;z-index:1" id="storyQuote">"ගොවිජනතාවට සහ වෙළෙන්දන්ට ඉදිරි දිනවල දත්ත මත පදනම් වූ තීරණ ගැනීමට හැකි වේවා."</p>
+      <div style="font-size:12px;color:#9fd4c8;margin-top:10px;position:relative;z-index:1">— රත්න, ගම්පොළ 🇱🇰</div>
+    </div>
+  </section>
+
+  <!-- BUILT IN SL -->
+  <section class="built">
+    <div class="built-card">
+      <div class="built-flag">🇱🇰</div>
+      <div class="built-title" id="builtTitle">ගම්පොළ සිට ලංකාව පුරා වෙළඳපොළ දත්ත සැමට.</div>
+      <p class="built-sub" id="builtSub">Proudly built with love in Gampola, Sri Lanka — for every farmer, trader, and consumer who deserves better market information.</p>
+      <div class="built-stats">
+        <div class="stat-item"><div class="stat-num">43+</div><div class="stat-lbl" id="statLbl1">Commodities</div></div>
+        <div class="stat-item"><div class="stat-num">4Y</div><div class="stat-lbl" id="statLbl2">History</div></div>
+        <div class="stat-item"><div class="stat-num">3</div><div class="stat-lbl" id="statLbl3">Languages</div></div>
+        <div class="stat-item"><div class="stat-num">Free</div><div class="stat-lbl" id="statLbl4">Always</div></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+
+  <!-- How to Use Section -->
+  <section style="padding:50px 0;border-bottom:1px solid var(--line-strong)">
+    <div class="section-label" id="howLabel">භාවිත මාර්ගෝපදේශය</div>
+    <h2 style="font-family:'Newsreader','Noto Sans Sinhala',serif;font-size:clamp(26px,4vw,38px);font-weight:500;margin-bottom:8px;line-height:1.2" id="howTitle">TopGoviya.lk භාවිත කරන්නේ කෙසේද?</h2>
+    <p style="font-size:15px;color:var(--muted);margin-bottom:28px" id="howSub">සියලු සේවාවන් සම්පූර්ණයෙන්ම නොමිලේ · ලොග් වීම් අවශ්‍ය නොවේ · ජංගම සහ පරිගණක</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px">
+
+      <!-- Feature 1 -->
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px">
+        <div style="font-size:32px;margin-bottom:10px">🎤</div>
+        <h3 style="font-family:'Newsreader','Noto Sans Sinhala',serif;font-size:18px;font-weight:600;color:var(--petrol);margin-bottom:8px" id="f1title">හඬ මඟින් සෙවීම</h3>
+        <p style="font-size:14px;color:var(--ink-soft);line-height:1.7" id="f1body">මුල් පිටුවේ 🎤 සලකුණ ස්පර්ශ කරන්න → "අමු මිරිස්" පවසන්න → මිල දර්ශකය ස්වයංක්‍රීයව විවෘත වී, ශබ්ද නඟා කියවනු ඇත!</p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px">
+        <div style="font-size:32px;margin-bottom:10px">🔊</div>
+        <h3 style="font-family:'Newsreader','Noto Sans Sinhala',serif;font-size:18px;font-weight:600;color:var(--petrol);margin-bottom:8px" id="f2title">මිල ශබ්ද නඟා කියවීම</h3>
+        <p style="font-size:14px;color:var(--ink-soft);line-height:1.7" id="f2body">ඕනෑම භාණ්ඩයක මිල දර්ශකය ක්ලික් කර 🔊 බොත්තම ස්පර්ශ කරන්න. සිල්ලර සහ තොග මිල ශබ්ද නඟා කියවනු ලැබේ!</p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px">
+        <div style="font-size:32px;margin-bottom:10px">🌾</div>
+        <h3 style="font-family:'Newsreader','Noto Sans Sinhala',serif;font-size:18px;font-weight:600;color:var(--petrol);margin-bottom:8px" id="f3title">දැන් හොඳම භාණ්ඩය</h3>
+        <p style="font-size:14px;color:var(--ink-soft);line-height:1.7" id="f3body">මුල් පිටුවේ <strong>🟢 දැන් විකිණීමට</strong> සහ <strong>🔴 දැන් මිලදී ගන්න</strong> වගු නිරීක්ෂණය කරන්න. ප්‍රධාන වෙළඳපොළ සිල්ලර මිල අනුව ස්වයංක්‍රීයව පෙළගස්වා ඇත!</p>
+      </div>
+
+      <!-- Feature 4 -->
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px">
+        <div style="font-size:32px;margin-bottom:10px">🧮</div>
+        <h3 style="font-family:'Newsreader','Noto Sans Sinhala',serif;font-size:18px;font-weight:600;color:var(--petrol);margin-bottom:8px" id="f4title">ලාභ ගණකය</h3>
+        <p style="font-size:14px;color:var(--ink-soft);line-height:1.7" id="f4body">භාණ්ඩය ක්ලික් → 🧮 ගණකය → 🌾 ගොවියා හෝ 💰 වෙළෙන්දා → කිලෝ ගණන සහ ප්‍රවාහන වියදම ඇතුළත් කරන්න → හොඳම වෙළඳපොළ ස්වයංක්‍රීයව නිර්දේශ!</p>
+      </div>
+
+      <!-- Feature 5 -->
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px">
+        <div style="font-size:32px;margin-bottom:10px">🧠</div>
+        <h3 style="font-family:'Newsreader','Noto Sans Sinhala',serif;font-size:18px;font-weight:600;color:var(--petrol);margin-bottom:8px" id="f5title">කෘතිම බුද්ධි තොරතුරු</h3>
+        <p style="font-size:14px;color:var(--ink-soft);line-height:1.7" id="f5body">භාණ්ඩය ක්ලික් → 🧠 තොරතුරු කොටුව නිරීක්ෂණය කරන්න. මිල ඉහළ යාම්, කාලීන රටාවන්, වෙළඳපොළ පරතරය, මාස 3ක ප්‍රවණතා — ස්වයංක්‍රීය විශ්ලේෂණය! භාෂා 3කින්!</p>
+      </div>
+
+      <!-- Feature 6 -->
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px">
+        <div style="font-size:32px;margin-bottom:10px">💡</div>
+        <h3 style="font-family:'Newsreader','Noto Sans Sinhala',serif;font-size:18px;font-weight:600;color:var(--petrol);margin-bottom:8px" id="f6title">මිල පරතරය සහ තොග මිල</h3>
+        <p style="font-size:14px;color:var(--ink-soft);line-height:1.7" id="f6body">භාණ්ඩය ක්ලික් → <strong>💡 පරතරය</strong> බොත්තම ස්පර්ශ කරන්න. සිල්ලර සහ තොග මිල අතර පරතරය ප්‍රස්ථාර ඇසුරින් බලාගත හැක. ප්‍රවාහන අවස්ථා ගණනය කිරීමට!</p>
+      </div>
+
+      <!-- Feature 7 -->
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px">
+        <div style="font-size:32px;margin-bottom:10px">📊</div>
+        <h3 style="font-family:'Newsreader','Noto Sans Sinhala',serif;font-size:18px;font-weight:600;color:var(--petrol);margin-bottom:8px" id="f7title">YoY සහ 2026 ප්‍රස්ථාර</h3>
+        <p style="font-size:14px;color:var(--ink-soft);line-height:1.7" id="f7body">භාණ්ඩය ක්ලික් → <strong>2026</strong> (default) → මෙ වසරේ අඩුම සහ වැඩිම මිල ගණන් ක්ෂණිකව! 1M, 3M, 1Y, 3Y, All, YoY විකල්ප ද ඇත!</p>
+      </div>
+
+      <!-- Feature 8 -->
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px">
+        <div style="font-size:32px;margin-bottom:10px">🗞️</div>
+        <h3 style="font-family:'Newsreader','Noto Sans Sinhala',serif;font-size:18px;font-weight:600;color:var(--petrol);margin-bottom:8px" id="f8title">ගොවි පුවත් Blog</h3>
+        <p style="font-size:14px;color:var(--ink-soft);line-height:1.7" id="f8body">පිටුවේ පහළ → 📝 ගොවි පුවත් ක්ලික් → ලිපි කියවන්න. ▶️ බොත්තම ස්පර්ශ කිරීමෙන් ලිපිය <strong>භාෂා 3කින් ශබ්ද නඟා ඇසිය හැක!</strong></p>
+      </div>
+
+      <!-- Feature 9 -->
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px">
+        <div style="font-size:32px;margin-bottom:10px">📸</div>
+        <h3 style="font-family:'Newsreader','Noto Sans Sinhala',serif;font-size:18px;font-weight:600;color:var(--petrol);margin-bottom:8px" id="f9title">ෂෙයාර් සහ WhatsApp</h3>
+        <p style="font-size:14px;color:var(--ink-soft);line-height:1.7" id="f9body">භාණ්ඩය ක්ලික් → 📸 ඡායාරූප ලෙස ෂෙයාර් → PNG ලෙස WhatsApp හරහා බෙදාගන්න! Facebook බොත්තමෙන් සෘජුවම Facebook වෙතද යොමු කළ හැක!</p>
+      </div>
+
+    </div>
+
+    <!-- Quick start -->
+    <div style="background:var(--petrol);border-radius:14px;padding:24px 28px;margin-top:28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#9fd4c8;font-weight:700;margin-bottom:6px" id="quickLabel">ඉක්මනින් ආරම්භ කරන්න</div>
+        <p style="font-size:15px;color:#fff;line-height:1.6" id="quickText">🎤 සලකුණ ස්පර්ශ කරන්න → "අමු මිරිස්" පවසන්න → මිල දර්ශකය විවෘත වී ශබ්ද නඟා කියවනු ඇත! එපමණයි!</p>
+      </div>
+      <a href="https://wmrkumara.github.io/lanka-price-monitor/" style="display:inline-block;background:var(--gold);color:#fff;font-weight:700;font-size:14px;padding:12px 22px;border-radius:8px;text-decoration:none;flex-shrink:0" id="quickBtn">🌾 දැන්ම අත්හදා බලන්න</a>
+    </div>
+  </section>
+<footer>
+  <div class="footer-brand">Top<em>Goviya</em>.lk</div>
+  <p class="footer-text">🌾 Sri Lanka's Agricultural Intelligence Platform<br>
+  <a href="https://wmrkumara.github.io/lanka-price-monitor/" class="footer-link">← Back to Live Prices</a>
+  &nbsp;·&nbsp; <a href="https://ebooklanka.com" class="footer-link">ebooklanka.com</a> &nbsp;·&nbsp; <a href="https://www.facebook.com/TopGoviyaLK" target="_blank" rel="noopener" class="footer-link" title="TopGoviya.lk on Facebook" style="display:inline-flex;align-items:center;gap:5px;background:#1877F2;color:#fff;font-weight:700;font-size:12px;padding:4px 10px;border-radius:6px;text-decoration:none;vertical-align:middle"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Facebook</a></p>
+</footer>
+
+<script>
+const L={
+  si:{
+    heroTitle:"ශ්‍රී ලාංකාවේ <em>බුද්ධිමත් ගොවි ජනතාව</em><br>උදෙසාම වෙන්වූ සුවිශේෂී<br>ඩිජිටල් අවකාශය",
+    heroSub:"ගොවීන්ට, වෙළෙන්දන්ට සහ අපනයනකරුවන්ට — සැබෑ වෙළඳපොළ දත්ත විශ්ලේෂණය කරමින් වඩාත් නිවැරදි හා වාසිදායක තීරණ ගැනීම සඳහා. දිනපතා සජීවී දත්ත — සම්පූර්ණයෙන්ම නොමිලේ — ලොග් වීම් අවශ්‍ය නොවේ.",
+    missionTitle:'"කෘෂිකාර්මික දත්ත, වඩාත් සාර්ථක තීරණ බවට පත් කිරීම."',
+    missionBody:"සෑම දිනකම කෘෂිකාර්මික වෙළඳපොළවල් තුළින් අතිවිශාල වටිනා තොරතුරු ප්‍රමාණයක් ජනනය වේ. නමුත් එම තොරතුරු නිවැරදි වේලාවට ලබා ගැනීමට සහ ඵලදායී ලෙස භාවිත කිරීමට මෙතෙක් අපහසුතා පැවතුණි.<br><br>TopGoviya.lk නිර්මාණය වූයේ එම හිස්තැන නිවැරදිව පිරවීම සඳහාය.",
+    quote:'"අද පවතින මිල යනු හුදෙක් තොරතුරක් පමණි. නමුත් මිලෙහි ප්‍රවණතාව (Trend) යනු වටිනා අවස්ථාවකි. දත්ත මත පදනම්ව ගන්නා තීරණ සැමවිටම ඔබට ඉහළම ලාභය උදාකර දෙයි." — TopGoviya.lk',
+    featLabel:"අප සපයන සේවාවන්",
+    dataLabel:"දත්ත මූලාශ්‍ර සහ ස්වාධීනත්වය",
+    dataTitle:"ශ්‍රී ලංකා මහ බැංකුව",
+    dataBody:"TopGoviya.lk හි මිල දත්ත ලබා ගන්නේ ශ්‍රී ලංකා මහ බැංකුවේ දෛනික මිල වාර්තා (<strong>CBSL Daily Price Reports</strong>) ඇතුළු ප්‍රසිද්ධියේ ලබාගත හැකි නිල වාර්තා වලිනි. TopGoviya.lk විසින් මෙම දත්ත ස්වාධීනව සකස් කර, විශ්ලේෂණය කර ප්‍රස්ථාරගත කරනු ලබයි.",
+    indLabel:"ස්වාධීනත්වය සහ විනිවිදභාවය",
+    indBody:"TopGoviya.lk යනු සම්පූර්ණයෙන්ම ස්වාධීන පද්ධතියකි. ශ්‍රී ලංකා මහ බැංකුව හෝ වෙනත් කිසිදු රාජ්‍ය ආයතනයක් සමඟ සෘජු සම්බන්ධතාවයක් නොමැත.<br><br>මෙහි දැක්වෙන මිල ගණන් <strong>මඟ පෙන්වීමක් සඳහා පමණක්</strong> වන අතර, ඔබ ගන්නා තීරණවල වගකීම ඔබ සතු වේ.",
+    visLabel:"අපේ දැක්ම",
+    visText:'"ශ්‍රී ලංකාවේ වඩාත්ම විශ්වාසනීය සහ දියුණුම කෘෂිකාර්මික තීක්ෂණ බුද්ධි (Agricultural Intelligence) පද්ධතිය බවට පත්වීම."',
+    builtTitle:"ගම්පොළ සිට මුළු ලංකාවටම 🇱🇰",
+    builtSub:"ගම්පොළ ඓතිහාසික නගරයේ සිට, නිවැරදි තොරතුරු දැන ගැනීමට අයිතියක් ඇති සෑම ගොවියෙකු, වෙළෙන්දෙකු, පාරිභෝගිකයෙකු, ශිෂ්‍යයෙකු මෙන්ම පර්යේෂකයෙකු වෙනුවෙන්ම උපරිම කැපවීමෙන් නිමවන ලදී.",
+    storyLabel:"අපේ කතාව",
+    story1:'<a href="https://www.youtube.com/@BusinessAdvisorLK" target="_blank" rel="noopener" style="color:var(--petrol);font-weight:700">Business Advisor LK</a> YouTube නාලිකාවේ වැඩසටහනක් නරඹමින් සිටියදී, ශ්‍රී ලංකා මහ බැංකුව දෛනිකව භාණ්ඩ මිල ගණන් PDF වාර්තා ලෙස නිකුත් කරන බව දැනගත්තෙමි.',
+    story2:'"මෙම වටිනා දත්ත සජීවීව ගොවි මහතුන්ට සහ වෙළෙන්දන්ට ලබා දීමට ක්‍රමයක් සකස් කළ හැකිද?" — එම සිතුවිල්ල TopGoviya.lk හි ආරම්භය විය.',
+    story3:"දින 11ක කෙටි කාලයක් තුළ මෙම Web App නිර්මාණය කරන ලදී. මාස 1, මාස 3 සහ දින 365ක මිල ඉතිහාසය, සජීවී දත්ත, ගොවි ලාභ ගණකය, වෙළෙන්දාගේ ලාභ විශ්ලේෂණය — සිංහල, දෙමළ සහ ඉංග්‍රීසි යන භාෂා තුනෙන්ම, සැමටම නොමිලේ.",
+    story4:'"2026 වෙසක් පොහෝ දිනක මෙවැනි සත්කාර්යයක් නිම කිරීමට ලැබීම මා ලැබූ ඉමහත් භාග්‍යයකි. මෙයින් අපේ රටේ ගොවි ජනතාවට සහ වෙළඳ ප්‍රජාවට විශාල සේවයක් සැලේවා!"',
+    storyQuote:"අපේ රටේ ගොවි ජනතාවට සහ වෙළෙන්දන්ට ඉදිරි දිනවලදී නිවැරදි දත්ත මත පදනම් වූ සාර්ථක තීරණ ගැනීමට මෙමඟින් ශක්තිය ලැබේවා! — රත්න, ගම්පොළ 🇱🇰",
+    s1icon:"📺 ප්‍රේරණය",s2icon:"💡 අදහස",s3icon:"🛠️ නිර්මාණය",s4icon:"🌸 ජනගත කිරීම — වෙසක් පෝය",
+    statLbl1:"භාණ්ඩ",statLbl2:"ඉතිහාසය",statLbl3:"භාෂා",statLbl4:"සදාකාලිකව නොමිලේ",
+    howLabel:"භාවිත මාර්ගෝපදේශය",howTitle:"TopGoviya.lk භාවිත කරන්නේ කෙසේද?",
+    howSub:"සියලු සේවාවන් සම්පූර්ණයෙන්ම නොමිලේ · ලොග් වීම් අවශ්‍ය නොවේ · ජංගම සහ පරිගණක",
+    f1title:"🎤 හඬ මඟින් සෙවීම",f1body:"මුල් පිටුවේ 🎤 සලකුණ ස්පර්ශ කරන්න → \"අමු මිරිස්\" පවසන්න → මිල දර්ශකය ස්වයංක්‍රීයව විවෘත වී ශබ්ද නඟා කියවනු ඇත!",
+    f2title:"🔊 මිල ශබ්ද නඟා කියවීම",f2body:"ඕනෑම භාණ්ඩයක මිල දර්ශකය ක්ලික් කර 🔊 බොත්තම ස්පර්ශ කරන්න. සිල්ලර සහ තොග මිල ශබ්ද නඟා කියවනු ලැබේ!",
+    f3title:"🌾 වත්මන් හොඳම භාණ්ඩය",f3body:"මුල් පිටුවේ 🟢 දැන් විකිණීමට සහ 🔴 දැන් මිලදී ගන්න වගු. ප්‍රධාන වෙළඳපොළ සිල්ලර මිල අනුව ස්වයංක්‍රීයව!",
+    f4title:"🧮 ලාභ ගණකය",f4body:"භාණ්ඩය ක්ලික් → 🧮 ගණකය → 🌾 ගොවියා / 💰 වෙළෙන්දා → කිලෝ සහ ප්‍රවාහන වියදම → හොඳම වෙළඳපොළ ස්වයංක්‍රීයව!",
+    f5title:"🧠 කෘතිම බුද්ධි තොරතුරු",f5body:"භාණ්ඩය ක්ලික් → 🧠 තොරතුරු කොටුව. මිල ඉහළ යාම්, කාලීන රටාවන්, පරතරය, මාස 3 ප්‍රවණතා! භාෂා 3කින්!",
+    f6title:"💡 මිල පරතරය සහ තොග මිල",f6body:"භාණ්ඩය ක්ලික් → 💡 පරතරය → සිල්ලර සහ තොග මිල අතර පරතරය ප්‍රස්ථාර ඇසුරින් බලාගත හැක!",
+    f7title:"📊 YoY සහ 2026 ප්‍රස්ථාර",f7body:"භාණ්ඩය ක්ලික් → 2026 (default) → මෙ වසරේ අඩුම සහ වැඩිම ක්ෂණිකව! 1M, 3M, 1Y, 3Y, All, YoY!",
+    f8title:"🗞️ ගොවි පුවත් බ්ලොග්",f8body:"පිටුවේ පහළ → 📝 ගොවි පුවත් → ලිපි කියවන්න. ▶️ ස්පර්ශ → භාෂා 3කින් ශබ්ද නඟා!",
+    f9title:"📸 ෂෙයාර් සහ WhatsApp",f9body:"භාණ්ඩය ක්ලික් → 📸 ඡායාරූප → WhatsApp හරහා! Facebook බොත්තමෙන් Facebook!",
+    quickLabel:"ඉක්මනින් ආරම්භ කරන්න",quickText:"🎤 සලකුණ ස්පර්ශ කරන්න → \"අමු මිරිස්\" → ශබ්ද නඟා! එපමණයි!",quickBtn:"🌾 දැන්ම අත්හදා බලන්න",
+  },
+  en:{
+    heroTitle:"Sri Lanka's<br><em>Agricultural Intelligence</em><br>Platform",
+    heroSub:"Helping farmers, traders, exporters, and agribusinesses make better decisions using real market data and agricultural intelligence.",
+    missionTitle:'"Turn agricultural data into better decisions."',
+    missionBody:"Every day, agricultural markets generate valuable information through price movements, supply trends, and market opportunities. However, this information is often difficult to access, analyze, and use effectively.<br><br>TopGoviya.lk was created to fill that gap.",
+    quote:'"Today\'s price is information. The trend is an opportunity. A decision made with data is profit."',
+    featLabel:"What We Provide",
+    dataLabel:"Our Data",
+    dataTitle:"Central Bank of Sri Lanka",
+    dataBody:"TopGoviya.lk price data is derived from publicly available reports, including the <strong>Central Bank of Sri Lanka (CBSL) Daily Price Reports</strong>.<br><br>TopGoviya.lk independently processes, analyzes, and visualizes this data to provide market insights and decision-support tools.",
+    indLabel:"Independence & Transparency",
+    indBody:"TopGoviya.lk is an independent agricultural intelligence platform. We are not affiliated with, endorsed by, or operated by the Central Bank of Sri Lanka or any government institution.<br><br>Prices shown are <strong>indicative only.</strong> Decisions are your responsibility.",
+    visLabel:"Our Vision",
+    visText:'"To become Sri Lanka\'s most trusted agricultural market intelligence platform."',
+    builtTitle:"Built in Gampola 🇱🇰 — For Sri Lankan Farmers",
+    builtSub:"Proudly built with love in Gampola, Sri Lanka — for every farmer, trader, and consumer who deserves better market information.",
+    storyLabel:"Our Story",
+    s1icon:"📺 Inspiration",s2icon:"💡 Idea",s3icon:"🛠️ Build",s4icon:"🌸 Launch — Vesak Poya",
+    story1:'Watching a program on the <a href="https://www.youtube.com/@BusinessAdvisorLK" target="_blank" rel="noopener" style="color:var(--petrol);font-weight:700">Business Advisor LK</a> YouTube channel — discovered that the Central Bank of Sri Lanka publishes daily commodity prices as PDF reports.',
+    story2:'"Could this data be made more accessible — live — for farmers and traders?" That question became the foundation of TopGoviya.lk.',
+    story3:'In just 11 days — built a web app with 1M · 3M · 365-day price history, live data, farmer profit calculator, trader margin analysis — in Sinhala, Tamil, and English — completely free.',
+    story4:'Launched on Vesak Poya Day 2026. "I am incredibly happy to have been able to do this on Vesak Day. May this bring great benefit to farmers and traders."',
+    storyQuote:'"May farmers and traders be empowered to make data-driven decisions in the days ahead." — Rathna, Gampola 🇱🇰',
+    s1icon:"📺 Inspiration",s2icon:"💡 Idea",s3icon:"🛠️ Build",s4icon:"🌸 Launch — Vesak Poya",
+    statLbl1:"Commodities",statLbl2:"History",statLbl3:"Languages",statLbl4:"Always Free",
+    howLabel:"How to Use Guide",howTitle:"How to Use TopGoviya.lk?",
+    howSub:"All features free · No login required · Mobile & Desktop",
+    f1title:"🎤 Voice Search",f1body:"Tap the 🎤 bar → Say 'Green Chilli' → Card opens automatically and reads price aloud!",
+    f2title:"🔊 Price Reading",f2body:"Click any card → Tap 🔊 → Retail + Wholesale prices read aloud in 3 languages!",
+    f3title:"🌾 Best Crop Right Now",f3body:"Home page → 🟢 Sell Now + 🔴 Buy Now tables. Auto-ranked by primary market price!",
+    f4title:"🧮 Profit Calculator",f4body:"Click card → 🧮 Calculator → 🌾 Farmer / 💰 Trader → Enter kg and transport cost → Best market auto-recommended!",
+    f5title:"🧠 AI Insights",f5body:"Click card → 🧠 Insight box. Price spike, seasonal pattern, market gap, 3-month trend. 3 languages!",
+    f6title:"💡 Gap & Wholesale Analysis",f6body:"Click card → 💡 Gap → Retail vs Wholesale gap chart. Calculate transport opportunities!",
+    f7title:"📊 YoY & 2026 Charts",f7body:"Click card → 2026 (default) → This year Low & High instantly! 1M, 3M, 1Y, 3Y, All, YoY!",
+    f8title:"🗞️ Govi Puwath Blog",f8body:"Footer → 📝 Blog → Read articles. Tap ▶️ → Article read aloud in 3 languages!",
+    f9title:"📸 Share & WhatsApp",f9body:"Click card → 📸 Share as Image → PNG → WhatsApp! Facebook button → Direct Facebook share!",
+    quickLabel:"Quick Start",quickText:"🎤 Tap mic → Say 'Green Chilli' → Card opens and reads price aloud! That's it!",quickBtn:"🌾 Try Now",
+  },
+  ta:{
+    heroTitle:"இலங்கையின்<br><em>விவசாய புத்திசாலி</em><br>தளம்",
+    heroSub:"விவசாயிகள், வியாபாரிகள், ஏற்றுமதியாளர்களுக்கு — உண்மையான சந்தை தரவைப் பயன்படுத்தி சிறந்த முடிவுகள் எடுக்க.",
+    missionTitle:'"விவசாய தரவை சிறந்த முடிவுகளாக மாற்றுவது."',
+    missionBody:"ஒவ்வொரு நாளும் விவசாய சந்தைகள் விலை அசைவுகள், விநியோக போக்குகள் மூலம் மதிப்புமிக்க தகவல்களை உருவாக்குகின்றன. ஆனால் இந்த தகவல்களை அணுகுவது கடினமாக உள்ளது.<br><br>TopGoviya.lk அந்த இடைவெளியை நிரப்ப உருவாக்கப்பட்டது.",
+    quote:'"இன்றைய விலை ஒரு தகவல். போக்கு ஒரு வாய்ப்பு. தரவுகளுடன் எடுக்கப்பட்ட முடிவு ஒரு லாபம்."',
+    featLabel:"நாங்கள் வழங்குவது",featLabelSub:"சேவைகள்",
+    dataLabel:"தரவு மூலம் மற்றும் சுதந்திரம்",
+    dataTitle:"இலங்கை மத்திய வங்கி",
+    dataBody:"TopGoviya.lk விலை தரவு <strong>CBSL Daily Price Reports</strong> உட்பட பொதுவில் கிடைக்கும் அறிக்கைகளிலிருந்து பெறப்படுகிறது.<br><br>TopGoviya.lk சுயாதீனமாக இந்த தரவை செயலாக்கி, பகுப்பாய்வு செய்து வழங்குகிறது.",
+    indLabel:"சுதந்திரம் மற்றும் வெளிப்படைத்தன்மை",
+    indNotice:"⚠️ முக்கிய அறிவிப்பு:",
+    indBody:"TopGoviya.lk ஒரு சுயாதீன விவசாய தகவல் தளம். CBSL அல்லது எந்த அரசு நிறுவனத்துடனும் தொடர்புடையதல்ல.<br><br>விலைகள் <strong>வழிகாட்டல் மட்டுமே.</strong> உங்கள் முடிவுகளுக்கு நீங்களே பொறுப்பாவீர்கள்.",
+    visLabel:"எமது தொலைநோக்கு",
+    visText:'"இலங்கையின் மிகவும் நம்பகமான விவசாய சந்தை புத்திசாலி தளமாக மாறுவது."',
+    builtTitle:"கம்பொளையில் கட்டப்பட்டது 🇱🇰 — இலங்கை விவசாயிகளுக்காக",
+    builtSub:"கம்பொளை ஐதிகாசிக நகரில் இருந்து — சரியான தகவலுக்கு உரிமை கொண்ட ஒவ்வொரு விவசாயி, வியாபாரி, நுகர்வோர், மாணவர் மற்றும் ஆராய்ச்சியாளருக்காக உருவாக்கப்பட்டது.",
+    storyLabel:"எமது கதை",
+    s1icon:"📺 தூண்டுதல்",s2icon:"💡 யோசனை",s3icon:"🛠️ உருவாக்கம்",s4icon:"🌸 துவக்கம்",
+    story1:'<a href="https://www.youtube.com/@BusinessAdvisorLK" target="_blank" rel="noopener" style="color:var(--petrol);font-weight:700">Business Advisor LK</a> YouTube சேனலில் ஒரு நிகழ்ச்சியை பார்த்தபோது — இலங்கை மத்திய வங்கி தினசரி PDF அறிக்கைகளை வெளியிடுகிறது என்பதை கண்டறிந்தேன்.',
+    story2:'"இந்த தரவை விவசாயிகளுக்கும் வியாபாரிகளுக்கும் நேரடியாக கிடைக்கச் செய்ய முடியுமா?" — அந்த கேள்வியே TopGoviya.lk இன் அடிப்படை.',
+    story3:'11 நாட்களில் — நேரடி தரவு, விவசாயி லாப கணிப்பி, வியாபாரி வரம்பு பகுப்பாய்வு — சிங்களம், தமிழ், ஆங்கிலம் — இலவசமாக.',
+    story4:'2026 வெசாக் போய நாளில் துவக்கப்பட்டது — வெசாக் பூர்ணிமை. "இந்த புனித நாளில் இதை செய்ய கிடைத்தமைக்கு மிகவும் மகிழ்ச்சியாக உள்ளது. இது விவசாயிகளுக்கும் வியாபாரிகளுக்கும் பெரும் பயனளிக்கட்டும்!"',
+    storyQuote:'"விவசாயிகளும் வியாபாரிகளும் தரவு அடிப்படையிலான முடிவுகள் எடுக்க வல்லவர்களாவார்களாக." — ரத்ன, கம்பொளை 🇱🇰',
+    statLbl1:"பொருட்கள்",statLbl2:"வரலாறு",statLbl3:"மொழிகள்",statLbl4:"எப்போதும் இலவசம்",
+    howLabel:"பயன்பாட்டு வழிகாட்டி",
+    howTitle:"TopGoviya.lk எவ்வாறு பயன்படுத்துவது?",
+    howSub:"அனைத்து சேவைகளும் இலவசம் · உள்நுழைவு தேவையில்லை · மொபைல் & கணினி",
+    f1title:"🎤 குரல் தேடல்",
+    f1body:"முகப்பு பக்கத்தில் 🎤 அடையாளத்தை தொடவும் → 'பச்சை மிளகாய்' சொல்லுங்கள் → அட்டை தானாக திறந்து விலை படிக்கும்!",
+    f2title:"🔊 விலை ஒலி வாசிப்பு",
+    f2body:"எந்த பொருளின் அட்டையையும் கிளிக் செய்து 🔊 பொத்தானை தொடவும். சில்லறை + மொத்த விலைகள் ஒலியாக படிக்கும்!",
+    f3title:"🌾 இப்போது சிறந்த பயிர்",
+    f3body:"முகப்பு பக்கம் → 🟢 இப்போது விற்க + 🔴 இப்போது வாங்க. முதன்மை சந்தை சில்லறை விலை படி தானாக வரிசைப்படுத்தப்படும்!",
+    f4title:"🧮 லாப கணிப்பி",
+    f4body:"அட்டை கிளிக் → 🧮 கணிப்பி → 🌾 விவசாயி / 💰 வியாபாரி → கிலோ மற்றும் போக்குவரத்து செலவு → சிறந்த சந்தை தானாக பரிந்துரை!",
+    f5title:"🧠 AI நுண்ணறிவு தகவல்கள்",
+    f5body:"அட்டை கிளிக் → 🧠 தகவல் பெட்டி. விலை உயர்வு, பருவகால வடிவம், சந்தை இடைவெளி, 3 மாத போக்கு — தானியங்கி பகுப்பாய்வு! 3 மொழிகளில்!",
+    f6title:"💡 விலை இடைவெளி மற்றும் மொத்த விலை",
+    f6body:"அட்டை கிளிக் → 💡 இடைவெளி பொத்தானை தொடவும். சில்லறை மற்றும் மொத்த விலை இடைவெளியை வரைபடமாக காணலாம். போக்குவரத்து வாய்ப்புகள் கணக்கிட!",
+    f7title:"📊 YoY மற்றும் 2026 வரைபடங்கள்",
+    f7body:"அட்டை கிளிக் → 2026 (இயல்பு) → இந்த ஆண்டின் குறைந்தது & அதிகபட்சம் உடனடியாக! 1M, 3M, 1Y, 3Y, All, YoY விருப்பங்கள்!",
+    f8title:"🗞️ கோவி புவத் வலைப்பூ",
+    f8body:"பக்கத்தின் கீழே → 📝 வலைப்பூ கிளிக் → கட்டுரைகள் படிக்கவும். ▶️ பொத்தானை தொட்டால் கட்டுரை 3 மொழிகளில் ஒலியாக படிக்கும்!",
+    f9title:"📸 பகிர்வு & WhatsApp",
+    f9body:"அட்டை கிளிக் → 📸 படமாக பகிர் → PNG பதிவிறக்கம் → WhatsApp வழியாக பகிரவும்! Facebook பொத்தானில் நேரடியாக Facebook!",
+    quickLabel:"விரைவான தொடக்கம்",
+    quickText:"🎤 அடையாளத்தை தொடவும் → 'பச்சை மிளகாய்' சொல்லுங்கள் → அட்டை திறந்து விலை படிக்கும்! அவ்வளவுதான்!",
+    quickBtn:"🌾 இப்போது முயற்சிக்கவும்",
+  }
+};
+
+/* Add full Tamil features to L object */
+const FEATS={
+  si:{
+    f1t:"දෛනික වෙළඳ මිල",f1b:"ශ්‍රී ලංකාවේ ප්‍රධාන වෙළඳපොළ 3ක් — දඹුල්ල, පිටකොටුව, නාරාහේන්පිට — සෑම දිනකම.",
+    f2t:"ගොවි ලාභ ගණකය",f2b:"ඔබේ අස්වැන්නෙන් ලැබෙන ආදායම දැනගන්න — ප්‍රවාහන හා නිෂ්පාදන වියදම් අඩු කර හොඳම වෙළඳපොළ නිර්දේශ කරයි.",
+    f3t:"වෙළෙන්දා ලාභ ගණකය",f3b:"තොග මිලට ගෙන සිල්ලර මිලට විකිණීමේ ලාභය — ප්‍රවාහන වියදම අඩු කර — ශුද්ධ ලාභය ගණනය කරයි.",
+    f4t:"වසර 4ක ඉතිහාසය",f4b:"1M · 3M · 1Y · 3Y · 4Y · All · YoY — ඕනෑම කාල සීමාව chart කරන්න.",
+    f5t:"AI-Powered Insights",f5b:"මිල හදිසි ඉහළ යාම් පිළිබඳ අනතුරු ඇඟවීම් — වාර්ෂික රටා — මාස 3ක ගතිය — වෙළඳපොළ ගැප් විශ්ලේෂණය.",
+    f6t:"Gap හා අවස්ථා Chart",f6b:"සිල්ලර සහ තොග මිල අතර වෙනස — පොහොය දින indicators — දින 30ක දර්ශනය.",
+    f7t:"වාර්ෂික මිල සැසඳීම",f7b:"2023-2026 මාසික සාමාන්‍ය මිල — ගෙදරදී ගැනීමට හා වගා කිරීමට හොඳම කාලය දැනගන්න.",
+    f8t:"සිංහල | தமிழ் | English",f8b:"සම්පූර්ණ platform — භාෂා 3කින் — ඕනෑම Sri Lankan use කරන්න.",
+    f9t:"🎤 Voice Search",f9b:"Say a crop name → card auto-opens! First agricultural voice search in Sri Lanka! Sinhala · Tamil · English.",
+    f10t:"🔊 Price Reading",f10b:"Click 🔊 on any card → Retail price, Wholesale price, % change read aloud! Have a great day!",
+    navLink:"← සජීවී මිල",badge:"දිනපතා live data — නිදහස් — login නැහැ",
+    tagline:"📊 දත්තය බලලා තීරණ ගන්න",missionLabel:"අපේ මෙහෙවර",
+    footerTag:"🌾 ශ්‍රී ලංකාවේ කෘෂිකාර්මික Intelligence Platform",
+    howLabel:"භාවිත මාර්ගෝපදේශය",
+    howTitle:"TopGoviya.lk භාවිත කරන්නේ කෙසේද?",
+    howSub:"සියලු සේවාවන් සම්පූර්ණයෙන්ම නොමිලේ · ලොග් වීම් අවශ්‍ය නොවේ · ජංගම දුරකථන සහ පරිගණක",
+    f1title:"🎤 හඬ මඟින් සෙවීම",
+    f1body:"🎤 bar tap → \"අමු මිරිස්\" කියන්න → Card open + price read! Mobile සහ Desktop.",
+    f2title:"🔊 මිල ශබ්ද නඟා කියවීම",
+    f2body:"ඕනෑම භාණ්ඩයක මිල දර්ශකය ක්ලික් කර 🔊 බොත්තම ස්පර්ශ කරන්න. සිල්ලර සහ තොග මිල ගණන් ශබ්ද නඟා කියවනු ලැබේ!",
+    f3title:"🌾 වත්මන් හොඳම භාණ්ඩය",
+    f3body:"මුල් පිටුවේ 🟢 දැන් විකිණීමට සහ 🔴 දැන් මිලදී ගන්න වගු නිරීක්ෂණය කරන්න. ප්‍රධාන වෙළඳපොළ සිල්ලර මිල අනුව ස්වයංක්‍රීයව පෙළගස්වා ඇත!",
+    f4title:"🧮 ලාභ ගණකය",
+    f4body:"භාණ්ඩය ක්ලික් → 🧮 ගණකය ස්පර්ශ → 🌾 ගොවියා හෝ 💰 වෙළෙන්දා මාදිලිය තෝරන්න → කිලෝ ගණන සහ ප්‍රවාහන වියදම ඇතුළත් කරන්න → ඔබට වඩාත් වාසිදායක වෙළඳපොළ ස්වයංක්‍රීයව නිර්දේශ කෙරේ!",
+    f5title:"🧠 කෘතිම බුද්ධි තොරතුරු",
+    f5body:"Card → 🧠 තොරතුරු box. Price spike, seasonal pattern, market gap, 3-month trend. 3 languages!",
+    f6title:"💡 මිල පරතරය සහ තොග මිල",
+    f6body:"භාණ්ඩය ක්ලික් → 💡 පරතරය බොත්තම ස්පර්ශ කරන්න. සිල්ලර සහ තොග මිල අතර පරතරය ප්‍රස්ථාර ඇසුරින් බලාගත හැක. ප්‍රවාහන අවස්ථා ගණනය කිරීමට!",
+    f7title:"📊 YoY සහ 2026 ප්‍රස්ථාර",
+    f7body:"භාණ්ඩය ක්ලික් → 2026 (default) → මෙ වසරේ අඩුම සහ වැඩිම මිල ගණන් ක්ෂණිකව! 1M, 3M, 1Y, 3Y, All, YoY විකල්ප ද ඇත!",
+    f8title:"🗞️ ගොවි පුවත් බ්ලොග් අඩවිය",
+    f8body:"Footer → 📝 ගොවි පුවත් → Articles. ▶️ tap → 3 languages හඬින් article කියවනවා!",
+    f9title:"📸 ෂෙයාර් කිරීම සහ WhatsApp",
+    f9body:"භාණ්ඩය ක්ලික් → 📸 Share as Image → PNG ඡායාරූප ලෙස WhatsApp හරහා බෙදාගන්න! Facebook බොත්තමෙන් සෘජුවම Facebook වෙතද යොමු කළ හැක!",
+    quickLabel:"ඉක්මනින් ආරම්භ කරන්න",
+    quickText:"🎤 මයික්‍රෆෝන සලකුණ ස්පර්ශ කරන්න → \"අමු මිරිස්\" පවසන්න → මිල දර්ශකය විවෘත වී, ශබ්ද නඟා කියවනු ඇත! එපමණයි!",
+    quickBtn:"🌾 දැන්ම අත්හදා බලන්න",
+    statLbl1:"භාණ්ඩ",statLbl2:"ඉතිහාසය",statLbl3:"භාෂා",statLbl4:"සදාකාලිකව නොමිලේ"
+  },
+  en:{
+    f1t:"Daily Market Prices",f1b:"Sri Lanka's 3 major markets — Dambulla, Pettah, Narahenpita — every day.",
+    f2t:"Farmer Profit Calculator",f2b:"Enter harvest kg, transport cost — best market auto-recommended.",
+    f3t:"Trader Margin Calculator",f3b:"Wholesale to retail — transport deducted — net profit per market instantly calculated.",
+    f4t:"4 Years of History",f4b:"1M · 3M · 1Y · 3Y · 4Y · All · YoY — chart any time range.",
+    f5t:"AI-Powered Insights",f5b:"Price spike alerts, seasonal patterns, 3-month trend analysis, and market gap intelligence.",
+    f6t:"Gap & Opportunity Chart",f6b:"Retail vs Wholesale shaded chart — Poya day markers — 30-day view of market margins.",
+    f7t:"Year-over-Year Analysis",f7b:"2023-2026 monthly averages — discover the best time to buy or grow each commodity.",
+    f8t:"සිංහල | தமிழ் | English",f8b:"Full platform in 3 languages — any Sri Lankan can use it.",
+    f9t:"Voice Search",f9b:"Speak a commodity name — card auto-opens! Sri Lanka's first agricultural voice search feature!",
+    f10t:"Price Read Aloud",f10b:"🔊 Read button reads full price card — retail, wholesale, % change, all markets. Obata Jayawewa!",
+    navLink:"← Live Prices",badge:"Daily live data — Free — No login required",
+    tagline:"📊 Data Balala Theeranaya Gananna",missionLabel:"Our Mission",
+    footerTag:"🌾 Sri Lanka's Agricultural Intelligence Platform",
+    howLabel:"How to Use Guide",
+    howTitle:"How to Use TopGoviya.lk?",
+    howSub:"All features free · No login · Mobile & Desktop",
+    f1title:"🎤 Voice Search",
+    f1body:"Tap the 🎤 bar → Say \"Green Chilli\" → Card opens + price read automatically!",
+    f2title:"🔊 මිල ශබ්ද නඟා කියවීම",
+    f2body:"Click any card → Tap 🔊 → Retail + Wholesale prices read in Sinhala, Tamil or English!",
+    f3title:"🌾 Best Crop Right Now",
+    f3body:"Home page → 🟢 Sell Now + 🔴 Buy Now tables. Auto-ranked by primary market retail price!",
+    f4title:"🧮 Profit Calculator",
+    f4body:"Card → 🧮 Calculator → Select 🌾 Farmer or 💰 Trader → Enter kg, cost → Best market auto-recommended!",
+    f5title:"🧠 කෘතිම බුද්ධි තොරතුරු",
+    f5body:"Card → 🧠 Insight box. Price spike, seasonal pattern, market gap, 3-month trend. 3 languages!",
+    f6title:"💡 මිල පරතරය සහ තොග මිල",
+    f6body:"Card → 💡 Gap button → Retail vs Wholesale gap chart. Perfect for trader transport opportunity!",
+    f7title:"📊 YoY සහ 2026 ප්‍රස්ථාර",
+    f7body:"Card → 2026 button (default) → 2026 Low & High instantly. Try 1M, 3M, 1Y, YoY too!",
+    f8title:"🗞️ Govi Puwath Blog",
+    f8body:"Footer → 📝 Blog → Read articles. Tap ▶️ → Article read aloud in 3 languages!",
+    f9title:"📸 ෂෙයාර් කිරීම සහ WhatsApp",
+    f9body:"Card → 📸 Share as Image → PNG download → WhatsApp share! TopGoviya.lk brand visible!",
+    quickLabel:"Quick Start",
+    quickText:"🎤 Tap voice bar → Say \"Green Chilli\" → Card opens + Read! That's it!",
+    quickBtn:"🌾 Try Now",
+    statLbl1:"Commodities",statLbl2:"History",statLbl3:"Languages",statLbl4:"Always Free"
+  },
+  ta:{
+    f1t:"தினசரி சந்தை விலைகள்",f1b:"இலங்கையின் முக்கிய 3 சந்தைகள் — தம்புள்ள, பேட்டை, நாரஹேன்பிட்ட — தினமும்.",
+    f2t:"விவசாயி லாப கணிப்பி",f2b:"மகசூல் kg, போக்குவரத்து செலவு உள்ளிட்டு — சிறந்த சந்தையை தானாக பரிந்துரைக்கும்.",
+    f3t:"வியாபாரி வரம்பு கணிப்பி",f3b:"மொத்தம் முதல் சில்லறை வரை — போக்குவரத்து கழித்து — நிகர லாபம் உடனடியாக கணக்கிடப்படும்.",
+    f4t:"4 ஆண்டுகள் வரலாறு",f4b:"1M · 3M · 1Y · 3Y · 4Y · All · YoY — எந்த நேர வரம்பையும் வரைபடமாக காட்டலாம்.",
+    f5t:"AI-இயக்கும் நுண்ணறிவு",f5b:"விலை உயர்வு எச்சரிக்கைகள், பருவகால வடிவங்கள், 3M போக்குகள், சந்தை இடைவெளி பகுப்பாய்வு.",
+    f6t:"இடைவெளி & வாய்ப்பு வரைபடம்",f6b:"சில்லறை vs மொத்த நிழல் வரைபடம் — பொய நாள் குறிப்பான்கள் — 30 நாள் காட்சி.",
+    f7t:"YoY பருவகால பகுப்பாய்வு",f7b:"2022-2026 மாதாந்திர சராசரிகள் — பருவகால வாங்குதல் மற்றும் வளர்ப்பு வடிவங்கள்.",
+    f8t:"සිංහල | தமிழ் | English",f8b:"முழு தளமும் 3 மொழிகளில் — எந்த இலங்கையரும் பயன்படுத்தலாம்.",
+    f9t:"குரல் தேடல்",f9b:"பொருளின் பெயரை சொல்லுங்கள் → அட்டை தானாக திறக்கும்! இலங்கையின் முதல் விவசாய குரல் தேடல்!",
+    f10t:"விலை வாசிப்பு",f10b:"🔊 பொத்தான் அழுத்தினால் முழு அட்டையும் வாசிக்கும்! சில்லறை, மொத்த விலை, % மாற்றம் அனைத்தும்!",
+    navLink:"← நேரடி விலைகள்",badge:"தினசரி நேரடி தரவு — இலவசம் — உள்நுழைவு தேவையில்லை",
+    tagline:"📊 தரவு பார்த்து முடிவெடுங்கள்",missionLabel:"எமது நோக்கம்",
+    footerTag:"🌾 இலங்கையின் விவசாய புத்திசாலி தளம்",
+    howLabel:"பயன்பாட்டு வழிகாட்டி",
+    howTitle:"TopGoviya.lk எவ்வாறு பயன்படுத்துவது?",
+    howSub:"அனைத்து அம்சங்களும் இலவசம் · உள்நுழைவு தேவையில்லை · மொபைல் & டெஸ்க்டாப்",
+    f1title:"🎤 குரல் தேடல் (Voice Search)",
+    f1body:"🎤 பட்டியை தட்டவும் → \"பச்சை மிளகாய்\" சொல்லுங்கள் → அட்டை திறந்து விலை படிக்கும்!",
+    f2title:"🔊 அட்டை வாசிப்பு",
+    f2body:"அட்டையை கிளிக் → 🔊 தட்டவும் → சில்லறை + மொத்த விலைகள் சிங்களம்/தமிழ்/ஆங்கிலத்தில்!",
+    f3title:"🌾 இப்போது சிறந்த பயிர்",
+    f3body:"முகப்பு → 🟢 இப்போது விற்க + 🔴 இப்போது வாங்க. முதன்மை சந்தை விலை படி தானாக வரிசைப்படுத்தப்படும்!",
+    f4title:"🧮 லாப கணிப்பி",
+    f4body:"அட்டை → 🧮 கணிப்பி → 🌾 விவசாயி / 💰 வியாபாரி தேர்வு → kg, செலவு → சிறந்த சந்தை பரிந்துரை!",
+    f5title:"🧠 AI நுண்ணறிவு",
+    f5body:"அட்டை → 🧠 நுண்ணறிவு பெட்டி. விலை உயர்வு, பருவகால வடிவம், சந்தை இடைவெளி. 3 மொழிகள்!",
+    f6title:"💡 இடைவெளி & மொத்த விலை",
+    f6body:"அட்டை → 💡 இடைவெளி → சில்லறை vs மொத்த விலை வரைபடம். போக்குவரத்து வாய்ப்பு கணக்கிட!",
+    f7title:"📊 YoY & 2026 வரைபடம்",
+    f7body:"அட்டை → 2026 பொத்தான் (இயல்பு) → 2026 குறைந்தது & அதிகபட்சம். 1M, 3M, 1Y, YoY!",
+    f8title:"🗞️ கோவி புவத் Blog",
+    f8body:"Footer → 📝 Blog → கட்டுரைகள். ▶️ தட்டவும் → 3 மொழிகளில் கட்டுரை படிக்கும்!",
+    f9title:"📸 பகிர் & WhatsApp",
+    f9body:"அட்டை → 📸 PNG பதிவிறக்கம் → WhatsApp பகிர்! TopGoviya.lk பிராண்ட் தெரியும் — இலவச மார்க்கெட்டிங்!",
+    quickLabel:"விரைவான தொடக்கம்",
+    quickText:"🎤 குரல் பட்டையை தட்டவும் → \"பச்சை மிளகாய்\" சொல்லுங்கள் → அட்டை திறந்து படிக்கும்!",
+    quickBtn:"🌾 இப்போது முயற்சிக்கவும"
+  }
+};
+
+function setLang(l){
+  const d=L[l];if(!d)return;
+  const f=FEATS[l]||FEATS.en;
+  document.querySelectorAll(".lang-bar button").forEach(b=>{
+    b.classList.toggle("on",b.textContent.trim()===({si:"සිංහල",en:"English",ta:"தமிழ்"}[l]));
+  });
+  const set=(id,html)=>{const e=document.getElementById(id);if(e)e.innerHTML=html;};
+  /* Main content */
+  set("heroTitle",d.heroTitle); set("heroSub",d.heroSub);
+  set("missionTitle",d.missionTitle); set("missionBody",d.missionBody);
+  set("quoteText",d.quote);
+  set("featLabel",d.featLabel);
+  set("dataLabel",d.dataLabel); set("dataTitle",d.dataTitle); set("dataBody",d.dataBody);
+  set("indLabel",d.indLabel); set("indBody",d.indBody);
+  set("visLabel",d.visLabel); set("visText",d.visText);
+  set("builtTitle",d.builtTitle); set("builtSub",d.builtSub);
+  /* Story section */
+  if(d.storyLabel) set("storyLabel",d.storyLabel);
+  if(d.story1) set("story1",d.story1);
+  if(d.story2) set("story2",d.story2);
+  if(d.story3) set("story3",d.story3);
+  if(d.story4) set("story4",d.story4);
+  if(d.storyQuote) set("storyQuote",d.storyQuote);
+  /* Features */
+  ["f1t","f1b","f2t","f2b","f3t","f3b","f4t","f4b",
+   "f5t","f5b","f6t","f6b","f7t","f7b","f8t","f8b"].forEach(id=>set(id,f[id]||""));
+  /* Nav & UI */
+  set("navLink",f.navLink||"← Live Prices");
+  set("heroBadge",f.badge||"");
+  set("heroTagline",f.tagline||"");
+  set("missionLabel",f.missionLabel||"");
+  /* How to Use section */
+  if(d.howLabel){
+    set("howLabel",d.howLabel); set("howTitle",d.howTitle); set("howSub",d.howSub);
+    set("f1title",d.f1title); set("f1body",d.f1body);
+    set("f2title",d.f2title); set("f2body",d.f2body);
+    set("f3title",d.f3title); set("f3body",d.f3body);
+    set("f4title",d.f4title); set("f4body",d.f4body);
+    set("f5title",d.f5title); set("f5body",d.f5body);
+    set("f6title",d.f6title); set("f6body",d.f6body);
+    set("f7title",d.f7title); set("f7body",d.f7body);
+    set("f8title",d.f8title); set("f8body",d.f8body);
+    set("f9title",d.f9title); set("f9body",d.f9body);
+    if(f&&f.f9t){set("f9t",f.f9t);set("f9b",f.f9b);}
+    if(f&&f.f10t){set("f10t",f.f10t);set("f10b",f.f10b);}
+    /* Stats */
+    if(d.statLbl1){set("statLbl1",d.statLbl1);set("statLbl2",d.statLbl2);set("statLbl3",d.statLbl3);set("statLbl4",d.statLbl4);}
+    /* How to Use TA */
+    if(d.howLabel){set("howLabel",d.howLabel);set("howTitle",d.howTitle);set("howSub",d.howSub);}
+    if(d.f1title){set("f1title",d.f1title);set("f1body",d.f1body);}
+    if(d.f2title){set("f2title",d.f2title);set("f2body",d.f2body);}
+    if(d.f3title){set("f3title",d.f3title);set("f3body",d.f3body);}
+    if(d.f4title){set("f4title",d.f4title);set("f4body",d.f4body);}
+    if(d.f5title){set("f5title",d.f5title);set("f5body",d.f5body);}
+    if(d.f6title){set("f6title",d.f6title);set("f6body",d.f6body);}
+    if(d.f7title){set("f7title",d.f7title);set("f7body",d.f7body);}
+    if(d.f8title){set("f8title",d.f8title);set("f8body",d.f8body);}
+    if(d.f9title){set("f9title",d.f9title);set("f9body",d.f9body);}
+    if(d.quickLabel){set("quickLabel",d.quickLabel);set("quickText",d.quickText);set("quickBtn",d.quickBtn);}
+    set("quickLabel",d.quickLabel); set("quickText",d.quickText); set("quickBtn",d.quickBtn);
+  }
+}
+setLang("si");
+</script>
+</body>
+</html>
