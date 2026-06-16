@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """
 Daily updater for HARTI Wholesale Price data.
-Fetches PDFs from Hector Kobbekaduwa Agrarian Research and Training Institute
+Only downloads last 3 years (2023-2026) to keep it fast!
 https://www.harti.gov.lk/daily-price.php
-Builds harti_data.json for wholesale.html
 """
 
 import os, re, json, glob, datetime, sys
@@ -16,551 +15,441 @@ LISTING_URL = "https://www.harti.gov.lk/daily-price.php"
 BASE_URL    = "https://www.harti.gov.lk/"
 PDF_DIR     = "harti_pdfs"
 OUT_FILE    = "harti_data.json"
-HEADERS     = {
-    "User-Agent": "Mozilla/5.0 (Lanka Price Monitor data updater; topgoviya.lk)",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-}
+HEADERS     = {"User-Agent": "Mozilla/5.0 (Lanka Price Monitor; topgoviya.lk)"}
 
-# ── 10 wholesale markets (column order in PDF page 2) ──
+# ── 3 year limit ──
+CUTOFF_YEAR = datetime.date.today().year - 3  # 2023
+
+# ── 10 wholesale markets ──
 MARKETS = [
-    "Peliyagoda", "Kandy", "Dambulla", "Meegoda",
-    "Norochchole", "Thambuththegama", "Keppetipola",
-    "Nuwaraeliya", "Bandarawela", "Veyangoda"
+    "Peliyagoda","Kandy","Dambulla","Meegoda",
+    "Norochchole","Thambuththegama","Keppetipola",
+    "Nuwaraeliya","Bandarawela","Veyangoda"
 ]
 
-# ── Commodity categories ──
 CATEGORIES = {
     "Up Country Vegetables": [
-        "Beans", "Carrot", "Leeks", "Beetroot", "Beetroot (N.Eliya)",
-        "Knolkhol", "Raddish", "Cabbage (N.Eliya)", "Cabbage (Kandy)", "Tomato"
+        "Beans","Carrot","Leeks","Beetroot","Beetroot (N.Eliya)",
+        "Knolkhol","Raddish","Cabbage (N.Eliya)","Cabbage (Kandy)","Tomato"
     ],
     "Low Country Vegetables": [
-        "Ladies Fingers", "Brinjals", "Capsicum", "Pumpkin", "Cucumber",
-        "Bitter Gourd", "Snake Gourd", "Drumstick", "Luffa", "Long Beans",
-        "Ash Plantains", "Green Chillies", "Lime", "Sweet Potato",
-        "Manioc", "Eggplant"
+        "Ladies Fingers","Brinjals","Capsicum","Pumpkin","Cucumber",
+        "Bitter Gourd","Snake Gourd","Drumstick","Luffa","Long Beans",
+        "Ash Plantains","Green Chillies","Lime","Sweet Potato","Manioc","Eggplant"
     ],
     "Potatoes & Onions": [
-        "Potato (Imported)", "Potato (Welimada)", "Potato (N.Eliya)",
-        "Big Onion (Imported)"
+        "Potato (Imported)","Potato (Welimada)","Potato (N.Eliya)","Big Onion (Imported)"
     ],
     "Fruits & Banana": [
-        "Banana Ambul", "Banana Kolikuttu", "Banana Seeni",
-        "Papaya", "Pineapple (Large)", "Avocado"
+        "Banana Ambul","Banana Kolikuttu","Banana Seeni","Papaya","Pineapple (Large)","Avocado"
     ]
 }
 
-RICE_CATEGORIES = {
-    "Samba 1": "Rice", "Samba 2": "Rice", "Keeri Samba": "Rice",
-    "Nadu 1": "Rice", "Nadu 2": "Rice", "Raw Red": "Rice", "Raw White": "Rice",
-    "Green Gram": "Pulses & Essentials", "Cowpea": "Pulses & Essentials",
-    "Red Dhal": "Pulses & Essentials", "Dried Chillies (Imp)": "Pulses & Essentials",
-    "Sugar (White)": "Pulses & Essentials", "Wheat Flour": "Pulses & Essentials",
-    "Eggs (Brown)": "Eggs", "Eggs (White)": "Eggs",
+RICE_CAT = {
+    "Samba 1":"Rice","Samba 2":"Rice","Keeri Samba":"Rice",
+    "Nadu 1":"Rice","Nadu 2":"Rice","Raw Red":"Rice","Raw White":"Rice",
+    "Green Gram":"Pulses & Essentials","Cowpea":"Pulses & Essentials",
+    "Red Dhal":"Pulses & Essentials","Dried Chillies (Imp)":"Pulses & Essentials",
+    "Sugar (White)":"Pulses & Essentials","Wheat Flour":"Pulses & Essentials",
+    "Eggs (Brown)":"Eggs","Eggs (White)":"Eggs",
 }
 
-# ── Commodity name mapping (PDF text → standard name) ──
-NAME_MAP = {
-    "Beans": "Beans", "Carrot": "Carrot", "Leeks": "Leeks",
-    "Beet root": "Beetroot", "Beet root (N Eliya)": "Beetroot (N.Eliya)",
-    "Beet root (N.Eliya)": "Beetroot (N.Eliya)",
-    "Knolkhol": "Knolkhol", "Raddish": "Raddish",
-    "Cabbage (N'Eliya)": "Cabbage (N.Eliya)", "Cabbage (Kandy)": "Cabbage (Kandy)",
-    "Tomato": "Tomato", "Ladies Fingers": "Ladies Fingers",
-    "Brinjals": "Brinjals", "Capsicum": "Capsicum", "Pumpkin": "Pumpkin",
-    "Cucumber": "Cucumber", "Bitter Gourd": "Bitter Gourd",
-    "Snake Gourd": "Snake Gourd", "Drumstick": "Drumstick",
-    "Luffa": "Luffa", "Long Beans": "Long Beans",
-    "Ash Plantains": "Ash Plantains", "Green Chillies": "Green Chillies",
-    "Lime": "Lime", "Sweet Potatoe": "Sweet Potato", "Sweet Potato": "Sweet Potato",
-    "Manioc": "Manioc", "Eggplant": "Eggplant",
-    "Potato(Imported)": "Potato (Imported)", "Potato (Imported)": "Potato (Imported)",
-    "Potato (Welimada)": "Potato (Welimada)",
-    "Potato (Nuwaraeliya)": "Potato (N.Eliya)",
-    "B'Onion Imported": "Big Onion (Imported)",
-    "Big-onion Local": None,  # skip
-    "Ambul(Rs/Kg)": "Banana Ambul", "Kolikuttu": "Banana Kolikuttu",
-    "Seeni": "Banana Seeni", "Papaya (Rs/Kg)": "Papaya",
-    "Pineapple - Large": "Pineapple (Large)", "Avocado": "Avocado",
-    # Rice/essentials
-    "Samba 1": "Samba 1", "Samba 2": "Samba 2", "Keeri Samba": "Keeri Samba",
-    "Nadu 1": "Nadu 1", "Nadu 2": "Nadu 2",
-    "Raw red": "Raw Red", "Raw White": "Raw White",
-    "Green Gram": "Green Gram", "Cowpea": "Cowpea", "Red Dhal": "Red Dhal",
-    "Sugar(White)": "Sugar (White)", "Wheat Flour": "Wheat Flour",
-    "Brown": "Eggs (Brown)", "White": "Eggs (White)",
+# ── Name mapping PDF text → standard ──
+VEG_NAMES = {
+    "Beans":"Beans","Carrot":"Carrot","Leeks":"Leeks",
+    "Beet root":"Beetroot","Beet root (N Eliya)":"Beetroot (N.Eliya)",
+    "Beet root (N.Eliya)":"Beetroot (N.Eliya)",
+    "Knolkhol":"Knolkhol","Raddish":"Raddish",
+    "Cabbage (N'Eliya)":"Cabbage (N.Eliya)","Cabbage (Kandy)":"Cabbage (Kandy)",
+    "Tomato":"Tomato","Ladies Fingers":"Ladies Fingers",
+    "Brinjals":"Brinjals","Capsicum":"Capsicum","Pumpkin":"Pumpkin",
+    "Cucumber":"Cucumber","Bitter Gourd":"Bitter Gourd",
+    "Snake Gourd":"Snake Gourd","Drumstick":"Drumstick",
+    "Luffa":"Luffa","Long Beans":"Long Beans",
+    "Ash Plantains":"Ash Plantains","Green Chillies":"Green Chillies",
+    "Lime":"Lime","Sweet Potatoe":"Sweet Potato","Sweet Potato":"Sweet Potato",
+    "Manioc":"Manioc","Eggplant":"Eggplant",
+    "Potato(Imported)":"Potato (Imported)","Potato (Imported)":"Potato (Imported)",
+    "Potato (Welimada)":"Potato (Welimada)",
+    "Potato (Nuwaraeliya)":"Potato (N.Eliya)",
+    "B'Onion Imported":"Big Onion (Imported)",
+    "Ambul(Rs/Kg)":"Banana Ambul","Kolikuttu":"Banana Kolikuttu",
+    "Seeni":"Banana Seeni","Papaya (Rs/Kg)":"Papaya",
+    "Pineapple - Large":"Pineapple (Large)","Avocado":"Avocado",
 }
 
 
-# ════════════════════════════════════════════════
-#  STEP 1: DISCOVER & DOWNLOAD PDFs
-# ════════════════════════════════════════════════
+def parse_range(text):
+    if not text: return None
+    text = str(text).strip()
+    if text in ("-","","-"): return None
+    m = re.search(r"(\d+)\s*[-–]\s*(\d+)", text)
+    if m:
+        lo,hi = int(m.group(1)),int(m.group(2))
+        if lo == 0 or hi == 0: return None  # skip bad 0-250 ranges
+        return {"min":lo,"max":hi,"mid":round((lo+hi)/2)}
+    nums = re.findall(r'\d+',text)
+    if nums:
+        v = int(nums[0])
+        if v == 0: return None
+        return {"min":v,"max":v,"mid":v}
+    return None
+
+def mid(r): return r["mid"] if r else None
+
+def date_from_filename(path):
+    fname = os.path.basename(path)
+    # (2026.06.16) format
+    m = re.search(r"[\(\s_]?(20\d{2})\.(\d{2})\.(\d{2})[\)\s_]?",fname)
+    if m: return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+    # daily_15-01-2026 format
+    m = re.search(r"daily[_\s](\d{2})-(\d{2})-(\d{4})",fname)
+    if m: return f"{m.group(3)}-{m.group(2)}-{m.group(1)}"
+    # 2026_06_16 or 2026-06-16
+    m = re.search(r"(20\d{2})[_-](\d{2})[_-](\d{2})",fname)
+    if m: return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+    return None
+
+def is_within_3_years(url):
+    """Check if URL contains a year >= CUTOFF_YEAR"""
+    years = re.findall(r'20(\d{2})', url)
+    for y in years:
+        if int("20"+y) >= CUTOFF_YEAR:
+            return True
+    return False
+
 
 def discover_and_download():
-    """Scrape HARTI daily-price.php and download new PDFs."""
     os.makedirs(PDF_DIR, exist_ok=True)
+    print(f"Fetching PDF list from HARTI website...")
+    print(f"Only downloading from year {CUTOFF_YEAR} onwards (3 year limit)")
 
-    print(f"Fetching PDF list from {LISTING_URL} ...")
     try:
         resp = requests.get(LISTING_URL, headers=HEADERS, timeout=30)
         resp.raise_for_status()
         html = resp.text
     except Exception as e:
-        print(f"WARN: Could not fetch HARTI listing page: {e}")
-        print("INFO: Will process existing PDFs in", PDF_DIR)
+        print(f"WARN: Could not fetch HARTI page: {e}")
         return
 
-    # Extract all PDF links from the page
-    # Pattern: href="...assets/pdf/food_price/daily/eng/...pdf"
+    # Extract PDF links
     pdf_links = re.findall(
         r'href=["\']([^"\']*assets/pdf/food_price/daily/eng/[^"\']*\.pdf)["\']',
         html, re.IGNORECASE
     )
-
-    # Also catch full https links
     pdf_links += re.findall(
         r'https://www\.harti\.gov\.lk/assets/pdf/food_price/daily/eng/[^\s"\'<>]+\.pdf',
         html, re.IGNORECASE
     )
 
-    # Build full URLs and deduplicate
     full_urls = set()
     for link in pdf_links:
-        if link.startswith("http"):
-            full_urls.add(link)
-        else:
-            full_urls.add(urljoin(BASE_URL, link))
+        url = link if link.startswith("http") else urljoin(BASE_URL, link)
+        # ── 3 YEAR FILTER ──
+        if is_within_3_years(url):
+            full_urls.add(url)
 
-    print(f"Found {len(full_urls)} PDF links on HARTI page.")
+    print(f"Found {len(full_urls)} PDFs within 3 year range.")
 
-    if not full_urls:
-        print("WARN: No PDF links found. Check if website structure changed.")
-        return
-
-    downloaded = 0
-    skipped = 0
+    downloaded = skipped = failed = 0
     for url in sorted(full_urls):
-        # Create a safe local filename from the URL
-        # Decode URL encoding for display, then make safe for filesystem
-        decoded = unquote(url.split("/")[-1])
-        # Make safe filename: remove special chars except dots, hyphens, spaces
-        safe_name = re.sub(r'[^\w\s\-\.]', '_', decoded).strip()
-        safe_name = re.sub(r'\s+', '_', safe_name)
-        if not safe_name.endswith('.pdf'):
-            safe_name += '.pdf'
+        decoded  = unquote(url.split("/")[-1])
+        safe     = re.sub(r'[^\w\s\-\.]','_',decoded).strip()
+        safe     = re.sub(r'\s+','_',safe)
+        if not safe.endswith('.pdf'): safe += '.pdf'
+        path = os.path.join(PDF_DIR, safe)
 
-        path = os.path.join(PDF_DIR, safe_name)
         if os.path.exists(path):
             skipped += 1
             continue
 
         try:
-            # URL encode spaces and special chars in the URL
-            encoded_url = quote(url, safe=':/?=&%#')
-            r = requests.get(encoded_url, headers=HEADERS, timeout=60)
+            enc_url = quote(url, safe=':/?=&%#')
+            r = requests.get(enc_url, headers=HEADERS, timeout=60)
             r.raise_for_status()
-
-            # Verify it's actually a PDF
             if len(r.content) < 1000 or not r.content.startswith(b'%PDF'):
-                print(f"  SKIP (not valid PDF): {safe_name}")
+                failed += 1
                 continue
-
-            with open(path, "wb") as f:
-                f.write(r.content)
-            print(f"  Downloaded: {safe_name}")
+            with open(path,"wb") as f: f.write(r.content)
             downloaded += 1
-
+            if downloaded % 10 == 0:
+                print(f"  Downloaded {downloaded} new PDFs so far...")
         except Exception as e:
-            print(f"  WARN: Failed to download {safe_name}: {e}")
+            failed += 1
 
-    print(f"Download complete: {downloaded} new, {skipped} already existed.")
-
-
-# ════════════════════════════════════════════════
-#  STEP 2: PARSE PDFs
-# ════════════════════════════════════════════════
-
-def parse_range(text):
-    """Parse '550 - 600' or '550-600' → {'min':550, 'max':600, 'mid':575}"""
-    if not text:
-        return None
-    text = str(text).strip()
-    if text in ("-", "", "n.a.", "-"):
-        return None
-    m = re.search(r"(\d+)\s*[-–]\s*(\d+)", text)
-    if m:
-        lo, hi = int(m.group(1)), int(m.group(2))
-        return {"min": lo, "max": hi, "mid": round((lo + hi) / 2)}
-    # Single number
-    nums = re.findall(r'\d+', text)
-    if nums:
-        v = int(nums[0])
-        return {"min": v, "max": v, "mid": v}
-    return None
+    print(f"✅ Download done: {downloaded} new, {skipped} skipped, {failed} failed")
 
 
-def midpoint(r):
-    return r["mid"] if r else None
-
-
-def date_from_filename(path):
-    """Extract ISO date from any HARTI filename format."""
-    fname = os.path.basename(path)
-
-    # Format: daily_15-01-2026 or daily_15-01-2026.pdf
-    m = re.search(r"daily[_\s](\d{2})-(\d{2})-(\d{4})", fname)
-    if m:
-        return f"{m.group(3)}-{m.group(2)}-{m.group(1)}"
-
-    # Format: (2026.06.16) or 2026.06.16
-    m = re.search(r"[\(\s_]?(20\d{2})\.(\d{2})\.(\d{2})[\)\s_]?", fname)
-    if m:
-        return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
-
-    # Format: 2026_06_16 or 2026-06-16
-    m = re.search(r"(20\d{2})[_-](\d{2})[_-](\d{2})", fname)
-    if m:
-        return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
-
-    # Format: 20260616
-    m = re.search(r"(20\d{2})(\d{2})(\d{2})", fname)
-    if m:
-        return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
-
-    return None
-
-
-def parse_vegetable_page(text):
+def parse_veg_table(pdf_page):
     """
-    Parse the vegetable wholesale price page.
-    Returns {commodity_name: [range_or_None × 10_markets]}
+    Parse vegetable page using pdfplumber table extraction.
+    Returns {name: [range×10]}
     """
     results = {}
-    lines = [l.strip() for l in text.split("\n") if l.strip()]
+    try:
+        tables = pdf_page.extract_tables()
+        for table in tables:
+            if not table or len(table) < 5: continue
+            for row in table:
+                if not row or not row[0]: continue
+                raw_name = str(row[0]).strip()
+                # Match commodity name
+                std = None
+                for pdf_n, std_n in sorted(VEG_NAMES.items(), key=lambda x: len(x[0]), reverse=True):
+                    if raw_name.startswith(pdf_n):
+                        std = std_n
+                        break
+                if not std: continue
 
-    for line in lines:
-        # Skip section headers and notes
-        if any(h in line for h in [
-            "Up Country", "Low Country", "Banana", "Other Fruits",
-            "Variety", "Market", "Hector", "Data", "Note", "Usually",
-            "Wholesale", "Peliyagoda", "Kandy", "Dambulla"
-        ]):
-            continue
+                # Extract 10 market prices from columns
+                market_prices = []
+                data_cols = [c for c in row[1:] if c is not None]
+                for col in data_cols[:10]:
+                    market_prices.append(parse_range(str(col).strip()))
+                while len(market_prices) < 10:
+                    market_prices.append(None)
+                market_prices = market_prices[:10]
 
-        matched_std = None
-        rest = line
+                if any(p is not None for p in market_prices):
+                    results[std] = market_prices
+    except Exception as e:
+        pass
 
-        # Try to match commodity name at start of line
-        # Sort by length descending to match longer names first
-        for pdf_name in sorted(NAME_MAP.keys(), key=len, reverse=True):
-            if line.startswith(pdf_name):
-                matched_std = NAME_MAP[pdf_name]
-                rest = line[len(pdf_name):].strip()
-                break
-
-        if not matched_std:
-            continue
-
-        # Extract price ranges from the rest of the line
-        # Split by 2+ spaces to separate market columns
-        parts = re.split(r'\s{2,}', rest)
-        market_prices = []
-
-        for part in parts:
-            part = part.strip()
-            if not part or part == "-":
-                market_prices.append(None)
-            else:
-                r = parse_range(part)
-                market_prices.append(r)
-
-        # Pad to 10 markets
-        while len(market_prices) < 10:
-            market_prices.append(None)
-        market_prices = market_prices[:10]
-
-        # Only store if at least one price found
-        if any(p is not None for p in market_prices):
-            results[matched_std] = market_prices
-
+    # Fallback: text parsing if table extraction failed
+    if not results:
+        results = parse_veg_text(pdf_page.extract_text() or "")
     return results
 
 
-def parse_rice_page(text):
-    """
-    Parse the rice & essentials page (Pettah + Marandagahamula).
-    Returns {item_name: {'pettah_range': dict, 'pettah_avg': float, 'maranda_avg': float}}
-    """
+def parse_veg_text(text):
+    """Fallback text parser for vegetable page."""
     results = {}
     lines = [l.strip() for l in text.split("\n") if l.strip()]
-
-    # Section tracking
-    in_dried_chilli = False
-    in_eggs = False
-
     for line in lines:
-        if "Dried Chillies" in line:
-            in_dried_chilli = True
+        if any(h in line for h in ["Up Country","Low Country","Banana","Other Fruits",
+            "Variety","Market","Hector","Data Management","Note","Usually","Wholesale",
+            "Peliyagoda","Kandy","Dambulla","Meegoda","Keppetipola","Nuwaraeliya"]):
             continue
-        if "Eggs" in line and "Rs" not in line:
-            in_eggs = True
-            continue
-        if any(h in line for h in ["Rice", "Imported Rice", "Subsidiary", "Onion", "Potatoes", "Pulses", "Consumption"]):
-            in_dried_chilli = False
-            if "Eggs" not in line:
-                in_eggs = False
-
-        # Match known rice/essential items
-        matched = None
-        for pdf_name, std_name in NAME_MAP.items():
-            if pdf_name in ["Brown", "White"] and in_eggs:
-                if line.startswith(pdf_name):
-                    matched = std_name
-                    rest = line[len(pdf_name):].strip()
-                    break
-            elif line.startswith(pdf_name) and pdf_name in [
-                "Samba 1", "Samba 2", "Keeri Samba", "Nadu 1", "Nadu 2",
-                "Raw red", "Raw White", "Green Gram", "Cowpea", "Red Dhal",
-                "Sugar(White)", "Wheat Flour"
-            ]:
-                matched = std_name
-                rest = line[len(pdf_name):].strip()
+        std = None
+        rest = line
+        for pdf_n in sorted(VEG_NAMES.keys(), key=len, reverse=True):
+            if line.startswith(pdf_n):
+                std = VEG_NAMES[pdf_n]
+                rest = line[len(pdf_n):].strip()
                 break
-            elif in_dried_chilli and line.startswith("Imported"):
-                matched = "Dried Chillies (Imp)"
-                rest = line[len("Imported"):].strip()
-                in_dried_chilli = False
-                break
+        if not std: continue
 
-        if not matched:
-            continue
+        # Split by 2+ spaces
+        parts = re.split(r'\s{2,}', rest)
+        mkt_prices = []
+        for p in parts:
+            p = p.strip()
+            mkt_prices.append(None if (not p or p=="-") else parse_range(p))
 
-        # Extract numbers from the rest
-        nums = re.findall(r'\d+\.?\d*', rest)
-        if not nums:
-            continue
+        while len(mkt_prices) < 10: mkt_prices.append(None)
+        mkt_prices = mkt_prices[:10]
+        if any(p is not None for p in mkt_prices):
+            results[std] = mkt_prices
+    return results
 
-        # Try to get range and average
-        r = parse_range(rest)
-        avg = None
-        if len(nums) >= 3:
-            try:
-                avg = float(nums[2])
-            except ValueError:
-                pass
-        elif len(nums) >= 1:
-            try:
-                avg = float(nums[0])
-            except ValueError:
-                pass
 
-        results[matched] = {
-            "pettah_range": r,
-            "pettah_avg": avg
-        }
+def parse_rice_table(pdf_page):
+    """Parse rice/essentials page using table extraction."""
+    results = {}
+    RICE_NAMES = {
+        "Samba 1":"Samba 1","Samba 2":"Samba 2","Keeri Samba":"Keeri Samba",
+        "Nadu 1":"Nadu 1","Nadu 2":"Nadu 2",
+        "Raw red":"Raw Red","Raw White":"Raw White",
+        "Green Gram":"Green Gram","Cowpea":"Cowpea","Red Dhal":"Red Dhal",
+        "Sugar(White)":"Sugar (White)","Wheat Flour":"Wheat Flour",
+        "Brown":"Eggs (Brown)","White":"Eggs (White)",
+    }
+    try:
+        tables = pdf_page.extract_tables()
+        in_dried = in_eggs = False
+        for table in tables:
+            if not table: continue
+            for row in table:
+                if not row or not row[0]: continue
+                raw = str(row[0]).strip()
+                if "Dried Chillies" in raw: in_dried = True; continue
+                if "Eggs" in raw and "Rs" not in raw: in_eggs = True; continue
+                if any(h in raw for h in ["Rice","Subsidiary","Onion","Potatoes","Pulses","Consumption"]):
+                    in_dried = False
+                    if "Eggs" not in raw: in_eggs = False
 
+                std = None
+                for pdf_n, std_n in RICE_NAMES.items():
+                    if raw.startswith(pdf_n):
+                        std = std_n
+                        break
+                if not std and in_dried and raw.startswith("Imported"):
+                    std = "Dried Chillies (Imp)"
+                if not std and in_eggs:
+                    for pdf_n, std_n in [("Brown","Eggs (Brown)"),("White","Eggs (White)")]:
+                        if raw.startswith(pdf_n): std = std_n; break
+                if not std: continue
+
+                # Get range and average from columns
+                nums = []
+                for col in row[1:]:
+                    if col:
+                        n = re.findall(r'\d+\.?\d*', str(col))
+                        nums.extend(n)
+
+                if len(nums) >= 2:
+                    try:
+                        lo,hi = float(nums[0]),float(nums[1])
+                        if lo > 0 and hi > 0:
+                            r = {"min":int(lo),"max":int(hi),"mid":round((lo+hi)/2)}
+                            avg = float(nums[2]) if len(nums) > 2 else mid(r)
+                            results[std] = {"pettah_range":r,"pettah_avg":avg}
+                    except: pass
+    except Exception as e:
+        pass
     return results
 
 
 def parse_pdf(path):
-    """Parse a single HARTI PDF. Returns (date_str, veg_data, rice_data)."""
     date_str = date_from_filename(path)
-    if not date_str:
-        print(f"  SKIP (no date in filename): {os.path.basename(path)}")
-        return None, {}, {}
+    if not date_str: return None,{},{}
 
-    veg_data  = {}
-    rice_data = {}
+    # Skip if outside 3 year range
+    try:
+        y = int(date_str[:4])
+        if y < CUTOFF_YEAR:
+            return None,{},{}
+    except: pass
 
+    veg_data = rice_data = {}
     try:
         with pdfplumber.open(path) as pdf:
             n = len(pdf.pages)
-
-            # Page 1 = Rice & Essentials (English)
             if n >= 1:
-                txt1 = pdf.pages[0].extract_text() or ""
-                rice_data = parse_rice_page(txt1)
-
-            # Page 2 = Vegetables English table
+                rice_data = parse_rice_table(pdf.pages[0])
             if n >= 2:
-                txt2 = pdf.pages[1].extract_text() or ""
-                veg_data = parse_vegetable_page(txt2)
-
-            # Some older PDFs: English veg on page 1, Sinhala on page 2
+                veg_data = parse_veg_table(pdf.pages[1])
             if not veg_data and n >= 1:
-                txt1 = pdf.pages[0].extract_text() or ""
-                veg_data = parse_vegetable_page(txt1)
-
+                veg_data = parse_veg_table(pdf.pages[0])
     except Exception as e:
-        print(f"  WARN: Parse failed for {os.path.basename(path)}: {e}")
-        return date_str, {}, {}
+        return date_str,{},{}
 
-    veg_count  = len(veg_data)
-    rice_count = len(rice_data)
-    print(f"  {date_str}: {veg_count} veg, {rice_count} essentials — {os.path.basename(path)}")
+    print(f"  {date_str}: {len(veg_data)} veg, {len(rice_data)} essentials")
     return date_str, veg_data, rice_data
 
 
-# ════════════════════════════════════════════════
-#  STEP 3: BUILD harti_data.json
-# ════════════════════════════════════════════════
-
-def build(pdf_dir=PDF_DIR, out=OUT_FILE):
-    """Build harti_data.json from all PDFs in pdf_dir."""
-    files = sorted(glob.glob(os.path.join(pdf_dir, "*.pdf")))
+def build():
+    files = sorted(glob.glob(os.path.join(PDF_DIR,"*.pdf")))
     if not files:
-        print(f"No PDFs found in {pdf_dir}/")
-        return
+        print(f"No PDFs in {PDF_DIR}/"); return
 
-    print(f"\nParsing {len(files)} PDF(s)...")
+    print(f"\nParsing {len(files)} PDFs (3 year range only)...")
     all_days = []
-    seen_dates = set()
-
+    seen = set()
     for f in files:
-        date_str, veg, rice = parse_pdf(f)
-        if date_str and date_str not in seen_dates:
-            all_days.append((date_str, veg, rice))
-            seen_dates.add(date_str)
+        d,v,r = parse_pdf(f)
+        if d and d not in seen:
+            all_days.append((d,v,r))
+            seen.add(d)
 
     if not all_days:
-        print("No valid data parsed.")
-        return
+        print("No valid data!"); return
 
-    # Sort by date
     all_days.sort(key=lambda x: x[0])
-    dates  = [d for d, _, _ in all_days]
+    dates  = [d for d,_,_ in all_days]
     labels = []
     for d in dates:
-        try:
-            labels.append(datetime.date.fromisoformat(d).strftime("%-d %b"))
-        except Exception:
-            labels.append(d)
+        try: labels.append(datetime.date.fromisoformat(d).strftime("%-d %b"))
+        except: labels.append(d)
 
-    # ── Collect all commodity names ──
-    all_veg_names = []
-    for _, veg, _ in all_days:
-        for n in veg:
-            if n not in all_veg_names:
-                all_veg_names.append(n)
-
-    all_rice_names = []
-    for _, _, rice in all_days:
-        for n in rice:
-            if n not in all_rice_names:
-                all_rice_names.append(n)
+    # Collect names
+    all_veg   = []
+    all_rice  = []
+    for _,v,r in all_days:
+        for n in v:
+            if n not in all_veg: all_veg.append(n)
+        for n in r:
+            if n not in all_rice: all_rice.append(n)
 
     commodities = []
     idx = 0
 
-    # ── Vegetable commodities ──
-    for name in all_veg_names:
+    # Vegetable commodities
+    for name in all_veg:
         cat = "Unknown"
-        for c, items in CATEGORIES.items():
-            if name in items:
-                cat = c
-                break
+        for c,items in CATEGORIES.items():
+            if name in items: cat=c; break
 
-        series_by_date = []
-        for _, veg, _ in all_days:
-            if name in veg:
-                series_by_date.append(veg[name])  # list of 10 ranges
-            else:
-                series_by_date.append([None] * 10)
+        series_all = []
+        for _,v,_ in all_days:
+            series_all.append(v.get(name,[None]*10))
 
-        # Skip if no real data
-        valid = sum(1 for s in series_by_date if any(p is not None for p in s))
-        if valid < 1:
-            continue
+        valid = sum(1 for s in series_all if any(p is not None for p in s))
+        if valid < 1: continue
 
-        # Latest market prices
-        latest = series_by_date[-1]
-        market_prices = {}
-        for i, m in enumerate(MARKETS):
-            market_prices[m] = latest[i] if i < len(latest) else None
+        latest = series_all[-1]
+        mkt_prices = {}
+        for i,m in enumerate(MARKETS):
+            mkt_prices[m] = latest[i] if i < len(latest) else None
 
-        # Primary = first market with data in latest
-        primary = "Peliyagoda"
-        for m in MARKETS:
-            if market_prices.get(m) is not None:
-                primary = m
-                break
+        primary = next((m for m in MARKETS if mkt_prices.get(m) is not None), "Peliyagoda")
 
-        # Series = Peliyagoda midpoints over time
+        # Series = midpoints over time for primary market
+        primary_idx = MARKETS.index(primary)
         price_series = []
-        for s in series_by_date:
-            p0 = s[0] if s else None
-            price_series.append(midpoint(p0))
+        for s in series_all:
+            p = s[primary_idx] if primary_idx < len(s) else None
+            price_series.append(mid(p))
 
         commodities.append({
-            "id": idx,
-            "name": name,
-            "category": cat,
-            "unit": "Rs./kg",
-            "primaryMarket": primary,
-            "markets": market_prices,
-            "series": price_series,
+            "id":idx,"name":name,"category":cat,"unit":"Rs./kg",
+            "primaryMarket":primary,"markets":mkt_prices,"series":price_series,
         })
         idx += 1
 
-    # ── Rice & Essentials ──
-    for name in all_rice_names:
-        cat  = RICE_CATEGORIES.get(name, "Rice")
+    # Rice/Essentials
+    for name in all_rice:
+        cat  = RICE_CAT.get(name,"Rice")
         unit = "Rs./Egg" if "Egg" in name else "Rs./kg"
 
         price_series = []
         latest_data  = None
-
-        for _, _, rice in all_days:
-            if name in rice:
-                r = rice[name].get("pettah_range")
-                price_series.append(midpoint(r))
-                latest_data = rice[name]
+        for _,_,r in all_days:
+            if name in r:
+                rr = r[name].get("pettah_range")
+                price_series.append(mid(rr))
+                latest_data = r[name]
             else:
                 price_series.append(None)
 
-        valid = sum(1 for s in price_series if s is not None)
-        if valid < 1:
-            continue
+        if sum(1 for s in price_series if s is not None) < 1: continue
 
-        pettah_range = latest_data.get("pettah_range") if latest_data else None
-        pettah_avg   = latest_data.get("pettah_avg")   if latest_data else None
+        pr = latest_data.get("pettah_range") if latest_data else None
+        pa = latest_data.get("pettah_avg")   if latest_data else None
 
         commodities.append({
-            "id": idx,
-            "name": name,
-            "category": cat,
-            "unit": unit,
-            "primaryMarket": "Pettah",
-            "markets": {"Pettah": midpoint(pettah_range)},
-            "series": price_series,
-            "pettahRange": pettah_range,
-            "pettahAvg": pettah_avg,
+            "id":idx,"name":name,"category":cat,"unit":unit,
+            "primaryMarket":"Pettah","markets":{"Pettah":mid(pr)},
+            "series":price_series,"pettahRange":pr,"pettahAvg":pa,
         })
         idx += 1
 
-    # ── Write JSON ──
     data = {
         "generated": datetime.datetime.now().isoformat(timespec="seconds"),
         "source": "Hector Kobbekaduwa Agrarian Research and Training Institute — Daily Wholesale Price Report",
         "sourceUrl": "https://www.harti.gov.lk/daily-price.php",
-        "dates": dates,
-        "dateLabels": labels,
-        "markets": MARKETS,
+        "dates": dates,"dateLabels": labels,"markets": MARKETS,
         "commodities": commodities
     }
 
-    with open(out, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=1, ensure_ascii=False)
+    with open(OUT_FILE,"w",encoding="utf-8") as f:
+        json.dump(data,f,indent=1,ensure_ascii=False)
 
-    print(f"\n✅ {out} written successfully!")
+    print(f"\n✅ {OUT_FILE} written!")
     print(f"   📦 {len(commodities)} commodities")
     print(f"   📅 {len(dates)} dates ({dates[0]} → {dates[-1]})")
     print(f"   🏪 {len(MARKETS)} markets")
 
-
-# ════════════════════════════════════════════════
-#  MAIN
-# ════════════════════════════════════════════════
 
 if __name__ == "__main__":
     if "--no-download" not in sys.argv:
