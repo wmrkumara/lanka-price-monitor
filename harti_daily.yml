@@ -1,0 +1,44 @@
+name: Update HARTI wholesale data
+
+on:
+  schedule:
+    # Runs at 07:00 UTC = 12:30 PM Sri Lanka time (30 min after CBSL update)
+    - cron: "0 7 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create harti_pdfs folder if not exists
+        run: mkdir -p harti_pdfs
+
+      - name: Fetch latest HARTI reports and rebuild harti_data.json
+        run: python harti_update.py
+
+      - name: Commit if data changed
+        run: |
+          git config user.name  "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add harti_data.json harti_pdfs/ || true
+          if git diff --staged --quiet; then
+            echo "No HARTI changes today."
+          else
+            git commit -m "Auto-update HARTI wholesale data ($(date +%Y-%m-%d))"
+            git push --force-with-lease origin main
+          fi
