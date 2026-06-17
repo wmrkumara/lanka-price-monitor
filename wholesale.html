@@ -1130,6 +1130,8 @@ function calcPanel(d){
   const traderMkts=allMkts.filter(k=>ws[k]!=null);
   const farmerMkts=traderMkts; /* Farmer sells at wholesale — need WS data */
   const mkts=allMkts;
+  /* All 10 HARTI markets for sell dropdown — null ones shown as disabled */
+  const ALL_HARTI_MARKETS=["Peliyagoda","Kandy","Dambulla","Meegoda","Norochchole","Thambuththegama","Keppetipola","Nuwaraeliya","Bandarawela","Veyangoda"];
   if(!mkts.length) return '<p class="mkt-sub" style="padding:20px">Market data not available.</p>';
   const cid="cp_"+Math.random().toString(36).slice(2,8);
   window._tcData=window._tcData||{};
@@ -1180,7 +1182,7 @@ function calcPanel(d){
           <select id="tsell_${cid}"
             style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:7px 10px;border:1.5px solid #a9802a;border-radius:8px;background:#fffdf7;color:#191d1a;cursor:pointer;flex:1;min-width:180px"
             onchange="calcArbitrage('${cid}')">
-            ${traderMkts.map((k,i)=>`<option value="${k}" ${i===Math.min(1,traderMkts.length-1)?"selected":""}>${tMkt(k)}: රු.${fmt(ws[k])}/kg</option>`).join("")}
+            ${ALL_HARTI_MARKETS.map((k)=>{const hd=ws[k]!=null;const pr=hd?'රු.'+fmt(ws[k])+'/kg':(lang==='si'?'දත්ත නැත':lang==='ta'?'தரவு இல்லை':'No data');const sel=hd&&ALL_HARTI_MARKETS.filter(m=>ws[m]!=null&&m!==traderMkts[0])[0]===k;return '<option value="'+k+'"'+(sel?' selected':'')+(!hd?' disabled style="color:#aaa"':'')+'>'+tMkt(k)+': '+pr+'</option>';}).join("")}
           </select>
         </div>
         <div style="display:flex;gap:14px;flex-wrap:wrap">
