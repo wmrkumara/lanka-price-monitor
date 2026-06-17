@@ -1182,8 +1182,18 @@ function calcPanel(d){
           <select id="tsell_${cid}"
             style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:7px 10px;border:1.5px solid #a9802a;border-radius:8px;background:#fffdf7;color:#191d1a;cursor:pointer;flex:1;min-width:180px"
             onchange="calcArbitrage('${cid}')">
-            ${ALL_HARTI_MARKETS.map((k)=>{const hd=ws[k]!=null;const pr=hd?'රු.'+fmt(ws[k])+'/kg':(lang==='si'?'දත්ත නැත':lang==='ta'?'தரவு இல்லை':'No data');const sel=hd&&ALL_HARTI_MARKETS.filter(m=>ws[m]!=null&&m!==traderMkts[0])[0]===k;return '<option value="'+k+'"'+(sel?' selected':'')+(!hd?' disabled style="color:#aaa"':'')+'>'+tMkt(k)+': '+pr+'</option>';}).join("")}
+            ${ALL_HARTI_MARKETS.map((k)=>{const hd=ws[k]!=null;const pr=hd?'රු.'+fmt(ws[k])+'/kg':(lang==='si'?'📝 මිල ඇතුලත් කරන්න':lang==='ta'?'📝 விலை உள்ளிடவும்':'📝 Enter price');const sel=hd&&ALL_HARTI_MARKETS.filter(m=>ws[m]!=null&&m!==traderMkts[0])[0]===k;return '<option value="'+k+'"'+(sel?' selected':'')+' style="'+(hd?'':'color:#a9802a;font-style:italic')+'">'+(hd?'':'✏️ ')+tMkt(k)+': '+pr+'</option>';}).join("")}
           </select>
+        </div>
+        <!-- Manual sell price input — shows when market has no data -->
+        <div id="manualSellRow_${cid}" style="display:none;align-items:center;gap:10px;flex-wrap:wrap;background:#fffbf0;border:1.5px solid #a9802a;border-radius:8px;padding:8px 12px">
+          <span style="font-size:20px">✏️</span>
+          <label style="font-size:13px;color:#a9802a;font-weight:700;min-width:130px">${lang==="si"?"ඔබේ sell මිල:":lang==="ta"?"உங்கள் விற்கும் விலை:":"Your sell price:"}</label>
+          <input id="tmanual_${cid}" type="number" min="0" placeholder="${lang==='si'?'රු. enter කරන්න':lang==='ta'?'ரூ. உள்ளிடவும்':'Enter Rs.'}"
+            style="width:110px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #a9802a;border-radius:8px;background:#fffdf7;color:#191d1a"
+            oninput="calcArbitrage('${cid}')">
+          <span style="font-size:12px;color:#7a7264">රු./kg</span>
+          <span style="font-size:11px;color:#a9802a;font-style:italic">${lang==="si"?"(ඔබ දන්නා වෙළඳපොළ මිල)":lang==="ta"?"(உங்களுக்கு தெரிந்த விலை)":"(price you know for this market)"}</span>
         </div>
         <div style="display:flex;gap:14px;flex-wrap:wrap">
           <div style="display:flex;align-items:center;gap:8px">
@@ -1964,6 +1974,8 @@ function calcArbitrage(cid) {
   const tcEl   = document.getElementById("tc_"    + cid);
   const qtyEl  = document.getElementById("tqty_"  + cid);
   const resEl  = document.getElementById("tr_"    + cid);
+  const manualRow = document.getElementById("manualSellRow_" + cid);
+  const manualEl  = document.getElementById("tmanual_" + cid);
   if(!buyEl || !sellEl || !resEl) return;
 
   const data = window._tcData && window._tcData[cid] ? window._tcData[cid] : [];
@@ -1975,13 +1987,23 @@ function calcArbitrage(cid) {
   const buyEntry  = data.find(function(x){ return x.k === buyMkt;  });
   const sellEntry = data.find(function(x){ return x.k === sellMkt; });
 
-  if(!buyEntry || !sellEntry) {
-    resEl.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:10px 0">Select markets with available price data.</div>';
+  /* Show/hide manual price input based on sell market data availability */
+  const sellHasData = !!sellEntry;
+  if(manualRow) manualRow.style.display = sellHasData ? 'none' : 'flex';
+
+  /* If sell market has no data — use manual price */
+  let sellPrice = 0;
+  if(sellEntry) {
+    sellPrice = sellEntry.ws || sellEntry.rt || 0;
+  } else if(manualEl && parseFloat(manualEl.value) > 0) {
+    sellPrice = parseFloat(manualEl.value);
+  } else {
+    resEl.innerHTML = '<div style="background:#fffbf0;border:1.5px solid #a9802a;border-radius:8px;padding:10px 14px;font-size:13px;color:#a9802a"><b>✏️ '+(lang==="si"?"ඉහළ orange box එකේ sell මිල enter කරන්න!":lang==="ta"?"மேலே sell விலையை உள்ளிடவும்!":"Enter your sell price in the orange box above!")+'</b></div>';
     return;
   }
 
   const buyPrice    = buyEntry.ws  || buyEntry.rt  || 0;
-  const sellPrice   = sellEntry.ws || sellEntry.rt || 0;
+  /* sellPrice already set above (from sellEntry or manual input) */
   const profitPerKg = sellPrice - buyPrice - tc;
   const totalCost   = buyPrice * qty;
   const totalProfit = profitPerKg * qty;
