@@ -1,8 +1,8 @@
 /* ===== TopGoviya PWA Service Worker ===== */
 /* Version: 1.0 | topgoviya.lk | Built in Gampola 🇱🇰 */
 
-const CACHE_NAME = 'topgoviya-v3';
-const DATA_CACHE = 'topgoviya-data-v3';
+const CACHE_NAME = 'topgoviya-v4';
+const DATA_CACHE = 'topgoviya-data-v4';
 
 /* Static files to cache for offline use */
 const STATIC_ASSETS = [
