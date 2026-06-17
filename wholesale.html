@@ -1134,42 +1134,44 @@ function calcPanel(d){
 
     <!-- TRADER INPUTS — Market Arbitrage -->
     <div id="trader_inputs_${cid}" style="display:none">
-      <div style="background:#fffbf0;border:1px solid #e3d9c4;border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:12px;color:#7a7264">
-        💡 ${lang==="si"?"එක් වෙළඳපොළකින් ගෙන වෙනත් වෙළඳපොළකට අලෙවිකිරීමේ ලාභය ගණනය කරනවා":lang==="ta"?"ஒரு சந்தையில் வாங்கி மற்றொரு சந்தையில் விற்பனை செய்வதன் லாபம் கணக்கிடுகிறது":"Calculate profit from buying at one wholesale market and selling at another"}
+      <div style="background:#fffbf0;border:1px solid #e3d9c4;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:12px;color:#7a7264">
+        💡 ${lang==="si"?"එක් වෙළඳපොළකින් ගෙන වෙනත් වෙළඳපොළකට අලෙවිකිරීමේ ලාභය ගණනය":lang==="ta"?"ஒரு சந்தையில் வாங்கி மற்றொரு சந்தையில் விற்கும் லாபம்":"Buy from one wholesale market, sell at another — calculate profit"}
       </div>
       <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:12px">
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-          <label style="font-size:13px;color:#3a403a;min-width:140px">${lang==="si"?"ගන්නා වෙළඳපොළ:":lang==="ta"?"வாங்கும் சந்தை:":"Buy from market:"}</label>
+          <label style="font-size:13px;color:#3a403a;min-width:130px">${lang==="si"?"ගන්නා වෙළඳපොළ:":lang==="ta"?"வாங்கும் சந்தை:":"Buy from:"}</label>
           <select id="tbuy_${cid}"
-            style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a;cursor:pointer;max-width:220px"
+            style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a;cursor:pointer;flex:1;min-width:180px"
             onchange="calcArbitrage('${cid}')">
             ${traderMkts.map(k=>`<option value="${k}">${tMkt(k)}: රු.${fmt(ws[k])}/kg</option>`).join("")}
           </select>
         </div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-          <label style="font-size:13px;color:#3a403a;min-width:140px">${lang==="si"?"විකිණෙන වෙළඳපොළ:":lang==="ta"?"விற்கும் சந்தை:":"Sell to market:"}</label>
+          <label style="font-size:13px;color:#3a403a;min-width:130px">${lang==="si"?"විකිණෙන වෙළඳපොළ:":lang==="ta"?"விற்கும் சந்தை:":"Sell to:"}</label>
           <select id="tsell_${cid}"
-            style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:7px 10px;border:1.5px solid #a9802a;border-radius:8px;background:#fffdf7;color:#191d1a;cursor:pointer;max-width:220px"
+            style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:7px 10px;border:1.5px solid #a9802a;border-radius:8px;background:#fffdf7;color:#191d1a;cursor:pointer;flex:1;min-width:180px"
             onchange="calcArbitrage('${cid}')">
             ${traderMkts.map((k,i)=>`<option value="${k}" ${i===Math.min(1,traderMkts.length-1)?"selected":""}>${tMkt(k)}: රු.${fmt(ws[k])}/kg</option>`).join("")}
           </select>
         </div>
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-          <label style="font-size:13px;color:#3a403a;min-width:140px">${lang==="si"?"ප්‍රවාහන පිරිවැය:":lang==="ta"?"போக்குவரத்து செலவு:":"Transport cost:"}</label>
-          <input id="tc_${cid}" type="number" min="0" max="500" value="15"
-            style="width:80px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
-            oninput="calcArbitrage('${cid}')">
-          <span style="font-size:13px;color:#7a7264">රු./kg</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-          <label style="font-size:13px;color:#3a403a;min-width:140px">${lang==="si"?"ප්‍රමාණය:":lang==="ta"?"அளவு:":"Quantity:"}</label>
-          <input id="tqty_${cid}" type="number" min="0" value="100"
-            style="width:80px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
-            oninput="calcArbitrage('${cid}')">
-          <span style="font-size:13px;color:#7a7264">kg</span>
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:8px">
+            <label style="font-size:13px;color:#3a403a">${lang==="si"?"ප්‍රවාහන:":lang==="ta"?"போக்குவரத்து:":"Transport:"}</label>
+            <input id="tc_${cid}" type="number" min="0" max="500" value="15"
+              style="width:70px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:7px 8px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
+              oninput="calcArbitrage('${cid}')">
+            <span style="font-size:12px;color:#7a7264">රු./kg</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <label style="font-size:13px;color:#3a403a">${lang==="si"?"ප්‍රමාණය:":lang==="ta"?"அளவு:":"Quantity:"}</label>
+            <input id="tqty_${cid}" type="number" min="0" value="500"
+              style="width:80px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:7px 8px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
+              oninput="calcArbitrage('${cid}')">
+            <span style="font-size:12px;color:#7a7264">kg</span>
+          </div>
         </div>
       </div>
-    </div>
+    </div></div>
 
     <!-- FARMER INPUTS -->
     <div id="farmer_inputs_${cid}">
@@ -1871,565 +1873,100 @@ function calcArbitrage(cid) {
   const data = window._tcData && window._tcData[cid] ? window._tcData[cid] : [];
   const buyMkt  = buyEl.value;
   const sellMkt = sellEl.value;
-  const tc      = parseFloat(tcEl ? tcEl.value : 15) || 0;
-  const qty     = parseFloat(qtyEl ? qtyEl.value : 100) || 100;
+  const tc      = parseFloat(tcEl  ? tcEl.value  : 15)  || 0;
+  const qty     = parseFloat(qtyEl ? qtyEl.value : 500) || 500;
 
-  // Get prices from data
   const buyEntry  = data.find(function(x){ return x.k === buyMkt;  });
   const sellEntry = data.find(function(x){ return x.k === sellMkt; });
 
   if(!buyEntry || !sellEntry) {
-    resEl.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:10px">Select markets with available price data.</div>';
+    resEl.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:10px 0">Select markets with available price data.</div>';
     return;
   }
 
-  const buyPrice  = buyEntry.ws  || buyEntry.rt;
-  const sellPrice = sellEntry.ws || sellEntry.rt;
+  const buyPrice    = buyEntry.ws  || buyEntry.rt  || 0;
+  const sellPrice   = sellEntry.ws || sellEntry.rt || 0;
   const profitPerKg = sellPrice - buyPrice - tc;
+  const totalCost   = buyPrice * qty;
   const totalProfit = profitPerKg * qty;
-  const margin = buyPrice > 0 ? ((profitPerKg / buyPrice) * 100).toFixed(1) : 0;
-  const isProfit = profitPerKg > 0;
+  const totalRevenue= sellPrice * qty;
+  const margin      = buyPrice > 0 ? ((profitPerKg / buyPrice) * 100).toFixed(1) : 0;
+  const isProfit    = profitPerKg > 0;
+  const isSame      = buyMkt === sellMkt;
 
-  const buyLbl   = lang==="si" ? "ගන්නා මිල"    : lang==="ta" ? "வாங்கும் விலை"   : "Buy price";
-  const sellLbl  = lang==="si" ? "විකිණෙන මිල"  : lang==="ta" ? "விற்கும் விலை"  : "Sell price";
-  const tcLbl    = lang==="si" ? "ප්‍රවාහන"      : lang==="ta" ? "போக்குவரத்து"   : "Transport";
-  const profLbl  = lang==="si" ? "ලාභය/kg"       : lang==="ta" ? "லாபம்/kg"        : "Profit/kg";
-  const totLbl   = lang==="si" ? "මුළු ලාභය"     : lang==="ta" ? "மொத்த லாபம்"    : "Total profit";
-  const marginLbl= lang==="si" ? "ලාභ %"          : lang==="ta" ? "லாப %"           : "Margin";
-  const viableLbl= lang==="si" ? (isProfit ? "✅ ලාභදායකයි!" : "❌ ලාභදායක නෙමෙයි") 
-                 : lang==="ta" ? (isProfit ? "✅ லாபகரம்!"  : "❌ லாபகரம் இல்லை")
-                 : (isProfit ? "✅ Profitable!" : "❌ Not profitable");
+  // Labels
+  const buyLbl    = lang==="si" ? "ගන්නා මිල"       : lang==="ta" ? "வாங்கும் விலை"   : "Buy price";
+  const sellLbl   = lang==="si" ? "විකිණෙන මිල"     : lang==="ta" ? "விற்கும் விலை"  : "Sell price";
+  const tcLbl     = lang==="si" ? "ප්‍රවාහන"         : lang==="ta" ? "போக்குவரத்து"   : "Transport";
+  const profLbl   = lang==="si" ? "ලාභය/kg"          : lang==="ta" ? "லாபம்/kg"        : "Profit/kg";
+  const totCostLbl= lang==="si" ? "මුළු ආයෝජනය"     : lang==="ta" ? "மொத்த முதலீடு"  : "Total investment";
+  const totRevLbl = lang==="si" ? "මුළු ආදායම"       : lang==="ta" ? "மொத்த வருமானம்" : "Total revenue";
+  const totProfLbl= lang==="si" ? "මුළු ලාභය"        : lang==="ta" ? "மொத்த லாபம்"    : "Total profit";
+  const marginLbl = lang==="si" ? "ලාභ %"             : lang==="ta" ? "லாப %"           : "Return %";
+  const qtyLbl    = lang==="si" ? "ප්‍රමාණය"          : lang==="ta" ? "அளவு"            : "Quantity";
+  const viableLbl = isSame
+    ? (lang==="si" ? "⚠️ එකම වෙළඳපොළ!" : lang==="ta" ? "⚠️ ஒரே சந்தை!" : "⚠️ Same market!")
+    : isProfit
+      ? (lang==="si" ? "✅ ශ්‍රේෂ්ඨ ලාභයක්!" : lang==="ta" ? "✅ லாபகரம்!" : "✅ Profitable!")
+      : (lang==="si" ? "❌ ලාභදායක නෙමෙයි" : lang==="ta" ? "❌ லாபகரம் இல்லை" : "❌ Not profitable");
 
-  resEl.innerHTML = 
-    '<div style="background:' + (isProfit ? 'var(--down-bg)' : 'var(--up-bg)') + ';border:1.5px solid ' + (isProfit ? 'var(--down)' : 'var(--up)') + ';border-radius:12px;padding:14px 16px;margin-top:8px">' +
-      '<div style="font-size:15px;font-weight:800;color:' + (isProfit ? 'var(--down)' : 'var(--up)') + ';margin-bottom:10px">' + viableLbl + '</div>' +
-      '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">' +
-        '<div style="background:rgba(255,255,255,.6);border-radius:8px;padding:8px 10px">' +
-          '<div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">' + buyLbl + ' — ' + tMkt(buyMkt) + '</div>' +
-          '<div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:16px">රු.' + fmt(buyPrice) + '/kg</div>' +
-        '</div>' +
-        '<div style="background:rgba(255,255,255,.6);border-radius:8px;padding:8px 10px">' +
-          '<div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">' + sellLbl + ' — ' + tMkt(sellMkt) + '</div>' +
-          '<div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:16px">රු.' + fmt(sellPrice) + '/kg</div>' +
-        '</div>' +
-        '<div style="background:rgba(255,255,255,.6);border-radius:8px;padding:8px 10px">' +
-          '<div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">' + tcLbl + '</div>' +
-          '<div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:16px;color:var(--up)">-රු.' + fmt(tc) + '/kg</div>' +
-        '</div>' +
-        '<div style="background:rgba(255,255,255,.6);border-radius:8px;padding:8px 10px">' +
+  const color = isSame ? "#a9802a" : isProfit ? "var(--down)" : "var(--up)";
+  const bgColor = isSame ? "#fffbf0" : isProfit ? "var(--down-bg)" : "var(--up-bg)";
+  const borderColor = isSame ? "#e3d9c4" : isProfit ? "var(--down)" : "var(--up)";
+
+  resEl.innerHTML =
+    '<div style="background:' + bgColor + ';border:1.5px solid ' + borderColor + ';border-radius:12px;padding:14px 16px;margin-top:8px">' +
+
+      // Header
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">' +
+        '<div style="font-size:15px;font-weight:800;color:' + color + '">' + viableLbl + '</div>' +
+        '<div style="font-size:11px;color:var(--muted)">' + fmt(qty) + ' kg · ' + tMkt(buyMkt) + ' → ' + tMkt(sellMkt) + '</div>' +
+      '</div>' +
+
+      // Per kg breakdown
+      '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px">' +
+        statBox(buyLbl + '<br><small>' + tMkt(buyMkt) + '</small>', 'රු.' + fmt(buyPrice), '#191d1a') +
+        statBox(sellLbl + '<br><small>' + tMkt(sellMkt) + '</small>', 'රු.' + fmt(sellPrice), '#191d1a') +
+        statBox(tcLbl, '-රු.' + fmt(tc), 'var(--up)') +
+      '</div>' +
+
+      // Profit per kg — BIG
+      '<div style="background:rgba(255,255,255,.7);border-radius:10px;padding:10px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center">' +
+        '<div>' +
           '<div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">' + profLbl + '</div>' +
-          '<div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:16px;color:' + (isProfit ? 'var(--down)' : 'var(--up)') + '">' + (profitPerKg >= 0 ? '+' : '') + 'රු.' + fmt(profitPerKg) + '</div>' +
+          '<div style="font-family:JetBrains Mono,monospace;font-weight:800;font-size:24px;color:' + color + '">' +
+            (profitPerKg >= 0 ? '+' : '') + 'රු.' + fmt(profitPerKg) + '/kg' +
+          '</div>' +
         '</div>' +
-      '</div>' +
-      '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px">' +
-        '<div style="background:rgba(255,255,255,.6);border-radius:8px;padding:8px 10px">' +
-          '<div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">' + totLbl + ' (' + fmt(qty) + 'kg)</div>' +
-          '<div style="font-family:JetBrains Mono,monospace;font-weight:800;font-size:18px;color:' + (isProfit ? 'var(--down)' : 'var(--up)') + '">' + (totalProfit >= 0 ? '+' : '') + 'රු.' + fmt(totalProfit) + '</div>' +
-        '</div>' +
-        '<div style="background:rgba(255,255,255,.6);border-radius:8px;padding:8px 10px">' +
+        '<div style="text-align:right">' +
           '<div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">' + marginLbl + '</div>' +
-          '<div style="font-family:JetBrains Mono,monospace;font-weight:800;font-size:18px;color:' + (isProfit ? 'var(--down)' : 'var(--up)') + '">' + (profitPerKg >= 0 ? '+' : '') + margin + '%</div>' +
+          '<div style="font-family:JetBrains Mono,monospace;font-weight:800;font-size:20px;color:' + color + '">' +
+            (profitPerKg >= 0 ? '+' : '') + margin + '%' +
+          '</div>' +
         '</div>' +
       '</div>' +
+
+      // Total section
+      '<div style="background:rgba(255,255,255,.7);border-radius:10px;padding:10px 14px">' +
+        '<div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">' +
+          qtyLbl + ': ' + fmt(qty) + ' kg' +
+        '</div>' +
+        '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">' +
+          statBox(totCostLbl, 'රු.' + fmt(totalCost), 'var(--up)') +
+          statBox(totRevLbl,  'රු.' + fmt(totalRevenue), '#191d1a') +
+          statBox(totProfLbl, (totalProfit>=0?'+':'') + 'රු.' + fmt(totalProfit), color) +
+        '</div>' +
+      '</div>' +
+
     '</div>';
-
-  /* Auto-trigger on load */
-  setTimeout(function(){ calcArbitrage(cid); }, 50);
 }
 
-function calcTransport(tcid, mktsJson, rt, ws){
-  const tc=parseFloat(document.getElementById("tc_"+tcid).value)||0;
-  const mkts=JSON.parse(mktsJson);
-  const results=mkts.map(k=>{
-    const margin=rt[k]-ws[k];
-    const net=margin-tc;
-    return {k,margin,net};
-  }).sort((a,b)=>b.net-a.net);
-  const best=results[0];
-  const html=results.map((r,i)=>{
-    const color=r.net>0?"#2c7a52":r.net===0?"#8a8170":"#b23a2e";
-    const icon=i===0&&r.net>0?"🏆 ":r.net>0?"✅ ":"❌ ";
-    return `<div style="display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;background:${i===0&&r.net>0?"#e3efe6":"#f4efe4"};border:1px solid ${i===0&&r.net>0?"#2c7a52":"#e3d9c4"}">
-      <span style="font-size:13px;font-weight:700;min-width:80px">${icon}${r.k}</span>
-      <span style="font-size:11px;color:#7a7264">Margin: +රු.${fmt(r.margin)}</span>
-      <span style="font-size:11px;color:#7a7264">Transport: -රු.${tc}</span>
-      <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:${color};margin-left:auto">${r.net>=0?"+":""}රු.${fmt(r.net)}/kg</span>
-    </div>`;
-  }).join("");
-  const advice=best.net>50?"🎯 "+best.k+" වෙළඳපොළට යන්න! හොඳම ලාභය!":best.net>0?"✅ "+best.k+" හොඳයි — ලාභ ඇත.":best.net===0?"⚠️ Break-even — ලාභ නැත.":"❌ Transport cost වැඩියි — අලාභ!";
-  document.getElementById("tr_"+tcid).innerHTML=html+`<div style="margin-top:6px;font-size:12px;font-weight:700;padding:6px 10px;border-radius:7px;background:#0e4f4a;color:#ffd98a">${advice}</div>`;
+function statBox(label, value, valueColor) {
+  return '<div style="background:rgba(255,255,255,.6);border-radius:8px;padding:8px 10px;text-align:center">' +
+    '<div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">' + label + '</div>' +
+    '<div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:13px;color:' + valueColor + '">' + value + '</div>' +
+    '</div>';
 }
-
-function gapAlert(d){
-  /* HARTI: markets contains wholesale ranges, extract midpoints */
-  const rawMkts = d.markets||{};
-  const rt = {}; /* retail = same as wholesale midpoint for HARTI */
-  const ws = {}; /* wholesale = midpoint */
-  Object.keys(rawMkts).forEach(function(k){
-    var mv = hartiMid(rawMkts[k]);
-    if(mv != null){ rt[k] = mv; ws[k] = mv; }
-  });
-  const mkts=Object.keys(rt).filter(k=>rt[k]!=null&&ws[k]!=null);
-  if(!mkts.length){
-    /* Inter-market gap */
-    const rtVals=Object.entries(rt).filter(([k,v])=>v!=null);
-    if(rtVals.length<2) return '<p class="mkt-sub" style="padding:8px 0">Not enough market data for gap analysis.</p>';
-    const sorted=rtVals.sort((a,b)=>b[1]-a[1]);
-    const gap=sorted[0][1]-sorted[sorted.length-1][1];
-    const pct=((gap/sorted[sorted.length-1][1])*100).toFixed(1);
-    return `<div class="gap-alert show">
-      <div>💡 <strong>Inter-Market Gap</strong></div>
-      <div class="gap-val">${sorted[0][0]}: රු.${fmt(sorted[0][1])} &nbsp;→&nbsp; ${sorted[sorted.length-1][0]}: රු.${fmt(sorted[sorted.length-1][1])}</div>
-      <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;color:#7b3fa0;margin:4px 0">Gap: රු.${fmt(gap)}/kg (${pct}%)</div>
-      <div class="gap-advice">${gap>100?"🚛 Transport opportunity — price difference worth moving stock!":gap>50?"📊 Moderate gap — consider transport costs before moving.":"✅ Small gap — markets are balanced."}</div>
-    </div>`;
-  }
-  /* Retail vs Wholesale gap */
-  const rows=mkts.map(k=>{
-    const g=rt[k]-ws[k];
-    return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-      <span style="min-width:90px;font-size:13px;font-weight:600">${k}</span>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#a9802a">W: රු.${fmt(ws[k])}</span>
-      <span style="color:#7a7264">→</span>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:12px">R: රු.${fmt(rt[k])}</span>
-      <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#7b3fa0;margin-left:auto">+රු.${fmt(g)}</span>
-    </div>`;
-  }).join("");
-  const maxGap=Math.max(...mkts.map(k=>rt[k]-ws[k]));
-  /* Store margins for transport calc */
-  const tcid="tc_"+Math.random().toString(36).slice(2,7);
-  window._tcData=window._tcData||{};
-  window._tcData[tcid]=mkts.map(k=>({k,margin:rt[k]-ws[k],rt:rt[k],ws:ws[k]}));
-  return `<div class="gap-alert show">
-    <div style="font-size:12px;font-weight:700;color:#7b3fa0;margin-bottom:8px">💡 Retail vs Wholesale Margin — ${DATES[DATES.length-1]}</div>
-    ${rows}
-    <div class="gap-advice">${maxGap>150?"⚠️ Wide margin — retailers keeping large profit. Good buying opportunity at wholesale!":maxGap>75?"📊 Normal margin range.":"✅ Tight margins — competitive market."}</div>
-    <div style="border-top:1px dashed #cdbf9f;margin-top:12px;padding-top:12px">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-        <div style="font-size:12px;font-weight:700;color:#0e4f4a">🧮 Profit Calculator</div>
-        <div style="display:flex;gap:0;border:1.5px solid #cdbf9f;border-radius:999px;overflow:hidden">
-          <button id="mode_farmer_${tcid}" onclick="setCalcMode('${tcid}','farmer')"
-            style="font:inherit;font-size:11px;font-weight:700;padding:4px 12px;border:none;background:#2c7a52;color:#fff;cursor:pointer">${lang==="si"?"🌾 ගොවියා":lang==="ta"?"🌾 விவசாயி":"🌾 Farmer"}</button>
-          <button id="mode_trader_${tcid}" onclick="setCalcMode('${tcid}','trader')"
-            style="font:inherit;font-size:11px;font-weight:700;padding:4px 12px;border:none;background:transparent;color:#7a7264;cursor:pointer">${lang==="si"?"🌾 ගොවියා":lang==="ta"?"🌾 விவசாயி":"🌾 Farmer"}</button>
-        </div>
-      </div>
-
-      <!-- TRADER MODE -->
-      <div id="trader_inputs_${tcid}">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <label style="font-size:12px;color:#3a403a;min-width:110px">Transport cost:</label>
-          <input id="tc_${tcid}" type="number" min="0" max="500" value="10"
-            style="width:75px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:6px 8px;border:1.5px solid #cdbf9f;border-radius:7px;background:#fffdf7;color:#191d1a"
-            oninput="calcTransport2('${tcid}')">
-          <span style="font-size:12px;color:#7a7264">රු./kg</span>
-        </div>
-      </div>
-
-      <!-- FARMER MODE -->
-      <div id="farmer_inputs_${tcid}" style="display:none">
-        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px">
-          <div style="display:flex;align-items:center;gap:8px">
-            <label style="font-size:12px;color:#3a403a;min-width:130px">Total harvest:</label>
-            <input id="fkg_${tcid}" type="number" min="0" value="500"
-              style="width:80px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:6px 8px;border:1.5px solid #cdbf9f;border-radius:7px;background:#fffdf7;color:#191d1a"
-              oninput="calcFarmer('${tcid}')">
-            <span style="font-size:12px;color:#7a7264">kg</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px">
-            <label style="font-size:12px;color:#3a403a;min-width:130px">Transport cost:</label>
-            <input id="ftc_${tcid}" type="number" min="0" value="10"
-              style="width:80px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:6px 8px;border:1.5px solid #cdbf9f;border-radius:7px;background:#fffdf7;color:#191d1a"
-              oninput="calcFarmer('${tcid}')">
-            <span style="font-size:12px;color:#7a7264">රු./kg</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px">
-            <label style="font-size:12px;color:#3a403a;min-width:130px">Production cost:
-              <span style="font-size:10px;color:#7a7264;font-weight:400">(optional)</span>
-            </label>
-            <input id="fpc_${tcid}" type="number" min="0" value=""
-              placeholder="0"
-              style="width:80px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:6px 8px;border:1.5px solid #cdbf9f;border-radius:7px;background:#fffdf7;color:#191d1a"
-              oninput="calcFarmer('${tcid}')">
-            <span style="font-size:12px;color:#7a7264">රු./kg</span>
-          </div>
-        </div>
-      </div>
-
-      <div id="tr_${tcid}" style="display:flex;flex-direction:column;gap:6px"></div>
-    </div>
-  </div>`;
-}
-
-function gapChart(d){
-  /* Last 30 days retail vs wholesale shaded area */
-  const n=Math.min(30,DB.dates.length);
-  const idxs=Array.from({length:n},(_,i)=>DB.dates.length-n+i);
-  const rtSeries=d.series, wsSeries=d.wholesaleSeries||[];
-  const labels=idxs.map(i=>DATES[i]);
-  const rtData=idxs.map(i=>rtSeries[i]||null);
-  const wsData=idxs.map(i=>wsSeries[i]||null);
-  const gapData=idxs.map(i=>(rtSeries[i]!=null&&wsSeries[i]!=null)?rtSeries[i]-wsSeries[i]:null);
-  /* Check if we have wholesale data */
-  const hasWS=wsData.some(v=>v!=null);
-  const cid="gap_"+Math.random().toString(36).slice(2,8);
-  window._gapPending=window._gapPending||{};
-  /* Poya annotations */
-  const poyaIdxs=idxs.filter(i=>POYA_DAYS.includes(DB.dates[i])).map(i=>idxs.indexOf(i));
-  window._gapPending[cid]={labels,rtData,wsData,gapData,hasWS,poyaIdxs};
-  setTimeout(()=>{
-    const p=window._gapPending[cid];if(!p)return;
-    const canvas=document.getElementById(cid);if(!canvas)return;
-    const datasets=p.hasWS?[
-      {label:'Retail',data:p.rtData,borderColor:'#0e4f4a',borderWidth:2,pointRadius:2,tension:0.3,fill:'+1',backgroundColor:'rgba(14,79,74,0.15)',spanGaps:false},
-      {label:'Wholesale',data:p.wsData,borderColor:'#a9802a',borderWidth:2,pointRadius:2,tension:0.3,fill:false,spanGaps:false}
-    ]:[
-      {label:'Retail',data:p.rtData,borderColor:'#0e4f4a',borderWidth:2,pointRadius:2,tension:0.3,fill:false,spanGaps:false}
-    ];
-    new Chart(canvas,{
-      type:'line',
-      data:{labels:p.labels,datasets},
-      options:{
-        responsive:true,maintainAspectRatio:false,
-        interaction:{mode:'index',intersect:false},
-        plugins:{
-          legend:{display:false},
-          tooltip:{
-            backgroundColor:'#191d1a',titleColor:'#ffd98a',bodyColor:'#d4ede8',padding:8,
-            callbacks:{
-              afterBody:(items)=>{
-                const rt=items.find(i=>i.dataset.label==='Retail');
-                const ws=items.find(i=>i.dataset.label==='Wholesale');
-                if(rt&&ws&&rt.parsed.y!=null&&ws.parsed.y!=null){
-                  return ['Gap: රු.'+(rt.parsed.y-ws.parsed.y).toFixed(0)];
-                }
-                return [];
-              },
-              label:ctx=>ctx.parsed.y==null?ctx.dataset.label+': n/a':ctx.dataset.label+': රු.'+ctx.parsed.y.toLocaleString()
-            }
-          }
-        },
-        scales:{
-          x:{
-            grid:{color:'rgba(0,0,0,0.04)'},
-            ticks:{font:{size:9},color:'#7a7264',maxRotation:45,autoSkip:true,maxTicksLimit:10},
-            afterDraw:(chart)=>{
-              /* Poya day markers */
-              p.poyaIdxs.forEach(pi=>{
-                const meta=chart.getDatasetMeta(0);
-                if(!meta.data[pi])return;
-                const x=meta.data[pi].x;
-                const ctx2=chart.ctx;
-                ctx2.save();
-                ctx2.strokeStyle='rgba(178,58,46,0.3)';
-                ctx2.lineWidth=1;
-                ctx2.setLineDash([3,3]);
-                ctx2.beginPath();
-                ctx2.moveTo(x,chart.chartArea.top);
-                ctx2.lineTo(x,chart.chartArea.bottom);
-                ctx2.stroke();
-                ctx2.fillStyle='#b23a2e';
-                ctx2.font='8px monospace';
-                ctx2.fillText('P',x-3,chart.chartArea.top+10);
-                ctx2.restore();
-              });
-            }
-          },
-          y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#7a7264',callback:v=>'රු.'+v.toLocaleString()},min:0}
-        }
-      }
-    });
-    delete window._gapPending[cid];
-  },100);
-  return `<div class="chart-wrap">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-bottom:4px;padding:0 4px">
-      <span class="lab" style="position:relative;top:0;left:0">${tMkt(d.primaryMarket)} · 30D · ${tUnit(d.unit)}</span>
-      <div style="display:flex;gap:10px;font-size:11px;color:#3a403a">
-        <span style="display:flex;align-items:center;gap:4px"><span style="width:16px;height:3px;background:#0e4f4a;display:inline-block;border-radius:2px"></span>Retail</span>
-        <span style="display:flex;align-items:center;gap:4px"><span style="width:16px;height:3px;background:#a9802a;display:inline-block;border-radius:2px"></span>Wholesale</span>
-      </div>
-    </div>
-    <div style="position:relative;height:210px;width:100%"><canvas id="${cid}" role="img" aria-label="Gap chart for ${d.name}"></canvas></div>
-    <div style="font-size:10px;color:#7a7264;text-align:right;margin-top:4px;padding-right:6px">P = Poya Day 🔴</div>
-  </div>`;
-}
-
-function yoyChart(d){
-  const yearData={};
-  DB.dates.forEach((dateStr,i)=>{
-    const v=d.series[i];if(v==null)return;
-    const dt=new Date(dateStr+"T00:00:00");
-    const yr=dt.getFullYear(),mo=dt.getMonth();
-    if(!yearData[yr])yearData[yr]=Array(12).fill(null).map(()=>[]);
-    yearData[yr][mo].push(v);
-  });
-  const years=Object.keys(yearData).sort();
-  const monthlyAvg={};
-  years.forEach(yr=>{monthlyAvg[yr]=yearData[yr].map(vals=>vals.length?Math.round(vals.reduce((a,b)=>a+b,0)/vals.length):null);});
-  const colors=["#378ADD","#1D9E75","#a9802a","#b23a2e","#9b59b6"];
-  const months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-  const cid="yoy_"+Math.random().toString(36).slice(2,8);
-  const legendHtml=years.map((yr,i)=>`<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#3a403a"><span style="width:20px;height:3px;background:${colors[i%colors.length]};display:inline-block;border-radius:2px"></span>${yr}</span>`).join("");
-  /* Store data for deferred init */
-  window._yoyPending=window._yoyPending||{};
-  window._yoyPending[cid]={years,monthlyAvg,colors,months,d};
-  const html=`<div class="chart-wrap">
-    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-bottom:6px;padding:0 4px">
-      <span class="lab" style="position:relative;top:0;left:0">${tMkt(d.primaryMarket)} YoY &middot; ${tUnit(d.unit)}</span>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">${legendHtml}</div>
-    </div>
-    <div style="position:relative;height:210px;width:100%"><canvas id="${cid}" role="img" aria-label="YoY chart for ${d.name}"></canvas></div>
-  </div>`;
-  /* Init after DOM ready */
-  setTimeout(()=>{
-    const p=window._yoyPending[cid];if(!p)return;
-    const canvas=document.getElementById(cid);if(!canvas)return;
-    new Chart(canvas,{
-      type:'line',
-      data:{
-        labels:p.months,
-        datasets:p.years.map((yr,i)=>({
-          label:yr,
-          data:p.monthlyAvg[yr],
-          borderColor:p.colors[i%p.colors.length],
-          borderWidth:2.2,
-          borderDash:i===p.years.length-1?[6,4]:[],
-          pointRadius:3,pointHoverRadius:5,
-          pointBackgroundColor:p.colors[i%p.colors.length],
-          backgroundColor:p.colors[i%p.colors.length]+'15',
-          tension:0.3,fill:false,spanGaps:false
-        }))
-      },
-      options:{
-        responsive:true,maintainAspectRatio:false,
-        interaction:{mode:'index',intersect:false},
-        plugins:{
-          legend:{display:false},
-          tooltip:{
-            backgroundColor:'#191d1a',titleColor:'#ffd98a',bodyColor:'#d4ede8',padding:8,
-            callbacks:{label:ctx=>ctx.parsed.y==null?ctx.dataset.label+': n/a':ctx.dataset.label+': රු.'+ctx.parsed.y.toLocaleString()}
-          }
-        },
-        scales:{
-          x:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#7a7264',autoSkip:false,maxRotation:0}},
-          y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#7a7264',callback:v=>'රු.'+v.toLocaleString()},min:0}
-        }
-      }
-    });
-    delete window._yoyPending[cid];
-  },100);
-  return html;
-}
-
-function wireChart(d, series){
-  series = series || d.series;
-  const svg=document.getElementById("lc");if(!svg)return;
-  const tip=document.getElementById("tip"),cross=document.getElementById("cross"),wrap=svg.closest(".chart-wrap");
-  const dots=[...svg.querySelectorAll(".pt")];
-  function show(dot){const i=+dot.getAttribute("data-i"),cx=+dot.getAttribute("cx"),cy=+dot.getAttribute("cy");
-    const vb=svg.viewBox.baseVal,rect=svg.getBoundingClientRect();
-    const px=cx/vb.width*rect.width,py=cy/vb.height*rect.height,wr=wrap.getBoundingClientRect();
-    tip.style.left=(rect.left-wr.left+px)+"px";tip.style.top=(rect.top-wr.top+py)+"px";
-    tip.innerHTML=DATES[i]+' &nbsp;<b>'+fmt(series[i])+'</b>';tip.style.opacity=1;
-    cross.setAttribute("x1",cx);cross.setAttribute("x2",cx);cross.setAttribute("opacity","1");
-    dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));dot.setAttribute("r","5");}
-  function hide(){tip.style.opacity=0;cross.setAttribute("opacity","0");dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));}
-  svg.addEventListener("mousemove",e=>{const rect=svg.getBoundingClientRect(),rel=(e.clientX-rect.left)/rect.width;
-    let best=null,bd=1e9;dots.forEach(o=>{const cx=+o.getAttribute("cx")/svg.viewBox.baseVal.width;
-      const dd=Math.abs(cx-rel);if(dd<bd){bd=dd;best=o;}});if(best)show(best);});
-  svg.addEventListener("mouseleave",hide);
-  dots.forEach(o=>o.addEventListener("mouseenter",()=>show(o)));
-}
-
-function downloadModalPNG(id){
-  const modal=document.getElementById("modal");
-  if(!modal)return;
-  const d=DATA[id];
-  const lastDate=DATES[DATES.length-1];
-  const btn=document.querySelector('[onclick*="downloadModalPNG"]');
-  if(btn){btn.textContent="⏳ Creating...";btn.disabled=true;}
-  html2canvas(modal,{
-    scale:2,
-    useCORS:true,
-    allowTaint:true,
-    backgroundColor:"#fffdf7",
-    logging:false,
-    scrollX:0,
-    scrollY:0,
-    windowWidth:modal.scrollWidth,
-    windowHeight:modal.scrollHeight
-  }).then(canvas=>{
-    const link=document.createElement("a");
-    link.download="topgoviya-"+d.name.toLowerCase().replace(/\s+/g,"-")+"-"+lastDate+".png";
-    link.href=canvas.toDataURL("image/png");
-    link.click();
-    if(btn){btn.textContent="📸 Share as Image";btn.disabled=false;}
-  }).catch(()=>{
-    if(btn){btn.textContent="📸 Share as Image";btn.disabled=false;}
-  });
-}
-
-
-
-function whatsappShare(d){
-  const ch=changeOf(d.series);
-  const cur=latestVal(d.series);
-  const arr=ch.dir==="up"?"📈":ch.dir==="down"?"📉":"➡️";
-  const msg=
-    "🇱🇰 *Lanka Price Monitor*\n\n"+
-    arr+" *"+d.name+"* — අද මිල\n"+
-    "📍 "+d.primaryMarket+": රු."+Math.round(cur)+"/"+d.unit+"\n"+
-    "📊 වෙනස: "+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+"%\n\n"+
-    "🔗 https://wmrkumara.github.io/lanka-price-monitor/\n"+
-    "_ශ්‍රී ලංකා මහ බැංකු දත්ත | නොමිලේ_";
-  const url="https://wa.me/?text="+encodeURIComponent(msg);
-  window.open(url,"_blank");
-}
-function facebookShare(d){
-  const ch=changeOf(d.series);
-  const cur=latestVal(d.series);
-  const arr=ch.dir==="up"?"▲":ch.dir==="down"?"▼":"▶";
-  const lastDate=DATES[DATES.length-1];
-  /* Pre-calculate — mobile compatibility */
-  const dEmoji=tEmoji(d.name);
-  const dName=lang==="en"?d.name:d.name+" ("+tName(d.name)+")";
-  const dNameSimple=d.name; /* Always English for PNG */
-  const dCat=tCat(d.category);
-  const dMkt=tMkt(d.primaryMarket);
-  const dUnit=tUnit(d.unit);
-  const dQuote=QUOTES.en[Math.floor(Math.random()*QUOTES.en.length)];
-
-  /* Step 1 — Generate + download PNG card */
-  const card=document.createElement("div");
-  card.style.cssText="position:absolute;left:-9999px;top:0;width:600px;height:auto;background:#f4efe4;font-family:Georgia,serif;overflow:hidden;border-radius:0;z-index:-1";
-  card.innerHTML=`
-    <div style="height:8px;background:#0e4f4a"></div>
-    <div style="background:#0e4f4a;padding:18px 28px;display:flex;justify-content:space-between;align-items:center">
-      <div style="font-family:Georgia,serif;font-size:22px;color:#fff;font-weight:700">Lanka <em style="color:#ffd98a;font-style:italic">Price</em> Monitor</div>
-      <div style="font-family:monospace;font-size:13px;color:#9fd4c8;text-align:right">
-        <div>${lastDate}</div>
-        <div style="font-size:11px;color:#7ab8b0">Data: HARTI</div>
-      </div>
-    </div>
-    <div style="padding:20px 24px 16px">
-      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#7a7264;font-weight:700;margin-bottom:8px">${d.category} · ${d.primaryMarket}</div>
-      <div style="margin-bottom:14px">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start">
-          <div style="flex:1;padding-right:10px">
-            <div style="font-size:26px;line-height:1;margin-bottom:2px">${dEmoji}</div>
-            <div style="font-family:Georgia,serif;font-size:30px;font-weight:500;color:#191d1a;line-height:1.1">${dNameSimple}</div>
-          </div>
-          <div style="text-align:right;flex-shrink:0">
-            <div style="font-family:monospace;font-size:12px;font-weight:700;color:#0F5C4D;letter-spacing:.5px">www.TopGoviya.lk</div>
-            <div style="font-size:9px;color:#D4A017;font-weight:700;letter-spacing:.3px">TopGoviya.lk</div>
-          </div>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
-        <div style="font-family:monospace;font-size:48px;font-weight:700;color:#191d1a">Rs.${fmt(cur)}</div>
-        <div style="background:${ch.dir==="up"?"#f7e6e2":"#e3efe6"};color:${ch.dir==="up"?"#b23a2e":"#2c7a52"};font-family:monospace;font-size:20px;font-weight:700;padding:8px 16px;border-radius:10px">${arr} ${Math.abs(ch.pct).toFixed(1)}%</div>
-      </div>
-      <div style="height:1px;background:#e3d9c4;margin-bottom:20px"></div>
-      <div style="display:grid;grid-template-columns:${Object.entries(d.markets||{}).filter(([k,v])=>v!=null).length>2?"1fr 1fr 1fr":"1fr 1fr"};gap:12px;margin-bottom:20px">
-        ${Object.entries(d.markets||{}).filter(([k,v])=>v!=null).map(([k,v])=>`
-        <div style="background:#fffdf7;border:1px solid #e3d9c4;border-radius:10px;padding:12px 14px">
-          <div style="font-size:10px;color:#7a7264;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">${k}</div>
-          <div style="font-family:monospace;font-size:18px;font-weight:700;color:#191d1a">Rs.${fmt(v)}</div>
-        </div>`).join("")}
-      </div>
-    </div>
-    <div style="background:#0e4f4a;padding:14px 28px;text-align:center">
-      <div style="font-family:monospace;font-size:16px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
-      <div style="font-size:11px;color:#9fd4c8;margin-top:4px;font-style:italic">"${dQuote}"</div>
-      <div style="font-size:10px;color:#7ab8b0;margin-top:3px">For Farmers. For Traders. Free.</div>
-    </div>
-  `;
-  document.body.appendChild(card);
-
-  html2canvas(card,{
-    scale:2,
-    useCORS:true,
-    allowTaint:true,
-    backgroundColor:"#f4efe4",
-    logging:false,
-    imageTimeout:8000,
-    removeContainer:true,
-    foreignObjectRendering:false
-  }).then(canvas=>{
-    document.body.removeChild(card);
-    /* Download PNG */
-    const link=document.createElement("a");
-    link.download="lanka-price-"+d.name.toLowerCase().replace(/\s+/g,"-")+"-"+lastDate+".png";
-    link.href=canvas.toDataURL("image/png");
-    link.click();
-
-    /* Step 2 — Show instruction popup */
-    setTimeout(()=>{
-      const popup=document.createElement("div");
-      popup.id="fbSharePopup";
-      popup.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px";
-      popup.innerHTML=`
-        <div style="background:#fffdf7;border-radius:16px;max-width:400px;width:100%;padding:24px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.4)">
-          <div style="font-size:32px;margin-bottom:12px">📸✅</div>
-          <div style="font-family:Georgia,serif;font-size:20px;font-weight:500;color:#0e4f4a;margin-bottom:8px">PNG Download වුනා!</div>
-          <div style="font-size:13px;color:#7a7264;line-height:1.7;margin-bottom:20px">
-            <strong style="color:#191d1a">Facebook post කරන්නේ:</strong><br>
-            1. Facebook app open කරන්න<br>
-            2. "Photo/Video" add කරන්න<br>
-            3. Download වුන PNG select කරන්න<br>
-            4. Caption paste කරන්න → Post!
-          </div>
-          <div style="display:flex;gap:8px">
-            <button onclick="document.getElementById('fbSharePopup').remove();window.open('https://www.facebook.com','_blank')" 
-              style="flex:1;background:#1877F2;color:#fff;border:none;border-radius:8px;padding:12px;font-size:14px;font-weight:700;cursor:pointer">
-              📘 Facebook Open
-            </button>
-            <button onclick="document.getElementById('fbSharePopup').remove()"
-              style="flex:1;background:#f4efe4;color:#3a403a;border:1.5px solid #cdbf9f;border-radius:8px;padding:12px;font-size:14px;font-weight:700;cursor:pointer">
-              ✓ OK
-            </button>
-          </div>
-        </div>
-      `;
-      document.body.appendChild(popup);
-    },500);
-
-  }).catch(()=>{
-    document.body.removeChild(card);
-    window.open("https://www.facebook.com","_blank");
-  });
-}
-function renderBestCrop(){
-  const el=document.getElementById("bestCrop");
-  if(!el||!DATA.length)return;
-  const ranked=DATA.map(d=>({d,ch:changeOf(d.series)}))
-    .filter(x=>latestVal(x.d.series)!==null)
-    .sort((a,b)=>b.ch.pct-a.ch.pct);
-  const sell=ranked.filter(x=>x.ch.pct>0).slice(0,5);
-  const buy=ranked.filter(x=>x.ch.pct<0).slice(-5).reverse();
-  const row=({d,ch})=>`<div class="best-row" onclick="openDetail(${d.id})" style="cursor:pointer">
-    <span class="best-name">${tEmoji(d.name)} ${tName(d.name)}</span>
-    <span style="display:flex;align-items:center;gap:6px">
-      <span class="best-price">රු.${fmt(latestVal(d.series))}<small style="font-size:9px;color:var(--muted)"> ${tUnit(d.unit)}</small></span>
-      <span class="best-badge ${ch.pct>0?'up':'down'}">${ch.pct>0?'▲':'▼'} ${Math.abs(ch.pct).toFixed(1)}%</span>
-    </span>
-  </div>`;
-  el.innerHTML=`
-    <div class="best-col">
-      <h3 class="sell">${t('bestSell')} 💰</h3>
-      ${sell.map(row).join('')}
-    </div>
-    <div class="best-col">
-      <h3 class="buy">${t('bestBuy')} 🛒</h3>
-      ${buy.map(row).join('')}
-    </div>`;
-  // Update labels
-  const hb=document.getElementById("hBest");
-  if(hb)hb.innerHTML=t("bestTitle");
-  const hint=document.getElementById("hintBest");
-  if(hint)hint.textContent=t("bestHint");
-}
-
 
 /* ===== Voice Search Hint Rotation ===== */
 const VOICE_HINTS = {
