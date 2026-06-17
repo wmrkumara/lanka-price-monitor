@@ -385,9 +385,38 @@
   .fb-share:hover{background:#0d65d9;}
   .wa-channel{background:var(--paper-2);color:var(--ink-soft);border:1.5px solid var(--line-strong);}
   .wa-channel:hover{border-color:#25D366;color:#1a7a40;}
+
+  /* ── TOP NAV BAR ── */
+  .topnav{background:var(--petrol-deep);border-bottom:2px solid var(--gold);padding:0}
+  .topnav-inner{max-width:1160px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:0}
+  .topnav-brand{font-family:'Newsreader',serif;font-size:16px;font-weight:500;color:#fff;
+    padding:12px 18px 12px 0;border-right:1px solid rgba(255,255,255,.18);margin-right:4px;
+    white-space:nowrap;text-decoration:none;letter-spacing:-.01em}
+  .topnav-brand em{font-style:italic;color:#ffd98a}
+  .navlinks{display:flex;gap:2px;padding:8px 0}
+  .navlink{font:inherit;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    padding:7px 16px;border-radius:8px;text-decoration:none;transition:.18s;white-space:nowrap}
+  .navlink.retail{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+  .navlink.retail:hover{background:rgba(255,255,255,.18);color:#fff}
+  .navlink.wholesale{background:var(--gold);color:#fff}
+  .navlink.wholesale:hover{background:#c4921f}
+  .navlink-badge{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.08em;
+    background:rgba(255,255,255,.25);padding:2px 5px;border-radius:4px;margin-left:5px;vertical-align:middle}
+  @media(max-width:560px){.navlink{font-size:11px;padding:6px 10px}}
 </style>
 </head>
 <body>
+<!-- ══ TOP NAV BAR ══ -->
+<nav class="topnav" role="navigation">
+  <div class="topnav-inner">
+    <a href="index.html" class="topnav-brand">Lanka <em>Price</em> Monitor</a>
+    <div class="navlinks">
+      <a href="index.html" class="navlink retail">📊 Retail Prices <span class="navlink-badge">CBSL</span></a>
+      <a href="wholesale.html" class="navlink wholesale">📦 Wholesale <span class="navlink-badge">HARTI</span></a>
+    </div>
+  </div>
+</nav>
+
 <div class="wrap">
   <header class="masthead" itemscope itemtype="https://schema.org/WebSite">
   <meta itemprop="name" content="Lanka Price Monitor | TopGoviya.lk">
