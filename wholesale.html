@@ -2109,7 +2109,36 @@ setTimeout(()=>{
 /* Voice hint updates on lang change — handled in setLang below */
 
 
-/* ===== function yoyChart ===== */
+
+
+
+
+
+
+
+function init(){
+  DATES=DB.dateLabels;
+  /* Store market dates for detail popup */
+  if(DB.markets) window.HARTI_DB_MARKETS = DB.markets;
+  DATE_OBJS=DB.dates.map(s=>new Date(s+"T00:00:00"));
+  DATA=DB.commodities.map((d,i)=>(d.id=i,d));
+  const last=DB.dates[DB.dates.length-1];
+  const dt=new Date(last+"T00:00:00");
+  const opt={day:"numeric",month:"long",year:"numeric"};
+  const el=document.getElementById("stampDate"); if(el) el.textContent=dt.toLocaleDateString("en-GB",opt);
+  applyLang(); buildCats(); renderMovers(); renderGrid(); renderBestCrop(); renderFAQ("si");
+  fetchWeather();
+  setInterval(fetchWeather, 3600000); /* Update every hour */
+}
+(async()=>{
+  try{ 
+    const r=await fetch("harti_data.json?v="+Date.now(),{cache:"no-store"}); 
+    if(r.ok){ DB=await r.json(); } 
+  }catch(e){ /* offline: use embedded */ }
+  init();
+})();
+
+/* ===== yoyChart ===== */
 function yoyChart(d){
   const yearData={};
   DB.dates.forEach((dateStr,i)=>{
@@ -2177,7 +2206,7 @@ function yoyChart(d){
   return html;
 }
 
-/* ===== function gapChart ===== */
+/* ===== gapChart ===== */
 function gapChart(d){
   /* Last 30 days retail vs wholesale shaded area */
   const n=Math.min(30,DB.dates.length);
@@ -2271,7 +2300,7 @@ function gapChart(d){
   </div>`;
 }
 
-/* ===== function gapAlert ===== */
+/* ===== gapAlert ===== */
 function gapAlert(d){
   const rt=d.markets||{}, ws=d.wholesaleMarkets||{};
   const mkts=Object.keys(rt).filter(k=>rt[k]!=null&&ws[k]!=null);
@@ -2366,7 +2395,7 @@ function gapAlert(d){
   </div>`;
 }
 
-/* ===== function renderBestCrop ===== */
+/* ===== renderBestCrop ===== */
 function renderBestCrop(){
   const el=document.getElementById("bestCrop");
   if(!el||!DATA.length)return;
@@ -2398,7 +2427,7 @@ function renderBestCrop(){
   if(hint)hint.textContent=t("bestHint");
 }
 
-/* ===== function downloadModalPNG ===== */
+/* ===== downloadModalPNG ===== */
 function downloadModalPNG(id){
   const modal=document.getElementById("modal");
   if(!modal)return;
@@ -2427,7 +2456,7 @@ function downloadModalPNG(id){
   });
 }
 
-/* ===== function whatsappShare ===== */
+/* ===== whatsappShare ===== */
 function whatsappShare(d){
   const ch=changeOf(d.series);
   const cur=latestVal(d.series);
@@ -2443,7 +2472,7 @@ function whatsappShare(d){
   window.open(url,"_blank");
 }
 
-/* ===== function facebookShare ===== */
+/* ===== facebookShare ===== */
 function facebookShare(d){
   const ch=changeOf(d.series);
   const cur=latestVal(d.series);
@@ -2559,27 +2588,6 @@ function facebookShare(d){
   });
 }
 
-function init(){
-  DATES=DB.dateLabels;
-  /* Store market dates for detail popup */
-  if(DB.markets) window.HARTI_DB_MARKETS = DB.markets;
-  DATE_OBJS=DB.dates.map(s=>new Date(s+"T00:00:00"));
-  DATA=DB.commodities.map((d,i)=>(d.id=i,d));
-  const last=DB.dates[DB.dates.length-1];
-  const dt=new Date(last+"T00:00:00");
-  const opt={day:"numeric",month:"long",year:"numeric"};
-  const el=document.getElementById("stampDate"); if(el) el.textContent=dt.toLocaleDateString("en-GB",opt);
-  applyLang(); buildCats(); renderMovers(); renderGrid(); renderBestCrop(); renderFAQ("si");
-  fetchWeather();
-  setInterval(fetchWeather, 3600000); /* Update every hour */
-}
-(async()=>{
-  try{ 
-    const r=await fetch("harti_data.json?v="+Date.now(),{cache:"no-store"}); 
-    if(r.ok){ DB=await r.json(); } 
-  }catch(e){ /* offline: use embedded */ }
-  init();
-})();
 </script>
 
 <!-- ===== PWA Install Banner ===== -->
