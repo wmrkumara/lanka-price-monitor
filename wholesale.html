@@ -1117,7 +1117,7 @@ function calcPanel(d){
         <button id="mode_farmer_${cid}" onclick="setCalcMode('${cid}','farmer')"
           style="font:inherit;font-size:12px;font-weight:700;padding:5px 14px;border:none;background:#2c7a52;color:#fff;cursor:pointer">${lang==="si"?"🌾 ගොවියා":lang==="ta"?"🌾 விவசாயி":"🌾 Farmer"}</button>
         <button id="mode_trader_${cid}" onclick="setCalcMode('${cid}','trader')"
-          style="font:inherit;font-size:12px;font-weight:700;padding:5px 14px;border:none;background:transparent;color:#7a7264;cursor:pointer">${lang==="si"?"💰 වෙළෙන්දා":lang==="ta"?"💰 வியாபாரி":"💰 Trader"}</button>
+          style="font:inherit;font-size:12px;font-weight:700;padding:5px 14px;border:none;background:transparent;color:#7a7264;cursor:pointer">${lang==="si"?"💰  වෙළඳ ලාභය":lang==="ta"?"💰 வியாபார லாபம்":"💰 Market Arbitrage"}</button>
       </div>
     </div>
 
@@ -1132,31 +1132,41 @@ function calcPanel(d){
       </div>`).join("")}
     </div>
 
-    <!-- TRADER INPUTS -->
+    <!-- TRADER INPUTS — Market Arbitrage -->
     <div id="trader_inputs_${cid}" style="display:none">
-      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
+      <div style="background:#fffbf0;border:1px solid #e3d9c4;border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:12px;color:#7a7264">
+        💡 ${lang==="si"?"එක් වෙළඳපොළකින් ගෙන වෙනත් වෙළඳපොළකට අලෙවිකිරීමේ ලාභය ගණනය කරනවා":lang==="ta"?"ஒரு சந்தையில் வாங்கி மற்றொரு சந்தையில் விற்பனை செய்வதன் லாபம் கணக்கிடுகிறது":"Calculate profit from buying at one wholesale market and selling at another"}
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:12px">
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-          <label style="font-size:13px;color:#3a403a;min-width:130px">${lang==="si"?"ගන්නේ කොහෙන්ද:":lang==="ta"?"எங்கிருந்து வாங்க:":"Buy from:"}</label>
+          <label style="font-size:13px;color:#3a403a;min-width:140px">${lang==="si"?"ගන්නා වෙළඳපොළ:":lang==="ta"?"வாங்கும் சந்தை:":"Buy from market:"}</label>
           <select id="tbuy_${cid}"
-            style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a;cursor:pointer"
-            onchange="calcTransport2('${cid}')">
-            ${traderMkts.map(k=>`<option value="${k}">${tMkt(k)} — ${lang==="si"?"තොග":lang==="ta"?"மொத்தம்":"W"}: රු.${fmt(ws[k])}/kg</option>`).join("")}
+            style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a;cursor:pointer;max-width:220px"
+            onchange="calcArbitrage('${cid}')">
+            ${traderMkts.map(k=>`<option value="${k}">${tMkt(k)}: රු.${fmt(ws[k])}/kg</option>`).join("")}
           </select>
         </div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-          <label style="font-size:13px;color:#3a403a;min-width:130px">${lang==="si"?"ප්‍රවාහන පිරිවැය:":lang==="ta"?"போக்குவரத்து செலவு:":"Transport cost:"}</label>
-          <input id="tc_${cid}" type="number" min="0" max="500" value="10"
+          <label style="font-size:13px;color:#3a403a;min-width:140px">${lang==="si"?"විකිණෙන වෙළඳපොළ:":lang==="ta"?"விற்கும் சந்தை:":"Sell to market:"}</label>
+          <select id="tsell_${cid}"
+            style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:7px 10px;border:1.5px solid #a9802a;border-radius:8px;background:#fffdf7;color:#191d1a;cursor:pointer;max-width:220px"
+            onchange="calcArbitrage('${cid}')">
+            ${traderMkts.map((k,i)=>`<option value="${k}" ${i===Math.min(1,traderMkts.length-1)?"selected":""}>${tMkt(k)}: රු.${fmt(ws[k])}/kg</option>`).join("")}
+          </select>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <label style="font-size:13px;color:#3a403a;min-width:140px">${lang==="si"?"ප්‍රවාහන පිරිවැය:":lang==="ta"?"போக்குவரத்து செலவு:":"Transport cost:"}</label>
+          <input id="tc_${cid}" type="number" min="0" max="500" value="15"
             style="width:80px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
-            oninput="calcTransport2('${cid}')">
+            oninput="calcArbitrage('${cid}')">
           <span style="font-size:13px;color:#7a7264">රු./kg</span>
         </div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-          <label style="font-size:13px;color:#3a403a;min-width:130px">${lang==="si"?"ඔබේ විකිණුම් මිල:":lang==="ta"?"உங்கள் விற்பனை விலை:":"Your sell price:"}</label>
-          <input id="tsell_${cid}" type="number" min="0" max="9999" value=""
-            placeholder="රු./kg"
-            style="width:100px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #a9802a;border-radius:8px;background:#fffdf7;color:#191d1a"
-            oninput="calcTransport2('${cid}')">
-          <span style="font-size:13px;color:#7a7264">රු./kg</span>
+          <label style="font-size:13px;color:#3a403a;min-width:140px">${lang==="si"?"ප්‍රමාණය:":lang==="ta"?"அளவு:":"Quantity:"}</label>
+          <input id="tqty_${cid}" type="number" min="0" value="100"
+            style="width:80px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
+            oninput="calcArbitrage('${cid}')">
+          <span style="font-size:13px;color:#7a7264">kg</span>
         </div>
       </div>
     </div>
@@ -1847,6 +1857,85 @@ function calcTransport2(tcid){
     `<div style="margin-top:4px;font-size:12px;font-weight:700;padding:8px 12px;border-radius:8px;background:#0e4f4a;color:#ffd98a">${advice}</div>`;
 }
 
+
+
+/* ===== Market Arbitrage Calculator (HARTI Wholesale) ===== */
+function calcArbitrage(cid) {
+  const buyEl  = document.getElementById("tbuy_"  + cid);
+  const sellEl = document.getElementById("tsell_" + cid);
+  const tcEl   = document.getElementById("tc_"    + cid);
+  const qtyEl  = document.getElementById("tqty_"  + cid);
+  const resEl  = document.getElementById("tr_"    + cid);
+  if(!buyEl || !sellEl || !resEl) return;
+
+  const data = window._tcData && window._tcData[cid] ? window._tcData[cid] : [];
+  const buyMkt  = buyEl.value;
+  const sellMkt = sellEl.value;
+  const tc      = parseFloat(tcEl ? tcEl.value : 15) || 0;
+  const qty     = parseFloat(qtyEl ? qtyEl.value : 100) || 100;
+
+  // Get prices from data
+  const buyEntry  = data.find(function(x){ return x.k === buyMkt;  });
+  const sellEntry = data.find(function(x){ return x.k === sellMkt; });
+
+  if(!buyEntry || !sellEntry) {
+    resEl.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:10px">Select markets with available price data.</div>';
+    return;
+  }
+
+  const buyPrice  = buyEntry.ws  || buyEntry.rt;
+  const sellPrice = sellEntry.ws || sellEntry.rt;
+  const profitPerKg = sellPrice - buyPrice - tc;
+  const totalProfit = profitPerKg * qty;
+  const margin = buyPrice > 0 ? ((profitPerKg / buyPrice) * 100).toFixed(1) : 0;
+  const isProfit = profitPerKg > 0;
+
+  const buyLbl   = lang==="si" ? "ගන්නා මිල"    : lang==="ta" ? "வாங்கும் விலை"   : "Buy price";
+  const sellLbl  = lang==="si" ? "විකිණෙන මිල"  : lang==="ta" ? "விற்கும் விலை"  : "Sell price";
+  const tcLbl    = lang==="si" ? "ප්‍රවාහන"      : lang==="ta" ? "போக்குவரத்து"   : "Transport";
+  const profLbl  = lang==="si" ? "ලාභය/kg"       : lang==="ta" ? "லாபம்/kg"        : "Profit/kg";
+  const totLbl   = lang==="si" ? "මුළු ලාභය"     : lang==="ta" ? "மொத்த லாபம்"    : "Total profit";
+  const marginLbl= lang==="si" ? "ලාභ %"          : lang==="ta" ? "லாப %"           : "Margin";
+  const viableLbl= lang==="si" ? (isProfit ? "✅ ලාභදායකයි!" : "❌ ලාභදායක නෙමෙයි") 
+                 : lang==="ta" ? (isProfit ? "✅ லாபகரம்!"  : "❌ லாபகரம் இல்லை")
+                 : (isProfit ? "✅ Profitable!" : "❌ Not profitable");
+
+  resEl.innerHTML = 
+    '<div style="background:' + (isProfit ? 'var(--down-bg)' : 'var(--up-bg)') + ';border:1.5px solid ' + (isProfit ? 'var(--down)' : 'var(--up)') + ';border-radius:12px;padding:14px 16px;margin-top:8px">' +
+      '<div style="font-size:15px;font-weight:800;color:' + (isProfit ? 'var(--down)' : 'var(--up)') + ';margin-bottom:10px">' + viableLbl + '</div>' +
+      '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">' +
+        '<div style="background:rgba(255,255,255,.6);border-radius:8px;padding:8px 10px">' +
+          '<div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">' + buyLbl + ' — ' + tMkt(buyMkt) + '</div>' +
+          '<div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:16px">රු.' + fmt(buyPrice) + '/kg</div>' +
+        '</div>' +
+        '<div style="background:rgba(255,255,255,.6);border-radius:8px;padding:8px 10px">' +
+          '<div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">' + sellLbl + ' — ' + tMkt(sellMkt) + '</div>' +
+          '<div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:16px">රු.' + fmt(sellPrice) + '/kg</div>' +
+        '</div>' +
+        '<div style="background:rgba(255,255,255,.6);border-radius:8px;padding:8px 10px">' +
+          '<div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">' + tcLbl + '</div>' +
+          '<div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:16px;color:var(--up)">-රු.' + fmt(tc) + '/kg</div>' +
+        '</div>' +
+        '<div style="background:rgba(255,255,255,.6);border-radius:8px;padding:8px 10px">' +
+          '<div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">' + profLbl + '</div>' +
+          '<div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:16px;color:' + (isProfit ? 'var(--down)' : 'var(--up)') + '">' + (profitPerKg >= 0 ? '+' : '') + 'රු.' + fmt(profitPerKg) + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px">' +
+        '<div style="background:rgba(255,255,255,.6);border-radius:8px;padding:8px 10px">' +
+          '<div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">' + totLbl + ' (' + fmt(qty) + 'kg)</div>' +
+          '<div style="font-family:JetBrains Mono,monospace;font-weight:800;font-size:18px;color:' + (isProfit ? 'var(--down)' : 'var(--up)') + '">' + (totalProfit >= 0 ? '+' : '') + 'රු.' + fmt(totalProfit) + '</div>' +
+        '</div>' +
+        '<div style="background:rgba(255,255,255,.6);border-radius:8px;padding:8px 10px">' +
+          '<div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">' + marginLbl + '</div>' +
+          '<div style="font-family:JetBrains Mono,monospace;font-weight:800;font-size:18px;color:' + (isProfit ? 'var(--down)' : 'var(--up)') + '">' + (profitPerKg >= 0 ? '+' : '') + margin + '%</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
+  /* Auto-trigger on load */
+  setTimeout(function(){ calcArbitrage(cid); }, 50);
+}
 
 function calcTransport(tcid, mktsJson, rt, ws){
   const tc=parseFloat(document.getElementById("tc_"+tcid).value)||0;
