@@ -1,7 +1,6 @@
 name: Update HARTI wholesale data
 on:
   schedule:
-    # 5:00 PM Sri Lanka time = 11:30 UTC (every day including weekends)
     - cron: "30 11 * * *"
   workflow_dispatch:
 permissions:
@@ -22,10 +21,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Create harti_pdfs folder if not exists
+      - name: Create harti_pdfs folder
         run: mkdir -p harti_pdfs
 
-      - name: Fetch latest HARTI report and rebuild harti_data.json
+      - name: Fetch latest HARTI report
         run: python harti_update.py
 
       - name: Commit if data changed
@@ -37,6 +36,9 @@ jobs:
             echo "No HARTI changes today."
           else
             git commit -m "Auto-update HARTI wholesale data ($(date +%Y-%m-%d))"
-            git pull --rebase origin main
+            git fetch origin main
+            git reset --soft origin/main
+            git add harti_data.json harti_pdfs/ || true
+            git commit -m "Auto-update HARTI wholesale data ($(date +%Y-%m-%d))" --allow-empty
             git push origin main
           fi
