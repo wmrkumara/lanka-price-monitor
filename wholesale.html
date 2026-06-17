@@ -901,7 +901,8 @@ function renderGrid(){
   document.getElementById("count").textContent=list.length+" "+t("items");
   if(!list.length){g.innerHTML='<div class="empty">'+t("noMatch").replace("%Q",state.q)+'</div>';return;}
   g.innerHTML=list.map(d=>{const ch=c(d),cur=latestVal(d.series);
-    return '<div class="item" onclick="openDetail('+d.id+')"><div class="top"><div><div class="cat" style="display:flex;justify-content:space-between;align-items:center">'+tCat(d.category)+'<span style="font-family:monospace;font-size:9px;font-weight:700;color:#0F5C4D;letter-spacing:.3px">TopGoviya.lk</span></div><div class="nm">'+tEmoji(d.name)+' '+tName(d.name)+'</div></div><span class="chg '+ch.dir+'">'+arrow(ch.dir)+' '+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</span></div>'+spark(d.series,220,42,strokeFor(ch.dir))+'<div class="foot"><span class="price">'+fmt(cur)+'<small> '+tUnit(d.unit)+'</small></span><span style="font-size:11px;color:var(--muted)">'+(ch.abs>0?"+":"")+fmt(ch.abs)+' '+t("vsLast")+'</span></div></div>';
+    const primaryP=d.markets&&d.primaryMarket?d.markets[d.primaryMarket]:null;
+    return '<div class="item" onclick="openDetail('+d.id+')"><div class="top"><div><div class="cat" style="display:flex;justify-content:space-between;align-items:center">'+tCat(d.category)+'<span style="font-family:monospace;font-size:9px;font-weight:700;color:#0F5C4D;letter-spacing:.3px">TopGoviya.lk</span></div><div class="nm">'+tEmoji(d.name)+' '+tName(d.name)+'</div></div><span class="chg '+ch.dir+'">'+arrow(ch.dir)+' '+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</span></div>'+spark(d.series,220,42,strokeFor(ch.dir))+'<div class="foot"><span class="price">'+fmt(cur)+'<small> '+tUnit(d.unit)+'</small></span></div>'+(primaryP&&primaryP.min&&primaryP.max?'<div style="font-size:10px;color:var(--muted);font-family:\'JetBrains Mono\',monospace">Rs.'+primaryP.min+'–'+primaryP.max+'</div>':'')+"</div>";
   }).join("");
 }
 
@@ -1066,7 +1067,7 @@ function switchMode(mode){
     },300);
     document.querySelectorAll("#ranges button").forEach(b=>b.classList.remove("on"));
   } else {
-    if(mh)mh.innerHTML=marketBars(curDetail,mode);
+    if(mh)mh.innerHTML=wholesaleMarketTable(curDetail);
     const active=document.querySelector("#ranges button.on");
     renderRange(active?active.dataset.r:defaultRange(),mode);
   }
@@ -1367,6 +1368,58 @@ function aiInsight(d){
   </div>`;
 }
 
+
+/* ===== HARTI Wholesale Market Table ===== */
+function wholesaleMarketTable(d) {
+  const HARTI_MKT_DATES = DB.marketDates || DB.dates ? [DB.dates[DB.dates.length-1]] : [];
+  const markets = DB.markets || ["Peliyagoda","Kandy","Dambulla","Meegoda","Norochchole",
+    "Thambuththegama","Keppetipola","Nuwaraeliya","Bandarawela","Veyangoda"];
+  
+  // Get latest prices per market from d.markets
+  const mktPrices = d.markets || {};
+  const allMids = markets.map(m => mktPrices[m] ? (mktPrices[m].mid || mktPrices[m]) : null).filter(v=>v!=null);
+  const maxMid = allMids.length ? Math.max(...allMids) : 1;
+  
+  const naText = t("na") || "—";
+  const heading = lang==="si"?"වෙළඳපොළ අතර — "+DATES[DATES.length-1]:
+                  lang==="ta"?"சந்தைகளில் — "+DATES[DATES.length-1]:
+                  "Prices across markets — "+DATES[DATES.length-1];
+  const subline = lang==="si"?""+tUnit(d.unit)+" · තොග මිල පරාසයේ මධ්‍යගතය":
+                  lang==="ta"?""+tUnit(d.unit)+" · மொத்த வரம்பின் நடுப்புள்ளி":
+                  tUnit(d.unit)+" · Midpoint of wholesale range shown";
+  const mktCol  = lang==="si"?"වෙළඳපොළ":lang==="ta"?"சந்தை":"Market";
+  const midCol  = lang==="si"?"මධ්‍යගතය":lang==="ta"?"நடுப்புள்ளி":"Midpoint";
+  const rngCol  = lang==="si"?"පරාසය":lang==="ta"?"வரம்பு":"Range (Rs.)";
+
+  let rows = "";
+  markets.forEach((m, i) => {
+    const p = mktPrices[m];
+    const mv = p ? (p.mid || p) : null;
+    const rng = p && p.min && p.max ? (p.min + "–" + p.max) : (mv ? String(mv) : null);
+    const pct = mv && maxMid ? Math.round(mv/maxMid*100) : 0;
+    const mktDate = DATES && DATES.length ? '<span style="font-size:10px;color:var(--muted);display:block">'+DATES[DATES.length-1]+'</span>' : '';
+    rows += '<tr>';
+    rows += '<td><strong style="font-weight:600">'+tMkt(m)+'</strong>'+mktDate+'</td>';
+    rows += '<td style="font-family:'JetBrains Mono',monospace;font-weight:600;font-size:13px">'+(rng||'<span style="color:var(--muted);font-style:italic">'+naText+'</span>')+'</td>';
+    rows += '<td style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#1a5c8a">'+(mv!=null?fmt(mv):'<span style="color:var(--muted)">—</span>')+'</td>';
+    rows += '<td style="min-width:100px">'+(mv!=null?'<div style="height:8px;background:var(--paper-2);border-radius:6px;overflow:hidden;min-width:80px"><div style="height:100%;width:'+pct+'%;border-radius:6px;background:linear-gradient(90deg,#1a5c8a,#133f60);transition:width .5s cubic-bezier(.2,.8,.2,1)"></div></div>':'')+'</td>';
+    rows += '</tr>';
+  });
+
+  return '<h4 class="mkt-h">'+heading+'</h4>' +
+    '<p class="mkt-sub">'+subline+'</p>' +
+    '<div style="overflow-x:auto">' +
+    '<table style="width:100%;border-collapse:collapse;font-size:13.5px">' +
+    '<thead><tr>' +
+    '<th style="text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:6px 10px;border-bottom:2px solid var(--line-strong)">'+mktCol+'</th>' +
+    '<th style="text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:6px 10px;border-bottom:2px solid var(--line-strong)">'+rngCol+'</th>' +
+    '<th style="text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:6px 10px;border-bottom:2px solid var(--line-strong)">'+midCol+'</th>' +
+    '<th style="min-width:100px;border-bottom:2px solid var(--line-strong)"></th>' +
+    '</tr></thead>' +
+    '<tbody>' + rows + '</tbody>' +
+    '</table></div>';
+}
+
 /* ===== SINGLE openDetail — wholesale aware ===== */
 function openDetail(id){
   const d=DATA[id],ch=changeOf(d.series),vals=vpts(d.series).map(p=>p[1]);
@@ -1418,14 +1471,14 @@ function openDetail(id){
   '</div>'+
   '<div class="mbody">'+aiInsight(d)+toggleBar+
   '<div class="statrow">'+
-    '<div class="stat"><div class="l">'+t("latest")+'</div><div class="v">'+fmt(latestVal(d.series))+'</div></div>'+
+    '<div class="stat"><div class="l">'+(lang==="si"?"මධ්‍යගතය":lang==="ta"?"நடுப்புள்ளி":"Midpoint")+'</div><div class="v">'+fmt(latestVal(d.series))+'</div></div>'+
     '<div class="stat"><div class="l">'+t("change")+'</div><div class="v" style="color:'+strokeFor(ch.dir)+'">'+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</div></div>'+
     '<div class="stat"><div class="l">'+t("low")+'</div><div class="v" id="statLow">'+fmt(yearMin)+'</div></div>'+
     '<div class="stat"><div class="l">'+t("high")+'</div><div class="v" id="statHigh">'+fmt(yearMax)+'</div></div>'+
   '</div>'+
   rangeBar+
   '<div id="chartHost"></div>'+
-  '<div id="mktBarsHost">'+marketBars(d,"retail")+'</div>'+
+  '<div id="mktBarsHost">'+wholesaleMarketTable(d)+'</div>'+
   waRow+brandBar+
   '</div>';
   scrim.classList.add("open");document.body.style.overflow="hidden";
@@ -2279,6 +2332,8 @@ setTimeout(()=>{
 
 function init(){
   DATES=DB.dateLabels;
+  /* Store market dates for detail popup */
+  if(DB.markets) window.HARTI_DB_MARKETS = DB.markets;
   DATE_OBJS=DB.dates.map(s=>new Date(s+"T00:00:00"));
   DATA=DB.commodities.map((d,i)=>(d.id=i,d));
   const last=DB.dates[DB.dates.length-1];
