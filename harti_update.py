@@ -240,27 +240,104 @@ def parse_pdf(path):
     return date_str,veg,rice
 
 def build():
-    files=sorted(glob.glob(os.path.join(PDF_DIR,"*.pdf")))
+    """Smart incremental build — only parse NEW PDFs, merge with existing data."""
+    files = sorted(glob.glob(os.path.join(PDF_DIR,"*.pdf")))
     if not files: print(f"No PDFs in {PDF_DIR}/"); return
-    print(f"\n📊 Parsing {len(files)} PDFs...")
-    all_days=[]; seen=set()
+
+    # ── Load existing harti_data.json ──
+    existing_dates = set()
+    existing_data = None
+    if os.path.exists(OUT_FILE):
+        try:
+            with open(OUT_FILE, 'r', encoding='utf-8') as f:
+                existing_data = json.load(f)
+            existing_dates = set(existing_data.get("dates", []))
+            print(f"📂 Existing data: {len(existing_dates)} dates")
+        except Exception as e:
+            print(f"WARN: Could not load existing data: {e}")
+
+    # ── Find only NEW PDFs not already in data ──
+    new_files = []
     for f in files:
-        d,v,r=parse_pdf(f)
-        if d and d not in seen: all_days.append((d,v,r)); seen.add(d)
+        d = date_from_filename(f)
+        if d and d not in existing_dates:
+            new_files.append(f)
+
+    print(f"📥 New PDFs to parse: {len(new_files)}")
+
+    if not new_files and existing_data:
+        print("✅ No new data — harti_data.json is up to date!")
+        return
+
+    # ── Parse only new PDFs ──
+    new_days = []; seen = set()
+    for f in new_files:
+        d,v,r = parse_pdf(f)
+        if d and d not in seen:
+            new_days.append((d,v,r)); seen.add(d)
+
+    if not new_days and existing_data:
+        print("✅ No new valid data parsed.")
+        return
+
+    # ── Merge new data with existing ──
+    if existing_data:
+        # Build dict of existing days from existing_data
+        existing_days_map = {}
+        ex_dates = existing_data.get("dates", [])
+        ex_comms = existing_data.get("commodities", [])
+        # Reconstruct day data from existing JSON
+        for i, date_str in enumerate(ex_dates):
+            veg = {}; rice = {}
+            for comm in ex_comms:
+                series = comm.get("series", [])
+                if i < len(series) and series[i] is not None:
+                    # Reconstruct minimal data
+                    if comm.get("primaryMarket") == "Pettah":
+                        rice[comm["name"]] = {
+                            "pettah_range": comm.get("pettahRange"),
+                            "pettah_avg": comm.get("pettahAvg")
+                        }
+                    else:
+                        mkt_data = comm.get("markets", {})
+                        prices = [mkt_data.get(m) for m in MARKETS]
+                        veg[comm["name"]] = prices
+            existing_days_map[date_str] = (veg, rice)
+
+        # Combine existing + new
+        all_days_map = dict(existing_days_map)
+        for d,v,r in new_days:
+            all_days_map[d] = (v, r)
+
+        all_days = sorted([(d,v,r) for d,(v,r) in all_days_map.items()], key=lambda x: x[0])
+    else:
+        # No existing data — parse ALL files
+        print("⚠️ No existing data — parsing ALL PDFs (first run)...")
+        all_days_new = []; seen2 = set()
+        for f in files:
+            d,v,r = parse_pdf(f)
+            if d and d not in seen2:
+                all_days_new.append((d,v,r)); seen2.add(d)
+        all_days = sorted(all_days_new, key=lambda x: x[0])
+
     if not all_days: print("No valid data!"); return
-    all_days.sort(key=lambda x:x[0])
-    dates=[d for d,_,_ in all_days]
-    labels=[]
+
+    dates = [d for d,_,_ in all_days]
+    labels = []
     for d in dates:
         try: labels.append(datetime.date.fromisoformat(d).strftime("%-d %b"))
         except: labels.append(d)
+
+    # ── Collect commodity names ──
     all_veg=[]; all_rice=[]
     for _,v,r in all_days:
         for n in v:
             if n not in all_veg: all_veg.append(n)
         for n in r:
             if n not in all_rice: all_rice.append(n)
+
     commodities=[]; idx=0
+
     for name in all_veg:
         cat="Unknown"
         for c,items in CATEGORIES.items():
@@ -275,6 +352,7 @@ def build():
         commodities.append({"id":idx,"name":name,"category":cat,"unit":"Rs./kg",
             "primaryMarket":primary,"markets":mkt_p,"series":series})
         idx+=1
+
     for name in all_rice:
         cat=RICE_CAT.get(name,"Rice")
         unit="Rs./Egg" if "Egg" in name else "Rs./kg"
@@ -289,16 +367,18 @@ def build():
             "primaryMarket":"Pettah","markets":{"Pettah":mid(pr)},
             "series":series,"pettahRange":pr,"pettahAvg":pa})
         idx+=1
+
     data={"generated":datetime.datetime.now().isoformat(timespec="seconds"),
           "source":"Hector Kobbekaduwa Agrarian Research and Training Institute — Daily Wholesale Price Report",
           "sourceUrl":"https://www.harti.gov.lk/daily-price.php",
           "dates":dates,"dateLabels":labels,"markets":MARKETS,"commodities":commodities}
+
     with open(OUT_FILE,"w",encoding="utf-8") as f:
         json.dump(data,f,indent=1,ensure_ascii=False)
     print(f"\n✅ {OUT_FILE} written!")
     print(f"   📦 {len(commodities)} commodities")
     print(f"   📅 {len(dates)} dates ({dates[0]} → {dates[-1]})")
-    print(f"   🏪 {len(MARKETS)} markets")
+    print(f"   🆕 {len(new_days)} new dates added")
 
 if __name__=="__main__":
     if "--no-download" not in sys.argv:
