@@ -2005,7 +2005,7 @@ function calcArbitrage(cid) {
   const buyPrice    = buyEntry.ws  || buyEntry.rt  || 0;
   /* sellPrice already set above (from sellEntry or manual input) */
   const profitPerKg = sellPrice - buyPrice - tc;
-  const totalCost   = buyPrice * qty;
+  const totalCost   = (buyPrice + tc) * qty;  /* Buy price + transport */
   const totalProfit = profitPerKg * qty;
   const totalRevenue= sellPrice * qty;
   const margin      = buyPrice > 0 ? ((profitPerKg / buyPrice) * 100).toFixed(1) : 0;
@@ -2017,7 +2017,7 @@ function calcArbitrage(cid) {
   const sellLbl   = lang==="si" ? "විකිණෙන මිල"     : lang==="ta" ? "விற்கும் விலை"  : "Sell price";
   const tcLbl     = lang==="si" ? "ප්‍රවාහන"         : lang==="ta" ? "போக்குவரத்து"   : "Transport";
   const profLbl   = lang==="si" ? "ලාභය/kg"          : lang==="ta" ? "லாபம்/kg"        : "Profit/kg";
-  const totCostLbl= lang==="si" ? "මුළු ආයෝජනය"     : lang==="ta" ? "மொத்த முதலீடு"  : "Total investment";
+  const totCostLbl= lang==="si" ? "මිල + ප්‍රවාහන"   : lang==="ta" ? "வாங்கல் + போக்கு" : "Buy + Transport";
   const totRevLbl = lang==="si" ? "මුළු ආදායම"       : lang==="ta" ? "மொத்த வருமானம்" : "Total revenue";
   const totProfLbl= lang==="si" ? "මුළු ලාභය"        : lang==="ta" ? "மொத்த லாபம்"    : "Total profit";
   const marginLbl = lang==="si" ? "ලාභ %"             : lang==="ta" ? "லாப %"           : "Return %";
