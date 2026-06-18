@@ -857,7 +857,7 @@ function applyLang(){
   const micLabel=document.querySelector(".mic-label");
   if(micLabel)micLabel.textContent=lang==="si"?"හඬ":lang==="ta"?"குரல்":"Voice";
   /* Toggle buttons */
-  const bR=document.getElementById("btnRetail");
+  const bR=document.getElementById("btnWholesale");
   const bW=document.getElementById("btnWholesale");
   const bG=document.getElementById("btnGap");
   const bC=document.getElementById("btnCalc");
@@ -1537,7 +1537,7 @@ function openDetail(id){
   curDetail=d; curMode="wholesale";
   const hasWholesale=true; /* HARTI page = all wholesale */
   const toggleBar=hasWholesale
-    ?'<div class="price-toggle" style="display:flex;align-items:center;flex-wrap:wrap;gap:6px"><div style="display:flex;gap:0"><button id="btnRetail" class="on" onclick="switchMode(\'retail\')">'+(lang==="si"?"📦 තොග":lang==="ta"?"📦 மொத்தம்":"📦 Wholesale")+'</button><button id="btnGap" class="gap-btn" onclick="switchMode(\'gap\')">'+t("btnGap")+'</button><button id="btnCalc" class="calc-btn" onclick="switchMode(\'calc\')">'+t("btnCalc")+'</button></div><span style="font-size:10px;color:var(--gold);font-weight:600;flex:1;text-align:right">'+(lang==="si"?"ගොවියාගේ ලාභය | වෙළෙන්දාගේ ලාභය ගණනය කරගන්න":lang==="ta"?"விவசாயி லாபம் | வியாபாரி லாபம் கணக்கிடுங்கள்":"Calculate Farmer profit | Trader profit")+'</span></div>'
+    ?'<div class="price-toggle" style="display:flex;align-items:center;flex-wrap:wrap;gap:6px"><div style="display:flex;gap:0"><button id="btnWholesale" class="on" onclick="switchMode(\'wholesale\')">'+(lang==="si"?"📦 තොග":lang==="ta"?"📦 மொத்தம்":"📦 Wholesale")+'</button><button id="btnGap" class="gap-btn" onclick="switchMode(\'gap\')">'+t("btnGap")+'</button><button id="btnCalc" class="calc-btn" onclick="switchMode(\'calc\')">'+t("btnCalc")+'</button></div><span style="font-size:10px;color:var(--gold);font-weight:600;flex:1;text-align:right">'+(lang==="si"?"ගොවියාගේ ලාභය | වෙළෙන්දාගේ ලාභය ගණනය කරගන්න":lang==="ta"?"விவசாயி லாபம் | வியாபாரி லாபம் கணக்கிடுங்கள்":"Calculate Farmer profit | Trader profit")+'</span></div>'
     :'';
   const rangeBar='<div class="ranges" id="ranges">'+["1M","3M","1Y","3Y","2026","All","YoY"].map(r=>'<button data-r="'+r+'">'+r+'</button>').join("")+'</div>';
   const waRow='<div class="wa-row">'+
