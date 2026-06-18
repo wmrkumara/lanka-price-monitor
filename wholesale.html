@@ -2146,13 +2146,19 @@ function yoyChart(d){
   const years=Object.keys(yearData).sort();
   const monthlyAvg={};
   years.forEach(yr=>{monthlyAvg[yr]=yearData[yr].map(vals=>vals.length?Math.round(vals.reduce((a,b)=>a+b,0)/vals.length):null);});
+  /* Filter outlier years — remove years where overall avg differs >2x from median */
+  const yearAvgs=years.map(yr=>{const v=monthlyAvg[yr].filter(x=>x!=null);return v.length?v.reduce((a,b)=>a+b,0)/v.length:null;}).filter(x=>x!=null);
+  yearAvgs.sort((a,b)=>a-b);
+  const medianAvg=yearAvgs[Math.floor(yearAvgs.length/2)]||1;
+  const filteredYears=years.filter(yr=>{const v=monthlyAvg[yr].filter(x=>x!=null);if(!v.length)return false;const avg=v.reduce((a,b)=>a+b,0)/v.length;return avg>medianAvg*0.4&&avg<medianAvg*2.5;});
+  const validYears=filteredYears.length>=1?filteredYears:years;
   const colors=["#378ADD","#1D9E75","#a9802a","#b23a2e","#9b59b6"];
   const months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const cid="yoy_"+Math.random().toString(36).slice(2,8);
-  const legendHtml=years.map((yr,i)=>`<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#3a403a"><span style="width:20px;height:3px;background:${colors[i%colors.length]};display:inline-block;border-radius:2px"></span>${yr}</span>`).join("");
+  const legendHtml=validYears.map((yr,i)=>`<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#3a403a"><span style="width:20px;height:3px;background:${colors[i%colors.length]};display:inline-block;border-radius:2px"></span>${yr}</span>`).join("");
   /* Store data for deferred init */
   window._yoyPending=window._yoyPending||{};
-  window._yoyPending[cid]={years,monthlyAvg,colors,months,d};
+  window._yoyPending[cid]={years:validYears,validYears,monthlyAvg,colors,months,d};
   const html=`<div class="chart-wrap">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-bottom:6px;padding:0 4px">
       <span class="lab" style="position:relative;top:0;left:0">${tMkt(d.primaryMarket)} YoY &middot; ${tUnit(d.unit)}</span>
@@ -2168,13 +2174,13 @@ function yoyChart(d){
       type:'line',
       data:{
         labels:p.months,
-        datasets:p.years.map((yr,i)=>({
+        datasets:p.validYears.map((yr,i)=>({
           label:yr,
           data:p.monthlyAvg[yr],
           borderColor:p.colors[i%p.colors.length],
-          borderWidth:i===p.years.length-1?2.5:1.8,
-          borderDash:i===p.years.length-1?[]:[4,3],
-          pointRadius:i===p.years.length-1?3:0,
+          borderWidth:i===p.validYears.length-1?2.5:1.8,
+          borderDash:i===p.validYears.length-1?[]:[4,3],
+          pointRadius:i===p.validYears.length-1?3:0,
           pointHoverRadius:5,
           pointBackgroundColor:p.colors[i%p.colors.length],
           pointBorderColor:p.colors[i%p.colors.length],
@@ -2194,7 +2200,7 @@ function yoyChart(d){
         },
         scales:{
           x:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#7a7264',autoSkip:false,maxRotation:0}},
-          y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#7a7264',callback:v=>'රු.'+v.toLocaleString()}}
+          y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#7a7264',callback:v=>'රු.'+v.toLocaleString()},grace:'10%'}
         }
       }
     });
