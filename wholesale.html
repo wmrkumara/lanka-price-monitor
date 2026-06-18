@@ -1622,11 +1622,11 @@ function speakPrice(d){
   if(lang==="si"){
     const dir=ch.dir==="up"?"ඉහළ ගොස් ඇත":ch.dir==="down"?"පහළ ගොස් ඇත":"වෙනස් නැත";
     text=`${tName(d.name)}. `;
-    text+=`${tMkt(d.primaryMarket)} වෙළඳපොළේ සිල්ලර මිල රුපියල් ${Math.round(cur)}. `;
+    text+=`${tMkt(d.primaryMarket)} වෙළඳපොළේ තොග මිල රුපියල් ${Math.round(cur)}. `;
     text+=`${Math.abs(ch.pct).toFixed(1)} ප්‍රතිශතයකින් ${dir}. `;
     text+=`${thisYear} අවම රුපියල් ${Math.round(yearMin)}, උපරිම රුපියල් ${Math.round(yearMax)}. `;
     if(rtMarkets.length>1){
-      text+=`සිල්ලර මිල: `;
+      text+=`තොග මිල: `;
       rtMarkets.forEach(([k,v])=>{ text+=`${tMkt(k)} රුපියල් ${Math.round(v)}. `; });
     }
     if(wsMarkets.length>0){
@@ -1638,11 +1638,11 @@ function speakPrice(d){
   } else if(lang==="ta"){
     const dir=ch.dir==="up"?"அதிகரித்துள்ளது":ch.dir==="down"?"குறைந்துள்ளது":"மாறவில்லை";
     text=`${tName(d.name)}. `;
-    text+=`${tMkt(d.primaryMarket)} சந்தையில் சில்லறை விலை ரூபாய் ${Math.round(cur)}. `;
+    text+=`${tMkt(d.primaryMarket)} சந்தையில் மொத்த விலை ரூபாய் ${Math.round(cur)}. `;
     text+=`${Math.abs(ch.pct).toFixed(1)} சதவீதம் ${dir}. `;
     text+=`${thisYear} குறைந்தது ரூபாய் ${Math.round(yearMin)}, அதிகபட்சம் ரூபாய் ${Math.round(yearMax)}. `;
     if(rtMarkets.length>1){
-      text+=`சில்லறை விலைகள்: `;
+      text+=`மொத்த விலைகள்: `;
       rtMarkets.forEach(([k,v])=>{ text+=`${tMkt(k)} ரூபாய் ${Math.round(v)}. `; });
     }
     if(wsMarkets.length>0){
@@ -1654,11 +1654,11 @@ function speakPrice(d){
   } else {
     const dir=ch.dir==="up"?"increased":ch.dir==="down"?"decreased":"unchanged";
     text=`${d.name}. `;
-    text+=`Today's retail price at ${d.primaryMarket} market is ${Math.round(cur)} rupees. `;
+    text+=`Today's wholesale price at ${d.primaryMarket} market is ${Math.round(cur)} rupees. `;
     text+=`${Math.abs(ch.pct).toFixed(1)} percent ${dir} from previous report. `;
     text+=`${thisYear} low ${Math.round(yearMin)}, high ${Math.round(yearMax)} rupees. `;
     if(rtMarkets.length>1){
-      text+=`Retail prices: `;
+      text+=`Wholesale prices: `;
       rtMarkets.forEach(([k,v])=>{ text+=`${k} ${Math.round(v)} rupees. `; });
     }
     if(wsMarkets.length>0){
