@@ -998,7 +998,8 @@ function lineChart(d, idxs, series, isWholesale){
     if(!isLast && (i%step || (sub.length-1-i)<step)) return;
     xlab+='<text x="'+X(p.pos).toFixed(1)+'" y="'+(H-10)+'" text-anchor="middle" font-size="9.5" fill="#7a7264" font-family="JetBrains Mono">'+DATES[p.origI]+'</text>';});
   const baseR=sub.length>45?0:3.2;
-  const dots=pts.map(p=>'<circle class="pt" data-i="'+p[2]+'" data-base="'+baseR+'" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+baseR+'" fill="#fffdf7" stroke="'+stroke+'" stroke-width="2"/>').join("");
+  const hitR=Math.max(baseR,4); /* always hoverable even with dense data */
+  const dots=pts.map(p=>'<circle class="pt" data-i="'+p[2]+'" data-base="'+baseR+'" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+hitR+'" fill="transparent" stroke="'+(baseR>0?stroke:'none')+'" stroke-width="'+(baseR>0?'2':'0')+'"/>').join("");
   return '<div class="chart-wrap"><span class="lab">'+tMkt(d.primaryMarket)+' '+(lang==="en"?modeLabel.toUpperCase():lang==="si"?(modeLabel==="retail"?"සිල්ලර":modeLabel==="wholesale"?"තොග":modeLabel.toUpperCase()):(modeLabel==="retail"?"சில்லறை":modeLabel==="wholesale"?"மொத்தம்":modeLabel.toUpperCase()))+' &middot; '+tUnit(d.unit)+'</span><div class="tip" id="tip"></div><svg id="lc" viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block"><defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+gradColor+'" stop-opacity=".16"/><stop offset="1" stop-color="'+gradColor+'" stop-opacity="0"/></linearGradient></defs>'+grid+ylab+ysep+xlab+'<path d="'+area+'" fill="url(#ar)"/><path d="'+line+'" fill="none" stroke="'+stroke+'" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><line id="cross" x1="0" x2="0" y1="'+T+'" y2="'+(H-B)+'" stroke="#a9802a" stroke-width="1" stroke-dasharray="3 3" opacity="0"/>'+dots+'</svg></div>';
 }
 
@@ -1785,8 +1786,8 @@ function wireChart(d, series){
     tip.style.left=(rect.left-wr.left+px)+"px";tip.style.top=(rect.top-wr.top+py)+"px";
     tip.innerHTML=DATES[i]+' &nbsp;<b>'+fmt(series[i])+'</b>';tip.style.opacity=1;
     cross.setAttribute("x1",cx);cross.setAttribute("x2",cx);cross.setAttribute("opacity","1");
-    dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));dot.setAttribute("r","5");}
-  function hide(){tip.style.opacity=0;cross.setAttribute("opacity","0");dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));}
+    dots.forEach(o=>{const db=parseFloat(o.getAttribute("data-base")||0);o.setAttribute("r",db>0?db:4);o.setAttribute("fill","transparent");});dot.setAttribute("r","5");dot.setAttribute("fill","#fffdf7");}
+  function hide(){tip.style.opacity=0;cross.setAttribute("opacity","0");dots.forEach(o=>{const db=parseFloat(o.getAttribute("data-base")||0);o.setAttribute("r",db>0?db:4);o.setAttribute("fill","transparent");});}
   svg.addEventListener("mousemove",e=>{const rect=svg.getBoundingClientRect(),rel=(e.clientX-rect.left)/rect.width;
     let best=null,bd=1e9;dots.forEach(o=>{const cx=+o.getAttribute("cx")/svg.viewBox.baseVal.width;
       const dd=Math.abs(cx-rel);if(dd<bd){bd=dd;best=o;}});if(best)show(best);});
