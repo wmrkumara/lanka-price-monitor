@@ -163,8 +163,8 @@
                      radial-gradient(circle at 95% 0%, rgba(169,128,42,.07), transparent 30%);background-attachment:fixed;}
   .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
   .masthead{padding:30px 0 16px;border-bottom:2px solid var(--ink)}
-  .kicker{display:flex;align-items:center;gap:8px;justify-content:space-between;flex-wrap:wrap;
-    font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .kicker{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap;
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:700}
   .kicker .org{color:var(--petrol)}
   .lang{display:flex;gap:2px;border:1px solid var(--line-strong);border-radius:999px;overflow:hidden}
   .lang button{font:inherit;font-size:11px;letter-spacing:.12em;font-weight:700;text-transform:uppercase;
@@ -173,14 +173,14 @@
   .title{font-family:'Newsreader',serif;font-weight:500;font-size:clamp(34px,6vw,62px);
     line-height:.98;letter-spacing:-.015em;margin:14px 0 6px}
   .title em{font-style:italic;color:var(--petrol)}
-  .dateline{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:8px;font-size:13px;color:var(--ink-soft)}
+  .dateline{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:13.5px;color:var(--ink-soft)}
   .dateline .stamp{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--ink)}
   .dateline .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);display:inline-block}
   .section-h{display:flex;align-items:center;gap:12px;margin:34px 0 14px}
   .section-h h2{font-family:'Newsreader',serif;font-weight:500;font-size:24px;margin:0;letter-spacing:-.01em}
   .section-h .rule{flex:1;height:1px;background:var(--line-strong)}
   .section-h .hint{font-size:12px;color:var(--muted)}
-  .movers{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:12px;
+  .movers{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(244px,1fr);gap:14px;
     overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory}
   .movers::-webkit-scrollbar{height:7px}.movers::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:99px}
   .mover{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;
@@ -294,7 +294,6 @@
   .credit a{color:var(--petrol);font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--line-strong);transition:.18s}
   .credit a:hover{border-color:var(--petrol)}
   @media(max-width:560px){
-    .wrap{padding:0 14px}
     .statrow{grid-template-columns:repeat(2,1fr)}
     .bar{grid-template-columns:110px 1fr auto;gap:9px}
     .modal .mhead h3{font-size:22px}
@@ -312,7 +311,7 @@
     .mover{padding:12px}
     .mover .nm{font-size:19px}
     /* Grid cards */
-    .grid{grid-template-columns:repeat(2,1fr)}
+    .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
     /* Ranges wrap */
     .ranges{flex-wrap:wrap}
     /* Gap alert */
@@ -322,8 +321,7 @@
     .guide-box h2{font-size:20px}
     .guide-box .gtxt{font-size:12.5px}
     /* Masthead */
-    .title{font-size:clamp(26px,9vw,62px)}
-    .masthead{padding:20px 0 12px}
+    .title{font-size:clamp(28px,10vw,62px)}
     /* Disclaimer */
     #disclaimer{font-size:10.5px}
     /* Insight box */
@@ -403,16 +401,24 @@
   .navlink.wholesale:hover{background:rgba(255,255,255,.18);color:#fff}
   .navlink-badge{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.08em;
     background:rgba(255,255,255,.25);padding:2px 5px;border-radius:4px;margin-left:5px;vertical-align:middle}
-  @media(max-width:600px){
-    .topnav-inner{padding:0 10px;gap:0}
-    .topnav-brand{font-size:13px;padding:10px 10px 10px 0;margin-right:3px}
-    .navlink{font-size:10.5px;padding:5px 8px;letter-spacing:.03em}
-    .navlink-badge{font-size:8px;padding:1px 4px;margin-left:3px}
-  }
-  @media(max-width:400px){
-    .topnav-brand{font-size:12px;padding:8px 8px 8px 0}
-    .navlink{font-size:10px;padding:5px 6px}
-    .navlink-badge{display:none}
+  @media(max-width:560px){.navlink{font-size:11px;padding:6px 10px}}
+  .nav-legend{background:#0a3a36;border-bottom:1px solid rgba(169,128,42,.3);padding:5px 22px;
+    display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
+  .nav-legend-inner{max-width:1160px;width:100%;display:flex;align-items:center;
+    justify-content:center;gap:16px;flex-wrap:wrap}
+  .nav-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.75);
+    font-weight:600;letter-spacing:.02em}
+  .nav-legend-item .nl-icon{font-size:13px}
+  .nav-legend-item .nl-label{color:#fff}
+  .nav-legend-item .nl-sub{color:#9fd4c8;font-size:10px;font-weight:500}
+  .nav-legend-sep{color:rgba(255,255,255,.25);font-size:14px}
+  .nav-legend-cta{font-size:10px;color:#ffd98a;font-weight:700;letter-spacing:.04em;
+    background:rgba(169,128,42,.2);padding:2px 8px;border-radius:6px;white-space:nowrap}
+  @media(max-width:560px){
+    .nav-legend{padding:5px 12px}
+    .nav-legend-item{font-size:10px}
+    .nav-legend-item .nl-sub{font-size:9px}
+    .nav-legend-cta{font-size:9px}
   }
 </style>
 </head>
@@ -427,6 +433,23 @@
     </div>
   </div>
 </nav>
+<div class="nav-legend" id="navLegend">
+  <div class="nav-legend-inner">
+    <div class="nav-legend-item">
+      <span class="nl-icon">📊</span>
+      <span class="nl-label" id="nl1si">සිල්ලර මිල</span>
+      <span class="nl-sub">CBSL · Retail</span>
+    </div>
+    <span class="nav-legend-sep">↔</span>
+    <div class="nav-legend-item">
+      <span class="nl-icon">📦</span>
+      <span class="nl-label" id="nl2si">තොග මිල</span>
+      <span class="nl-sub">HARTI · Wholesale</span>
+    </div>
+    <span class="nav-legend-sep">·</span>
+    <span class="nav-legend-cta" id="nlCta">දෙකම compare කරන්න ↑</span>
+  </div>
+</div>
 <div class="wrap">
   <header class="masthead" itemscope itemtype="https://schema.org/WebSite">
   <meta itemprop="name" content="Lanka Price Monitor | TopGoviya.lk">
@@ -765,6 +788,17 @@ function tCat(c){return lang==="en"?c:((CATS[c]&&CATS[c][lang])||c);}
 function tMkt(m){return lang==="en"?m:((MARKETS[m]&&MARKETS[m][lang])||m);}
 function tUnit(u){return lang==="en"?u:((UNITS[u]&&UNITS[u][lang])||u);}
 function applyLang(){
+  /* Nav legend text */
+  const nlTexts={
+    en:{l1:"Retail Prices",l2:"Wholesale Prices",cta:"Compare both ↑"},
+    si:{l1:"සිල්ලර මිල",l2:"තොග මිල",cta:"දෙකම compare කරන්න ↑"},
+    ta:{l1:"சில்லறை விலை",l2:"மொத்த விலை",cta:"இரண்டையும் ஒப்பிடுங்கள் ↑"}
+  };
+  const nt=nlTexts[lang]||nlTexts.en;
+  const e1=document.getElementById("nl1si"),e2=document.getElementById("nl2si"),ec=document.getElementById("nlCta");
+  if(e1)e1.textContent=nt.l1;
+  if(e2)e2.textContent=nt.l2;
+  if(ec)ec.textContent=nt.cta;
   document.documentElement.lang=lang;
   const set=(id,html)=>{const e=document.getElementById(id);if(e)e.innerHTML=html;};
   set("kickerTxt",t("kicker"));set("lblLatest",t("latestReport"));set("lblSub",t("sub"));
