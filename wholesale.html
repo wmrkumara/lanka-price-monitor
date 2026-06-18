@@ -240,7 +240,7 @@
     display:none;align-items:flex-start;justify-content:center;padding:28px 16px;z-index:50;overflow-y:auto}
   .scrim.open{display:flex;animation:fade .2s ease}@keyframes fade{from{opacity:0}to{opacity:1}}
   .modal{background:var(--card);border:1px solid var(--line-strong);border-radius:18px;max-width:760px;width:100%;
-    box-shadow:0 40px 90px -30px rgba(10,30,28,.7);animation:rise .26s cubic-bezier(.2,.8,.2,1);overflow:hidden}
+    box-shadow:0 40px 90px -30px rgba(10,30,28,.7);animation:rise .26s cubic-bezier(.2,.8,.2,1);overflow:visible}
   @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
   .modal .mhead{padding:20px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
   .modal .mhead .cat{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
@@ -252,10 +252,10 @@
   .stat{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:11px 12px}
   .stat .l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
   .stat .v{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:19px;margin-top:3px}
-  .chart-wrap{position:relative;border:1px solid var(--line);border-radius:12px;background:linear-gradient(180deg,#fffefb,#fbf7ee);padding:8px 6px 4px}
+  .chart-wrap{position:relative;border:1px solid var(--line);border-radius:12px;background:linear-gradient(180deg,#fffefb,#fbf7ee);padding:8px 6px 4px;overflow:visible}
   .chart-wrap .lab{position:absolute;top:10px;left:14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
   .tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--paper);font-family:'JetBrains Mono',monospace;
-    font-size:11px;font-weight:600;padding:5px 8px;border-radius:7px;transform:translate(-50%,-130%);white-space:nowrap;opacity:0;transition:opacity .12s;z-index:3}
+    font-size:11px;font-weight:600;padding:5px 8px;border-radius:7px;transform:translate(-50%,-130%);white-space:nowrap;opacity:0;transition:opacity .12s;z-index:999}
   .tip b{color:#ffd98a}
   .ranges{display:flex;gap:4px;margin:0 0 10px;justify-content:flex-end}
   .ranges button{font:inherit;font-size:11.5px;font-weight:700;letter-spacing:.04em;padding:5px 11px;border-radius:8px;
@@ -299,7 +299,7 @@
     .modal .mhead h3{font-size:22px}
     /* Modal full screen on mobile */
     .scrim{padding:0}
-    .modal{border-radius:14px 14px 0 0;max-width:100%;width:100%;margin-top:auto;max-height:92vh;overflow-y:auto}
+    .modal{border-radius:14px 14px 0 0;max-width:100%;width:100%;margin-top:auto;max-height:92vh;overflow-y:auto;overflow-x:visible}
     /* Price toggle wrap */
     .price-toggle{flex-wrap:wrap;gap:5px}
     .price-toggle button{font-size:11px;padding:6px 10px}
@@ -2146,19 +2146,13 @@ function yoyChart(d){
   const years=Object.keys(yearData).sort();
   const monthlyAvg={};
   years.forEach(yr=>{monthlyAvg[yr]=yearData[yr].map(vals=>vals.length?Math.round(vals.reduce((a,b)=>a+b,0)/vals.length):null);});
-  /* Filter outlier years — remove years where overall avg differs >2x from median */
-  const yearAvgs=years.map(yr=>{const v=monthlyAvg[yr].filter(x=>x!=null);return v.length?v.reduce((a,b)=>a+b,0)/v.length:null;}).filter(x=>x!=null);
-  yearAvgs.sort((a,b)=>a-b);
-  const medianAvg=yearAvgs[Math.floor(yearAvgs.length/2)]||1;
-  const filteredYears=years.filter(yr=>{const v=monthlyAvg[yr].filter(x=>x!=null);if(!v.length)return false;const avg=v.reduce((a,b)=>a+b,0)/v.length;return avg>medianAvg*0.4&&avg<medianAvg*2.5;});
-  const validYears=filteredYears.length>=1?filteredYears:years;
   const colors=["#378ADD","#1D9E75","#a9802a","#b23a2e","#9b59b6"];
   const months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const cid="yoy_"+Math.random().toString(36).slice(2,8);
-  const legendHtml=validYears.map((yr,i)=>`<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#3a403a"><span style="width:20px;height:3px;background:${colors[i%colors.length]};display:inline-block;border-radius:2px"></span>${yr}</span>`).join("");
+  const legendHtml=years.map((yr,i)=>`<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#3a403a"><span style="width:20px;height:3px;background:${colors[i%colors.length]};display:inline-block;border-radius:2px"></span>${yr}</span>`).join("");
   /* Store data for deferred init */
   window._yoyPending=window._yoyPending||{};
-  window._yoyPending[cid]={years:validYears,validYears,monthlyAvg,colors,months,d};
+  window._yoyPending[cid]={years,monthlyAvg,colors,months,d};
   const html=`<div class="chart-wrap">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-bottom:6px;padding:0 4px">
       <span class="lab" style="position:relative;top:0;left:0">${tMkt(d.primaryMarket)} YoY &middot; ${tUnit(d.unit)}</span>
@@ -2174,13 +2168,13 @@ function yoyChart(d){
       type:'line',
       data:{
         labels:p.months,
-        datasets:p.validYears.map((yr,i)=>({
+        datasets:p.years.map((yr,i)=>({
           label:yr,
           data:p.monthlyAvg[yr],
           borderColor:p.colors[i%p.colors.length],
-          borderWidth:i===p.validYears.length-1?2.5:1.8,
-          borderDash:i===p.validYears.length-1?[]:[4,3],
-          pointRadius:i===p.validYears.length-1?3:0,
+          borderWidth:i===p.years.length-1?2.5:1.8,
+          borderDash:i===p.years.length-1?[]:[4,3],
+          pointRadius:i===p.years.length-1?3:0,
           pointHoverRadius:5,
           pointBackgroundColor:p.colors[i%p.colors.length],
           pointBorderColor:p.colors[i%p.colors.length],
@@ -2200,7 +2194,7 @@ function yoyChart(d){
         },
         scales:{
           x:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#7a7264',autoSkip:false,maxRotation:0}},
-          y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#7a7264',callback:v=>'රු.'+v.toLocaleString()},grace:'10%'}
+          y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#7a7264',callback:v=>'රු.'+v.toLocaleString()}}
         }
       }
     });
