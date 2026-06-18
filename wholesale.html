@@ -1425,13 +1425,13 @@ function aiInsight(d){
   }
 
   /* 5. Market gap — retail price difference only */
-  const mktsRetail=Object.entries(d.markets||{}).filter(([k,v])=>v!=null);
+  const mktsRetail=Object.entries(d.markets||{}).map(([k,v])=>[k,hartiMid(v)]).filter(([k,v])=>v!=null);
   if(mktsRetail.length>=2){
     const srt=mktsRetail.sort((a,b)=>b[1]-a[1]);
     const gap=srt[0][1]-srt[srt.length-1][1];
     if(gap>50)
       rows.push({cls:"gold",icon:"💰",
-        text:lang==="si"?`${tMkt(srt[0][0])} vs ${tMkt(srt[srt.length-1][0])} — තොග මිල පරතරය රු.${fmt(gap)}/kg`:lang==="ta"?`${tMkt(srt[0][0])} vs ${tMkt(srt[srt.length-1][0])} — சில்லறை விலை இடைவெளி ரூ.${fmt(gap)}/kg`:`${srt[0][0]} vs ${srt[srt.length-1][0]} — Retail price gap Rs.${fmt(gap)}/kg`});
+        text:lang==="si"?`${tMkt(srt[0][0])} vs ${tMkt(srt[srt.length-1][0])} — තොග මිල පරතරය රු.${fmt(gap)}/kg`:lang==="ta"?`${tMkt(srt[0][0])} vs ${tMkt(srt[srt.length-1][0])} — மொத்த விலை இடைவெளி ரூ.${fmt(gap)}/kg`:`${srt[0][0]} vs ${srt[srt.length-1][0]} — Wholesale price gap Rs.${fmt(gap)}/kg`});
   }
 
   if(!rows.length)return"";
@@ -1485,7 +1485,7 @@ function wholesaleMarketTable(d) {
   const mktCol = lang==="si" ? "වෙළඳපොළ" : lang==="ta" ? "சந்தை" : "Market";
   const rngCol = lang==="si" ? "පරාසය (රු.)" : lang==="ta" ? "வரம்பு (ரூ.)" : "Range (Rs.)";
   const midCol = lang==="si" ? "මධ්‍යගතය" : lang==="ta" ? "நடுப்புள்ளி" : "Midpoint";
-  const wLabel = lang==="si" ? "තොග" : lang==="ta" ? "மொத்தம்" : "wholesale";
+  const wLabel = lang==="si" ? "මධ්‍යගතය" : lang==="ta" ? "நடுப்புள்ளி" : "midpoint";
 
   let rows = "";
   markets.forEach(function(m) {
@@ -1613,8 +1613,8 @@ function speakPrice(d){
   const yVals=yIdxs.map(i=>d.series[i]).filter(v=>v!=null);
   const yearMin=yVals.length?Math.min(...yVals):min;
   const yearMax=yVals.length?Math.max(...yVals):max;
-  const rtMarkets=Object.entries(d.markets||{}).filter(([k,v])=>v!=null);
-  const wsMarkets=Object.entries(d.wholesaleMarkets||{}).filter(([k,v])=>v!=null);
+  const rtMarkets=Object.entries(d.markets||{}).map(([k,v])=>[k,hartiMid(v)]).filter(([k,v])=>v!=null);
+  const wsMarkets=Object.entries(d.wholesaleMarkets||{}).map(([k,v])=>[k,hartiMid(v)]).filter(([k,v])=>v!=null);
 
   let text="";
   let ttsLang="en-US";
