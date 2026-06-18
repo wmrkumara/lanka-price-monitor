@@ -962,9 +962,9 @@ function rangeIdxs(key){
 function lineChart(d, idxs, series, isWholesale){
   isWholesale = true; /* Always wholesale on this page */
   series=series||d.series;
-  const stroke=isWholesale?"#a9802a":"#0e4f4a";
-  const gradColor=isWholesale?"#a9802a":"#0e4f4a";
-  const modeLabel=isWholesale?"wholesale":"retail";
+  const stroke="#a9802a"; /* Gold for HARTI wholesale */
+  const gradColor="#a9802a";
+  const modeLabel="wholesale";
   const W=680,H=240,L=46,R=14,T=26,B=30;
   const sub=idxs.map((origI,pos)=>({pos,origI,v:series[origI]})).filter(p=>p.v!=null);
   if(sub.length<2)
@@ -1778,49 +1778,20 @@ function wireChart(d, series){
   series = series || d.series;
   const svg=document.getElementById("lc");if(!svg)return;
   const tip=document.getElementById("tip"),cross=document.getElementById("cross"),wrap=svg.closest(".chart-wrap");
-  if(!tip||!cross||!wrap)return;
   const dots=[...svg.querySelectorAll(".pt")];
-  
-  function show(dot){
-    const i=+dot.getAttribute("data-i");
-    const cx=+dot.getAttribute("cx"),cy=+dot.getAttribute("cy");
+  function show(dot){const i=+dot.getAttribute("data-i"),cx=+dot.getAttribute("cx"),cy=+dot.getAttribute("cy");
     const vb=svg.viewBox.baseVal,rect=svg.getBoundingClientRect();
-    const px=cx/vb.width*rect.width,py=cy/vb.height*rect.height;
-    const wr=wrap.getBoundingClientRect();
-    tip.style.left=(rect.left-wr.left+px)+"px";
-    tip.style.top=(rect.top-wr.top+py)+"px";
-    const val=series[i];
-    const rng=d.markets&&d.primaryMarket?d.markets[d.primaryMarket]:null;
-    const rngStr=rng&&rng.min&&rng.max?" ("+rng.min+"–"+rng.max+")":"";
-    tip.innerHTML=DATES[i]+" &nbsp;<b>"+fmt(val)+"</b>"+rngStr;
-    tip.style.opacity=1;
-    cross.setAttribute("x1",cx);cross.setAttribute("x2",cx);
-    cross.setAttribute("opacity","1");
-    dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));
-    dot.setAttribute("r","5");
-  }
-  
-  function hide(){
-    tip.style.opacity=0;
-    cross.setAttribute("opacity","0");
-    dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));
-  }
-  
-  svg.addEventListener("mousemove",e=>{
-    const rect=svg.getBoundingClientRect();
-    const rel=(e.clientX-rect.left)/rect.width;
-    let best=null,bd=1e9;
-    dots.forEach(o=>{
-      const cx=+o.getAttribute("cx")/svg.viewBox.baseVal.width;
-      const dd=Math.abs(cx-rel);
-      if(dd<bd){bd=dd;best=o;}
-    });
-    if(best)show(best);
-  });
-  
+    const px=cx/vb.width*rect.width,py=cy/vb.height*rect.height,wr=wrap.getBoundingClientRect();
+    tip.style.left=(rect.left-wr.left+px)+"px";tip.style.top=(rect.top-wr.top+py)+"px";
+    tip.innerHTML=DATES[i]+' &nbsp;<b>'+fmt(series[i])+'</b>';tip.style.opacity=1;
+    cross.setAttribute("x1",cx);cross.setAttribute("x2",cx);cross.setAttribute("opacity","1");
+    dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));dot.setAttribute("r","5");}
+  function hide(){tip.style.opacity=0;cross.setAttribute("opacity","0");dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));}
+  svg.addEventListener("mousemove",e=>{const rect=svg.getBoundingClientRect(),rel=(e.clientX-rect.left)/rect.width;
+    let best=null,bd=1e9;dots.forEach(o=>{const cx=+o.getAttribute("cx")/svg.viewBox.baseVal.width;
+      const dd=Math.abs(cx-rel);if(dd<bd){bd=dd;best=o;}});if(best)show(best);});
   svg.addEventListener("mouseleave",hide);
   dots.forEach(o=>o.addEventListener("mouseenter",()=>show(o)));
-  
   /* Touch support for mobile */
   svg.addEventListener("touchmove",e=>{
     e.preventDefault();
@@ -1835,7 +1806,6 @@ function wireChart(d, series){
     });
     if(best)show(best);
   },{passive:false});
-  
   svg.addEventListener("touchend",hide);
 }
 
