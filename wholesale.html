@@ -2172,12 +2172,14 @@ function yoyChart(d){
           label:yr,
           data:p.monthlyAvg[yr],
           borderColor:p.colors[i%p.colors.length],
-          borderWidth:2.2,
-          borderDash:i===p.years.length-1?[6,4]:[],
-          pointRadius:3,pointHoverRadius:5,
+          borderWidth:i===p.years.length-1?2.5:1.8,
+          borderDash:i===p.years.length-1?[]:[4,3],
+          pointRadius:i===p.years.length-1?3:0,
+          pointHoverRadius:5,
           pointBackgroundColor:p.colors[i%p.colors.length],
+          pointBorderColor:p.colors[i%p.colors.length],
           backgroundColor:p.colors[i%p.colors.length]+'15',
-          tension:0.3,fill:false,spanGaps:false
+          tension:0.35,fill:false,spanGaps:true
         }))
       },
       options:{
@@ -2186,13 +2188,13 @@ function yoyChart(d){
         plugins:{
           legend:{display:false},
           tooltip:{
-            backgroundColor:'#191d1a',titleColor:'#ffd98a',bodyColor:'#d4ede8',padding:8,
+            backgroundColor:'#191d1a',titleColor:'#ffd98a',bodyColor:'#e8f4f1',padding:10,cornerRadius:7,
             callbacks:{label:ctx=>ctx.parsed.y==null?ctx.dataset.label+': n/a':ctx.dataset.label+': රු.'+ctx.parsed.y.toLocaleString()}
           }
         },
         scales:{
           x:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#7a7264',autoSkip:false,maxRotation:0}},
-          y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#7a7264',callback:v=>'රු.'+v.toLocaleString()},min:0}
+          y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#7a7264',callback:v=>'රු.'+v.toLocaleString()}}
         }
       }
     });
@@ -2236,7 +2238,7 @@ function gapChart(d){
         plugins:{
           legend:{display:false},
           tooltip:{
-            backgroundColor:'#191d1a',titleColor:'#ffd98a',bodyColor:'#d4ede8',padding:8,
+            backgroundColor:'#191d1a',titleColor:'#ffd98a',bodyColor:'#e8f4f1',padding:10,cornerRadius:7,
             callbacks:{
               afterBody:(items)=>{
                 const rt=items.find(i=>i.dataset.label==='Retail');
@@ -2276,7 +2278,7 @@ function gapChart(d){
               });
             }
           },
-          y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#7a7264',callback:v=>'රු.'+v.toLocaleString()},min:0}
+          y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#7a7264',callback:v=>'රු.'+v.toLocaleString()}}
         }
       }
     });
