@@ -254,8 +254,8 @@
   .stat .v{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:19px;margin-top:3px}
   .chart-wrap{position:relative;border:1px solid var(--line);border-radius:12px;background:linear-gradient(180deg,#fffefb,#fbf7ee);padding:8px 6px 4px;overflow:visible}
   .chart-wrap .lab{position:absolute;top:10px;left:14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
-  .tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--paper);font-family:'JetBrains Mono',monospace;
-    font-size:11px;font-weight:600;padding:5px 8px;border-radius:7px;transform:translate(-50%,-130%);white-space:nowrap;opacity:0;transition:opacity .12s;z-index:999}
+  .tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--paper);font-family:'JetBrains Mono',monospace;
+    font-size:11px;font-weight:600;padding:5px 8px;border-radius:7px;transform:translate(-50%,-130%);white-space:nowrap;opacity:0;transition:opacity .12s;z-index:9999}
   .tip b{color:#ffd98a}
   .ranges{display:flex;gap:4px;margin:0 0 10px;justify-content:flex-end}
   .ranges button{font:inherit;font-size:11.5px;font-weight:700;letter-spacing:.04em;padding:5px 11px;border-radius:8px;
@@ -1787,8 +1787,8 @@ function wireChart(d, series){
     const vb=svg.viewBox.baseVal,rect=svg.getBoundingClientRect();
     const px=cx/vb.width*rect.width,py=cy/vb.height*rect.height;
     const wr=wrap.getBoundingClientRect();
-    tip.style.left=(rect.left-wr.left+px)+"px";
-    tip.style.top=(rect.top-wr.top+py)+"px";
+    tip.style.left=(rect.left+px)+"px";
+    tip.style.top=(rect.top+py)+"px";
     const val=series[i];
     const rng=d.markets&&d.primaryMarket?d.markets[d.primaryMarket]:null;
     const rngStr=rng&&rng.min&&rng.max?" ("+rng.min+"–"+rng.max+")":"";
@@ -1796,14 +1796,14 @@ function wireChart(d, series){
     tip.style.opacity=1;
     cross.setAttribute("x1",cx);cross.setAttribute("x2",cx);
     cross.setAttribute("opacity","1");
-    dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));
-    dot.setAttribute("r","5");
+    dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"0"));
+    dot.setAttribute("r","5");dot.setAttribute("fill","#a9802a");dot.setAttribute("stroke","#fff");dot.setAttribute("stroke-width","1.5");
   }
   
   function hide(){
     tip.style.opacity=0;
     cross.setAttribute("opacity","0");
-    dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));
+    dots.forEach(o=>{o.setAttribute("r",o.getAttribute("data-base")||"0");o.setAttribute("fill","#fffdf7");o.setAttribute("stroke-width","2");});
   }
   
   svg.addEventListener("mousemove",e=>{
