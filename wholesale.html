@@ -240,7 +240,7 @@
     display:none;align-items:flex-start;justify-content:center;padding:28px 16px;z-index:50;overflow-y:auto}
   .scrim.open{display:flex;animation:fade .2s ease}@keyframes fade{from{opacity:0}to{opacity:1}}
   .modal{background:var(--card);border:1px solid var(--line-strong);border-radius:18px;max-width:760px;width:100%;
-    box-shadow:0 40px 90px -30px rgba(10,30,28,.7);animation:rise .26s cubic-bezier(.2,.8,.2,1);overflow:visible}
+    box-shadow:0 40px 90px -30px rgba(10,30,28,.7);animation:rise .26s cubic-bezier(.2,.8,.2,1);overflow:hidden}
   @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
   .modal .mhead{padding:20px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
   .modal .mhead .cat{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
@@ -998,7 +998,7 @@ function lineChart(d, idxs, series, isWholesale){
     if(!isLast && (i%step || (sub.length-1-i)<step)) return;
     xlab+='<text x="'+X(p.pos).toFixed(1)+'" y="'+(H-10)+'" text-anchor="middle" font-size="9.5" fill="#7a7264" font-family="JetBrains Mono">'+DATES[p.origI]+'</text>';});
   const baseR=sub.length>45?0:3.2;
-  const dots=pts.map(p=>'<circle class="pt" data-i="'+p[2]+'" data-base="'+baseR+'" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="6" fill="rgba(0,0,0,0.01)" stroke="none" pointer-events="all"/>').join("");
+  const dots=pts.map(p=>'<circle class="pt" data-i="'+p[2]+'" data-base="'+baseR+'" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+baseR+'" fill="#fffdf7" stroke="'+stroke+'" stroke-width="2"/>').join("");
   return '<div class="chart-wrap"><span class="lab">'+tMkt(d.primaryMarket)+' '+(lang==="en"?modeLabel.toUpperCase():lang==="si"?(modeLabel==="retail"?"සිල්ලර":modeLabel==="wholesale"?"තොග":modeLabel.toUpperCase()):(modeLabel==="retail"?"சில்லறை":modeLabel==="wholesale"?"மொத்தம்":modeLabel.toUpperCase()))+' &middot; '+tUnit(d.unit)+'</span><div class="tip" id="tip"></div><svg id="lc" viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block;cursor:crosshair" pointer-events="all"><defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+gradColor+'" stop-opacity=".16"/><stop offset="1" stop-color="'+gradColor+'" stop-opacity="0"/></linearGradient></defs>'+grid+ylab+ysep+xlab+'<path d="'+area+'" fill="url(#ar)"/><path d="'+line+'" fill="none" stroke="'+stroke+'" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><line id="cross" x1="0" x2="0" y1="'+T+'" y2="'+(H-B)+'" stroke="#a9802a" stroke-width="1" stroke-dasharray="3 3" opacity="0"/>'+dots+'</svg></div>';
 }
 
@@ -1778,21 +1778,49 @@ function wireChart(d, series){
   series = series || d.series;
   const svg=document.getElementById("lc");if(!svg)return;
   const tip=document.getElementById("tip"),cross=document.getElementById("cross"),wrap=svg.closest(".chart-wrap");
+  if(!tip||!cross||!wrap)return;
   const dots=[...svg.querySelectorAll(".pt")];
-  function show(dot){const i=+dot.getAttribute("data-i"),cx=+dot.getAttribute("cx"),cy=+dot.getAttribute("cy");
+  
+  function show(dot){
+    const i=+dot.getAttribute("data-i");
+    const cx=+dot.getAttribute("cx"),cy=+dot.getAttribute("cy");
     const vb=svg.viewBox.baseVal,rect=svg.getBoundingClientRect();
-    const px=cx/vb.width*rect.width,py=cy/vb.height*rect.height,wr=wrap.getBoundingClientRect();
-    tip.style.left=(rect.left-wr.left+px)+"px";tip.style.top=(rect.top-wr.top+py)+"px";
-    const sv=typeof series[i]==="object"?(series[i]&&series[i].mid!=null?series[i].mid:null):series[i];
-    tip.innerHTML=DATES[i]+' &nbsp;<b>'+fmt(sv)+'</b>';tip.style.opacity=1;
-    cross.setAttribute("x1",cx);cross.setAttribute("x2",cx);cross.setAttribute("opacity","1");
-    dots.forEach(o=>{o.setAttribute("fill","rgba(0,0,0,0.01)");o.setAttribute("stroke","none");});dot.setAttribute("r","6");dot.setAttribute("fill","#fffdf7");dot.setAttribute("stroke","#a9802a");dot.setAttribute("stroke-width","2.5");}
-  function hide(){tip.style.opacity=0;cross.setAttribute("opacity","0");dots.forEach(o=>{o.setAttribute("fill","rgba(0,0,0,0.01)");o.setAttribute("stroke","none");});}
-  svg.addEventListener("mousemove",e=>{const rect=svg.getBoundingClientRect(),rel=(e.clientX-rect.left)/rect.width;
-    let best=null,bd=1e9;dots.forEach(o=>{const cx=+o.getAttribute("cx")/svg.viewBox.baseVal.width;
-      const dd=Math.abs(cx-rel);if(dd<bd){bd=dd;best=o;}});if(best)show(best);});
+    const px=cx/vb.width*rect.width,py=cy/vb.height*rect.height;
+    const wr=wrap.getBoundingClientRect();
+    tip.style.left=(rect.left-wr.left+px)+"px";
+    tip.style.top=(rect.top-wr.top+py)+"px";
+    const val=series[i];
+    const rng=d.markets&&d.primaryMarket?d.markets[d.primaryMarket]:null;
+    const rngStr=rng&&rng.min&&rng.max?" ("+rng.min+"–"+rng.max+")":"";
+    tip.innerHTML=DATES[i]+" &nbsp;<b>"+fmt(val)+"</b>"+rngStr;
+    tip.style.opacity=1;
+    cross.setAttribute("x1",cx);cross.setAttribute("x2",cx);
+    cross.setAttribute("opacity","1");
+    dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));
+    dot.setAttribute("r","5");
+  }
+  
+  function hide(){
+    tip.style.opacity=0;
+    cross.setAttribute("opacity","0");
+    dots.forEach(o=>o.setAttribute("r",o.getAttribute("data-base")||"3.2"));
+  }
+  
+  svg.addEventListener("mousemove",e=>{
+    const rect=svg.getBoundingClientRect();
+    const rel=(e.clientX-rect.left)/rect.width;
+    let best=null,bd=1e9;
+    dots.forEach(o=>{
+      const cx=+o.getAttribute("cx")/svg.viewBox.baseVal.width;
+      const dd=Math.abs(cx-rel);
+      if(dd<bd){bd=dd;best=o;}
+    });
+    if(best)show(best);
+  });
+  
   svg.addEventListener("mouseleave",hide);
   dots.forEach(o=>o.addEventListener("mouseenter",()=>show(o)));
+  
   /* Touch support for mobile */
   svg.addEventListener("touchmove",e=>{
     e.preventDefault();
@@ -1807,6 +1835,7 @@ function wireChart(d, series){
     });
     if(best)show(best);
   },{passive:false});
+  
   svg.addEventListener("touchend",hide);
 }
 
