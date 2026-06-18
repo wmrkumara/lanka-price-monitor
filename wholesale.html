@@ -406,7 +406,6 @@
 </style>
 </head>
 <body>
-<div id="chartTip" style="position:fixed;pointer-events:none;background:#191d1a;color:#f4efe4;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:5px 10px;border-radius:7px;white-space:nowrap;opacity:0;transition:opacity .12s;z-index:99999;transform:translate(-50%,-130%)"></div>
 <!-- ══ TOP NAV BAR ══ -->
 <nav class="topnav" role="navigation">
   <div class="topnav-inner">
@@ -1000,7 +999,7 @@ function lineChart(d, idxs, series, isWholesale){
     xlab+='<text x="'+X(p.pos).toFixed(1)+'" y="'+(H-10)+'" text-anchor="middle" font-size="9.5" fill="#7a7264" font-family="JetBrains Mono">'+DATES[p.origI]+'</text>';});
   const baseR=sub.length>45?0:3.2;
   const dots=pts.map(p=>'<circle class="pt" data-i="'+p[2]+'" data-base="'+baseR+'" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+baseR+'" fill="#fffdf7" stroke="'+stroke+'" stroke-width="2"/>').join("");
-  return '<div class="chart-wrap"><span class="lab">'+tMkt(d.primaryMarket)+' '+(lang==="en"?modeLabel.toUpperCase():lang==="si"?(modeLabel==="retail"?"සිල්ලර":modeLabel==="wholesale"?"තොග":modeLabel.toUpperCase()):(modeLabel==="retail"?"சில்லறை":modeLabel==="wholesale"?"மொத்தம்":modeLabel.toUpperCase()))+' &middot; '+tUnit(d.unit)+'</span><svg id="lc" viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block;cursor:crosshair" pointer-events="all"><defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+gradColor+'" stop-opacity=".16"/><stop offset="1" stop-color="'+gradColor+'" stop-opacity="0"/></linearGradient></defs>'+grid+ylab+ysep+xlab+'<path d="'+area+'" fill="url(#ar)"/><path d="'+line+'" fill="none" stroke="'+stroke+'" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><line id="cross" x1="0" x2="0" y1="'+T+'" y2="'+(H-B)+'" stroke="#a9802a" stroke-width="1" stroke-dasharray="3 3" opacity="0"/>'+dots+'</svg></div>';
+  return '<div class="chart-wrap"><span class="lab">'+tMkt(d.primaryMarket)+' '+(lang==="en"?modeLabel.toUpperCase():lang==="si"?(modeLabel==="retail"?"සිල්ලර":modeLabel==="wholesale"?"තොග":modeLabel.toUpperCase()):(modeLabel==="retail"?"சில்லறை":modeLabel==="wholesale"?"மொத்தம்":modeLabel.toUpperCase()))+' &middot; '+tUnit(d.unit)+'</span><div class="tip" id="tip"></div><svg id="lc" viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block;cursor:crosshair" pointer-events="all"><defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+gradColor+'" stop-opacity=".16"/><stop offset="1" stop-color="'+gradColor+'" stop-opacity="0"/></linearGradient></defs>'+grid+ylab+ysep+xlab+'<path d="'+area+'" fill="url(#ar)"/><path d="'+line+'" fill="none" stroke="'+stroke+'" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><line id="cross" x1="0" x2="0" y1="'+T+'" y2="'+(H-B)+'" stroke="#a9802a" stroke-width="1" stroke-dasharray="3 3" opacity="0"/>'+dots+'</svg></div>';
 }
 
 function marketBars(d, mode){
@@ -1778,7 +1777,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeDetail();docum
 function wireChart(d, series){
   series = series || d.series;
   const svg=document.getElementById("lc");if(!svg)return;
-  const tip=document.getElementById("chartTip")||document.getElementById("tip"),cross=document.getElementById("cross"),wrap=svg.closest(".chart-wrap");
+  const tip=document.getElementById("tip"),cross=document.getElementById("cross"),wrap=svg.closest(".chart-wrap");
   if(!tip||!cross||!wrap)return;
   const dots=[...svg.querySelectorAll(".pt")];
   
@@ -2176,13 +2175,27 @@ function yoyChart(d){
   const years=Object.keys(yearData).sort();
   const monthlyAvg={};
   years.forEach(yr=>{monthlyAvg[yr]=yearData[yr].map(vals=>vals.length?Math.round(vals.reduce((a,b)=>a+b,0)/vals.length):null);});
+  /* Filter out backfill years — years where all values are identical (no real variation) */
+  const validYears=years.filter(yr=>{
+    const vals=monthlyAvg[yr].filter(v=>v!=null);
+    if(vals.length<2) return false;
+    const uniqueVals=new Set(vals);
+    /* If >90% same value, it's backfill data — skip */
+    const maxFreq=Math.max(...[...uniqueVals].map(v=>vals.filter(x=>x===v).length));
+    const isFlat=maxFreq/vals.length>0.9;
+    /* Also check price range consistency with other years */
+    const avg=vals.reduce((a,b)=>a+b,0)/vals.length;
+    return !isFlat;
+  });
+  /* Use validYears if we have any, else fall back to just current year */
+  const displayYears=validYears.length>0?validYears:[years[years.length-1]];
   const colors=["#378ADD","#1D9E75","#a9802a","#b23a2e","#9b59b6"];
   const months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const cid="yoy_"+Math.random().toString(36).slice(2,8);
-  const legendHtml=years.map((yr,i)=>`<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#3a403a"><span style="width:20px;height:3px;background:${colors[i%colors.length]};display:inline-block;border-radius:2px"></span>${yr}</span>`).join("");
+  const legendHtml=displayYears.map((yr,i)=>`<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#3a403a"><span style="width:20px;height:3px;background:${colors[i%colors.length]};display:inline-block;border-radius:2px"></span>${yr}</span>`).join("");
   /* Store data for deferred init */
   window._yoyPending=window._yoyPending||{};
-  window._yoyPending[cid]={years,monthlyAvg,colors,months,d};
+  window._yoyPending[cid]={years:displayYears,monthlyAvg,colors,months,d};
   const html=`<div class="chart-wrap">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-bottom:6px;padding:0 4px">
       <span class="lab" style="position:relative;top:0;left:0">${tMkt(d.primaryMarket)} YoY &middot; ${tUnit(d.unit)}</span>
