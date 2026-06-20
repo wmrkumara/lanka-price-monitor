@@ -2040,7 +2040,7 @@ function calcArbitrage(cid) {
   const viableLbl = isSame
     ? (lang==="si" ? "⚠️ එකම වෙළඳපොළ!" : lang==="ta" ? "⚠️ ஒரே சந்தை!" : "⚠️ Same market!")
     : isProfit
-      ? (lang==="si" ? "✅ ශ්‍රේෂ්ඨ ලාභයක්!" : lang==="ta" ? "✅ லாபகரம்!" : "✅ Profitable!")
+      ? (lang==="si" ? "✅ හොඳ ලාභයක්! (වඩාත්ම නිර්දේශිතයි)" : lang==="ta" ? "✅ லாபகரம்!" : "✅ Profitable!")
       : (lang==="si" ? "❌ ලාභදායක නෙමෙයි" : lang==="ta" ? "❌ லாபகரம் இல்லை" : "❌ Not profitable");
 
   const color = isSame ? "#a9802a" : isProfit ? "var(--down)" : "var(--up)";
