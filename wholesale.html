@@ -891,7 +891,7 @@ function setLang(l){
 }
 document.querySelector(".lang").addEventListener("click",function(e){var b=e.target.closest("button[data-lang]");if(b)setLang(b.dataset.lang);});
 
-const vpts = s => s.map((v,i)=>[i,v]).filter(p=>p[1]!=null);
+const vpts = s => s.map((v,i)=>[i,hartiMid(v)]).filter(p=>p[1]!=null);
 const latestVal = s => {const v=vpts(s);return v.length?v[v.length-1][1]:null;};
 const fmt = n => n==null ? "&mdash;" : Math.round(n).toLocaleString("en-US");
 function changeOf(s){const v=vpts(s);if(v.length<2)return{abs:0,pct:0,dir:"flat"};
@@ -1845,7 +1845,7 @@ function setCalcMode(tcid, mode){
     traderBtn.style.background="#0e4f4a";traderBtn.style.color="#fff";
     farmerBtn.style.background="transparent";farmerBtn.style.color="#7a7264";
     traderInputs.style.display="block";farmerInputs.style.display="none";
-    calcTransport2(tcid);
+    calcArbitrage(tcid);
   }
 }
 
@@ -1981,7 +1981,7 @@ function calcArbitrage(cid) {
   const buyPrice    = buyEntry.ws  || buyEntry.rt  || 0;
   const sellPrice   = sellEntry.ws || sellEntry.rt || 0;
   const profitPerKg = sellPrice - buyPrice - tc;
-  const totalCost   = buyPrice * qty;
+  const totalCost   = (buyPrice + tc) * qty;
   const totalProfit = profitPerKg * qty;
   const totalRevenue= sellPrice * qty;
   const margin      = buyPrice > 0 ? ((profitPerKg / buyPrice) * 100).toFixed(1) : 0;
@@ -2345,7 +2345,7 @@ function gapAlert(d){
           <button id="mode_farmer_${tcid}" onclick="setCalcMode('${tcid}','farmer')"
             style="font:inherit;font-size:11px;font-weight:700;padding:4px 12px;border:none;background:#2c7a52;color:#fff;cursor:pointer">${lang==="si"?"🌾 ගොවියා":lang==="ta"?"🌾 விவசாயி":"🌾 Farmer"}</button>
           <button id="mode_trader_${tcid}" onclick="setCalcMode('${tcid}','trader')"
-            style="font:inherit;font-size:11px;font-weight:700;padding:4px 12px;border:none;background:transparent;color:#7a7264;cursor:pointer">${lang==="si"?"🌾 ගොවියා":lang==="ta"?"🌾 விவசாயி":"🌾 Farmer"}</button>
+            style="font:inherit;font-size:11px;font-weight:700;padding:4px 12px;border:none;background:transparent;color:#7a7264;cursor:pointer">${lang==="si"?"💰 වෙළෙන්දා":lang==="ta"?"💰 வியாபாரி":"💰 Trader"}</button>
         </div>
       </div>
 
