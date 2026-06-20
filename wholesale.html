@@ -1179,9 +1179,19 @@ function calcPanel(d){
           <label style="font-size:13px;color:#3a403a;min-width:130px">${lang==="si"?"විකිණෙන වෙළඳපොළ:":lang==="ta"?"விற்கும் சந்தை:":"Sell to:"}</label>
           <select id="tsell_${cid}"
             style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:7px 10px;border:1.5px solid #a9802a;border-radius:8px;background:#fffdf7;color:#191d1a;cursor:pointer;flex:1;min-width:180px"
-            onchange="calcArbitrage('${cid}')">
-            ${traderMkts.map((k,i)=>`<option value="${k}" ${i===Math.min(1,traderMkts.length-1)?"selected":""}>${tMkt(k)}: රු.${fmt(ws[k])}/kg</option>`).join("")}
+            onchange="toggleCustomSell('${cid}');calcArbitrage('${cid}')">
+            ${(DB.markets||allMkts).map((k,i)=>{
+              const has=ws[k]!=null;
+              return `<option value="${k}" ${i===Math.min(1,(DB.markets||allMkts).length-1)?"selected":""}>${tMkt(k)}: ${has?"රු."+fmt(ws[k])+"/kg":(lang==="si"?"දත්ත නැත":lang==="ta"?"தரவு இல்லை":"no data")}</option>`;
+            }).join("")}
+            <option value="custom">${lang==="si"?"✏️ මගේම ඉලක්ක මිල":lang==="ta"?"✏️ எனது இலக்கு விலை":"✏️ My own target price"}</option>
           </select>
+        </div>
+        <div id="customSellWrap_${cid}" style="display:none;align-items:center;gap:10px;flex-wrap:wrap;padding-left:140px">
+          <input id="tsellPrice_${cid}" type="number" min="0" placeholder="${lang==="si"?"ඔබේ විකිණුම් මිල":lang==="ta"?"உங்கள் விற்பனை விலை":"Your sell price"}"
+            style="width:120px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:7px 10px;border:1.5px solid #a9802a;border-radius:8px;background:#fffdf7;color:#191d1a"
+            oninput="calcArbitrage('${cid}')">
+          <span style="font-size:12px;color:#7a7264">රු./kg</span>
         </div>
         <div style="display:flex;gap:14px;flex-wrap:wrap">
           <div style="display:flex;align-items:center;gap:8px">
@@ -1955,6 +1965,14 @@ function calcTransport2(tcid){
 
 
 
+/* ===== Toggle custom sell price input visibility ===== */
+function toggleCustomSell(cid){
+  const sellEl = document.getElementById("tsell_"+cid);
+  const wrap = document.getElementById("customSellWrap_"+cid);
+  if(!sellEl || !wrap) return;
+  wrap.style.display = sellEl.value === "custom" ? "flex" : "none";
+}
+
 /* ===== Market Arbitrage Calculator (HARTI Wholesale) ===== */
 function calcArbitrage(cid) {
   const buyEl  = document.getElementById("tbuy_"  + cid);
@@ -1971,15 +1989,36 @@ function calcArbitrage(cid) {
   const qty     = parseFloat(qtyEl ? qtyEl.value : 500) || 500;
 
   const buyEntry  = data.find(function(x){ return x.k === buyMkt;  });
-  const sellEntry = data.find(function(x){ return x.k === sellMkt; });
 
-  if(!buyEntry || !sellEntry) {
-    resEl.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:10px 0">Select markets with available price data.</div>';
+  if(!buyEntry) {
+    resEl.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:10px 0">Select a buy market with available price data.</div>';
     return;
   }
 
-  const buyPrice    = buyEntry.ws  || buyEntry.rt  || 0;
-  const sellPrice   = sellEntry.ws || sellEntry.rt || 0;
+  const buyPrice = buyEntry.ws || buyEntry.rt || 0;
+  let sellPrice, sellMktLabel;
+
+  if(sellMkt === "custom") {
+    const sellPriceEl = document.getElementById("tsellPrice_" + cid);
+    sellPrice = parseFloat(sellPriceEl ? sellPriceEl.value : 0) || 0;
+    sellMktLabel = lang==="si" ? "ඔබේ ඉලක්කය" : lang==="ta" ? "உங்கள் இலக்கு" : "Your target";
+    if(!sellPrice) {
+      resEl.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:10px 0">' +
+        (lang==="si" ? "ඔබේ විකිණුම් මිල ඇතුළත් කරන්න." : lang==="ta" ? "உங்கள் விற்பனை விலையை உள்ளிடவும்." : "Enter your target sell price.") +
+        '</div>';
+      return;
+    }
+  } else {
+    const sellEntry = data.find(function(x){ return x.k === sellMkt; });
+    if(!sellEntry || (sellEntry.ws == null && sellEntry.rt == null)) {
+      resEl.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:10px 0">' +
+        (lang==="si" ? "මෙම වෙළඳපොළට මිල දත්ත නැත. ඉලක්ක මිලක් enter කරන්න." : lang==="ta" ? "இந்த சந்தைக்கு விலை தரவு இல்லை. இலக்கு விலையை உள்ளிடவும்." : "No price data for this market. Try \"My own target price\" instead.") +
+        '</div>';
+      return;
+    }
+    sellPrice = sellEntry.ws || sellEntry.rt || 0;
+    sellMktLabel = tMkt(sellMkt);
+  }
   const profitPerKg = sellPrice - buyPrice - tc;
   const totalCost   = (buyPrice + tc) * qty;
   const totalProfit = profitPerKg * qty;
@@ -2014,13 +2053,13 @@ function calcArbitrage(cid) {
       // Header
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">' +
         '<div style="font-size:15px;font-weight:800;color:' + color + '">' + viableLbl + '</div>' +
-        '<div style="font-size:11px;color:var(--muted)">' + fmt(qty) + ' kg · ' + tMkt(buyMkt) + ' → ' + tMkt(sellMkt) + '</div>' +
+        '<div style="font-size:11px;color:var(--muted)">' + fmt(qty) + ' kg · ' + tMkt(buyMkt) + ' → ' + sellMktLabel + '</div>' +
       '</div>' +
 
       // Per kg breakdown
       '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px">' +
         statBox(buyLbl + '<br><small>' + tMkt(buyMkt) + '</small>', 'රු.' + fmt(buyPrice), '#191d1a') +
-        statBox(sellLbl + '<br><small>' + tMkt(sellMkt) + '</small>', 'රු.' + fmt(sellPrice), '#191d1a') +
+        statBox(sellLbl + '<br><small>' + sellMktLabel + '</small>', 'රු.' + fmt(sellPrice), '#191d1a') +
         statBox(tcLbl, '-රු.' + fmt(tc), 'var(--up)') +
       '</div>' +
 
