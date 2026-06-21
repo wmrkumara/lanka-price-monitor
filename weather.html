@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Weather — TopGoviya.lk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4efe4;--paper-2:#efe8d8;--card:#fffdf7;--ink:#191d1a;--ink-soft:#3a403a;
+    --muted:#7a7264;--line:#e3d9c4;--line-strong:#cdbf9f;--petrol:#0e4f4a;--petrol-deep:#0a3a36;
+    --gold:#a9802a;--up:#b23a2e;--down:#2c7a52;
+    --shadow:0 1px 0 rgba(0,0,0,.02), 0 12px 30px -18px rgba(20,40,38,.35);--r:14px;
+  }
+  *{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:'Hanken Grotesk','Noto Sans Sinhala','Noto Sans Tamil',sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.45;
+    background-image:radial-gradient(circle at 12% -10%, rgba(14,79,74,.06), transparent 38%),
+                     radial-gradient(circle at 95% 0%, rgba(169,128,42,.07), transparent 30%);background-attachment:fixed;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+
+  .topnav{background:var(--petrol);padding:0}
+  .topnav-inner{max-width:1160px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:0;flex-wrap:wrap}
+  .topnav-brand{font-family:'Newsreader',serif;font-weight:500;font-size:17px;color:#fff;text-decoration:none;padding:13px 16px 13px 0;flex-shrink:0}
+  .topnav-brand em{font-style:italic;color:#ffd98a}
+  .navlinks{display:flex;gap:2px;flex:1;overflow-x:auto}
+  .navlink{display:flex;align-items:center;gap:6px;padding:13px 14px;font-size:13px;font-weight:700;color:rgba(255,255,255,.72);text-decoration:none;border-bottom:3px solid transparent;white-space:nowrap;transition:.18s}
+  .navlink:hover{color:#fff;background:rgba(255,255,255,.06)}
+  .navlink.on{color:#fff;border-bottom-color:var(--gold)}
+  .navlink-badge{font-size:9px;font-weight:700;letter-spacing:.06em;background:rgba(255,255,255,.16);padding:2px 6px;border-radius:5px}
+
+  .ticker-wrap{background:var(--petrol-deep);overflow:hidden;white-space:nowrap;border-top:1px solid rgba(255,255,255,.08)}
+  .ticker{display:inline-block;padding:7px 0;animation:tickerScroll 32s linear infinite}
+  .ticker span{display:inline-block;color:#ffd98a;font-size:12px;font-weight:600;padding:0 26px;font-family:'JetBrains Mono',monospace}
+  .ticker:hover{animation-play-state:paused}
+  @keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  .masthead{padding:26px 0 14px;border-bottom:2px solid var(--ink)}
+  .kicker{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap;
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .kicker .org{color:var(--petrol)}
+  .lang{display:flex;gap:2px;border:1px solid var(--line-strong);border-radius:999px;overflow:hidden}
+  .lang button{font:inherit;font-size:11px;letter-spacing:.12em;font-weight:700;text-transform:uppercase;
+    border:0;background:transparent;color:var(--muted);padding:5px 11px;cursor:pointer;transition:.2s}
+  .lang button.on{background:var(--petrol);color:#fff}
+  .title{font-family:'Newsreader',serif;font-weight:500;font-size:clamp(30px,5.5vw,52px);
+    line-height:.98;letter-spacing:-.015em;margin:12px 0 4px}
+  .title em{font-style:italic;color:var(--petrol)}
+  .subtxt{font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:26px 0}
+  .wcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
+  .wcard .mkt-name{font-family:'Newsreader',serif;font-size:21px;margin-bottom:2px}
+  .wcard .mkt-sub{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+  .wcard .today{display:flex;align-items:center;gap:14px;padding-bottom:14px;border-bottom:1px dashed var(--line-strong);margin-bottom:12px}
+  .wcard .today .icon{font-size:42px;line-height:1}
+  .wcard .today .temps{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:24px}
+  .wcard .today .temps small{font-size:14px;color:var(--muted);font-weight:500}
+  .wcard .today .desc{font-size:12px;color:var(--ink-soft);margin-top:2px}
+  .wcard .rain{font-size:11.5px;color:var(--petrol);font-weight:600;margin-top:3px}
+  .fdays{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .fday{text-align:center;background:var(--paper-2);border-radius:9px;padding:8px 4px}
+  .fday .dlabel{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;margin-bottom:4px}
+  .fday .dicon{font-size:20px}
+  .fday .dtemp{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;margin-top:3px}
+  .fday .dtemp .lo{color:var(--muted);font-weight:500}
+  .wcard.loading{display:flex;align-items:center;justify-content:center;min-height:180px;color:var(--muted);font-size:13px}
+  .wcard.err{display:flex;align-items:center;justify-content:center;min-height:120px;color:var(--up);font-size:12.5px;text-align:center;padding:18px}
+
+  footer{margin:40px 0 50px;padding-top:20px;border-top:1px solid var(--line-strong);font-size:12px;color:var(--muted);text-align:center}
+  footer a{color:var(--petrol);font-weight:700;text-decoration:none}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="topnav" role="navigation">
+  <div class="topnav-inner">
+    <a href="index.html" class="topnav-brand">Lanka <em>Price</em> Monitor</a>
+    <div class="navlinks">
+      <a href="index.html" class="navlink">📊 Retail Prices <span class="navlink-badge">CBSL</span></a>
+      <a href="wholesale.html" class="navlink">📦 Wholesale <span class="navlink-badge">HARTI</span></a>
+      <a href="weather.html" class="navlink on">🌤️ Weather <span class="navlink-badge">10 markets</span></a>
+    </div>
+  </div>
+</nav>
+<div class="ticker-wrap">
+  <div class="ticker" id="tickerEl"></div>
+</div>
+
+<div class="wrap">
+  <header class="masthead">
+    <div class="kicker">
+      <span id="kickerTxt">Data from <span class="org">Open-Meteo</span></span>
+      <div class="lang" role="group" aria-label="Language">
+        <button data-lang="si" class="on" onclick="setLang('si')">සිං</button>
+        <button data-lang="ta" onclick="setLang('ta')">த</button>
+        <button data-lang="en" onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+    <h1 class="title" id="pageTitle">වෙළඳපොළ <em>කාලගුණය</em></h1>
+    <div class="subtxt" id="pageSub">HARTI වෙළඳපොළ 10ටම අද සහ ඉදිරි දින 3ක කාලගුණ අනාවැකිය</div>
+  </header>
+
+  <div class="grid" id="weatherGrid"></div>
+
+  <footer>
+    <span id="footNote">Weather data from Open-Meteo.com · Forecast only, not a guarantee.</span><br>
+    <a href="index.html">← Back to Live Prices</a> · <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a>
+  </footer>
+</div>
+
+<script>
+const MARKETS = [
+  {key:"Peliyagoda",      lat:6.9685,   lng:79.8836},
+  {key:"Kandy",           lat:7.2906,   lng:80.6337},
+  {key:"Dambulla",        lat:7.8742,   lng:80.6511},
+  {key:"Meegoda",         lat:6.8438,   lng:80.0867},
+  {key:"Norochchole",     lat:8.054288, lng:79.737320},
+  {key:"Thambuththegama", lat:8.161554, lng:80.299989},
+  {key:"Keppetipola",     lat:6.9215,   lng:80.8538},
+  {key:"Nuwaraeliya",     lat:6.9497,   lng:80.7891},
+  {key:"Bandarawela",     lat:6.8294,   lng:80.9908},
+  {key:"Veyangoda",       lat:7.1541,   lng:80.0594}
+];
+
+let lang = "si";
+const NAMES = {
+  Peliyagoda:{si:"පැලියගොඩ",ta:"பேலியகொடை"},
+  Kandy:{si:"මහනුවර",ta:"கண்டி"},
+  Dambulla:{si:"දඹුල්ල",ta:"தம்புள்ள"},
+  Meegoda:{si:"මීගොඩ",ta:"மீகொடை"},
+  Norochchole:{si:"නොරොච්චෝලේ",ta:"நொரொச்சோலை"},
+  Thambuththegama:{si:"තඹුත්තේගම",ta:"தம்புத்தேகம"},
+  Keppetipola:{si:"කැප්පෙටිපොළ",ta:"கெப்பெட்டிபொல"},
+  Nuwaraeliya:{si:"නුවරඑළිය",ta:"நுவரெலியா"},
+  Bandarawela:{si:"බණ්ඩාරවෙල",ta:"பண்டாரவளை"},
+  Veyangoda:{si:"වේයන්ගොඩ",ta:"வேயங்கொடை"}
+};
+function tName(k){return lang==="en"?k:((NAMES[k]&&NAMES[k][lang])||k);}
+
+const I18N = {
+  si:{title:'වෙළඳපොළ <em>කාලගුණය</em>',sub:"HARTI වෙළඳපොළ 10ටම අද සහ ඉදිරි දින 3ක කාලගුණ අනාවැකිය",
+      kicker:'Data from <span class="org">Open-Meteo</span>',today:"අද",
+      foot:"කාලගුණ දත්ත Open-Meteo.com වෙතින් · අනාවැකියක් පමණි, සහතිකයක් නොවේ.",loading:"කාලගුණය loading...",
+      err:"කාලගුණ දත්ත ලබාගත නොහැක.",rain:"වර්ෂාවට ඉඩ"},
+  ta:{title:'சந்தை <em>வானிலை</em>',sub:"HARTI சந்தைகள் 10இலும் இன்று மற்றும் அடுத்த 3 நாட்களுக்கான வானிலை முன்னறிவிப்பு",
+      kicker:'Data from <span class="org">Open-Meteo</span>',today:"இன்று",
+      foot:"வானிலை தரவு Open-Meteo.com இலிருந்து · முன்னறிவிப்பு மட்டுமே, உத்தரவாதம் இல்லை.",loading:"வானிலை ஏற்றப்படுகிறது...",
+      err:"வானிலை தரவைப் பெற முடியவில்லை.",rain:"மழை வாய்ப்பு"},
+  en:{title:'Market <em>Weather</em>',sub:"Today and 3-day forecast for all 10 HARTI markets",
+      kicker:'Data from <span class="org">Open-Meteo</span>',today:"Today",
+      foot:"Weather data from Open-Meteo.com · Forecast only, not a guarantee.",loading:"Loading weather...",
+      err:"Could not load weather data.",rain:"Rain chance"}
+};
+function t(k){return I18N[lang][k];}
+
+function setLang(l){
+  lang=l;
+  document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.lang===l));
+  document.documentElement.lang=l;
+  document.getElementById("pageTitle").innerHTML=t("title");
+  document.getElementById("pageSub").textContent=t("sub");
+  document.getElementById("kickerTxt").innerHTML=t("kicker");
+  document.getElementById("footNote").textContent=t("foot");
+  buildTicker();
+  renderAll();
+}
+
+function buildTicker(){
+  const names=MARKETS.map(m=>"🌤️ "+tName(m.key)).join("   ·   ");
+  document.getElementById("tickerEl").innerHTML=`<span>${names}</span><span>${names}</span>`;
+}
+
+const WCODE = {
+  0:{icon:"☀️",si:"පැහැදිලි අහස",ta:"தெளிவான வானம்",en:"Clear sky"},
+  1:{icon:"🌤️",si:"බොහෝදුරට පැහැදිලි",ta:"பெரும்பாலும் தெளிவானது",en:"Mainly clear"},
+  2:{icon:"⛅",si:"අර්ධ වළාකුළු",ta:"பகுதி மேகமூட்டம்",en:"Partly cloudy"},
+  3:{icon:"☁️",si:"වළාකුළු සහිත",ta:"மேகமூட்டம்",en:"Overcast"},
+  45:{icon:"🌫️",si:"මීදුම",ta:"மூடுபனி",en:"Fog"},
+  48:{icon:"🌫️",si:"මීදුම",ta:"மூடுபனி",en:"Fog"},
+  51:{icon:"🌦️",si:"සුළු බොයිස්",ta:"லேசான தூறல்",en:"Light drizzle"},
+  53:{icon:"🌦️",si:"බොයිස්",ta:"தூறல்",en:"Drizzle"},
+  55:{icon:"🌧️",si:"තද බොයිස්",ta:"கனமான தூறல்",en:"Heavy drizzle"},
+  61:{icon:"🌦️",si:"සුළු වැස්ස",ta:"லேசான மழை",en:"Light rain"},
+  63:{icon:"🌧️",si:"වැස්ස",ta:"மழை",en:"Rain"},
+  65:{icon:"🌧️",si:"තද වැස්ස",ta:"கனமழை",en:"Heavy rain"},
+  80:{icon:"🌦️",si:"සැර වැසි",ta:"மழை அலைகள்",en:"Rain showers"},
+  81:{icon:"🌧️",si:"සැර වැසි",ta:"மழை அலைகள்",en:"Rain showers"},
+  82:{icon:"⛈️",si:"තද සැර වැසි",ta:"கனமழை அலைகள்",en:"Violent showers"},
+  95:{icon:"⛈️",si:"ගිගුරුම් සහිත වැස්ස",ta:"இடிமின்னலுடன் மழை",en:"Thunderstorm"},
+  96:{icon:"⛈️",si:"ගිගුරුම් සහිත වැස්ස",ta:"இடிமின்னலுடன் மழை",en:"Thunderstorm"},
+  99:{icon:"⛈️",si:"ගිගුරුම් සහිත වැස්ස",ta:"இடிமின்னலுடன் மழை",en:"Thunderstorm"}
+};
+function wInfo(code){
+  const w=WCODE[code]||WCODE[2];
+  return {icon:w.icon, desc:w[lang]||w.en};
+}
+const DAY_NAMES={si:["ඉරිදා","සඳුදා","අඟහ","බදාදා","බ්‍රහස්","සිකු","සෙන"],
+  ta:["ஞாயி","திங்","செவ்","புத","வியா","வெள்","சனி"],
+  en:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]};
+
+let _weatherData={};
+
+async function fetchWeather(mkt){
+  if(_weatherData[mkt.key])return _weatherData[mkt.key];
+  const url=`https://api.open-meteo.com/v1/forecast?latitude=${mkt.lat}&longitude=${mkt.lng}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FColombo&forecast_days=4`;
+  const res=await fetch(url);
+  if(!res.ok)throw new Error("weather fetch failed");
+  const data=await res.json();
+  _weatherData[mkt.key]=data;
+  return data;
+}
+
+function renderCard(mkt, data){
+  const el=document.getElementById("wcard_"+mkt.key);
+  if(!el)return;
+  if(!data){
+    el.className="wcard err";
+    el.innerHTML="⚠️ "+t("err");
+    return;
+  }
+  const d=data.daily;
+  const todayCode=d.weathercode[0];
+  const todayInfo=wInfo(todayCode);
+  const hi=Math.round(d.temperature_2m_max[0]);
+  const lo=Math.round(d.temperature_2m_min[0]);
+  const rain=d.precipitation_probability_max[0];
+
+  let futureDays="";
+  for(let i=1;i<=3;i++){
+    if(!d.time[i])continue;
+    const dt=new Date(d.time[i]+"T00:00:00");
+    const dayName=DAY_NAMES[lang][dt.getDay()];
+    const info=wInfo(d.weathercode[i]);
+    const dhi=Math.round(d.temperature_2m_max[i]);
+    const dlo=Math.round(d.temperature_2m_min[i]);
+    futureDays+='<div class="fday"><div class="dlabel">'+dayName+'</div><div class="dicon">'+info.icon+'</div><div class="dtemp">'+dhi+'° <span class="lo">'+dlo+'°</span></div></div>';
+  }
+
+  el.className="wcard";
+  el.innerHTML=
+    '<div class="mkt-name">'+tName(mkt.key)+'</div>'+
+    '<div class="mkt-sub">HARTI · '+t("today")+'</div>'+
+    '<div class="today">'+
+      '<div class="icon">'+todayInfo.icon+'</div>'+
+      '<div>'+
+        '<div class="temps">'+hi+'°<small> / '+lo+'°</small></div>'+
+        '<div class="desc">'+todayInfo.desc+'</div>'+
+        '<div class="rain">💧 '+t("rain")+': '+rain+'%</div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="fdays">'+futureDays+'</div>';
+}
+
+async function renderAll(){
+  const grid=document.getElementById("weatherGrid");
+  grid.innerHTML=MARKETS.map(function(m){return '<div class="wcard loading" id="wcard_'+m.key+'">⏳ '+t("loading")+'</div>';}).join("");
+  for(const mkt of MARKETS){
+    try{
+      const data=await fetchWeather(mkt);
+      renderCard(mkt, data);
+    }catch(e){
+      renderCard(mkt, null);
+    }
+  }
+}
+
+buildTicker();
+renderAll();
+</script>
+</body>
+</html>
