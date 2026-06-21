@@ -1126,22 +1126,25 @@ function calcPanel(d){
             oninput="calcTransport2('${cid}')">
           <span style="font-size:13px;color:#7a7264">රු./kg</span>
         </div>
-        <div style="background:#f4efe4;border:1px dashed #cdbf9f;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:7px">
-          <div style="font-size:11.5px;font-weight:700;color:#0e4f4a">📍 ${lang==="si"?"දුර ගණනය කර ප්‍රවාහන පිරිවැය auto-fill කරගන්න":lang==="ta"?"தூரத்தைக் கணக்கிட்டு போக்குவரத்து செலவை auto-fill செய்யுங்கள்":"Calculate distance to auto-fill transport cost"}</div>
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-            <select id="distCity_${cid}"
-              style="flex:1;min-width:150px;font-size:13px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a;cursor:pointer">
-              ${traderMkts.map(k=>`<option value="${k}">${tMkt(k)}</option>`).join("")}
-            </select>
-            <button onclick="calcRoadDistance('${cid}')" type="button"
-              style="font:inherit;font-size:12.5px;font-weight:700;padding:7px 12px;border-radius:8px;border:1.5px solid #0e4f4a;background:#0e4f4a;color:#fff;cursor:pointer;white-space:nowrap">${lang==="si"?"දුර බලන්න":lang==="ta"?"தூரம் காண்க":"Get distance"}</button>
+        <div>
+          <button type="button" onclick="toggleDistanceBox('${cid}')"
+            style="font:inherit;font-size:12px;font-weight:700;color:#0e4f4a;background:none;border:none;padding:2px 0;cursor:pointer;text-decoration:underline;text-underline-offset:2px">📍 ${lang==="si"?"දුර ගණනය කර transport cost auto-fill කරගන්න":lang==="ta"?"தூரம் கணக்கிட்டு transport cost auto-fill செய்யுங்கள்":"Calculate distance to auto-fill transport cost"}</button>
+          <div id="distBox_${cid}" style="display:none;background:#f4efe4;border:1px dashed #cdbf9f;border-radius:10px;padding:10px 12px;margin-top:7px;flex-direction:column;gap:7px">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <select id="distCity_${cid}"
+                style="flex:1;min-width:150px;font-size:13px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a;cursor:pointer">
+                ${traderMkts.map(k=>`<option value="${k}">${tMkt(k)}</option>`).join("")}
+              </select>
+              <button onclick="calcRoadDistance('${cid}')" type="button"
+                style="font:inherit;font-size:12.5px;font-weight:700;padding:7px 12px;border-radius:8px;border:1.5px solid #0e4f4a;background:#0e4f4a;color:#fff;cursor:pointer;white-space:nowrap">${lang==="si"?"දුර බලන්න":lang==="ta"?"தூரம் காண்க":"Get distance"}</button>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap" id="distRateRow_${cid}">
+              <input id="distRate_${cid}" type="number" min="0" placeholder="${lang==="si"?"රු./km":lang==="ta"?"ரூ./km":"Rs./km"}"
+                style="display:none;width:90px;font-size:13px;padding:7px 10px;border:1.5px solid #a9802a;border-radius:8px;background:#fffdf7;color:#191d1a"
+                oninput="applyDistanceRate('${cid}')">
+            </div>
+            <div id="distResult_${cid}" style="font-size:12px;color:#7a7264"></div>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap" id="distRateRow_${cid}">
-            <input id="distRate_${cid}" type="number" min="0" placeholder="${lang==="si"?"රු./km":lang==="ta"?"ரூ./km":"Rs./km"}"
-              style="display:none;width:90px;font-size:13px;padding:7px 10px;border:1.5px solid #a9802a;border-radius:8px;background:#fffdf7;color:#191d1a"
-              oninput="applyDistanceRate('${cid}')">
-          </div>
-          <div id="distResult_${cid}" style="font-size:12px;color:#7a7264"></div>
         </div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
           <label style="font-size:13px;color:#3a403a;min-width:130px">${lang==="si"?"ඔබේ විකිණුම් මිල:":lang==="ta"?"உங்கள் விற்பனை விலை:":"Your sell price:"}</label>
@@ -1706,6 +1709,11 @@ function marketCoord(mktKey){
     "Bandarawela":{lat:6.8294,lng:80.9908},"Veyangoda":{lat:7.1541,lng:80.0594}
   };
   return M[mktKey]||null;
+}
+function toggleDistanceBox(cid){
+  const box=document.getElementById("distBox_"+cid);
+  if(!box)return;
+  box.style.display=(box.style.display==="none"||!box.style.display)?"flex":"none";
 }
 async function calcRoadDistance(cid){
   const sellSelect=document.getElementById("distCity_"+cid);
