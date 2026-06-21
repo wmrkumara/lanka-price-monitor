@@ -431,6 +431,7 @@
 <body>
 <!-- ══ TOP NAV BAR ══ -->
 <nav class="topnav" role="navigation">
+
   <div class="topnav-inner">
     <a href="index.html" class="topnav-brand">Lanka <em>Price</em> Monitor</a>
     <div class="navlinks">
@@ -1125,6 +1126,23 @@ function calcPanel(d){
             oninput="calcTransport2('${cid}')">
           <span style="font-size:13px;color:#7a7264">රු./kg</span>
         </div>
+        <div style="background:#f4efe4;border:1px dashed #cdbf9f;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:7px">
+          <div style="font-size:11.5px;font-weight:700;color:#0e4f4a">📍 ${lang==="si"?"දුර ගණනය කර ප්‍රවාහන පිරිවැය auto-fill කරගන්න":lang==="ta"?"தூரத்தைக் கணக்கிட்டு போக்குவரத்து செலவை auto-fill செய்யுங்கள்":"Calculate distance to auto-fill transport cost"}</div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <select id="distCity_${cid}"
+              style="flex:1;min-width:150px;font-size:13px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a;cursor:pointer">
+              ${traderMkts.map(k=>`<option value="${k}">${tMkt(k)}</option>`).join("")}
+            </select>
+            <button onclick="calcRoadDistance('${cid}')" type="button"
+              style="font:inherit;font-size:12.5px;font-weight:700;padding:7px 12px;border-radius:8px;border:1.5px solid #0e4f4a;background:#0e4f4a;color:#fff;cursor:pointer;white-space:nowrap">${lang==="si"?"දුර බලන්න":lang==="ta"?"தூரம் காண்க":"Get distance"}</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap" id="distRateRow_${cid}">
+            <input id="distRate_${cid}" type="number" min="0" placeholder="${lang==="si"?"රු./km":lang==="ta"?"ரூ./km":"Rs./km"}"
+              style="display:none;width:90px;font-size:13px;padding:7px 10px;border:1.5px solid #a9802a;border-radius:8px;background:#fffdf7;color:#191d1a"
+              oninput="applyDistanceRate('${cid}')">
+          </div>
+          <div id="distResult_${cid}" style="font-size:12px;color:#7a7264"></div>
+        </div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
           <label style="font-size:13px;color:#3a403a;min-width:130px">${lang==="si"?"ඔබේ විකිණුම් මිල:":lang==="ta"?"உங்கள் விற்பனை விலை:":"Your sell price:"}</label>
           <input id="tsell_${cid}" type="number" min="0" max="9999" value=""
@@ -1675,6 +1693,61 @@ function calcFarmer(tcid){
   const el=document.getElementById("tr_"+tcid);
   if(el)el.innerHTML=`<div style="font-size:11px;font-weight:700;color:#2c7a52;margin-bottom:6px">🌾 Farmer Profit Summary (${kg}kg):</div>`+html+
     `<div style="margin-top:6px;font-size:12px;font-weight:700;padding:8px 12px;border-radius:8px;background:#0e4f4a;color:#ffd98a">${advice}</div>`;
+}
+
+/* ===== Distance-based transport cost calculator (free OSRM, no API key) — limited to the 10 HARTI markets ===== */
+function marketCoord(mktKey){
+  // Known HARTI market coordinates (verified)
+  const M={
+    "Peliyagoda":{lat:6.9685,lng:79.8836},"Kandy":{lat:7.2906,lng:80.6337},
+    "Dambulla":{lat:7.8742,lng:80.6511},"Meegoda":{lat:6.8438,lng:80.0867},
+    "Norochchole":{lat:8.054288,lng:79.737320},"Thambuththegama":{lat:8.161554,lng:80.299989},
+    "Keppetipola":{lat:6.9215,lng:80.8538},"Nuwaraeliya":{lat:6.9497,lng:80.7891},
+    "Bandarawela":{lat:6.8294,lng:80.9908},"Veyangoda":{lat:7.1541,lng:80.0594}
+  };
+  return M[mktKey]||null;
+}
+async function calcRoadDistance(cid){
+  const sellSelect=document.getElementById("distCity_"+cid);
+  const buySelect=document.getElementById("tbuy_"+cid);
+  const resultEl=document.getElementById("distResult_"+cid);
+  const rateInput=document.getElementById("distRate_"+cid);
+  if(!sellSelect||!buySelect||!resultEl)return;
+  const sellMkt=sellSelect.value;
+  const buyMkt=buySelect.value;
+  const fromCoord=marketCoord(buyMkt);
+  const toCoord=marketCoord(sellMkt);
+  if(!fromCoord||!toCoord){resultEl.textContent="Market location not found.";return;}
+  if(buyMkt===sellMkt){resultEl.textContent=lang==="si"?"එකම වෙළඳපොළ තෝරා ඇත — වෙනස් එකක් තෝරන්න.":lang==="ta"?"ஒரே சந்தை தேர்ந்தெடுக்கப்பட்டது — வேறு ஒன்றைத் தேர்ந்தெடுக்கவும்.":"Same market selected — pick a different one.";return;}
+
+  resultEl.textContent=lang==="si"?"⏳ දුර ගණනය වෙමින්...":lang==="ta"?"⏳ தூரம் கணக்கிடப்படுகிறது...":"⏳ Calculating distance...";
+  try{
+    const url=`https://router.project-osrm.org/route/v1/driving/${fromCoord.lng},${fromCoord.lat};${toCoord.lng},${toCoord.lat}?overview=false`;
+    const res=await fetch(url);
+    if(!res.ok)throw new Error("routing failed");
+    const data=await res.json();
+    if(!data.routes||!data.routes.length)throw new Error("no route");
+    const km=data.routes[0].distance/1000;
+    window["_distKm_"+cid]=km;
+    resultEl.innerHTML=(lang==="si"?`🛣️ <b>${tMkt(buyMkt)}</b> සිට <b>${tMkt(sellMkt)}</b> දක්වා මාර්ග දුර: <b>${km.toFixed(1)} km</b>`:
+      lang==="ta"?`🛣️ <b>${tMkt(buyMkt)}</b> இலிருந்து <b>${tMkt(sellMkt)}</b> வரை சாலை தூரம்: <b>${km.toFixed(1)} km</b>`:
+      `🛣️ Road distance from <b>${tMkt(buyMkt)}</b> to <b>${tMkt(sellMkt)}</b>: <b>${km.toFixed(1)} km</b>`)+
+      `<br><span style="font-size:11px;color:#a9802a">${lang==="si"?"Rs./km ඔබේ rate එක දාන්න ↓":lang==="ta"?"உங்கள் Rs./km விகிதத்தை உள்ளிடவும் ↓":"Enter your own Rs./km rate below ↓"}</span>`;
+    if(rateInput){rateInput.style.display="inline-block";}
+  }catch(e){
+    resultEl.textContent=lang==="si"?"⚠️ දුර සොයාගත නොහැක. නැවත try කරන්න.":lang==="ta"?"⚠️ தூரம் கண்டறிய முடியவில்லை. மீண்டும் முயற்சிக்கவும்.":"⚠️ Could not calculate distance. Please try again.";
+  }
+}
+function applyDistanceRate(cid){
+  const km=window["_distKm_"+cid];
+  const rateInput=document.getElementById("distRate_"+cid);
+  const tcInput=document.getElementById("tc_"+cid);
+  if(km==null||!rateInput||!tcInput)return;
+  const rate=parseFloat(rateInput.value)||0;
+  if(rate>0){
+    tcInput.value=Math.round(km*rate);
+    calcTransport2(cid);
+  }
 }
 
 function calcTransport2(tcid){
