@@ -1,0 +1,36 @@
+name: HARTI Wholesale Backfill (Run Once)
+
+on:
+  workflow_dispatch:  # Manual trigger only
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120  # 2 hours max
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests pdfplumber
+
+      - name: Run HARTI backfill (download PDFs 2023-2026)
+        run: python harti_backfill.py
+
+      - name: Build harti_data.json from all PDFs
+        run: python harti_update.py --no-download
+
+      - name: Commit results
+        run: |
+          git config user.name "price-bot"
+          git config user.email "price-bot@topgoviya.lk"
+          git add harti_data.json
+          git add harti_pdfs/
+          git diff --staged --quiet || git commit -m "HARTI backfill: 2023-2026 wholesale history"
+          git push
