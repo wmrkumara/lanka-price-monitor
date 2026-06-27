@@ -12,9 +12,9 @@
 <link rel="apple-touch-icon" href="icon-192x192.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png">
 <title>අලාභ-ලාභ සීමා ගණකය | Break-even Calculator | TopGoviya.lk</title>
-<meta name="description" content="ගොවියාගේ කොඩිය මිල ගණකය — ඔබේ ලාභ හෝ පාඩු දැනගන්න. Farmer break-even price calculator with live market comparison. TopGoviya.lk">
+<meta name="description" content="ගොවියාගේ අලාභ-ලාභ සීමා ගණකය — ඔබේ ලාභ හෝ පාඩු දැනගන්න. Farmer break-even price calculator with live market comparison. TopGoviya.lk">
 <meta property="og:title" content="Break-even Calculator | TopGoviya.lk">
-<meta property="og:description" content="ඔබේ භෝගයේ කොඩිය මිල ගණනය කර, අද වෙළඳපොළ මිල සමඟ සංසන්දනය කරන්න.">
+<meta property="og:description" content="ඔබේ භෝගයේ අලාභ-ලාභ සීමා ගණනය කර, අද වෙළඳපොළ මිල සමඟ සංසන්දනය කරන්න.">
 <meta property="og:url" content="https://topgoviya.lk/breakeven.html">
 <link rel="canonical" href="https://topgoviya.lk/breakeven.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -312,7 +312,7 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
     <!-- HERO: BREAK-EVEN PRICE -->
     <div class="sec-label" style="margin-top:28px" id="sec3-label">📊 ගණනය කළ ප්‍රතිඵල</div>
     <div class="result-hero">
-      <div class="rh-label" id="rh-label">ඔබේ කොඩිය මිල</div>
+      <div class="rh-label" id="rh-label">ඔබේ අලාභ-ලාභ සීමා මිල</div>
       <div class="rh-price" id="rh-price">—</div>
       <div class="rh-unit" id="rh-unit">රු. / කි.ග්‍රෑ.</div>
       <div class="rh-sub" id="rh-sub"></div>
@@ -369,7 +369,7 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
 let lang = "si";
 const T = {
   si:{
-    navRetail:"සිල්ලර",navWholesale:"තොග",navWeather:"කාලගුණ",navBe:"කොඩිය",
+    navRetail:"සිල්ලර",navWholesale:"තොග",navWeather:"කාලගුණ",navBe:"අලාභ-ලාභ",
     kickerTag:"ගොවි තීරණ මෙවලම",pageTitle:"අලාභ-ලාභ සීමා <em>ගණකය</em>",
     pageDesc:"ඔබේ භෝගයේ වගා පිරිවැය ඇතුළු කරන්න — ලාභ ලැබීමට අවශ්‍ය අවම මිල ක්ෂණිකව දැනගන්න.",
     sec1:"🌾 භෝග තොරතුරු",sec2:"💰 වගා වියදම් (රු.)",sec3:"📊 ගණනය කළ ප්‍රතිඵල",
@@ -381,13 +381,13 @@ const T = {
     lblPack:"ඇසිරීම / ඇසුරුම්",lblLand:"ඉඩම් කුලිය",lblLandHint:"(නොමිලේ නම් 0)",
     lblOther:"වෙනත් වියදම්",
     btnCalc:"ගණනය කරන්න",btnShare:"WhatsApp හරහා බෙදාහරින්න",btnReset:"නැවත ගණනය කරන්න",
-    rhLabel:"ඔබේ කොඩිය මිල",rhUnit:"රු. / කි.ග්‍රෑ.",
+    rhLabel:"ඔබේ අලාභ-ලාභ සීමා මිල",rhUnit:"රු. / කි.ග්‍රෑ.",
     rhSub1:"ඉහළ විකුණන්න",rhSub2:"ලාභ ලැබීමට",
-    statTotal:"මුළු වියදම",statNet:"විකිණිය හැකි අස්වැන්න",statBe:"කොඩිය මිල",
+    statTotal:"මුළු වියදම",statNet:"විකිණිය හැකි අස්වැන්න",statBe:"අලාභ-ලාභ සීමා මිල",
     statProfit:"අපේක්ෂිත ලාභය",statPerKg:"කි.ග්‍රෑ. ලාභය",statPerAcre:"අක්කරයකට",
     recProfitTitle:"✅ ලාභදායී අවස්ථාව!",recLossTitle:"⚠️ හොඳ නෑ — පාඩු!",
-    recProfitDesc:"දැනට වෙළඳපොළ මිල ඔබේ කොඩිය මිලට වඩා ඉහළයි. දැනට විකිණීම ලාභදායී!",
-    recLossDesc:"දැනට වෙළඳපොළ මිල ඔබේ කොඩිය මිලට වඩා අඩුයි. ටිකක් රඳා සිටීම සලකා බලන්න.",
+    recProfitDesc:"දැනට වෙළඳපොළ මිල ඔබේ අලාභ-ලාභ සීමා මිලට වඩා ඉහළයි. දැනට විකිණීම ලාභදායී!",
+    recLossDesc:"දැනට වෙළඳපොළ මිල ඔබේ අලාභ-ලාභ සීමා මිලට වඩා අඩුයි. ටිකක් රඳා සිටීම සලකා බලන්න.",
     recNoData:"දත්ත නොමැත — ඔබේ භෝගය සඳහා CBSL දත්ත ලබා ගත නොහැකිය.",
     mktThMarket:"වෙළඳපොළ",mktThPrice:"මිල (රු./කි.ග්‍රෑ.)",mktThResult:"ප්‍රතිඵලය",mktThRec:"",
     mktBest:"හොඳම ✅",mktAvoid:"හොඳ නෑ ⚠️",mktNa:"දත්ත නැත",
@@ -396,7 +396,7 @@ const T = {
     footDisc:"මිල ගණන් CBSL දත්ත ගොනුවෙන් ලබා ගනී. ප්‍රතිඵල සඳහා TopGoviya.lk වගකීම නොදරයි.",
     errHarvest:"කරුණාකර අස්වැන්න ප්‍රමාණය ඇතුළු කරන්න.",
     errCosts:"කරුණාකර අවම වශයෙන් එක් වියදමක් ඇතුළු කරන්න.",
-    shareMsg:"🧮 *TopGoviya.lk — අලාභ-ලාභ සීමා ගණකය*\n\n🌾 භෝගය: %CROP%\n💰 මුළු වියදම: රු.%COST%\n📦 අස්වැන්න: %KG% kg\n🎯 කොඩිය මිල: රු.%BE%/kg\n\n%REC%\n\n🔗 https://topgoviya.lk/breakeven.html\n🤝 *මේ තොරතුරු ඔබේ මිතුරන්ටත් දැනගන්න බෙදාහරින්න!*",
+    shareMsg:"🧮 *TopGoviya.lk — අලාභ-ලාභ සීමා ගණකය*\n\n🌾 භෝගය: %CROP%\n💰 මුළු වියදම: රු.%COST%\n📦 අස්වැන්න: %KG% kg\n🎯 අලාභ-ලාභ සීමා: රු.%BE%/kg\n\n%REC%\n\n🔗 https://topgoviya.lk/breakeven.html\n🤝 *මේ තොරතුරු ඔබේ මිතුරන්ටත් දැනගන්න බෙදාහරින්න!*",
     shareProfit:"✅ දැනට ලාභදායී!",shareLoss:"⚠️ දැනට පාඩුයි — රඳා සිටින්න.",shareNoData:"📊 වෙළඳපොළ සංසන්දනය: දත්ත නොමැත.",
   },
   ta:{
