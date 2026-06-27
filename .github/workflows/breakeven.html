@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TopGoviya">
+<meta name="theme-color" content="#0e4f4a">
+<link rel="apple-touch-icon" href="icon-192x192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png">
+<title>අලාභ-ලාභ සීමා ගණකය | Break-even Calculator | TopGoviya.lk</title>
+<meta name="description" content="ගොවියාගේ කොඩිය මිල ගණකය — ඔබේ ලාභ හෝ පාඩු දැනගන්න. Farmer break-even price calculator with live market comparison. TopGoviya.lk">
+<meta property="og:title" content="Break-even Calculator | TopGoviya.lk">
+<meta property="og:description" content="ඔබේ භෝගයේ කොඩිය මිල ගණනය කර, අද වෙළඳපොළ මිල සමඟ සංසන්දනය කරන්න.">
+<meta property="og:url" content="https://topgoviya.lk/breakeven.html">
+<link rel="canonical" href="https://topgoviya.lk/breakeven.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4efe4;--paper-2:#efe8d8;--card:#fffdf7;--ink:#191d1a;--ink-soft:#3a403a;
+  --muted:#7a7264;--line:#e3d9c4;--line-strong:#cdbf9f;--petrol:#0e4f4a;--petrol-deep:#0a3a36;
+  --gold:#a9802a;--up:#b23a2e;--up-bg:#f7e6e2;--down:#2c7a52;--down-bg:#e3efe6;
+  --shadow:0 1px 0 rgba(0,0,0,.02),0 12px 30px -18px rgba(20,40,38,.35);--r:14px;
+}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);
+  font-family:'Hanken Grotesk','Noto Sans Sinhala','Noto Sans Tamil',sans-serif;
+  -webkit-font-smoothing:antialiased;line-height:1.5;
+  background-image:radial-gradient(circle at 12% -10%,rgba(14,79,74,.06),transparent 38%),
+                   radial-gradient(circle at 95% 0%,rgba(169,128,42,.07),transparent 30%);
+  background-attachment:fixed;}
+
+/* ── NAVBAR ── */
+.topnav{background:var(--petrol);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(10,30,28,.4)}
+.topnav-inner{max-width:1160px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:0}
+.topnav-brand{font-family:'Newsreader',serif;font-size:16px;font-weight:500;color:#fff;
+  padding:12px 18px 12px 0;border-right:1px solid rgba(255,255,255,.18);margin-right:4px;
+  white-space:nowrap;text-decoration:none;letter-spacing:-.01em}
+.topnav-brand em{font-style:italic;color:#ffd98a}
+.navlinks{display:flex;gap:2px;padding:8px 0}
+.navlink{font:inherit;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:7px 16px;border-radius:8px;text-decoration:none;transition:.18s;white-space:nowrap}
+.navlink.retail{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+.navlink.retail:hover{background:rgba(255,255,255,.18);color:#fff}
+.navlink.wholesale{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+.navlink.wholesale:hover{background:rgba(255,255,255,.18);color:#fff}
+.navlink.weather{background:rgba(100,200,220,.18);color:#a8dfe8;border:1px solid rgba(100,200,220,.25)}
+.navlink.weather:hover{background:rgba(100,200,220,.30);color:#fff}
+.navlink.breakeven{background:var(--gold);color:#fff}
+.navlink.breakeven:hover{background:#c4921f}
+.navlink-badge{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.08em;
+  background:rgba(255,255,255,.25);padding:2px 5px;border-radius:4px;margin-left:5px;vertical-align:middle}
+@media(max-width:600px){
+  .topnav-inner{flex-wrap:wrap;padding:0}
+  .topnav-brand{font-size:15px;padding:9px 14px;border-right:none;margin-right:0;width:100%;border-bottom:1px solid rgba(255,255,255,.12)}
+  .navlinks{width:100%;padding:5px 10px;gap:4px;flex-wrap:wrap}
+  .navlink{font-size:10.5px;padding:6px 8px;flex:1;text-align:center}
+  .navlink-badge{display:none}
+}
+
+/* ── LAYOUT ── */
+.wrap{max-width:820px;margin:0 auto;padding:0 18px 60px}
+
+/* ── PAGE HEADER ── */
+.page-header{padding:28px 0 20px;border-bottom:2px solid var(--ink);margin-bottom:28px}
+.page-kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:8px}
+.page-kicker span{color:var(--petrol)}
+.page-title{font-family:'Newsreader',serif;font-size:clamp(28px,5vw,46px);font-weight:500;
+  line-height:1;letter-spacing:-.015em;margin:0 0 8px}
+.page-title em{font-style:italic;color:var(--gold)}
+.page-desc{font-size:14px;color:var(--ink-soft);max-width:560px;line-height:1.55}
+
+/* ── LANG TOGGLE ── */
+.lang-row{display:flex;justify-content:flex-end;margin-bottom:20px}
+.lang{display:flex;gap:2px;border:1px solid var(--line-strong);border-radius:999px;overflow:hidden}
+.lang button{font:inherit;font-size:11px;letter-spacing:.12em;font-weight:700;text-transform:uppercase;
+  border:0;background:transparent;color:var(--muted);padding:5px 12px;cursor:pointer;transition:.2s}
+.lang button.on{background:var(--petrol);color:#fff}
+
+/* ── SECTION LABEL ── */
+.sec-label{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--petrol);
+  font-weight:800;margin:24px 0 10px;display:flex;align-items:center;gap:8px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--line-strong)}
+
+/* ── FORM CARD ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;box-shadow:var(--shadow);margin-bottom:16px}
+
+/* ── INPUTS ── */
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12.5px;font-weight:700;color:var(--ink-soft);margin-bottom:5px}
+.field label .hint{font-weight:500;color:var(--muted);font-size:11px;margin-left:4px}
+.field input,.field select{width:100%;font:inherit;font-size:15px;padding:11px 13px;
+  border-radius:10px;border:1px solid var(--line-strong);background:#fff;color:var(--ink);
+  outline:none;transition:.2s;-webkit-appearance:none}
+.field input:focus,.field select:focus{border-color:var(--petrol);box-shadow:0 0 0 3px rgba(14,79,74,.1)}
+.field input[type=number]{font-family:'JetBrains Mono',monospace;font-weight:600}
+.prefix-wrap{position:relative}
+.prefix-wrap .prefix{position:absolute;left:12px;top:50%;transform:translateY(-50%);
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:var(--muted)}
+.prefix-wrap input{padding-left:36px}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.two-col{grid-template-columns:1fr}}
+
+/* ── WASTE SLIDER ── */
+.slider-wrap{display:flex;align-items:center;gap:12px}
+.slider-wrap input[type=range]{flex:1;accent-color:var(--petrol);height:4px;cursor:pointer}
+.slider-val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;
+  color:var(--petrol);min-width:42px;text-align:right}
+
+/* ── CALCULATE BUTTON ── */
+.calc-btn{width:100%;font:inherit;font-size:16px;font-weight:800;letter-spacing:.04em;
+  padding:15px;border-radius:12px;border:0;background:var(--petrol);color:#fff;cursor:pointer;
+  transition:.18s;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:8px}
+.calc-btn:hover{background:var(--petrol-deep);transform:translateY(-1px)}
+.calc-btn:active{transform:none}
+
+/* ── RESULTS ── */
+.results{display:none}
+.results.show{display:block;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.result-hero{background:linear-gradient(135deg,var(--petrol),var(--petrol-deep));
+  border-radius:var(--r);padding:24px;color:#fff;margin-bottom:16px;text-align:center}
+.result-hero .rh-label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.65);font-weight:700;margin-bottom:6px}
+.result-hero .rh-price{font-family:'JetBrains Mono',monospace;font-weight:700;
+  font-size:clamp(36px,8vw,56px);color:#ffd98a;letter-spacing:-.02em;line-height:1}
+.result-hero .rh-unit{font-size:13px;color:rgba(255,255,255,.7);margin-top:4px}
+.result-hero .rh-sub{font-size:13px;color:rgba(255,255,255,.8);margin-top:12px;line-height:1.5}
+
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:480px){.stat-grid{grid-template-columns:repeat(2,1fr)}}
+.stat-box{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+.stat-box .sl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.stat-box .sv{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;margin-top:3px}
+.stat-box .sv.profit{color:var(--down)}.stat-box .sv.loss{color:var(--up)}
+
+/* ── MARKET TABLE ── */
+.mkt-table{width:100%;border-collapse:collapse;font-size:14px}
+.mkt-table th{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  font-weight:700;padding:8px 10px;text-align:left;border-bottom:2px solid var(--line-strong)}
+.mkt-table td{padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+.mkt-table tr:last-child td{border-bottom:0}
+.mkt-table .mkt-name{font-weight:700;color:var(--ink)}
+.mkt-table .mkt-name small{display:block;font-size:10.5px;color:var(--muted);font-weight:500}
+.mkt-table .mkt-price{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px}
+.mkt-table .mkt-result{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;
+  padding:3px 8px;border-radius:7px;white-space:nowrap}
+.mkt-table .mkt-result.profit{color:var(--down);background:var(--down-bg)}
+.mkt-table .mkt-result.loss{color:var(--up);background:var(--up-bg)}
+.mkt-table .mkt-result.na{color:var(--muted);background:var(--paper-2);font-style:italic}
+.mkt-rec{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600}
+.mkt-rec.best{color:var(--down)}.mkt-rec.avoid{color:var(--up)}
+
+/* ── RECOMMENDATION BOX ── */
+.rec-box{border-radius:12px;padding:16px 18px;margin-bottom:16px;display:flex;gap:12px;align-items:flex-start}
+.rec-box.profit{background:var(--down-bg);border:1px solid rgba(44,122,82,.2)}
+.rec-box.loss{background:var(--up-bg);border:1px solid rgba(178,58,46,.2)}
+.rec-box .rec-icon{font-size:24px;flex-shrink:0;margin-top:2px}
+.rec-box .rec-text{font-size:14px;line-height:1.55}
+.rec-box .rec-text strong{display:block;font-size:15px;margin-bottom:3px}
+.rec-box.profit .rec-text strong{color:var(--down)}
+.rec-box.loss .rec-text strong{color:var(--up)}
+
+/* ── SCENARIO TABLE ── */
+.scenario-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.scenario-table th{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  font-weight:700;padding:7px 10px;text-align:left;border-bottom:2px solid var(--line-strong)}
+.scenario-table td{padding:9px 10px;border-bottom:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-weight:600}
+.scenario-table tr:last-child td{border-bottom:0}
+.scenario-table .s-profit{color:var(--down)}.scenario-table .s-loss{color:var(--up)}
+.scenario-table .s-be{color:var(--gold);font-weight:800}
+.scenario-table tr.highlight-row td{background:rgba(169,128,42,.08)}
+
+/* ── SHARE BUTTON ── */
+.share-btn{width:100%;font:inherit;font-size:14px;font-weight:700;padding:13px;border-radius:11px;
+  border:0;background:#25D366;color:#fff;cursor:pointer;transition:.18s;
+  display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px}
+.share-btn:hover{background:#1ebe5d}
+
+/* ── RESET ── */
+.reset-btn{width:100%;font:inherit;font-size:13px;font-weight:600;padding:10px;border-radius:10px;
+  border:1px solid var(--line-strong);background:transparent;color:var(--muted);cursor:pointer;
+  margin-top:8px;transition:.18s}
+.reset-btn:hover{border-color:var(--petrol);color:var(--petrol)}
+
+/* ── FOOTER ── */
+footer{margin:40px 0 20px;padding-top:20px;border-top:1px solid var(--line-strong);
+  font-size:12px;color:var(--muted);text-align:center;line-height:1.7}
+footer a{color:var(--petrol);font-weight:700;text-decoration:none}
+</style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a href="index.html" class="topnav-brand">Lanka <em>Price</em> Monitor</a>
+    <div class="navlinks">
+      <a href="index.html" class="navlink retail">📊 <span id="nav-retail">Retail</span> <span class="navlink-badge">CBSL</span></a>
+      <a href="wholesale.html" class="navlink wholesale">📦 <span id="nav-wholesale">Wholesale</span> <span class="navlink-badge">HARTI</span></a>
+      <a href="weather.html" class="navlink weather">🌤️ <span id="nav-weather">Weather</span> <span class="navlink-badge">10</span></a>
+      <a href="breakeven.html" class="navlink breakeven">🧮 <span id="nav-be">Break-even</span></a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-kicker"><span id="kicker-org">TopGoviya.lk</span> &nbsp;·&nbsp; <span id="kicker-tag">ගොවි තීරණ මෙවලම</span></div>
+    <h1 class="page-title" id="page-title">අලාභ-ලාභ සීමා <em>ගණකය</em></h1>
+    <p class="page-desc" id="page-desc">ඔබේ භෝගයේ වගා පිරිවැය ඇතුළු කරන්න — ලාභ ලැබීමට අවශ්‍ය අවම මිල ක්ෂණිකව දැනගන්න.</p>
+  </div>
+
+  <!-- LANG TOGGLE -->
+  <div class="lang-row">
+    <div class="lang" role="group">
+      <button data-lang="si" class="on">සිං</button>
+      <button data-lang="ta">தமி</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </div>
+
+  <!-- ── SECTION 1: CROP INFO ── -->
+  <div class="sec-label" id="sec1-label">🌾 භෝග තොරතුරු</div>
+  <div class="card">
+    <div class="two-col">
+      <div class="field">
+        <label id="lbl-crop">භෝගය <span class="hint" id="lbl-crop-hint">(උදා: තක්කාලි)</span></label>
+        <input type="text" id="cropName" placeholder="භෝගය ලියන්න…">
+      </div>
+      <div class="field">
+        <label id="lbl-area">ඉඩම් ප්‍රමාණය <span class="hint">(අක්කර)</span></label>
+        <input type="number" id="landArea" placeholder="1.0" min="0.1" step="0.1">
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label id="lbl-harvest">අපේක්ෂිත අස්වැන්න <span class="hint">(කි.ග්‍රෑ.)</span></label>
+        <input type="number" id="harvest" placeholder="8000" min="1">
+      </div>
+      <div class="field">
+        <label id="lbl-waste">අස්වැන්න හානිය <span class="hint">(ප්‍රතිශතය)</span></label>
+        <div class="slider-wrap">
+          <input type="range" id="wasteSlider" min="0" max="40" value="10" oninput="document.getElementById('wasteVal').textContent=this.value+'%'">
+          <span class="slider-val" id="wasteVal">10%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 2: COSTS ── -->
+  <div class="sec-label" id="sec2-label">💰 වගා වියදම් (රු.)</div>
+  <div class="card">
+    <div class="two-col">
+      <div class="field">
+        <label id="lbl-seed">බීජ / පැල</label>
+        <div class="prefix-wrap"><span class="prefix">රු.</span><input type="number" id="cSeed" placeholder="25000" min="0"></div>
+      </div>
+      <div class="field">
+        <label id="lbl-fert">පොහොර</label>
+        <div class="prefix-wrap"><span class="prefix">රු.</span><input type="number" id="cFert" placeholder="60000" min="0"></div>
+      </div>
+      <div class="field">
+        <label id="lbl-pest">කෘමිනාශක / රසායනික</label>
+        <div class="prefix-wrap"><span class="prefix">රු.</span><input type="number" id="cPest" placeholder="35000" min="0"></div>
+      </div>
+      <div class="field">
+        <label id="lbl-labor">කම්කරු</label>
+        <div class="prefix-wrap"><span class="prefix">රු.</span><input type="number" id="cLabor" placeholder="80000" min="0"></div>
+      </div>
+      <div class="field">
+        <label id="lbl-irr">ජල සම්පාදනය</label>
+        <div class="prefix-wrap"><span class="prefix">රු.</span><input type="number" id="cIrr" placeholder="15000" min="0"></div>
+      </div>
+      <div class="field">
+        <label id="lbl-transport">ප්‍රවාහනය</label>
+        <div class="prefix-wrap"><span class="prefix">රු.</span><input type="number" id="cTransport" placeholder="20000" min="0"></div>
+      </div>
+      <div class="field">
+        <label id="lbl-pack">ඇසිරීම / ඇසුරුම්</label>
+        <div class="prefix-wrap"><span class="prefix">රු.</span><input type="number" id="cPack" placeholder="10000" min="0"></div>
+      </div>
+      <div class="field">
+        <label id="lbl-land">ඉඩම් කුලිය <span class="hint" id="lbl-land-hint">(නොමිලේ නම් 0)</span></label>
+        <div class="prefix-wrap"><span class="prefix">රු.</span><input type="number" id="cLand" placeholder="0" min="0"></div>
+      </div>
+      <div class="field">
+        <label id="lbl-other">වෙනත් වියදම්</label>
+        <div class="prefix-wrap"><span class="prefix">රු.</span><input type="number" id="cOther" placeholder="15000" min="0"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALCULATE BUTTON -->
+  <button class="calc-btn" onclick="calculate()" id="calcBtn">
+    🧮 <span id="btn-calc">ගණනය කරන්න</span>
+  </button>
+
+  <!-- ══ RESULTS ══ -->
+  <div class="results" id="results">
+
+    <!-- HERO: BREAK-EVEN PRICE -->
+    <div class="sec-label" style="margin-top:28px" id="sec3-label">📊 ගණනය කළ ප්‍රතිඵල</div>
+    <div class="result-hero">
+      <div class="rh-label" id="rh-label">ඔබේ කොඩිය මිල</div>
+      <div class="rh-price" id="rh-price">—</div>
+      <div class="rh-unit" id="rh-unit">රු. / කි.ග්‍රෑ.</div>
+      <div class="rh-sub" id="rh-sub"></div>
+    </div>
+
+    <!-- STAT BOXES -->
+    <div class="stat-grid" id="stat-grid"></div>
+
+    <!-- RECOMMENDATION -->
+    <div class="rec-box" id="rec-box">
+      <div class="rec-icon" id="rec-icon"></div>
+      <div class="rec-text">
+        <strong id="rec-title"></strong>
+        <span id="rec-desc"></span>
+      </div>
+    </div>
+
+    <!-- MARKET COMPARISON -->
+    <div class="card">
+      <div class="sec-label" style="margin:0 0 14px" id="sec4-label">🏪 වෙළඳපොළ සංසන්දනය</div>
+      <div id="mkt-table-wrap"></div>
+      <p style="font-size:11px;color:var(--muted);margin:10px 0 0" id="mkt-note">* මිල ගණන් CBSL දත්ත ගොනුවෙන් ස්වයංක්‍රීයව ලබා ගනී</p>
+    </div>
+
+    <!-- SCENARIO ANALYSIS -->
+    <div class="card">
+      <div class="sec-label" style="margin:0 0 14px" id="sec5-label">📈 මිල අවස්ථා විශ්ලේෂණය</div>
+      <div id="scenario-wrap"></div>
+    </div>
+
+    <!-- SHARE + RESET -->
+    <button class="share-btn" onclick="shareResult()" id="share-btn">
+      🤝 <span id="btn-share">WhatsApp හරහා බෙදාහරින්න</span>
+    </button>
+    <button class="reset-btn" onclick="resetForm()" id="reset-btn">↺ <span id="btn-reset">නැවත ගණනය කරන්න</span></button>
+
+  </div><!-- /results -->
+
+</div><!-- /wrap -->
+
+<footer>
+  <div id="footer-disc">මිල ගණන් CBSL දත්ත ගොනුවෙන් ලබා ගනී. ප්‍රතිඵල සඳහා TopGoviya.lk වගකීම නොදරයි.</div>
+  <div style="margin-top:6px">
+    <a href="https://topgoviya.lk">topgoviya.lk</a> &nbsp;·&nbsp;
+    <a href="https://ebooklanka.com" target="_blank">ebooklanka.com</a>
+    &nbsp;·&nbsp; රත්න, ගම්පොළ 🇱🇰
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════
+   i18n
+══════════════════════════════════════ */
+let lang = "si";
+const T = {
+  si:{
+    navRetail:"සිල්ලර",navWholesale:"තොග",navWeather:"කාලගුණ",navBe:"කොඩිය",
+    kickerTag:"ගොවි තීරණ මෙවලම",pageTitle:"අලාභ-ලාභ සීමා <em>ගණකය</em>",
+    pageDesc:"ඔබේ භෝගයේ වගා පිරිවැය ඇතුළු කරන්න — ලාභ ලැබීමට අවශ්‍ය අවම මිල ක්ෂණිකව දැනගන්න.",
+    sec1:"🌾 භෝග තොරතුරු",sec2:"💰 වගා වියදම් (රු.)",sec3:"📊 ගණනය කළ ප්‍රතිඵල",
+    sec4:"🏪 වෙළඳපොළ සංසන්දනය",sec5:"📈 මිල අවස්ථා විශ්ලේෂණය",
+    lblCrop:"භෝගය",lblCropHint:"(උදා: තක්කාලි)",lblArea:"ඉඩම් ප්‍රමාණය",
+    lblHarvest:"අපේක්ෂිත අස්වැන්න",lblWaste:"අස්වැන්න හානිය",
+    lblSeed:"බීජ / පැල",lblFert:"පොහොර",lblPest:"කෘමිනාශක / රසායනික",
+    lblLabor:"කම්කරු",lblIrr:"ජල සම්පාදනය",lblTransport:"ප්‍රවාහනය",
+    lblPack:"ඇසිරීම / ඇසුරුම්",lblLand:"ඉඩම් කුලිය",lblLandHint:"(නොමිලේ නම් 0)",
+    lblOther:"වෙනත් වියදම්",
+    btnCalc:"ගණනය කරන්න",btnShare:"WhatsApp හරහා බෙදාහරින්න",btnReset:"නැවත ගණනය කරන්න",
+    rhLabel:"ඔබේ කොඩිය මිල",rhUnit:"රු. / කි.ග්‍රෑ.",
+    rhSub1:"ඉහළ විකුණන්න",rhSub2:"ලාභ ලැබීමට",
+    statTotal:"මුළු වියදම",statNet:"විකිණිය හැකි අස්වැන්න",statBe:"කොඩිය මිල",
+    statProfit:"අපේක්ෂිත ලාභය",statPerKg:"කි.ග්‍රෑ. ලාභය",statPerAcre:"අක්කරයකට",
+    recProfitTitle:"✅ ලාභදායී අවස්ථාව!",recLossTitle:"⚠️ හොඳ නෑ — පාඩු!",
+    recProfitDesc:"දැනට වෙළඳපොළ මිල ඔබේ කොඩිය මිලට වඩා ඉහළයි. දැනට විකිණීම ලාභදායී!",
+    recLossDesc:"දැනට වෙළඳපොළ මිල ඔබේ කොඩිය මිලට වඩා අඩුයි. ටිකක් රඳා සිටීම සලකා බලන්න.",
+    recNoData:"දත්ත නොමැත — ඔබේ භෝගය සඳහා CBSL දත්ත ලබා ගත නොහැකිය.",
+    mktThMarket:"වෙළඳපොළ",mktThPrice:"මිල (රු./කි.ග්‍රෑ.)",mktThResult:"ප්‍රතිඵලය",mktThRec:"",
+    mktBest:"හොඳම ✅",mktAvoid:"හොඳ නෑ ⚠️",mktNa:"දත්ත නැත",
+    scnThPrice:"විකුණුම් මිල",scnThProfit:"ලාභය/පාඩුව",scnThTotal:"මුළු ලාභය",
+    mktNote:"* මිල ගණන් CBSL දත්ත ගොනුවෙන් ස්වයංක්‍රීයව ලබා ගනී",
+    footDisc:"මිල ගණන් CBSL දත්ත ගොනුවෙන් ලබා ගනී. ප්‍රතිඵල සඳහා TopGoviya.lk වගකීම නොදරයි.",
+    errHarvest:"කරුණාකර අස්වැන්න ප්‍රමාණය ඇතුළු කරන්න.",
+    errCosts:"කරුණාකර අවම වශයෙන් එක් වියදමක් ඇතුළු කරන්න.",
+    shareMsg:"🧮 *TopGoviya.lk — අලාභ-ලාභ සීමා ගණකය*\n\n🌾 භෝගය: %CROP%\n💰 මුළු වියදම: රු.%COST%\n📦 අස්වැන්න: %KG% kg\n🎯 කොඩිය මිල: රු.%BE%/kg\n\n%REC%\n\n🔗 https://topgoviya.lk/breakeven.html\n🤝 *මේ තොරතුරු ඔබේ මිතුරන්ටත් දැනගන්න බෙදාහරින්න!*",
+    shareProfit:"✅ දැනට ලාභදායී!",shareLoss:"⚠️ දැනට පාඩුයි — රඳා සිටින්න.",shareNoData:"📊 වෙළඳපොළ සංසන්දනය: දත්ත නොමැත.",
+  },
+  ta:{
+    navRetail:"சில்லறை",navWholesale:"மொத்தம்",navWeather:"வானிலை",navBe:"முறிவு",
+    kickerTag:"விவசாயி முடிவு கருவி",pageTitle:"முறிவு <em>கணிப்பி</em>",
+    pageDesc:"உங்கள் பயிர் செலவுகளை உள்ளிடவும் — லாபம் பெற தேவையான குறைந்தபட்ச விலையை உடனடியாக அறியவும்.",
+    sec1:"🌾 பயிர் தகவல்",sec2:"💰 சாகுபடி செலவுகள் (ரூ.)",sec3:"📊 கணக்கீட்டு முடிவுகள்",
+    sec4:"🏪 சந்தை ஒப்பீடு",sec5:"📈 விலை சூழ்நிலை பகுப்பாய்வு",
+    lblCrop:"பயிர்",lblCropHint:"(எ.கா: தக்காளி)",lblArea:"நிலம் (ஏக்கர்)",
+    lblHarvest:"எதிர்பார்க்கப்படும் மகசூல்",lblWaste:"மகசூல் இழப்பு",
+    lblSeed:"விதை / நாற்று",lblFert:"உரம்",lblPest:"பூச்சிக்கொல்லி",
+    lblLabor:"தொழிலாளி",lblIrr:"நீர்ப்பாசனம்",lblTransport:"போக்குவரத்து",
+    lblPack:"பேக்கிங்",lblLand:"நில வாடகை",lblLandHint:"(இலவசமாக இருந்தால் 0)",
+    lblOther:"பிற செலவுகள்",
+    btnCalc:"கணக்கிடு",btnShare:"WhatsApp மூலம் பகிர்",btnReset:"மீண்டும் கணக்கிடு",
+    rhLabel:"உங்கள் முறிவு விலை",rhUnit:"ரூ. / கி.கி.",
+    rhSub1:"இதற்கு மேல் விற்கவும்",rhSub2:"லாபம் பெற",
+    statTotal:"மொத்த செலவு",statNet:"விற்கக்கூடிய மகசூல்",statBe:"முறிவு விலை",
+    statProfit:"எதிர்பார்க்கப்படும் லாபம்",statPerKg:"கி.கி. லாபம்",statPerAcre:"ஏக்கருக்கு",
+    recProfitTitle:"✅ லாபகரமான வாய்ப்பு!",recLossTitle:"⚠️ நஷ்டம் — கவனம்!",
+    recProfitDesc:"தற்போதைய சந்தை விலை உங்கள் முறிவு விலையை விட அதிகமாக உள்ளது. இப்போது விற்பது லாபகரமானது!",
+    recLossDesc:"தற்போதைய சந்தை விலை உங்கள் முறிவு விலையை விட குறைவாக உள்ளது. சற்று காத்திருங்கள்.",
+    recNoData:"தரவு இல்லை — உங்கள் பயிருக்கு CBSL தரவு கிடைக்கவில்லை.",
+    mktThMarket:"சந்தை",mktThPrice:"விலை (ரூ./கி.கி.)",mktThResult:"முடிவு",mktThRec:"",
+    mktBest:"சிறந்தது ✅",mktAvoid:"கவனம் ⚠️",mktNa:"தரவு இல்லை",
+    scnThPrice:"விற்பனை விலை",scnThProfit:"லாபம்/நஷ்டம்",scnThTotal:"மொத்த லாபம்",
+    mktNote:"* விலைகள் CBSL தரவு கோப்பிலிருந்து தானாக எடுக்கப்படுகின்றன",
+    footDisc:"விலைகள் CBSL தரவிலிருந்து. முடிவுகளுக்கு TopGoviya.lk பொறுப்பல்ல.",
+    errHarvest:"மகசூல் அளவை உள்ளிடவும்.",errCosts:"குறைந்தது ஒரு செலவை உள்ளிடவும்.",
+    shareMsg:"🧮 *TopGoviya.lk — முறிவு கணிப்பி*\n\n🌾 பயிர்: %CROP%\n💰 மொத்த செலவு: ரூ.%COST%\n📦 மகசூல்: %KG% kg\n🎯 முறிவு விலை: ரூ.%BE%/kg\n\n%REC%\n\n🔗 https://topgoviya.lk/breakeven.html\n🤝 *இந்த தகவலை உங்கள் நண்பர்களுடன் பகிருங்கள்!*",
+    shareProfit:"✅ தற்போது லாபகரமானது!",shareLoss:"⚠️ தற்போது நஷ்டம் — காத்திருங்கள்.",shareNoData:"📊 சந்தை ஒப்பீடு: தரவு இல்லை.",
+  },
+  en:{
+    navRetail:"Retail",navWholesale:"Wholesale",navWeather:"Weather",navBe:"Break-even",
+    kickerTag:"Farmer Decision Tool",pageTitle:"Break-even <em>Calculator</em>",
+    pageDesc:"Enter your crop production costs — instantly find the minimum selling price you need to avoid a loss.",
+    sec1:"🌾 Crop Information",sec2:"💰 Production Costs (Rs.)",sec3:"📊 Calculated Results",
+    sec4:"🏪 Market Comparison",sec5:"📈 Price Scenario Analysis",
+    lblCrop:"Crop",lblCropHint:"(e.g. Tomato)",lblArea:"Land Area (acres)",
+    lblHarvest:"Expected Harvest (kg)",lblWaste:"Harvest Loss %",
+    lblSeed:"Seeds / Seedlings",lblFert:"Fertilizer",lblPest:"Pesticide / Chemicals",
+    lblLabor:"Labour",lblIrr:"Irrigation",lblTransport:"Transport",
+    lblPack:"Packing / Packaging",lblLand:"Land Rent",lblLandHint:"(0 if own land)",
+    lblOther:"Other Expenses",
+    btnCalc:"Calculate",btnShare:"Share via WhatsApp",btnReset:"Calculate Again",
+    rhLabel:"Your Break-even Price",rhUnit:"Rs. / kg",
+    rhSub1:"Sell above this price",rhSub2:"to make a profit",
+    statTotal:"Total Cost",statNet:"Sellable Harvest",statBe:"Break-even Price",
+    statProfit:"Expected Profit",statPerKg:"Profit per kg",statPerAcre:"Per Acre",
+    recProfitTitle:"✅ Profitable Opportunity!",recLossTitle:"⚠️ Loss Risk — Be Careful!",
+    recProfitDesc:"Current market prices are above your break-even price. Selling now is likely to be profitable!",
+    recLossDesc:"Current market prices are below your break-even price. Consider waiting for better prices.",
+    recNoData:"No data — CBSL market data not available for this crop.",
+    mktThMarket:"Market",mktThPrice:"Price (Rs./kg)",mktThResult:"Result",mktThRec:"",
+    mktBest:"Best ✅",mktAvoid:"Avoid ⚠️",mktNa:"No data",
+    scnThPrice:"Selling Price",scnThProfit:"Profit/Loss per kg",scnThTotal:"Total Profit/Loss",
+    mktNote:"* Prices auto-loaded from CBSL data file",
+    footDisc:"Prices from CBSL data. TopGoviya.lk is not responsible for decisions made based on these results.",
+    errHarvest:"Please enter your expected harvest.",errCosts:"Please enter at least one cost.",
+    shareMsg:"🧮 *TopGoviya.lk — Break-even Calculator*\n\n🌾 Crop: %CROP%\n💰 Total Cost: Rs.%COST%\n📦 Harvest: %KG% kg\n🎯 Break-even: Rs.%BE%/kg\n\n%REC%\n\n🔗 https://topgoviya.lk/breakeven.html\n🤝 *Share this with your farming friends!*",
+    shareProfit:"✅ Currently profitable!",shareLoss:"⚠️ Loss at current prices — wait.",shareNoData:"📊 Market comparison: data not available.",
+  }
+};
+function t(k){return (T[lang]&&T[lang][k])||T.en[k]||k;}
+
+function applyLang(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.lang===lang));
+  // navbar
+  document.getElementById("nav-retail").textContent=t("navRetail");
+  document.getElementById("nav-wholesale").textContent=t("navWholesale");
+  document.getElementById("nav-weather").textContent=t("navWeather");
+  document.getElementById("nav-be").textContent=t("navBe");
+  // header
+  document.getElementById("kicker-tag").textContent=t("kickerTag");
+  document.getElementById("page-title").innerHTML=t("pageTitle");
+  document.getElementById("page-desc").textContent=t("pageDesc");
+  // sections
+  document.getElementById("sec1-label").innerHTML=t("sec1");
+  document.getElementById("sec2-label").innerHTML=t("sec2");
+  // labels
+  document.getElementById("lbl-crop").innerHTML=t("lblCrop")+'<span class="hint" id="lbl-crop-hint">'+t("lblCropHint")+'</span>';
+  document.getElementById("lbl-area").innerHTML=t("lblArea");
+  document.getElementById("lbl-harvest").innerHTML=t("lblHarvest");
+  document.getElementById("lbl-waste").innerHTML=t("lblWaste");
+  document.getElementById("lbl-seed").textContent=t("lblSeed");
+  document.getElementById("lbl-fert").textContent=t("lblFert");
+  document.getElementById("lbl-pest").textContent=t("lblPest");
+  document.getElementById("lbl-labor").textContent=t("lblLabor");
+  document.getElementById("lbl-irr").textContent=t("lblIrr");
+  document.getElementById("lbl-transport").textContent=t("lblTransport");
+  document.getElementById("lbl-pack").textContent=t("lblPack");
+  document.getElementById("lbl-land").innerHTML=t("lblLand")+'<span class="hint">'+t("lblLandHint")+'</span>';
+  document.getElementById("lbl-other").textContent=t("lblOther");
+  // button
+  document.getElementById("btn-calc").textContent=t("btnCalc");
+  document.getElementById("footer-disc").textContent=t("footDisc");
+  // prefix labels
+  const prefix = lang==="en" ? "Rs." : lang==="ta" ? "ரூ." : "රු.";
+  document.querySelectorAll(".prefix").forEach(p=>p.textContent=prefix);
+  // unit labels
+  const unit = lang==="en" ? "(kg)" : lang==="ta" ? "(கி.கி.)" : "(කි.ග්‍රෑ.)";
+  const areaUnit = lang==="en" ? "(acres)" : lang==="ta" ? "(ஏக்கர்)" : "(අක්කර)";
+  document.getElementById("lbl-area").innerHTML=t("lblArea");
+  document.getElementById("lbl-harvest").innerHTML=t("lblHarvest");
+}
+
+document.querySelector(".lang").addEventListener("click",function(e){
+  const b=e.target.closest("button[data-lang]");
+  if(b){lang=b.dataset.lang;applyLang();}
+});
+
+/* ══════════════════════════════════════
+   LOAD CBSL MARKET DATA
+══════════════════════════════════════ */
+let MARKET_DATA = null;
+async function loadMarketData(){
+  try{
+    const r = await fetch("data.json",{cache:"no-store"});
+    if(r.ok) MARKET_DATA = await r.json();
+  }catch(e){ MARKET_DATA = null; }
+}
+
+function findCropMarkets(cropName){
+  if(!MARKET_DATA||!cropName) return null;
+  const q = cropName.toLowerCase().trim();
+  const match = MARKET_DATA.commodities.find(c=>
+    c.name.toLowerCase().includes(q)||
+    q.includes(c.name.toLowerCase().split(" ")[0])
+  );
+  return match||null;
+}
+
+/* ══════════════════════════════════════
+   CALCULATE
+══════════════════════════════════════ */
+let lastResult = null;
+
+function calculate(){
+  const cropName = document.getElementById("cropName").value.trim();
+  const landArea = parseFloat(document.getElementById("landArea").value)||1;
+  const harvest  = parseFloat(document.getElementById("harvest").value);
+  const waste    = parseFloat(document.getElementById("wasteSlider").value)||0;
+
+  const costs = {
+    seed:      parseFloat(document.getElementById("cSeed").value)||0,
+    fert:      parseFloat(document.getElementById("cFert").value)||0,
+    pest:      parseFloat(document.getElementById("cPest").value)||0,
+    labor:     parseFloat(document.getElementById("cLabor").value)||0,
+    irr:       parseFloat(document.getElementById("cIrr").value)||0,
+    transport: parseFloat(document.getElementById("cTransport").value)||0,
+    pack:      parseFloat(document.getElementById("cPack").value)||0,
+    land:      parseFloat(document.getElementById("cLand").value)||0,
+    other:     parseFloat(document.getElementById("cOther").value)||0,
+  };
+
+  if(!harvest||harvest<=0){alert(t("errHarvest"));return;}
+  const totalCost = Object.values(costs).reduce((a,b)=>a+b,0);
+  if(totalCost<=0){alert(t("errCosts"));return;}
+
+  const netHarvest = harvest * (1 - waste/100);
+  const breakeven  = totalCost / netHarvest;
+
+  // Find matching crop in CBSL data
+  const crop = findCropMarkets(cropName);
+  let markets = [];
+  let bestMktPrice = null;
+  if(crop && crop.markets){
+    markets = Object.entries(crop.markets)
+      .filter(([k,v])=>v!=null)
+      .map(([name,price])=>({name, price, profit: price - breakeven, pct: ((price-breakeven)/breakeven*100)}));
+    if(markets.length) bestMktPrice = Math.max(...markets.map(m=>m.price));
+  }
+
+  // Expected profit using best market price
+  const expectedRevenue = bestMktPrice ? bestMktPrice * netHarvest : null;
+  const expectedProfit  = expectedRevenue != null ? expectedRevenue - totalCost : null;
+  const profitPerKg     = bestMktPrice ? bestMktPrice - breakeven : null;
+  const profitPerAcre   = expectedProfit != null ? expectedProfit / landArea : null;
+
+  lastResult = {cropName,landArea,harvest,waste,netHarvest,totalCost,breakeven,markets,
+    expectedProfit,profitPerKg,profitPerAcre,bestMktPrice};
+
+  renderResults(lastResult);
+}
+
+function fmt(n,dec=0){if(n==null)return "—";return n.toLocaleString("en-US",{minimumFractionDigits:dec,maximumFractionDigits:dec});}
+
+function renderResults(r){
+  // Hero
+  document.getElementById("rh-label").textContent=t("rhLabel");
+  document.getElementById("rh-price").textContent="රු. "+fmt(r.breakeven,2);
+  document.getElementById("rh-unit").textContent=t("rhUnit");
+  document.getElementById("rh-sub").textContent=t("rhSub1")+" (Rs. "+fmt(r.breakeven,2)+") "+t("rhSub2");
+
+  // Stats
+  const stats=[
+    {l:t("statTotal"),  v:"රු. "+fmt(r.totalCost),  cl:""},
+    {l:t("statNet"),    v:fmt(r.netHarvest)+" kg",   cl:""},
+    {l:t("statBe"),     v:"රු. "+fmt(r.breakeven,2), cl:""},
+    {l:t("statProfit"), v: r.expectedProfit!=null ? (r.expectedProfit>=0?"":"- ")+"රු. "+fmt(Math.abs(r.expectedProfit)) : "—", cl:r.expectedProfit!=null?(r.expectedProfit>=0?"profit":"loss"):""},
+    {l:t("statPerKg"),  v: r.profitPerKg!=null ? (r.profitPerKg>=0?"+":"")+fmt(r.profitPerKg,2) : "—", cl:r.profitPerKg!=null?(r.profitPerKg>=0?"profit":"loss"):""},
+    {l:t("statPerAcre"),v: r.profitPerAcre!=null ? (r.profitPerAcre>=0?"":"- ")+"රු. "+fmt(Math.abs(r.profitPerAcre)) : "—", cl:r.profitPerAcre!=null?(r.profitPerAcre>=0?"profit":"loss"):""},
+  ];
+  document.getElementById("stat-grid").innerHTML=stats.map(s=>`
+    <div class="stat-box"><div class="sl">${s.l}</div><div class="sv ${s.cl}">${s.v}</div></div>`).join("");
+
+  // Recommendation
+  const rb=document.getElementById("rec-box");
+  rb.className="rec-box";
+  if(!r.markets.length){
+    rb.classList.add("loss");
+    document.getElementById("rec-icon").textContent="📊";
+    document.getElementById("rec-title").textContent=t("recNoData");
+    document.getElementById("rec-desc").textContent="";
+  } else if(r.bestMktPrice>=r.breakeven){
+    rb.classList.add("profit");
+    document.getElementById("rec-icon").textContent="✅";
+    document.getElementById("rec-title").textContent=t("recProfitTitle");
+    document.getElementById("rec-desc").textContent=t("recProfitDesc");
+  } else {
+    rb.classList.add("loss");
+    document.getElementById("rec-icon").textContent="⚠️";
+    document.getElementById("rec-title").textContent=t("recLossTitle");
+    document.getElementById("rec-desc").textContent=t("recLossDesc");
+  }
+
+  // Market table
+  document.getElementById("sec3-label").textContent=t("sec3");
+  document.getElementById("sec4-label").textContent=t("sec4");
+  document.getElementById("sec5-label").textContent=t("sec5");
+  document.getElementById("mkt-note").textContent=t("mktNote");
+  if(!r.markets.length){
+    document.getElementById("mkt-table-wrap").innerHTML=`<p style="color:var(--muted);font-style:italic;font-size:14px">${t("recNoData")}</p>`;
+  } else {
+    const sorted=[...r.markets].sort((a,b)=>b.profit-a.profit);
+    document.getElementById("mkt-table-wrap").innerHTML=`
+      <table class="mkt-table">
+        <thead><tr>
+          <th>${t("mktThMarket")}</th>
+          <th>${t("mktThPrice")}</th>
+          <th>${t("mktThResult")}</th>
+          <th></th>
+        </tr></thead>
+        <tbody>${sorted.map((m,i)=>`
+          <tr>
+            <td class="mkt-name">${m.name}</td>
+            <td class="mkt-price">රු. ${fmt(m.price,0)}</td>
+            <td><span class="mkt-result ${m.profit>=0?"profit":"loss"}">${m.profit>=0?"+":""}${fmt(m.profit,2)}/kg</span></td>
+            <td>${i===0?`<span class="mkt-rec best">${t("mktBest")}</span>`:m.profit<0?`<span class="mkt-rec avoid">${t("mktAvoid")}</span>`:""}</td>
+          </tr>`).join("")}
+        </tbody>
+      </table>`;
+  }
+
+  // Scenario table
+  const be = r.breakeven;
+  const scenarios = [
+    Math.round(be*0.7), Math.round(be*0.85), Math.round(be),
+    Math.round(be*1.15), Math.round(be*1.3), Math.round(be*1.5), Math.round(be*1.75)
+  ];
+  document.getElementById("scenario-wrap").innerHTML=`
+    <table class="scenario-table">
+      <thead><tr>
+        <th>${t("scnThPrice")}</th>
+        <th>${t("scnThProfit")}</th>
+        <th>${t("scnThTotal")}</th>
+      </tr></thead>
+      <tbody>${scenarios.map(p=>{
+        const ppl = p-be, total = ppl*r.netHarvest;
+        const isBe = Math.abs(ppl)<0.5;
+        const cl = isBe?"s-be":ppl>=0?"s-profit":"s-loss";
+        return `<tr class="${isBe?"highlight-row":""}">
+          <td class="${isBe?"s-be":""}">රු. ${fmt(p)}</td>
+          <td class="${cl}">${ppl>=0?"+":""}${fmt(ppl,2)}</td>
+          <td class="${cl}">${total>=0?"+":""}රු. ${fmt(Math.abs(total))}${total<0?" (Loss)":isBe?" (Break-even)":""}</td>
+        </tr>`;}).join("")}
+      </tbody>
+    </table>`;
+
+  // Share & Reset buttons
+  document.getElementById("btn-share").textContent=t("btnShare");
+  document.getElementById("btn-reset").textContent=t("btnReset");
+
+  // Show results
+  const res=document.getElementById("results");
+  res.classList.add("show");
+  res.style.display="block";
+  setTimeout(()=>res.scrollIntoView({behavior:"smooth",block:"start"}),100);
+}
+
+function shareResult(){
+  if(!lastResult)return;
+  const r=lastResult;
+  let rec=t("shareNoData");
+  if(r.markets.length){rec=r.bestMktPrice>=r.breakeven?t("shareProfit"):t("shareLoss");}
+  const msg=t("shareMsg")
+    .replace("%CROP%",r.cropName||"—")
+    .replace("%COST%",fmt(r.totalCost))
+    .replace("%KG%",fmt(r.netHarvest))
+    .replace("%BE%",fmt(r.breakeven,2))
+    .replace("%REC%",rec);
+  window.open("https://wa.me/?text="+encodeURIComponent(msg),"_blank");
+}
+
+function resetForm(){
+  document.getElementById("results").style.display="none";
+  document.getElementById("results").classList.remove("show");
+  lastResult=null;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* ── INIT ── */
+applyLang();
+loadMarketData();
+</script>
+</body>
+</html>
