@@ -2188,7 +2188,7 @@ function init(){
 function yoyChart(d){
   const yearData={};
   DB.dates.forEach((dateStr,i)=>{
-    const v=d.series[i];if(v==null)return;
+    const v=hartiMid(d.series[i]);if(v==null)return;
     const dt=new Date(dateStr+"T00:00:00");
     const yr=dt.getFullYear(),mo=dt.getMonth();
     if(!yearData[yr])yearData[yr]=Array(12).fill(null).map(()=>[]);
