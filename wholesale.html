@@ -156,7 +156,7 @@
     --gold:#a9802a;--up:#b23a2e;--up-bg:#f7e6e2;--down:#2c7a52;--down-bg:#e3efe6;--flat:#8a8170;
     --shadow:0 1px 0 rgba(0,0,0,.02), 0 12px 30px -18px rgba(20,40,38,.35);--r:14px;
   }
-  *{box-sizing:border-box} html,body{margin:0;padding:0}
+  *{box-sizing:border-box} html,body{margin:0;padding:0;overflow-x:hidden}
   body{background:var(--paper);color:var(--ink);font-family:'Hanken Grotesk','Noto Sans Sinhala','Noto Sans Tamil',sans-serif;
     -webkit-font-smoothing:antialiased;line-height:1.45;
     background-image:radial-gradient(circle at 12% -10%, rgba(14,79,74,.06), transparent 38%),
@@ -413,7 +413,7 @@
 <!-- ══ TOP NAV BAR ══ -->
 <nav class="topnav" role="navigation">
   <div class="topnav-inner">
-    <a href="index.html" class="topnav-brand">Lanka <em>Price</em> Monitor</a>
+    <a href="index.html" class="topnav-brand">Top<em>Goviya</em>.lk</a>
     <div class="navlinks">
       <a href="index.html" class="navlink retail">📊 Retail Prices <span class="navlink-badge">CBSL</span></a>
       <a href="wholesale.html" class="navlink wholesale">📦 Wholesale <span class="navlink-badge">HARTI</span></a>
@@ -1010,7 +1010,7 @@ function lineChart(d, idxs, series, isWholesale){
 }
 
 function marketBars(d, mode){
-  mode = mode || "retail";
+  mode = mode || "wholesale";
   const isWholesale = mode==="wholesale";
   const markets = isWholesale && d.wholesaleMarkets ? d.wholesaleMarkets : d.markets;
   const retailMkts = d.markets || {};
@@ -1627,12 +1627,12 @@ function speakPrice(d){
   if(lang==="si"){
     const dir=ch.dir==="up"?"ඉහළ ගොස් ඇත":ch.dir==="down"?"පහළ ගොස් ඇත":"වෙනස් නැත";
     text=`${tName(d.name)}. `;
-    text+=`${tMkt(d.primaryMarket)} වෙළඳපොළේ සිල්ලර මිල රුපියල් ${Math.round(cur)}. `;
+    text+=`${tMkt(d.primaryMarket)} වෙළඳපොළේ HARTI තොග මිල මධ්‍යගතය රුපියල් ${Math.round(cur)}. `;
     text+=`${Math.abs(ch.pct).toFixed(1)} ප්‍රතිශතයකින් ${dir}. `;
     text+=`${thisYear} අවම රුපියල් ${Math.round(yearMin)}, උපරිම රුපියල් ${Math.round(yearMax)}. `;
     if(rtMarkets.length>1){
-      text+=`සිල්ලර මිල: `;
-      rtMarkets.forEach(([k,v])=>{ text+=`${tMkt(k)} රුපියල් ${Math.round(v)}. `; });
+      text+=`තොග මිල මධ්‍යගතය: `;
+      rtMarkets.forEach(([k,v])=>{ const mv=hartiMid(v); if(mv!=null) text+=`${tMkt(k)} රුපියල් ${Math.round(mv)}. `; });
     }
     if(wsMarkets.length>0){
       text+=`තොග මිල: `;
@@ -1643,12 +1643,12 @@ function speakPrice(d){
   } else if(lang==="ta"){
     const dir=ch.dir==="up"?"அதிகரித்துள்ளது":ch.dir==="down"?"குறைந்துள்ளது":"மாறவில்லை";
     text=`${tName(d.name)}. `;
-    text+=`${tMkt(d.primaryMarket)} சந்தையில் சில்லறை விலை ரூபாய் ${Math.round(cur)}. `;
+    text+=`${tMkt(d.primaryMarket)} சந்தையில் HARTI மொத்த விலை நடுப்புள்ளி ரூபாய் ${Math.round(cur)}. `;
     text+=`${Math.abs(ch.pct).toFixed(1)} சதவீதம் ${dir}. `;
     text+=`${thisYear} குறைந்தது ரூபாய் ${Math.round(yearMin)}, அதிகபட்சம் ரூபாய் ${Math.round(yearMax)}. `;
     if(rtMarkets.length>1){
-      text+=`சில்லறை விலைகள்: `;
-      rtMarkets.forEach(([k,v])=>{ text+=`${tMkt(k)} ரூபாய் ${Math.round(v)}. `; });
+      text+=`மொத்த விலை நடுப்புள்ளி: `;
+      rtMarkets.forEach(([k,v])=>{ const mv=hartiMid(v); if(mv!=null) text+=`${tMkt(k)} ரூபாய் ${Math.round(mv)}. `; });
     }
     if(wsMarkets.length>0){
       text+=`மொத்த விலைகள்: `;
@@ -1659,12 +1659,12 @@ function speakPrice(d){
   } else {
     const dir=ch.dir==="up"?"increased":ch.dir==="down"?"decreased":"unchanged";
     text=`${d.name}. `;
-    text+=`Today's retail price at ${d.primaryMarket} market is ${Math.round(cur)} rupees. `;
+    text+=`Today's HARTI wholesale midpoint price at ${d.primaryMarket} market is ${Math.round(cur)} rupees. `;
     text+=`${Math.abs(ch.pct).toFixed(1)} percent ${dir} from previous report. `;
     text+=`${thisYear} low ${Math.round(yearMin)}, high ${Math.round(yearMax)} rupees. `;
     if(rtMarkets.length>1){
-      text+=`Retail prices: `;
-      rtMarkets.forEach(([k,v])=>{ text+=`${k} ${Math.round(v)} rupees. `; });
+      text+=`Wholesale midpoint prices: `;
+      rtMarkets.forEach(([k,v])=>{ const mv=hartiMid(v); if(mv!=null) text+=`${k} ${Math.round(mv)} rupees. `; });
     }
     if(wsMarkets.length>0){
       text+=`Wholesale prices: `;
