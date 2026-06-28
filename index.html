@@ -156,7 +156,7 @@
     --gold:#a9802a;--up:#b23a2e;--up-bg:#f7e6e2;--down:#2c7a52;--down-bg:#e3efe6;--flat:#8a8170;
     --shadow:0 1px 0 rgba(0,0,0,.02), 0 12px 30px -18px rgba(20,40,38,.35);--r:14px;
   }
-  *{box-sizing:border-box} html,body{margin:0;padding:0}
+  *{box-sizing:border-box} html,body{margin:0;padding:0;overflow-x:hidden}
   body{background:var(--paper);color:var(--ink);font-family:'Hanken Grotesk','Noto Sans Sinhala','Noto Sans Tamil',sans-serif;
     -webkit-font-smoothing:antialiased;line-height:1.45;
     background-image:radial-gradient(circle at 12% -10%, rgba(14,79,74,.06), transparent 38%),
@@ -407,10 +407,17 @@
     background:rgba(255,255,255,.25);padding:2px 5px;border-radius:4px;margin-left:5px;vertical-align:middle}
   @media(max-width:600px){
     .topnav-inner{flex-wrap:wrap;padding:0}
-    .topnav-brand{font-size:15px;padding:9px 14px;border-right:none;margin-right:0;width:100%;border-bottom:1px solid rgba(255,255,255,.12)}
-    .navlinks{width:100%;padding:5px 10px;gap:6px}
-    .navlink{font-size:11.5px;padding:7px 0;flex:1;text-align:center}
-    .navlink-badge{font-size:8px;padding:1px 4px}
+    .topnav-brand{font-size:16px;padding:10px 16px;border-right:none;margin-right:0;width:100%;
+      border-bottom:1px solid rgba(255,255,255,.12);letter-spacing:-.01em}
+    .navlinks{width:100%;padding:6px 8px;gap:5px;overflow-x:auto;flex-wrap:nowrap;
+      -webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .navlinks::-webkit-scrollbar{display:none}
+    .navlink{font-size:11px;padding:7px 10px;flex-shrink:0;text-align:center;white-space:nowrap}
+    .navlink-badge{font-size:8px;padding:1px 4px;display:none}
+  }
+  @media(max-width:400px){
+    .topnav-brand{font-size:15px;padding:9px 14px}
+    .navlink{font-size:10.5px;padding:6px 9px}
   }
   .nav-legend{background:#0a3a36;border-bottom:1px solid rgba(169,128,42,.3);padding:5px 22px;
     display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
@@ -437,12 +444,12 @@
 <nav class="topnav" role="navigation">
 
   <div class="topnav-inner">
-    <a href="index.html" class="topnav-brand">Lanka <em>Price</em> Monitor</a>
+    <a href="index.html" class="topnav-brand">Top<em>Goviya</em>.lk</a>
     <div class="navlinks">
-      <a href="index.html" class="navlink retail">📊 Retail Prices <span class="navlink-badge">CBSL</span></a>
-      <a href="wholesale.html" class="navlink wholesale">📦 Wholesale <span class="navlink-badge">HARTI</span></a>
-      <a href="weather.html" class="navlink weather">🌤️ Weather <span class="navlink-badge">10 markets</span></a>
-      <a href="breakeven.html" class="navlink breakeven">🧮 අලාභ-ලාභ</a>
+      <a href="index.html" class="navlink retail" id="navRetail">📊 <span class="navlink-badge">CBSL</span></a>
+      <a href="wholesale.html" class="navlink wholesale" id="navWholesale">📦 <span class="navlink-badge">HARTI</span></a>
+      <a href="weather.html" class="navlink weather" id="navWeather">🌤️ <span class="navlink-badge" id="navWeatherBadge">Weather</span></a>
+      <a href="breakeven.html" class="navlink breakeven" id="navBreakeven">🧮 <span id="navBreakevenLbl">Break-even</span></a>
     </div>
   </div>
 </nav>
@@ -629,9 +636,9 @@ const GUIDE={
       {icon:"📸",title:"Share & WhatsApp",text:"Card → 📸 Share as Image → PNG download → WhatsApp share! FB → Facebook direct. TopGoviya.lk brand visible!"},
       {icon:"🗞️",title:"ගොවි පුවත් Blog",text:"Footer → 📝 Blog → Articles read කරන්න. ▶️ tap → 3 languages හඬින් article කියවනවා!"},
       {icon:"🔍",title:"Search & Filter",text:"නමින් search, category filter, biggest changes sort."},
-      {icon:"📉",title:"Break-even ගණකය",text:"ඔබේ සම්පූර්ණ නිෂ්පාදන පිරිවැය enter කරන්න → අලාභ නොලබා විකිණිය හැකි <strong>අවම මිල ක්ෂණිකව</strong> ගණනය කෙරේ! ගොවි මිල ≥ Break-even = ලාභ ✅"},
-      {icon:"🌤️",title:"HARTI වෙළඳපොළ කාලගුණය",text:"Top menu → 🌤️ Weather → HARTI ප්‍රධාන ආර්ථික මධ්‍යස්ථාන 10 සඳහා දින 4ක කාලගුණ අනාවැකිය. නිවසේ සිටම ප්‍රවාහන සැලසුම් කරන්න!"},
-      {icon:"🕐",title:"දෛනිකව auto-update",text:"සිල්ලර මිල (CBSL) — දිනපතා සවස 5:00 ට automatic update. තොග මිල (HARTI) — සතියේ දිනවල (markets weekend වසා) automatic update."},
+      {icon:"📉",title:"Break-even ගණකය",text:"ඔබේ සම්පූර්ණ නිෂ්පාදන පිරිවැය enter කරන්න → අලාභ නොලබා විකිණිය හැකි <strong>අවම මිල ක්ෂණිකව</strong> ගණනය. ගොවි මිල ≥ Break-even = ලාභ ✅"},
+      {icon:"🌤️",title:"HARTI වෙළඳපොළ කාලගුණය",text:"Top menu → 🌤️ කාලගුණ → HARTI ප්‍රධාන ආර්ථික මධ්‍යස්ථාන 10 සඳහා දින 4ක කාලගුණ අනාවැකිය. නිවසේ සිටම ප්‍රවාහන සැලසුම් කරන්න!"},
+      {icon:"🕐",title:"දෛනිකව auto-update",text:"සිල්ලර මිල (CBSL) — දිනපතා සවස 5:00 ට automatic update. තොග මිල (HARTI) — සතියේ දිනවල automatic update."},
     ]
   },
   en:{
@@ -652,9 +659,9 @@ const GUIDE={
       {icon:"📸",title:"Share & WhatsApp",text:"Card → 📸 Share as Image → PNG → WhatsApp! FB button → Facebook direct. TopGoviya.lk brand visible!"},
       {icon:"🗞️",title:"Govi Puwath Blog",text:"Footer → 📝 Blog → Read articles. Tap ▶️ → Article read aloud in 3 languages!"},
       {icon:"🔍",title:"Search & Filter",text:"Search by name, filter by category, or sort by biggest price changes."},
-      {icon:"📉",title:"Break-even Calculator",text:"Enter your total production cost → the <strong>minimum break-even selling price is calculated instantly!</strong> If market price ≥ Break-even = Profit ✅ Never sell at a loss again."},
-      {icon:"🌤️",title:"HARTI Market Weather Dashboard",text:"Top menu → 🌤️ Weather → 4-day weather forecast for all 10 HARTI economic centres. Plan your transport from home!"},
-      {icon:"🕐",title:"Auto-updated daily",text:"Retail prices (CBSL) — automatic update every day at 5:00 PM Sri Lanka time. Wholesale prices (HARTI) — automatic update on weekdays (markets closed weekends)."},
+      {icon:"📉",title:"Break-even Calculator",text:"Enter your total production cost → <strong>minimum break-even selling price calculated instantly!</strong> Market price ≥ Break-even = Profit ✅ Never sell at a loss again."},
+      {icon:"🌤️",title:"HARTI Market Weather",text:"Top menu → 🌤️ Weather → 4-day forecast for all 10 HARTI economic centres. Plan transport from home!"},
+      {icon:"🕐",title:"Auto-updated daily",text:"Retail prices (CBSL) — automatic update every day at 5:00 PM Sri Lanka time. Wholesale prices (HARTI) — weekdays only."},
     ]
   },
   ta:{
@@ -675,9 +682,9 @@ const GUIDE={
       {icon:"📸",title:"பகிர் & WhatsApp",text:"அட்டை → 📸 PNG பதிவிறக்கம் → WhatsApp பகிர்! FB → Facebook நேரடி பகிர்!"},
       {icon:"🗞️",title:"கோவி புவத் Blog",text:"Footer → 📝 Blog → கட்டுரைகள். ▶️ தட்டவும் → 3 மொழிகளில் கட்டுரை படிக்கும்!"},
       {icon:"🔍",title:"தேடல் மற்றும் வடிகட்டல்",text:"பெயரால் தேடவும், வகையால் வடிகட்டவும், பெரிய மாற்றங்களால் வரிசைப்படுத்தவும்."},
-      {icon:"📉",title:"இயல்நிலை கணிப்பி (Break-even)",text:"உங்கள் மொத்த உற்பத்தி செலவை உள்ளிடுங்கள் → <strong>நஷ்டமில்லாத குறைந்தபட்ச விற்பனை விலை உடனடியாக கணக்கிடப்படும்!</strong> சந்தை விலை ≥ Break-even = லாபம் ✅"},
-      {icon:"🌤️",title:"HARTI சந்தை வானிலை பலகை",text:"மேல் மெனு → 🌤️ வானிலை → 10 HARTI பொருளாதார மையங்களுக்கு 4 நாள் வானிலை முன்னறிவிப்பு. வீட்டிலிருந்தே போக்குவரத்து திட்டமிடுங்கள்!"},
-      {icon:"🕐",title:"தினசரி தானியங்கி புதுப்பிப்பு",text:"சில்லறை விலை (CBSL) — தினமும் மாலை 5:00 மணிக்கு தானியங்கி புதுப்பிப்பு. மொத்த விலை (HARTI) — வார நாட்களில் (சந்தைகள் வார இறுதியில் மூடப்பட்டிருக்கும்) தானியங்கி புதுப்பிப்பு."},
+      {icon:"📉",title:"இயல்நிலை கணிப்பி (Break-even)",text:"மொத்த உற்பத்தி செலவை உள்ளிடுங்கள் → <strong>நஷ்டமில்லாத குறைந்தபட்ச விற்பனை விலை உடனடியாக!</strong> சந்தை விலை ≥ Break-even = லாபம் ✅"},
+      {icon:"🌤️",title:"HARTI சந்தை வானிலை",text:"மேல் மெனு → 🌤️ வானிலை → 10 HARTI மையங்களுக்கு 4 நாள் வானிலை முன்னறிவிப்பு. வீட்டிலிருந்தே திட்டமிடுங்கள்!"},
+      {icon:"🕐",title:"தினசரி தானியங்கி புதுப்பிப்பு",text:"சில்லறை விலை (CBSL) — தினமும் மாலை 5:00 மணிக்கு. மொத்த விலை (HARTI) — வார நாட்களில் மட்டும்."},
     ]
   }
 };
@@ -828,6 +835,21 @@ function applyLang(){
   if(ec)ec.textContent=nt.cta;
   document.documentElement.lang=lang;
   const set=(id,html)=>{const e=document.getElementById(id);if(e)e.innerHTML=html;};
+  // Nav button labels
+  const navRetail=document.getElementById('navRetail');
+  const navWholesale=document.getElementById('navWholesale');
+  const navWeather=document.getElementById('navWeather');
+  const navBreakeven=document.getElementById('navBreakeven');
+  const labels={
+    si:{retail:'📊 සිල්ලර',wholesale:'📦 තොග',weather:'🌤️ කාලගුණ',breakeven:'🧮 Break-even'},
+    en:{retail:'📊 Retail',wholesale:'📦 Wholesale',weather:'🌤️ Weather',breakeven:'🧮 Break-even'},
+    ta:{retail:'📊 சில்லறை',wholesale:'📦 மொத்தம்',weather:'🌤️ வானிலை',breakeven:'🧮 Break-even'}
+  };
+  const lb=labels[lang]||labels.en;
+  if(navRetail)navRetail.innerHTML=lb.retail+' <span class="navlink-badge">CBSL</span>';
+  if(navWholesale)navWholesale.innerHTML=lb.wholesale+' <span class="navlink-badge">HARTI</span>';
+  if(navWeather)navWeather.innerHTML=lb.weather;
+  if(navBreakeven)navBreakeven.innerHTML=lb.breakeven;
   set("kickerTxt",t("kicker"));set("lblLatest",t("latestReport"));set("lblSub",t("sub"));
   set("hMovers",t("movers"));set("hintMovers",t("moversHint"));set("hAll",t("all"));
   set("lgUp",t("lgUp"));set("lgDown",t("lgDown"));set("footNote",t("footNote"));set("creditPre",t("creditPre"));
