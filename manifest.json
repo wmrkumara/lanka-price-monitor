@@ -1,9 +1,9 @@
 {
-  "name": "TopGoviya - Lanka Price Monitor",
+  "name": "TopGoviya.lk - Agricultural Intelligence Platform",
   "short_name": "TopGoviya",
-  "description": "Daily vegetable, fish & rice prices in Sri Lanka. Farmer profit calculator, AI insights, 4-year history. Sinhala · Tamil · English.",
-  "start_url": "/lanka-price-monitor/?pwa=1",
-  "scope": "/lanka-price-monitor/",
+  "description": "Sri Lanka's Agricultural Intelligence Platform. Daily CBSL retail + HARTI wholesale prices, AI insights, farmer profit calculator, 4-year history. Sinhala · Tamil · English. නොමිලේ.",
+  "start_url": "/?pwa=1",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#f4efe4",
@@ -11,8 +11,8 @@
   "lang": "si",
   "categories": ["food", "finance", "agriculture"],
   "icons": [
-    { "src": "icon-72x72.png", "sizes": "72x72", "type": "image/png" },
-    { "src": "icon-96x96.png", "sizes": "96x96", "type": "image/png" },
+    { "src": "icon-72x72.png",   "sizes": "72x72",   "type": "image/png" },
+    { "src": "icon-96x96.png",   "sizes": "96x96",   "type": "image/png" },
     { "src": "icon-128x128.png", "sizes": "128x128", "type": "image/png" },
     { "src": "icon-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
     { "src": "icon-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
@@ -22,29 +22,50 @@
       "src": "icon-512x512.png",
       "sizes": "390x844",
       "type": "image/png",
-      "label": "TopGoviya Home Screen"
+      "label": "TopGoviya - Lanka Price Monitor"
     }
   ],
   "shortcuts": [
     {
-      "name": "සජීවී මිල",
-      "short_name": "මිල",
-      "description": "View live prices",
-      "url": "/lanka-price-monitor/?shortcut=prices",
+      "name": "සජීවී සිල්ලර මිල | Live Retail Prices",
+      "short_name": "සිල්ලර මිල",
+      "description": "CBSL daily retail prices — 43+ commodities",
+      "url": "/?shortcut=prices",
       "icons": [{ "src": "icon-96x96.png", "sizes": "96x96" }]
     },
     {
-      "name": "ගොවි ලාභ ගණකය",
+      "name": "තොග මිල | Wholesale Prices",
+      "short_name": "තොග මිල",
+      "description": "HARTI wholesale prices — 10 markets",
+      "url": "/wholesale.html?shortcut=wholesale",
+      "icons": [{ "src": "icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "ලාභ ගණකය | Profit Calculator",
       "short_name": "ගණකය",
-      "description": "Farmer profit calculator",
-      "url": "/lanka-price-monitor/?shortcut=calculator",
+      "description": "Farmer & trader profit calculator",
+      "url": "/?shortcut=calculator",
       "icons": [{ "src": "icon-96x96.png", "sizes": "96x96" }]
     },
     {
-      "name": "ගොවි පුවත්",
+      "name": "කාලගුණය | Market Weather",
+      "short_name": "කාලගුණ",
+      "description": "4-day weather for 10 HARTI markets",
+      "url": "/weather.html?shortcut=weather",
+      "icons": [{ "src": "icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Break-even ගණකය",
+      "short_name": "Break-even",
+      "description": "Break-even calculator — minimum selling price",
+      "url": "/breakeven.html?shortcut=breakeven",
+      "icons": [{ "src": "icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "ගොවි පුවත් | Blog",
       "short_name": "Blog",
-      "description": "Govi Puwath Blog",
-      "url": "/lanka-price-monitor/blog.html",
+      "description": "Govi Puwath Blog — audio articles",
+      "url": "/blog.html?shortcut=blog",
       "icons": [{ "src": "icon-96x96.png", "sizes": "96x96" }]
     }
   ]

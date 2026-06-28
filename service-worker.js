@@ -1,32 +1,38 @@
 /* ===== TopGoviya PWA Service Worker ===== */
-/* Version: 1.0 | topgoviya.lk | Built in Gampola 🇱🇰 */
+/* Version: 2.0 | topgoviya.lk | Built in Gampola 🇱🇰 */
+/* Updated: June 2026 — All new pages + features cached */
 
-const CACHE_NAME = 'topgoviya-v4';
-const DATA_CACHE = 'topgoviya-data-v4';
+const CACHE_NAME = 'topgoviya-v5';
+const DATA_CACHE = 'topgoviya-data-v5';
 
-/* Static files to cache for offline use */
+/* ── Static files to cache for offline use ── */
 const STATIC_ASSETS = [
   '/',
   '/index.html',
+  '/wholesale.html',
+  '/weather.html',
+  '/breakeven.html',
   '/insights.html',
   '/blog.html',
   '/about.html',
   '/privacy.html',
-  '/netherlands-sri-lanka-agriculture.html',
   '/farmers-guide-topgoviya.html',
   '/manifest.json',
+  '/icon-72x72.png',
+  '/icon-96x96.png',
+  '/icon-128x128.png',
   '/icon-192x192.png',
   '/icon-512x512.png',
   /* Google Fonts — cache for offline */
   'https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Sinhala:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;600&display=swap'
 ];
 
-/* Install — cache static assets */
+/* ── Install — cache all static assets ── */
 self.addEventListener('install', event => {
-  console.log('[TopGoviya SW] Installing...');
+  console.log('[TopGoviya SW v2.0] Installing...');
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      console.log('[TopGoviya SW] Caching static assets');
+      console.log('[TopGoviya SW] Caching all pages + assets');
       return cache.addAll(STATIC_ASSETS).catch(err => {
         console.warn('[TopGoviya SW] Some assets failed to cache:', err);
       });
@@ -35,9 +41,9 @@ self.addEventListener('install', event => {
   self.skipWaiting();
 });
 
-/* Activate — clean old caches */
+/* ── Activate — remove old caches ── */
 self.addEventListener('activate', event => {
-  console.log('[TopGoviya SW] Activating...');
+  console.log('[TopGoviya SW v2.0] Activating...');
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
@@ -52,11 +58,11 @@ self.addEventListener('activate', event => {
   self.clients.claim();
 });
 
-/* Fetch — Network first for data, cache first for static */
+/* ── Fetch strategy ── */
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
-  /* data.json — always try network first (fresh prices!) */
+  /* data.json — always network first (fresh prices!) */
   if (url.pathname.includes('data.json') || url.href.includes('data.json')) {
     event.respondWith(
       fetch(event.request)
@@ -70,9 +76,33 @@ self.addEventListener('fetch', event => {
     return;
   }
 
+  /* HARTI PDF data — network only, no cache */
+  if (url.hostname.includes('harti.gov.lk')) {
+    event.respondWith(
+      fetch(event.request).catch(() =>
+        new Response('{}', { headers: { 'Content-Type': 'application/json' } })
+      )
+    );
+    return;
+  }
+
   /* Open-Meteo weather API — network only */
   if (url.hostname.includes('open-meteo.com')) {
-    event.respondWith(fetch(event.request).catch(() => new Response('{}', {headers: {'Content-Type': 'application/json'}})));
+    event.respondWith(
+      fetch(event.request).catch(() =>
+        new Response('{}', { headers: { 'Content-Type': 'application/json' } })
+      )
+    );
+    return;
+  }
+
+  /* OSRM routing API — network only */
+  if (url.hostname.includes('router.project-osrm.org')) {
+    event.respondWith(
+      fetch(event.request).catch(() =>
+        new Response('{}', { headers: { 'Content-Type': 'application/json' } })
+      )
+    );
     return;
   }
 
@@ -87,35 +117,36 @@ self.addEventListener('fetch', event => {
         }
         return response;
       }).catch(() => {
-        /* Offline fallback */
+        /* Offline fallback — show main page */
         if (event.request.destination === 'document') {
-          return caches.match('/lanka-price-monitor/index.html');
+          return caches.match('/index.html');
         }
       });
     })
   );
 });
 
-/* Push notifications — price alerts */
+/* ── Push notifications — price alerts ── */
 self.addEventListener('push', event => {
   const data = event.data ? event.data.json() : {};
   const title = data.title || 'TopGoviya.lk';
   const options = {
-    body: data.body || 'නව මිල දැනුම්දීමක්!',
-    icon: '/lanka-price-monitor/icons/icon-192.png',
-    badge: '/lanka-price-monitor/icons/icon-72.png',
+    body: data.body || 'නව මිල දැනුම්දීමක් | New price alert!',
+    icon: '/icon-192x192.png',
+    badge: '/icon-96x96.png',
     tag: 'topgoviya-price-alert',
-    data: { url: data.url || '/lanka-price-monitor/' }
+    vibrate: [200, 100, 200],
+    data: { url: data.url || '/' }
   };
   event.waitUntil(self.registration.showNotification(title, options));
 });
 
-/* Notification click — open app */
+/* ── Notification click — open app ── */
 self.addEventListener('notificationclick', event => {
   event.notification.close();
   event.waitUntil(
-    clients.openWindow(event.notification.data.url || '/lanka-price-monitor/')
+    clients.openWindow(event.notification.data.url || '/')
   );
 });
 
-console.log('[TopGoviya SW] Service Worker loaded ✅');
+console.log('[TopGoviya SW v2.0] Service Worker loaded ✅ | topgoviya.lk');
