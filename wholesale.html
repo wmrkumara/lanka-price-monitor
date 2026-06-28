@@ -973,7 +973,7 @@ function lineChart(d, idxs, series, isWholesale){
   const gradColor=isWholesale?"#a9802a":"#0e4f4a";
   const modeLabel=isWholesale?"wholesale":"retail";
   const W=680,H=240,L=46,R=14,T=26,B=30;
-  const sub=idxs.map((origI,pos)=>({pos,origI,v:series[origI]})).filter(p=>p.v!=null);
+  const sub=idxs.map((origI,pos)=>({pos,origI,v:hartiMid(series[origI])})).filter(p=>p.v!=null);
   if(sub.length<2)
     return '<div class="chart-wrap"><span class="lab">'+tMkt(d.primaryMarket)+' '+(lang==="en"?modeLabel.toUpperCase():lang==="si"?(modeLabel==="retail"?"සිල්ලර":modeLabel==="wholesale"?"තොග":modeLabel.toUpperCase()):(modeLabel==="retail"?"சில்லறை":modeLabel==="wholesale"?"மொத்தம்":modeLabel.toUpperCase()))+' &middot; '+tUnit(d.unit)+'</span><p class="mkt-sub" style="padding:40px 14px;text-align:center">'+t("notEnough")+'</p></div>';
   const m=idxs.length||1;
@@ -1052,7 +1052,7 @@ function renderRange(key, mode){
   const isWholesale = mode==="wholesale";
   const series = isWholesale && curDetail.wholesaleSeries ? curDetail.wholesaleSeries : curDetail.series;
   host.innerHTML=lineChart(curDetail, idxs, series, isWholesale);
-  const win=idxs.map(i=>series[i]).filter(v=>v!=null);
+  const win=idxs.map(i=>hartiMid(series[i])).filter(v=>v!=null);
   if(win.length){
     const lo=Math.min(...win),hi=Math.max(...win);
     const lE=document.getElementById("statLow"),hE=document.getElementById("statHigh");
@@ -1389,7 +1389,7 @@ function aiInsight(d){
 
   /* 3. 3M trend */
   const idxs3m=rangeIdxs("3M");
-  const win3m=idxs3m.map(i=>d.series[i]).filter(v=>v!=null);
+  const win3m=idxs3m.map(i=>hartiMid(d.series[i])).filter(v=>v!=null);
   if(win3m.length>=4){
     const half=Math.floor(win3m.length/2);
     const avg1=win3m.slice(0,half).reduce((a,b)=>a+b,0)/half;
@@ -1409,7 +1409,7 @@ function aiInsight(d){
   const mo=lang==="en"?moNamesEN:lang==="ta"?moNamesTA:moNames;
   const yearData={};
   DB.dates.forEach((ds,i)=>{
-    const v=d.series[i];if(v==null)return;
+    const v=hartiMid(d.series[i]);if(v==null)return;
     const dt=new Date(ds+"T00:00:00"),yr=dt.getFullYear(),mo=dt.getMonth();
     if(!yearData[yr])yearData[yr]=Array(12).fill(null).map(()=>[]);
     yearData[yr][mo].push(v);
@@ -1536,7 +1536,7 @@ function openDetail(id){
   /* 2026 only — this year low/high */
   const thisYear=new Date().getFullYear().toString();
   const yearIdxs=DB.dates.map((dt,i)=>dt.startsWith(thisYear)?i:-1).filter(i=>i>=0);
-  const yearVals=yearIdxs.map(i=>d.series[i]).filter(v=>v!=null);
+  const yearVals=yearIdxs.map(i=>hartiMid(d.series[i])).filter(v=>v!=null);
   const yearMin=yearVals.length?Math.min(...yearVals):min;
   const yearMax=yearVals.length?Math.max(...yearVals):max;
   curDetail=d; curMode="retail";
@@ -1615,7 +1615,7 @@ function speakPrice(d){
   const min=Math.min(...vals),max=Math.max(...vals);
   const thisYear=new Date().getFullYear().toString();
   const yIdxs=DB.dates.map((dt,i)=>dt.startsWith(thisYear)?i:-1).filter(i=>i>=0);
-  const yVals=yIdxs.map(i=>d.series[i]).filter(v=>v!=null);
+  const yVals=yIdxs.map(i=>hartiMid(d.series[i])).filter(v=>v!=null);
   const yearMin=yVals.length?Math.min(...yVals):min;
   const yearMax=yVals.length?Math.max(...yVals):max;
   const rtMarkets=Object.entries(d.markets||{}).filter(([k,v])=>v!=null);
@@ -1794,7 +1794,7 @@ function wireChart(d, series){
     const wr=wrap.getBoundingClientRect();
     tip.style.left=(rect.left-wr.left+px)+"px";
     tip.style.top=(rect.top-wr.top+py)+"px";
-    const val=series[i];
+    const val=hartiMid(series[i]);
     const rng=d.markets&&d.primaryMarket?d.markets[d.primaryMarket]:null;
     const rngStr=rng&&rng.min&&rng.max?" ("+rng.min+"–"+rng.max+")":"";
     tip.innerHTML=DATES[i]+" &nbsp;<b>"+fmt(val)+"</b>"+rngStr;
