@@ -286,21 +286,23 @@ def build():
         existing_days_map = {}
         ex_dates = existing_data.get("dates", [])
         ex_comms = existing_data.get("commodities", [])
-        # Reconstruct day data from existing JSON
+        # Reconstruct day data from existing JSON using actual per-day series values
         for i, date_str in enumerate(ex_dates):
             veg = {}; rice = {}
             for comm in ex_comms:
                 series = comm.get("series", [])
                 if i < len(series) and series[i] is not None:
-                    # Reconstruct minimal data
+                    mid_val = series[i]  # actual per-day mid price
                     if comm.get("primaryMarket") == "Pettah":
                         rice[comm["name"]] = {
-                            "pettah_range": comm.get("pettahRange"),
-                            "pettah_avg": comm.get("pettahAvg")
+                            "pettah_range": {"min": mid_val, "max": mid_val, "mid": mid_val},
+                            "pettah_avg": mid_val
                         }
                     else:
-                        mkt_data = comm.get("markets", {})
-                        prices = [mkt_data.get(m) for m in MARKETS]
+                        primary = comm.get("primaryMarket", MARKETS[0])
+                        prices = [None] * len(MARKETS)
+                        if primary in MARKETS:
+                            prices[MARKETS.index(primary)] = {"min": mid_val, "max": mid_val, "mid": mid_val}
                         veg[comm["name"]] = prices
             existing_days_map[date_str] = (veg, rice)
 
