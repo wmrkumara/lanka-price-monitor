@@ -2194,12 +2194,19 @@ function yoyChart(d){
     if(!yearData[yr])yearData[yr]=Array(12).fill(null).map(()=>[]);
     yearData[yr][mo].push(v);
   });
-  const years=Object.keys(yearData).sort();
+  // Only keep years that have real varying data (more than 1 unique price value)
+  const allYears=Object.keys(yearData).sort();
+  const years=allYears.filter(yr=>{
+    const allVals=yearData[yr].flat();
+    const unique=new Set(allVals);
+    return unique.size>1;
+  });
   const monthlyAvg={};
   years.forEach(yr=>{monthlyAvg[yr]=yearData[yr].map(vals=>vals.length?Math.round(vals.reduce((a,b)=>a+b,0)/vals.length):null);});
   const colors=["#378ADD","#1D9E75","#a9802a","#b23a2e","#9b59b6"];
   const months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const cid="yoy_"+Math.random().toString(36).slice(2,8);
+  if(!years.length) return '<div class="chart-wrap" style="padding:32px;text-align:center;color:var(--muted);font-style:italic">YoY chart available as real historical data builds up.</div>';
   const legendHtml=years.map((yr,i)=>`<span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#3a403a"><span style="width:20px;height:3px;background:${colors[i%colors.length]};display:inline-block;border-radius:2px"></span>${yr}</span>`).join("");
   /* Store data for deferred init */
   window._yoyPending=window._yoyPending||{};
