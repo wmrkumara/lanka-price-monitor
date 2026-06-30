@@ -34,4 +34,24 @@ jobs:
           if git diff --staged --quiet; then
             echo "No CBSL changes today."
           else
-            git comm
+            git commit -m "Auto-update CBSL price data ($(date +%Y-%m-%d))"
+            git pull --rebase origin main
+            git push origin main
+          fi
+
+      # ── HARTI Wholesale Prices ──────────────────────────────
+      - name: Fetch latest HARTI report
+        run: python harti_update.py
+
+      - name: Commit HARTI data if changed
+        run: |
+          git config user.name  "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add harti_data.json harti_pdfs/ || true
+          if git diff --staged --quiet; then
+            echo "No HARTI changes today."
+          else
+            git commit -m "Auto-update HARTI wholesale data ($(date +%Y-%m-%d))"
+            git pull --rebase origin main
+            git push origin main
+          fi
