@@ -1,5 +1,5 @@
 {
- "generated": "2026-06-30T12:25:34",
+ "generated": "2026-06-28T16:03:49",
  "source": "Central Bank of Sri Lanka - Daily Price Report",
  "dates": [
   "2023-01-03",
@@ -700,8 +700,7 @@
   "2026-06-23",
   "2026-06-24",
   "2026-06-25",
-  "2026-06-26",
-  "2026-06-30"
+  "2026-06-26"
  ],
  "dateLabels": [
   "3 Jan",
@@ -1402,15 +1401,14 @@
   "23 Jun",
   "24 Jun",
   "25 Jun",
-  "26 Jun",
-  "30 Jun"
+  "26 Jun"
  ],
  "commodities": [
   {
    "name": "Beans",
    "category": "Vegetables",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     605.0,
     545.0,
@@ -2110,13 +2108,12 @@
     380.0,
     380.0,
     355.0,
-    355.0,
-    400.0
+    355.0
    ],
    "markets": {
-    "Pettah": 400.0,
-    "Dambulla": null,
-    "Narahenpita": 560.0
+    "Pettah": 450.0,
+    "Dambulla": 355.0,
+    "Narahenpita": 600.0
    },
    "wholesaleSeries": [
     575.0,
@@ -2817,19 +2814,18 @@
     350.0,
     350.0,
     325.0,
-    325.0,
-    300.0
+    325.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 300.0,
-    "Dambulla": null
+    "Pettah": 400.0,
+    "Dambulla": 325.0
    }
   },
   {
    "name": "Carrot",
    "category": "Vegetables",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     225.0,
     200.0,
@@ -3529,12 +3525,11 @@
     295.0,
     290.0,
     275.0,
-    345.0,
-    250.0
+    345.0
    ],
    "markets": {
     "Pettah": 250.0,
-    "Dambulla": null,
+    "Dambulla": 345.0,
     "Narahenpita": 400.0
    },
    "wholesaleSeries": [
@@ -4236,19 +4231,18 @@
     265.0,
     260.0,
     245.0,
-    315.0,
-    200.0
+    315.0
    ],
    "wholesaleMarkets": {
     "Pettah": 200.0,
-    "Dambulla": null
+    "Dambulla": 315.0
    }
   },
   {
    "name": "Cabbage",
    "category": "Vegetables",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     108.0,
     110.0,
@@ -4948,13 +4942,12 @@
     135.0,
     135.0,
     95.0,
-    120.0,
-    180.0
+    120.0
    ],
    "markets": {
-    "Pettah": 180.0,
-    "Dambulla": null,
-    "Narahenpita": 360.0
+    "Pettah": 150.0,
+    "Dambulla": 120.0,
+    "Narahenpita": 320.0
    },
    "wholesaleSeries": [
     78.0,
@@ -5655,19 +5648,18 @@
     105.0,
     105.0,
     65.0,
-    90.0,
-    130.0
+    90.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 130.0,
-    "Dambulla": null
+    "Pettah": 100.0,
+    "Dambulla": 90.0
    }
   },
   {
    "name": "Tomato",
    "category": "Vegetables",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     98.0,
     115.0,
@@ -6367,13 +6359,12 @@
     580.0,
     480.0,
     505.0,
-    480.0,
-    600.0
+    480.0
    ],
    "markets": {
-    "Pettah": 600.0,
-    "Dambulla": null,
-    "Narahenpita": 600.0
+    "Pettah": 500.0,
+    "Dambulla": 480.0,
+    "Narahenpita": 700.0
    },
    "wholesaleSeries": [
     68.0,
@@ -7074,19 +7065,18 @@
     550.0,
     450.0,
     475.0,
-    450.0,
-    500.0
+    450.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 500.0,
-    "Dambulla": null
+    "Pettah": 450.0,
+    "Dambulla": 450.0
    }
   },
   {
    "name": "Brinjal",
    "category": "Vegetables",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     375.0,
     370.0,
@@ -7786,13 +7776,12 @@
     160.0,
     150.0,
     190.0,
-    220.0,
-    300.0
+    220.0
    ],
    "markets": {
-    "Pettah": 300.0,
-    "Dambulla": null,
-    "Narahenpita": 520.0
+    "Pettah": 250.0,
+    "Dambulla": 220.0,
+    "Narahenpita": 400.0
    },
    "wholesaleSeries": [
     345.0,
@@ -8493,19 +8482,18 @@
     130.0,
     120.0,
     160.0,
-    190.0,
-    250.0
+    190.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 250.0,
-    "Dambulla": null
+    "Pettah": 200.0,
+    "Dambulla": 190.0
    }
   },
   {
    "name": "Pumpkin",
    "category": "Vegetables",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     135.0,
     160.0,
@@ -9205,12 +9193,11 @@
     140.0,
     130.0,
     118.0,
-    155.0,
-    170.0
+    155.0
    ],
    "markets": {
     "Pettah": 170.0,
-    "Dambulla": null,
+    "Dambulla": 155.0,
     "Narahenpita": 200.0
    },
    "wholesaleSeries": [
@@ -9912,19 +9899,18 @@
     110.0,
     100.0,
     88.0,
-    125.0,
-    120.0
+    125.0
    ],
    "wholesaleMarkets": {
     "Pettah": 120.0,
-    "Dambulla": null
+    "Dambulla": 125.0
    }
   },
   {
    "name": "Snake gourd",
    "category": "Vegetables",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     225.0,
     220.0,
@@ -10624,13 +10610,12 @@
     210.0,
     200.0,
     225.0,
-    155.0,
-    400.0
+    155.0
    ],
    "markets": {
     "Pettah": 400.0,
-    "Dambulla": null,
-    "Narahenpita": 560.0
+    "Dambulla": 155.0,
+    "Narahenpita": 380.0
    },
    "wholesaleSeries": [
     195.0,
@@ -11331,19 +11316,18 @@
     180.0,
     170.0,
     195.0,
-    155.0,
-    350.0
+    155.0
    ],
    "wholesaleMarkets": {
     "Pettah": 350.0,
-    "Dambulla": null
+    "Dambulla": 155.0
    }
   },
   {
    "name": "Green Chilli",
    "category": "Vegetables",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     285.0,
     300.0,
@@ -12043,13 +12027,12 @@
     605.0,
     655.0,
     655.0,
-    655.0,
-    900.0
+    655.0
    ],
    "markets": {
-    "Pettah": 900.0,
-    "Dambulla": null,
-    "Narahenpita": 1000.0
+    "Pettah": 800.0,
+    "Dambulla": 655.0,
+    "Narahenpita": 800.0
    },
    "wholesaleSeries": [
     255.0,
@@ -12750,19 +12733,18 @@
     575.0,
     625.0,
     625.0,
-    625.0,
-    800.0
+    625.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 800.0,
-    "Dambulla": null
+    "Pettah": 700.0,
+    "Dambulla": 625.0
    }
   },
   {
    "name": "Lime",
    "category": "Vegetables",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     108.0,
     115.0,
@@ -13462,12 +13444,11 @@
     355.0,
     340.0,
     370.0,
-    365.0,
-    500.0
+    365.0
    ],
    "markets": {
-    "Pettah": 500.0,
-    "Dambulla": null,
+    "Pettah": 450.0,
+    "Dambulla": 365.0,
     "Narahenpita": 800.0
    },
    "wholesaleSeries": [
@@ -14169,12 +14150,11 @@
     325.0,
     310.0,
     340.0,
-    335.0,
-    400.0
+    335.0
    ],
    "wholesaleMarkets": {
     "Pettah": 400.0,
-    "Dambulla": null
+    "Dambulla": 335.0
    }
   },
   {
@@ -14881,12 +14861,11 @@
     330.0,
     285.0,
     335.0,
-    245.0,
-    null
+    245.0
    ],
    "markets": {
     "Pettah": null,
-    "Dambulla": null,
+    "Dambulla": 245.0,
     "Narahenpita": null
    },
    "wholesaleSeries": [
@@ -15588,19 +15567,18 @@
     310.0,
     265.0,
     315.0,
-    225.0,
-    383.0
+    225.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 383.0,
-    "Dambulla": null
+    "Pettah": 360.0,
+    "Dambulla": 225.0
    }
   },
   {
    "name": "Red Onion (lmp)",
    "category": "Other",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     495.0,
     655.0,
@@ -16300,12 +16278,11 @@
     310.0,
     310.0,
     300.0,
-    295.0,
-    400.0
+    295.0
    ],
    "markets": {
     "Pettah": 400.0,
-    "Dambulla": null,
+    "Dambulla": 295.0,
     "Narahenpita": 600.0
    },
    "wholesaleSeries": [
@@ -17007,12 +16984,11 @@
     290.0,
     290.0,
     280.0,
-    275.0,
-    330.0
+    275.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 330.0,
-    "Dambulla": null
+    "Pettah": 320.0,
+    "Dambulla": 275.0
    }
   },
   {
@@ -17719,7 +17695,6 @@
     null,
     null,
     null,
-    null,
     null
    ],
    "markets": {
@@ -18426,7 +18401,6 @@
     null,
     null,
     null,
-    null,
     null
    ],
    "wholesaleMarkets": {
@@ -18438,7 +18412,7 @@
    "name": "Big Onion (Imp)",
    "category": "Other",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     188.0,
     198.0,
@@ -19138,12 +19112,11 @@
     180.0,
     175.0,
     198.0,
-    205.0,
-    198.0
+    205.0
    ],
    "markets": {
-    "Pettah": 198.0,
-    "Dambulla": null,
+    "Pettah": 200.0,
+    "Dambulla": 205.0,
     "Narahenpita": 300.0
    },
    "wholesaleSeries": [
@@ -19845,19 +19818,18 @@
     160.0,
     155.0,
     178.0,
-    185.0,
-    164.0
+    185.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 164.0,
-    "Dambulla": null
+    "Pettah": 165.0,
+    "Dambulla": 185.0
    }
   },
   {
    "name": "Potato (Local)",
    "category": "Other",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     450.0,
     405.0,
@@ -20557,12 +20529,11 @@
     295.0,
     265.0,
     265.0,
-    280.0,
-    328.0
+    280.0
    ],
    "markets": {
-    "Pettah": 328.0,
-    "Dambulla": null,
+    "Pettah": 325.0,
+    "Dambulla": 280.0,
     "Narahenpita": 350.0
    },
    "wholesaleSeries": [
@@ -21264,19 +21235,18 @@
     275.0,
     245.0,
     245.0,
-    260.0,
-    284.0
+    260.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 284.0,
-    "Dambulla": null
+    "Pettah": 276.0,
+    "Dambulla": 260.0
    }
   },
   {
    "name": "Potato (Imp)",
    "category": "Other",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     138.0,
     138.0,
@@ -21976,12 +21946,11 @@
     195.0,
     195.0,
     225.0,
-    205.0,
-    213.0
+    205.0
    ],
    "markets": {
     "Pettah": 213.0,
-    "Dambulla": null,
+    "Dambulla": 205.0,
     "Narahenpita": 240.0
    },
    "wholesaleSeries": [
@@ -22683,19 +22652,18 @@
     175.0,
     175.0,
     205.0,
-    185.0,
-    190.0
+    185.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 190.0,
-    "Dambulla": null
+    "Pettah": 187.0,
+    "Dambulla": 185.0
    }
   },
   {
    "name": "Dried Chilli (Imp)",
    "category": "Other",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     1380.0,
     1505.0,
@@ -23395,12 +23363,11 @@
     1055.0,
     1105.0,
     1105.0,
-    1105.0,
-    1117.0
+    1105.0
    ],
    "markets": {
     "Pettah": 1117.0,
-    "Dambulla": null,
+    "Dambulla": 1105.0,
     "Narahenpita": 1160.0
    },
    "wholesaleSeries": [
@@ -24102,19 +24069,18 @@
     1025.0,
     1075.0,
     1075.0,
-    1075.0,
-    1034.0
+    1075.0
    ],
    "wholesaleMarkets": {
     "Pettah": 1034.0,
-    "Dambulla": null
+    "Dambulla": 1075.0
    }
   },
   {
    "name": "Coconut (Avg.)",
    "category": "Other",
    "unit": "Rs./Nut",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     80.0,
     80.0,
@@ -24814,12 +24780,11 @@
     130.0,
     110.0,
     100.0,
-    110.0,
-    145.0
+    110.0
    ],
    "markets": {
     "Pettah": 145.0,
-    "Dambulla": null,
+    "Dambulla": 110.0,
     "Narahenpita": 180.0
    },
    "wholesaleSeries": [
@@ -25521,12 +25486,11 @@
     125.0,
     105.0,
     95.0,
-    105.0,
-    120.0
+    105.0
    ],
    "wholesaleMarkets": {
     "Pettah": 120.0,
-    "Dambulla": null
+    "Dambulla": 105.0
    }
   },
   {
@@ -26233,16 +26197,14 @@
     887.0,
     887.0,
     893.0,
-    893.0,
-    890.0
+    893.0
    ],
    "markets": {
-    "Pettah": 825.0,
-    "Dambulla": 890.0,
+    "Pettah": 834.0,
+    "Dambulla": 893.0,
     "Narahenpita": 852.0
    },
    "wholesaleSeries": [
-    null,
     null,
     null,
     null,
@@ -27649,16 +27611,14 @@
     253.0,
     250.0,
     250.0,
-    248.0,
-    250.0
+    248.0
    ],
    "markets": {
     "Pettah": 231.0,
-    "Dambulla": 250.0,
+    "Dambulla": 248.0,
     "Narahenpita": 260.0
    },
    "wholesaleSeries": [
-    null,
     null,
     null,
     null,
@@ -29065,16 +29025,14 @@
     223.0,
     223.0,
     223.0,
-    232.0,
-    225.0
+    232.0
    ],
    "markets": {
-    "Pettah": 206.0,
-    "Dambulla": 225.0,
+    "Pettah": 204.0,
+    "Dambulla": 232.0,
     "Narahenpita": 220.0
    },
    "wholesaleSeries": [
-    null,
     null,
     null,
     null,
@@ -30481,7 +30439,6 @@
     36.0,
     36.0,
     37.0,
-    37.0,
     37.0
    ],
    "markets": {
@@ -30490,7 +30447,6 @@
     "Narahenpita": 40.0
    },
    "wholesaleSeries": [
-    null,
     null,
     null,
     null,
@@ -31897,7 +31853,6 @@
     null,
     null,
     null,
-    null,
     null
    ],
    "markets": {
@@ -32053,7 +32008,6 @@
     1700.0,
     1700.0,
     1700.0,
-    null,
     null,
     null,
     null,
@@ -33314,11 +33268,10 @@
     1400.0,
     1383.0,
     1400.0,
-    1417.0,
-    1400.0
+    1417.0
    ],
    "markets": {
-    "Pettah": 1400.0,
+    "Pettah": 1417.0,
     "Narahenpita": 1600.0
    },
    "wholesaleSeries": [
@@ -34020,7 +33973,6 @@
     1063.0,
     1133.0,
     1225.0,
-    1225.0,
     1225.0
    ],
    "wholesaleMarkets": {
@@ -34031,7 +33983,7 @@
    "name": "Banana (Sour)",
    "category": "Fruits",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     155.0,
     170.0,
@@ -34731,12 +34683,11 @@
     130.0,
     140.0,
     140.0,
-    135.0,
-    150.0
+    135.0
    ],
    "markets": {
     "Pettah": 150.0,
-    "Dambulla": null,
+    "Dambulla": 135.0,
     "Narahenpita": 240.0
    },
    "wholesaleSeries": [
@@ -35438,19 +35389,18 @@
     100.0,
     110.0,
     110.0,
-    105.0,
-    100.0
+    105.0
    ],
    "wholesaleMarkets": {
     "Pettah": 100.0,
-    "Dambulla": null
+    "Dambulla": 105.0
    }
   },
   {
    "name": "Papaw",
    "category": "Fruits",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     125.0,
     120.0,
@@ -36150,12 +36100,11 @@
     155.0,
     135.0,
     140.0,
-    105.0,
-    200.0
+    105.0
    ],
    "markets": {
-    "Pettah": 200.0,
-    "Dambulla": null,
+    "Pettah": 220.0,
+    "Dambulla": 105.0,
     "Narahenpita": 270.0
    },
    "wholesaleSeries": [
@@ -36857,19 +36806,18 @@
     125.0,
     105.0,
     110.0,
-    75.0,
-    150.0
+    75.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 150.0,
-    "Dambulla": null
+    "Pettah": 160.0,
+    "Dambulla": 75.0
    }
   },
   {
    "name": "Pineapple",
    "category": "Fruits",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     325.0,
     360.0,
@@ -37569,12 +37517,11 @@
     225.0,
     285.0,
     260.0,
-    235.0,
-    245.0
+    235.0
    ],
    "markets": {
     "Pettah": 245.0,
-    "Dambulla": null,
+    "Dambulla": 235.0,
     "Narahenpita": 350.0
    },
    "wholesaleSeries": [
@@ -38276,12 +38223,11 @@
     195.0,
     255.0,
     230.0,
-    205.0,
-    null
+    205.0
    ],
    "wholesaleMarkets": {
     "Pettah": null,
-    "Dambulla": null
+    "Dambulla": 205.0
    }
   },
   {
@@ -38988,14 +38934,12 @@
     195.0,
     195.0,
     195.0,
-    195.0,
     195.0
    ],
    "markets": {
     "Narahenpita": 195.0
    },
    "wholesaleSeries": [
-    null,
     null,
     null,
     null,
@@ -40402,14 +40346,12 @@
     180.0,
     180.0,
     180.0,
-    180.0,
     180.0
    ],
    "markets": {
     "Narahenpita": 180.0
    },
    "wholesaleSeries": [
-    null,
     null,
     null,
     null,
@@ -41116,7 +41058,7 @@
    "name": "Samba",
    "category": "Rice",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     240.0,
     240.0,
@@ -41816,12 +41758,11 @@
     245.0,
     245.0,
     245.0,
-    245.0,
-    250.0
+    245.0
    ],
    "markets": {
     "Pettah": 250.0,
-    "Dambulla": null,
+    "Dambulla": 245.0,
     "Narahenpita": null
    },
    "wholesaleSeries": [
@@ -42523,19 +42464,18 @@
     246.0,
     246.0,
     248.0,
-    248.0,
-    250.0
+    248.0
    ],
    "wholesaleMarkets": {
     "Pettah": 245.0,
-    "Dambulla": 250.0
+    "Dambulla": 248.0
    }
   },
   {
    "name": "Nadu",
    "category": "Rice",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     208.0,
     208.0,
@@ -43235,12 +43175,11 @@
     235.0,
     235.0,
     235.0,
-    235.0,
-    223.0
+    235.0
    ],
    "markets": {
-    "Pettah": 223.0,
-    "Dambulla": null,
+    "Pettah": 225.0,
+    "Dambulla": 235.0,
     "Narahenpita": 230.0
    },
    "wholesaleSeries": [
@@ -43942,7 +43881,6 @@
     203.0,
     203.0,
     203.0,
-    203.0,
     203.0
    ],
    "wholesaleMarkets": {
@@ -43954,7 +43892,7 @@
    "name": "Kekulu (White)",
    "category": "Rice",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     190.0,
     190.0,
@@ -44654,12 +44592,11 @@
     225.0,
     225.0,
     225.0,
-    225.0,
-    210.0
+    225.0
    ],
    "markets": {
     "Pettah": 210.0,
-    "Dambulla": null,
+    "Dambulla": 225.0,
     "Narahenpita": 220.0
    },
    "wholesaleSeries": [
@@ -45361,7 +45298,6 @@
     193.0,
     192.0,
     192.0,
-    192.0,
     192.0
    ],
    "wholesaleMarkets": {
@@ -45373,7 +45309,7 @@
    "name": "Kekulu (Red)",
    "category": "Rice",
    "unit": "Rs./kg",
-   "primaryMarket": "Pettah",
+   "primaryMarket": "Dambulla",
    "series": [
     215.0,
     215.0,
@@ -46073,12 +46009,11 @@
     225.0,
     225.0,
     225.0,
-    225.0,
-    197.0
+    225.0
    ],
    "markets": {
     "Pettah": 197.0,
-    "Dambulla": null,
+    "Dambulla": 225.0,
     "Narahenpita": 190.0
    },
    "wholesaleSeries": [
@@ -46780,11 +46715,10 @@
     187.0,
     187.0,
     187.0,
-    186.0,
     186.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 172.0,
+    "Pettah": 171.0,
     "Dambulla": 186.0
    }
   },
@@ -47492,11 +47426,10 @@
     240.0,
     240.0,
     240.0,
-    240.0,
     240.0
    ],
    "markets": {
-    "Pettah": 251.0,
+    "Pettah": 253.0,
     "Dambulla": 240.0
    },
    "wholesaleSeries": [
@@ -48198,7 +48131,6 @@
     238.0,
     238.0,
     237.0,
-    238.0,
     238.0
    ],
    "wholesaleMarkets": {
@@ -48910,7 +48842,6 @@
     null,
     null,
     null,
-    null,
     null
    ],
    "markets": {
@@ -49451,7 +49382,6 @@
     205.0,
     205.0,
     205.0,
-    null,
     null,
     null,
     null,
@@ -50328,7 +50258,6 @@
     null,
     null,
     null,
-    null,
     null
    ],
    "markets": {
@@ -50869,7 +50798,6 @@
     205.0,
     205.0,
     205.0,
-    null,
     null,
     null,
     null,
@@ -51746,7 +51674,6 @@
     2480.0,
     2480.0,
     2480.0,
-    2480.0,
     2480.0
    ],
    "markets": {
@@ -52452,11 +52379,10 @@
     1650.0,
     1650.0,
     1650.0,
-    1650.0,
     1650.0
    ],
    "wholesaleMarkets": {
-    "Peliyagoda": 1700.0,
+    "Peliyagoda": 1800.0,
     "Negombo": 1650.0
    }
   },
@@ -52464,7 +52390,7 @@
    "name": "Thalapath",
    "category": "Fish",
    "unit": "Rs./kg",
-   "primaryMarket": "Marandagahamula",
+   "primaryMarket": "Negombo",
    "series": [
     2000.0,
     1990.0,
@@ -53164,12 +53090,11 @@
     2770.0,
     2770.0,
     2770.0,
-    2770.0,
-    3080.0
+    2770.0
    ],
    "markets": {
-    "Negombo": null,
-    "Marandagahamula": 3080.0
+    "Negombo": 2770.0,
+    "Marandagahamula": null
    },
    "wholesaleSeries": [
     1800.0,
@@ -53870,12 +53795,11 @@
     2050.0,
     2050.0,
     2050.0,
-    2050.0,
-    2300.0
+    2050.0
    ],
    "wholesaleMarkets": {
-    "Peliyagoda": 2300.0,
-    "Negombo": null
+    "Peliyagoda": null,
+    "Negombo": 2050.0
    }
   },
   {
@@ -54582,7 +54506,6 @@
     1580.0,
     1440.0,
     1440.0,
-    1220.0,
     1220.0
    ],
    "markets": {
@@ -55286,7 +55209,6 @@
     1400.0,
     1400.0,
     1400.0,
-    1300.0,
     1300.0,
     1300.0,
     1300.0
@@ -56000,12 +55922,11 @@
     2850.0,
     1960.0,
     1940.0,
-    null,
-    2700.0
+    null
    ],
    "markets": {
-    "Negombo": 2700.0,
-    "Marandagahamula": 1820.0
+    "Negombo": null,
+    "Marandagahamula": null
    },
    "wholesaleSeries": [
     1200.0,
@@ -56706,12 +56627,11 @@
     1600.0,
     1500.0,
     1600.0,
-    1600.0,
-    1500.0
+    1600.0
    ],
    "wholesaleMarkets": {
-    "Peliyagoda": 1500.0,
-    "Negombo": 1500.0
+    "Peliyagoda": 1600.0,
+    "Negombo": null
    }
   },
   {
@@ -57418,12 +57338,11 @@
     1060.0,
     980.0,
     900.0,
-    850.0,
-    920.0
+    850.0
    ],
    "markets": {
-    "Negombo": 920.0,
-    "Marandagahamula": 840.0
+    "Negombo": 850.0,
+    "Marandagahamula": 880.0
    },
    "wholesaleSeries": [
     420.0,
@@ -58124,19 +58043,18 @@
     900.0,
     850.0,
     770.0,
-    700.0,
-    770.0
+    700.0
    ],
    "wholesaleMarkets": {
-    "Peliyagoda": 750.0,
-    "Negombo": 770.0
+    "Peliyagoda": 800.0,
+    "Negombo": 700.0
    }
   },
   {
    "name": "Hurulla",
    "category": "Fish",
    "unit": "Rs./kg",
-   "primaryMarket": "Marandagahamula",
+   "primaryMarket": "Negombo",
    "series": [
     850.0,
     860.0,
@@ -58836,12 +58754,11 @@
     1200.0,
     1600.0,
     1380.0,
-    null,
-    1480.0
+    null
    ],
    "markets": {
     "Negombo": null,
-    "Marandagahamula": 1480.0
+    "Marandagahamula": null
    },
    "wholesaleSeries": [
     750.0,
@@ -59542,11 +59459,10 @@
     970.0,
     1360.0,
     1100.0,
-    1300.0,
-    1200.0
+    1300.0
    ],
    "wholesaleMarkets": {
-    "Peliyagoda": 1200.0,
+    "Peliyagoda": 1300.0,
     "Negombo": null
    }
   },
@@ -60254,12 +60170,11 @@
     1420.0,
     1320.0,
     1380.0,
-    1300.0,
-    1320.0
+    1300.0
    ],
    "markets": {
-    "Negombo": 1320.0,
-    "Marandagahamula": 1220.0
+    "Negombo": 1300.0,
+    "Marandagahamula": 1180.0
    },
    "wholesaleSeries": [
     630.0,
@@ -60960,11 +60875,10 @@
     1180.0,
     1080.0,
     1120.0,
-    1050.0,
     1050.0
    ],
    "wholesaleMarkets": {
-    "Peliyagoda": 1050.0,
+    "Peliyagoda": 1100.0,
     "Negombo": 1050.0
    }
   },
@@ -61663,7 +61577,6 @@
     2750.0,
     2767.0,
     2750.0,
-    2783.0,
     2783.0,
     2783.0,
     2783.0,
@@ -62378,7 +62291,6 @@
     2113.0,
     2163.0,
     2138.0,
-    2163.0,
     2163.0
    ],
    "wholesaleMarkets": {
