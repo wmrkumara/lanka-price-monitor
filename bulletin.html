@@ -71,6 +71,15 @@
   .section-h .rule{flex:1;height:1px;background:var(--line-strong)}
   .section-h .src{font-size:11px;color:var(--muted)}
 
+  /* trend charts */
+  .trend-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:10px}
+  .trend-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:15px 16px 10px;box-shadow:var(--shadow)}
+  .tc-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px}
+  .tc-title{font-size:12.5px;font-weight:700;color:var(--ink-soft);letter-spacing:.01em}
+  .tc-val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:19px;margin-bottom:4px}
+  .tc-val small{font-size:11px;font-weight:500;color:var(--muted)}
+  .tc-empty{font-size:12px;color:var(--muted);font-style:italic;padding:20px 0;text-align:center;margin:0}
+
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
   .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:15px 16px;box-shadow:var(--shadow)}
   .stat .l{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
@@ -79,6 +88,8 @@
   .stat .chg{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;margin-top:4px;display:inline-block;
     padding:2px 7px;border-radius:7px}
   .stat .chg.up{color:var(--up);background:var(--up-bg)}.stat .chg.down{color:var(--down);background:var(--down-bg)}
+  .chg{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;display:inline-block;padding:2px 7px;border-radius:7px}
+  .chg.up{color:var(--up);background:var(--up-bg)}.chg.down{color:var(--down);background:var(--down-bg)}.chg.flat{color:var(--muted);background:var(--paper-2)}
 
   /* signature: profit gap bar */
   .gapcard{background:var(--card);border:1px solid var(--line-strong);border-radius:18px;padding:22px 22px 20px;
@@ -139,6 +150,8 @@
 
   <div id="sections"></div>
 
+  <div id="trends"></div>
+
   <div class="credit"><span id="creditPre">Design &amp; development by</span> <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a> &middot; Built in Gampola 🇱🇰</div>
   <footer>
     <div class="disclaimer" id="disclaimer">Prices are indicative only, sourced from CBSL's monthly Agriculture Sector Data Bulletin. Use at your own discretion — decisions are your responsibility.</div>
@@ -169,10 +182,12 @@ const I18N = {
    creditPre:"Design &amp; development by", noData:"No bulletin loaded yet.",
    disclaimer:"Prices are indicative only, sourced from CBSL's monthly Agriculture Sector Data Bulletin. Use at your own discretion — decisions are your responsibility.",
    footNote:"Source: Central Bank of Sri Lanka, Economic Research Department — Agriculture Sector Data Bulletin. Not an official CBSL publication or endorsement.",
-   agriculture:"Agriculture", industry:"Industry", services:"Services"},
+   agriculture:"Agriculture", industry:"Industry", services:"Services",
+   trendsTitle:"Trends since data began", trendsHint:"Continuous monthly series &middot; gaps mean the bulletin didn't report a figure that month",
+   notEnoughTrend:"Not enough months of data yet"},
  si:{kicker:'මාසික දත්ත <span class="org">ශ්‍රී ලංකා මහ බැංකුවේ</span> — කෘෂිකාර්මික අංශයේ දත්ත බුලටින්',
    title:'මාසික <em>කෘෂිකාර්මික</em> දත්ත ප්‍රකාශනය',
-   sub:"වී, මත්ස්‍ය, එළවළු, පශු සම්පත්, තේ, රබර් සහ පොල් නිෂ්පාදන, ගොවිපළ මිල ගණන්, සිල්ලර මිල ගණන් සහ නිෂ්පාදන පිරිවැය — ශ්‍රී ලංකා මහ බැංකුවේ ආර්ථික පර්යේෂණ දෙපාර්තමේන්තුව මඟින් මාසිකව යාවත්කාලීන කරනු ලැබේ.",
+   sub:"ශ්‍රී ලංකා මහ බැංකුවේ ආර්ථික පර්යේෂණ දෙපාර්තමේන්තුව මඟින් මාසිකව යාවත්කාලීන කරනු ලබන වී, මත්ස්‍ය, එළවළු, පශු සම්පත්, තේ, රබර් සහ පොල් නිෂ්පාදනවල ගොවිපළ මිල ගණන්, සිල්ලර මිල ගණන් සහ නිෂ්පාදන පිරිවැය දත්ත මෙහි ඇතුළත් වේ.",
    lblMonth:"දත්ත වාර්තාව", refFor:"මෙම වාර්තාවට අදාළ දත්ත කාලය", paddy:"වී", rice:"සහල්", fish:"මාළු", veg:"එළවළු",
    livestock:"පශු සම්පත්", tea:"තේ", rubber:"රබර්", coconut:"පොල්", global:"ගෝලීය &amp; FAO දර්ශකය", employment:"කෘෂිකර්මාන්තයේ රැකියා",
    yalaForecast:"යල අස්වැන්න පුරෝකථනය", annualForecast:"වාර්ෂික පුරෝකථනය", farmgateSamba:"ගොවිපල මිල — සම්බා", farmgateNadu:"ගොවිපල මිල — නාඩු",
@@ -187,7 +202,9 @@ const I18N = {
    creditPre:"නිර්මාණය හා සංවර්ධනය:", noData:"තවම බුලටිනයක් පූරණය කර නැත.",
    disclaimer:"මිල ගණන් මාර්ගෝපදේශයක් පමණක් වන අතර, මේවා ශ්‍රී ලංකා මහ බැංකුවේ මාසික කෘෂිකාර්මික දත්ත ප්‍රකාශනයෙන් (Data Bulletin) උපුටා ගන්නා ලදී. මෙය ඔබේම අභිමතය පරිදි භාවිත කළ යුතු අතර, ඒ මත පදනම්ව ගන්නා තීරණ පිළිබඳ සම්පූර්ණ වගකීම ඔබ සතු වේ.",
    footNote:"මූලාශ්‍රය: ශ්‍රී ලංකා මහ බැංකුව, ආර්ථික පර්යේෂණ දෙපාර්තමේන්තුව — කෘෂිකාර්මික අංශයේ දත්ත ප්‍රකාශනය. මෙය නිල ප්‍රකාශනයක් හෝ (මහ බැංකුවේ) අනුමැතිය ලත් එකක් නොවේ.",
-   agriculture:"කෘෂිකර්මාන්තය", industry:"කර්මාන්ත", services:"සේවා"},
+   agriculture:"කෘෂිකර්මාන්තය", industry:"කර්මාන්ත", services:"සේවා",
+   trendsTitle:"දත්ත ආරම්භයේ සිට ප්‍රවණතා", trendsHint:"අඛණ්ඩ මාසික දත්ත මාලාවක් &middot; හිස් ඉඩ යනු එම මාසයේ අගයක් වාර්තාවේ නොතිබූ බවයි",
+   notEnoughTrend:"තවම ප්‍රමාණවත් මාස ගණනක දත්ත නොමැත"},
  ta:{kicker:'மாதாந்திர தரவு <span class="org">இலங்கை மத்திய வங்கி</span> — வேளாண் தரவு புல்லட்டின்',
    title:'மாதாந்திர <em>வேளாண்</em> தரவு புல்லட்டின்',
    sub:"நெல், மீன், காய்கறிகள், கால்நடை, தேயிலை, ரப்பர் மற்றும் தேங்காய் தொடர்பான உற்பத்தி, விவசாய விலை, சில்லறை விலை மற்றும் உற்பத்தி செலவு — இலங்கை மத்திய வங்கியின் பொருளாதார ஆய்வுத் துறையிலிருந்து, ஒவ்வொரு மாதமும் புதுப்பிக்கப்படுகிறது.",
@@ -205,7 +222,9 @@ const I18N = {
    creditPre:"வடிவமைப்பு &amp; உருவாக்கம்:", noData:"இன்னும் புல்லட்டின் ஏற்றப்படவில்லை.",
    disclaimer:"விலைகள் வழிகாட்டல் மட்டுமே, இலங்கை மத்திய வங்கியின் மாதாந்திர வேளாண் தரவு புல்லட்டினில் இருந்து பெறப்பட்டது. உங்கள் சொந்த முடிவின்படி பயன்படுத்தவும் — முடிவுகள் உங்கள் பொறுப்பாகும்.",
    footNote:"மூலம்: இலங்கை மத்திய வங்கி, பொருளாதார ஆய்வுத் துறை — வேளாண் தரவு புல்லட்டின். இது அதிகாரப்பூர்வ வெளியீடு அல்லது ஒப்புதல் அல்ல.",
-   agriculture:"வேளாண்மை", industry:"தொழில்", services:"சேவைகள்"}
+   agriculture:"வேளாண்மை", industry:"தொழில்", services:"சேவைகள்",
+   trendsTitle:"தரவு தொடங்கியதிலிருந்து போக்குகள்", trendsHint:"தொடர்ச்சியான மாதாந்திர தரவுத் தொடர் &middot; இடைவெளிகள் என்பது அந்த மாதத்திற்கான தரவு அறிக்கையிடப்படவில்லை என்பதைக் குறிக்கும்",
+   notEnoughTrend:"இன்னும் போதிய மாதங்களுக்கான தரவு இல்லை"}
 };
 function t(k){return (I18N[lang]&&I18N[lang][k])||I18N.en[k]||k;}
 const MONTH_NAMES={en:["January","February","March","April","May","June","July","August","September","October","November","December"],
@@ -239,6 +258,76 @@ function statCard(label,valueHtml,chgHtml){
 
 function section(titleKey,srcNote,innerHtml){
   return '<div class="section-h"><h2>'+t(titleKey)+'</h2><span class="rule"></span>'+(srcNote?'<span class="src">'+srcNote+'</span>':'')+'</div><div class="grid">'+innerHtml+'</div>';
+}
+
+// ---- Trend charts (continuous monthly series across all bulletins) ----
+function monthLabel(k){
+  const names=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const parts=k.split("-"); const y=parts[0], mo=parts[1];
+  return names[(+mo)-1]+" '"+y.slice(2);
+}
+function trendSeries(getter){
+  return Object.keys(DB.months).sort().map(k=>{
+    let v=null;
+    try{ v=getter(DB.months[k]); }catch(e){ v=null; }
+    return {k:k, label:monthLabel(k), v:(typeof v==="number"?v:null)};
+  });
+}
+function trendChart(title, unit, series, color){
+  const W=320,H=120,L=6,R=6,T=10,B=20;
+  const n=series.length;
+  const X=i=> L + i*(W-L-R)/((n-1)||1);
+  const present = series.filter(p=>p.v!=null);
+  if(present.length<2){
+    return '<div class="trend-card"><div class="tc-title">'+title+'</div><p class="tc-empty">'+t("notEnoughTrend")+'</p></div>';
+  }
+  const vals=present.map(p=>p.v), min=Math.min.apply(null,vals), max=Math.max.apply(null,vals);
+  const pad=(max-min)*0.18||Math.abs(min)*0.05||1, lo=min-pad, hi=max+pad;
+  const Y=v=> T + (H-T-B)*(1-(v-lo)/((hi-lo)||1));
+
+  let segments=[], cur=[];
+  series.forEach((p,i)=>{
+    if(p.v==null){ if(cur.length) segments.push(cur); cur=[]; }
+    else cur.push([X(i), Y(p.v)]);
+  });
+  if(cur.length) segments.push(cur);
+
+  const paths = segments.map(seg=>{
+    const d = seg.map((pt,idx)=> (idx?"L":"M")+pt[0].toFixed(1)+" "+pt[1].toFixed(1)).join(" ");
+    return '<path d="'+d+'" fill="none" stroke="'+color+'" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>';
+  }).join("");
+  const dots = segments.reduce((a,s)=>a.concat(s),[]).map(pt=>
+    '<circle cx="'+pt[0].toFixed(1)+'" cy="'+pt[1].toFixed(1)+'" r="2.6" fill="'+color+'"/>').join("");
+
+  const first=present[0], lastP=present[present.length-1];
+  const chgPct = first.v ? ((lastP.v-first.v)/first.v*100) : null;
+  const startIdx = series.findIndex(p=>p.k===first.k), endIdx = series.findIndex(p=>p.k===lastP.k);
+
+  const xlabels =
+    '<text x="'+X(startIdx).toFixed(1)+'" y="'+(H-6)+'" font-size="9" fill="var(--muted)" font-family="JetBrains Mono">'+first.label+'</text>'+
+    '<text x="'+X(endIdx).toFixed(1)+'" y="'+(H-6)+'" text-anchor="end" font-size="9" fill="var(--muted)" font-family="JetBrains Mono">'+lastP.label+'</text>';
+
+  return '<div class="trend-card">'+
+    '<div class="tc-head"><span class="tc-title">'+title+'</span>'+chgTag(chgPct)+'</div>'+
+    '<div class="tc-val">'+fmt(lastP.v)+(unit?' <small>'+unit+'</small>':'')+'</div>'+
+    '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block">'+paths+dots+xlabels+'</svg>'+
+  '</div>';
+}
+function renderTrends(){
+  const host=document.getElementById("trends"); if(!host) return;
+  const metrics=[
+    [t("chicken"), "Rs./kg", trendSeries(m=>last(m.livestock.chicken_price_rs_per_kg)), "var(--up)"],
+    [t("costChicken"), "Rs./kg", trendSeries(m=>last(m.livestock.cost_of_production && m.livestock.cost_of_production.chicken_rs_per_kg)), "var(--down)"],
+    [t("teaAuction"), "USD/kg", trendSeries(m=>pick(m.tea,"auction_price_usd_per_kg")), "var(--petrol)"],
+    [t("rubberPrice"), "USD/kg", trendSeries(m=>pick(m.rubber,"rss3_usd_per_kg")), "var(--petrol)"],
+    [t("farmgateSamba"), "Rs./kg", trendSeries(m=>m.paddy.farmgate_rs_per_kg && m.paddy.farmgate_rs_per_kg.samba), "var(--gold)"],
+    [t("farmgateNadu"), "Rs./kg", trendSeries(m=>m.paddy.farmgate_rs_per_kg && m.paddy.farmgate_rs_per_kg.nadu), "var(--gold)"],
+    [t("retailSamba"), "Rs./kg", trendSeries(m=>m.rice.retail_rs_per_kg && m.rice.retail_rs_per_kg.samba), "var(--gold)"],
+    [t("retailNadu"), "Rs./kg", trendSeries(m=>m.rice.retail_rs_per_kg && m.rice.retail_rs_per_kg.nadu), "var(--gold)"],
+    [t("faoIndex"), "", trendSeries(m=>pick(m.global,"fao_food_price_index")), "var(--petrol)"]
+  ];
+  host.innerHTML = '<div class="section-h"><h2>'+t("trendsTitle")+'</h2><span class="rule"></span><span class="src">'+t("trendsHint")+'</span></div>'+
+    '<div class="trend-grid">'+ metrics.map(x=>trendChart(x[0],x[1],x[2],x[3])).join("") +'</div>';
 }
 
 function render(){
@@ -366,6 +455,7 @@ function render(){
   }
 
   document.getElementById("sections").innerHTML=html;
+  renderTrends();
 }
 
 document.querySelector(".lang").addEventListener("click",function(e){
