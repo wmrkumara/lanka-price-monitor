@@ -1,9 +1,9 @@
 /* ===== TopGoviya PWA Service Worker ===== */
-/* Version: 2.0 | topgoviya.lk | Built in Gampola 🇱🇰 */
-/* Updated: June 2026 — All new pages + features cached */
+/* Version: 2.1 | topgoviya.lk | Built in Gampola 🇱🇰 */
+/* Updated: July 2026 — bulletin.html precached; trend charts + footer link update */
 
-const CACHE_NAME = 'topgoviya-v5';
-const DATA_CACHE = 'topgoviya-data-v5';
+const CACHE_NAME = 'topgoviya-v6';
+const DATA_CACHE = 'topgoviya-data-v6';
 
 /* ── Static files to cache for offline use ── */
 const STATIC_ASSETS = [
@@ -17,6 +17,7 @@ const STATIC_ASSETS = [
   '/about.html',
   '/privacy.html',
   '/farmers-guide-topgoviya.html',
+  '/bulletin.html',
   '/manifest.json',
   '/icon-72x72.png',
   '/icon-96x96.png',
@@ -29,7 +30,7 @@ const STATIC_ASSETS = [
 
 /* ── Install — cache all static assets ── */
 self.addEventListener('install', event => {
-  console.log('[TopGoviya SW v2.0] Installing...');
+  console.log('[TopGoviya SW v2.1] Installing...');
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       console.log('[TopGoviya SW] Caching all pages + assets');
@@ -43,7 +44,7 @@ self.addEventListener('install', event => {
 
 /* ── Activate — remove old caches ── */
 self.addEventListener('activate', event => {
-  console.log('[TopGoviya SW v2.0] Activating...');
+  console.log('[TopGoviya SW v2.1] Activating...');
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
@@ -149,4 +150,4 @@ self.addEventListener('notificationclick', event => {
   );
 });
 
-console.log('[TopGoviya SW v2.0] Service Worker loaded ✅ | topgoviya.lk');
+console.log('[TopGoviya SW v2.1] Service Worker loaded ✅ | topgoviya.lk');
