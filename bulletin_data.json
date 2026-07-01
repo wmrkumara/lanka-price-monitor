@@ -1,0 +1,4097 @@
+{
+  "source": "CBSL Agriculture Sector Data Bulletin (Economic Research Department)",
+  "source_url": "https://www.cbsl.gov.lk/en/agriculture-data-bulletin",
+  "note": "Jan-Dec 2025 and Jan-Apr 2026 all merged and verified.",
+  "months": {
+    "2025-01": {
+      "bulletin_title": "Agriculture Sector Data Bulletin - January 2025",
+      "reference_period": "November/December 2024",
+      "highlights": {
+        "en": [
+          "Paddy production for 2024/2025 Maha forecasted at 2.57 million MT (sown extent end Dec 2024), a 5.7% decline from previous Maha season",
+          "Fish production decreased 16.3% (y-o-y) in November 2024, largely driven by declines in inland fishing",
+          "Domestic tea production increased 13.9% in November and 9.6% in December 2024; global tea prices continued declining through both months",
+          "Local rubber production grew 24.3% in November 2024; global rubber prices picked up slightly in December after the prior month's decline",
+          "Coconut production declined 27.9% (y-o-y) in November 2024"
+        ],
+        "si": [
+          "2024/25 මහ කන්නයේ වී නිෂ්පාදනය මෙට්‍රික් ටොන් මිලියන 2.57ක් ලෙස පුරෝකථනය කර ඇත (2024 දෙසැම්බර් අවසන් වන විට වගා කළ ප්‍රමාණය අනුව), එය පෙර මහ කන්නයට සාපේක්ෂව 5.7%කින් අඩුවීමකි",
+          "2024 නොවැම්බර් මාසයේදී මාළු නිෂ්පාදනය පසුගිය වසරට සාපේක්ෂව 16.3%කින් අඩු විය; එයට ප්‍රධාන හේතුව අභ්‍යන්තර මාළු ඇල්ලීමේ පහත වැටීමයි",
+          "දේශීය තේ නිෂ්පාදනය නොවැම්බර් මාසයේ 13.9%කින් සහ දෙසැම්බර් මාසයේ 9.6%කින් වැඩි විය; එහෙත් ගෝලීය තේ මිල ගණන් එම මාස දෙකේදීම දිගටම පහත වැටුණි",
+          "දේශීය රබර් නිෂ්පාදනය 2024 නොවැම්බර් මාසයේදී 24.3%කින් වර්ධනය විය; පෙර මාසයේ පහත වැටීමෙන් පසු ගෝලීය රබර් මිල ගණන් දෙසැම්බර් මාසයේදී තරමක් ඉහළ ගියේය",
+          "2024 නොවැම්බර් මාසයේදී පොල් නිෂ්පාදනය පසුගිය වසරට සාපේක්ෂව 27.9%කින් අඩු විය"
+        ],
+        "ta": [
+          "2024/25 மஹா பருவத்திற்கான நெல் உற்பத்தி 2.57 மில்லியன் மெட்ரிக் டன்களாக முன்னறிவிக்கப்பட்டுள்ளது (2024 டிசம்பர் இறுதி வரையிலான பயிரிடப்பட்ட பரப்பளவின் அடிப்படையில்), இது முந்தைய மஹா பருவத்துடன் ஒப்பிடும்போது 5.7% குறைவாகும்",
+          "2024 நவம்பர் மாதத்தில் மீன் உற்பத்தி முந்தைய ஆண்டுடன் ஒப்பிடும்போது 16.3% குறைந்தது, முதன்மையாக உள்நாட்டு மீன்பிடியில் ஏற்பட்ட வீழ்ச்சியால் இது ஏற்பட்டது",
+          "உள்நாட்டு தேயிலை உற்பத்தி நவம்பரில் 13.9%ஆகவும் டிசம்பரில் 9.6%ஆகவும் அதிகரித்தது; ஆனால் உலகளாவிய தேயிலை விலைகள் இரு மாதங்களிலும் தொடர்ந்து குறைந்தன",
+          "உள்நாட்டு ரப்பர் உற்பத்தி 2024 நவம்பரில் 24.3% வளர்ச்சியடைந்தது; முந்தைய மாத வீழ்ச்சிக்குப் பின்னர் உலகளாவிய ரப்பர் விலைகள் டிசம்பரில் சற்று உயர்ந்தன",
+          "2024 நவம்பரில் தேங்காய் உற்பத்தி முந்தைய ஆண்டுடன் ஒப்பிடும்போது 27.9% குறைந்தது"
+        ]
+      },
+      "paddy": {
+        "season_mn_mt": {
+          "2023": {
+            "maha": 2.7,
+            "yala": 1.82,
+            "annual": 4.51
+          },
+          "2024": {
+            "maha": 2.72,
+            "yala": 2.02,
+            "annual": 4.75,
+            "note": "Yala based on DoA forecast"
+          }
+        },
+        "growth_pct": {
+          "maha": 1.0,
+          "yala": 11.4,
+          "annual": 5.2
+        },
+        "maha_2024_25_forecast_mn_mt": 2.57,
+        "maha_2024_25_forecast_yoy_pct": -5.7,
+        "forecast_basis": "sown extent as of end Dec 2024"
+      },
+      "rice": {
+        "imports_latest_000mt": 82.7
+      },
+      "fish": {
+        "yoy_change_pct": -16.3,
+        "reference_month": "November 2024",
+        "note": "inland fishing activities key contributor to decline",
+        "production_000mt": {
+          "2022": {
+            "marine": 281,
+            "inland": 117,
+            "total": 397
+          },
+          "2023": {
+            "marine": 294,
+            "inland": 113,
+            "total": 407
+          },
+          "2023_jan_nov": {
+            "marine": 268,
+            "inland": 103,
+            "total": 371
+          },
+          "2024_jan_nov": {
+            "marine": 279,
+            "inland": 96,
+            "total": 376
+          }
+        }
+      },
+      "vegetables_production_mt": {
+        "columns": [
+          "2022_yala",
+          "2022_23_maha",
+          "2023_yala",
+          "2023_24_maha",
+          "2024_yala"
+        ],
+        "note": "2024 Yala based on DoA forecast",
+        "up_country": {
+          "tomatoes": [
+            47425,
+            46244,
+            34169,
+            39293,
+            42480
+          ],
+          "cabbage": [
+            67069,
+            52310,
+            47773,
+            58552,
+            47301
+          ],
+          "carrot": [
+            40806,
+            40084,
+            25267,
+            48836,
+            36815
+          ],
+          "beetroot": [
+            15580,
+            17178,
+            21444,
+            17332,
+            15592
+          ],
+          "raddish": [
+            38506,
+            26955,
+            27557,
+            40159,
+            24181
+          ],
+          "beans": [
+            33929,
+            41139,
+            25287,
+            36345,
+            30516
+          ]
+        },
+        "low_country": {
+          "luffa": [
+            19288,
+            24852,
+            18417,
+            22225,
+            15182
+          ],
+          "okra": [
+            36181,
+            38984,
+            31351,
+            37620,
+            31594
+          ],
+          "brinjal": [
+            61628,
+            80637,
+            54450,
+            69584,
+            56445
+          ],
+          "cucumber": [
+            15959,
+            21013,
+            26603,
+            17937,
+            20939
+          ],
+          "red_pumpkin": [
+            44249,
+            59163,
+            41779,
+            46890,
+            58582
+          ],
+          "ash_plantain": [
+            24926,
+            35369,
+            22833,
+            33783,
+            5380
+          ],
+          "long_bean": [
+            30735,
+            35395,
+            27456,
+            35539,
+            37785
+          ]
+        }
+      },
+      "other_field_crops_production_mt": {
+        "columns": [
+          "2022_yala",
+          "2022_23_maha",
+          "2023_yala",
+          "2023_24_maha",
+          "2024_yala"
+        ],
+        "potato": [
+          27764,
+          19723,
+          21026,
+          21291,
+          21158
+        ],
+        "red_onion": [
+          19565,
+          26673,
+          22678,
+          24762,
+          29966
+        ],
+        "big_onion": [
+          17164,
+          329,
+          4755,
+          257,
+          21875
+        ],
+        "green_chillie": [
+          27316,
+          42270,
+          25128,
+          40438,
+          36419
+        ],
+        "cowpea": [
+          6976,
+          7022,
+          5779,
+          5955,
+          5678
+        ],
+        "black_gram": [
+          2632,
+          8346,
+          1437,
+          8518,
+          4075
+        ],
+        "maize": [
+          22112,
+          198601,
+          22647,
+          196871,
+          38011
+        ],
+        "ground_nut": [
+          11204,
+          19014,
+          10666,
+          17336,
+          17515
+        ],
+        "gingelly": [
+          7742,
+          2701,
+          8651,
+          2210,
+          4489
+        ],
+        "green_gram": [
+          6757,
+          6940,
+          5514,
+          6156,
+          16093
+        ]
+      },
+      "food_imports_mt": {
+        "dhal": {
+          "2022": 131711,
+          "2023": 196601,
+          "2024": 163881
+        },
+        "potato": {
+          "2022": 153827,
+          "2023": 168184,
+          "2024": 180121
+        },
+        "big_onion": {
+          "2022": 263781,
+          "2023": 294386,
+          "2024": 212720
+        }
+      },
+      "sugar": {
+        "production_mt": {
+          "2023_jan_nov": 66177,
+          "2024_jan_nov": 79986
+        },
+        "production_yoy_pct": 20.9,
+        "imports_mt": {
+          "2023": 652876,
+          "2024": 582906
+        },
+        "commentary": "International sugar prices decreased in December 2024 amid improving sugarcane crop prospects in main producing countries"
+      },
+      "livestock": {
+        "reference_months": [
+          "2023-10",
+          "2024-09",
+          "2024-10"
+        ],
+        "egg_production_mn": [
+          154,
+          269,
+          277
+        ],
+        "chicken_production_000mt": [
+          21,
+          21,
+          20
+        ],
+        "egg_price_rs": {
+          "white": [
+            42.5,
+            45.54,
+            42.24
+          ],
+          "red": [
+            47.25,
+            50.0,
+            43.29
+          ]
+        },
+        "chicken_price_rs_per_kg": [
+          1111.67,
+          1088.2,
+          1030.48
+        ],
+        "cost_of_production": {
+          "egg_rs_range": [
+            [
+              29.77,
+              34.72
+            ],
+            [
+              30.62,
+              35.64
+            ],
+            [
+              30.62,
+              35.64
+            ]
+          ],
+          "chicken_rs_per_kg": [
+            829.97,
+            702.8,
+            702.8
+          ]
+        },
+        "feed_rs_per_kg": {
+          "maize": [
+            "n.a",
+            177.19,
+            179.38
+          ],
+          "soya_bean_meal": [
+            262.21,
+            230.92,
+            229.25
+          ],
+          "fish_meal": [
+            "473.96",
+            "300.00-470.00",
+            "310.00-470.00"
+          ],
+          "rice_polish": [
+            90.79,
+            126.0,
+            129.54
+          ],
+          "rice_bran": [
+            142.5,
+            66.25,
+            70.0
+          ]
+        }
+      },
+      "tea": {
+        "production_mn_kg": {
+          "2023": {
+            "high": 58.0,
+            "medium": 42.2,
+            "low": 154.5,
+            "total": 254.7
+          },
+          "2024": {
+            "high": 56.4,
+            "medium": 46.1,
+            "low": 158.3,
+            "total": 260.8
+          }
+        },
+        "growth_pct": {
+          "high": -2.7,
+          "medium": 9.2,
+          "low": 2.5,
+          "total": 2.4
+        },
+        "yoy_change_pct": 9.6,
+        "reference_month": "December 2024",
+        "commentary": "Global tea prices declined in Dec 2024 vs Nov; only Colombo reported higher average prices"
+      },
+      "rubber": {
+        "production_mn_kg": {
+          "2023": {
+            "sheet": 32.2,
+            "crepe": 11.1,
+            "other": 21.1,
+            "total": 64.4
+          },
+          "2023_jan_nov": {
+            "sheet": 30.3,
+            "crepe": 10.4,
+            "other": 20.3,
+            "total": 61.0
+          },
+          "2024_jan_nov": {
+            "sheet": 31.2,
+            "crepe": 9.3,
+            "other": 24.2,
+            "total": 64.7
+          }
+        },
+        "growth_pct_jan_nov": {
+          "sheet": 2.7,
+          "crepe": -10.6,
+          "other": 19.3,
+          "total": 6.0
+        },
+        "yoy_change_pct": 24.3,
+        "reference_month": "November 2024",
+        "commentary": "Global rubber prices increased in December 2024 after prior month's decline"
+      },
+      "coconut": {
+        "production": {
+          "2023": {
+            "coconut_mn_nuts": 3170,
+            "desiccated_mt": 31985,
+            "oil_mt": 43475
+          },
+          "2023_jan_nov": {
+            "coconut_mn_nuts": 2914,
+            "desiccated_mt": 29940,
+            "oil_mt": 41037
+          },
+          "2024_jan_nov": {
+            "coconut_mn_nuts": 2643,
+            "desiccated_mt": 31284,
+            "oil_mt": 28850
+          }
+        },
+        "growth_pct_jan_nov": {
+          "coconut": -9.3,
+          "desiccated": 4.5,
+          "oil": -29.7
+        },
+        "yoy_change_pct": -27.9,
+        "reference_month": "November 2024"
+      },
+      "other_export_agriculture": {
+        "reference_month": "December 2024",
+        "commentary": "Prices of Pepper, Cinnamon, Cocoa, Cardamom and Nutmeg increased; Clove, Coffee, Ginger and Turmeric declined. Spice export earnings increased y-o-y, mainly due to Pepper and Cinnamon"
+      },
+      "agri_input_imports_mt": {
+        "2022": {
+          "vegetable_seeds": 194,
+          "potato_seed": 1001,
+          "plants_parts": 3848,
+          "live_trees_000": 1555,
+          "urea": 242,
+          "other_nitrogenous": 57,
+          "phosphatic": 3,
+          "potassic": 46,
+          "other_fertilizers": 16
+        },
+        "2023": {
+          "vegetable_seeds": 184,
+          "potato_seed": 797,
+          "plants_parts": 4236,
+          "live_trees_000": 1039,
+          "urea": 324,
+          "other_nitrogenous": 65,
+          "phosphatic": 61,
+          "potassic": 74,
+          "other_fertilizers": 19
+        },
+        "2024": {
+          "vegetable_seeds": 211,
+          "potato_seed": 773,
+          "plants_parts": 6874,
+          "live_trees_000": 1248,
+          "urea": 270,
+          "other_nitrogenous": 68,
+          "phosphatic": 31,
+          "potassic": 122,
+          "other_fertilizers": 16
+        }
+      },
+      "global": {
+        "commentary": "FAO Food Price Index decreased in Dec 2024; meat rose slightly while oils, dairy, cereals and sugar declined"
+      },
+      "employment_2024_q2_pct": {
+        "agriculture": 25,
+        "industry": 27,
+        "services": 48
+      }
+    },
+    "2025-02": {
+      "bulletin_title": "Agriculture Sector Data Bulletin - February 2025",
+      "reference_period": "December 2024/January 2025",
+      "highlights": {
+        "en": [
+          "Paddy production for 2024/2025 Maha forecasted at 2.57 million MT (sown extent end Dec 2024), a 5.7% decline from previous Maha season",
+          "Fish production decreased 12.0% during December 2024, largely driven by declines in inland fishing activities",
+          "Domestic tea production increased 9.6% in December and 14.6% in January 2025, while global tea prices continued to decline",
+          "Local rubber production grew 32.4% in December 2024; provisional data shows production dropped in January 2025",
+          "Coconut production declined 33.1% in December 2024 and 32.3% in January 2025"
+        ],
+        "si": [
+          "2024/25 මහ කන්නයේ වී නිෂ්පාදනය මෙට්‍රික් ටොන් මිලියන 2.57ක් ලෙස පුරෝකථනය කර ඇත (2024 දෙසැම්බර් අවසන් වන විට වගා කළ ප්‍රමාණය අනුව), එය පෙර මහ කන්නයට සාපේක්ෂව 5.7%කින් අඩුවීමකි",
+          "2024 දෙසැම්බර් මාසයේදී මාළු නිෂ්පාදනය 12.0%කින් අඩු විය; එයට ප්‍රධාන හේතුව අභ්‍යන්තර මාළු ඇල්ලීමේ ක්‍රියාකාරකම් පහත වැටීමයි",
+          "දේශීය තේ නිෂ්පාදනය දෙසැම්බර් මාසයේ 9.6%කින් සහ 2025 ජනවාරි මාසයේ 14.6%කින් වැඩි විය; එහෙත් ගෝලීය තේ මිල ගණන් දිගටම පහත වැටුණි",
+          "දේශීය රබර් නිෂ්පාදනය 2024 දෙසැම්බර් මාසයේදී 32.4%කින් වර්ධනය විය; තාවකාලික දත්ත අනුව 2025 ජනවාරි මාසයේදී නිෂ්පාදනය පහත වැටී ඇත",
+          "පොල් නිෂ්පාදනය 2024 දෙසැම්බර් මාසයේදී 33.1%කින් සහ 2025 ජනවාරි මාසයේදී 32.3%කින් අඩු විය"
+        ],
+        "ta": [
+          "2024/25 மஹா பருவத்திற்கான நெல் உற்பத்தி 2.57 மில்லியன் மெட்ரிக் டன்களாக முன்னறிவிக்கப்பட்டுள்ளது (2024 டிசம்பர் இறுதி வரையிலான பயிரிடப்பட்ட பரப்பளவின் அடிப்படையில்), இது முந்தைய மஹா பருவத்துடன் ஒப்பிடும்போது 5.7% குறைவாகும்",
+          "2024 டிசம்பர் மாதத்தில் மீன் உற்பத்தி 12.0% குறைந்தது, முதன்மையாக உள்நாட்டு மீன்பிடி நடவடிக்கைகளில் ஏற்பட்ட வீழ்ச்சியால் இது ஏற்பட்டது",
+          "உள்நாட்டு தேயிலை உற்பத்தி டிசம்பரில் 9.6%ஆகவும் 2025 ஜனவரியில் 14.6%ஆகவும் அதிகரித்தது; ஆனால் உலகளாவிய தேயிலை விலைகள் தொடர்ந்து குறைந்தன",
+          "உள்நாட்டு ரப்பர் உற்பத்தி 2024 டிசம்பரில் 32.4% வளர்ச்சியடைந்தது; தற்காலிக தரவுகளின்படி 2025 ஜனவரியில் உற்பத்தி குறைந்துள்ளது",
+          "தேங்காய் உற்பத்தி 2024 டிசம்பரில் 33.1%ஆகவும் 2025 ஜனவரியில் 32.3%ஆகவும் குறைந்தது"
+        ]
+      },
+      "paddy": {
+        "season_mn_mt": {
+          "2023": {
+            "maha": 2.7,
+            "yala": 1.82,
+            "annual": 4.51
+          },
+          "2024": {
+            "maha": 2.72,
+            "yala": 2.02,
+            "annual": 4.75,
+            "note": "Yala based on DoA forecast"
+          }
+        },
+        "growth_pct": {
+          "maha": 1.0,
+          "yala": 11.4,
+          "annual": 5.2
+        },
+        "maha_2024_25_forecast_mn_mt": 2.57,
+        "maha_2024_25_forecast_yoy_pct": -5.7,
+        "forecast_basis": "sown extent as of end Dec 2024"
+      },
+      "rice": {
+        "imports_latest_000mt": 99.2
+      },
+      "fish": {
+        "yoy_change_pct": -12.0,
+        "reference_month": "December 2024",
+        "note": "inland fishing activities key contributor to decline",
+        "production_000mt_annual": {
+          "2022": {
+            "marine": 281,
+            "inland": 117,
+            "total": 397
+          },
+          "2023": {
+            "marine": 294,
+            "inland": 113,
+            "total": 407
+          },
+          "2024": {
+            "marine": 308,
+            "inland": 102,
+            "total": 411
+          }
+        }
+      },
+      "vegetables_production_mt": {
+        "columns": [
+          "2022_yala",
+          "2022_23_maha",
+          "2023_yala",
+          "2023_24_maha",
+          "2024_yala"
+        ],
+        "up_country": {
+          "tomatoes": [
+            47425,
+            46244,
+            34169,
+            39293,
+            42480
+          ],
+          "cabbage": [
+            67069,
+            52310,
+            47773,
+            58552,
+            47301
+          ],
+          "carrot": [
+            40806,
+            40084,
+            25267,
+            48836,
+            36815
+          ],
+          "beetroot": [
+            15580,
+            17178,
+            21444,
+            17332,
+            15592
+          ],
+          "raddish": [
+            38506,
+            26955,
+            27557,
+            40159,
+            24181
+          ],
+          "beans": [
+            33929,
+            41139,
+            25287,
+            36345,
+            30516
+          ]
+        },
+        "low_country": {
+          "luffa": [
+            19288,
+            24852,
+            18417,
+            22225,
+            15182
+          ],
+          "okra": [
+            36181,
+            38984,
+            31351,
+            37620,
+            31594
+          ],
+          "brinjal": [
+            61628,
+            80637,
+            54450,
+            69584,
+            56445
+          ],
+          "cucumber": [
+            15959,
+            21013,
+            26603,
+            17937,
+            20939
+          ],
+          "red_pumpkin": [
+            44249,
+            59163,
+            41779,
+            46890,
+            58582
+          ],
+          "ash_plantain": [
+            24926,
+            35369,
+            22833,
+            33783,
+            5380
+          ],
+          "long_bean": [
+            30735,
+            35395,
+            27456,
+            35539,
+            37785
+          ]
+        }
+      },
+      "other_field_crops_production_mt": {
+        "columns": [
+          "2022_yala",
+          "2022_23_maha",
+          "2023_yala",
+          "2023_24_maha",
+          "2024_yala"
+        ],
+        "potato": [
+          27764,
+          19723,
+          21026,
+          21291,
+          21158
+        ],
+        "red_onion": [
+          19565,
+          26673,
+          22678,
+          24762,
+          29966
+        ],
+        "big_onion": [
+          17164,
+          329,
+          4755,
+          257,
+          21875
+        ],
+        "green_chillie": [
+          27316,
+          42270,
+          25128,
+          40438,
+          36419
+        ],
+        "cowpea": [
+          6976,
+          7022,
+          5779,
+          5955,
+          5678
+        ],
+        "black_gram": [
+          2632,
+          8346,
+          1437,
+          8518,
+          4075
+        ],
+        "maize": [
+          22112,
+          198601,
+          22647,
+          196871,
+          38011
+        ],
+        "ground_nut": [
+          11204,
+          19014,
+          10666,
+          17336,
+          17515
+        ],
+        "gingelly": [
+          7742,
+          2701,
+          8651,
+          2210,
+          4489
+        ],
+        "green_gram": [
+          6757,
+          6940,
+          5514,
+          6156,
+          16093
+        ]
+      },
+      "food_imports_mt": {
+        "dhal": {
+          "2023": 196601,
+          "2024": 163881,
+          "2024_jan": 9102,
+          "2025_jan": 17341
+        },
+        "potato": {
+          "2023": 168184,
+          "2024": 180121,
+          "2024_jan": 16248,
+          "2025_jan": 19625
+        },
+        "big_onion": {
+          "2023": 294386,
+          "2024": 212720,
+          "2024_jan": 20911,
+          "2025_jan": 27814
+        }
+      },
+      "sugar": {
+        "production_mt": {
+          "2023": 66177,
+          "2024": 80102
+        },
+        "imports_mt": {
+          "2024_jan": 39711,
+          "2025_jan": 70561
+        },
+        "commentary": "International sugar prices decreased in January 2025 due to improved global supply, aided by good weather in Brazil and India's resumption of sugar exports"
+      },
+      "livestock": {
+        "reference_months": [
+          "2023-11",
+          "2024-10",
+          "2024-11"
+        ],
+        "egg_production_mn": [
+          159,
+          277,
+          294
+        ],
+        "chicken_production_000mt": [
+          20,
+          20,
+          21
+        ],
+        "egg_price_rs": {
+          "white": [
+            41.88,
+            42.24,
+            39.63
+          ],
+          "red": [
+            45.0,
+            43.29,
+            41.25
+          ]
+        },
+        "chicken_price_rs_per_kg": [
+          1113.21,
+          1030.48,
+          1035.6
+        ],
+        "cost_of_production": {
+          "egg_rs_range": [
+            [
+              30.69,
+              35.38
+            ],
+            [
+              30.62,
+              35.64
+            ],
+            [
+              31.61,
+              36.97
+            ]
+          ],
+          "chicken_rs_per_kg": [
+            822.97,
+            702.8,
+            757.44
+          ]
+        },
+        "feed_rs_per_kg": {
+          "maize": [
+            "n.a",
+            179.38,
+            193.31
+          ],
+          "soya_bean_meal": [
+            309.38,
+            229.25,
+            222.29
+          ],
+          "fish_meal": [
+            "387.50",
+            "310.00-470.00",
+            "310.00-503.75"
+          ],
+          "rice_polish": [
+            96.19,
+            129.54,
+            132.08
+          ],
+          "rice_bran": [
+            153.13,
+            70.0,
+            71.25
+          ]
+        }
+      },
+      "tea": {
+        "production_mn_kg": {
+          "2024": {
+            "high": 56.4,
+            "medium": 46.1,
+            "low": 158.3,
+            "total": 260.8
+          },
+          "2024_jan": {
+            "high": 3.6,
+            "medium": 2.6,
+            "low": 12.6,
+            "total": 18.7
+          },
+          "2025_jan": {
+            "high": 4.7,
+            "medium": 3.5,
+            "low": 13.3,
+            "total": 21.5
+          }
+        },
+        "growth_pct_jan": {
+          "high": 31.6,
+          "medium": 33.7,
+          "low": 5.8,
+          "total": 14.6
+        },
+        "yoy_change_pct": 14.6,
+        "reference_month": "January 2025",
+        "commentary": "Global tea prices declined in Jan 2025 vs Dec; only Mombasa reported a marginally higher average price"
+      },
+      "rubber": {
+        "production_mn_kg": {
+          "2024": {
+            "sheet": 33.5,
+            "crepe": 10.1,
+            "other": 25.6,
+            "total": 69.2
+          },
+          "2024_jan": {
+            "sheet": 3.4,
+            "crepe": 1.0,
+            "other": 4.1,
+            "total": 8.5
+          },
+          "2025_jan": {
+            "sheet": 1.8,
+            "crepe": 1.0,
+            "other": 1.8,
+            "total": 4.5
+          }
+        },
+        "growth_pct_jan": {
+          "sheet": -47.0,
+          "crepe": -2.1,
+          "other": -57.6,
+          "total": -47.0
+        },
+        "reference_month": "January 2025",
+        "note": "y-o-y decline in January 2025 (provisional RDD data)",
+        "commentary": "Global rubber prices saw a slight decrease in January 2025 as supply availability improved"
+      },
+      "coconut": {
+        "production": {
+          "2024": {
+            "coconut_mn_nuts": 2790,
+            "desiccated_mt": 33177,
+            "oil_mt": 30842
+          },
+          "2024_jan": {
+            "coconut_mn_nuts": 248,
+            "desiccated_mt": 2496,
+            "oil_mt": 2236
+          },
+          "2025_jan": {
+            "coconut_mn_nuts": 168,
+            "desiccated_mt": 1482,
+            "oil_mt": 1786
+          }
+        },
+        "growth_pct_jan": {
+          "coconut": -32.3,
+          "desiccated": -40.6,
+          "oil": -20.1
+        },
+        "yoy_change_pct": -32.3,
+        "reference_month": "January 2025"
+      },
+      "other_export_agriculture": {
+        "reference_month": "January 2025",
+        "commentary": "Prices of Pepper, Coffee, Cinnamon, Cocoa, Cardamom, Nutmeg and Turmeric increased; Clove and Ginger declined. Spice export earnings increased y-o-y mainly due to Pepper and Cloves"
+      },
+      "agri_input_imports_mt": {
+        "2023": {
+          "vegetable_seeds": 184,
+          "potato_seed": 797,
+          "plants_parts": 4236,
+          "live_trees_000": 1039,
+          "urea": 324,
+          "other_nitrogenous": 65,
+          "phosphatic": 61,
+          "potassic": 74,
+          "other_fertilizers": 19
+        },
+        "2024": {
+          "vegetable_seeds": 211,
+          "potato_seed": 773,
+          "plants_parts": 6874,
+          "live_trees_000": 1248,
+          "urea": 270,
+          "other_nitrogenous": 68,
+          "phosphatic": 31,
+          "potassic": 122,
+          "other_fertilizers": 16
+        },
+        "2024_jan": {
+          "vegetable_seeds": 15,
+          "potato_seed": 125,
+          "plants_parts": 649,
+          "live_trees_000": 19,
+          "urea": 17,
+          "other_nitrogenous": 4,
+          "phosphatic": 1,
+          "potassic": 2,
+          "other_fertilizers": 1
+        },
+        "2025_jan": {
+          "vegetable_seeds": 14,
+          "potato_seed": 75,
+          "plants_parts": 348,
+          "live_trees_000": 5,
+          "urea": 14,
+          "other_nitrogenous": 13,
+          "phosphatic": 1,
+          "potassic": 5,
+          "other_fertilizers": 2
+        }
+      },
+      "global": {
+        "commentary": "FAO Food Price Index decreased in Jan 2025; dairy and cereals rose while sugar, vegetable oils and meat declined"
+      },
+      "employment_2024_q2_pct": {
+        "agriculture": 25,
+        "industry": 27,
+        "services": 48
+      }
+    },
+    "2025-03": {
+      "bulletin_title": "Agriculture Sector Data Bulletin - March 2025",
+      "reference_period": "January/February 2025",
+      "highlights": {
+        "en": [
+          "Paddy production for 2024/2025 Maha forecasted at 2.61 million MT (sown extent end Jan 2025), a 4.2% decline from previous Maha season",
+          "Fish production decreased 15.1% (y-o-y) in January 2025 and marginally increased 1.0% (y-o-y) in February 2025, largely driven by declines in inland fishing",
+          "Domestic tea production decreased 22.0% (y-o-y) in February 2025 while global tea prices continued to decline",
+          "Coconut production experienced a significant y-o-y decline of 31.6% in February 2025"
+        ],
+        "si": [
+          "2024/25 මහ කන්නයේ වී නිෂ්පාදනය මෙට්‍රික් ටොන් මිලියන 2.61ක් ලෙස පුරෝකථනය කර ඇත (2025 ජනවාරි අවසන් වන විට වගා කළ ප්‍රමාණය අනුව), එය පෙර මහ කන්නයට සාපේක්ෂව 4.2%කින් අඩුවීමකි",
+          "මාළු නිෂ්පාදනය 2025 ජනවාරි මාසයේදී පසුගිය වසරට සාපේක්ෂව 15.1%කින් අඩු වූ අතර පෙබරවාරි මාසයේදී 1.0%කින් තරමක් ඉහළ ගියේය; එයට ප්‍රධාන හේතුව අභ්‍යන්තර මාළු ඇල්ලීමේ පහත වැටීමයි",
+          "දේශීය තේ නිෂ්පාදනය 2025 පෙබරවාරි මාසයේදී පසුගිය වසරට සාපේක්ෂව 22.0%කින් අඩු විය; ගෝලීය තේ මිල ගණන් ද දිගටම පහත වැටුණි",
+          "පොල් නිෂ්පාදනය 2025 පෙබරවාරි මාසයේදී පසුගිය වසරට සාපේක්ෂව සැලකිය යුතු ලෙස 31.6%කින් අඩු විය"
+        ],
+        "ta": [
+          "2024/25 மஹா பருவத்திற்கான நெல் உற்பத்தி 2.61 மில்லியன் மெட்ரிக் டன்களாக முன்னறிவிக்கப்பட்டுள்ளது (2025 ஜனவரி இறுதி வரையிலான பயிரிடப்பட்ட பரப்பளவின் அடிப்படையில்), இது முந்தைய மஹா பருவத்துடன் ஒப்பிடும்போது 4.2% குறைவாகும்",
+          "மீன் உற்பத்தி 2025 ஜனவரியில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 15.1% குறைந்தது, பெப்ரவரியில் 1.0% சிறிதளவு அதிகரித்தது; முதன்மையாக உள்நாட்டு மீன்பிடியில் ஏற்பட்ட வீழ்ச்சியால் இது ஏற்பட்டது",
+          "உள்நாட்டு தேயிலை உற்பத்தி 2025 பெப்ரவரியில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 22.0% குறைந்தது; உலகளாவிய தேயிலை விலைகளும் தொடர்ந்து குறைந்தன",
+          "தேங்காய் உற்பத்தி 2025 பெப்ரவரியில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது கணிசமாக 31.6% குறைந்தது"
+        ]
+      },
+      "paddy": {
+        "season_mn_mt": {
+          "2023": {
+            "maha": 2.7,
+            "yala": 1.82,
+            "annual": 4.51
+          },
+          "2024": {
+            "maha": 2.72,
+            "yala": 1.98,
+            "annual": 4.7
+          }
+        },
+        "growth_pct": {
+          "maha": 1.0,
+          "yala": 8.8,
+          "annual": 4.1
+        },
+        "maha_2024_25_forecast_mn_mt": 2.61,
+        "maha_2024_25_forecast_yoy_pct": -4.2,
+        "forecast_basis": "sown extent as of end Jan 2025"
+      },
+      "rice": {
+        "imports_latest_000mt": 5.3
+      },
+      "fish": {
+        "yoy_change_pct": 1.0,
+        "reference_month": "February 2025",
+        "note": "marine sole contributor to increase, inland declined",
+        "production_000mt": {
+          "2023": {
+            "marine": 294,
+            "inland": 113,
+            "total": 407
+          },
+          "2024": {
+            "marine": 308,
+            "inland": 102,
+            "total": 411
+          },
+          "2024_jan_feb": {
+            "marine": 53,
+            "inland": 21,
+            "total": 74
+          },
+          "2025_jan_feb": {
+            "marine": 60,
+            "inland": 8,
+            "total": 68
+          }
+        }
+      },
+      "vegetables_production_mt": {
+        "columns": [
+          "2022_yala",
+          "2022_23_maha",
+          "2023_yala",
+          "2023_24_maha",
+          "2024_yala"
+        ],
+        "up_country": {
+          "tomatoes": [
+            47425,
+            46244,
+            34169,
+            39293,
+            34945
+          ],
+          "cabbage": [
+            67069,
+            52310,
+            47773,
+            58552,
+            48242
+          ],
+          "carrot": [
+            40806,
+            40084,
+            25267,
+            48836,
+            24374
+          ],
+          "beetroot": [
+            15580,
+            17178,
+            21444,
+            17332,
+            20034
+          ],
+          "raddish": [
+            38506,
+            26955,
+            27557,
+            40159,
+            27567
+          ],
+          "beans": [
+            33929,
+            41139,
+            25287,
+            36345,
+            26128
+          ]
+        },
+        "low_country": {
+          "luffa": [
+            19288,
+            24852,
+            18417,
+            22225,
+            18521
+          ],
+          "okra": [
+            36181,
+            38984,
+            31351,
+            37620,
+            35003
+          ],
+          "brinjal": [
+            61628,
+            80637,
+            54450,
+            69584,
+            54660
+          ],
+          "cucumber": [
+            15959,
+            21013,
+            26603,
+            17937,
+            27161
+          ],
+          "red_pumpkin": [
+            44249,
+            59163,
+            41779,
+            46890,
+            42565
+          ],
+          "ash_plantain": [
+            24926,
+            35369,
+            22833,
+            33783,
+            24477
+          ],
+          "long_bean": [
+            30735,
+            35395,
+            27456,
+            35539,
+            28855
+          ]
+        }
+      },
+      "other_field_crops_production_mt": {
+        "columns": [
+          "2022_yala",
+          "2022_23_maha",
+          "2023_yala",
+          "2023_24_maha",
+          "2024_yala"
+        ],
+        "potato": [
+          27764,
+          19723,
+          21026,
+          21291,
+          20916
+        ],
+        "red_onion": [
+          19565,
+          26673,
+          22678,
+          24762,
+          19749
+        ],
+        "big_onion": [
+          17164,
+          329,
+          4755,
+          257,
+          8572
+        ],
+        "green_chillie": [
+          27316,
+          42270,
+          25128,
+          40438,
+          26200
+        ],
+        "cowpea": [
+          6976,
+          7022,
+          5779,
+          5955,
+          5458
+        ],
+        "black_gram": [
+          2632,
+          8346,
+          1437,
+          8518,
+          1828
+        ],
+        "maize": [
+          22112,
+          198601,
+          22647,
+          196871,
+          26626
+        ],
+        "ground_nut": [
+          11204,
+          19014,
+          10666,
+          17336,
+          11626
+        ],
+        "gingelly": [
+          7742,
+          2701,
+          8651,
+          2210,
+          8293
+        ],
+        "green_gram": [
+          6757,
+          6940,
+          5514,
+          6156,
+          8909
+        ]
+      },
+      "food_imports_mt": {
+        "dhal": {
+          "2023": 196601,
+          "2024": 163881,
+          "2024_jan_mar": 33447,
+          "2025_jan_mar": 61397
+        },
+        "potato": {
+          "2023": 168184,
+          "2024": 180121,
+          "2024_jan_mar": 52389,
+          "2025_jan_mar": 49772
+        },
+        "big_onion": {
+          "2023": 294386,
+          "2024": 212720,
+          "2024_jan_mar": 45121,
+          "2025_jan_mar": 75291
+        }
+      },
+      "sugar": {
+        "production_mt": {
+          "2024_jan_feb": 5599,
+          "2025_jan_feb": 2702
+        },
+        "imports_mt": {
+          "2024_jan_mar": 121772,
+          "2025_jan_mar": 218623
+        },
+        "commentary": "International sugar prices slightly declined in March, mainly due to signs of weaker global demand, capped by deteriorating production prospects in India and Brazil crop concerns"
+      },
+      "livestock": {
+        "reference_months": [
+          "2024-01",
+          "2024-12",
+          "2025-01"
+        ],
+        "egg_production_mn": [
+          196,
+          308,
+          302
+        ],
+        "chicken_production_000mt": [
+          21,
+          24,
+          22
+        ],
+        "egg_price_rs": {
+          "white": [
+            50.9,
+            38.3,
+            33.6
+          ],
+          "red": [
+            52.8,
+            38.5,
+            35.7
+          ]
+        },
+        "chicken_price_rs_per_kg": [
+          1062.5,
+          1047.7,
+          1019.0
+        ],
+        "cost_of_production": {
+          "egg_rs_range": [
+            [
+              30.1,
+              35.9
+            ],
+            [
+              33.3,
+              37.0
+            ],
+            [
+              30.4,
+              35.1
+            ]
+          ],
+          "chicken_rs_per_kg": [
+            795.7,
+            746.5,
+            743.4
+          ]
+        },
+        "feed_rs_per_kg": {
+          "maize": [
+            "n.a",
+            200.6,
+            161.9
+          ],
+          "soya_bean_meal": [
+            311.7,
+            224.0,
+            201.2
+          ],
+          "fish_meal": [
+            "358.8",
+            "300-497.5",
+            "406.7-550"
+          ],
+          "rice_polish": [
+            99.3,
+            154.8,
+            131.4
+          ],
+          "rice_bran": [
+            163.1,
+            80.0,
+            "n.a."
+          ]
+        }
+      },
+      "tea": {
+        "production_mn_kg": {
+          "2024": {
+            "high": 56.4,
+            "medium": 46.1,
+            "low": 158.3,
+            "total": 260.8
+          },
+          "2024_jan_feb": {
+            "high": 8.1,
+            "medium": 6.2,
+            "low": 24.4,
+            "total": 38.7
+          },
+          "2025_jan_feb": {
+            "high": 8.1,
+            "medium": 6.1,
+            "low": 22.9,
+            "total": 37.1
+          }
+        },
+        "growth_pct_jan_feb": {
+          "high": 0.6,
+          "medium": -2.8,
+          "low": -6.3,
+          "total": -4.3
+        },
+        "yoy_change_pct": -22.0,
+        "reference_month": "February 2025",
+        "commentary": "Domestic tea decreased 22.0% y-o-y in Feb 2025 mainly due to dry weather conditions; global tea prices declined (only Mombasa reported a slightly higher average price)"
+      },
+      "rubber": {
+        "production_mn_kg": {
+          "2024": {
+            "sheet": 33.5,
+            "crepe": 10.1,
+            "other": 25.6,
+            "total": 69.2
+          },
+          "2024_jan_feb": {
+            "sheet": 5.6,
+            "crepe": 2.1,
+            "other": 6.4,
+            "total": 14.1
+          },
+          "2025_jan_feb": {
+            "sheet": 4.0,
+            "crepe": 2.0,
+            "other": 4.0,
+            "total": 10.0
+          }
+        },
+        "growth_pct_jan_feb": {
+          "sheet": -29.1,
+          "crepe": -4.7,
+          "other": -37.1,
+          "total": -29.1
+        },
+        "reference_month": "February 2025",
+        "note": "y-o-y decline (provisional RDD data)",
+        "commentary": "Global rubber prices experienced an increase in February 2025 due to adverse weather hindering output in key cultivation areas"
+      },
+      "coconut": {
+        "production": {
+          "2024": {
+            "coconut_mn_nuts": 2790,
+            "desiccated_mt": 33177,
+            "oil_mt": 30842
+          },
+          "2024_jan_feb": {
+            "coconut_mn_nuts": 508,
+            "desiccated_mt": 4943,
+            "oil_mt": 4694
+          },
+          "2025_jan_feb": {
+            "coconut_mn_nuts": 346,
+            "desiccated_mt": 2518,
+            "oil_mt": 3505
+          }
+        },
+        "growth_pct_jan_feb": {
+          "coconut": -32.0,
+          "desiccated": -49.1,
+          "oil": -25.3
+        },
+        "yoy_change_pct": -31.6,
+        "reference_month": "February 2025"
+      },
+      "other_export_agriculture": {
+        "reference_month": "February 2025",
+        "commentary": "Prices of Pepper, Coffee, Cocoa, Cardamom and Nutmeg increased; Cinnamon, Clove, Ginger and Turmeric declined. Spice export earnings increased y-o-y mainly due to Pepper, Cinnamon and Cloves"
+      },
+      "agri_input_imports_mt": {
+        "2023": {
+          "vegetable_seeds": 184,
+          "potato_seed": 797,
+          "plants_parts": 4236,
+          "live_trees_000": 1039,
+          "urea": 324,
+          "other_nitrogenous": 65,
+          "phosphatic": 61,
+          "potassic": 74,
+          "other_fertilizers": 19
+        },
+        "2024": {
+          "vegetable_seeds": 211,
+          "potato_seed": 773,
+          "plants_parts": 6874,
+          "live_trees_000": 1248,
+          "urea": 270,
+          "other_nitrogenous": 68,
+          "phosphatic": 31,
+          "potassic": 122,
+          "other_fertilizers": 16
+        },
+        "2024_jan_mar": {
+          "vegetable_seeds": 35,
+          "potato_seed": 125,
+          "plants_parts": 1498,
+          "live_trees_000": 358,
+          "urea": 21,
+          "other_nitrogenous": 11,
+          "phosphatic": 2,
+          "potassic": 13,
+          "other_fertilizers": 2
+        },
+        "2025_jan_mar": {
+          "vegetable_seeds": 40,
+          "potato_seed": 100,
+          "plants_parts": 1327,
+          "live_trees_000": 59,
+          "urea": 74,
+          "other_nitrogenous": 31,
+          "phosphatic": 3,
+          "potassic": 21,
+          "other_fertilizers": 5
+        }
+      },
+      "global": {
+        "commentary": "FAO Food Price Index increased slightly in March 2025; meat and vegetable oils rose while cereals and sugar declined"
+      },
+      "employment_2024_q3_pct": {
+        "agriculture": 26,
+        "industry": 26,
+        "services": 48
+      }
+    },
+    "2025-04": {
+      "bulletin_title": "Agriculture Sector Data Bulletin - April 2025",
+      "reference_period": "March 2025",
+      "highlights": {
+        "en": [
+          "Paddy production for 2024/2025 Maha forecasted at 2.62 million MT (sown extent end March 2025), a 3.8% decline from previous Maha season",
+          "Fish production marginally decreased 1.8% (y-o-y) in March 2025, driven by decline in inland fishing activities",
+          "Domestic tea production increased 24.8% (y-o-y) in March 2025, while global tea prices remained broadly stable",
+          "Coconut production declined 23.1% (y-o-y) in March 2025, yet the trend has been improving since February, signaling recovery"
+        ],
+        "si": [
+          "2024/25 මහ කන්නයේ වී නිෂ්පාදනය මෙට්‍රික් ටොන් මිලියන 2.62ක් ලෙස පුරෝකථනය කර ඇත (2025 මාර්තු අවසන් වන විට වගා කළ ප්‍රමාණය අනුව), එය පෙර මහ කන්නයට සාපේක්ෂව 3.8%කින් අඩුවීමකි",
+          "මාළු නිෂ්පාදනය 2025 මාර්තු මාසයේදී පසුගිය වසරට සාපේක්ෂව 1.8%කින් සුළු වශයෙන් අඩු විය; එයට හේතුව අභ්‍යන්තර මාළු ඇල්ලීමේ ක්‍රියාකාරකම් පහත වැටීමයි",
+          "දේශීය තේ නිෂ්පාදනය 2025 මාර්තු මාසයේදී පසුගිය වසරට සාපේක්ෂව 24.8%කින් වැඩි විය; ගෝලීය තේ මිල ගණන් සමස්තයක් ලෙස ස්ථාවරව පැවතුණි",
+          "පොල් නිෂ්පාදනය 2025 මාර්තු මාසයේදී පසුගිය වසරට සාපේක්ෂව 23.1%කින් අඩු වුවද, පෙබරවාරි මාසයේ සිට ප්‍රවණතාව වැඩිදියුණු වෙමින් තිබීම යථා තත්ත්වයට පත්වීමේ සලකුණකි"
+        ],
+        "ta": [
+          "2024/25 மஹா பருவத்திற்கான நெல் உற்பத்தி 2.62 மில்லியன் மெட்ரிக் டன்களாக முன்னறிவிக்கப்பட்டுள்ளது (2025 மார்ச் இறுதி வரையிலான பயிரிடப்பட்ட பரப்பளவின் அடிப்படையில்), இது முந்தைய மஹா பருவத்துடன் ஒப்பிடும்போது 3.8% குறைவாகும்",
+          "மீன் உற்பத்தி 2025 மார்ச்சில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 1.8% சிறிதளவு குறைந்தது, உள்நாட்டு மீன்பிடி நடவடிக்கைகளில் ஏற்பட்ட வீழ்ச்சியால் இது ஏற்பட்டது",
+          "உள்நாட்டு தேயிலை உற்பத்தி 2025 மார்ச்சில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 24.8% அதிகரித்தது; உலகளாவிய தேயிலை விலைகள் பொதுவாக நிலையாக இருந்தன",
+          "தேங்காய் உற்பத்தி 2025 மார்ச்சில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 23.1% குறைந்தபோதிலும், பெப்ரவரி முதல் போக்கு மேம்பட்டு வருவது மீட்சியின் அறிகுறியாகும்"
+        ]
+      },
+      "paddy": {
+        "season_mn_mt": {
+          "2023": {
+            "maha": 2.7,
+            "yala": 1.82,
+            "annual": 4.51
+          },
+          "2024": {
+            "maha": 2.72,
+            "yala": 1.98,
+            "annual": 4.7
+          }
+        },
+        "growth_pct": {
+          "maha": 1.0,
+          "yala": 8.8,
+          "annual": 4.1
+        },
+        "maha_2024_25_forecast_mn_mt": 2.62,
+        "maha_2024_25_forecast_yoy_pct": -3.8,
+        "forecast_basis": "sown extent as of end March 2025"
+      },
+      "rice": {
+        "imports_latest_000mt": 1.4
+      },
+      "fish": {
+        "yoy_change_pct": -1.8,
+        "reference_month": "March 2025",
+        "note": "increase in marine offset by decline in inland fishing",
+        "production_000mt": {
+          "2023": {
+            "marine": 294,
+            "inland": 113,
+            "total": 407
+          },
+          "2024": {
+            "marine": 308,
+            "inland": 102,
+            "total": 411
+          },
+          "2024_jan_mar": {
+            "marine": 80,
+            "inland": 29,
+            "total": 108
+          },
+          "2025_jan_mar": {
+            "marine": 90,
+            "inland": 12,
+            "total": 102
+          }
+        }
+      },
+      "vegetables_production_mt": {
+        "columns": [
+          "2022_23_maha",
+          "2023_yala",
+          "2023_24_maha",
+          "2024_yala",
+          "2024_25_maha_forecast"
+        ],
+        "note": "24/25 Maha based on DoA forecast",
+        "up_country": {
+          "tomatoes": [
+            46244,
+            34169,
+            39293,
+            34945,
+            41551
+          ],
+          "cabbage": [
+            52310,
+            47773,
+            58552,
+            48242,
+            55110
+          ],
+          "carrot": [
+            40084,
+            25267,
+            48836,
+            24374,
+            44410
+          ],
+          "beetroot": [
+            17178,
+            21444,
+            17332,
+            20034,
+            21520
+          ],
+          "raddish": [
+            26955,
+            27557,
+            40159,
+            27567,
+            37249
+          ],
+          "beans": [
+            41139,
+            25287,
+            36345,
+            26128,
+            49810
+          ]
+        },
+        "low_country": {
+          "luffa": [
+            24852,
+            18417,
+            22225,
+            18521,
+            15276
+          ],
+          "okra": [
+            38984,
+            31351,
+            37620,
+            35003,
+            33326
+          ],
+          "brinjal": [
+            80637,
+            54450,
+            69584,
+            54660,
+            57486
+          ],
+          "cucumber": [
+            21013,
+            26603,
+            17937,
+            27161,
+            15630
+          ],
+          "red_pumpkin": [
+            59163,
+            41779,
+            46890,
+            42565,
+            43593
+          ],
+          "ash_plantain": [
+            35369,
+            22833,
+            33783,
+            24477,
+            4832
+          ],
+          "long_bean": [
+            35395,
+            27456,
+            35539,
+            28855,
+            36463
+          ]
+        }
+      },
+      "other_field_crops_production_mt": {
+        "columns": [
+          "2022_23_maha",
+          "2023_yala",
+          "2023_24_maha",
+          "2024_yala",
+          "2024_25_maha_forecast"
+        ],
+        "potato": [
+          19723,
+          21026,
+          21291,
+          20916,
+          25510
+        ],
+        "red_onion": [
+          26673,
+          22678,
+          24762,
+          19749,
+          29409
+        ],
+        "big_onion": [
+          329,
+          4755,
+          257,
+          8572,
+          281
+        ],
+        "green_chillie": [
+          42270,
+          25128,
+          40438,
+          26200,
+          69997
+        ],
+        "cowpea": [
+          7022,
+          5779,
+          5955,
+          5458,
+          7269
+        ],
+        "black_gram": [
+          8346,
+          1437,
+          8518,
+          1828,
+          12270
+        ],
+        "maize": [
+          198601,
+          22647,
+          196871,
+          26626,
+          341595
+        ],
+        "ground_nut": [
+          19014,
+          10666,
+          17336,
+          11626,
+          17460
+        ],
+        "gingelly": [
+          2701,
+          8651,
+          2210,
+          8293,
+          1655
+        ],
+        "green_gram": [
+          6940,
+          5514,
+          6156,
+          8909,
+          6473
+        ]
+      },
+      "food_imports_mt": {
+        "dhal": {
+          "2023": 196601,
+          "2024": 163881,
+          "2024_jan_mar": 33447,
+          "2025_jan_mar": 61397
+        },
+        "potato": {
+          "2023": 168184,
+          "2024": 180121,
+          "2024_jan_mar": 52389,
+          "2025_jan_mar": 49772
+        },
+        "big_onion": {
+          "2023": 294386,
+          "2024": 212720,
+          "2024_jan_mar": 45121,
+          "2025_jan_mar": 75291
+        }
+      },
+      "sugar": {
+        "production_mt": {
+          "2024_jan_feb": 5599,
+          "2025_jan_feb": 2702,
+          "note": "same Jan-Feb figures repeated - no newer production data published"
+        },
+        "imports_mt": {
+          "2024_jan_mar": 121772,
+          "2025_jan_mar": 218623
+        },
+        "commentary": "International sugar prices slightly declined in March, weaker demand signs capped by India production concerns and Brazil crop outlook"
+      },
+      "livestock": {
+        "reference_months": [
+          "2024-01",
+          "2024-12",
+          "2025-01"
+        ],
+        "note": "same DAPH table as March bulletin - Feb 2025 data not yet published",
+        "egg_production_mn": [
+          196,
+          308,
+          302
+        ],
+        "chicken_production_000mt": [
+          21,
+          24,
+          22
+        ],
+        "egg_price_rs": {
+          "white": [
+            50.9,
+            38.3,
+            33.6
+          ],
+          "red": [
+            52.8,
+            38.5,
+            35.7
+          ]
+        },
+        "chicken_price_rs_per_kg": [
+          1062.5,
+          1047.7,
+          1019.0
+        ],
+        "cost_of_production": {
+          "egg_rs_range": [
+            [
+              30.1,
+              35.9
+            ],
+            [
+              33.3,
+              37.0
+            ],
+            [
+              30.4,
+              35.1
+            ]
+          ],
+          "chicken_rs_per_kg": [
+            795.7,
+            746.5,
+            743.4
+          ]
+        },
+        "feed_rs_per_kg": {
+          "maize": [
+            "n.a",
+            200.6,
+            161.9
+          ],
+          "soya_bean_meal": [
+            311.7,
+            224.0,
+            201.2
+          ],
+          "fish_meal": [
+            "358.8",
+            "300-497.5",
+            "406.7-550"
+          ],
+          "rice_polish": [
+            99.3,
+            154.8,
+            131.4
+          ],
+          "rice_bran": [
+            163.1,
+            80.0,
+            "n.a."
+          ]
+        }
+      },
+      "tea": {
+        "production_mn_kg": {
+          "2024": {
+            "high": 56.4,
+            "medium": 46.1,
+            "low": 158.3,
+            "total": 260.8
+          },
+          "2024_jan_mar": {
+            "high": 13.0,
+            "medium": 10.1,
+            "low": 35.2,
+            "total": 58.3
+          },
+          "2025_jan_mar": {
+            "high": 13.8,
+            "medium": 11.0,
+            "low": 36.7,
+            "total": 61.5
+          }
+        },
+        "growth_pct_jan_mar": {
+          "high": 5.9,
+          "medium": 9.1,
+          "low": 4.3,
+          "total": 5.5
+        },
+        "yoy_change_pct": 24.8,
+        "reference_month": "March 2025",
+        "commentary": "Domestic tea increased 24.8% y-o-y in March 2025 due to favourable weather; global tea prices remained stable (only Colombo slightly higher)"
+      },
+      "rubber": {
+        "production_mn_kg": {
+          "2024": {
+            "sheet": 33.5,
+            "crepe": 10.1,
+            "other": 25.6,
+            "total": 69.2
+          },
+          "2024_jan_mar": {
+            "sheet": 8.2,
+            "crepe": 3.1,
+            "other": 9.2,
+            "total": 20.6
+          },
+          "2025_jan_mar": {
+            "sheet": 7.1,
+            "crepe": 3.0,
+            "other": 5.7,
+            "total": 15.7
+          }
+        },
+        "growth_pct_jan_mar": {
+          "sheet": -14.1,
+          "crepe": -3.7,
+          "other": -38.9,
+          "total": -23.7
+        },
+        "reference_month": "March 2025",
+        "note": "y-o-y decline (provisional RDD data)",
+        "commentary": "Global rubber prices saw a slight decline in March 2025 due to stable supply and improved logistics, limited by US tariffs on key trading partners"
+      },
+      "coconut": {
+        "production": {
+          "2024": {
+            "coconut_mn_nuts": 2790,
+            "desiccated_mt": 33177,
+            "oil_mt": 30842
+          },
+          "2024_jan_mar": {
+            "coconut_mn_nuts": 790.9,
+            "desiccated_mt": 7540,
+            "oil_mt": 8101
+          },
+          "2025_jan_mar": {
+            "coconut_mn_nuts": 563.1,
+            "desiccated_mt": 4017,
+            "oil_mt": 6528
+          }
+        },
+        "growth_pct_jan_mar": {
+          "coconut": -28.8,
+          "desiccated": -46.7,
+          "oil": -19.4
+        },
+        "yoy_change_pct": -23.1,
+        "reference_month": "March 2025"
+      },
+      "other_export_agriculture": {
+        "reference_month": "March 2025",
+        "commentary": "Prices of Pepper, Coffee, Cocoa, Cinnamon, Ginger and Turmeric increased; Clove, Cardamom and Nutmeg declined. Spice export earnings increased y-o-y mainly due to Pepper, Cinnamon and Cloves"
+      },
+      "agri_input_imports_mt": {
+        "2023": {
+          "vegetable_seeds": 184,
+          "potato_seed": 797,
+          "plants_parts": 4236,
+          "live_trees_000": 1039,
+          "urea": 324,
+          "other_nitrogenous": 65,
+          "phosphatic": 61,
+          "potassic": 74,
+          "other_fertilizers": 19
+        },
+        "2024": {
+          "vegetable_seeds": 211,
+          "potato_seed": 773,
+          "plants_parts": 6874,
+          "live_trees_000": 1248,
+          "urea": 270,
+          "other_nitrogenous": 68,
+          "phosphatic": 31,
+          "potassic": 122,
+          "other_fertilizers": 16
+        },
+        "2024_jan_mar": {
+          "vegetable_seeds": 35,
+          "potato_seed": 125,
+          "plants_parts": 1498,
+          "live_trees_000": 358,
+          "urea": 21,
+          "other_nitrogenous": 11,
+          "phosphatic": 2,
+          "potassic": 13,
+          "other_fertilizers": 2
+        },
+        "2025_jan_mar": {
+          "vegetable_seeds": 40,
+          "potato_seed": 100,
+          "plants_parts": 1327,
+          "live_trees_000": 59,
+          "urea": 74,
+          "other_nitrogenous": 31,
+          "phosphatic": 3,
+          "potassic": 21,
+          "other_fertilizers": 5
+        }
+      },
+      "global": {
+        "commentary": "FAO Food Price Index increased slightly in March 2025; meat and oils rose, cereals and sugar declined"
+      },
+      "employment_2024_q3_pct": {
+        "agriculture": 26,
+        "industry": 26,
+        "services": 48
+      }
+    },
+    "2025-05": {
+      "bulletin_title": "Agriculture Sector Data Bulletin - May 2025",
+      "reference_period": "April 2025",
+      "highlights": {
+        "en": [
+          "Paddy production for 2024/2025 Maha forecasted at 2.62 million MT (sown extent end March 2025), a 3.8% decline from previous Maha season",
+          "Total fish production marginally decreased 0.1% (y-o-y) in April 2025, as declined inland fishing was largely offset by improvements in marine fishing",
+          "Domestic tea production increased 23.0% (y-o-y) in April 2025 due to favourable weather; global tea prices increased in April 2025",
+          "Coconut production declined 6.2% (y-o-y) in April 2025, yet the production trend has been improving since February, signaling recovery"
+        ],
+        "si": [
+          "2024/25 මහ කන්නයේ වී නිෂ්පාදනය මෙට්‍රික් ටොන් මිලියන 2.62ක් ලෙස පුරෝකථනය කර ඇත (2025 මාර්තු අවසන් වන විට වගා කළ ප්‍රමාණය අනුව), එය පෙර මහ කන්නයට සාපේක්ෂව 3.8%කින් අඩුවීමකි",
+          "සම්පූර්ණ මාළු නිෂ්පාදනය 2025 අප්‍රේල් මාසයේදී පසුගිය වසරට සාපේක්ෂව 0.1%කින් සුළු වශයෙන් අඩු විය; අභ්‍යන්තර මාළු ඇල්ලීමේ පහත වැටීම මුහුදු මාළු ඇල්ලීමේ වර්ධනයෙන් බොහෝ දුරට සමතුලිත විය",
+          "අනුකූල කාලගුණය හේතුවෙන් දේශීය තේ නිෂ්පාදනය 2025 අප්‍රේල් මාසයේදී පසුගිය වසරට සාපේක්ෂව 23.0%කින් වැඩි විය; ගෝලීය තේ මිල ගණන් ද අප්‍රේල් මාසයේදී ඉහළ ගියේය",
+          "පොල් නිෂ්පාදනය 2025 අප්‍රේල් මාසයේදී පසුගිය වසරට සාපේක්ෂව 6.2%කින් අඩු වුවද, පෙබරවාරි මාසයේ සිට නිෂ්පාදන ප්‍රවණතාව වැඩිදියුණු වෙමින් තිබීම යථා තත්ත්වයට පත්වීමේ සලකුණකි"
+        ],
+        "ta": [
+          "2024/25 மஹா பருவத்திற்கான நெல் உற்பத்தி 2.62 மில்லியன் மெட்ரிக் டன்களாக முன்னறிவிக்கப்பட்டுள்ளது (2025 மார்ச் இறுதி வரையிலான பயிரிடப்பட்ட பரப்பளவின் அடிப்படையில்), இது முந்தைய மஹா பருவத்துடன் ஒப்பிடும்போது 3.8% குறைவாகும்",
+          "மொத்த மீன் உற்பத்தி 2025 ஏப்ரலில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 0.1% சிறிதளவு குறைந்தது, உள்நாட்டு மீன்பிடியில் ஏற்பட்ட வீழ்ச்சி கடல் மீன்பிடியில் ஏற்பட்ட முன்னேற்றத்தால் பெரும்பாலும் ஈடுசெய்யப்பட்டது",
+          "சாதகமான வானிலை காரணமாக உள்நாட்டு தேயிலை உற்பத்தி 2025 ஏப்ரலில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 23.0% அதிகரித்தது; உலகளாவிய தேயிலை விலைகளும் ஏப்ரலில் அதிகரித்தன",
+          "தேங்காய் உற்பத்தி 2025 ஏப்ரலில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 6.2% குறைந்தபோதிலும், பெப்ரவரி முதல் உற்பத்தி போக்கு மேம்பட்டு வருவது மீட்சியின் அறிகுறியாகும்"
+        ]
+      },
+      "paddy": {
+        "season_mn_mt": {
+          "2023": {
+            "maha": 2.7,
+            "yala": 1.82,
+            "annual": 4.51
+          },
+          "2024": {
+            "maha": 2.72,
+            "yala": 1.98,
+            "annual": 4.7
+          }
+        },
+        "growth_pct": {
+          "maha": 1.0,
+          "yala": 8.8,
+          "annual": 4.1
+        },
+        "maha_2024_25_forecast_mn_mt": 2.62,
+        "maha_2024_25_forecast_yoy_pct": -3.8,
+        "forecast_basis": "sown extent as of end March 2025 (unchanged from prior bulletin)"
+      },
+      "rice": {
+        "imports_latest_000mt": 1.3
+      },
+      "fish": {
+        "yoy_change_pct": -0.1,
+        "reference_month": "April 2025",
+        "note": "inland activities declined 30.5% y-o-y, offset by marine increase of 9.7% y-o-y",
+        "production_000mt": {
+          "2023": {
+            "marine": 294,
+            "inland": 113,
+            "total": 407
+          },
+          "2024": {
+            "marine": 308,
+            "inland": 102,
+            "total": 411
+          },
+          "2024_jan_apr": {
+            "marine": 105,
+            "inland": 37,
+            "total": 141
+          },
+          "2025_jan_apr": {
+            "marine": 119,
+            "inland": 18,
+            "total": 137
+          }
+        }
+      },
+      "vegetables_production_mt": {
+        "columns": [
+          "2022_23_maha",
+          "2023_yala",
+          "2023_24_maha",
+          "2024_yala",
+          "2024_25_maha_forecast"
+        ],
+        "note": "24/25 Maha based on DoA forecast",
+        "up_country": {
+          "tomatoes": [
+            46244,
+            34169,
+            39293,
+            34945,
+            41551
+          ],
+          "cabbage": [
+            52310,
+            47773,
+            58552,
+            48242,
+            55110
+          ],
+          "carrot": [
+            40084,
+            25267,
+            48836,
+            24374,
+            44410
+          ],
+          "beetroot": [
+            17178,
+            21444,
+            17332,
+            20034,
+            21520
+          ],
+          "raddish": [
+            26955,
+            27557,
+            40159,
+            27567,
+            37249
+          ],
+          "beans": [
+            41139,
+            25287,
+            36345,
+            26128,
+            49810
+          ]
+        },
+        "low_country": {
+          "luffa": [
+            24852,
+            18417,
+            22225,
+            18521,
+            15276
+          ],
+          "okra": [
+            38984,
+            31351,
+            37620,
+            35003,
+            33326
+          ],
+          "brinjal": [
+            80637,
+            54450,
+            69584,
+            54660,
+            57486
+          ],
+          "cucumber": [
+            21013,
+            26603,
+            17937,
+            27161,
+            15630
+          ],
+          "red_pumpkin": [
+            59163,
+            41779,
+            46890,
+            42565,
+            43593
+          ],
+          "ash_plantain": [
+            35369,
+            22833,
+            33783,
+            24477,
+            4832
+          ],
+          "long_bean": [
+            35395,
+            27456,
+            35539,
+            28855,
+            36463
+          ]
+        }
+      },
+      "other_field_crops_production_mt": {
+        "columns": [
+          "2022_23_maha",
+          "2023_yala",
+          "2023_24_maha",
+          "2024_yala",
+          "2024_25_maha_forecast"
+        ],
+        "potato": [
+          19723,
+          21026,
+          21291,
+          20916,
+          25510
+        ],
+        "red_onion": [
+          26673,
+          22678,
+          24762,
+          19749,
+          29409
+        ],
+        "big_onion": [
+          329,
+          4755,
+          257,
+          8572,
+          281
+        ],
+        "green_chillie": [
+          42270,
+          25128,
+          40438,
+          26200,
+          68997
+        ],
+        "cowpea": [
+          7022,
+          5779,
+          5955,
+          5458,
+          7269
+        ],
+        "black_gram": [
+          8346,
+          1437,
+          8518,
+          1828,
+          12270
+        ],
+        "maize": [
+          198601,
+          22647,
+          196871,
+          26626,
+          341595
+        ],
+        "ground_nut": [
+          19014,
+          10666,
+          17336,
+          11626,
+          17460
+        ],
+        "gingelly": [
+          2701,
+          8651,
+          2210,
+          8293,
+          1655
+        ],
+        "green_gram": [
+          6940,
+          5514,
+          6156,
+          8909,
+          6473
+        ]
+      },
+      "food_imports_mt": {
+        "dhal": {
+          "2023": 196601,
+          "2024": 163881,
+          "2024_jan_apr": 53551,
+          "2025_jan_apr": 81849
+        },
+        "potato": {
+          "2023": 168184,
+          "2024": 180121,
+          "2024_jan_apr": 66951,
+          "2025_jan_apr": 63658
+        },
+        "big_onion": {
+          "2023": 294386,
+          "2024": 212720,
+          "2024_jan_apr": 56331,
+          "2025_jan_apr": 103789
+        }
+      },
+      "sugar": {
+        "production_mt": {
+          "2024_jan_apr": 21506,
+          "2025_jan_apr": 15296
+        },
+        "imports_mt": {
+          "2024_jan_apr": 142903,
+          "2025_jan_apr": 269766
+        },
+        "commentary": "International sugar prices declined in April for the second consecutive month, mainly due to concerns over the global economic outlook and higher-than-expected sugar output in Brazil"
+      },
+      "livestock": {
+        "reference_months": [
+          "2024-02",
+          "2025-01",
+          "2025-02"
+        ],
+        "egg_production_mn": [
+          207,
+          302,
+          314
+        ],
+        "chicken_production_000mt": [
+          20,
+          22,
+          24
+        ],
+        "egg_price_rs": {
+          "white": [
+            59.4,
+            33.6,
+            31.3
+          ],
+          "red": [
+            61.3,
+            35.7,
+            33.4
+          ]
+        },
+        "chicken_price_rs_per_kg": [
+          1205.0,
+          1019.0,
+          1079.2
+        ],
+        "cost_of_production": {
+          "egg_rs_range": [
+            [
+              29.2,
+              34.3
+            ],
+            [
+              30.4,
+              35.1
+            ],
+            [
+              31.3,
+              34.3
+            ]
+          ],
+          "chicken_rs_per_kg": [
+            802.8,
+            743.4,
+            755.6
+          ]
+        },
+        "feed_rs_per_kg": {
+          "maize": [
+            152.8,
+            161.9,
+            158.5
+          ],
+          "soya_bean_meal": [
+            306.3,
+            201.2,
+            202.6
+          ],
+          "fish_meal": [
+            "312.5-551.3",
+            "406.7-550",
+            "420-550"
+          ],
+          "rice_polish": [
+            99.2,
+            131.4,
+            137.4
+          ]
+        }
+      },
+      "tea": {
+        "production_mn_kg": {
+          "2024": {
+            "high": 56.4,
+            "medium": 46.1,
+            "low": 158.3,
+            "total": 260.8
+          },
+          "2024_jan_apr": {
+            "high": 17.6,
+            "medium": 13.7,
+            "low": 48.5,
+            "total": 79.8
+          },
+          "2025_jan_apr": {
+            "high": 20.2,
+            "medium": 16.4,
+            "low": 51.3,
+            "total": 87.9
+          }
+        },
+        "growth_pct_jan_apr": {
+          "high": 14.3,
+          "medium": 20.2,
+          "low": 5.9,
+          "total": 10.2
+        },
+        "yoy_change_pct": 23.0,
+        "reference_month": "April 2025",
+        "commentary": "Global tea prices increased in April 2025 vs March, with Kolkata reporting a notably higher average price while Mombasa and Colombo recorded lower prices"
+      },
+      "rubber": {
+        "production_mn_kg": {
+          "2024": {
+            "sheet": 33.5,
+            "crepe": 10.1,
+            "other": 25.6,
+            "total": 69.2
+          },
+          "2024_jan_apr": {
+            "sheet": 11.1,
+            "crepe": 3.9,
+            "other": 11.1,
+            "total": 26.1
+          },
+          "2025_jan_apr": {
+            "sheet": 10.1,
+            "crepe": 3.8,
+            "other": 7.7,
+            "total": 21.6
+          }
+        },
+        "growth_pct_jan_apr": {
+          "sheet": -9.2,
+          "crepe": -1.2,
+          "other": -30.6,
+          "total": -17.1
+        },
+        "reference_month": "April 2025",
+        "note": "y-o-y decline (provisional RDD data)",
+        "commentary": "Global rubber prices declined in April 2025 due to steady growth in tapping activities and limited demand amid trade tariff uncertainty"
+      },
+      "coconut": {
+        "production": {
+          "2024": {
+            "coconut_mn_nuts": 2790,
+            "desiccated_mt": 33177,
+            "oil_mt": 30842
+          },
+          "2024_jan_apr": {
+            "coconut_mn_nuts": 1044.4,
+            "desiccated_mt": 9628,
+            "oil_mt": 10586
+          },
+          "2025_jan_apr": {
+            "coconut_mn_nuts": 804.5,
+            "desiccated_mt": 5457,
+            "oil_mt": 10118
+          }
+        },
+        "growth_pct_jan_apr": {
+          "coconut": -23.0,
+          "desiccated": -43.3,
+          "oil": -4.4
+        },
+        "yoy_change_pct": -6.2,
+        "reference_month": "April 2025"
+      },
+      "other_export_agriculture": {
+        "reference_month": "April 2025",
+        "commentary": "Prices of all export crops - Pepper, Coffee, Cocoa, Cinnamon, Clove, Cardamom, Ginger and Turmeric - increased except Nutmeg which declined. Spice export earnings increased y-o-y mainly due to Pepper and Cloves"
+      },
+      "agri_input_imports_mt": {
+        "2023": {
+          "vegetable_seeds": 184,
+          "potato_seed": 797,
+          "plants_parts": 4236,
+          "live_trees_000": 1039,
+          "urea": 324,
+          "other_nitrogenous": 65,
+          "phosphatic": 61,
+          "potassic": 74,
+          "other_fertilizers": 19
+        },
+        "2024": {
+          "vegetable_seeds": 211,
+          "potato_seed": 773,
+          "plants_parts": 6874,
+          "live_trees_000": 1248,
+          "urea": 270,
+          "other_nitrogenous": 68,
+          "phosphatic": 31,
+          "potassic": 122,
+          "other_fertilizers": 16
+        },
+        "2024_jan_apr": {
+          "vegetable_seeds": 52,
+          "potato_seed": 125,
+          "plants_parts": 1958,
+          "live_trees_000": 368,
+          "urea": 25,
+          "other_nitrogenous": 15,
+          "phosphatic": 4,
+          "potassic": 15,
+          "other_fertilizers": 3
+        },
+        "2025_jan_apr": {
+          "vegetable_seeds": 54,
+          "potato_seed": 100,
+          "plants_parts": 1521,
+          "live_trees_000": 266,
+          "urea": 83,
+          "other_nitrogenous": 35,
+          "phosphatic": 5,
+          "potassic": 37,
+          "other_fertilizers": 6
+        }
+      },
+      "global": {
+        "commentary": "FAO Food Price Index increased in April 2025 vs previous month; meat, dairy and cereals rose while vegetable oils and sugar declined"
+      },
+      "employment_2024_q4_pct": {
+        "agriculture": 27,
+        "industry": 26,
+        "services": 47
+      }
+    },
+    "2025-06": {
+      "bulletin_title": "Agriculture Sector Data Bulletin - June 2025",
+      "reference_period": "May 2025",
+      "highlights": {
+        "en": [
+          "Paddy production for 2025 Yala forecasted at 1.99 million MT (sown extent end May 2025), a 0.6% increase from previous Yala season",
+          "Total fish production decreased 12.4% (y-o-y) in May 2025, attributed to decline in both marine and inland fishing activities",
+          "Domestic tea production increased 2.9% (y-o-y) in May 2025 mainly due to favourable weather; global tea prices increased marginally",
+          "Domestic coconut production declined 1.2% (y-o-y) in May 2025; upward trend since February indicates gradual recovery"
+        ],
+        "si": [
+          "2025 යල කන්නයේ වී නිෂ්පාදනය මෙට්‍රික් ටොන් මිලියන 1.99ක් ලෙස පුරෝකථනය කර ඇත (2025 මැයි අවසන් වන විට වගා කළ ප්‍රමාණය අනුව), එය පෙර යල කන්නයට සාපේක්ෂව 0.6%කින් වැඩිවීමකි",
+          "සම්පූර්ණ මාළු නිෂ්පාදනය 2025 මැයි මාසයේදී පසුගිය වසරට සාපේක්ෂව 12.4%කින් අඩු විය; එය මුහුදු මාළු හා අභ්‍යන්තර මාළු ඇල්ලීම යන දෙකෙහිම පහත වැටීම නිසාය",
+          "දේශීය තේ නිෂ්පාදනය 2025 මැයි මාසයේදී පසුගිය වසරට සාපේක්ෂව 2.9%කින් වැඩි විය; එයට ප්‍රධාන හේතුව අනුකූල කාලගුණයයි; ගෝලීය තේ මිල ගණන් සුළු වශයෙන් ඉහළ ගියේය",
+          "දේශීය පොල් නිෂ්පාදනය 2025 මැයි මාසයේදී පසුගිය වසරට සාපේක්ෂව 1.2%කින් අඩු විය; පෙබරවාරි මාසයේ සිට පවතින ඉහළ යන ප්‍රවණතාව ක්‍රමික යථා තත්ත්වයට පත්වීමක් පෙන්නුම් කරයි"
+        ],
+        "ta": [
+          "2025 யால பருவத்திற்கான நெல் உற்பத்தி 1.99 மில்லியன் மெட்ரிக் டன்களாக முன்னறிவிக்கப்பட்டுள்ளது (2025 மே இறுதி வரையிலான பயிரிடப்பட்ட பரப்பளவின் அடிப்படையில்), இது முந்தைய யால பருவத்துடன் ஒப்பிடும்போது 0.6% அதிகரிப்பாகும்",
+          "மொத்த மீன் உற்பத்தி 2025 மேயில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 12.4% குறைந்தது, கடல் மற்றும் உள்நாட்டு மீன்பிடி நடவடிக்கைகள் இரண்டிலும் ஏற்பட்ட வீழ்ச்சியே இதற்குக் காரணம்",
+          "உள்நாட்டு தேயிலை உற்பத்தி 2025 மேயில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 2.9% அதிகரித்தது, முதன்மையாக சாதகமான வானிலை காரணமாக இது ஏற்பட்டது; உலகளாவிய தேயிலை விலைகள் சிறிதளவு அதிகரித்தன",
+          "உள்நாட்டு தேங்காய் உற்பத்தி 2025 மேயில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 1.2% குறைந்தது; பெப்ரவரி முதல் காணப்படும் ஏற்ற போக்கு படிப்படியான மீட்சியைக் குறிக்கிறது"
+        ]
+      },
+      "paddy": {
+        "season_mn_mt": {
+          "2023": {
+            "maha": 2.7,
+            "yala": 1.82,
+            "annual": 4.51
+          },
+          "2024": {
+            "maha": 2.72,
+            "yala": 1.98,
+            "annual": 4.7
+          }
+        },
+        "growth_pct": {
+          "maha": 1.0,
+          "yala": 8.8,
+          "annual": 4.1
+        },
+        "yala_2025_forecast_mn_mt": 1.99,
+        "yala_2025_forecast_yoy_pct": 0.6,
+        "annual_2025_forecast_mn_mt": 4.6,
+        "annual_2025_forecast_yoy_pct": -2.0,
+        "forecast_basis": "sown extent as of end May 2025"
+      },
+      "rice": {
+        "imports_latest_000mt": 1.1
+      },
+      "fish": {
+        "yoy_change_pct": -12.4,
+        "reference_month": "May 2025",
+        "note": "marine -2.8% y-o-y, inland -38.1% y-o-y",
+        "production_000mt": {
+          "2023": {
+            "marine": 294,
+            "inland": 113,
+            "total": 407
+          },
+          "2024": {
+            "marine": 308,
+            "inland": 102,
+            "total": 411
+          },
+          "2024_jan_may": {
+            "marine": 126,
+            "inland": 45,
+            "total": 171
+          },
+          "2025_jan_may": {
+            "marine": 137,
+            "inland": 23,
+            "total": 160
+          }
+        }
+      },
+      "vegetables_production_mt": {
+        "columns": [
+          "2022_23_maha",
+          "2023_yala",
+          "2023_24_maha",
+          "2024_yala",
+          "2024_25_maha_forecast"
+        ],
+        "note": "24/25 Maha based on DoA forecast; y-o-y direction arrows shown per item in source",
+        "up_country": {
+          "tomatoes": {
+            "values": [
+              46244,
+              34169,
+              39293,
+              34945,
+              41551
+            ],
+            "yoy_direction": "up"
+          },
+          "cabbage": {
+            "values": [
+              52310,
+              47773,
+              58552,
+              48242,
+              55110
+            ],
+            "yoy_direction": "down"
+          },
+          "carrot": {
+            "values": [
+              40084,
+              25267,
+              48836,
+              24374,
+              44410
+            ],
+            "yoy_direction": "down"
+          },
+          "beetroot": {
+            "values": [
+              17178,
+              21444,
+              17332,
+              20034,
+              21520
+            ],
+            "yoy_direction": "up"
+          },
+          "raddish": {
+            "values": [
+              26955,
+              27557,
+              40159,
+              27567,
+              37249
+            ],
+            "yoy_direction": "down"
+          },
+          "beans": {
+            "values": [
+              41139,
+              25287,
+              36345,
+              26128,
+              49810
+            ],
+            "yoy_direction": "up"
+          }
+        },
+        "low_country": {
+          "luffa": {
+            "values": [
+              24852,
+              18417,
+              22225,
+              18521,
+              15276
+            ],
+            "yoy_direction": "down"
+          },
+          "okra": {
+            "values": [
+              38984,
+              31351,
+              37620,
+              35003,
+              33326
+            ],
+            "yoy_direction": "down"
+          },
+          "brinjal": {
+            "values": [
+              80637,
+              54450,
+              69584,
+              54660,
+              57486
+            ],
+            "yoy_direction": "down"
+          },
+          "cucumber": {
+            "values": [
+              21013,
+              26603,
+              17937,
+              27161,
+              15630
+            ],
+            "yoy_direction": "down"
+          },
+          "red_pumpkin": {
+            "values": [
+              59163,
+              41779,
+              46890,
+              42565,
+              43593
+            ],
+            "yoy_direction": "down"
+          },
+          "ash_plantain": {
+            "values": [
+              35369,
+              22833,
+              33783,
+              24477,
+              4832
+            ],
+            "yoy_direction": "down"
+          },
+          "long_bean": {
+            "values": [
+              35395,
+              27456,
+              35539,
+              28855,
+              36463
+            ],
+            "yoy_direction": "down"
+          }
+        }
+      },
+      "other_field_crops_production_mt": {
+        "columns": [
+          "2022_23_maha",
+          "2023_yala",
+          "2023_24_maha",
+          "2024_yala",
+          "2024_25_maha_forecast"
+        ],
+        "potato": [
+          19723,
+          21026,
+          21291,
+          20916,
+          25510
+        ],
+        "red_onion": [
+          26673,
+          22678,
+          24762,
+          19749,
+          29409
+        ],
+        "big_onion": [
+          329,
+          4755,
+          257,
+          8572,
+          281
+        ],
+        "green_chillie": [
+          42270,
+          25128,
+          40438,
+          26200,
+          68997
+        ],
+        "cowpea": [
+          7022,
+          5779,
+          5955,
+          5458,
+          7269
+        ],
+        "black_gram": [
+          8346,
+          1437,
+          8518,
+          1828,
+          12270
+        ],
+        "maize": [
+          198601,
+          22647,
+          196871,
+          26626,
+          341595
+        ],
+        "ground_nut": [
+          19014,
+          10666,
+          17336,
+          11626,
+          17460
+        ],
+        "gingelly": [
+          2701,
+          8651,
+          2210,
+          8293,
+          1655
+        ],
+        "green_gram": [
+          6940,
+          5514,
+          6156,
+          8909,
+          6473
+        ]
+      },
+      "food_imports_mt": {
+        "dhal": {
+          "2024_jan_may": 69460,
+          "2025_jan_may": 98804
+        },
+        "potato": {
+          "2024_jan_may": 77577,
+          "2025_jan_may": 80213
+        },
+        "big_onion": {
+          "2024_jan_may": 80012,
+          "2025_jan_may": 130025
+        }
+      },
+      "sugar": {
+        "production_mt": {
+          "2024_jan_may": 31688,
+          "2025_jan_may": 26258
+        },
+        "imports_mt": {
+          "2024_jan_may": 172987,
+          "2025_jan_may": 305229
+        },
+        "commentary": "International sugar prices declined in May 2025 for the third consecutive month, mainly due to weaker global demand amid uncertain economic outlook"
+      },
+      "livestock": {
+        "reference_months": [
+          "2024-03",
+          "2025-02",
+          "2025-03"
+        ],
+        "egg_production_mn": [
+          216,
+          314,
+          312
+        ],
+        "chicken_production_000mt": [
+          20,
+          24,
+          25
+        ],
+        "egg_price_rs": {
+          "white": [
+            47.8,
+            31.3,
+            30.5
+          ],
+          "red": [
+            55.1,
+            33.4,
+            32.2
+          ]
+        },
+        "chicken_price_rs_per_kg": [
+          1243.2,
+          1079.2,
+          1121.0
+        ],
+        "cost_of_production": {
+          "egg_rs_range": [
+            [
+              30.5,
+              34.6
+            ],
+            [
+              31.3,
+              34.3
+            ],
+            [
+              30.8,
+              34.0
+            ]
+          ],
+          "chicken_rs_per_kg": [
+            785.0,
+            755.6,
+            722.1
+          ]
+        },
+        "feed_rs_per_kg": {
+          "maize": [
+            163.1,
+            158.5,
+            161.9
+          ],
+          "soya_bean_meal": [
+            258.9,
+            202.6,
+            201.2
+          ],
+          "fish_meal": [
+            "343.8",
+            "420.0-550.0",
+            "406.7-550.0"
+          ],
+          "rice_polish": [
+            94.5,
+            137.4,
+            131.4
+          ]
+        }
+      },
+      "tea": {
+        "production_mn_kg": {
+          "2024": {
+            "high": 55.7,
+            "medium": 47.4,
+            "low": 159.6,
+            "total": 262.7
+          },
+          "2024_jan_may": {
+            "high": 23.0,
+            "medium": 18.9,
+            "low": 62.9,
+            "total": 104.8
+          },
+          "2025_jan_may": {
+            "high": 26.1,
+            "medium": 21.5,
+            "low": 65.7,
+            "total": 113.2
+          }
+        },
+        "growth_pct_jan_may": {
+          "high": 13.6,
+          "medium": 13.5,
+          "low": 4.4,
+          "total": 8.1
+        },
+        "yoy_change_pct": 2.9,
+        "reference_month": "May 2025",
+        "commentary": "Global tea prices increased marginally in May 2025, Kolkata recording a notable rise while Mombasa and Colombo recorded marginal declines"
+      },
+      "rubber": {
+        "production_mn_kg": {
+          "2024": {
+            "sheet": 33.5,
+            "crepe": 10.1,
+            "other": 25.6,
+            "total": 69.2
+          },
+          "2024_jan_may": {
+            "sheet": 13.8,
+            "crepe": 4.6,
+            "other": 12.9,
+            "total": 31.4
+          },
+          "2025_jan_may": {
+            "sheet": 11.8,
+            "crepe": 4.5,
+            "other": 8.4,
+            "total": 24.8
+          }
+        },
+        "growth_pct_jan_may": {
+          "sheet": -14.6,
+          "crepe": -2.3,
+          "other": -34.7,
+          "total": -21.1
+        },
+        "reference_month": "May 2025",
+        "note": "y-o-y decline (highly provisional RDD data)",
+        "commentary": "Global rubber prices increased marginally in May 2025 due to increased demand and supply chain disruption concerns"
+      },
+      "coconut": {
+        "production": {
+          "2024_jan_may": {
+            "coconut_mn_nuts": 1305,
+            "desiccated_mt": 12569,
+            "oil_mt": 13009
+          },
+          "2025_jan_may": {
+            "coconut_mn_nuts": 1062,
+            "desiccated_mt": 8055,
+            "oil_mt": 12994
+          }
+        },
+        "growth_pct_jan_may": {
+          "coconut": -18.6,
+          "desiccated": -35.9,
+          "oil": -0.1
+        },
+        "yoy_change_pct": -1.2,
+        "reference_month": "May 2025",
+        "commentary": "International coconut oil prices increased notably since Feb 2025 due to supply shortages from adverse weather and rising demand from food/cosmetics industries"
+      },
+      "other_export_agriculture": {
+        "reference_month": "May 2025",
+        "commentary": "Prices of Pepper, Coffee, Cardamom, Nutmeg and Ginger increased; Cinnamon, Clove, Cocoa and Turmeric declined. Spice export earnings increased y-o-y mainly due to Pepper, Cinnamon and Cloves"
+      },
+      "agri_input_imports_mt": {
+        "2024_jan_may": {
+          "vegetable_seeds": 68,
+          "potato_seed": 125,
+          "plants_parts": 2626,
+          "live_trees_000": 635,
+          "urea": 59,
+          "other_nitrogenous": 18,
+          "phosphatic": 7,
+          "potassic": 20,
+          "other_fertilizers": 4
+        },
+        "2025_jan_may": {
+          "vegetable_seeds": 88,
+          "potato_seed": 100,
+          "plants_parts": 2094,
+          "live_trees_000": 305,
+          "urea": 90,
+          "other_nitrogenous": 38,
+          "phosphatic": 6,
+          "potassic": 39,
+          "other_fertilizers": 8
+        }
+      },
+      "global": {
+        "commentary": "FAO Food Price Index decreased in May 2025 vs previous month; cereals, oils and sugar declined while dairy and meat increased"
+      },
+      "employment_data": null
+    },
+    "2025-07": {
+      "bulletin_title": "Agriculture Sector Data Bulletin - July 2025",
+      "reference_period": "June 2025",
+      "highlights": {
+        "en": [
+          "Paddy production for 2025 Yala forecasted at 2.19 million MT, up 10.8% from last Yala season",
+          "Total fish production fell 20.6% (y-o-y) in June 2025 on lower marine and inland catch",
+          "Domestic tea production fell 6.3% (y-o-y) in June 2025 due to adverse weather",
+          "Domestic coconut production rose 18.3% (y-o-y) in June 2025, continuing recovery since February"
+        ],
+        "si": [
+          "2025 යල කන්නයේ වී නිෂ්පාදනය මෙට්‍රික් ටොන් මිලියන 2.19ක් ලෙස පුරෝකථනය කර ඇත; එය පෙර යල කන්නයට සාපේක්ෂව 10.8%කින් වැඩිවීමකි",
+          "සම්පූර්ණ මාළු නිෂ්පාදනය 2025 ජූනි මාසයේදී පසුගිය වසරට සාපේක්ෂව 20.6%කින් අඩු විය; මුහුදු හා අභ්‍යන්තර මාළු අස්වැන්න අඩුවීම නිසාය",
+          "අහිතකර කාලගුණය හේතුවෙන් දේශීය තේ නිෂ්පාදනය 2025 ජූනි මාසයේදී පසුගිය වසරට සාපේක්ෂව 6.3%කින් අඩු විය",
+          "දේශීය පොල් නිෂ්පාදනය 2025 ජූනි මාසයේදී පසුගිය වසරට සාපේක්ෂව 18.3%කින් ඉහළ ගියේය; පෙබරවාරි මාසයේ සිට පවතින යථා තත්ත්වයට පත්වීම දිගටම පවතී"
+        ],
+        "ta": [
+          "2025 யால பருவத்திற்கான நெல் உற்பத்தி 2.19 மில்லியன் மெட்ரிக் டன்களாக முன்னறிவிக்கப்பட்டுள்ளது, இது முந்தைய யால பருவத்துடன் ஒப்பிடும்போது 10.8% அதிகரிப்பாகும்",
+          "மொத்த மீன் உற்பத்தி 2025 ஜூனில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 20.6% குறைந்தது, கடல் மற்றும் உள்நாட்டு மீன்பிடி குறைவால் இது ஏற்பட்டது",
+          "பாதகமான வானிலை காரணமாக உள்நாட்டு தேயிலை உற்பத்தி 2025 ஜூனில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 6.3% குறைந்தது",
+          "உள்நாட்டு தேங்காய் உற்பத்தி 2025 ஜூனில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 18.3% அதிகரித்தது, பெப்ரவரி முதல் தொடரும் மீட்சி தொடர்கிறது"
+        ]
+      },
+      "paddy": {
+        "yala_2025_forecast_mn_mt": 2.19,
+        "yala_yoy_growth_pct": 10.8,
+        "annual_2025_forecast_mn_mt": 4.8,
+        "annual_yoy_growth_pct": 2.3,
+        "farmgate_rs_per_kg": {
+          "samba": 133.5,
+          "nadu": 123.6
+        }
+      },
+      "rice": {
+        "retail_rs_per_kg": {
+          "samba": 250.6,
+          "nadu": 232.5
+        },
+        "fao_rice_price_index": 104
+      },
+      "fish": {
+        "yoy_change_pct": -20.6,
+        "production_jan_jun_000mt": {
+          "marine_2024": 151,
+          "marine_2025": 158,
+          "inland_2024": 53,
+          "inland_2025": 28
+        },
+        "retail_rs_per_kg": {
+          "kelawalla": 2405.2,
+          "salaya": 849.9
+        }
+      },
+      "vegetables_retail_rs_per_kg": {
+        "okra": 305.6,
+        "brinjal": 547.0,
+        "red_pumpkin": 263.0,
+        "beans": 683.4,
+        "beetroot": 590.4,
+        "carrot": 722.5
+      },
+      "livestock": {
+        "reference_month": "2025-04",
+        "egg_price_rs": {
+          "white": 34.3,
+          "red": 36.1
+        },
+        "chicken_price_rs_per_kg": 1138.1,
+        "cost_of_production": {
+          "egg_rs_range": [
+            31.8,
+            34.0
+          ],
+          "chicken_rs_per_kg": 704.1
+        },
+        "chicken_margin_rs_per_kg": 434.0
+      },
+      "tea": {
+        "yoy_change_pct": -6.3,
+        "jan_jun_2025_mn_kg": 134.9,
+        "jan_jun_yoy_growth_pct": 5.5,
+        "auction_price_usd_per_kg": 3.0
+      },
+      "rubber": {
+        "jan_jun_2025_mn_kg": 32.4,
+        "jan_jun_yoy_growth_pct": -12.4,
+        "rss3_usd_per_kg": 2.2
+      },
+      "coconut": {
+        "yoy_change_pct": 18.3,
+        "coconut_rs_per_nut": 289.5,
+        "coconut_oil_rs_per_750ml": 2766.0
+      },
+      "global": {
+        "fao_food_price_index": 130.1
+      }
+    },
+    "2025-08": {
+      "bulletin_title": "Agriculture Sector Data Bulletin - August 2025",
+      "reference_period": "July 2025",
+      "highlights": {
+        "en": [
+          "Paddy production for 2025 Yala forecasted at 2.2 million MT, up 11.7% from last Yala season",
+          "Total fish production fell 16.5% (y-o-y) in July 2025 on lower marine and inland catch",
+          "Domestic tea production fell 7.9% (y-o-y) in July 2025, though Jan-Jul stayed up y-o-y",
+          "Domestic coconut production rose 25.7% (y-o-y) in July 2025, reflecting steady recovery"
+        ],
+        "si": [
+          "2025 යල කන්නයේ වී නිෂ්පාදනය මෙට්‍රික් ටොන් මිලියන 2.2ක් ලෙස පුරෝකථනය කර ඇත; එය පෙර යල කන්නයට සාපේක්ෂව 11.7%කින් වැඩිවීමකි",
+          "සම්පූර්ණ මාළු නිෂ්පාදනය 2025 ජූලි මාසයේදී පසුගිය වසරට සාපේක්ෂව 16.5%කින් අඩු විය; මුහුදු හා අභ්‍යන්තර මාළු අස්වැන්න අඩුවීම නිසාය",
+          "දේශීය තේ නිෂ්පාදනය 2025 ජූලි මාසයේදී පසුගිය වසරට සාපේක්ෂව 7.9%කින් අඩු වුවද, ජනවාරි සිට ජූලි දක්වා සමස්තය පසුගිය වසරට සාපේක්ෂව ඉහළ මට්ටමක පැවතුණි",
+          "දේශීය පොල් නිෂ්පාදනය 2025 ජූලි මාසයේදී පසුගිය වසරට සාපේක්ෂව 25.7%කින් ඉහළ ගියේය; එය ස්ථාවර යථා තත්ත්වයට පත්වීමක් පිළිබිඹු කරයි"
+        ],
+        "ta": [
+          "2025 யால பருவத்திற்கான நெல் உற்பத்தி 2.2 மில்லியன் மெட்ரிக் டன்களாக முன்னறிவிக்கப்பட்டுள்ளது, இது முந்தைய யால பருவத்துடன் ஒப்பிடும்போது 11.7% அதிகரிப்பாகும்",
+          "மொத்த மீன் உற்பத்தி 2025 ஜூலையில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 16.5% குறைந்தது, கடல் மற்றும் உள்நாட்டு மீன்பிடி குறைவால் இது ஏற்பட்டது",
+          "உள்நாட்டு தேயிலை உற்பத்தி 2025 ஜூலையில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 7.9% குறைந்தபோதிலும், ஜனவரி முதல் ஜூலை வரையிலான மொத்த உற்பத்தி முந்தைய ஆண்டைவிட அதிகமாக இருந்தது",
+          "உள்நாட்டு தேங்காய் உற்பத்தி 2025 ஜூலையில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 25.7% அதிகரித்தது, இது நிலையான மீட்சியை பிரதிபலிக்கிறது"
+        ]
+      },
+      "paddy": {
+        "yala_2025_forecast_mn_mt": 2.2,
+        "yala_yoy_growth_pct": 11.7,
+        "annual_2025_forecast_mn_mt": 4.8,
+        "annual_yoy_growth_pct": 2.7,
+        "farmgate_rs_per_kg": {
+          "samba": 123.4,
+          "nadu": 113.6
+        }
+      },
+      "rice": {
+        "retail_rs_per_kg": {
+          "samba": 251.1,
+          "nadu": 231.4
+        },
+        "fao_rice_price_index": 101.4
+      },
+      "fish": {
+        "yoy_change_pct": -16.5,
+        "production_jan_jul_000mt": {
+          "marine_2024": 176,
+          "marine_2025": 183,
+          "inland_2024": 63,
+          "inland_2025": 34
+        },
+        "marine_jan_jul_growth_pct": 3.8,
+        "retail_rs_per_kg": {
+          "kelawalla": 2336.0,
+          "salaya": 719.1
+        }
+      },
+      "vegetables_retail_rs_per_kg": {
+        "beans": 618.0,
+        "leeks": 369.0,
+        "beetroot": 347.4,
+        "okra": 285.8,
+        "brinjal": 483.1,
+        "red_pumpkin": 239.3
+      },
+      "livestock": {
+        "reference_month": "2025-05",
+        "egg_price_rs": {
+          "white": 29.5,
+          "red": 32.1
+        },
+        "chicken_price_rs_per_kg": 1129.7,
+        "cost_of_production": {
+          "egg_rs_range": [
+            30.5,
+            32.5
+          ],
+          "chicken_rs_per_kg": 711.5
+        },
+        "chicken_margin_rs_per_kg": 418.2
+      },
+      "tea": {
+        "yoy_change_pct": -7.9,
+        "jan_jul_2025_mn_kg": 156.3,
+        "jan_jul_yoy_growth_pct": 3.4,
+        "auction_price_usd_per_kg": 3.0
+      },
+      "rubber": {
+        "jan_jul_2025_mn_kg": 37.6,
+        "jan_jul_yoy_growth_pct": -13.0
+      },
+      "coconut": {
+        "yoy_change_pct": 25.7,
+        "coconut_rs_per_nut": 285.3,
+        "coconut_oil_rs_per_750ml": 2771.0
+      },
+      "global": {
+        "fao_food_price_index": 130.1
+      }
+    },
+    "2025-09": {
+      "bulletin_title": "Agriculture Sector Data Bulletin - September 2025",
+      "reference_period": "August 2025",
+      "highlights": {
+        "en": [
+          "Paddy production for 2025 Yala forecasted at 2.21 million MT, up 11.9% from last Yala season",
+          "Total fish production fell 10.7% (y-o-y) in August 2025, mainly on lower inland production",
+          "Domestic tea production fell 7.8% (y-o-y) in August 2025; international prices held stable",
+          "Domestic coconut production rose 17.8% (y-o-y) in August 2025, sustaining steady recovery"
+        ],
+        "si": [
+          "2025 යල කන්නයේ වී නිෂ්පාදනය මෙට්‍රික් ටොන් මිලියන 2.21ක් ලෙස පුරෝකථනය කර ඇත; එය පෙර යල කන්නයට සාපේක්ෂව 11.9%කින් වැඩිවීමකි",
+          "සම්පූර්ණ මාළු නිෂ්පාදනය 2025 අගෝස්තු මාසයේදී පසුගිය වසරට සාපේක්ෂව 10.7%කින් අඩු විය; එයට ප්‍රධාන හේතුව අභ්‍යන්තර නිෂ්පාදනය අඩුවීමයි",
+          "දේශීය තේ නිෂ්පාදනය 2025 අගෝස්තු මාසයේදී පසුගිය වසරට සාපේක්ෂව 7.8%කින් අඩු විය; ජාත්‍යන්තර මිල ගණන් ස්ථාවරව පැවතුණි",
+          "දේශීය පොල් නිෂ්පාදනය 2025 අගෝස්තු මාසයේදී පසුගිය වසරට සාපේක්ෂව 17.8%කින් ඉහළ ගියේය; ස්ථාවර යථා තත්ත්වයට පත්වීම දිගටම පවතී"
+        ],
+        "ta": [
+          "2025 யால பருவத்திற்கான நெல் உற்பத்தி 2.21 மில்லியன் மெட்ரிக் டன்களாக முன்னறிவிக்கப்பட்டுள்ளது, இது முந்தைய யால பருவத்துடன் ஒப்பிடும்போது 11.9% அதிகரிப்பாகும்",
+          "மொத்த மீன் உற்பத்தி 2025 ஆகஸ்டில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 10.7% குறைந்தது, முதன்மையாக உள்நாட்டு உற்பத்தி குறைவால் இது ஏற்பட்டது",
+          "உள்நாட்டு தேயிலை உற்பத்தி 2025 ஆகஸ்டில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 7.8% குறைந்தது; சர்வதேச விலைகள் நிலையாக இருந்தன",
+          "உள்நாட்டு தேங்காய் உற்பத்தி 2025 ஆகஸ்டில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 17.8% அதிகரித்தது, நிலையான மீட்சி தொடர்கிறது"
+        ]
+      },
+      "paddy": {
+        "yala_2025_forecast_mn_mt": 2.21,
+        "yala_yoy_growth_pct": 11.9,
+        "annual_2025_forecast_mn_mt": 4.96,
+        "annual_yoy_growth_pct": 5.5,
+        "farmgate_rs_per_kg": {
+          "samba": 120.4,
+          "nadu": 109.2
+        }
+      },
+      "rice": {
+        "retail_rs_per_kg": {
+          "samba": 254.3,
+          "nadu": 228.3
+        },
+        "fao_rice_price_index": 100.9
+      },
+      "fish": {
+        "yoy_change_pct": -10.7,
+        "production_jan_aug_000mt": {
+          "marine_2024": 203,
+          "marine_2025": 211,
+          "inland_2024": 73,
+          "inland_2025": 39
+        },
+        "marine_yoy_growth_pct": 3.4,
+        "inland_yoy_change_pct": -46.9,
+        "retail_rs_per_kg": {
+          "kelawalla": 2297.6,
+          "salaya": 531.2
+        }
+      },
+      "vegetables_retail_rs_per_kg": {
+        "okra": 289.0,
+        "brinjal": 448.7,
+        "red_pumpkin": 175.7,
+        "beans": 668.1,
+        "leeks": 308.7,
+        "beetroot": 266.3
+      },
+      "livestock": {
+        "reference_month": "2025-07",
+        "egg_price_rs": {
+          "white": 31.6,
+          "red": 33.2
+        },
+        "chicken_price_rs_per_kg": 1306.1,
+        "cost_of_production": {
+          "egg_rs_range": [
+            28.1,
+            31.8
+          ],
+          "chicken_rs_per_kg": 799.0
+        },
+        "chicken_margin_rs_per_kg": 507.1
+      },
+      "tea": {
+        "yoy_change_pct": -7.8,
+        "jan_aug_2025_mn_kg": 176.0,
+        "jan_aug_yoy_growth_pct": 2.0
+      },
+      "rubber": {
+        "jan_jul_2025_mn_kg": 37.6,
+        "jan_jul_yoy_growth_pct": -13.0,
+        "note": "rubber table repeated from Aug bulletin - no Aug figures published"
+      },
+      "coconut": {
+        "yoy_change_pct": 17.8,
+        "coconut_rs_per_nut": 286.9,
+        "coconut_oil_rs_per_750ml": 2845.0
+      },
+      "global": {
+        "fao_food_price_index": 128.8
+      },
+      "employment_2025_q2_pct": {
+        "agriculture": 26,
+        "industry": 25,
+        "services": 49
+      }
+    },
+    "2025-10": {
+      "bulletin_title": "Agriculture Sector Data Bulletin - October 2025",
+      "reference_period": "September 2025",
+      "highlights": {
+        "en": [
+          "Paddy production for 2025 Yala forecasted at 2.27 million MT, up 14.6% from last Yala season",
+          "Total fish production fell 12.1% (y-o-y) in September 2025, mainly on inland decline",
+          "Domestic tea production fell 9.1% (y-o-y) in September 2025; international prices reduced",
+          "Coconut production rose 42.6% (y-o-y) in September 2025, sustaining growth momentum"
+        ],
+        "si": [
+          "2025 යල කන්නයේ වී නිෂ්පාදනය මෙට්‍රික් ටොන් මිලියන 2.27ක් ලෙස පුරෝකථනය කර ඇත; එය පෙර යල කන්නයට සාපේක්ෂව 14.6%කින් වැඩිවීමකි",
+          "සම්පූර්ණ මාළු නිෂ්පාදනය 2025 සැප්තැම්බර් මාසයේදී පසුගිය වසරට සාපේක්ෂව 12.1%කින් අඩු විය; එයට ප්‍රධාන හේතුව අභ්‍යන්තර නිෂ්පාදනය පහත වැටීමයි",
+          "දේශීය තේ නිෂ්පාදනය 2025 සැප්තැම්බර් මාසයේදී පසුගිය වසරට සාපේක්ෂව 9.1%කින් අඩු විය; ජාත්‍යන්තර මිල ගණන් ද අඩු විය",
+          "පොල් නිෂ්පාදනය 2025 සැප්තැම්බර් මාසයේදී පසුගිය වසරට සාපේක්ෂව 42.6%කින් ඉහළ ගියේය; වර්ධන ගමන් වේගය දිගටම පවතී"
+        ],
+        "ta": [
+          "2025 யால பருவத்திற்கான நெல் உற்பத்தி 2.27 மில்லியன் மெட்ரிக் டன்களாக முன்னறிவிக்கப்பட்டுள்ளது, இது முந்தைய யால பருவத்துடன் ஒப்பிடும்போது 14.6% அதிகரிப்பாகும்",
+          "மொத்த மீன் உற்பத்தி 2025 செப்டம்பரில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 12.1% குறைந்தது, முதன்மையாக உள்நாட்டு உற்பத்தி வீழ்ச்சியால் இது ஏற்பட்டது",
+          "உள்நாட்டு தேயிலை உற்பத்தி 2025 செப்டம்பரில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 9.1% குறைந்தது; சர்வதேச விலைகளும் குறைந்தன",
+          "தேங்காய் உற்பத்தி 2025 செப்டம்பரில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 42.6% அதிகரித்தது, வளர்ச்சி வேகம் தொடர்கிறது"
+        ]
+      },
+      "paddy": {
+        "yala_2025_forecast_mn_mt": 2.27,
+        "yala_yoy_growth_pct": 14.6,
+        "annual_2025_forecast_mn_mt": 5.01,
+        "annual_yoy_growth_pct": 6.6,
+        "farmgate_rs_per_kg": {
+          "samba": 132.3,
+          "nadu": 116.0
+        }
+      },
+      "rice": {
+        "retail_rs_per_kg": {
+          "samba": 261.6,
+          "nadu": 227.4
+        },
+        "fao_rice_price_index": 98.4
+      },
+      "fish": {
+        "yoy_change_pct": -12.1,
+        "production_jan_sep_000mt": {
+          "marine_2024": 229,
+          "marine_2025": 237,
+          "inland_2024": 83,
+          "inland_2025": 44
+        },
+        "marine_yoy_change_pct": -1.1,
+        "inland_yoy_change_pct": -43.5,
+        "retail_rs_per_kg": {
+          "kelawalla": 2463.9,
+          "salaya": 486.3
+        }
+      },
+      "vegetables_retail_rs_per_kg": {
+        "beans": 502.6,
+        "okra": 311.8,
+        "leeks": 301.9,
+        "brinjal": 455.9,
+        "beetroot": 252.3,
+        "red_pumpkin": 169.8
+      },
+      "livestock": {
+        "reference_month": "2025-08",
+        "egg_price_rs": {
+          "white": 32.3,
+          "red": 34.5
+        },
+        "chicken_price_rs_per_kg": 1345.5,
+        "cost_of_production": {
+          "egg_rs_range": [
+            28.1,
+            31.6
+          ],
+          "chicken_rs_per_kg": 826.2
+        },
+        "chicken_margin_rs_per_kg": 519.3
+      },
+      "tea": {
+        "yoy_change_pct": -9.1,
+        "jan_sep_2025_mn_kg": 198.1,
+        "jan_sep_yoy_growth_pct": 0.6,
+        "auction_price_usd_per_kg": 2.94
+      },
+      "rubber": {
+        "yoy_change_pct": 4.0,
+        "jan_sep_2025_mn_kg": 51.9,
+        "jan_sep_yoy_growth_pct": -5.2,
+        "rss3_usd_per_kg": 2.1
+      },
+      "coconut": {
+        "yoy_change_pct": 42.6,
+        "coconut_rs_per_nut": 292.7,
+        "coconut_oil_rs_per_750ml": 2589.0
+      },
+      "global": {
+        "fao_food_price_index": 126.4
+      }
+    },
+    "2025-11": {
+      "bulletin_title": "Agriculture Sector Data Bulletin - November 2025",
+      "reference_period": "October 2025",
+      "highlights": {
+        "en": [
+          "Paddy production for 2025 Yala forecasted at 2.27 million MT, up 14.6% from last Yala season",
+          "Total fish production fell 7.2% (y-o-y) in October 2025, mainly on inland decline",
+          "Domestic tea production rose 2.3% (y-o-y) in October 2025; international prices increased",
+          "Coconut production rose 43.3% (y-o-y) in October 2025, sustaining growth momentum"
+        ],
+        "si": [
+          "2025 යල කන්නයේ වී නිෂ්පාදනය මෙට්‍රික් ටොන් මිලියන 2.27ක් ලෙස පුරෝකථනය කර ඇත; එය පෙර යල කන්නයට සාපේක්ෂව 14.6%කින් වැඩිවීමකි",
+          "සම්පූර්ණ මාළු නිෂ්පාදනය 2025 ඔක්තෝබර් මාසයේදී පසුගිය වසරට සාපේක්ෂව 7.2%කින් අඩු විය; එයට ප්‍රධාන හේතුව අභ්‍යන්තර නිෂ්පාදනය පහත වැටීමයි",
+          "දේශීය තේ නිෂ්පාදනය 2025 ඔක්තෝබර් මාසයේදී පසුගිය වසරට සාපේක්ෂව 2.3%කින් ඉහළ ගියේය; ජාත්‍යන්තර මිල ගණන් ද ඉහළ ගියේය",
+          "පොල් නිෂ්පාදනය 2025 ඔක්තෝබර් මාසයේදී පසුගිය වසරට සාපේක්ෂව 43.3%කින් ඉහළ ගියේය; වර්ධන ගමන් වේගය දිගටම පවතී"
+        ],
+        "ta": [
+          "2025 யால பருவத்திற்கான நெல் உற்பத்தி 2.27 மில்லியன் மெட்ரிக் டன்களாக முன்னறிவிக்கப்பட்டுள்ளது, இது முந்தைய யால பருவத்துடன் ஒப்பிடும்போது 14.6% அதிகரிப்பாகும்",
+          "மொத்த மீன் உற்பத்தி 2025 அக்டோபரில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 7.2% குறைந்தது, முதன்மையாக உள்நாட்டு உற்பத்தி வீழ்ச்சியால் இது ஏற்பட்டது",
+          "உள்நாட்டு தேயிலை உற்பத்தி 2025 அக்டோபரில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 2.3% அதிகரித்தது; சர்வதேச விலைகளும் அதிகரித்தன",
+          "தேங்காய் உற்பத்தி 2025 அக்டோபரில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 43.3% அதிகரித்தது, வளர்ச்சி வேகம் தொடர்கிறது"
+        ]
+      },
+      "paddy": {
+        "yala_2025_forecast_mn_mt": 2.27,
+        "yala_yoy_growth_pct": 14.6,
+        "annual_2025_forecast_mn_mt": 5.01,
+        "annual_yoy_growth_pct": 6.6,
+        "farmgate_rs_per_kg": {
+          "samba": 135.9,
+          "nadu": 122.0
+        }
+      },
+      "rice": {
+        "retail_rs_per_kg": {
+          "samba": 268.1,
+          "nadu": 228.0
+        },
+        "fao_rice_price_index": null
+      },
+      "fish": {
+        "yoy_change_pct": -7.2,
+        "production_jan_oct_000mt": {
+          "marine_2024": 257,
+          "marine_2025": 265,
+          "inland_2024": 90,
+          "inland_2025": 49
+        },
+        "marine_yoy_change_pct": -0.3,
+        "inland_yoy_change_pct": -43.5,
+        "retail_rs_per_kg": {
+          "kelawalla": 2416.8,
+          "salaya": 394.6
+        }
+      },
+      "vegetables_retail_rs_per_kg": {
+        "beans": 473.3,
+        "okra": 311.4,
+        "leeks": 280.1,
+        "brinjal": 392.0,
+        "beetroot": 254.2,
+        "red_pumpkin": 171.9
+      },
+      "livestock": {
+        "reference_month": "2025-09",
+        "egg_price_rs": {
+          "white": 31.7,
+          "red": 34.3
+        },
+        "chicken_price_rs_per_kg": 1293.3,
+        "cost_of_production": {
+          "egg_rs_range": [
+            27.9,
+            31.4
+          ],
+          "chicken_rs_per_kg": 805.3
+        },
+        "chicken_margin_rs_per_kg": 488.0
+      },
+      "tea": {
+        "yoy_change_pct": 2.3,
+        "jan_oct_2025_mn_kg": 219.9,
+        "jan_oct_yoy_growth_pct": 0.81,
+        "auction_price_usd_per_kg": 3.01
+      },
+      "rubber": {
+        "yoy_change_pct": -3.7,
+        "jan_oct_2025_mn_kg": 57.3,
+        "jan_oct_yoy_growth_pct": -5.1,
+        "rss3_usd_per_kg": 2.0
+      },
+      "coconut": {
+        "yoy_change_pct": 43.3,
+        "coconut_rs_per_nut": 292.0,
+        "coconut_oil_rs_per_750ml": 2599.0
+      },
+      "global": {
+        "fao_food_price_index": 125.1
+      }
+    },
+    "2025-12": {
+      "bulletin_title": "Agriculture Sector Data Bulletin - December 2025",
+      "reference_period": "November 2025",
+      "note": {
+        "en": "Bulletin flagged by CBSL: data may not yet capture the impact of Cyclone Ditwah due to information lags.",
+        "si": "මහ බැංකුව විසින් සටහන් කරන ලදි: තොරතුරු ප්‍රමාද වීම හේතුවෙන් 'ඩිට්වා' සුළි කුණාටුවේ බලපෑම මෙම දත්තවල තවම පිළිබිඹු නොවිය හැක.",
+        "ta": "மத்திய வங்கி குறிப்பிட்டுள்ளது: தகவல் தாமதங்கள் காரணமாக டிட்வா சூறாவளியின் தாக்கம் இந்தத் தரவுகளில் இன்னும் பிரதிபலிக்கப்படாமல் இருக்கலாம்."
+      },
+      "highlights": {
+        "en": [
+          "Paddy production for 2025 Yala forecasted at 2.27 million MT, up 14.6% from last Yala season",
+          "Total fish production fell 7.2% (y-o-y) in October 2025, mainly on inland decline (reporting lag)",
+          "Domestic tea production fell 5.6% (y-o-y) in November 2025, mainly due to heavy rainfall",
+          "Coconut production rose 40.6% (y-o-y) in November 2025, maintaining positive growth trajectory"
+        ],
+        "si": [
+          "2025 යල කන්නයේ වී නිෂ්පාදනය මෙට්‍රික් ටොන් මිලියන 2.27ක් ලෙස පුරෝකථනය කර ඇත; එය පෙර යල කන්නයට සාපේක්ෂව 14.6%කින් වැඩිවීමකි",
+          "සම්පූර්ණ මාළු නිෂ්පාදනය 2025 ඔක්තෝබර් මාසයේදී පසුගිය වසරට සාපේක්ෂව 7.2%කින් අඩු විය; එයට ප්‍රධාන හේතුව අභ්‍යන්තර නිෂ්පාදනය පහත වැටීමයි (වාර්තා කිරීමේ ප්‍රමාදයක් හේතුවෙන්)",
+          "දේශීය තේ නිෂ්පාදනය 2025 නොවැම්බර් මාසයේදී පසුගිය වසරට සාපේක්ෂව 5.6%කින් අඩු විය; එයට ප්‍රධාන හේතුව අධික වර්ෂාවයි",
+          "පොල් නිෂ්පාදනය 2025 නොවැම්බර් මාසයේදී පසුගිය වසරට සාපේක්ෂව 40.6%කින් ඉහළ ගියේය; ධනාත්මක වර්ධන ප්‍රවණතාව පවත්වා ගනී"
+        ],
+        "ta": [
+          "2025 யால பருவத்திற்கான நெல் உற்பத்தி 2.27 மில்லியன் மெட்ரிக் டன்களாக முன்னறிவிக்கப்பட்டுள்ளது, இது முந்தைய யால பருவத்துடன் ஒப்பிடும்போது 14.6% அதிகரிப்பாகும்",
+          "மொத்த மீன் உற்பத்தி 2025 அக்டோபரில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 7.2% குறைந்தது, முதன்மையாக உள்நாட்டு உற்பத்தி வீழ்ச்சியால் இது ஏற்பட்டது (அறிக்கையிடல் தாமதம் காரணமாக)",
+          "உள்நாட்டு தேயிலை உற்பத்தி 2025 நவம்பரில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 5.6% குறைந்தது, முதன்மையாக அதிக மழையால் இது ஏற்பட்டது",
+          "தேங்காய் உற்பத்தி 2025 நவம்பரில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 40.6% அதிகரித்தது, நேர்மறையான வளர்ச்சிப் போக்கு தொடர்கிறது"
+        ]
+      },
+      "paddy": {
+        "yala_2025_forecast_mn_mt": 2.27,
+        "yala_yoy_growth_pct": 14.6,
+        "annual_2025_forecast_mn_mt": 5.01,
+        "annual_yoy_growth_pct": 6.6,
+        "farmgate_rs_per_kg": {
+          "samba": 138.4,
+          "nadu": 126.2
+        }
+      },
+      "rice": {
+        "retail_rs_per_kg": {
+          "samba": 243.8,
+          "nadu": 227.0
+        },
+        "fao_rice_price_index": 101.0
+      },
+      "fish": {
+        "yoy_change_pct": -7.2,
+        "note": "Still reflecting October 2025 data due to reporting lag",
+        "retail_rs_per_kg": {
+          "kelawalla": 2379.1,
+          "salaya": 423.8
+        }
+      },
+      "vegetables_retail_rs_per_kg": {
+        "beans": 516.9,
+        "okra": 309.7,
+        "leeks": 296.4,
+        "brinjal": 416.1,
+        "beetroot": 307.4,
+        "red_pumpkin": 179.5
+      },
+      "livestock": {
+        "reference_month": "2025-09",
+        "note": "Same DAPH table as prior bulletin - no newer data published yet",
+        "egg_price_rs": {
+          "white": 31.7,
+          "red": 34.3
+        },
+        "chicken_price_rs_per_kg": 1293.3,
+        "cost_of_production": {
+          "egg_rs_range": [
+            27.9,
+            31.4
+          ],
+          "chicken_rs_per_kg": 805.3
+        },
+        "chicken_margin_rs_per_kg": 488.0
+      },
+      "tea": {
+        "yoy_change_pct": -5.6,
+        "jan_nov_2025_mn_kg": 241.4,
+        "jan_nov_yoy_growth_pct": 0.21,
+        "auction_price_usd_per_kg": 2.99
+      },
+      "rubber": {
+        "yoy_change_pct": -2.2,
+        "jan_nov_2025_mn_kg": 61.5,
+        "jan_nov_yoy_growth_pct": -4.9,
+        "rss3_usd_per_kg": 2.03
+      },
+      "coconut": {
+        "yoy_change_pct": 40.6,
+        "coconut_rs_per_nut": 268.64,
+        "coconut_oil_rs_per_750ml": 2469.0
+      },
+      "global": {
+        "fao_food_price_index": 124.3
+      },
+      "employment_2025_q3_pct": {
+        "agriculture": 23,
+        "industry": 27,
+        "services": 50
+      }
+    },
+    "2026-01": {
+      "bulletin_title": "Agriculture Sector Data Bulletin - January 2026",
+      "reference_period": "December 2025",
+      "highlights": {
+        "en": [
+          "Paddy production for 2025 Yala season was 2.31 million MT, a 16.8% increase from the previous Yala season",
+          "Total fish production decreased by 25.2% (y-o-y) in December 2025, with declines in both inland and marine production",
+          "Domestic tea production decreased by 2.0% (y-o-y) in December 2025, mainly due to heavy rainfall",
+          "Local rubber production increased by 10.3% in December 2025 due to increased prices and natural rubber exports",
+          "Coconut production rose 49.6% (y-o-y) in December 2025, but has been declining since October 2025"
+        ],
+        "si": [
+          "2025 යල කන්නයේ වී නිෂ්පාදනය මෙට්‍රික් ටොන් මිලියන 2.31ක් විය; එය පෙර යල කන්නයට සාපේක්ෂව 16.8%කින් වැඩිවීමකි",
+          "සම්පූර්ණ මාළු නිෂ්පාදනය 2025 දෙසැම්බර් මාසයේදී පසුගිය වසරට සාපේක්ෂව 25.2%කින් අඩු විය; අභ්‍යන්තර හා මුහුදු නිෂ්පාදනය යන දෙකෙහිම පහත වැටීමක් සිදු විය",
+          "දේශීය තේ නිෂ්පාදනය 2025 දෙසැම්බර් මාසයේදී පසුගිය වසරට සාපේක්ෂව 2.0%කින් අඩු විය; එයට ප්‍රධාන හේතුව අධික වර්ෂාවයි",
+          "මිල ගණන් ඉහළ යාම හා ස්වභාවික රබර් අපනයන වැඩිවීම හේතුවෙන් දේශීය රබර් නිෂ්පාදනය 2025 දෙසැම්බර් මාසයේදී 10.3%කින් වැඩි විය",
+          "පොල් නිෂ්පාදනය 2025 දෙසැම්බර් මාසයේදී පසුගිය වසරට සාපේක්ෂව 49.6%කින් ඉහළ ගිය නමුත්, 2025 ඔක්තෝබර් මාසයේ සිට එය අඛණ්ඩව පහත වැටෙමින් පවතී"
+        ],
+        "ta": [
+          "2025 யால பருவத்திற்கான நெல் உற்பத்தி 2.31 மில்லியன் மெட்ரிக் டன்களாக இருந்தது, இது முந்தைய யால பருவத்துடன் ஒப்பிடும்போது 16.8% அதிகரிப்பாகும்",
+          "மொத்த மீன் உற்பத்தி 2025 டிசம்பரில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 25.2% குறைந்தது, உள்நாட்டு மற்றும் கடல் உற்பத்தி இரண்டிலும் வீழ்ச்சி காணப்பட்டது",
+          "உள்நாட்டு தேயிலை உற்பத்தி 2025 டிசம்பரில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 2.0% குறைந்தது, முதன்மையாக அதிக மழையால் இது ஏற்பட்டது",
+          "விலை உயர்வு மற்றும் இயற்கை ரப்பர் ஏற்றுமதி அதிகரிப்பு காரணமாக உள்நாட்டு ரப்பர் உற்பத்தி 2025 டிசம்பரில் 10.3% அதிகரித்தது",
+          "தேங்காய் உற்பத்தி 2025 டிசம்பரில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 49.6% அதிகரித்தது, ஆனால் 2025 அக்டோபர் முதல் தொடர்ந்து குறைந்து வருகிறது"
+        ]
+      },
+      "paddy": {
+        "yala_2025_mn_mt": 2.31,
+        "yala_yoy_growth_pct": 16.8,
+        "annual_2025_mn_mt": 5.05,
+        "annual_yoy_growth_pct": 7.6,
+        "farmgate_rs_per_kg": {
+          "samba": 138.4,
+          "nadu": 126.2
+        }
+      },
+      "rice": {
+        "retail_rs_per_kg": {
+          "samba": 246.0,
+          "nadu": 229.4
+        },
+        "imports_latest_000mt": 2.7
+      },
+      "fish": {
+        "yoy_change_pct": -25.2,
+        "retail_rs_per_kg": {
+          "kelawalla": 2595.01,
+          "salaya": 595.81
+        }
+      },
+      "vegetables_retail_rs_per_kg": {
+        "beans": 1149.9,
+        "okra": 449.5,
+        "leeks": 439.4,
+        "brinjal": 666.9,
+        "beetroot": 728.7,
+        "red_pumpkin": 244.9
+      },
+      "livestock": {
+        "reference_month": "2025-11",
+        "egg_price_rs": {
+          "white": 30.1,
+          "red": 31.7
+        },
+        "chicken_price_rs_per_kg": 1090.4,
+        "cost_of_production": {
+          "egg_rs_range": [
+            29.4,
+            32.4
+          ],
+          "chicken_rs_per_kg": 775.0
+        },
+        "chicken_margin_rs_per_kg": 315.4
+      },
+      "tea": {
+        "yoy_change_pct": -2.0,
+        "auction_price_usd_per_kg": 2.88,
+        "production_mn_kg_latest": 21.38,
+        "annual_2025_mn_kg": 262.8,
+        "annual_growth_pct": 0.02
+      },
+      "rubber": {
+        "yoy_change_pct": 10.3,
+        "rss3_usd_per_kg": 2.06,
+        "production_mn_kg_latest": 4.97,
+        "annual_2025_mn_kg": 66.5,
+        "annual_growth_pct": -3.9
+      },
+      "coconut": {
+        "yoy_change_pct": 49.6,
+        "coconut_oil_usd_per_mt": 2323.0,
+        "production_mn_nuts_latest": 254.52
+      },
+      "global": {
+        "fao_food_price_index": 123.9
+      }
+    },
+    "2026-02": {
+      "bulletin_title": "Agriculture Sector Data Bulletin - February 2026",
+      "reference_period": "December 2025 / January 2026",
+      "note": {
+        "en": "Maha 2025/26 forecast decline includes crop damage caused by Cyclone Ditwah",
+        "si": "2025/26 මහ කන්නයේ පුරෝකථනය කළ අඩුවීමට 'ඩිට්වා' සුළි කුණාටුවෙන් සිදු වූ බෝග හානිය ද ඇතුළත් වේ",
+        "ta": "2025/26 மஹா பருவத்திற்கான முன்னறிவிக்கப்பட்ட குறைவில் டிட்வா சூறாவளியால் ஏற்பட்ட பயிர் சேதமும் அடங்கும்"
+      },
+      "highlights": {
+        "en": [
+          "Paddy production for 2025/26 Maha season forecast at 2.6 million MT (sown extent end Dec 2025), a 5.3% decline from the previous Maha season",
+          "Total fish production decreased by 25.2% (y-o-y) in December 2025, with declines in both inland and marine production",
+          "Domestic tea production decreased by 3.6% (y-o-y) in January 2026, while tea auction prices declined m-o-m",
+          "Local rubber production increased 4.4% (y-o-y) in January 2026, driven by reduced rainy days",
+          "Coconut production rose 49.6% (y-o-y) in December 2025, but has been declining since October 2025"
+        ],
+        "si": [
+          "2025/26 මහ කන්නයේ වී නිෂ්පාදනය මෙට්‍රික් ටොන් මිලියන 2.6ක් ලෙස පුරෝකථනය කර ඇත (2025 දෙසැම්බර් අවසන් වන විට වගා කළ ප්‍රමාණය අනුව), එය පෙර මහ කන්නයට සාපේක්ෂව 5.3%කින් අඩුවීමකි",
+          "සම්පූර්ණ මාළු නිෂ්පාදනය 2025 දෙසැම්බර් මාසයේදී පසුගිය වසරට සාපේක්ෂව 25.2%කින් අඩු විය; අභ්‍යන්තර හා මුහුදු නිෂ්පාදනය යන දෙකෙහිම පහත වැටීමක් සිදු විය",
+          "දේශීය තේ නිෂ්පාදනය 2026 ජනවාරි මාසයේදී පසුගිය වසරට සාපේක්ෂව 3.6%කින් අඩු විය; තේ වෙන්දේසි මිල ගණන් ද පෙර මාසයට සාපේක්ෂව අඩු විය",
+          "වැසි දින සංඛ්‍යාව අඩුවීම හේතුවෙන් දේශීය රබර් නිෂ්පාදනය 2026 ජනවාරි මාසයේදී පසුගිය වසරට සාපේක්ෂව 4.4%කින් වැඩි විය",
+          "පොල් නිෂ්පාදනය 2025 දෙසැම්බර් මාසයේදී පසුගිය වසරට සාපේක්ෂව 49.6%කින් ඉහළ ගිය නමුත්, 2025 ඔක්තෝබර් මාසයේ සිට එය අඛණ්ඩව පහත වැටෙමින් පවතී"
+        ],
+        "ta": [
+          "2025/26 மஹா பருவத்திற்கான நெல் உற்பத்தி 2.6 மில்லியன் மெட்ரிக் டன்களாக முன்னறிவிக்கப்பட்டுள்ளது (2025 டிசம்பர் இறுதி வரையிலான பயிரிடப்பட்ட பரப்பளவின் அடிப்படையில்), இது முந்தைய மஹா பருவத்துடன் ஒப்பிடும்போது 5.3% குறைவாகும்",
+          "மொத்த மீன் உற்பத்தி 2025 டிசம்பரில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 25.2% குறைந்தது, உள்நாட்டு மற்றும் கடல் உற்பத்தி இரண்டிலும் வீழ்ச்சி காணப்பட்டது",
+          "உள்நாட்டு தேயிலை உற்பத்தி 2026 ஜனவரியில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 3.6% குறைந்தது; தேயிலை ஏல விலைகளும் முந்தைய மாதத்துடன் ஒப்பிடும்போது குறைந்தன",
+          "மழை நாட்கள் குறைந்ததால் உள்நாட்டு ரப்பர் உற்பத்தி 2026 ஜனவரியில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 4.4% அதிகரித்தது",
+          "தேங்காய் உற்பத்தி 2025 டிசம்பரில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 49.6% அதிகரித்தது, ஆனால் 2025 அக்டோபர் முதல் தொடர்ந்து குறைந்து வருகிறது"
+        ]
+      },
+      "paddy": {
+        "maha_2025_26_forecast_mn_mt": 2.6,
+        "maha_yoy_growth_pct": -5.3,
+        "farmgate_rs_per_kg": {
+          "samba": 131.8,
+          "nadu": 106.4
+        }
+      },
+      "rice": {
+        "retail_rs_per_kg": {
+          "samba": 253.6,
+          "nadu": 229.8
+        },
+        "imports_latest_000mt": 3.2
+      },
+      "fish": {
+        "yoy_change_pct": -25.2,
+        "retail_rs_per_kg": {
+          "kelawalla": 2359.13,
+          "salaya": 562.46
+        }
+      },
+      "vegetables_retail_rs_per_kg": {
+        "beans": 500.7,
+        "okra": 330.3,
+        "leeks": 399.7,
+        "brinjal": 310.9,
+        "beetroot": 425.1,
+        "red_pumpkin": 231.4
+      },
+      "livestock": {
+        "reference_month": "2025-12",
+        "egg_price_rs": {
+          "white": 36.6,
+          "red": 39.7
+        },
+        "chicken_price_rs_per_kg": 1094.5,
+        "cost_of_production": {
+          "egg_rs_range": [
+            29.1,
+            34.4
+          ],
+          "chicken_rs_per_kg": 790.0
+        },
+        "chicken_margin_rs_per_kg": 304.5
+      },
+      "tea": {
+        "yoy_change_pct": -3.6,
+        "mom_seasonally_adj_pct": 0.7,
+        "auction_price_usd_per_kg": 2.7,
+        "production_mn_kg_latest": 20.68
+      },
+      "rubber": {
+        "yoy_change_pct": 4.4,
+        "mom_seasonally_adj_pct": -3.4,
+        "rss3_usd_per_kg": 2.26,
+        "production_mn_kg_latest": 5.93
+      },
+      "coconut": {
+        "yoy_change_pct": 49.6,
+        "mom_seasonally_adj_pct": 0.3,
+        "coconut_oil_usd_per_mt": 2259.13,
+        "production_mn_nuts_latest": 254.52
+      },
+      "global": {
+        "fao_food_price_index": 125.3
+      },
+      "employment_2025_q4_pct": {
+        "agriculture": 23,
+        "industry": 26,
+        "services": 51
+      }
+    },
+    "2026-03": {
+      "bulletin_title": "Agriculture Sector Data Bulletin - March 2026",
+      "reference_period": "January / February 2026",
+      "note": {
+        "en": "Maha 2025/26 forecast decline includes crop damage caused by Cyclone Ditwah",
+        "si": "2025/26 මහ කන්නයේ පුරෝකථනය කළ අඩුවීමට 'ඩිට්වා' සුළි කුණාටුවෙන් සිදු වූ බෝග හානිය ද ඇතුළත් වේ",
+        "ta": "2025/26 மஹா பருவத்திற்கான முன்னறிவிக்கப்பட்ட குறைவில் டிட்வா சூறாவளியால் ஏற்பட்ட பயிர் சேதமும் அடங்கும்"
+      },
+      "highlights": {
+        "en": [
+          "Paddy production for 2025/26 Maha season forecast at 2.64 million MT (sown extent end Jan 2026), a 3.7% decline from the previous Maha season",
+          "Domestic tea production increased 15.2% (y-o-y) in February 2026, while global tea prices remained broadly stable in Q1 2026",
+          "Local rubber production decreased 33.6% (y-o-y) in February 2026 due to extensive dry weather",
+          "Total marine fish production declined (y-o-y) in both January and February 2026"
+        ],
+        "si": [
+          "2025/26 මහ කන්නයේ වී නිෂ්පාදනය මෙට්‍රික් ටොන් මිලියන 2.64ක් ලෙස පුරෝකථනය කර ඇත (2026 ජනවාරි අවසන් වන විට වගා කළ ප්‍රමාණය අනුව), එය පෙර මහ කන්නයට සාපේක්ෂව 3.7%කින් අඩුවීමකි",
+          "දේශීය තේ නිෂ්පාදනය 2026 පෙබරවාරි මාසයේදී පසුගිය වසරට සාපේක්ෂව 15.2%කින් වැඩි විය; 2026 පළමු කාර්තුවේදී ගෝලීය තේ මිල ගණන් සමස්තයක් ලෙස ස්ථාවරව පැවතුණි",
+          "දීර්ඝ වියළි කාලගුණය හේතුවෙන් දේශීය රබර් නිෂ්පාදනය 2026 පෙබරවාරි මාසයේදී පසුගිය වසරට සාපේක්ෂව 33.6%කින් අඩු විය",
+          "සම්පූර්ණ මුහුදු මාළු නිෂ්පාදනය 2026 ජනවාරි හා පෙබරවාරි යන මාස දෙකේදීම පසුගිය වසරට සාපේක්ෂව අඩු විය"
+        ],
+        "ta": [
+          "2025/26 மஹா பருவத்திற்கான நெல் உற்பத்தி 2.64 மில்லியன் மெட்ரிக் டன்களாக முன்னறிவிக்கப்பட்டுள்ளது (2026 ஜனவரி இறுதி வரையிலான பயிரிடப்பட்ட பரப்பளவின் அடிப்படையில்), இது முந்தைய மஹா பருவத்துடன் ஒப்பிடும்போது 3.7% குறைவாகும்",
+          "உள்நாட்டு தேயிலை உற்பத்தி 2026 பெப்ரவரியில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 15.2% அதிகரித்தது; 2026 முதல் காலாண்டில் உலகளாவிய தேயிலை விலைகள் பொதுவாக நிலையாக இருந்தன",
+          "நீண்ட வறட்சி வானிலை காரணமாக உள்நாட்டு ரப்பர் உற்பத்தி 2026 பெப்ரவரியில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 33.6% குறைந்தது",
+          "மொத்த கடல் மீன் உற்பத்தி 2026 ஜனவரி மற்றும் பெப்ரவரி இரண்டிலும் முந்தைய ஆண்டுடன் ஒப்பிடும்போது குறைந்தது"
+        ]
+      },
+      "paddy": {
+        "maha_2025_26_forecast_mn_mt": 2.64,
+        "maha_yoy_growth_pct": -3.7,
+        "farmgate_rs_per_kg": {
+          "samba": 128.7,
+          "nadu": 108.4
+        }
+      },
+      "rice": {
+        "retail_rs_per_kg": {
+          "samba": 271.4,
+          "nadu": 229.5
+        },
+        "imports_latest_000mt": 1.0
+      },
+      "fish": {
+        "marine_production_jan_feb_2026_000mt": 43.9,
+        "note": "Inland fish production data not available since Jan 2026",
+        "retail_rs_per_kg": {
+          "kelawalla": 2288.83,
+          "salaya": 605.92
+        }
+      },
+      "vegetables_retail_rs_per_kg": {
+        "beans": 505.3,
+        "okra": 283.6,
+        "leeks": 374.8,
+        "brinjal": 360.3,
+        "beetroot": 333.7,
+        "red_pumpkin": 238.8
+      },
+      "livestock": {
+        "reference_month": "2026-01",
+        "egg_price_rs": {
+          "white": 31.3,
+          "red": 34.0
+        },
+        "chicken_price_rs_per_kg": 1095.7,
+        "cost_of_production": {
+          "egg_rs_range": [
+            29.0,
+            32.2
+          ],
+          "chicken_rs_per_kg": 811.8
+        },
+        "chicken_margin_rs_per_kg": 283.9
+      },
+      "tea": {
+        "yoy_change_pct": 15.2,
+        "mom_seasonally_adj_pct": -4.5,
+        "auction_price_usd_per_kg": 2.69,
+        "production_mn_kg_latest": 17.97
+      },
+      "rubber": {
+        "yoy_change_pct": -33.6,
+        "mom_seasonally_adj_pct": -8.1,
+        "rss3_usd_per_kg": 2.39,
+        "production_mn_kg_latest": 4.93
+      },
+      "coconut": {
+        "coconut_oil_usd_per_mt": 2360.34,
+        "production_jan_feb": {
+          "desiccated_mt_2025": 2657,
+          "desiccated_mt_2026": 6799,
+          "oil_mt_2025": 3505,
+          "oil_mt_2026": 6548
+        }
+      },
+      "global": {}
+    },
+    "2026-04": {
+      "bulletin_title": "Agriculture Sector Data Bulletin - April 2026",
+      "reference_period": "February / March 2026",
+      "highlights": {
+        "en": [
+          "Paddy production for 2025/26 Maha season forecast at 2.81 million MT (sown extent end Feb 2026), a 2.4% increase from the previous Maha season",
+          "Domestic tea production decreased 14.5% (y-o-y) in March 2026 due to extensive dry weather conditions",
+          "Local rubber production decreased 11.0% (y-o-y) in March 2026, whilst global rubber prices increased",
+          "Total marine fish production declined (y-o-y) in March 2026"
+        ],
+        "si": [
+          "2025/26 මහ කන්නයේ වී නිෂ්පාදනය මෙට්‍රික් ටොන් මිලියන 2.81ක් ලෙස පුරෝකථනය කර ඇත (2026 පෙබරවාරි අවසන් වන විට වගා කළ ප්‍රමාණය අනුව), එය පෙර මහ කන්නයට සාපේක්ෂව 2.4%කින් වැඩිවීමකි",
+          "දීර්ඝ වියළි කාලගුණික තත්ත්වයන් හේතුවෙන් දේශීය තේ නිෂ්පාදනය 2026 මාර්තු මාසයේදී පසුගිය වසරට සාපේක්ෂව 14.5%කින් අඩු විය",
+          "දේශීය රබර් නිෂ්පාදනය 2026 මාර්තු මාසයේදී පසුගිය වසරට සාපේක්ෂව 11.0%කින් අඩු වුවද, ගෝලීය රබර් මිල ගණන් ඉහළ ගියේය",
+          "සම්පූර්ණ මුහුදු මාළු නිෂ්පාදනය 2026 මාර්තු මාසයේදී පසුගිය වසරට සාපේක්ෂව අඩු විය"
+        ],
+        "ta": [
+          "2025/26 மஹா பருவத்திற்கான நெல் உற்பத்தி 2.81 மில்லியன் மெட்ரிக் டன்களாக முன்னறிவிக்கப்பட்டுள்ளது (2026 பெப்ரவரி இறுதி வரையிலான பயிரிடப்பட்ட பரப்பளவின் அடிப்படையில்), இது முந்தைய மஹா பருவத்துடன் ஒப்பிடும்போது 2.4% அதிகரிப்பாகும்",
+          "நீண்ட வறட்சி வானிலை நிலைமைகள் காரணமாக உள்நாட்டு தேயிலை உற்பத்தி 2026 மார்ச்சில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 14.5% குறைந்தது",
+          "உள்நாட்டு ரப்பர் உற்பத்தி 2026 மார்ச்சில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது 11.0% குறைந்தது, ஆனால் உலகளாவிய ரப்பர் விலைகள் அதிகரித்தன",
+          "மொத்த கடல் மீன் உற்பத்தி 2026 மார்ச்சில் முந்தைய ஆண்டுடன் ஒப்பிடும்போது குறைந்தது"
+        ]
+      },
+      "paddy": {
+        "maha_2025_26_forecast_mn_mt": 2.81,
+        "maha_yoy_growth_pct": 2.4,
+        "farmgate_rs_per_kg": {
+          "samba": 133.6,
+          "nadu": 110.7
+        }
+      },
+      "rice": {
+        "retail_rs_per_kg": {
+          "samba": 271.9,
+          "nadu": 228.8
+        },
+        "imports_latest_000mt": 1.2
+      },
+      "fish": {
+        "marine_production_jan_mar_2026_000mt": 67.9,
+        "note": "Inland fish production data not available since Jan 2026",
+        "retail_rs_per_kg": {
+          "kelawalla": 2406.5,
+          "salaya": 727.23
+        }
+      },
+      "vegetables_retail_rs_per_kg": {
+        "beans": 582.52,
+        "okra": 317.9,
+        "leeks": 377.46,
+        "brinjal": 375.3,
+        "beetroot": 315.3,
+        "red_pumpkin": 227.41
+      },
+      "livestock": {
+        "reference_month": "2026-01",
+        "note": "Same DAPH table as prior bulletin - no newer data published yet",
+        "egg_price_rs": {
+          "white": 31.3,
+          "red": 34.0
+        },
+        "chicken_price_rs_per_kg": 1095.7,
+        "cost_of_production": {
+          "egg_rs_range": [
+            29.0,
+            32.2
+          ],
+          "chicken_rs_per_kg": 811.8
+        },
+        "chicken_margin_rs_per_kg": 283.9
+      },
+      "tea": {
+        "yoy_change_pct": -14.5,
+        "mom_seasonally_adj_pct": -1.3,
+        "auction_price_usd_per_kg": 2.83,
+        "production_mn_kg_latest": 20.9
+      },
+      "rubber": {
+        "yoy_change_pct": -11.0,
+        "mom_seasonally_adj_pct": -4.9,
+        "rss3_usd_per_kg": 2.51,
+        "production_mn_kg_latest": 5.33
+      },
+      "coconut": {
+        "coconut_oil_usd_per_mt": 2361.0,
+        "production_jan_feb": {
+          "desiccated_mt_2025": 2657,
+          "desiccated_mt_2026": 6799,
+          "oil_mt_2025": 3505,
+          "oil_mt_2026": 6548
+        },
+        "note": "Coconut production table unchanged from prior bulletin - bi-monthly estimation basis"
+      },
+      "global": {
+        "fao_food_price_index": 130.7
+      }
+    }
+  }
+}
