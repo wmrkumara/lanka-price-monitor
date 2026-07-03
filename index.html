@@ -514,6 +514,21 @@
   <!-- Hidden weather data still loaded -->
   <div id="weatherData" style="display:none"></div>
 
+  <!-- Facebook Page Follow Card -->
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:14px 0;box-shadow:var(--shadow)">
+    <div style="font-size:14.5px;font-weight:700;color:var(--ink-soft);margin-bottom:10px;line-height:1.4">
+      <span class="fb-en">📱 Follow our Facebook page for daily updated price information</span>
+      <span class="fb-si" style="display:none">📱 දිනපතා යාවත්කාලීන වන මිල තොරතුරු දැනගැනීම සඳහා අපගේ ෆේස්බුක් පිටුව හා සම්බන්ධ වන්න</span>
+      <span class="fb-ta" style="display:none">📱 தினசரி புதுப்பிக்கப்படும் விலைத் தகவல்களைப் பெற எங்கள் Facebook பக்கத்துடன் இணையுங்கள்</span>
+    </div>
+    <div style="max-width:500px;margin:0 auto">
+      <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FTopGoviyaLK&tabs=timeline&width=500&height=360&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+        width="100%" height="360" style="border:none;overflow:hidden;border-radius:10px;display:block" scrolling="no" frameborder="0"
+        allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" loading="lazy"
+        title="TopGoviya.lk Facebook Page"></iframe>
+    </div>
+  </div>
+
   <div class="section-h"><h2 id="hMovers">Today&rsquo;s sharpest movements</h2><span class="rule"></span><span class="hint" id="hintMovers">auto-ranked &middot; tap &rarr;</span></div>
   <div class="movers" id="movers"></div>
 
@@ -582,6 +597,7 @@
             <a href="blog.html" style="color:var(--petrol);font-weight:600;text-decoration:none">📝 ගොවි පුවත් | Blog</a><br>
             <a href="insights.html" style="color:var(--petrol);font-weight:600;text-decoration:none">📊 මිල ප්‍රවණතා | Price Insights 2026</a><br>
             <a href="bulletin.html" style="color:var(--petrol);font-weight:600;text-decoration:none">📈 කෘෂිකාර්මික දත්ත වාර්තාව | Monthly Agriculture Data Bulletin</a><br>
+            <a href="loan-calculator.html" style="color:var(--petrol);font-weight:600;text-decoration:none">🏦 ණය සහ කුලී ගණකය | Loan &amp; Leasing Calculator</a><br>
             <a href="weather.html" style="color:var(--petrol);font-weight:600;text-decoration:none">🌤️ වෙළඳපොළ කාලගුණය | Market Weather</a><br>
             <a href="about.html" style="color:var(--petrol);font-weight:600;text-decoration:none">ℹ️ අප පිළිබඳව | About TopGoviya.lk</a><br>
             <a href="breakeven.html" style="color:var(--petrol);font-weight:600;text-decoration:none">🧮 අලාභ-ලාභ සීමා ගණකය | Break-even Calculator</a><br>
@@ -888,6 +904,13 @@ function applyLang(){
     de.style.display=lang==="en"?"inline":"none";
     ds.style.display=lang==="si"?"inline":"none";
     dt.style.display=lang==="ta"?"inline":"none";
+  }
+  /* Facebook card language switch */
+  const fe=document.querySelector(".fb-en"),fs=document.querySelector(".fb-si"),ft=document.querySelector(".fb-ta");
+  if(fe&&fs&&ft){
+    fe.style.display=lang==="en"?"inline":"none";
+    fs.style.display=lang==="si"?"inline":"none";
+    ft.style.display=lang==="ta"?"inline":"none";
   }
 }
 function setLang(l){

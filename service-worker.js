@@ -1,9 +1,9 @@
 /* ===== TopGoviya PWA Service Worker ===== */
-/* Version: 2.2 | topgoviya.lk | Built in Gampola 🇱🇰 */
-/* Updated: July 2026 — Google Analytics added site-wide; netherlands-sri-lanka-agriculture.html precached */
+/* Version: 2.3 | topgoviya.lk | Built in Gampola 🇱🇰 */
+/* Updated: July 2026 — loan-calculator.html added (Loan & Leasing Calculator) */
 
-const CACHE_NAME = 'topgoviya-v7';
-const DATA_CACHE = 'topgoviya-data-v7';
+const CACHE_NAME = 'topgoviya-v8';
+const DATA_CACHE = 'topgoviya-data-v8';
 
 /* ── Static files to cache for offline use ── */
 const STATIC_ASSETS = [
@@ -19,6 +19,7 @@ const STATIC_ASSETS = [
   '/farmers-guide-topgoviya.html',
   '/bulletin.html',
   '/netherlands-sri-lanka-agriculture.html',
+  '/loan-calculator.html',
   '/manifest.json',
   '/icon-72x72.png',
   '/icon-96x96.png',
@@ -31,7 +32,7 @@ const STATIC_ASSETS = [
 
 /* ── Install — cache all static assets ── */
 self.addEventListener('install', event => {
-  console.log('[TopGoviya SW v2.2] Installing...');
+  console.log('[TopGoviya SW v2.3] Installing...');
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       console.log('[TopGoviya SW] Caching all pages + assets');
@@ -45,7 +46,7 @@ self.addEventListener('install', event => {
 
 /* ── Activate — remove old caches ── */
 self.addEventListener('activate', event => {
-  console.log('[TopGoviya SW v2.2] Activating...');
+  console.log('[TopGoviya SW v2.3] Activating...');
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
@@ -151,4 +152,4 @@ self.addEventListener('notificationclick', event => {
   );
 });
 
-console.log('[TopGoviya SW v2.2] Service Worker loaded ✅ | topgoviya.lk');
+console.log('[TopGoviya SW v2.3] Service Worker loaded ✅ | topgoviya.lk');

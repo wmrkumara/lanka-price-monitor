@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ණය සහ කුලී ගණකය | Loan &amp; Leasing Calculator — TopGoviya.lk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZBN8Z32S4J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZBN8Z32S4J');
+</script>
+
+<style>
+  :root{
+    --paper:#f4efe4;--paper-2:#efe8d8;--card:#fffdf7;--ink:#191d1a;--ink-soft:#3a403a;
+    --muted:#7a7264;--line:#e3d9c4;--line-strong:#cdbf9f;--petrol:#0e4f4a;--petrol-deep:#0a3a36;
+    --gold:#a9802a;--gold-bg:#f6ecd6;--up:#b23a2e;--up-bg:#f7e6e2;--down:#2c7a52;--down-bg:#e3efe6;--flat:#8a8170;
+    --shadow:0 1px 0 rgba(0,0,0,.02), 0 12px 30px -18px rgba(20,40,38,.35);--r:14px;
+  }
+  *{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:'Hanken Grotesk','Noto Sans Sinhala','Noto Sans Tamil',sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.45;
+    background-image:radial-gradient(circle at 12% -10%, rgba(14,79,74,.06), transparent 38%),
+                     radial-gradient(circle at 95% 0%, rgba(169,128,42,.07), transparent 30%);background-attachment:fixed;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 22px}
+  .masthead{padding:30px 0 16px;border-bottom:2px solid var(--ink)}
+  .kicker{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap;
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .kicker .org{color:var(--petrol)}
+  .lang{display:flex;gap:2px;border:1px solid var(--line-strong);border-radius:999px;overflow:hidden}
+  .lang button{font:inherit;font-size:11px;letter-spacing:.12em;font-weight:700;text-transform:uppercase;
+    border:0;background:transparent;color:var(--muted);padding:5px 11px;cursor:pointer;transition:.2s}
+  .lang button.on{background:var(--petrol);color:#fff}
+  .title{font-family:'Newsreader',serif;font-weight:500;font-size:clamp(30px,5.5vw,50px);
+    line-height:1.02;letter-spacing:-.015em;margin:14px 0 6px}
+  .title em{font-style:italic;color:var(--petrol)}
+  .sub{font-size:14.5px;color:var(--ink-soft);margin-top:6px;max-width:640px}
+
+  .tabs{display:flex;gap:8px;margin:26px 0 20px}
+  .tabbtn{flex:1;font:inherit;font-size:15px;font-weight:700;padding:14px 16px;border-radius:12px;cursor:pointer;
+    border:1.5px solid var(--line-strong);background:var(--card);color:var(--ink-soft);transition:.18s;text-align:center}
+  .tabbtn.on{background:var(--petrol);color:#fff;border-color:var(--petrol)}
+  .tabbtn small{display:block;font-weight:500;font-size:11.5px;opacity:.85;margin-top:2px}
+
+  .panel{display:none}
+  .panel.on{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:var(--shadow);margin-bottom:18px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:6px}
+  .field .hint{font-size:11.5px;color:var(--muted);margin-top:4px}
+  .field input, .field select{width:100%;font:inherit;font-size:16px;padding:11px 13px;border-radius:10px;
+    border:1px solid var(--line-strong);background:#fff;color:var(--ink);outline:none;transition:.2s;
+    font-family:'JetBrains Mono',monospace}
+  .field input:focus, .field select:focus{border-color:var(--petrol);box-shadow:0 0 0 3px rgba(14,79,74,.12)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:520px){.row2{grid-template-columns:1fr}}
+  .toggle-row{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding:12px 14px;background:var(--paper-2);border-radius:10px}
+  .toggle-row input{width:auto}
+  .toggle-row label{margin:0;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer}
+
+  .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+  .btn{font:inherit;font-size:14.5px;font-weight:700;padding:13px 22px;border-radius:11px;cursor:pointer;border:0;transition:.18s}
+  .btn.primary{background:var(--petrol);color:#fff}
+  .btn.primary:hover{background:var(--petrol-deep)}
+  .btn.ghost{background:var(--paper-2);color:var(--ink-soft);border:1px solid var(--line-strong)}
+  .btn.ghost:hover{border-color:var(--petrol)}
+
+  .result{margin-top:18px;padding:20px;background:linear-gradient(180deg,#fffefb,#fbf7ee);border:1px solid var(--line-strong);border-radius:14px;display:none}
+  .result.show{display:block;animation:fade .3s ease}
+  .result .rmain{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:32px;color:var(--petrol);letter-spacing:-.02em}
+  .result .rmain small{font-size:13px;font-weight:500;color:var(--muted);display:block;margin-top:2px;font-family:'Hanken Grotesk',sans-serif}
+  .result .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+  @media(max-width:560px){.result .rgrid{grid-template-columns:1fr 1fr}}
+  .result .rstat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .result .rstat .l{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .result .rstat .v{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;margin-top:3px}
+
+  .section-h{display:flex;align-items:center;gap:12px;margin:40px 0 14px}
+  .section-h h2{font-family:'Newsreader',serif;font-weight:500;font-size:23px;margin:0;letter-spacing:-.01em}
+  .section-h .rule{flex:1;height:1px;background:var(--line-strong)}
+
+  .cmp-empty{text-align:center;color:var(--muted);padding:36px 20px;font-style:italic;font-family:'Newsreader',serif;font-size:16px;
+    background:var(--card);border:1px dashed var(--line-strong);border-radius:var(--r)}
+  .cmp-table{overflow-x:auto;border-radius:var(--r);border:1px solid var(--line);background:var(--card)}
+  table.cmp{width:100%;border-collapse:collapse;min-width:640px}
+  table.cmp th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+    font-weight:700;padding:12px 14px;border-bottom:1.5px solid var(--line-strong);white-space:nowrap}
+  table.cmp td{padding:12px 14px;border-bottom:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:14px;white-space:nowrap}
+  table.cmp tr:last-child td{border-bottom:0}
+  table.cmp td.name{font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:14px}
+  table.cmp tr.best{background:var(--gold-bg)}
+  .best-badge{display:inline-block;font-size:10px;font-weight:700;background:var(--gold);color:#fff;
+    padding:2px 8px;border-radius:999px;margin-left:8px;letter-spacing:.03em;font-family:'Hanken Grotesk',sans-serif}
+  .rmbtn{background:none;border:0;color:var(--up);cursor:pointer;font-size:16px;padding:2px 6px}
+
+  footer{margin:46px 0 40px;padding-top:22px;border-top:1px solid var(--line-strong);font-size:12.5px;color:var(--muted)}
+  .disclaimer{margin-bottom:10px;line-height:1.5}
+  .credit{text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--line);
+    font-size:13.5px;color:var(--ink-soft)}
+  .credit a{color:var(--petrol);font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--line-strong)}
+  .backlink{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--petrol);
+    text-decoration:none;margin-bottom:18px}
+  .title,.section-h h2{font-family:'Newsreader','Noto Sans Sinhala','Noto Sans Tamil',serif}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="kicker">
+      <span id="kickerTxt">TopGoviya.lk <span class="org">Financial Tools</span></span>
+      <div class="lang" role="group" aria-label="Language"><button data-lang="en">EN</button><button data-lang="si" class="on">සිං</button><button data-lang="ta">தமி</button></div>
+    </div>
+    <a class="backlink" href="index.html" id="backLink">← ප්‍රධාන පිටුවට | Back to home</a>
+    <h1 class="title" id="pageTitle">ණය සහ <em>කුලී</em> ගණකය</h1>
+    <p class="sub" id="pageSub">බැංකු ණය හෝ උපකරණ කුලී ගිවිසුමක මාසික වාරිකය ගණනය කරන්න — විවිධ විකල්ප සසඳන්න.</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tabbtn on" data-tab="loan" id="tabLoanBtn">🏦 <span id="tabLoanLbl">ණය ගණකය</span><small id="tabLoanSub">Loan Calculator</small></button>
+    <button class="tabbtn" data-tab="lease" id="tabLeaseBtn">🚜 <span id="tabLeaseLbl">කුලී ගණකය</span><small id="tabLeaseSub">Leasing Calculator</small></button>
+  </div>
+
+  <!-- LOAN PANEL -->
+  <div class="panel on" id="panelLoan">
+    <div class="card">
+      <div class="field">
+        <label id="lblLoanName">සැලැස්මේ නම (විකල්ප)</label>
+        <input type="text" id="loanName" placeholder="උදා: BOC වී ණය">
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label id="lblLoanAmount">ණය මුදල (රු.)</label>
+          <input type="number" id="loanAmount" placeholder="500000" min="0" step="1000">
+        </div>
+        <div class="field">
+          <label id="lblLoanRate">වාර්ෂික පොලී අනුපාතය (%)</label>
+          <input type="number" id="loanRate" placeholder="14" min="0" step="0.1">
+        </div>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label id="lblLoanTerm">ණය කාලය (මාස)</label>
+          <input type="number" id="loanTerm" placeholder="36" min="1" step="1">
+          <div class="hint" id="loanTermHint">වසර 3ක් = මාස 36</div>
+        </div>
+        <div class="field">
+          <label id="lblLoanType">ණය වර්ගය</label>
+          <select id="loanType">
+            <option value="reducing" id="optReducing">අඩුවන ශේෂය (බැංකු ක්‍රමය)</option>
+            <option value="flat" id="optFlat">ස්ථාවර අනුපාතය</option>
+          </select>
+        </div>
+      </div>
+      <div class="btnrow">
+        <button class="btn primary" onclick="calcLoan()" id="btnCalcLoan">ගණනය කරන්න</button>
+        <button class="btn ghost" onclick="addLoanToCompare()" id="btnAddLoan">සංසන්දනයට එකතු කරන්න</button>
+      </div>
+      <div class="result" id="loanResult">
+        <div class="rmain" id="loanMonthlyOut">—<small id="lblMonthlyPayment">මාසික වාරිකය</small></div>
+        <div class="rgrid">
+          <div class="rstat"><div class="l" id="lblTotalInterest">මුළු පොලිය</div><div class="v" id="loanTotalInterest">—</div></div>
+          <div class="rstat"><div class="l" id="lblTotalRepay">මුළු ආපසු ගෙවීම</div><div class="v" id="loanTotalRepay">—</div></div>
+          <div class="rstat"><div class="l" id="lblPrincipalOut">ණය මුදල</div><div class="v" id="loanPrincipalOut">—</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEASE PANEL -->
+  <div class="panel" id="panelLease">
+    <div class="card">
+      <div class="field">
+        <label id="lblLeaseName">සැලැස්මේ නම (විකල්ප)</label>
+        <input type="text" id="leaseName" placeholder="උදා: ට්‍රැක්ටරය කුලී">
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label id="lblEquipValue">උපකරණයේ මුළු මිල (රු.)</label>
+          <input type="number" id="equipValue" placeholder="3000000" min="0" step="1000">
+        </div>
+        <div class="field">
+          <label id="lblDownPayment">අත්තිකාරම් මුදල (රු.)</label>
+          <input type="number" id="downPayment" placeholder="500000" min="0" step="1000">
+        </div>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label id="lblLeaseRate">වාර්ෂික පොලී අනුපාතය (%)</label>
+          <input type="number" id="leaseRate" placeholder="16" min="0" step="0.1">
+        </div>
+        <div class="field">
+          <label id="lblLeaseTerm">කුලී කාලය (මාස)</label>
+          <input type="number" id="leaseTerm" placeholder="48" min="1" step="1">
+        </div>
+      </div>
+      <div class="field">
+        <label id="lblResidual">ඉතිරි වටිනාකම / අවසාන මිලදී ගැනීමේ මුදල (රු.)</label>
+        <input type="number" id="residualValue" placeholder="0" min="0" step="1000">
+        <div class="hint" id="residualHint">උපකරණය ආපසු දෙනවා නම් 0 ලෙස තබන්න</div>
+      </div>
+      <div class="toggle-row">
+        <input type="checkbox" id="buyoutCheck">
+        <label for="buyoutCheck" id="lblBuyout">කල් ඉකුත් වූ පසු උපකරණය මිලදී ගන්නවා (ඉතිරි වටිනාකම ගෙවනවා)</label>
+      </div>
+      <div class="btnrow">
+        <button class="btn primary" onclick="calcLease()" id="btnCalcLease">ගණනය කරන්න</button>
+        <button class="btn ghost" onclick="addLeaseToCompare()" id="btnAddLease">සංසන්දනයට එකතු කරන්න</button>
+      </div>
+      <div class="result" id="leaseResult">
+        <div class="rmain" id="leaseMonthlyOut">—<small id="lblMonthlyPaymentLease">මාසික වාරිකය</small></div>
+        <div class="rgrid">
+          <div class="rstat"><div class="l" id="lblTotalCostLease">මුළු පිරිවැය</div><div class="v" id="leaseTotalCost">—</div></div>
+          <div class="rstat"><div class="l" id="lblDownOut">අත්තිකාරම</div><div class="v" id="leaseDownOut">—</div></div>
+          <div class="rstat"><div class="l" id="lblResidualOut">ඉතිරි වටිනාකම</div><div class="v" id="leaseResidualOut">—</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-h"><h2 id="cmpTitle">සැලසුම් සංසන්දනය</h2><span class="rule"></span></div>
+  <div id="cmpHost"></div>
+
+  <footer>
+    <div class="disclaimer" id="disclaimer">මෙම ගණකය තුළින් ලැබෙන ප්‍රතිඵල ආසන්න වශයෙන් පමණි. ඔබේ බැංකුව හෝ මූල්‍ය ආයතනය සමඟ නිශ්චිත කොන්දේසි සහ ගාස්තු තහවුරු කරගන්න. මෙය මූල්‍ය උපදෙශනයක් නොවේ.</div>
+    <div class="credit"><span id="creditPre">Design &amp; development by</span> <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a> &middot; Built in Gampola 🇱🇰</div>
+  </footer>
+</div>
+
+<script>
+const I18N = {
+en:{
+  kicker:'TopGoviya.lk <span class="org">Financial Tools</span>', backLink:'← Back to home',
+  pageTitle:'Loan &amp; <em>Leasing</em> Calculator', pageSub:'Calculate the monthly payment on a bank loan or equipment lease — and compare different plans side by side.',
+  tabLoanLbl:'Loan Calculator', tabLoanSub:'For land, seeds, general farming', tabLeaseLbl:'Leasing Calculator', tabLeaseSub:'For tractors, pumps, machinery',
+  lblLoanName:'Plan name (optional)', phLoanName:'e.g. BOC Paddy Loan',
+  lblLoanAmount:'Loan amount (Rs.)', lblLoanRate:'Annual interest rate (%)',
+  lblLoanTerm:'Loan term (months)', loanTermHint:'3 years = 36 months',
+  lblLoanType:'Interest type', optReducing:'Reducing balance (bank method)', optFlat:'Flat rate',
+  btnCalcLoan:'Calculate', btnAddLoan:'Add to comparison',
+  lblMonthlyPayment:'Monthly payment', lblTotalInterest:'Total interest', lblTotalRepay:'Total repayment', lblPrincipalOut:'Loan amount',
+  lblLeaseName:'Plan name (optional)', phLeaseName:'e.g. Tractor lease',
+  lblEquipValue:'Equipment total price (Rs.)', lblDownPayment:'Down payment (Rs.)',
+  lblLeaseRate:'Annual interest rate (%)', lblLeaseTerm:'Lease term (months)',
+  lblResidual:'Residual value / buyout price at end (Rs.)', residualHint:'Set to 0 if returning the equipment',
+  lblBuyout:'Buying the equipment at end of lease (pay the residual value)',
+  btnCalcLease:'Calculate', btnAddLease:'Add to comparison',
+  lblMonthlyPaymentLease:'Monthly payment', lblTotalCostLease:'Total cost', lblDownOut:'Down payment', lblResidualOut:'Residual value',
+  cmpTitle:'Compare your plans',
+  cmpEmpty:'No plans added yet. Calculate a loan or lease above, then click "Add to comparison" to see them side by side here.',
+  colName:'Plan', colType:'Type', colAmount:'Amount', colRate:'Rate', colTerm:'Term', colMonthly:'Monthly', colTotal:'Total Cost', colAction:'',
+  typeLoan:'Loan', typeLease:'Lease', best:'BEST', months:'mo',
+  disclaimer:"These figures are approximate only. Confirm the exact terms and fees with your bank or financial institution. This is not financial advice.",
+  creditPre:'Design &amp; development by',
+  planNameDefault:'Plan'
+},
+si:{
+  kicker:'TopGoviya.lk <span class="org">මූල්‍ය මෙවලම්</span>', backLink:'← ප්‍රධාන පිටුවට',
+  pageTitle:'ණය සහ <em>කුලී</em> ගණකය', pageSub:'බැංකු ණය හෝ උපකරණ කුලී ගිවිසුමක මාසික වාරිකය ගණනය කරන්න — විවිධ විකල්ප සසඳන්න.',
+  tabLoanLbl:'ණය ගණකය', tabLoanSub:'භූමිය, බීජ, කෘෂිකර්මය සඳහා', tabLeaseLbl:'කුලී ගණකය', tabLeaseSub:'ට්‍රැක්ටර්, පොම්ප, යන්ත්‍ර සඳහා',
+  lblLoanName:'සැලැස්මේ නම (විකල්ප)', phLoanName:'උදා: BOC වී ණය',
+  lblLoanAmount:'ණය මුදල (රු.)', lblLoanRate:'වාර්ෂික පොලී අනුපාතය (%)',
+  lblLoanTerm:'ණය කාලය (මාස)', loanTermHint:'වසර 3ක් = මාස 36',
+  lblLoanType:'ණය වර්ගය', optReducing:'අඩුවන ශේෂය (බැංකු ක්‍රමය)', optFlat:'ස්ථාවර අනුපාතය',
+  btnCalcLoan:'ගණනය කරන්න', btnAddLoan:'සංසන්දනයට එකතු කරන්න',
+  lblMonthlyPayment:'මාසික වාරිකය', lblTotalInterest:'මුළු පොලිය', lblTotalRepay:'මුළු ආපසු ගෙවීම', lblPrincipalOut:'ණය මුදල',
+  lblLeaseName:'සැලැස්මේ නම (විකල්ප)', phLeaseName:'උදා: ට්‍රැක්ටරය කුලී',
+  lblEquipValue:'උපකරණයේ මුළු මිල (රු.)', lblDownPayment:'අත්තිකාරම් මුදල (රු.)',
+  lblLeaseRate:'වාර්ෂික පොලී අනුපාතය (%)', lblLeaseTerm:'කුලී කාලය (මාස)',
+  lblResidual:'ඉතිරි වටිනාකම / අවසාන මිලදී ගැනීමේ මුදල (රු.)', residualHint:'උපකරණය ආපසු දෙනවා නම් 0 ලෙස තබන්න',
+  lblBuyout:'කල් ඉකුත් වූ පසු උපකරණය මිලදී ගන්නවා (ඉතිරි වටිනාකම ගෙවනවා)',
+  btnCalcLease:'ගණනය කරන්න', btnAddLease:'සංසන්දනයට එකතු කරන්න',
+  lblMonthlyPaymentLease:'මාසික වාරිකය', lblTotalCostLease:'මුළු පිරිවැය', lblDownOut:'අත්තිකාරම', lblResidualOut:'ඉතිරි වටිනාකම',
+  cmpTitle:'ඔබේ සැලසුම් සසඳන්න',
+  cmpEmpty:'තවම සැලසුම් එකතු කර නැත. ඉහත ණයක් හෝ කුලියක් ගණනය කර, "සංසන්දනයට එකතු කරන්න" ක්ලික් කරන්න.',
+  colName:'සැලැස්ම', colType:'වර්ගය', colAmount:'මුදල', colRate:'අනුපාතය', colTerm:'කාලය', colMonthly:'මාසිකව', colTotal:'මුළු පිරිවැය', colAction:'',
+  typeLoan:'ණය', typeLease:'කුලී', best:'හොඳම', months:'මාස',
+  disclaimer:'මෙම ගණකය තුළින් ලැබෙන ප්‍රතිඵල ආසන්න වශයෙන් පමණි. ඔබේ බැංකුව හෝ මූල්‍ය ආයතනය සමඟ නිශ්චිත කොන්දේසි සහ ගාස්තු තහවුරු කරගන්න. මෙය මූල්‍ය උපදෙශනයක් නොවේ.',
+  creditPre:'නිර්මාණය හා සංවර්ධනය:',
+  planNameDefault:'සැලැස්ම'
+},
+ta:{
+  kicker:'TopGoviya.lk <span class="org">நிதிக் கருவிகள்</span>', backLink:'← முகப்புக்கு திரும்பு',
+  pageTitle:'கடன் மற்றும் <em>குத்தகை</em> கணிப்பான்', pageSub:'வங்கிக் கடன் அல்லது உபகரண குத்தகை ஒப்பந்தத்தின் மாதாந்திர தவணையை கணக்கிடுங்கள் — வெவ்வேறு திட்டங்களை ஒப்பிடுங்கள்.',
+  tabLoanLbl:'கடன் கணிப்பான்', tabLoanSub:'நிலம், விதைகள், விவசாயத்திற்கு', tabLeaseLbl:'குத்தகை கணிப்பான்', tabLeaseSub:'டிராக்டர், பம்ப், இயந்திரங்களுக்கு',
+  lblLoanName:'திட்டத்தின் பெயர் (விருப்பம்)', phLoanName:'உதா: BOC நெல் கடன்',
+  lblLoanAmount:'கடன் தொகை (ரூ.)', lblLoanRate:'வருடாந்த வட்டி விகிதம் (%)',
+  lblLoanTerm:'கடன் காலம் (மாதங்கள்)', loanTermHint:'3 ஆண்டுகள் = 36 மாதங்கள்',
+  lblLoanType:'வட்டி வகை', optReducing:'குறையும் இருப்பு (வங்கி முறை)', optFlat:'நிலையான விகிதம்',
+  btnCalcLoan:'கணக்கிடு', btnAddLoan:'ஒப்பீட்டில் சேர்க்க',
+  lblMonthlyPayment:'மாதாந்திர தவணை', lblTotalInterest:'மொத்த வட்டி', lblTotalRepay:'மொத்த திருப்பிச் செலுத்தல்', lblPrincipalOut:'கடன் தொகை',
+  lblLeaseName:'திட்டத்தின் பெயர் (விருப்பம்)', phLeaseName:'உதா: டிராக்டர் குத்தகை',
+  lblEquipValue:'உபகரணத்தின் மொத்த விலை (ரூ.)', lblDownPayment:'முன்பணம் (ரூ.)',
+  lblLeaseRate:'வருடாந்த வட்டி விகிதம் (%)', lblLeaseTerm:'குத்தகை காலம் (மாதங்கள்)',
+  lblResidual:'மீதி மதிப்பு / இறுதி வாங்கும் விலை (ரூ.)', residualHint:'உபகரணத்தை திரும்பக் கொடுத்தால் 0 எனக் குறிக்கவும்',
+  lblBuyout:'குத்தகை முடிவில் உபகரணத்தை வாங்குகிறேன் (மீதி மதிப்பைச் செலுத்தி)',
+  btnCalcLease:'கணக்கிடு', btnAddLease:'ஒப்பீட்டில் சேர்க்க',
+  lblMonthlyPaymentLease:'மாதாந்திர தவணை', lblTotalCostLease:'மொத்த செலவு', lblDownOut:'முன்பணம்', lblResidualOut:'மீதி மதிப்பு',
+  cmpTitle:'உங்கள் திட்டங்களை ஒப்பிடுங்கள்',
+  cmpEmpty:'இன்னும் திட்டங்கள் சேர்க்கப்படவில்லை. மேலே ஒரு கடன் அல்லது குத்தகையை கணக்கிட்டு, "ஒப்பீட்டில் சேர்க்க" என்பதைக் கிளிக் செய்யவும்.',
+  colName:'திட்டம்', colType:'வகை', colAmount:'தொகை', colRate:'விகிதம்', colTerm:'காலம்', colMonthly:'மாதாந்திரம்', colTotal:'மொத்த செலவு', colAction:'',
+  typeLoan:'கடன்', typeLease:'குத்தகை', best:'சிறந்தது', months:'மா',
+  disclaimer:'இந்தக் கணிப்பானின் முடிவுகள் தோராயமானவை மட்டுமே. உங்கள் வங்கி அல்லது நிதி நிறுவனத்துடன் சரியான நிபந்தனைகள் மற்றும் கட்டணங்களை உறுதிப்படுத்தவும். இது நிதி ஆலோசனை அல்ல.',
+  creditPre:'வடிவமைப்பு &amp; உருவாக்கம்:',
+  planNameDefault:'திட்டம்'
+}
+};
+let lang="si";
+let plans=[]; // comparison list: {name, type, amount, rate, term, monthly, total}
+
+function t(k){ return (I18N[lang]&&I18N[lang][k]) || I18N.en[k] || k; }
+function fmt(n){ if(n==null||isNaN(n)) return "—"; return Math.round(n).toLocaleString("en-US"); }
+
+function applyLang(){
+  document.documentElement.lang = lang;
+  const set=(id,html)=>{ const e=document.getElementById(id); if(e) e.innerHTML=html; };
+  set("kickerTxt", t("kicker")); set("backLink", t("backLink"));
+  set("pageTitle", t("pageTitle")); set("pageSub", t("pageSub"));
+  set("tabLoanLbl", t("tabLoanLbl")); set("tabLoanSub", t("tabLoanSub"));
+  set("tabLeaseLbl", t("tabLeaseLbl")); set("tabLeaseSub", t("tabLeaseSub"));
+  set("lblLoanName", t("lblLoanName")); set("lblLoanAmount", t("lblLoanAmount")); set("lblLoanRate", t("lblLoanRate"));
+  set("lblLoanTerm", t("lblLoanTerm")); set("loanTermHint", t("loanTermHint")); set("lblLoanType", t("lblLoanType"));
+  set("optReducing", t("optReducing")); set("optFlat", t("optFlat"));
+  set("btnCalcLoan", t("btnCalcLoan")); set("btnAddLoan", t("btnAddLoan"));
+  set("lblMonthlyPayment", t("lblMonthlyPayment")); set("lblTotalInterest", t("lblTotalInterest"));
+  set("lblTotalRepay", t("lblTotalRepay")); set("lblPrincipalOut", t("lblPrincipalOut"));
+  set("lblLeaseName", t("lblLeaseName")); set("lblEquipValue", t("lblEquipValue")); set("lblDownPayment", t("lblDownPayment"));
+  set("lblLeaseRate", t("lblLeaseRate")); set("lblLeaseTerm", t("lblLeaseTerm"));
+  set("lblResidual", t("lblResidual")); set("residualHint", t("residualHint")); set("lblBuyout", t("lblBuyout"));
+  set("btnCalcLease", t("btnCalcLease")); set("btnAddLease", t("btnAddLease"));
+  set("lblMonthlyPaymentLease", t("lblMonthlyPaymentLease")); set("lblTotalCostLease", t("lblTotalCostLease"));
+  set("lblDownOut", t("lblDownOut")); set("lblResidualOut", t("lblResidualOut"));
+  set("cmpTitle", t("cmpTitle")); set("creditPre", t("creditPre")); set("disclaimer", t("disclaimer"));
+  const ln=document.getElementById("loanName"); if(ln) ln.placeholder=t("phLoanName");
+  const len_=document.getElementById("leaseName"); if(len_) len_.placeholder=t("phLeaseName");
+  renderComparison();
+}
+function setLang(l){
+  lang=l;
+  document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("on", b.dataset.lang===l));
+  applyLang();
+}
+document.querySelector(".lang").addEventListener("click", e=>{
+  const b=e.target.closest("button[data-lang]"); if(b) setLang(b.dataset.lang);
+});
+
+document.querySelectorAll(".tabbtn").forEach(b=>{
+  b.addEventListener("click", ()=>{
+    document.querySelectorAll(".tabbtn").forEach(x=>x.classList.remove("on"));
+    document.querySelectorAll(".panel").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");
+    document.getElementById(b.dataset.tab==="loan" ? "panelLoan" : "panelLease").classList.add("on");
+  });
+});
+
+/* ---- Loan math (amortizing / reducing balance, or flat rate) ---- */
+function loanMonthly(P, annualRatePct, n, type){
+  const r = (annualRatePct/100)/12;
+  if(type==="flat"){
+    const totalInterest = P * (annualRatePct/100) * (n/12);
+    const totalRepay = P + totalInterest;
+    return { monthly: totalRepay/n, totalInterest, totalRepay };
+  }
+  if(r===0){
+    return { monthly: P/n, totalInterest: 0, totalRepay: P };
+  }
+  const pow = Math.pow(1+r, n);
+  const monthly = P * r * pow / (pow - 1);
+  const totalRepay = monthly * n;
+  const totalInterest = totalRepay - P;
+  return { monthly, totalInterest, totalRepay };
+}
+function calcLoan(){
+  const P = parseFloat(document.getElementById("loanAmount").value)||0;
+  const rate = parseFloat(document.getElementById("loanRate").value)||0;
+  const n = parseInt(document.getElementById("loanTerm").value)||0;
+  const type = document.getElementById("loanType").value;
+  if(P<=0 || n<=0){ return; }
+  const res = loanMonthly(P, rate, n, type);
+  document.getElementById("loanMonthlyOut").innerHTML = "Rs. "+fmt(res.monthly)+'<small>'+t("lblMonthlyPayment")+'</small>';
+  document.getElementById("loanTotalInterest").textContent = "Rs. "+fmt(res.totalInterest);
+  document.getElementById("loanTotalRepay").textContent = "Rs. "+fmt(res.totalRepay);
+  document.getElementById("loanPrincipalOut").textContent = "Rs. "+fmt(P);
+  document.getElementById("loanResult").classList.add("show");
+}
+function addLoanToCompare(){
+  const P = parseFloat(document.getElementById("loanAmount").value)||0;
+  const rate = parseFloat(document.getElementById("loanRate").value)||0;
+  const n = parseInt(document.getElementById("loanTerm").value)||0;
+  const type = document.getElementById("loanType").value;
+  if(P<=0 || n<=0){ return; }
+  const res = loanMonthly(P, rate, n, type);
+  const name = document.getElementById("loanName").value.trim() || (t("planNameDefault")+" "+(plans.length+1));
+  plans.push({ name, kind:"loan", amount:P, rate, term:n, monthly:res.monthly, total:res.totalRepay });
+  renderComparison();
+}
+
+/* ---- Lease math (amortizing with a residual/balloon value at end) ---- */
+function leaseMonthly(equipValue, downPayment, annualRatePct, n, residual){
+  const P = Math.max(equipValue - downPayment, 0);
+  const r = (annualRatePct/100)/12;
+  let monthly;
+  if(r===0){
+    monthly = (P - residual) / n;
+  } else {
+    const pow = Math.pow(1+r, n);
+    const pvResidual = residual / pow;
+    monthly = (P - pvResidual) * r * pow / (pow - 1);
+  }
+  if(monthly < 0) monthly = 0;
+  return monthly;
+}
+function calcLease(){
+  const equipValue = parseFloat(document.getElementById("equipValue").value)||0;
+  const downPayment = parseFloat(document.getElementById("downPayment").value)||0;
+  const rate = parseFloat(document.getElementById("leaseRate").value)||0;
+  const n = parseInt(document.getElementById("leaseTerm").value)||0;
+  const residual = parseFloat(document.getElementById("residualValue").value)||0;
+  const buyout = document.getElementById("buyoutCheck").checked;
+  if(equipValue<=0 || n<=0){ return; }
+  const monthly = leaseMonthly(equipValue, downPayment, rate, n, residual);
+  const totalCost = downPayment + (monthly*n) + (buyout ? residual : 0);
+  document.getElementById("leaseMonthlyOut").innerHTML = "Rs. "+fmt(monthly)+'<small>'+t("lblMonthlyPaymentLease")+'</small>';
+  document.getElementById("leaseTotalCost").textContent = "Rs. "+fmt(totalCost);
+  document.getElementById("leaseDownOut").textContent = "Rs. "+fmt(downPayment);
+  document.getElementById("leaseResidualOut").textContent = buyout ? ("Rs. "+fmt(residual)) : "—";
+  document.getElementById("leaseResult").classList.add("show");
+}
+function addLeaseToCompare(){
+  const equipValue = parseFloat(document.getElementById("equipValue").value)||0;
+  const downPayment = parseFloat(document.getElementById("downPayment").value)||0;
+  const rate = parseFloat(document.getElementById("leaseRate").value)||0;
+  const n = parseInt(document.getElementById("leaseTerm").value)||0;
+  const residual = parseFloat(document.getElementById("residualValue").value)||0;
+  const buyout = document.getElementById("buyoutCheck").checked;
+  if(equipValue<=0 || n<=0){ return; }
+  const monthly = leaseMonthly(equipValue, downPayment, rate, n, residual);
+  const totalCost = downPayment + (monthly*n) + (buyout ? residual : 0);
+  const name = document.getElementById("leaseName").value.trim() || (t("planNameDefault")+" "+(plans.length+1));
+  plans.push({ name, kind:"lease", amount:equipValue, rate, term:n, monthly, total:totalCost });
+  renderComparison();
+}
+
+function removePlan(idx){ plans.splice(idx,1); renderComparison(); }
+
+function renderComparison(){
+  const host=document.getElementById("cmpHost");
+  if(!plans.length){
+    host.innerHTML = '<div class="cmp-empty">'+t("cmpEmpty")+'</div>';
+    return;
+  }
+  const minTotal = Math.min(...plans.map(p=>p.total));
+  let rows = plans.map((p,i)=>{
+    const isBest = p.total===minTotal;
+    return '<tr'+(isBest?' class="best"':'')+'>'+
+      '<td class="name">'+p.name+(isBest?'<span class="best-badge">'+t("best")+'</span>':'')+'</td>'+
+      '<td>'+(p.kind==="loan"?t("typeLoan"):t("typeLease"))+'</td>'+
+      '<td>Rs. '+fmt(p.amount)+'</td>'+
+      '<td>'+p.rate+'%</td>'+
+      '<td>'+p.term+' '+t("months")+'</td>'+
+      '<td>Rs. '+fmt(p.monthly)+'</td>'+
+      '<td>Rs. '+fmt(p.total)+'</td>'+
+      '<td><button class="rmbtn" onclick="removePlan('+i+')" aria-label="Remove">&#10005;</button></td>'+
+    '</tr>';
+  }).join("");
+  host.innerHTML = '<div class="cmp-table"><table class="cmp"><thead><tr>'+
+    '<th>'+t("colName")+'</th><th>'+t("colType")+'</th><th>'+t("colAmount")+'</th><th>'+t("colRate")+'</th>'+
+    '<th>'+t("colTerm")+'</th><th>'+t("colMonthly")+'</th><th>'+t("colTotal")+'</th><th></th>'+
+    '</tr></thead><tbody>'+rows+'</tbody></table></div>';
+}
+
+applyLang();
+</script>
+</body>
+</html>
