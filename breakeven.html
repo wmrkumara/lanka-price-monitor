@@ -242,15 +242,15 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
   <!-- FARMER RECORD KIT DOWNLOAD -->
   <div style="background:var(--card);border:1px solid var(--line-strong);border-radius:var(--r);padding:16px 18px;margin-bottom:22px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;box-shadow:var(--shadow)">
     <div>
-      <div style="font-family:'Newsreader',serif;font-size:16.5px;color:var(--ink);margin-bottom:4px;line-height:1.3">
+      <div style="font-family:'Newsreader',serif;font-size:16.5px;color:var(--ink);margin-bottom:4px;line-height:1.3" id="kit-title">
         📋 වගා වියදම් අතින් සටහන් කරගන්න
       </div>
-      <div style="font-size:12.5px;color:var(--muted);line-height:1.4">
+      <div style="font-size:12.5px;color:var(--muted);line-height:1.4" id="kit-desc">
         නොමිලේ මුද්‍රණ පිටපත — සාරාංශ පත්‍රය + දෛනික සටහන් පත්‍රය (සිංහල · தமிழ் · English)
       </div>
     </div>
     <a href="downloads/topgoviya-farmer-record-kit.pdf" target="_blank" rel="noopener"
-       style="background:var(--petrol);color:#fff;font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:10px;text-decoration:none;white-space:nowrap;flex-shrink:0">
+       style="background:var(--petrol);color:#fff;font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:10px;text-decoration:none;white-space:nowrap;flex-shrink:0" id="kit-btn">
       ⬇ PDF බාගත කරගන්න
     </a>
   </div>
@@ -397,6 +397,9 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
 let lang = "si";
 const T = {
   si:{
+    kitTitle:"📋 වගා වියදම් අතින් සටහන් කරගන්න",
+    kitDesc:"නොමිලේ මුද්‍රණ පිටපත — සාරාංශ පත්‍රය + දෛනික සටහන් පත්‍රය (සිංහල · தமிழ் · English)",
+    kitBtn:"⬇ PDF බාගත කරගන්න",
     navRetail:"සිල්ලර",navWholesale:"තොග",navWeather:"කාලගුණ",navBe:"අලාභ-ලාභ",
     kickerTag:"ගොවි තීරණ මෙවලම",pageTitle:"ලාභ අලාභ සීමා <em>ගණකය</em>",
     pageDesc:"ඔබේ භෝගයේ වගා පිරිවැය ඇතුළු කරන්න — ලාභ ලැබීමට අවශ්‍ය අවම මිල ක්ෂණිකව දැනගන්න.",
@@ -456,6 +459,9 @@ const T = {
     errHarvest:"மகசூல் அளவை உள்ளிடவும்.",errCosts:"குறைந்தது ஒரு செலவை உள்ளிடவும்.",
     shareMsg:"🧮 *TopGoviya.lk — முறிவு கணிப்பி*\n\n🌾 பயிர்: %CROP%\n💰 மொத்த செலவு: ரூ.%COST%\n📦 மகசூல்: %KG% kg\n🎯 முறிவு விலை: ரூ.%BE%/kg\n\n%REC%\n\n🔗 https://topgoviya.lk/breakeven.html\n🤝 *இந்த தகவலை உங்கள் நண்பர்களுடன் பகிருங்கள்!*",
     shareProfit:"✅ தற்போது லாபகரமானது!",shareLoss:"⚠️ தற்போது நஷ்டம் — காத்திருங்கள்.",shareNoData:"📊 சந்தை ஒப்பீடு: தரவு இல்லை.",
+    kitTitle:"📋 உங்கள் விவசாய செலவுகளை கையால் பதிவு செய்யுங்கள்",
+    kitDesc:"இலவச அச்சு பிரதி — சுருக்க தாள் + தினசரி பதிவேடு (சிங்களம் · தமிழ் · English)",
+    kitBtn:"⬇ PDF பதிவிறக்கவும்",
   },
   en:{
     navRetail:"Retail",navWholesale:"Wholesale",navWeather:"Weather",navBe:"Break-even",
@@ -486,6 +492,9 @@ const T = {
     errHarvest:"Please enter your expected harvest.",errCosts:"Please enter at least one cost.",
     shareMsg:"🧮 *TopGoviya.lk — Break-even Calculator*\n\n🌾 Crop: %CROP%\n💰 Total Cost: Rs.%COST%\n📦 Harvest: %KG% kg\n🎯 Break-even: Rs.%BE%/kg\n\n%REC%\n\n🔗 https://topgoviya.lk/breakeven.html\n🤝 *Share this with your farming friends!*",
     shareProfit:"✅ Currently profitable!",shareLoss:"⚠️ Loss at current prices — wait.",shareNoData:"📊 Market comparison: data not available.",
+    kitTitle:"📋 Track your farm costs by hand",
+    kitDesc:"Free printable copy — Summary Sheet + Daily Log Sheet (Sinhala · Tamil · English)",
+    kitBtn:"⬇ Download PDF",
   }
 };
 function t(k){return (T[lang]&&T[lang][k])||T.en[k]||k;}
@@ -530,6 +539,10 @@ function applyLang(){
   const areaUnit = lang==="en" ? "(acres)" : lang==="ta" ? "(ஏக்கர்)" : "(අක්කර)";
   document.getElementById("lbl-area").innerHTML=t("lblArea");
   document.getElementById("lbl-harvest").innerHTML=t("lblHarvest");
+  // farmer record kit card
+  document.getElementById("kit-title").textContent=t("kitTitle");
+  document.getElementById("kit-desc").textContent=t("kitDesc");
+  document.getElementById("kit-btn").textContent=t("kitBtn");
 }
 
 document.querySelector(".lang").addEventListener("click",function(e){
