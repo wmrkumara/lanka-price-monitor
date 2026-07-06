@@ -1111,10 +1111,10 @@ function switchMode(mode){
     if(host)host.innerHTML=gapChart(curDetail);
     if(mh)mh.innerHTML=gapAlert(curDetail);
     setTimeout(()=>{
-      const tcInputs=document.querySelectorAll("[id^='tc_']");
-      tcInputs.forEach(inp=>{
-        const tcid=inp.id.replace("tc_","");
-        inp.value=10;calcTransport2(tcid);
+      const panels=document.querySelectorAll("[id^='trader_inputs_']");
+      panels.forEach(panel=>{
+        const tcid=panel.id.replace("trader_inputs_","");
+        calcTransport2(tcid);
       });
     },200);
     document.querySelectorAll("#ranges button").forEach(b=>b.classList.remove("on"));
@@ -1196,12 +1196,15 @@ function calcPanel(d){
             ${traderMkts.map(k=>`<option value="${k}">${tMkt(k)} — ${lang==="si"?"තොග":lang==="ta"?"மொத்தம்":"W"}: රු.${fmt(ws[k])}/kg</option>`).join("")}
           </select>
         </div>
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-          <label style="font-size:13px;color:#3a403a;min-width:130px">${lang==="si"?"ප්‍රවාහන පිරිවැය:":lang==="ta"?"போக்குவரத்து செலவு:":"Transport cost:"}</label>
-          <input id="tc_${cid}" type="number" min="0" max="500" value="10"
-            style="width:80px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;padding:7px 10px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
-            oninput="calcTransport2('${cid}')">
-          <span style="font-size:13px;color:#7a7264">රු./kg</span>
+        <div style="display:flex;flex-direction:column;gap:6px" id="traderTransportBox_${cid}">
+          <label style="font-size:13px;color:#3a403a;font-weight:700">${lang==="si"?"ප්‍රවාහන පිරිවැය (එක් එක් වෙළඳපොළට):":lang==="ta"?"போக்குவரத்து செலவு (ஒவ்வொரு சந்தைக்கும்):":"Transport cost (per market):"}</label>
+          ${traderMkts.map(k=>`<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-left:4px">
+            <label style="font-size:12.5px;color:#3a403a;min-width:110px">${tMkt(k)}:</label>
+            <input id="ttc_${cid}_${k}" type="number" min="0" max="500" value="10"
+              style="width:80px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:6px 9px;border:1.5px solid #cdbf9f;border-radius:8px;background:#fffdf7;color:#191d1a"
+              oninput="calcTransport2('${cid}')">
+            <span style="font-size:12px;color:#7a7264">රු./kg</span>
+          </div>`).join("")}
         </div>
         <div>
           <button type="button" onclick="toggleDistanceBox('${cid}')"
@@ -1829,8 +1832,11 @@ async function calcRoadDistance(cid){
 function applyDistanceRate(cid){
   const km=window["_distKm_"+cid];
   const rateInput=document.getElementById("distRate_"+cid);
-  const tcInput=document.getElementById("tc_"+cid);
-  if(km==null||!rateInput||!tcInput)return;
+  const buySelect=document.getElementById("tbuy_"+cid);
+  if(km==null||!rateInput||!buySelect)return;
+  const buyMkt=buySelect.value;
+  const tcInput=document.getElementById("ttc_"+cid+"_"+buyMkt);
+  if(!tcInput)return;
   const rate=parseFloat(rateInput.value)||0;
   if(rate>0){
     tcInput.value=Math.round(km*rate);
@@ -1839,7 +1845,6 @@ function applyDistanceRate(cid){
 }
 
 function calcTransport2(tcid){
-  const tc=parseFloat(document.getElementById("tc_"+tcid)?.value)||0;
   const sellInput=document.getElementById("tsell_"+tcid);
   const buySelect=document.getElementById("tbuy_"+tcid);
   const data=(window._tcData||{})[tcid];
@@ -1847,13 +1852,14 @@ function calcTransport2(tcid){
   const el=document.getElementById("tr_"+tcid);
   if(!el)return;
 
-  /* If sell price entered — use custom sell price */
+  /* If sell price entered — use custom sell price, transport cost specific to the selected buy market */
   if(sellInput&&sellInput.value&&buySelect){
     const sellPrice=parseFloat(sellInput.value)||0;
     const buyMkt=buySelect.value;
     const buyData=data.find(r=>r.k===buyMkt);
     if(!buyData)return;
     const buyPrice=buyData.ws;
+    const tc=parseFloat(document.getElementById("ttc_"+tcid+"_"+buyMkt)?.value)||0;
     const net=sellPrice-buyPrice-tc;
     const color=net>0?"#2c7a52":net<0?"#b23a2e":"#8a8170";
     el.innerHTML=`
@@ -1876,13 +1882,16 @@ function calcTransport2(tcid){
         <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:20px;color:${color}">${net>=0?"+":""}රු.${fmt(net)}/kg</span>
       </div>
       <div style="margin-top:6px;font-size:12px;font-weight:700;padding:8px 12px;border-radius:8px;background:#0e4f4a;color:#ffd98a">
-        ${net>50?"🎯 හොඳ ලාභයක්! විකුණන්න!":net>0?"✅ ලාభ ලැබේ.":net===0?"⚠️ Break-even — ලාභ නැත.":"❌ අලාභ! sell price ඉහළ කරන්න."}
+        ${net>50?"🎯 හොඳ ලාභයක්! විකුණන්න!":net>0?"✅ ලාභ ලැබේ.":net===0?"⚠️ Break-even — ලාභ නැත.":"❌ අලාභ! sell price ඉහළ කරන්න."}
       </div>`;
     return;
   }
 
-  /* No sell price — show market margins */
-  const results=data.map(r=>({...r,net:r.margin-tc})).sort((a,b)=>b.net-a.net);
+  /* No sell price — show market margins, each using ITS OWN transport cost (distance differs per market) */
+  const results=data.map(r=>{
+    const tc=parseFloat(document.getElementById("ttc_"+tcid+"_"+r.k)?.value)||0;
+    return {...r,tc,net:r.margin-tc};
+  }).sort((a,b)=>b.net-a.net);
   const best=results[0];
   const html=results.map((r,i)=>{
     const color=r.net>0?"#2c7a52":r.net<0?"#b23a2e":"#8a8170";
@@ -1891,7 +1900,7 @@ function calcTransport2(tcid){
     const border=i===0&&r.net>0?"#2c7a52":"#e3d9c4";
     return `<div style="display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:8px;background:${bg};border:1px solid ${border};flex-wrap:wrap">
       <span style="font-size:13px;font-weight:700;min-width:85px">${icon}${r.k}</span>
-      <span style="font-size:11px;color:#7a7264">W:රු.${fmt(r.ws)} → R:රු.${fmt(r.rt)}</span>
+      <span style="font-size:11px;color:#7a7264">W:රු.${fmt(r.ws)} → R:රු.${fmt(r.rt)} · Transport:රු.${r.tc}</span>
       <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;color:${color};margin-left:auto">${r.net>=0?"+":""}රු.${fmt(r.net)}/kg</span>
     </div>`;
   }).join("");
@@ -1974,12 +1983,15 @@ function gapAlert(d){
 
       <!-- TRADER MODE -->
       <div id="trader_inputs_${tcid}">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <label style="font-size:12px;color:#3a403a;min-width:110px">Transport cost:</label>
-          <input id="tc_${tcid}" type="number" min="0" max="500" value="10"
-            style="width:75px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;padding:6px 8px;border:1.5px solid #cdbf9f;border-radius:7px;background:#fffdf7;color:#191d1a"
-            oninput="calcTransport2('${tcid}')">
-          <span style="font-size:12px;color:#7a7264">රු./kg</span>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px" id="traderTransportBox_${tcid}">
+          <label style="font-size:12px;color:#3a403a;font-weight:700">Transport cost (per market):</label>
+          ${mkts.map(k=>`<div style="display:flex;align-items:center;gap:8px;padding-left:4px">
+            <label style="font-size:11.5px;color:#3a403a;min-width:100px">${tMkt(k)}:</label>
+            <input id="ttc_${tcid}_${k}" type="number" min="0" max="500" value="10"
+              style="width:75px;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;padding:5px 7px;border:1.5px solid #cdbf9f;border-radius:7px;background:#fffdf7;color:#191d1a"
+              oninput="calcTransport2('${tcid}')">
+            <span style="font-size:11px;color:#7a7264">රු./kg</span>
+          </div>`).join("")}
         </div>
       </div>
 
