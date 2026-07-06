@@ -1846,44 +1846,38 @@ function applyDistanceRate(cid){
 
 function calcTransport2(tcid){
   const sellInput=document.getElementById("tsell_"+tcid);
-  const buySelect=document.getElementById("tbuy_"+tcid);
   const data=(window._tcData||{})[tcid];
   if(!data||!data.length)return;
   const el=document.getElementById("tr_"+tcid);
   if(!el)return;
 
-  /* If sell price entered — use custom sell price, transport cost specific to the selected buy market */
-  if(sellInput&&sellInput.value&&buySelect){
+  /* If sell price entered — compare ALL markets at that same sell price, each using its own buy price + its own transport cost */
+  if(sellInput&&sellInput.value){
     const sellPrice=parseFloat(sellInput.value)||0;
-    const buyMkt=buySelect.value;
-    const buyData=data.find(r=>r.k===buyMkt);
-    if(!buyData)return;
-    const buyPrice=buyData.ws;
-    const tc=parseFloat(document.getElementById("ttc_"+tcid+"_"+buyMkt)?.value)||0;
-    const net=sellPrice-buyPrice-tc;
-    const color=net>0?"#2c7a52":net<0?"#b23a2e":"#8a8170";
-    el.innerHTML=`
-      <div style="background:#f4efe4;border-radius:8px;padding:10px 12px;font-size:12px;color:#7a7264;margin-bottom:6px">
-        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
-          <span>ගෙනා මිල (${buyMkt}):</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-weight:700">රු.${fmt(buyPrice)}/kg</span>
+    const results=data.map(r=>{
+      const tc=parseFloat(document.getElementById("ttc_"+tcid+"_"+r.k)?.value)||0;
+      const net=sellPrice-r.ws-tc;
+      return {...r,tc,net};
+    }).sort((a,b)=>b.net-a.net);
+    const best=results[0];
+    const html=results.map((r,i)=>{
+      const color=r.net>0?"#2c7a52":r.net<0?"#b23a2e":"#8a8170";
+      const bg=i===0&&r.net>0?"#e3efe6":"#f4efe4";
+      const border=i===0&&r.net>0?"#2c7a52":"#e3d9c4";
+      const icon=i===0&&r.net>0?"🏆 ":r.net>0?"✅ ":"❌ ";
+      return `<div style="padding:8px 12px;border-radius:8px;background:${bg};border:1px solid ${border};margin-bottom:4px">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <span style="font-size:13px;font-weight:700">${icon}${r.k}</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:${color}">${r.net>=0?"+":""}රු.${fmt(r.net)}/kg</span>
         </div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
-          <span>Transport cost:</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-weight:700">- රු.${tc}/kg</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;border-top:1px dashed #cdbf9f;padding-top:4px;margin-top:4px">
-          <span>ඔබේ sell මිල:</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#a9802a">රු.${fmt(sellPrice)}/kg</span>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:10px;background:${net>0?"#e3efe6":"#f7e6e2"};border:1.5px solid ${net>0?"#2c7a52":"#b23a2e"}">
-        <span style="font-size:14px;font-weight:700">${net>0?"✅":"❌"} ශුද්ධ ලාභය</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:20px;color:${color}">${net>=0?"+":""}රු.${fmt(net)}/kg</span>
-      </div>
-      <div style="margin-top:6px;font-size:12px;font-weight:700;padding:8px 12px;border-radius:8px;background:#0e4f4a;color:#ffd98a">
-        ${net>50?"🎯 හොඳ ලාභයක්! විකුණන්න!":net>0?"✅ ලාභ ලැබේ.":net===0?"⚠️ Break-even — ලාභ නැත.":"❌ අලාභ! sell price ඉහළ කරන්න."}
+        <div style="font-size:11px;color:#7a7264;margin-top:3px">W:රු.${fmt(r.ws)} - Transport:රු.${r.tc} → Sell:රු.${fmt(sellPrice)}</div>
       </div>`;
+    }).join("");
+    const advice=best.net>0
+      ?"🎯 "+best.k+" — හොඳම ලාභය! රු."+fmt(best.net)+"/kg"
+      :"❌ සියලු වෙළඳපොළ — අලාභ! Transport cost අඩු කරන්න හෝ sell price ඉහළ කරන්න.";
+    el.innerHTML=`<div style="font-size:11px;font-weight:700;color:#0e4f4a;margin-bottom:6px">💰 Trader Profit Comparison (Sell at රු.${fmt(sellPrice)}/kg):</div>`+html+
+      `<div style="margin-top:6px;font-size:12px;font-weight:700;padding:8px 12px;border-radius:8px;background:#0e4f4a;color:#ffd98a">${advice}</div>`;
     return;
   }
 
