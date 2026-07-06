@@ -1,9 +1,9 @@
 /* ===== TopGoviya PWA Service Worker ===== */
-/* Version: 2.3 | topgoviya.lk | Built in Gampola 🇱🇰 */
-/* Updated: July 2026 — loan-calculator.html added (Loan & Leasing Calculator) */
+/* Version: 2.4 | topgoviya.lk | Built in Gampola 🇱🇰 */
+/* Updated: July 2026 — fixed harti_data.json caching (was stuck on stale wholesale data) */
 
-const CACHE_NAME = 'topgoviya-v8';
-const DATA_CACHE = 'topgoviya-data-v8';
+const CACHE_NAME = 'topgoviya-v9';
+const DATA_CACHE = 'topgoviya-data-v9';
 
 /* ── Static files to cache for offline use ── */
 const STATIC_ASSETS = [
@@ -32,7 +32,7 @@ const STATIC_ASSETS = [
 
 /* ── Install — cache all static assets ── */
 self.addEventListener('install', event => {
-  console.log('[TopGoviya SW v2.3] Installing...');
+  console.log('[TopGoviya SW v2.4] Installing...');
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       console.log('[TopGoviya SW] Caching all pages + assets');
@@ -46,7 +46,7 @@ self.addEventListener('install', event => {
 
 /* ── Activate — remove old caches ── */
 self.addEventListener('activate', event => {
-  console.log('[TopGoviya SW v2.3] Activating...');
+  console.log('[TopGoviya SW v2.4] Activating...');
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
@@ -65,8 +65,10 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
-  /* data.json — always network first (fresh prices!) */
-  if (url.pathname.includes('data.json') || url.href.includes('data.json')) {
+  /* data.json & harti_data.json — always network first (fresh prices!) */
+  if (url.pathname.includes('data.json') || url.href.includes('data.json') ||
+      url.pathname.includes('harti_data.json') || url.href.includes('harti_data.json') ||
+      url.pathname.includes('bulletin_data.json') || url.href.includes('bulletin_data.json')) {
     event.respondWith(
       fetch(event.request)
         .then(response => {
@@ -152,4 +154,4 @@ self.addEventListener('notificationclick', event => {
   );
 });
 
-console.log('[TopGoviya SW v2.3] Service Worker loaded ✅ | topgoviya.lk');
+console.log('[TopGoviya SW v2.4] Service Worker loaded ✅ | topgoviya.lk');
