@@ -2045,7 +2045,7 @@ function calcArbitrage(cid) {
   const totalCost   = (buyPrice + tc) * qty;
   const totalProfit = profitPerKg * qty;
   const totalRevenue= sellPrice * qty;
-  const margin      = buyPrice > 0 ? ((profitPerKg / buyPrice) * 100).toFixed(1) : 0;
+  const margin      = (buyPrice+tc) > 0 ? ((profitPerKg / (buyPrice+tc)) * 100).toFixed(1) : 0;
   const isProfit    = profitPerKg > 0;
   const isSame      = buyMkt === sellMkt;
 
