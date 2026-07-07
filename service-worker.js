@@ -1,9 +1,9 @@
 /* ===== TopGoviya PWA Service Worker ===== */
-/* Version: 2.4 | topgoviya.lk | Built in Gampola 🇱🇰 */
-/* Updated: July 2026 — fixed harti_data.json caching (was stuck on stale wholesale data) */
+/* Version: 2.5 | topgoviya.lk | Built in Gampola 🇱🇰 */
+/* Updated: July 2026 — bumped cache version so browsers pick up updated wholesale.html/index.html (Farmer/Trader calculator fixes) */
 
-const CACHE_NAME = 'topgoviya-v9';
-const DATA_CACHE = 'topgoviya-data-v9';
+const CACHE_NAME = 'topgoviya-v10';
+const DATA_CACHE = 'topgoviya-data-v10';
 
 /* ── Static files to cache for offline use ── */
 const STATIC_ASSETS = [
@@ -32,7 +32,7 @@ const STATIC_ASSETS = [
 
 /* ── Install — cache all static assets ── */
 self.addEventListener('install', event => {
-  console.log('[TopGoviya SW v2.4] Installing...');
+  console.log('[TopGoviya SW v2.5] Installing...');
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       console.log('[TopGoviya SW] Caching all pages + assets');
@@ -46,7 +46,7 @@ self.addEventListener('install', event => {
 
 /* ── Activate — remove old caches ── */
 self.addEventListener('activate', event => {
-  console.log('[TopGoviya SW v2.4] Activating...');
+  console.log('[TopGoviya SW v2.5] Activating...');
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
@@ -154,4 +154,4 @@ self.addEventListener('notificationclick', event => {
   );
 });
 
-console.log('[TopGoviya SW v2.4] Service Worker loaded ✅ | topgoviya.lk');
+console.log('[TopGoviya SW v2.5] Service Worker loaded ✅ | topgoviya.lk');
