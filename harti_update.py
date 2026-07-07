@@ -36,7 +36,9 @@ CATEGORIES = {
         "Potato (Imported)","Potato (Welimada)","Potato (N.Eliya)","Big Onion (Imported)"
     ],
     "Fruits & Banana": [
-        "Banana Ambul","Banana Kolikuttu","Banana Seeni","Papaya","Pineapple (Large)","Avocado"
+        "Banana Ambul","Banana Kolikuttu","Banana Seeni","Anamalu","Papaya",
+        "Passion Fruit","Pineapple (Large)","Pineapple (Medium)","Pineapple (Small)",
+        "Mango (Betti)","Mango (Karathakolomban)","Woodapple","Avocado","Orange"
     ]
 }
 
@@ -68,9 +70,26 @@ VEG_NAMES = {
     "Potato (Nuwaraeliya)":"Potato (N.Eliya)",
     "B'Onion Imported":"Big Onion (Imported)",
     "Ambul(Rs/Kg)":"Banana Ambul","Kolikuttu":"Banana Kolikuttu",
-    "Seeni":"Banana Seeni","Papaya (Rs/Kg)":"Papaya",
-    "Pineapple - Large":"Pineapple (Large)","Avocado":"Avocado",
+    "Seeni":"Banana Seeni","Anamalu (Rs/Fruits)":"Anamalu",
+    "Papaya (Rs/Kg)":"Papaya","Passion Fruits(Rs/Fruit":"Passion Fruit",
+    "Pineapple - Large":"Pineapple (Large)","Mango - Betti":"Mango (Betti)",
+    "Woodapple":"Woodapple","Avocado":"Avocado","Orange":"Orange",
 }
+
+# Some fruit rows wrap onto continuation lines that repeat just a dash
+# (e.g. "Pineapple - Large" is followed by "- Medium", "- Small").
+# This maps a parent row's raw text to the ordered list of sub-item
+# names that should be assigned to the following dash-only rows.
+FRUIT_SUBITEMS = {
+    "Pineapple - Large": ["Pineapple (Medium)", "Pineapple (Small)"],
+    "Mango - Betti": ["Mango (Karathakolomban)"],
+}
+
+def clean_price_cell(s):
+    """Strip stray letters/parentheses that sometimes visually overlap
+    wrapped fruit labels during PDF text extraction (e.g. a wrapped
+    'Karathakolomban' bleeding into the price column)."""
+    return re.sub(r'[A-Za-z()]', '', s)
 
 def parse_range(text):
     if not text: return None
@@ -159,16 +178,21 @@ def parse_veg_table(pdf_page):
         tables = pdf_page.extract_tables()
         for table in tables:
             if not table or len(table) < 5: continue
+            pending_subitems = []
             for row in table:
                 if not row or not row[0]: continue
                 raw = str(row[0]).strip()
                 std = None
                 for pdf_n,std_n in sorted(VEG_NAMES.items(),key=lambda x:len(x[0]),reverse=True):
                     if raw.startswith(pdf_n): std=std_n; break
+                if not std and raw.startswith("-") and pending_subitems:
+                    std = pending_subitems.pop(0)
+                if raw in FRUIT_SUBITEMS:
+                    pending_subitems = list(FRUIT_SUBITEMS[raw])
                 if not std: continue
                 mkt = []
                 for col in [c for c in row[1:] if c is not None][:10]:
-                    mkt.append(parse_range(str(col).strip()))
+                    mkt.append(parse_range(clean_price_cell(str(col).strip())))
                 while len(mkt)<10: mkt.append(None)
                 if any(p is not None for p in mkt):
                     results[std] = mkt[:10]
