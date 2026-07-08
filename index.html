@@ -980,7 +980,14 @@ function renderGrid(){
 }
 
 function renderMovers(){
-  const m=DATA.map(d=>({d,ch:changeOf(d.series)})).filter(x=>x.ch.dir!=="flat")
+  const lastIdx=DATES.length-1; // index of the most recent report date
+  const m=DATA.map(d=>({d,ch:changeOf(d.series)})).filter(x=>{
+      if(x.ch.dir==="flat")return false;
+      const v=vpts(x.d.series);
+      // Only include items actually updated in the LATEST report,
+      // not items whose last known value is from an older, stale date.
+      return v.length && v[v.length-1][0]===lastIdx;
+    })
     .sort((a,b)=>Math.abs(b.ch.pct)-Math.abs(a.ch.pct)).slice(0,7);
   document.getElementById("movers").innerHTML=m.map(({d,ch})=>{
     const v=vpts(d.series),prev=v[v.length-2][1],cur=v[v.length-1][1];
