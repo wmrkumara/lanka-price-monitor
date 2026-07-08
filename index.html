@@ -2368,8 +2368,14 @@ function facebookShare(d){
 function renderBestCrop(){
   const el=document.getElementById("bestCrop");
   if(!el||!DATA.length)return;
+  const lastIdx=DATES.length-1; // index of the most recent report date
   const ranked=DATA.map(d=>({d,ch:changeOf(d.series)}))
-    .filter(x=>latestVal(x.d.series)!==null)
+    .filter(x=>{
+      const v=vpts(x.d.series);
+      // Only include items actually updated in the LATEST report,
+      // not items whose last known value is from an older, stale date.
+      return v.length && v[v.length-1][0]===lastIdx;
+    })
     .sort((a,b)=>b.ch.pct-a.ch.pct);
   const sell=ranked.filter(x=>x.ch.pct>0).slice(0,5);
   const buy=ranked.filter(x=>x.ch.pct<0).slice(-5).reverse();
