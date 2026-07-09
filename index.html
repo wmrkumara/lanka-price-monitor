@@ -854,6 +854,14 @@ function t(k){return (I18N[lang]&&I18N[lang][k])||I18N.en[k]||k;}
 function tName(n){return (NAMES[n]&&NAMES[n][lang])||n;}
 function tCat(c){return lang==="en"?c:((CATS[c]&&CATS[c][lang])||c);}
 function tMkt(m){return lang==="en"?m:((MARKETS[m]&&MARKETS[m][lang])||m);}
+function transportCostNote(){
+  const html={
+    si:'💡 ප්‍රවාහන වියදම හොයාගන්නේ කොහොමද?<br>ලොරි කුලිය (Rs.) ÷ අරගෙන ගිය මුළු kg = 1kg ට ප්‍රවාහන වියදම<br><span style="opacity:.85">(Pettah/Dambulla වගේ වෙනස් market එකකට ගියොත්, දුර වෙනස් නිසා ලොරි කුලියත් වෙනස් වෙනවා — ඒ අනුව මේ ගාන යළිත් හදන්න.)</span>',
+    ta:'💡 போக்குவரத்து செலவை எப்படி கண்டுபிடிப்பது?<br>லாரி வாடகை (Rs.) ÷ கொண்டு சென்ற மொத்த kg = 1kg க்கான போக்குவரத்து செலவு<br><span style="opacity:.85">(Pettah/Dambulla போன்ற வேறு சந்தைக்குச் சென்றால், தூரம் வேறுபடுவதால் லாரி வாடகையும் மாறும் — அதற்கேற்ப இந்த மதிப்பை மீண்டும் கணக்கிடவும்.)</span>',
+    en:'💡 How do I find the transport cost?<br>Lorry hire (Rs.) ÷ Total kg transported = Transport cost per kg<br><span style="opacity:.85">(If you go to a different market like Pettah/Dambulla, the distance — and so the lorry hire — changes, so recalculate this figure accordingly.)</span>'
+  };
+  return html[lang]||html.en;
+}
 function tUnit(u){return lang==="en"?u:((UNITS[u]&&UNITS[u][lang])||u);}
 function applyLang(){
   /* Nav legend text */
@@ -1206,9 +1214,7 @@ function calcPanel(d){
         <div style="display:flex;flex-direction:column;gap:6px" id="traderTransportBox_${cid}">
           <label style="font-size:13px;color:#3a403a;font-weight:700">${lang==="si"?"ප්‍රවාහන පිරිවැය (එක් එක් වෙළඳපොළට):":lang==="ta"?"போக்குவரத்து செலவு (ஒவ்வொரு சந்தைக்கும்):":"Transport cost (per market):"}</label>
           <div style="font-size:11.5px;line-height:1.6;color:#7a7264;background:#f4efe4;border:1px dashed #cdbf9f;border-radius:8px;padding:8px 10px">
-            💡 ප්‍රවාහන වියදම හොයාගන්නේ කොහොමද?<br>
-            ලොරි කුලිය (Rs.) ÷ අරගෙන ගිය මුළු kg = 1kg ට ප්‍රවාහන වියදම<br>
-            <span style="opacity:.85">(Pettah/Dambulla වගේ වෙනස් market එකකට ගියොත්, දුර වෙනස් නිසා ලොරි කුලියත් වෙනස් වෙනවා — ඒ අනුව මේ ගාන යළිත් හදන්න.)</span>
+            ${transportCostNote()}
           </div>
           ${traderMkts.map(k=>`<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-left:4px">
             <label style="font-size:12.5px;color:#3a403a;min-width:110px">${tMkt(k)}:</label>
@@ -1262,9 +1268,7 @@ function calcPanel(d){
         <div style="display:flex;flex-direction:column;gap:6px" id="farmerTransportBox_${cid}">
           <label style="font-size:13px;color:#3a403a;font-weight:700">${lang==="si"?"ප්‍රවාහන පිරිවැය (එක් එක් වෙළඳපොළට):":lang==="ta"?"போக்குவரத்து செலவு (ஒவ்வொரு சந்தைக்கும்):":"Transport cost (per market):"}</label>
           <div style="font-size:11.5px;line-height:1.6;color:#7a7264;background:#f4efe4;border:1px dashed #cdbf9f;border-radius:8px;padding:8px 10px">
-            💡 ප්‍රවාහන වියදම හොයාගන්නේ කොහොමද?<br>
-            ලොරි කුලිය (Rs.) ÷ අරගෙන ගිය මුළු kg = 1kg ට ප්‍රවාහන වියදම<br>
-            <span style="opacity:.85">(Pettah/Dambulla වගේ වෙනස් market එකකට ගියොත්, දුර වෙනස් නිසා ලොරි කුලියත් වෙනස් වෙනවා — ඒ අනුව මේ ගාන යළිත් හදන්න.)</span>
+            ${transportCostNote()}
           </div>
           ${farmerMkts.map(k=>`<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-left:4px">
             <label style="font-size:12.5px;color:#3a403a;min-width:110px">${tMkt(k)}:</label>
@@ -1997,9 +2001,8 @@ function gapAlert(d){
         <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px" id="traderTransportBox_${tcid}">
           <label style="font-size:12px;color:#3a403a;font-weight:700">Transport cost (per market):</label>
           <div style="font-size:11px;line-height:1.6;color:#7a7264;background:#f4efe4;border:1px dashed #cdbf9f;border-radius:8px;padding:7px 9px">
-            💡 ප්‍රවාහන වියදම හොයාගන්නේ කොහොමද?<br>
-            ලොරි කුලිය (Rs.) ÷ අරගෙන ගිය මුළු kg = 1kg ට ප්‍රවාහන වියදම<br>
-            <span style="opacity:.85">(Pettah/Dambulla වගේ වෙනස් market එකකට ගියොත්, දුර වෙනස් නිසා ලොරි කුලියත් වෙනස් වෙනවා — ඒ අනුව මේ ගාන යළිත් හදන්න.)</span>
+            ${transportCostNote()}
+          </div>
           </div>
           ${mkts.map(k=>`<div style="display:flex;align-items:center;gap:8px;padding-left:4px">
             <label style="font-size:11.5px;color:#3a403a;min-width:100px">${tMkt(k)}:</label>
