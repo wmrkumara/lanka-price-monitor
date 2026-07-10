@@ -2667,7 +2667,7 @@ async function openDailyPostsPanel(){
   const old=document.getElementById("dpScrim");
   if(old)old.remove();
   const scrim=document.createElement("div");
-  scrim.className="scrim";
+  scrim.className="scrim open";
   scrim.id="dpScrim";
   scrim.innerHTML=`<div class="modal" id="dpModal" role="dialog" aria-modal="true" style="max-width:900px;padding:22px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px">
