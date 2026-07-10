@@ -416,7 +416,8 @@ const T = {
     rhLabel:"ඔබේ අලාභ-ලාභ සීමා මිල",rhUnit:"රු. / කි.ග්‍රෑ.",
     rhSub1:"ඉහළ විකුණන්න",rhSub2:"ලාභ ලැබීමට",
     statTotal:"මුළු වියදම",statNet:"විකිණිය හැකි අස්වැන්න",statBe:"අලාභ-ලාභ සීමා මිල",
-    statProfit:"අපේක්ෂිත ලාභය",statPerKg:"කි.ග්‍රෑ. ලාභය",statPerAcre:"අක්කරයකට",
+    statProfit:"අපේක්ෂිත ලාභය",statPerKg:"කි.ග්‍රෑ. ලාභය",statPerAcre:"අක්කරයකට",statMargin:"ලාභ ප්‍රතිශතය",
+    marginExcellent:"විශිෂ්ටයි",marginGood:"හොඳයි",marginFair:"මධ්‍යස්ථයි",marginLow:"අඩුයි",
     recProfitTitle:"✅ ලාභදායී අවස්ථාව!",recLossTitle:"⚠️ හොඳ නෑ — පාඩු!",
     recProfitDesc:"දැනට වෙළඳපොළ මිල ඔබේ අලාභ-ලාභ සීමා මිලට වඩා ඉහළයි. දැනට විකිණීම ලාභදායී!",
     recLossDesc:"දැනට වෙළඳපොළ මිල ඔබේ අලාභ-ලාභ සීමා මිලට වඩා අඩුයි. ටිකක් රඳා සිටීම සලකා බලන්න.",
@@ -447,7 +448,8 @@ const T = {
     rhLabel:"உங்கள் முறிவு விலை",rhUnit:"ரூ. / கி.கி.",
     rhSub1:"இதற்கு மேல் விற்கவும்",rhSub2:"லாபம் பெற",
     statTotal:"மொத்த செலவு",statNet:"விற்கக்கூடிய மகசூல்",statBe:"முறிவு விலை",
-    statProfit:"எதிர்பார்க்கப்படும் லாபம்",statPerKg:"கி.கி. லாபம்",statPerAcre:"ஏக்கருக்கு",
+    statProfit:"எதிர்பார்க்கப்படும் லாபம்",statPerKg:"கி.கி. லாபம்",statPerAcre:"ஏக்கருக்கு",statMargin:"லாப வீதம்",
+    marginExcellent:"சிறந்தது",marginGood:"நல்லது",marginFair:"மிதமானது",marginLow:"குறைவு",
     recProfitTitle:"✅ லாபகரமான வாய்ப்பு!",recLossTitle:"⚠️ நஷ்டம் — கவனம்!",
     recProfitDesc:"தற்போதைய சந்தை விலை உங்கள் முறிவு விலையை விட அதிகமாக உள்ளது. இப்போது விற்பது லாபகரமானது!",
     recLossDesc:"தற்போதைய சந்தை விலை உங்கள் முறிவு விலையை விட குறைவாக உள்ளது. சற்று காத்திருங்கள்.",
@@ -481,7 +483,8 @@ const T = {
     rhLabel:"Your Break-even Price",rhUnit:"Rs. / kg",
     rhSub1:"Sell above this price",rhSub2:"to make a profit",
     statTotal:"Total Cost",statNet:"Sellable Harvest",statBe:"Break-even Price",
-    statProfit:"Expected Profit",statPerKg:"Profit per kg",statPerAcre:"Per Acre",
+    statProfit:"Expected Profit",statPerKg:"Profit per kg",statPerAcre:"Per Acre",statMargin:"Profit Margin",
+    marginExcellent:"Excellent",marginGood:"Good",marginFair:"Fair",marginLow:"Low",
     recProfitTitle:"✅ Profitable Opportunity!",recLossTitle:"⚠️ Loss Risk — Be Careful!",
     recProfitDesc:"Current market prices are above your break-even price. Selling now is likely to be profitable!",
     recLossDesc:"Current market prices are below your break-even price. Consider waiting for better prices.",
@@ -627,14 +630,22 @@ function calculate(){
   const expectedProfit  = expectedRevenue != null ? expectedRevenue - totalCost : null;
   const profitPerKg     = bestMktPrice ? bestMktPrice - breakeven : null;
   const profitPerAcre   = expectedProfit != null ? expectedProfit / landArea : null;
+  const profitMargin    = (expectedProfit != null && expectedRevenue > 0) ? (expectedProfit / expectedRevenue * 100) : null;
 
   lastResult = {cropName,landArea,harvest,waste,netHarvest,totalCost,breakeven,markets,
-    expectedProfit,profitPerKg,profitPerAcre,bestMktPrice};
+    expectedProfit,profitPerKg,profitPerAcre,profitMargin,bestMktPrice};
 
   renderResults(lastResult);
 }
 
 function fmt(n,dec=0){if(n==null)return "—";return n.toLocaleString("en-US",{minimumFractionDigits:dec,maximumFractionDigits:dec});}
+function marginLabel(pct){
+  if(pct==null)return "";
+  if(pct<10)return t("marginLow");
+  if(pct<25)return t("marginFair");
+  if(pct<50)return t("marginGood");
+  return t("marginExcellent");
+}
 
 function renderResults(r){
   // Hero
@@ -651,6 +662,7 @@ function renderResults(r){
     {l:t("statProfit"), v: r.expectedProfit!=null ? (r.expectedProfit>=0?"":"- ")+"රු. "+fmt(Math.abs(r.expectedProfit)) : "—", cl:r.expectedProfit!=null?(r.expectedProfit>=0?"profit":"loss"):""},
     {l:t("statPerKg"),  v: r.profitPerKg!=null ? (r.profitPerKg>=0?"+":"")+fmt(r.profitPerKg,2) : "—", cl:r.profitPerKg!=null?(r.profitPerKg>=0?"profit":"loss"):""},
     {l:t("statPerAcre"),v: r.profitPerAcre!=null ? (r.profitPerAcre>=0?"":"- ")+"රු. "+fmt(Math.abs(r.profitPerAcre)) : "—", cl:r.profitPerAcre!=null?(r.profitPerAcre>=0?"profit":"loss"):""},
+    {l:t("statMargin"), v: r.profitMargin!=null ? (r.profitMargin>=0?"+":"")+fmt(r.profitMargin,1)+"%  "+marginLabel(r.profitMargin) : "—", cl:r.profitMargin!=null?(r.profitMargin>=0?"profit":"loss"):""},
   ];
   document.getElementById("stat-grid").innerHTML=stats.map(s=>`
     <div class="stat-box"><div class="sl">${s.l}</div><div class="sv ${s.cl}">${s.v}</div></div>`).join("");
