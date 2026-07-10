@@ -286,7 +286,9 @@
   footer{margin:46px 0 60px;padding-top:22px;border-top:1px solid var(--line-strong);font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   /* Best Crop Right Now */
   .best-col{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;box-shadow:var(--shadow)}
-  .best-col h3{font-family:'Newsreader',serif;font-size:16px;font-weight:500;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .best-col h3{font-family:'Newsreader',serif;font-size:16px;font-weight:500;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .best-png-btn{font-family:inherit;font-size:12px;font-weight:700;padding:3px 8px;border-radius:7px;border:1.5px solid var(--line-strong);background:var(--card);color:var(--muted);cursor:pointer;line-height:1.4;flex-shrink:0}
+  .best-png-btn:disabled{opacity:.6;cursor:default}
   .best-col h3.sell{color:var(--down)}.best-col h3.buy{color:var(--up)}
   .best-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
   .best-row:last-child{border:none}
@@ -478,6 +480,7 @@
     <h2 id="hBest">🌾 Best Crop Right Now</h2>
     <span class="rule"></span>
     <span class="hint" id="hintBest">live data · tap →</span>
+    <button id="dailyPostsBtn" onclick="openDailyPostsPanel()" style="font:inherit;font-size:11px;font-weight:700;padding:5px 10px;border-radius:8px;border:1.5px solid var(--line-strong);background:var(--card);color:var(--petrol);cursor:pointer;white-space:nowrap">📅 Today's 6 Posts</button>
   </div>
   <div id="bestCrop" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px"></div>
 
@@ -2504,11 +2507,11 @@ function renderBestCrop(){
   </div>`;
   el.innerHTML=`
     <div class="best-col">
-      <h3 class="sell">${t('bestSell')} 💰</h3>
+      <h3 class="sell"><span>${t('bestSell')} 💰</span><button class="best-png-btn" data-col="sell" onclick="downloadBestColPNG('sell')">📸</button></h3>
       ${sell.map(row).join('')}
     </div>
     <div class="best-col">
-      <h3 class="buy">${t('bestBuy')} 🛒</h3>
+      <h3 class="buy"><span>${t('bestBuy')} 🛒</span><button class="best-png-btn" data-col="buy" onclick="downloadBestColPNG('buy')">📸</button></h3>
       ${buy.map(row).join('')}
     </div>`;
   // Update labels
@@ -2516,6 +2519,200 @@ function renderBestCrop(){
   if(hb)hb.innerHTML=t("bestTitle");
   const hint=document.getElementById("hintBest");
   if(hint)hint.textContent=t("bestHint");
+}
+
+function downloadBestColPNG(type){
+  const isSell=type==="sell";
+  const col=document.querySelectorAll("#bestCrop .best-col")[isSell?0:1];
+  if(!col)return;
+  const rowsHTML=Array.from(col.querySelectorAll(".best-row")).map(r=>r.outerHTML).join("");
+  if(!rowsHTML)return;
+  const lastDate=DATES[DATES.length-1];
+  const btn=col.querySelector(".best-png-btn");
+  if(btn){btn.textContent="⏳";btn.disabled=true;}
+  const title=isSell?t("bestSell"):t("bestBuy");
+  const accent=isSell?"#2c7a52":"#b23a2e";
+  const card=document.createElement("div");
+  card.style.cssText="position:absolute;left:-9999px;top:0;width:520px;background:#f4efe4;font-family:Georgia,serif;overflow:hidden";
+  card.innerHTML=`
+    <div style="height:8px;background:#0e4f4a"></div>
+    <div style="background:#0e4f4a;padding:16px 24px;display:flex;justify-content:space-between;align-items:center">
+      <div style="font-family:Georgia,serif;font-size:20px;color:#fff;font-weight:700">Top<em style="color:#ffd98a;font-style:italic">Goviya</em></div>
+      <div style="font-family:monospace;font-size:12px;color:#9fd4c8;text-align:right">
+        <div>${lastDate}</div>
+        <div style="font-size:10px;color:#7ab8b0">Data from HARTI Daily Wholesale Report</div>
+      </div>
+    </div>
+    <div style="padding:20px 22px;position:relative">
+      <img src="logo-mark.png" crossorigin="anonymous" style="position:absolute;top:16px;left:18px;width:38px;height:38px;object-fit:contain">
+      <div style="font-family:Georgia,serif;font-size:20px;font-weight:600;color:${accent};text-align:center;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid ${accent}33">${title}</div>
+      <div id="bcColClone"></div>
+    </div>
+    <div style="background:#0e4f4a;padding:12px 24px;text-align:center">
+      <div style="font-family:monospace;font-size:15px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
+      <div style="font-size:9px;color:#7ab8b0;margin-top:3px">For Farmers. For Traders. Free.</div>
+    </div>
+  `;
+  card.querySelector("#bcColClone").innerHTML=rowsHTML;
+  document.body.appendChild(card);
+  html2canvas(card,{
+    scale:2,
+    useCORS:true,
+    allowTaint:true,
+    backgroundColor:"#f4efe4",
+    logging:false,
+    imageTimeout:8000,
+    removeContainer:true,
+    foreignObjectRendering:false
+  }).then(canvas=>{
+    document.body.removeChild(card);
+    const link=document.createElement("a");
+    link.download="topgoviya-wholesale-"+type+"-now-"+lastDate+".png";
+    link.href=canvas.toDataURL("image/png");
+    link.click();
+    if(btn){btn.textContent="📸";btn.disabled=false;}
+  }).catch(()=>{
+    if(document.body.contains(card))document.body.removeChild(card);
+    if(btn){btn.textContent="📸";btn.disabled=false;}
+  });
+}
+
+/* ===== Daily Posts (6-in-1: sell + buy × si/en/ta) ===== */
+const CAPTIONS={
+  si:{
+    sell:"🌾 අද (%DATE%) තොග වෙළඳපොළේ වැඩිම මිල වැඩිවීම් — විකිණීමට හොඳම වෙලාව! 📈\n\nඅද අංක 1: %NAME% — %PCT%%ක් ඉහළ ▲\n\nසම්පූර්ණ තොග මිල ලැයිස්තුව 👉 www.TopGoviya.lk\n\n#TopGoviya #ශ්‍රීලංකාව #තොගමිල #HARTI",
+    buy:"🌾 අද (%DATE%) තොග වෙළඳපොළේ වැඩිම මිල අඩුවීම් — ගැනීමට හොඳම වෙලාව! 📉\n\nඅද අංක 1: %NAME% — %PCT%%ක් පහළ ▼\n\nසම්පූර්ණ තොග මිල ලැයිස්තුව 👉 www.TopGoviya.lk\n\n#TopGoviya #ශ්‍රීලංකාව #තොගමිල #HARTI"
+  },
+  en:{
+    sell:"🌾 Today's (%DATE%) sharpest wholesale price rises — Best Time to Sell! 📈\n\nTop mover: %NAME% up %PCT%% ▲\n\nFull wholesale price list 👉 www.TopGoviya.lk\n\n#TopGoviya #SriLanka #WholesalePrices #HARTI",
+    buy:"🌾 Today's (%DATE%) sharpest wholesale price drops — Best Time to Buy! 📉\n\nTop mover: %NAME% down %PCT%% ▼\n\nFull wholesale price list 👉 www.TopGoviya.lk\n\n#TopGoviya #SriLanka #WholesalePrices #HARTI"
+  },
+  ta:{
+    sell:"🌾 இன்றைய (%DATE%) அதிக மொத்த விலை உயர்வுகள் — விற்க சிறந்த நேரம்! 📈\n\nமுன்னணி: %NAME% %PCT%% உயர்வு ▲\n\nமுழு மொத்த விலை பட்டியல் 👉 www.TopGoviya.lk\n\n#TopGoviya #இலங்கை #மொத்தவிலை #HARTI",
+    buy:"🌾 இன்றைய (%DATE%) அதிக மொத்த விலை குறைவுகள் — வாங்க சிறந்த நேரம்! 📉\n\nமுன்னணி: %NAME% %PCT%% குறைவு ▼\n\nமுழு மொத்த விலை பட்டியல் 👉 www.TopGoviya.lk\n\n#TopGoviya #இலங்கை #மொத்தவிலை #HARTI"
+  }
+};
+const POST_LANGS=[{code:"si",label:"සිංහල"},{code:"en",label:"English"},{code:"ta",label:"தமிழ்"}];
+
+function getBestCropRanked(){
+  const ranked=DATA.map(d=>({d,ch:changeOf(d.series)}))
+    .filter(x=>latestVal(x.d.series)!==null)
+    .sort((a,b)=>b.ch.pct-a.ch.pct);
+  return {sell:ranked.filter(x=>x.ch.pct>0).slice(0,5),buy:ranked.filter(x=>x.ch.pct<0).slice(-5).reverse()};
+}
+function bestRowHTMLStatic(x){
+  const {d,ch}=x;
+  return `<div class="best-row">
+    <span class="best-name">${tEmoji(d.name)} ${tName(d.name)}</span>
+    <span style="display:flex;align-items:center;gap:6px">
+      <span class="best-price">රු.${fmt(latestVal(d.series))}<small style="font-size:9px;color:var(--muted)"> ${tUnit(d.unit)}</small></span>
+      <span class="best-badge ${ch.pct>0?'up':'down'}">${ch.pct>0?'▲':'▼'} ${Math.abs(ch.pct).toFixed(1)}%</span>
+    </span>
+  </div>`;
+}
+
+function buildCardCanvas(type,langCode){
+  return new Promise(resolve=>{
+    const prevLang=lang;
+    lang=langCode;
+    const {sell,buy}=getBestCropRanked();
+    const items=type==="sell"?sell:buy;
+    const rowsHTML=items.map(bestRowHTMLStatic).join("");
+    const lastDate=DATES[DATES.length-1];
+    const title=type==="sell"?t("bestSell"):t("bestBuy");
+    const accent=type==="sell"?"#2c7a52":"#b23a2e";
+    const top=items[0];
+    const topName=top?tName(top.d.name):"";
+    const topPct=top?Math.abs(top.ch.pct).toFixed(1):"0";
+    const caption=(CAPTIONS[langCode][type]||"").replace(/%DATE%/g,lastDate).replace(/%NAME%/g,topName).replace(/%PCT%/g,topPct);
+    const card=document.createElement("div");
+    card.style.cssText="position:absolute;left:-9999px;top:0;width:520px;background:#f4efe4;font-family:Georgia,serif;overflow:hidden";
+    card.innerHTML=`
+      <div style="height:8px;background:#0e4f4a"></div>
+      <div style="background:#0e4f4a;padding:16px 24px;display:flex;justify-content:space-between;align-items:center">
+        <div style="font-family:Georgia,serif;font-size:20px;color:#fff;font-weight:700">Top<em style="color:#ffd98a;font-style:italic">Goviya</em></div>
+        <div style="font-family:monospace;font-size:12px;color:#9fd4c8;text-align:right">
+          <div>${lastDate}</div>
+          <div style="font-size:10px;color:#7ab8b0">Data from HARTI Daily Wholesale Report</div>
+        </div>
+      </div>
+      <div style="padding:20px 22px;position:relative">
+        <img src="logo-mark.png" crossorigin="anonymous" style="position:absolute;top:16px;left:18px;width:38px;height:38px;object-fit:contain">
+        <div style="font-family:Georgia,serif;font-size:20px;font-weight:600;color:${accent};text-align:center;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid ${accent}33">${title}</div>
+        <div id="bcColClone2"></div>
+      </div>
+      <div style="background:#0e4f4a;padding:12px 24px;text-align:center">
+        <div style="font-family:monospace;font-size:15px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
+        <div style="font-size:9px;color:#7ab8b0;margin-top:3px">For Farmers. For Traders. Free.</div>
+      </div>
+    `;
+    card.querySelector("#bcColClone2").innerHTML=rowsHTML;
+    document.body.appendChild(card);
+    html2canvas(card,{
+      scale:2,useCORS:true,allowTaint:true,backgroundColor:"#f4efe4",
+      logging:false,imageTimeout:8000,removeContainer:true,foreignObjectRendering:false
+    }).then(canvas=>{
+      document.body.removeChild(card);
+      lang=prevLang;
+      resolve({canvas,filename:"topgoviya-wholesale-"+type+"-"+langCode+"-"+lastDate+".png",caption});
+    }).catch(()=>{
+      if(document.body.contains(card))document.body.removeChild(card);
+      lang=prevLang;
+      resolve(null);
+    });
+  });
+}
+
+async function openDailyPostsPanel(){
+  const old=document.getElementById("dpScrim");
+  if(old)old.remove();
+  const scrim=document.createElement("div");
+  scrim.className="scrim";
+  scrim.id="dpScrim";
+  scrim.innerHTML=`<div class="modal" id="dpModal" role="dialog" aria-modal="true" style="max-width:900px;padding:22px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px">
+      <h3 style="font-family:'Newsreader',serif;font-size:19px;margin:0">📅 Today's 6 Posts — සිංහල / English / தமிழ்</h3>
+      <button class="close" onclick="closeDailyPostsPanel()">✕</button>
+    </div>
+    <div id="dpGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px"></div>
+  </div>`;
+  document.body.appendChild(scrim);
+  scrim.addEventListener("click",e=>{if(e.target===scrim)closeDailyPostsPanel();});
+  const grid=document.getElementById("dpGrid");
+  POST_LANGS.forEach(({code,label})=>{
+    ["sell","buy"].forEach(type=>{
+      const slotId="dp-"+code+"-"+type;
+      const box=document.createElement("div");
+      box.style.cssText="border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;background:var(--paper-2)";
+      box.innerHTML=`<div style="font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px">${label} · ${type==="sell"?"📈":"📉"}</div>
+        <div id="${slotId}-thumb" style="height:120px;display:flex;align-items:center;justify-content:center;background:var(--card);border-radius:8px;margin-bottom:8px;font-size:20px;color:var(--muted)">⏳</div>
+        <div style="display:flex;gap:6px">
+          <button id="${slotId}-dl" class="best-png-btn" style="flex:1" disabled>⬇</button>
+          <button id="${slotId}-cap" class="best-png-btn" style="flex:1" disabled>📋</button>
+        </div>`;
+      grid.appendChild(box);
+    });
+  });
+  for(const {code} of POST_LANGS){
+    for(const type of ["sell","buy"]){
+      const slotId="dp-"+code+"-"+type;
+      const result=await buildCardCanvas(type,code);
+      const thumb=document.getElementById(slotId+"-thumb");
+      const dlBtn=document.getElementById(slotId+"-dl");
+      const capBtn=document.getElementById(slotId+"-cap");
+      if(!result){if(thumb)thumb.textContent="⚠️";continue;}
+      const dataURL=result.canvas.toDataURL("image/png");
+      if(thumb){thumb.innerHTML="";const img=document.createElement("img");img.src=dataURL;img.style.cssText="max-width:100%;max-height:120px;border-radius:6px";thumb.appendChild(img);}
+      if(dlBtn){dlBtn.disabled=false;dlBtn.onclick=()=>{const a=document.createElement("a");a.href=dataURL;a.download=result.filename;a.click();};}
+      if(capBtn){capBtn.disabled=false;capBtn.onclick=()=>{
+        navigator.clipboard.writeText(result.caption).then(()=>{capBtn.textContent="✅";setTimeout(()=>{capBtn.textContent="📋";},1500);}).catch(()=>{alert(result.caption);});
+      };}
+    }
+  }
+}
+function closeDailyPostsPanel(){
+  const s=document.getElementById("dpScrim");
+  if(s)s.remove();
 }
 
 /* ===== downloadModalPNG ===== */
