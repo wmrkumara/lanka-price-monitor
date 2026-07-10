@@ -286,7 +286,9 @@
   footer{margin:46px 0 60px;padding-top:22px;border-top:1px solid var(--line-strong);font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   /* Best Crop Right Now */
   .best-col{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;box-shadow:var(--shadow)}
-  .best-col h3{font-family:'Newsreader',serif;font-size:16px;font-weight:500;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .best-col h3{font-family:'Newsreader',serif;font-size:16px;font-weight:500;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .best-png-btn{font-family:inherit;font-size:12px;font-weight:700;padding:3px 8px;border-radius:7px;border:1.5px solid var(--line-strong);background:var(--card);color:var(--muted);cursor:pointer;line-height:1.4;flex-shrink:0}
+  .best-png-btn:disabled{opacity:.6;cursor:default}
   .best-col h3.sell{color:var(--down)}.best-col h3.buy{color:var(--up)}
   .best-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
   .best-row:last-child{border:none}
@@ -2413,11 +2415,11 @@ function renderBestCrop(){
   </div>`;
   el.innerHTML=`
     <div class="best-col">
-      <h3 class="sell">${t('bestSell')}</h3>
+      <h3 class="sell"><span>${t('bestSell')}</span><button class="best-png-btn" data-col="sell" onclick="downloadBestColPNG('sell')">📸</button></h3>
       ${sell.map(row).join('')}
     </div>
     <div class="best-col">
-      <h3 class="buy">${t('bestBuy')}</h3>
+      <h3 class="buy"><span>${t('bestBuy')}</span><button class="best-png-btn" data-col="buy" onclick="downloadBestColPNG('buy')">📸</button></h3>
       ${buy.map(row).join('')}
     </div>`;
   // Update labels
@@ -2425,6 +2427,61 @@ function renderBestCrop(){
   if(hb)hb.innerHTML=t("bestTitle");
   const hint=document.getElementById("hintBest");
   if(hint)hint.textContent=t("bestHint");
+}
+
+function downloadBestColPNG(type){
+  const isSell=type==="sell";
+  const col=document.querySelectorAll("#bestCrop .best-col")[isSell?0:1];
+  if(!col)return;
+  const rowsHTML=Array.from(col.querySelectorAll(".best-row")).map(r=>r.outerHTML).join("");
+  if(!rowsHTML)return;
+  const lastDate=DATES[DATES.length-1];
+  const btn=col.querySelector(".best-png-btn");
+  if(btn){btn.textContent="⏳";btn.disabled=true;}
+  const title=isSell?t("bestSell"):t("bestBuy");
+  const accent=isSell?"#2c7a52":"#b23a2e";
+  const card=document.createElement("div");
+  card.style.cssText="position:absolute;left:-9999px;top:0;width:520px;background:#f4efe4;font-family:Georgia,serif;overflow:hidden";
+  card.innerHTML=`
+    <div style="height:8px;background:#0e4f4a"></div>
+    <div style="background:#0e4f4a;padding:16px 24px;display:flex;justify-content:space-between;align-items:center">
+      <div style="font-family:Georgia,serif;font-size:20px;color:#fff;font-weight:700">Top<em style="color:#ffd98a;font-style:italic">Goviya</em></div>
+      <div style="font-family:monospace;font-size:12px;color:#9fd4c8;text-align:right">
+        <div>${lastDate}</div>
+        <div style="font-size:10px;color:#7ab8b0">Data: Central Bank of Sri Lanka</div>
+      </div>
+    </div>
+    <div style="padding:20px 22px">
+      <div style="font-family:Georgia,serif;font-size:20px;font-weight:600;color:${accent};text-align:center;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid ${accent}33">${title}</div>
+      <div id="bcColClone"></div>
+    </div>
+    <div style="background:#0e4f4a;padding:12px 24px;text-align:center">
+      <div style="font-family:monospace;font-size:15px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
+      <div style="font-size:9px;color:#7ab8b0;margin-top:3px">For Farmers. For Traders. Free.</div>
+    </div>
+  `;
+  card.querySelector("#bcColClone").innerHTML=rowsHTML;
+  document.body.appendChild(card);
+  html2canvas(card,{
+    scale:2,
+    useCORS:true,
+    allowTaint:true,
+    backgroundColor:"#f4efe4",
+    logging:false,
+    imageTimeout:8000,
+    removeContainer:true,
+    foreignObjectRendering:false
+  }).then(canvas=>{
+    document.body.removeChild(card);
+    const link=document.createElement("a");
+    link.download="topgoviya-"+type+"-now-"+lastDate+".png";
+    link.href=canvas.toDataURL("image/png");
+    link.click();
+    if(btn){btn.textContent="📸";btn.disabled=false;}
+  }).catch(()=>{
+    if(document.body.contains(card))document.body.removeChild(card);
+    if(btn){btn.textContent="📸";btn.disabled=false;}
+  });
 }
 
 
