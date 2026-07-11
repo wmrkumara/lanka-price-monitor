@@ -2548,9 +2548,14 @@ function downloadBestColPNG(type){
       <div style="font-family:Georgia,serif;font-size:20px;font-weight:600;color:${accent};text-align:center;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid ${accent}33">${title}</div>
       <div id="bcColClone"></div>
     </div>
-    <div style="background:#0e4f4a;padding:12px 24px;text-align:center">
-      <div style="font-family:monospace;font-size:15px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
-      <div style="font-size:9px;color:#7ab8b0;margin-top:3px">For Farmers. For Traders. Free.</div>
+    <div style="background:#0e4f4a;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+      <div>
+        <div style="font-family:monospace;font-size:15px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
+        <div style="font-size:9px;color:#7ab8b0;margin-top:3px">For Farmers. For Traders. Free.</div>
+      </div>
+      <div style="background:#fff;padding:4px;border-radius:6px;flex-shrink:0;line-height:0">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://topgoviya.lk" crossorigin="anonymous" style="display:block;width:50px;height:50px">
+      </div>
     </div>
   `;
   card.querySelector("#bcColClone").innerHTML=rowsHTML;
@@ -2641,9 +2646,14 @@ function buildCardCanvas(type,langCode){
         <div style="font-family:Georgia,serif;font-size:20px;font-weight:600;color:${accent};text-align:center;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid ${accent}33">${title}</div>
         <div id="bcColClone2"></div>
       </div>
-      <div style="background:#0e4f4a;padding:12px 24px;text-align:center">
-        <div style="font-family:monospace;font-size:15px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
-        <div style="font-size:9px;color:#7ab8b0;margin-top:3px">For Farmers. For Traders. Free.</div>
+      <div style="background:#0e4f4a;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+        <div>
+          <div style="font-family:monospace;font-size:15px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
+          <div style="font-size:9px;color:#7ab8b0;margin-top:3px">For Farmers. For Traders. Free.</div>
+        </div>
+        <div style="background:#fff;padding:4px;border-radius:6px;flex-shrink:0;line-height:0">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://topgoviya.lk" crossorigin="anonymous" style="display:block;width:50px;height:50px">
+        </div>
       </div>
     `;
     card.querySelector("#bcColClone2").innerHTML=rowsHTML;
@@ -2814,10 +2824,15 @@ function facebookShare(d){
         </div>`).join("")}
       </div>
     </div>
-    <div style="background:#0e4f4a;padding:14px 28px;text-align:center">
-      <div style="font-family:monospace;font-size:16px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
-      <div style="font-size:11px;color:#9fd4c8;margin-top:4px;font-style:italic">"${dQuote}"</div>
-      <div style="font-size:10px;color:#7ab8b0;margin-top:3px">For Farmers. For Traders. Free.</div>
+    <div style="background:#0e4f4a;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+      <div>
+        <div style="font-family:monospace;font-size:16px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
+        <div style="font-size:11px;color:#9fd4c8;margin-top:4px;font-style:italic">"${dQuote}"</div>
+        <div style="font-size:10px;color:#7ab8b0;margin-top:3px">For Farmers. For Traders. Free.</div>
+      </div>
+      <div style="background:#fff;padding:4px;border-radius:6px;flex-shrink:0;line-height:0">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://topgoviya.lk" crossorigin="anonymous" style="display:block;width:52px;height:52px">
+      </div>
     </div>
   `;
   document.body.appendChild(card);
