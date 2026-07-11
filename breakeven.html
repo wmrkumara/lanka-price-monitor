@@ -194,6 +194,23 @@ body{background:var(--paper);color:var(--ink);
 .summary-card .sc-icon{flex-shrink:0}
 .summary-card b{color:#ffd98a;font-weight:700}
 @media(max-width:480px){.summary-card{padding:16px 16px}.summary-card .sc-line{font-size:13.5px}}
+.print-btn{width:100%;font:inherit;font-size:14px;font-weight:700;padding:13px;border-radius:11px;
+  border:1.5px solid var(--petrol);background:var(--card);color:var(--petrol);cursor:pointer;
+  margin-bottom:10px;transition:.18s}
+.print-btn:hover{background:var(--petrol);color:#fff}
+.print-header{display:none}
+@media print{
+  body{background:#fff}
+  .topnav,.lang-row,.share-btn,.reset-btn,.print-btn,footer,
+  #sec1-label,#sec2-label,#input-card-1,#input-card-2,#calcBtn,#farmer-kit-box{display:none!important}
+  .page-header,.results{margin:0}
+  .card,.rec-box,.summary-card{box-shadow:none!important;border:1px solid #ccc!important;
+    break-inside:avoid;page-break-inside:avoid}
+  .summary-card{background:#0e4f4a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .print-header{display:block;margin-bottom:18px;padding-bottom:14px;border-bottom:2px solid #0e4f4a}
+  .print-header .ph-brand{font-family:'Newsreader',serif;font-size:22px;font-weight:600;color:#0e4f4a}
+  .print-header .ph-meta{font-size:12px;color:#7a7264;margin-top:4px}
+}
 
 /* ── SCENARIO TABLE ── */
 .scenario-table{width:100%;border-collapse:collapse;font-size:13.5px}
@@ -257,7 +274,7 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
   </div>
 
   <!-- FARMER RECORD KIT DOWNLOAD -->
-  <div style="background:var(--card);border:1px solid var(--line-strong);border-radius:var(--r);padding:16px 18px;margin-bottom:22px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;box-shadow:var(--shadow)">
+  <div id="farmer-kit-box" style="background:var(--card);border:1px solid var(--line-strong);border-radius:var(--r);padding:16px 18px;margin-bottom:22px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;box-shadow:var(--shadow)">
     <div>
       <div style="font-family:'Newsreader',serif;font-size:16.5px;color:var(--ink);margin-bottom:4px;line-height:1.3">
         <span id="kit-title">📋 වගා වියදම් අතින් සටහන් කරගන්න</span>
@@ -274,7 +291,7 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
 
   <!-- ── SECTION 1: CROP INFO ── -->
   <div class="sec-label" id="sec1-label">🌾 භෝග තොරතුරු</div>
-  <div class="card">
+  <div class="card" id="input-card-1">
     <div class="two-col">
       <div class="field">
         <label id="lbl-crop">භෝගය <span class="hint" id="lbl-crop-hint">(උදා: තක්කාලි)</span></label>
@@ -302,7 +319,7 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
 
   <!-- ── SECTION 2: COSTS ── -->
   <div class="sec-label" id="sec2-label">💰 වගා වියදම් (රු.)</div>
-  <div class="card">
+  <div class="card" id="input-card-2">
     <div class="two-col">
       <div class="field">
         <label id="lbl-seed">බීජ / පැල</label>
@@ -351,6 +368,12 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
   <!-- ══ RESULTS ══ -->
   <div class="results" id="results">
 
+    <!-- PRINT-ONLY HEADER -->
+    <div class="print-header" id="print-header">
+      <div class="ph-brand">TopGoviya.lk — <span id="ph-title">ලාභ අලාභ සීමා ගණකය</span></div>
+      <div class="ph-meta" id="ph-meta"></div>
+    </div>
+
     <!-- HERO: BREAK-EVEN PRICE -->
     <div class="sec-label" style="margin-top:28px" id="sec3-label">📊 ගණනය කළ ප්‍රතිඵල</div>
     <div class="result-hero">
@@ -393,6 +416,11 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
 
     <!-- TOPGOVIYA ANALYSIS SUMMARY -->
     <div class="summary-card" id="summary-card"></div>
+
+    <!-- PRINT / SAVE AS PDF -->
+    <button class="print-btn" onclick="printResult()" id="print-btn">
+      🖨️ <span id="btn-print">මුද්‍රණය කරන්න / PDF ලෙස සුරකින්න</span>
+    </button>
 
     <!-- SHARE + RESET -->
     <button class="share-btn" onclick="shareResult()" id="share-btn">
@@ -439,6 +467,8 @@ const T = {
     lblPack:"ඇසිරීම / ඇසුරුම්",lblLand:"ඉඩම් කුලිය",lblLandHint:"(නොමිලේ නම් 0)",
     lblOther:"වෙනත් වියදම්",
     btnCalc:"ගණනය කරන්න",btnShare:"WhatsApp හරහා බෙදාහරින්න",btnReset:"නැවත ගණනය කරන්න",
+    btnPrint:"මුද්‍රණය කරන්න / PDF ලෙස සුරකින්න",
+    phGenerated:"උත්පාදනය කළේ topgoviya.lk මගිනි &middot; %DATE% &middot; භෝගය: %CROP%",
     rhLabel:"ඔබේ අලාභ-ලාභ සීමා මිල",rhUnit:"රු. / කි.ග්‍රෑ.",
     rhSub1:"ඉහළ විකුණන්න",rhSub2:"ලාභ ලැබීමට",
     statTotal:"මුළු වියදම",statNet:"විකිණිය හැකි අස්වැන්න",statBe:"අලාභ-ලාභ සීමා මිල",
@@ -479,6 +509,8 @@ const T = {
     lblPack:"பேக்கிங்",lblLand:"நில வாடகை",lblLandHint:"(இலவசமாக இருந்தால் 0)",
     lblOther:"பிற செலவுகள்",
     btnCalc:"கணக்கிடு",btnShare:"WhatsApp மூலம் பகிர்",btnReset:"மீண்டும் கணக்கிடு",
+    btnPrint:"அச்சிடவும் / PDF ஆக சேமிக்கவும்",
+    phGenerated:"topgoviya.lk மூலம் உருவாக்கப்பட்டது &middot; %DATE% &middot; பயிர்: %CROP%",
     rhLabel:"உங்கள் முறிவு விலை",rhUnit:"ரூ. / கி.கி.",
     rhSub1:"இதற்கு மேல் விற்கவும்",rhSub2:"லாபம் பெற",
     statTotal:"மொத்த செலவு",statNet:"விற்கக்கூடிய மகசூல்",statBe:"முறிவு விலை",
@@ -522,6 +554,8 @@ const T = {
     lblPack:"Packing / Packaging",lblLand:"Land Rent",lblLandHint:"(0 if own land)",
     lblOther:"Other Expenses",
     btnCalc:"Calculate",btnShare:"Share via WhatsApp",btnReset:"Calculate Again",
+    btnPrint:"Print / Save as PDF",
+    phGenerated:"Generated by topgoviya.lk &middot; %DATE% &middot; Crop: %CROP%",
     rhLabel:"Your Break-even Price",rhUnit:"Rs. / kg",
     rhSub1:"Sell above this price",rhSub2:"to make a profit",
     statTotal:"Total Cost",statNet:"Sellable Harvest",statBe:"Break-even Price",
@@ -870,9 +904,19 @@ function renderResults(r){
       </tbody>
     </table>`;
 
-  // Share & Reset buttons
+  // Share, Print & Reset buttons
   document.getElementById("btn-share").textContent=t("btnShare");
+  document.getElementById("btn-print").textContent=t("btnPrint");
   document.getElementById("btn-reset").textContent=t("btnReset");
+
+  // Print header content
+  const phTitleEl=document.getElementById("ph-title");
+  if(phTitleEl) phTitleEl.textContent=t("pageTitle").replace(/<[^>]*>/g,"");
+  const phMetaEl=document.getElementById("ph-meta");
+  if(phMetaEl){
+    const todayStr=new Date().toLocaleDateString(lang==="en"?"en-GB":lang==="ta"?"ta-LK":"si-LK",{day:"numeric",month:"long",year:"numeric"});
+    phMetaEl.innerHTML=t("phGenerated").replace("%DATE%",todayStr).replace("%CROP%",r.cropName||"—");
+  }
 
   // Show results
   const res=document.getElementById("results");
@@ -881,6 +925,9 @@ function renderResults(r){
   setTimeout(()=>res.scrollIntoView({behavior:"smooth",block:"start"}),100);
 }
 
+function printResult(){
+  window.print();
+}
 function shareResult(){
   if(!lastResult)return;
   const r=lastResult;
