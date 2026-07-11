@@ -185,6 +185,15 @@ body{background:var(--paper);color:var(--ink);
 .rec-box .rec-text strong{display:block;font-size:15px;margin-bottom:3px}
 .rec-box.profit .rec-text strong{color:var(--down)}
 .rec-box.loss .rec-text strong{color:var(--up)}
+.summary-card{background:linear-gradient(150deg,var(--petrol),var(--petrol-deep));border-radius:14px;
+  padding:20px 22px;margin-bottom:16px;color:#fff;box-shadow:0 14px 30px -16px rgba(10,30,28,.5)}
+.summary-card .sc-head{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;color:#d8ecc9;margin-bottom:12px}
+.summary-card .sc-line{font-size:14.5px;line-height:1.65;margin-bottom:8px;display:flex;gap:8px}
+.summary-card .sc-line:last-child{margin-bottom:0}
+.summary-card .sc-icon{flex-shrink:0}
+.summary-card b{color:#ffd98a;font-weight:700}
+@media(max-width:480px){.summary-card{padding:16px 16px}.summary-card .sc-line{font-size:13.5px}}
 
 /* ── SCENARIO TABLE ── */
 .scenario-table{width:100%;border-collapse:collapse;font-size:13.5px}
@@ -382,6 +391,9 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
       <div id="scenario-wrap"></div>
     </div>
 
+    <!-- TOPGOVIYA ANALYSIS SUMMARY -->
+    <div class="summary-card" id="summary-card"></div>
+
     <!-- SHARE + RESET -->
     <button class="share-btn" onclick="shareResult()" id="share-btn">
       🤝 <span id="btn-share">WhatsApp හරහා බෙදාහරින්න</span>
@@ -436,6 +448,14 @@ const T = {
     recProfitDesc:"දැනට වෙළඳපොළ මිල ඔබේ අලාභ-ලාභ සීමා මිලට වඩා ඉහළයි. දැනට විකිණීම ලාභදායී!",
     recLossDesc:"දැනට වෙළඳපොළ මිල ඔබේ අලාභ-ලාභ සීමා මිලට වඩා අඩුයි. ටිකක් රඳා සිටීම සලකා බලන්න.",
     recNoData:"දත්ත නොමැත — ඔබේ භෝගය සඳහා CBSL දත්ත ලබා ගත නොහැකිය.",
+    sumHeader:"📋 TopGoviya විශ්ලේෂණය",
+    sumProfitPos:"ඔබේ අපේක්ෂිත ලාභය රු. %AMT% කි (%PCT%% ලාභ ප්‍රතිශතයක් — %LABEL%).",
+    sumProfitNeg:"ඔබට අපේක්ෂිත අලාභයක් රු. %AMT% කි (%PCT%%).",
+    sumBEHigher:"ඔබේ ලාභ - අලාභ  සීමා මිල රු. %BE%/කි.ග්‍රෑ. — වර්තමාන වෙළඳපොළ මිල ගණන් ඊට වඩා වැඩිය.",
+    sumBELower:"ඔබේ ලාභ - අලාභ  සීමා මිල රු. %BE%/කි.ග්‍රෑ. — වර්තමාන වෙළඳපොළ මිල ගණන් ඊට වඩා අඩුය.",
+    sumCostBig:"වියදමින් වැඩිම කොටස %CAT% (%PCT%%) — මෙය හොඳින් සැලසුම් කරන්න.",
+    sumRisk:"වෙළඳපොළ මිල රු. %BE% ට වඩා අඩු වුවහොත්, ලාභය සැලකිය යුතු ලෙස අඩු වේ.",
+    sumNoData:"මෙම භෝගය සඳහා තවම වෙළඳපොළ දත්ත නොමැත — ලාභ අනුමානය සීමිතයි.",
     mktThMarket:"වෙළඳපොළ",mktThPrice:"මිල (රු./කි.ග්‍රෑ.)",mktThResult:"ප්‍රතිඵලය",mktThRec:"",
     mktBest:"හොඳම ✅",mktAvoid:"හොඳ නෑ ⚠️",mktNa:"දත්ත නැත",
     scnThPrice:"විකුණුම් මිල",scnThProfit:"ලාභය/පාඩුව",scnThTotal:"මුළු ලාභය",
@@ -468,6 +488,14 @@ const T = {
     recProfitDesc:"தற்போதைய சந்தை விலை உங்கள் முறிவு விலையை விட அதிகமாக உள்ளது. இப்போது விற்பது லாபகரமானது!",
     recLossDesc:"தற்போதைய சந்தை விலை உங்கள் முறிவு விலையை விட குறைவாக உள்ளது. சற்று காத்திருங்கள்.",
     recNoData:"தரவு இல்லை — உங்கள் பயிருக்கு CBSL தரவு கிடைக்கவில்லை.",
+    sumHeader:"📋 TopGoviya பகுப்பாய்வு",
+    sumProfitPos:"உங்கள் எதிர்பார்க்கப்படும் லாபம் ரூ. %AMT% (%PCT%% லாப வீதம் — %LABEL%).",
+    sumProfitNeg:"உங்களுக்கு எதிர்பார்க்கப்படும் நஷ்டம் ரூ. %AMT% (%PCT%%).",
+    sumBEHigher:"உங்கள் லாப - நஷ்ட வரம்பு விலை ரூ. %BE%/கி.கி. — தற்போதைய சந்தை விலைகள் அதை விட அதிகம்.",
+    sumBELower:"உங்கள் லாப - நஷ்ட வரம்பு விலை ரூ. %BE%/கி.கி. — தற்போதைய சந்தை விலைகள் அதை விட குறைவு.",
+    sumCostBig:"செலவில் மிகப்பெரிய பகுதி %CAT% (%PCT%%) — இதை கவனமாக திட்டமிடுங்கள்.",
+    sumRisk:"சந்தை விலை ரூ. %BE% க்கும் குறைவாக குறைந்தால், லாபம் கணிசமாக குறையும்.",
+    sumNoData:"இந்த பயிருக்கான சந்தை தரவு இன்னும் இல்லை — லாப மதிப்பீடு வரையறுக்கப்பட்டது.",
     mktThMarket:"சந்தை",mktThPrice:"விலை (ரூ./கி.கி.)",mktThResult:"முடிவு",mktThRec:"",
     mktBest:"சிறந்தது ✅",mktAvoid:"கவனம் ⚠️",mktNa:"தரவு இல்லை",
     scnThPrice:"விற்பனை விலை",scnThProfit:"லாபம்/நஷ்டம்",scnThTotal:"மொத்த லாபம்",
@@ -503,6 +531,14 @@ const T = {
     recProfitDesc:"Current market prices are above your break-even price. Selling now is likely to be profitable!",
     recLossDesc:"Current market prices are below your break-even price. Consider waiting for better prices.",
     recNoData:"No data — CBSL market data not available for this crop.",
+    sumHeader:"📋 TopGoviya Analysis",
+    sumProfitPos:"Your expected profit is Rs. %AMT% (%PCT%% margin — %LABEL%).",
+    sumProfitNeg:"You're expected to have a loss of Rs. %AMT% (%PCT%%).",
+    sumBEHigher:"Your break-even price is Rs. %BE%/kg — current market prices are above that.",
+    sumBELower:"Your break-even price is Rs. %BE%/kg — current market prices are below that.",
+    sumCostBig:"Your biggest cost is %CAT% (%PCT%%) — plan this carefully.",
+    sumRisk:"If market price falls below Rs. %BE%, your profit will decrease significantly.",
+    sumNoData:"No market data available yet for this crop — profit estimate is limited.",
     mktThMarket:"Market",mktThPrice:"Price (Rs./kg)",mktThResult:"Result",mktThRec:"",
     mktBest:"Best ✅",mktAvoid:"Avoid ⚠️",mktNa:"No data",
     scnThPrice:"Selling Price",scnThProfit:"Profit/Loss per kg",scnThTotal:"Total Profit/Loss",
@@ -681,6 +717,59 @@ function renderCostBreakdown(r){
     </div>`).join("");
 }
 
+function renderSummary(r){
+  const wrap=document.getElementById("summary-card");
+  if(!wrap)return;
+  const keyToLabel={seed:"lblSeed",fert:"lblFert",pest:"lblPest",labor:"lblLabor",
+    irr:"lblIrr",transport:"lblTransport",pack:"lblPack",land:"lblLand",other:"lblOther"};
+  const lines=[];
+
+  // Profit / loss
+  if(r.expectedProfit!=null){
+    if(r.expectedProfit>=0){
+      lines.push({icon:"✅",html:t("sumProfitPos")
+        .replace("%AMT%",fmt(r.expectedProfit))
+        .replace("%PCT%",fmt(r.profitMargin,1))
+        .replace("%LABEL%",marginLabel(r.profitMargin))});
+    } else {
+      lines.push({icon:"⚠️",html:t("sumProfitNeg")
+        .replace("%AMT%",fmt(Math.abs(r.expectedProfit)))
+        .replace("%PCT%",fmt(r.profitMargin,1))});
+    }
+  }
+
+  // Break-even vs current market
+  if(r.markets && r.markets.length && r.bestMktPrice!=null){
+    if(r.bestMktPrice>=r.breakeven){
+      lines.push({icon:"✅",html:t("sumBEHigher").replace("%BE%",fmt(r.breakeven,2))});
+    } else {
+      lines.push({icon:"⚠️",html:t("sumBELower").replace("%BE%",fmt(r.breakeven,2))});
+    }
+  } else {
+    lines.push({icon:"📊",html:t("sumNoData")});
+  }
+
+  // Biggest cost category
+  if(r.costs && r.totalCost>0){
+    const entries=Object.entries(r.costs).filter(([k,v])=>v>0);
+    if(entries.length){
+      const [bigKey,bigAmt]=entries.sort((a,b)=>b[1]-a[1])[0];
+      const bigPct=bigAmt/r.totalCost*100;
+      lines.push({icon:"⚠️",html:t("sumCostBig")
+        .replace("%CAT%",t(keyToLabel[bigKey]||bigKey))
+        .replace("%PCT%",fmt(bigPct,1))});
+    }
+  }
+
+  // Risk note
+  if(r.breakeven!=null){
+    lines.push({icon:"💡",html:t("sumRisk").replace("%BE%",fmt(r.breakeven,2))});
+  }
+
+  wrap.innerHTML='<div class="sc-head">'+t("sumHeader")+'</div>'+
+    lines.map(l=>'<div class="sc-line"><span class="sc-icon">'+l.icon+'</span><span>'+l.html+'</span></div>').join("");
+}
+
 function renderResults(r){
   // Hero
   document.getElementById("rh-label").textContent=t("rhLabel");
@@ -724,6 +813,9 @@ function renderResults(r){
   // Cost Breakdown
   document.getElementById("sec-cost-label").textContent=t("secCost");
   renderCostBreakdown(r);
+
+  // TopGoviya Analysis Summary
+  renderSummary(r);
 
   // Market table
   document.getElementById("sec3-label").textContent=t("sec3");
