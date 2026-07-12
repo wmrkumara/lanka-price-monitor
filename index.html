@@ -1501,7 +1501,7 @@ function aiInsight(d){
       const diffPct=((cur-avgVal)/avgVal*100);
       if(Math.abs(diffPct)>=1)
         rows.push({cls:diffPct>=0?"warn":"good",icon:"📅",
-          text:lang==="si"?`ගිය අවුරුද්දේ මේ කාලයේ මිල රු.${fmt(avgVal)} පමණ විය — අද මිලට වඩා ${Math.abs(diffPct).toFixed(1)}% ${diffPct>=0?"වැඩි":"අඩු"}`:lang==="ta"?`கடந்த ஆண்டு இதே காலத்தில் விலை சுமார் ரூ.${fmt(avgVal)} ஆக இருந்தது — இன்றைய விலையை விட ${Math.abs(diffPct).toFixed(1)}% ${diffPct>=0?"அதிகம்":"குறைவு"}`:`Around this time last year, price was ~Rs.${fmt(avgVal)} — ${Math.abs(diffPct).toFixed(1)}% ${diffPct>=0?"higher":"lower"} than today`});
+          text:lang==="si"?`ගිය අවුරුද්දේ මේ කාලයේ ${tMkt(d.primaryMarket)} වෙළඳපොළේ මිල රු.${fmt(avgVal)} පමණ විය — අද මිල ඊට වඩා ${Math.abs(diffPct).toFixed(1)}% ${diffPct>=0?"වැඩි":"අඩු"}`:lang==="ta"?`கடந்த ஆண்டு இதே காலத்தில் ${tMkt(d.primaryMarket)} சந்தையில் விலை சுமார் ரூ.${fmt(avgVal)} ஆக இருந்தது — இன்றைய விலை அதை விட ${Math.abs(diffPct).toFixed(1)}% ${diffPct>=0?"அதிகம்":"குறைவு"}`:`Around this time last year, the ${d.primaryMarket} price was ~Rs.${fmt(avgVal)} — today's price is ${Math.abs(diffPct).toFixed(1)}% ${diffPct>=0?"higher":"lower"} than that`});
     }
   }
 
