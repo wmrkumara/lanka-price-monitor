@@ -239,6 +239,8 @@
   .dl-btn:hover{background:var(--petrol-deep);border-color:var(--petrol-deep)}
   .dl-btn-outline{background:var(--card);color:var(--petrol)}
   .dl-btn-outline:hover{background:var(--petrol);color:#fff}
+  .stale-note{font-size:10px;color:#a9802a;background:#fbf1dc;border:1px solid #e8d6ab;border-radius:6px;
+    padding:3px 7px;margin-top:6px;display:inline-flex;align-items:center;gap:4px;font-weight:600}
   .print-list-wrap{display:none}
   @media print{
     body{background:#fff}
@@ -775,9 +777,9 @@ let DB=EMBEDDED, DATES=[], DATA=[], DATE_OBJS=[];
 /* ---------- i18n ---------- */
 let lang="si";
 const I18N={
- en:{kicker:'Data from <span class="org">Central Bank of Sri Lanka</span> website',latestReport:"Latest report",sub:"Retail prices &middot; primary market shown per item &middot; vs. previous report",movers:"Today\u2019s sharpest movements",moversHint:"auto-ranked &middot; tap &rarr;",all:"All commodities",items:"items",searchPh:"Search a commodity\u2026",sortAZ:"Sort: A\u2013Z",sortUp:"Biggest increases",sortDown:"Biggest decreases",sortHigh:"Highest price",lgUp:"Price increased",lgDown:"Price decreased",footNote:"Auto-extracted from CBSL Daily Price Reports. Not an official publication.",creditPre:"Design &amp; development by",vsLast:"vs last",latest:"Latest",change:"Change",low:"2026 Low",high:"2026 High",retail:"retail",across:"Across markets \u2014 latest report",priceOn:"Retail price on",reason:'Moved <b>%A</b> &rarr; <b>%B</b> since the previous report.',noMatch:'No commodity matches &ldquo;%Q&rdquo;.',notEnough:"Not enough data in this range yet.",na:"n.a.",allCat:"All",weather:"🌤️ Weather",btnRetail:"Retail",btnWholesale:"Wholesale",btnGap:"💡 Gap",btnCalc:"🧮 Calculator",btnRead:"Read",btnShare:"Share",btnFB:"Facebook",btnPNG:"📸 Share as Image",btnAlerts:"🔔 Daily Alerts",bestTitle:"🌾 Best Crop Right Now",bestSell:"📈 Best Time to Sell",bestBuy:"📉 Best Time to Buy",bestHint:"live data · 📍 Primary market retail price · tap →",insightLabel:"🧠 Insight",retailLabel:"Retail",wholesaleLabel:"Wholesale",spikeUp:"Price spike up",spikeDown:"Price drop",dlList:"Free Download (CSV)",printList:"Print"},
- si:{kicker:'දත්ත <span class="org">ශ්‍රී ලංකා මහ බැංකුවේ</span> වෙබ් අඩවියෙන්',latestReport:"නවතම වාර්තාව",sub:"සිල්ලර මිල &middot; එක් භාණ්ඩයකට ප්‍රධාන වෙළඳපොළ &middot; පෙර වාර්තාවට සාපේක්ෂව",movers:"අද වැඩිම වෙනස්වීම්",moversHint:"ස්වයංක්‍රීයව ශ්‍රේණිගත &middot; තට්ටු කරන්න &rarr;",all:"සියලු භාණ්ඩ",items:"භාණ්ඩ",searchPh:"භාණ්ඩයක් සොයන්න\u2026",sortAZ:"අකාරාදී",sortUp:"වැඩිම වැඩිවීම්",sortDown:"වැඩිම අඩුවීම්",sortHigh:"ඉහළම මිල",lgUp:"මිල ඉහළ ගියා",lgDown:"මිල පහළ ගියා",footNote:"මහ බැංකුවේ දෛනික මිල වාර්තාවලින් ස්වයංක්‍රීයව උපුටා ගන්නා ලදි. නිල ප්‍රකාශනයක් නොවේ.",creditPre:"නිර්මාණය හා සංවර්ධනය:",vsLast:"පෙරට වඩා",latest:"නවතම",change:"වෙනස",low:"2026 අවම",high:"2026 උපරිම",retail:"සිල්ලර",across:"වෙළඳපොළ අතර &mdash; නවතම වාර්තාව",priceOn:"සිල්ලර මිල",reason:'පෙර වාර්තාවට සාපේක්ෂව <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; සඳහා භාණ්ඩයක් හමු නොවීය.',notEnough:"මෙම පරාසය සඳහා තවම ප්‍රමාණවත් දත්ත නැත.",na:"නැත",allCat:"සියල්ල",weather:"🌤️ කාලගුණය",btnRetail:"සිල්ලර",btnWholesale:"තොග",btnGap:"💡 පරතරය",btnCalc:"🧮 ගණකය",btnRead:"කියවන්න",btnShare:"Share කරන්න",btnFB:"ෆේස්බුක්",btnPNG:"📸  රූපයක් ලෙස Share",btnAlerts:"🔔 දෛනික දැනුම්දීම්",bestTitle:"🌾 දැන් හොඳම භාණ්ඩය",bestSell:"📈 විකිණීමට හොඳම වෙලාව",bestBuy:"📉 ගැනීමට හොඳම වෙලාව",bestHint:"සජීවී දත්ත · 📍 ප්‍රධාන වෙළඳපොළ සිල්ලර මිල · tap →",insightLabel:"🧠 තොරතුරු",retailLabel:"සිල්ලර",wholesaleLabel:"තොග",spikeUp:"ඉහළ නැගීමක්",spikeDown:"පහළ වැටීම",dlList:"නොමිලේ බාගන්න (CSV)",printList:"මුද්‍රණය"},
- ta:{kicker:'தரவு <span class="org">இலங்கை மத்திய வங்கி</span> இணையதளத்திலிருந்து',latestReport:"சமீபத்திய அறிக்கை",sub:"சில்லறை விலை &middot; ஒவ்வொரு பொருளுக்கும் முதன்மை சந்தை &middot; முந்தைய அறிக்கையுடன் ஒப்பிடுகையில்",movers:"இன்றைய பெரிய மாற்றங்கள்",moversHint:"தானியங்கி தரவரிசை &middot; தட்டவும் &rarr;",all:"அனைத்து பொருட்கள்",items:"பொருட்கள்",searchPh:"ஒரு பொருளைத் தேடுங்கள்\u2026",sortAZ:"அகர வரிசை",sortUp:"அதிக உயர்வுகள்",sortDown:"அதிக குறைவுகள்",sortHigh:"அதிக விலை",lgUp:"விலை அதிகரித்தது",lgDown:"விலை குறைந்தது",footNote:"மத்திய வங்கியின் தினசரி விலை அறிக்கைகளில் இருந்து தானாக எடுக்கப்பட்டது. அதிகாரப்பூர்வ வெளியீடு அல்ல.",creditPre:"வடிவமைப்பு &amp; உருவாக்கம்:",vsLast:"முந்தையதை விட",latest:"சமீபத்தியது",change:"மாற்றம்",low:"2026 குறைந்தது",high:"2026 அதிகபட்சம்",retail:"சில்லறை",across:"சந்தைகளில் &mdash; சமீபத்திய அறிக்கை",priceOn:"சில்லறை விலை",reason:'முந்தைய அறிக்கையுடன் ஒப்பிடுகையில் <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; உடன் பொருந்தும் பொருள் இல்லை.',notEnough:"இந்த வரம்பில் இன்னும் போதிய தரவு இல்லை.",na:"இல்லை",allCat:"அனைத்தும்",weather:"🌤️ வானிலை",btnRetail:"சில்லறை",btnWholesale:"மொத்தம்",btnGap:"💡 இடைவெளி",btnCalc:"🧮 கணிப்பி",btnRead:"படிக்க",btnShare:"பகிர்",btnFB:"பேஸ்புக்",btnPNG:"📸 படமாக பகிர்",btnAlerts:"🔔 தினசரி விழிப்பூட்டல்",bestTitle:"🌾 இப்போது சிறந்த பயிர்",bestSell:"📈 விற்க சிறந்த நேரம்",bestBuy:"📉 வாங்க சிறந்த நேரம்",bestHint:"நேரடி தரவு · 📍 முதன்மை சந்தை சில்லறை விலை · தட்டவும் →",insightLabel:"🧠 நுண்ணறிவு",retailLabel:"சில்லறை",wholesaleLabel:"மொத்தம்",spikeUp:"விலை உயர்வு",spikeDown:"விலை வீழ்ச்சி",dlList:"இலவச பதிவிறக்கம் (CSV)",printList:"அச்சிடு"}
+ en:{kicker:'Data from <span class="org">Central Bank of Sri Lanka</span> website',latestReport:"Latest report",sub:"Retail prices &middot; primary market shown per item &middot; vs. previous report",movers:"Today\u2019s sharpest movements",moversHint:"auto-ranked &middot; tap &rarr;",all:"All commodities",items:"items",searchPh:"Search a commodity\u2026",sortAZ:"Sort: A\u2013Z",sortUp:"Biggest increases",sortDown:"Biggest decreases",sortHigh:"Highest price",lgUp:"Price increased",lgDown:"Price decreased",footNote:"Auto-extracted from CBSL Daily Price Reports. Not an official publication.",creditPre:"Design &amp; development by",vsLast:"vs last",latest:"Latest",change:"Change",low:"2026 Low",high:"2026 High",retail:"retail",across:"Across markets \u2014 latest report",priceOn:"Retail price on",reason:'Moved <b>%A</b> &rarr; <b>%B</b> since the previous report.',noMatch:'No commodity matches &ldquo;%Q&rdquo;.',notEnough:"Not enough data in this range yet.",na:"n.a.",allCat:"All",weather:"🌤️ Weather",btnRetail:"Retail",btnWholesale:"Wholesale",btnGap:"💡 Gap",btnCalc:"🧮 Calculator",btnRead:"Read",btnShare:"Share",btnFB:"Facebook",btnPNG:"📸 Share as Image",btnAlerts:"🔔 Daily Alerts",bestTitle:"🌾 Best Crop Right Now",bestSell:"📈 Best Time to Sell",bestBuy:"📉 Best Time to Buy",bestHint:"live data · 📍 Primary market retail price · tap →",insightLabel:"🧠 Insight",retailLabel:"Retail",wholesaleLabel:"Wholesale",spikeUp:"Price spike up",spikeDown:"Price drop",dlList:"Free Download (CSV)",printList:"Print",staleNote:"Not updated today — last: %DATE%"},
+ si:{kicker:'දත්ත <span class="org">ශ්‍රී ලංකා මහ බැංකුවේ</span> වෙබ් අඩවියෙන්',latestReport:"නවතම වාර්තාව",sub:"සිල්ලර මිල &middot; එක් භාණ්ඩයකට ප්‍රධාන වෙළඳපොළ &middot; පෙර වාර්තාවට සාපේක්ෂව",movers:"අද වැඩිම වෙනස්වීම්",moversHint:"ස්වයංක්‍රීයව ශ්‍රේණිගත &middot; තට්ටු කරන්න &rarr;",all:"සියලු භාණ්ඩ",items:"භාණ්ඩ",searchPh:"භාණ්ඩයක් සොයන්න\u2026",sortAZ:"අකාරාදී",sortUp:"වැඩිම වැඩිවීම්",sortDown:"වැඩිම අඩුවීම්",sortHigh:"ඉහළම මිල",lgUp:"මිල ඉහළ ගියා",lgDown:"මිල පහළ ගියා",footNote:"මහ බැංකුවේ දෛනික මිල වාර්තාවලින් ස්වයංක්‍රීයව උපුටා ගන්නා ලදි. නිල ප්‍රකාශනයක් නොවේ.",creditPre:"නිර්මාණය හා සංවර්ධනය:",vsLast:"පෙරට වඩා",latest:"නවතම",change:"වෙනස",low:"2026 අවම",high:"2026 උපරිම",retail:"සිල්ලර",across:"වෙළඳපොළ අතර &mdash; නවතම වාර්තාව",priceOn:"සිල්ලර මිල",reason:'පෙර වාර්තාවට සාපේක්ෂව <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; සඳහා භාණ්ඩයක් හමු නොවීය.',notEnough:"මෙම පරාසය සඳහා තවම ප්‍රමාණවත් දත්ත නැත.",na:"නැත",allCat:"සියල්ල",weather:"🌤️ කාලගුණය",btnRetail:"සිල්ලර",btnWholesale:"තොග",btnGap:"💡 පරතරය",btnCalc:"🧮 ගණකය",btnRead:"කියවන්න",btnShare:"Share කරන්න",btnFB:"ෆේස්බුක්",btnPNG:"📸  රූපයක් ලෙස Share",btnAlerts:"🔔 දෛනික දැනුම්දීම්",bestTitle:"🌾 දැන් හොඳම භාණ්ඩය",bestSell:"📈 විකිණීමට හොඳම වෙලාව",bestBuy:"📉 ගැනීමට හොඳම වෙලාව",bestHint:"සජීවී දත්ත · 📍 ප්‍රධාන වෙළඳපොළ සිල්ලර මිල · tap →",insightLabel:"🧠 තොරතුරු",retailLabel:"සිල්ලර",wholesaleLabel:"තොග",spikeUp:"ඉහළ නැගීමක්",spikeDown:"පහළ වැටීම",dlList:"නොමිලේ බාගන්න (CSV)",printList:"මුද්‍රණය",staleNote:"අද යාවත්කාලීන නොවේ — අවසන්: %DATE%"},
+ ta:{kicker:'தரவு <span class="org">இலங்கை மத்திய வங்கி</span> இணையதளத்திலிருந்து',latestReport:"சமீபத்திய அறிக்கை",sub:"சில்லறை விலை &middot; ஒவ்வொரு பொருளுக்கும் முதன்மை சந்தை &middot; முந்தைய அறிக்கையுடன் ஒப்பிடுகையில்",movers:"இன்றைய பெரிய மாற்றங்கள்",moversHint:"தானியங்கி தரவரிசை &middot; தட்டவும் &rarr;",all:"அனைத்து பொருட்கள்",items:"பொருட்கள்",searchPh:"ஒரு பொருளைத் தேடுங்கள்\u2026",sortAZ:"அகர வரிசை",sortUp:"அதிக உயர்வுகள்",sortDown:"அதிக குறைவுகள்",sortHigh:"அதிக விலை",lgUp:"விலை அதிகரித்தது",lgDown:"விலை குறைந்தது",footNote:"மத்திய வங்கியின் தினசரி விலை அறிக்கைகளில் இருந்து தானாக எடுக்கப்பட்டது. அதிகாரப்பூர்வ வெளியீடு அல்ல.",creditPre:"வடிவமைப்பு &amp; உருவாக்கம்:",vsLast:"முந்தையதை விட",latest:"சமீபத்தியது",change:"மாற்றம்",low:"2026 குறைந்தது",high:"2026 அதிகபட்சம்",retail:"சில்லறை",across:"சந்தைகளில் &mdash; சமீபத்திய அறிக்கை",priceOn:"சில்லறை விலை",reason:'முந்தைய அறிக்கையுடன் ஒப்பிடுகையில் <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; உடன் பொருந்தும் பொருள் இல்லை.',notEnough:"இந்த வரம்பில் இன்னும் போதிய தரவு இல்லை.",na:"இல்லை",allCat:"அனைத்தும்",weather:"🌤️ வானிலை",btnRetail:"சில்லறை",btnWholesale:"மொத்தம்",btnGap:"💡 இடைவெளி",btnCalc:"🧮 கணிப்பி",btnRead:"படிக்க",btnShare:"பகிர்",btnFB:"பேஸ்புக்",btnPNG:"📸 படமாக பகிர்",btnAlerts:"🔔 தினசரி விழிப்பூட்டல்",bestTitle:"🌾 இப்போது சிறந்த பயிர்",bestSell:"📈 விற்க சிறந்த நேரம்",bestBuy:"📉 வாங்க சிறந்த நேரம்",bestHint:"நேரடி தரவு · 📍 முதன்மை சந்தை சில்லறை விலை · தட்டவும் →",insightLabel:"🧠 நுண்ணறிவு",retailLabel:"சில்லறை",wholesaleLabel:"மொத்தம்",spikeUp:"விலை உயர்வு",spikeDown:"விலை வீழ்ச்சி",dlList:"இலவச பதிவிறக்கம் (CSV)",printList:"அச்சிடு",staleNote:"இன்று புதுப்பிக்கப்படவில்லை — கடைசி: %DATE%"}
 };
 const CATS={Vegetables:{si:"එළවළු",ta:"காய்கறிகள்"},Other:{si:"වෙනත්",ta:"பிற"},Rice:{si:"සහල්",ta:"அரிசி"},Fish:{si:"මාළු",ta:"மீன்"},Fruits:{si:"පළතුරු",ta:"பழங்கள்"}};
 const MARKETS={Pettah:{si:"පිටකොටුව",ta:"பேட்டை"},Dambulla:{si:"දඹුල්ල",ta:"தம்புள்ள"},Narahenpita:{si:"නාරාහේන්පිට",ta:"நாரஹேன்பிட்ட"},Negombo:{si:"මීගමුව",ta:"நீர்கொழும்பு"},Marandagahamula:{si:"මාරන්දගහමුල",ta:"மரந்தகஹமுல"}};
@@ -977,6 +979,22 @@ function setLang(l){
 document.querySelector(".lang").addEventListener("click",function(e){var b=e.target.closest("button[data-lang]");if(b)setLang(b.dataset.lang);});
 
 const vpts = s => s.map((v,i)=>[i,v]).filter(p=>p[1]!=null);
+function lastValidInfo(series){
+  const v=vpts(series);
+  if(!v.length)return{idx:-1,date:null,isStale:true};
+  const idx=v[v.length-1][0];
+  const isStale = DB.dates.length ? idx !== (DB.dates.length-1) : false;
+  return{idx, date: DB.dates[idx]||null, isStale};
+}
+function fmtStaleDate(dateStr){
+  if(!dateStr)return"";
+  const dt=new Date(dateStr+"T00:00:00");
+  const MONTHS_SHORT={en:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+    si:["ජන","පෙබ","මාර්","අප්‍රේ","මැයි","ජූනි","ජූලි","අගෝ","සැප්","ඔක්","නොවැ","දෙසැ"],
+    ta:["ஜன","பிப்","மார்","ஏப்","மே","ஜூன்","ஜூலை","ஆக","செப்","அக்","நவ","டிச"]};
+  const mn=(MONTHS_SHORT[lang]||MONTHS_SHORT.en);
+  return dt.getDate()+" "+mn[dt.getMonth()];
+}
 const latestVal = s => {const v=vpts(s);return v.length?v[v.length-1][1]:null;};
 const fmt = n => n==null ? "&mdash;" : Math.round(n).toLocaleString("en-US");
 function changeOf(s){const v=vpts(s);if(v.length<2)return{abs:0,pct:0,dir:"flat"};
@@ -1013,18 +1031,25 @@ function downloadPriceListCSV(){
   };
   const titleLines=TITLE_MAP[lang]||TITLE_MAP.en;
   const HEADERS_MAP={
-    en:["Commodity","Category","Primary Market","Unit","Latest Price","Change (Rs.)","Change (%)","Report Date"],
-    si:["භාණ්ඩය","වර්ගය","ප්‍රධාන වෙළඳපොළ","ඒකකය","නවතම මිල","වෙනස (රු.)","වෙනස (%)","වාර්තා දිනය"],
-    ta:["பொருள்","வகை","முதன்மை சந்தை","அலகு","சமீபத்திய விலை","மாற்றம் (ரூ.)","மாற்றம் (%)","அறிக்கை தேதி"]
+    en:["Commodity","Category","Primary Market","Unit","Latest Price","Change (Rs.)","Change (%)","Price Date","Status","Report Date"],
+    si:["භාණ්ඩය","වර්ගය","ප්‍රධාන වෙළඳපොළ","ඒකකය","නවතම මිල","වෙනස (රු.)","වෙනස (%)","මිල දිනය","තත්ත්වය","වාර්තා දිනය"],
+    ta:["பொருள்","வகை","முதன்மை சந்தை","அலகு","சமீபத்திய விலை","மாற்றம் (ரூ.)","மாற்றம் (%)","விலை தேதி","நிலை","அறிக்கை தேதி"]
   };
   const headers=HEADERS_MAP[lang]||HEADERS_MAP.en;
   const esc=v=>{ const s=String(v==null?"":v); return /[",\n]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s; };
+  const STATUS_MAP={
+    en:{current:"Current",stale:"Not updated today"},
+    si:{current:"වත්මන්",stale:"අද යාවත්කාලීන නොවේ"},
+    ta:{current:"தற்போதைய",stale:"இன்று புதுப்பிக்கப்படவில்லை"}
+  };
+  const statusLabels=STATUS_MAP[lang]||STATUS_MAP.en;
   const rows=[...titleLines,"",headers.map(esc).join(",")];
   DATA.forEach(d=>{
-    const cur=latestVal(d.series), ch=changeOf(d.series);
+    const cur=latestVal(d.series), ch=changeOf(d.series), sv=lastValidInfo(d.series);
     rows.push([
       tName(d.name), tCat(d.category), tMkt(d.primaryMarket), tUnit(d.unit),
       cur==null?"":Math.round(cur), ch.abs?Math.round(ch.abs):0, ch.pct?ch.pct.toFixed(1):"0.0",
+      sv.date||"", sv.isStale?statusLabels.stale:statusLabels.current,
       DB.dates[DB.dates.length-1]||dateStr
     ].map(esc).join(","));
   });
@@ -1058,16 +1083,17 @@ function printPriceList(){
   };
   const tt=TITLE_MAP[lang]||TITLE_MAP.en;
   const HEADERS_MAP={
-    en:["Commodity","Category","Primary Market","Unit","Latest Price","Change (Rs.)","Change (%)"],
-    si:["භාණ්ඩය","වර්ගය","ප්‍රධාන වෙළඳපොළ","ඒකකය","නවතම මිල","වෙනස (රු.)","වෙනස (%)"],
-    ta:["பொருள்","வகை","முதன்மை சந்தை","அலகு","சமீபத்திய விலை","மாற்றம் (ரூ.)","மாற்றம் (%)"]
+    en:["Commodity","Category","Primary Market","Unit","Latest Price","Change (Rs.)","Change (%)","Price Date"],
+    si:["භාණ්ඩය","වර්ගය","ප්‍රධාන වෙළඳපොළ","ඒකකය","නවතම මිල","වෙනස (රු.)","වෙනස (%)","මිල දිනය"],
+    ta:["பொருள்","வகை","முதன்மை சந்தை","அலகு","சமீபத்திய விலை","மாற்றம் (ரூ.)","மாற்றம் (%)","விலை தேதி"]
   };
   const headers=HEADERS_MAP[lang]||HEADERS_MAP.en;
   const esc=v=>String(v==null?"":v).replace(/&/g,"&amp;").replace(/</g,"&lt;");
   let rowsHtml="";
   DATA.forEach(d=>{
-    const cur=latestVal(d.series), ch=changeOf(d.series);
-    rowsHtml+="<tr><td>"+esc(tName(d.name))+"</td><td>"+esc(tCat(d.category))+"</td><td>"+esc(tMkt(d.primaryMarket))+"</td><td>"+esc(tUnit(d.unit))+"</td><td>"+(cur==null?"—":fmt(cur))+"</td><td>"+(ch.abs?fmt(ch.abs):"0")+"</td><td>"+(ch.pct?ch.pct.toFixed(1):"0.0")+"%</td></tr>";
+    const cur=latestVal(d.series), ch=changeOf(d.series), sv=lastValidInfo(d.series);
+    const rowStyle=sv.isStale?' style="color:#a9802a"':'';
+    rowsHtml+="<tr"+rowStyle+"><td>"+esc(tName(d.name))+"</td><td>"+esc(tCat(d.category))+"</td><td>"+esc(tMkt(d.primaryMarket))+"</td><td>"+esc(tUnit(d.unit))+"</td><td>"+(cur==null?"—":fmt(cur))+"</td><td>"+(ch.abs?fmt(ch.abs):"0")+"</td><td>"+(ch.pct?ch.pct.toFixed(1):"0.0")+"%</td><td>"+(sv.date||"—")+(sv.isStale?" ⚠️":"")+"</td></tr>";
   });
   document.getElementById("printListWrap").innerHTML=
     '<div class="plh-head">'+
@@ -1115,8 +1141,9 @@ function renderGrid(){
   const g=document.getElementById("grid");
   document.getElementById("count").textContent=list.length+" "+t("items");
   if(!list.length){g.innerHTML='<div class="empty">'+t("noMatch").replace("%Q",state.q)+'</div>';return;}
-  g.innerHTML=list.map(d=>{const ch=c(d),cur=latestVal(d.series);
-    return '<div class="item" onclick="openDetail('+d.id+')"><div class="top"><div><div class="cat" style="display:flex;justify-content:space-between;align-items:center">'+tCat(d.category)+'<span style="font-family:monospace;font-size:9px;font-weight:700;color:#0F5C4D;letter-spacing:.3px">TopGoviya.lk</span></div><div class="nm">'+tEmoji(d.name)+' '+tName(d.name)+'</div></div><span class="chg '+ch.dir+'">'+arrow(ch.dir)+' '+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</span></div>'+spark(d.series,220,42,strokeFor(ch.dir))+'<div class="foot"><span class="price">'+fmt(cur)+'<small> '+tUnit(d.unit)+'</small></span><span style="font-size:11px;color:var(--muted)">'+(ch.abs>0?"+":"")+fmt(ch.abs)+' '+t("vsLast")+'</span></div></div>';
+  g.innerHTML=list.map(d=>{const ch=c(d),cur=latestVal(d.series);const sv=lastValidInfo(d.series);
+    const staleHtml=sv.isStale?'<div class="stale-note">⏱ '+t("staleNote").replace("%DATE%",fmtStaleDate(sv.date))+'</div>':'';
+    return '<div class="item" onclick="openDetail('+d.id+')"><div class="top"><div><div class="cat" style="display:flex;justify-content:space-between;align-items:center">'+tCat(d.category)+'<span style="font-family:monospace;font-size:9px;font-weight:700;color:#0F5C4D;letter-spacing:.3px">TopGoviya.lk</span></div><div class="nm">'+tEmoji(d.name)+' '+tName(d.name)+'</div></div><span class="chg '+ch.dir+'">'+arrow(ch.dir)+' '+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</span></div>'+spark(d.series,220,42,strokeFor(ch.dir))+'<div class="foot"><span class="price">'+fmt(cur)+'<small> '+tUnit(d.unit)+'</small></span><span style="font-size:11px;color:var(--muted)">'+(ch.abs>0?"+":"")+fmt(ch.abs)+' '+t("vsLast")+'</span></div>'+staleHtml+'</div>';
   }).join("");
 }
 
