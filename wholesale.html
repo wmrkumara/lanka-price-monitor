@@ -983,6 +983,7 @@ const strokeFor = d => d==="up"?"#b23a2e":d==="down"?"#2c7a52":"#8a8170";
 
 function downloadPriceListCSV(){
   if(!DATA.length)return;
+  if(typeof gtag==="function")gtag('event','download_csv',{event_category:'engagement',event_label:'wholesale_price_list',page_type:'wholesale'});
   const dateStr=DATES[DATES.length-1]||"";
   const reportDate=DB.dates[DB.dates.length-1]||"";
   const dtObj=reportDate?new Date(reportDate+"T00:00:00"):null;
@@ -1045,6 +1046,7 @@ function downloadPriceListCSV(){
 
 function printPriceList(){
   if(!DATA.length)return;
+  if(typeof gtag==="function")gtag('event','print_report',{event_category:'engagement',event_label:'wholesale_price_list',page_type:'wholesale'});
   const reportDate=DB.dates[DB.dates.length-1]||"";
   const dtObj=reportDate?new Date(reportDate+"T00:00:00"):null;
   const MONTHS={

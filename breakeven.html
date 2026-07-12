@@ -288,6 +288,7 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
       </div>
     </div>
     <a href="downloads/topgoviya-farmer-record-kit.pdf" target="_blank" rel="noopener"
+       onclick="if(typeof gtag==='function')gtag('event','download_pdf',{event_category:'engagement',event_label:'farmer_record_kit'})"
        style="background:var(--petrol);color:#fff;font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:10px;text-decoration:none;white-space:nowrap;flex-shrink:0" id="kit-btn">
       ⬇ PDF බාගත කරගන්න
     </a>
@@ -684,6 +685,7 @@ function findCropMarkets(cropName){
 let lastResult = null;
 
 function calculate(){
+  if(typeof gtag==="function")gtag('event','calculate_breakeven',{event_category:'engagement',event_label:'breakeven_calculator'});
   const cropName = document.getElementById("cropName").value.trim();
   const landArea = parseFloat(document.getElementById("landArea").value)||1;
   const harvest  = parseFloat(document.getElementById("harvest").value);
@@ -939,6 +941,7 @@ function renderResults(r){
 }
 
 function printResult(){
+  if(typeof gtag==="function")gtag('event','print_report',{event_category:'engagement',event_label:'breakeven_calculator',page_type:'breakeven'});
   const qrImg=document.getElementById("phQrImg");
   let printed=false;
   const doPrint=()=>{ if(printed)return; printed=true; window.print(); };
