@@ -708,7 +708,15 @@ const NAMES={
  "Orange (Imp)":{si:"දොඩම් (ආනයනික)",ta:"ஆரஞ்சு (இறக்குமதி)"},
  "Red Dhal":{si:"රතු පරිප්පු",ta:"சிவப்பு பருப்பு"},
  "Sprat (Imp)":{si:"හාල් මැස්සෝ (ආනයනික)",ta:"மத்தி (இறக்குமதி)"},
- "Sugar (White)":{si:"සීනි (සුදු)",ta:"சர்க்கரை (வெள்ளை)"}
+ "Sugar (White)":{si:"සීනි (සුදු)",ta:"சர்க்கரை (வெள்ளை)"},
+ "Woodapple":{si:"දිවුල්",ta:"விளாம்பழம்"},
+ "Anamalu":{si:"අනමාලු",ta:"அணமாலு"},
+ "Mango (Betti)":{si:"අඹ (බැට්ටි)",ta:"மாம்பழம் (பெட்டி)"},
+ "Mango (Karathakolomban)":{si:"අඹ (කරුත්තකොළොඹන්)",ta:"மாம்பழம் (கருத்தகொழும்பன்)"},
+ "Orange":{si:"දොඩම්",ta:"ஆரஞ்சு"},
+ "Passion Fruit":{si:"වැල් දොඩම්",ta:"பேஷன் பழம்"},
+ "Pineapple (Medium)":{si:"අන්නාසි (මධ්‍යම)",ta:"அன்னாசி (நடுத்தர)"},
+ "Pineapple (Small)":{si:"අන්නාසි (කුඩා)",ta:"அன்னாசி (சிறிய)"}
 };
 /* ===== HARTI Wholesale commodity names ===== */
 const HARTI_NAMES_SI = {
@@ -919,6 +927,13 @@ function setLang(l){
 document.querySelector(".lang").addEventListener("click",function(e){var b=e.target.closest("button[data-lang]");if(b)setLang(b.dataset.lang);});
 
 const vpts = s => s.map((v,i)=>[i,hartiMid(v)]).filter(p=>p[1]!=null);
+function lastValidInfo(series){
+  const v=vpts(series);
+  if(!v.length)return{idx:-1,date:null,isStale:true};
+  const idx=v[v.length-1][0];
+  const isStale = DB.dates.length ? idx !== (DB.dates.length-1) : false;
+  return{idx, date: DB.dates[idx]||null, isStale};
+}
 const latestVal = s => {const v=vpts(s);return v.length?v[v.length-1][1]:null;};
 const fmt = n => n==null ? "&mdash;" : Math.round(n).toLocaleString("en-US");
 function changeOf(s){const v=vpts(s);if(v.length<2)return{abs:0,pct:0,dir:"flat"};
@@ -953,6 +968,13 @@ function renderGrid(){
   if(state.sort==="up")list.sort((a,b)=>c(b).pct-c(a).pct);
   if(state.sort==="down")list.sort((a,b)=>c(a).pct-c(b).pct);
   if(state.sort==="high")list.sort((a,b)=>(latestVal(b.series)||0)-(latestVal(a.series)||0));
+  // Secondary sort: items with no price for today's report drop to the bottom,
+  // regardless of the primary sort selected above.
+  list.sort((a,b)=>{
+    const aStale=lastValidInfo(a.series).isStale?1:0;
+    const bStale=lastValidInfo(b.series).isStale?1:0;
+    return aStale-bStale;
+  });
   const g=document.getElementById("grid");
   document.getElementById("count").textContent=list.length+" "+t("items");
   if(!list.length){g.innerHTML='<div class="empty">'+t("noMatch").replace("%Q",state.q)+'</div>';return;}
