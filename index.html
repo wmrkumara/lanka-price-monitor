@@ -964,6 +964,24 @@ const strokeFor = d => d==="up"?"#b23a2e":d==="down"?"#2c7a52":"#8a8170";
 function downloadPriceListCSV(){
   if(!DATA.length)return;
   const dateStr=DATES[DATES.length-1]||"";
+  const reportDate=DB.dates[DB.dates.length-1]||"";
+  const dtObj=reportDate?new Date(reportDate+"T00:00:00"):null;
+  const humanDate=dtObj?dtObj.toLocaleDateString(lang==="en"?"en-GB":lang==="ta"?"ta-LK":"si-LK",{day:"numeric",month:"long",year:"numeric"}):dateStr;
+  const TITLE_MAP={
+    en:["TopGoviya.lk — Daily Retail Price Report",
+        "Report Date: "+humanDate,
+        "Source: Central Bank of Sri Lanka (CBSL) Daily Price Reports",
+        "www.topgoviya.lk"],
+    si:["TopGoviya.lk — දෛනික සිල්ලර මිල වාර්තාව",
+        "වාර්තා දිනය: "+humanDate,
+        "මූලාශ්‍රය: ශ්‍රී ලංකා මහ බැංකුවේ (CBSL) දෛනික මිල වාර්තා",
+        "www.topgoviya.lk"],
+    ta:["TopGoviya.lk — தினசரி சில்லறை விலை அறிக்கை",
+        "அறிக்கை தேதி: "+humanDate,
+        "மூலம்: இலங்கை மத்திய வங்கி (CBSL) தினசரி விலை அறிக்கைகள்",
+        "www.topgoviya.lk"]
+  };
+  const titleLines=TITLE_MAP[lang]||TITLE_MAP.en;
   const HEADERS_MAP={
     en:["Commodity","Category","Primary Market","Unit","Latest Price","Change (Rs.)","Change (%)","Report Date"],
     si:["භාණ්ඩය","වර්ගය","ප්‍රධාන වෙළඳපොළ","ඒකකය","නවතම මිල","වෙනස (රු.)","වෙනස (%)","වාර්තා දිනය"],
@@ -971,7 +989,7 @@ function downloadPriceListCSV(){
   };
   const headers=HEADERS_MAP[lang]||HEADERS_MAP.en;
   const esc=v=>{ const s=String(v==null?"":v); return /[",\n]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s; };
-  const rows=[headers.map(esc).join(",")];
+  const rows=[...titleLines,"",headers.map(esc).join(",")];
   DATA.forEach(d=>{
     const cur=latestVal(d.series), ch=changeOf(d.series);
     rows.push([
