@@ -379,7 +379,7 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
           <div class="ph-brand">TopGoviya.lk — <span id="ph-title">ලාභ අලාභ සීමා ගණකය</span></div>
           <div class="ph-meta" id="ph-meta"></div>
         </div>
-        <div class="ph-qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://topgoviya.lk" alt="topgoviya.lk QR"><div>topgoviya.lk</div></div>
+        <div class="ph-qr"><img id="phQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://topgoviya.lk" alt="topgoviya.lk QR"><div>topgoviya.lk</div></div>
       </div>
     </div>
 
@@ -939,7 +939,15 @@ function renderResults(r){
 }
 
 function printResult(){
-  window.print();
+  const qrImg=document.getElementById("phQrImg");
+  let printed=false;
+  const doPrint=()=>{ if(printed)return; printed=true; window.print(); };
+  if(!qrImg || qrImg.complete){ doPrint(); }
+  else{
+    qrImg.onload=doPrint;
+    qrImg.onerror=doPrint;
+    setTimeout(doPrint,1200);
+  }
 }
 function shareResult(){
   if(!lastResult)return;

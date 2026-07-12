@@ -1072,10 +1072,18 @@ function printPriceList(){
   document.getElementById("printListWrap").innerHTML=
     '<div class="plh-head">'+
       '<div><div class="plh-brand">'+tt.h+'</div><div class="plh-meta">'+tt.d+'<br>'+tt.s+'<br>www.topgoviya.lk</div></div>'+
-      '<div class="plh-qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://topgoviya.lk" alt="topgoviya.lk QR"><div>topgoviya.lk</div></div>'+
+      '<div class="plh-qr"><img id="plhQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://topgoviya.lk" alt="topgoviya.lk QR"><div>topgoviya.lk</div></div>'+
     '</div>'+
     '<table><thead><tr>'+headers.map(h=>"<th>"+esc(h)+"</th>").join("")+'</tr></thead><tbody>'+rowsHtml+'</tbody></table>';
-  window.print();
+  const qrImg=document.getElementById("plhQrImg");
+  let printed=false;
+  const doPrint=()=>{ if(printed)return; printed=true; window.print(); };
+  if(qrImg.complete){ doPrint(); }
+  else{
+    qrImg.onload=doPrint;
+    qrImg.onerror=doPrint;
+    setTimeout(doPrint,1200);
+  }
 }
 
 function spark(s,w,h,stroke){
@@ -2829,6 +2837,7 @@ setTimeout(()=>{
 /* Voice hint updates on lang change — handled in setLang below */
 
 function init(){
+  new Image().src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://topgoviya.lk";
   DATES=DB.dateLabels;
   DATE_OBJS=DB.dates.map(s=>new Date(s+"T00:00:00"));
   DATA=DB.commodities.map((d,i)=>(d.id=i,d));
