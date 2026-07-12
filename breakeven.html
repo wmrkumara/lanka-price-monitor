@@ -914,7 +914,11 @@ function renderResults(r){
   if(phTitleEl) phTitleEl.textContent=t("pageTitle").replace(/<[^>]*>/g,"");
   const phMetaEl=document.getElementById("ph-meta");
   if(phMetaEl){
-    const todayStr=new Date().toLocaleDateString(lang==="en"?"en-GB":lang==="ta"?"ta-LK":"si-LK",{day:"numeric",month:"long",year:"numeric"});
+    const MONTHS_={en:["January","February","March","April","May","June","July","August","September","October","November","December"],
+      si:["ජනවාරි","පෙබරවාරි","මාර්තු","අප්‍රේල්","මැයි","ජූනි","ජූලි","අගෝස්තු","සැප්තැම්බර්","ඔක්තෝබර්","නොවැම්බර්","දෙසැම්බර්"],
+      ta:["ஜனவரி","பிப்ரவரி","மார்ச்","ஏப்ரல்","மே","ஜூன்","ஜூலை","ஆகஸ்ட்","செப்டம்பர்","அக்டோபர்","நவம்பர்","டிசம்பர்"]}[lang]||["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const nowD=new Date();
+    const todayStr=nowD.getDate()+" "+MONTHS_[nowD.getMonth()]+" "+nowD.getFullYear();
     phMetaEl.innerHTML=t("phGenerated").replace("%DATE%",todayStr).replace("%CROP%",r.cropName||"—");
   }
 
