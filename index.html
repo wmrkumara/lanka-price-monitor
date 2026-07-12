@@ -245,8 +245,13 @@
     .masthead,.controls,.movers,#bestCrop,.section-h,.grid,footer,.dl-btn,#dailyPostsBtn,
     .voice-toast{display:none!important}
     .print-list-wrap{display:block!important}
+    .print-list-wrap .plh-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
+      margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid #0e4f4a}
     .print-list-wrap .plh-brand{font-family:'Newsreader',serif;font-size:22px;font-weight:600;color:#0e4f4a}
-    .print-list-wrap .plh-meta{font-size:12px;color:#7a7264;margin:4px 0 16px;padding-bottom:12px;border-bottom:2px solid #0e4f4a}
+    .print-list-wrap .plh-meta{font-size:12px;color:#7a7264}
+    .print-list-wrap .plh-qr{flex-shrink:0;text-align:center}
+    .print-list-wrap .plh-qr img{width:64px;height:64px;border:1px solid #ccc;border-radius:4px}
+    .print-list-wrap .plh-qr div{font-size:9px;color:#7a7264;margin-top:3px}
     .print-list-wrap table{width:100%;border-collapse:collapse;font-size:11.5px}
     .print-list-wrap th,.print-list-wrap td{border:1px solid #ccc;padding:5px 8px;text-align:left}
     .print-list-wrap th{background:#f4efe4;font-weight:700}
@@ -1065,8 +1070,10 @@ function printPriceList(){
     rowsHtml+="<tr><td>"+esc(tName(d.name))+"</td><td>"+esc(tCat(d.category))+"</td><td>"+esc(tMkt(d.primaryMarket))+"</td><td>"+esc(tUnit(d.unit))+"</td><td>"+(cur==null?"—":fmt(cur))+"</td><td>"+(ch.abs?fmt(ch.abs):"0")+"</td><td>"+(ch.pct?ch.pct.toFixed(1):"0.0")+"%</td></tr>";
   });
   document.getElementById("printListWrap").innerHTML=
-    '<div class="plh-brand">'+tt.h+'</div>'+
-    '<div class="plh-meta">'+tt.d+'<br>'+tt.s+'<br>www.topgoviya.lk</div>'+
+    '<div class="plh-head">'+
+      '<div><div class="plh-brand">'+tt.h+'</div><div class="plh-meta">'+tt.d+'<br>'+tt.s+'<br>www.topgoviya.lk</div></div>'+
+      '<div class="plh-qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://topgoviya.lk" alt="topgoviya.lk QR"><div>topgoviya.lk</div></div>'+
+    '</div>'+
     '<table><thead><tr>'+headers.map(h=>"<th>"+esc(h)+"</th>").join("")+'</tr></thead><tbody>'+rowsHtml+'</tbody></table>';
   window.print();
 }
