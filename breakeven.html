@@ -427,6 +427,28 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
     <!-- TOPGOVIYA ANALYSIS SUMMARY -->
     <div class="summary-card" id="summary-card"></div>
 
+    <!-- LOAN & LEASING CALCULATOR CROSS-LINK -->
+    <a href="loan-calculator.html"
+       onclick="if(typeof gtag==='function')gtag('event','click_loan_banner',{event_category:'engagement',event_label:'breakeven_to_loan'})"
+       style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+              background:var(--card);border:1px solid var(--line-strong);border-left:4px solid var(--gold);
+              border-radius:var(--r);padding:16px 18px;margin:16px 0;text-decoration:none;
+              box-shadow:var(--shadow);transition:transform .15s"
+       onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+      <div>
+        <div style="font-family:'Newsreader',serif;font-size:16.5px;color:var(--ink);margin-bottom:4px;line-height:1.3">
+          <span id="loan-title">උපකරණ සඳහා මුදල් අවශ්‍යද?</span>
+        </div>
+        <div style="font-size:12.5px;color:var(--muted);line-height:1.4" id="loan-desc">
+          ට්‍රැක්ටරයක්, පොම්පයක් හෝ වාහනයක් සඳහා ණය ගැනීම vs ලීසින් — කුමක් ලාභදායීදැයි සසඳන්න.
+        </div>
+      </div>
+      <span style="background:var(--gold);color:#fff;font-weight:700;font-size:13.5px;padding:10px 18px;
+                    border-radius:10px;white-space:nowrap;flex-shrink:0" id="loan-btn">
+        ණය සහ ලීසින් ගණකය →
+      </span>
+    </a>
+
     <!-- PRINT / SAVE AS PDF -->
     <button class="print-btn" onclick="printResult()" id="print-btn">
       🖨️ <span id="btn-print">මුද්‍රණය කරන්න / PDF ලෙස සුරකින්න</span>
@@ -505,6 +527,9 @@ const T = {
     errCosts:"කරුණාකර අවම වශයෙන් එක් වියදමක් ඇතුළු කරන්න.",
     shareMsg:"🧮 *TopGoviya.lk — ලාභ අලාභ සීමා ගණකය*\n\n🌾 භෝගය: %CROP%\n💰 මුළු වියදම: රු.%COST%\n📦 අස්වැන්න: %KG% kg\n🎯 අලාභ-ලාභ සීමා: රු.%BE%/kg\n\n%REC%\n\n🔗 https://topgoviya.lk/breakeven.html\n🤝 *මේ තොරතුරු ඔබේ මිතුරන්ටත් දැනගන්න බෙදාහරින්න!*",
     shareProfit:"✅ දැනට ලාභදායී!",shareLoss:"⚠️ දැනට පාඩුයි — රඳා සිටින්න.",shareNoData:"📊 වෙළඳපොළ සංසන්දනය: දත්ත නොමැත.",
+    loanTitle:"උපකරණ සඳහා මුදල් අවශ්‍යද?",
+    loanDesc:"ට්‍රැක්ටරයක්, පොම්පයක් හෝ වාහනයක් සඳහා ණය ගැනීම vs ලීසින් — කුමක් ලාභදායීදැයි සසඳන්න.",
+    loanBtn:"ණය සහ ලීසින් ගණකය →",
   },
   ta:{
     navRetail:"சில்லறை",navWholesale:"மொத்தம்",navWeather:"வானிலை",navBe:"முறிவு",
@@ -546,6 +571,9 @@ const T = {
     errHarvest:"மகசூல் அளவை உள்ளிடவும்.",errCosts:"குறைந்தது ஒரு செலவை உள்ளிடவும்.",
     shareMsg:"🧮 *TopGoviya.lk — முறிவு கணிப்பி*\n\n🌾 பயிர்: %CROP%\n💰 மொத்த செலவு: ரூ.%COST%\n📦 மகசூல்: %KG% kg\n🎯 முறிவு விலை: ரூ.%BE%/kg\n\n%REC%\n\n🔗 https://topgoviya.lk/breakeven.html\n🤝 *இந்த தகவலை உங்கள் நண்பர்களுடன் பகிருங்கள்!*",
     shareProfit:"✅ தற்போது லாபகரமானது!",shareLoss:"⚠️ தற்போது நஷ்டம் — காத்திருங்கள்.",shareNoData:"📊 சந்தை ஒப்பீடு: தரவு இல்லை.",
+    loanTitle:"உபகரணங்களுக்கு நிதி தேவையா?",
+    loanDesc:"டிராக்டர், பம்ப் அல்லது வாகனத்திற்கு கடன் vs லீசிங் — எது லாபகரம் என ஒப்பிடுங்கள்.",
+    loanBtn:"கடன் & லீசிங் கால்குலேட்டர் →",
     kitTitle:"📋 உங்கள் விவசாய செலவுகளை கையால் பதிவு செய்யுங்கள்",
     kitDesc:"இலவச அச்சு பிரதி — சுருக்க தாள் + தினசரி பதிவேடு (சிங்களம் · தமிழ் · English)",
     kitBtn:"⬇ இலவசமாக PDF பதிவிறக்கவும்",
@@ -591,6 +619,9 @@ const T = {
     errHarvest:"Please enter your expected harvest.",errCosts:"Please enter at least one cost.",
     shareMsg:"🧮 *TopGoviya.lk — Break-even Calculator*\n\n🌾 Crop: %CROP%\n💰 Total Cost: Rs.%COST%\n📦 Harvest: %KG% kg\n🎯 Break-even: Rs.%BE%/kg\n\n%REC%\n\n🔗 https://topgoviya.lk/breakeven.html\n🤝 *Share this with your farming friends!*",
     shareProfit:"✅ Currently profitable!",shareLoss:"⚠️ Loss at current prices — wait.",shareNoData:"📊 Market comparison: data not available.",
+    loanTitle:"Financing equipment?",
+    loanDesc:"Compare a bank loan vs leasing for a tractor, pump, or vehicle — see which is more profitable.",
+    loanBtn:"Loan & Leasing Calculator →",
     kitTitle:"📋 Track your farm costs by hand",
     kitDesc:"Free printable copy — Summary Sheet + Daily Log Sheet (Sinhala · Tamil · English)",
     kitBtn:"⬇ Download PDF Free",
@@ -644,6 +675,9 @@ function applyLang(){
   document.getElementById("kit-title").textContent=t("kitTitle");
   document.getElementById("kit-desc").textContent=t("kitDesc");
   document.getElementById("kit-btn").textContent=t("kitBtn");
+  document.getElementById("loan-title").textContent=t("loanTitle");
+  document.getElementById("loan-desc").textContent=t("loanDesc");
+  document.getElementById("loan-btn").textContent=t("loanBtn");
 }
 
 document.querySelector(".lang").addEventListener("click",function(e){
