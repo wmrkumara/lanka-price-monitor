@@ -234,31 +234,6 @@
   .chip:hover{border-color:var(--petrol)}.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
   .sortsel{font:inherit;font-size:12.5px;font-weight:600;padding:9px 12px;border-radius:999px;
     border:1px solid var(--line-strong);background:var(--card);color:var(--ink-soft);cursor:pointer}
-  .dl-btn{font:inherit;font-size:12.5px;font-weight:700;padding:9px 14px;border-radius:999px;cursor:pointer;
-    border:1px solid var(--petrol);background:var(--petrol);color:#fff;transition:.18s;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
-  .dl-btn:hover{background:var(--petrol-deep);border-color:var(--petrol-deep)}
-  .dl-btn-outline{background:var(--card);color:var(--petrol)}
-  .dl-btn-outline:hover{background:var(--petrol);color:#fff}
-  .stale-note{font-size:10px;color:#a9802a;background:#fbf1dc;border:1px solid #e8d6ab;border-radius:6px;
-    padding:3px 7px;margin-top:6px;display:inline-flex;align-items:center;gap:4px;font-weight:600}
-  .print-list-wrap{display:none}
-  @media print{
-    body{background:#fff}
-    .masthead,.controls,.movers,#bestCrop,.section-h,.grid,footer,.dl-btn,#dailyPostsBtn,
-    .voice-toast,.guide-btn,.guide-scrim,.scrim,#pwa-banner{display:none!important}
-    .print-list-wrap{display:block!important}
-    .print-list-wrap .plh-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
-      margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid #0e4f4a}
-    .print-list-wrap .plh-brand{font-family:'Newsreader',serif;font-size:22px;font-weight:600;color:#0e4f4a}
-    .print-list-wrap .plh-meta{font-size:12px;color:#7a7264}
-    .print-list-wrap .plh-qr{flex-shrink:0;text-align:center}
-    .print-list-wrap .plh-qr img{width:64px;height:64px;border:1px solid #ccc;border-radius:4px}
-    .print-list-wrap .plh-qr div{font-size:9px;color:#7a7264;margin-top:3px}
-    .print-list-wrap table{width:100%;border-collapse:collapse;font-size:11.5px}
-    .print-list-wrap th,.print-list-wrap td{border:1px solid #ccc;padding:5px 8px;text-align:left}
-    .print-list-wrap th{background:#f4efe4;font-weight:700}
-    .print-list-wrap tr{break-inside:avoid}
-  }
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:14px}
   .item{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;cursor:pointer;
     box-shadow:var(--shadow);transition:transform .16s, box-shadow .16s, border-color .16s;
@@ -449,7 +424,7 @@
 <!-- ══ TOP NAV BAR ══ -->
 <nav class="topnav" role="navigation">
   <div class="topnav-inner">
-    <a href="index.html" class="topnav-brand">Top<em>Goviya</em>.lk</a>
+    <a href="index.html" class="topnav-brand" style="display:inline-flex;align-items:center;gap:7px"><img src="logo-mark.png" alt="TopGoviya" style="width:22px;height:22px;object-fit:contain;flex-shrink:0">Top<em>Goviya</em>.lk</a>
     <div class="navlinks">
       <a href="index.html" class="navlink retail">📊 Retail Prices <span class="navlink-badge">CBSL</span></a>
       <a href="wholesale.html" class="navlink wholesale">📦 Wholesale <span class="navlink-badge">HARTI</span></a>
@@ -521,13 +496,9 @@
       <option value="az">Sort: A&ndash;Z</option><option value="up">Biggest increases</option>
       <option value="down">Biggest decreases</option><option value="high">Highest price</option>
     </select>
-    <button class="dl-btn" onclick="downloadPriceListCSV()" id="dlListBtn">⬇ <span id="dlListBtnTxt">CSV</span></button>
-    <button class="dl-btn dl-btn-outline" onclick="printPriceList()" id="printListBtn">🖨️ <span id="printListBtnTxt">Print</span></button>
   </div>
   <div class="voice-toast" id="voiceToast">🎤 Listening...</div>
   <div class="grid" id="grid"></div>
-
-  <div class="print-list-wrap" id="printListWrap"></div>
 
   <footer>
     <div class="legend">
@@ -695,9 +666,9 @@ let DB=EMBEDDED, DATES=[], DATA=[], DATE_OBJS=[];
 /* ---------- i18n ---------- */
 let lang="si";
 const I18N={
- en:{kicker:'Wholesale data from <span class="org">Hector Kobbekaduwa Agrarian Research &amp; Training Institute</span>',latestReport:"Latest report",sub:"Wholesale prices · 10 markets · Peliyagoda midpoint",movers:"Today\u2019s sharpest movements",moversHint:"Peliyagoda midpoint &middot; tap &rarr;",all:"All commodities",items:"items",searchPh:"Search a commodity\u2026",sortAZ:"Sort: A\u2013Z",sortUp:"Biggest increases",sortDown:"Biggest decreases",sortHigh:"Highest price",lgUp:"Price increased",lgDown:"Price decreased",footNote:"Auto-extracted from HARTI Daily Wholesale Price Reports. Not an official publication.",creditPre:"Design &amp; development by",vsLast:"vs last",latest:"Latest",change:"Change",low:"2026 Low",high:"2026 High",retail:"retail",across:"Across markets \u2014 latest report",priceOn:"Retail price on",reason:'Moved <b>%A</b> &rarr; <b>%B</b> since the previous report.',noMatch:'No commodity matches &ldquo;%Q&rdquo;.',notEnough:"Not enough data in this range yet.",na:"n.a.",allCat:"All",weather:"🌤️ Weather",btnRetail:"Retail",btnWholesale:"Wholesale",btnGap:"💡 Gap",btnCalc:"🧮 Calculator",btnRead:"Read",btnShare:"Share",btnFB:"Facebook",btnPNG:"📸 Share as Image",btnAlerts:"🔔 Daily Alerts",bestTitle:"🌾 Best Crop Right Now",bestSell:"🟢 Sell Now",bestBuy:"🔴 Buy Now",bestHint:"live data · 📍 Primary market retail price · tap →",insightLabel:"🧠 Insight",retailLabel:"Retail",wholesaleLabel:"Wholesale",spikeUp:"Price spike up",spikeDown:"Price drop",dlList:"Free Download (CSV)",printList:"Print",staleNote:"Not updated today — last: %DATE%"},
- si:{kicker:'තොග මිල දත්ත <span class="org">හෙක්ටර් කොබ්බෑකඩුව ගොවිගටයුතු පර්යේෂණ ආයතනය</span> වෙතින්',latestReport:"නවතම වාර්තාව",sub:"තොග මිල · වෙළඳපොළ 10ක් · පෑලියගොඩ මධ්‍යගතය",movers:"අද වැඩිම වෙනස්වීම්",moversHint:"පෑලියගොඩ මධ්‍යගතය &middot; තට්ටු කරන්න &rarr;",all:"සියලු භාණ්ඩ",items:"භාණ්ඩ",searchPh:"භාණ්ඩයක් සොයන්න\u2026",sortAZ:"අකාරාදී",sortUp:"වැඩිම වැඩිවීම්",sortDown:"වැඩිම අඩුවීම්",sortHigh:"ඉහළම මිල",lgUp:"මිල ඉහළ ගියා",lgDown:"මිල පහළ ගියා",footNote:"මහ බැංකුවේ දෛනික මිල වාර්තාවලින් ස්වයංක්‍රීයව උපුටා ගන්නා ලදි. නිල ප්‍රකාශනයක් නොවේ.",creditPre:"නිර්මාණය හා සංවර්ධනය:",vsLast:"පෙරට වඩා",latest:"නවතම",change:"වෙනස",low:"2026 අවම",high:"2026 උපරිම",retail:"සිල්ලර",across:"වෙළඳපොළ අතර &mdash; නවතම වාර්තාව",priceOn:"සිල්ලර මිල",reason:'පෙර වාර්තාවට සාපේක්ෂව <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; සඳහා භාණ්ඩයක් හමු නොවීය.',notEnough:"මෙම පරාසය සඳහා තවම ප්‍රමාණවත් දත්ත නැත.",na:"නැත",allCat:"සියල්ල",weather:"🌤️ කාලගුණය",btnRetail:"සිල්ලර",btnWholesale:"තොග",btnGap:"💡 පරතරය",btnCalc:"🧮 ගණකය",btnRead:"කියවන්න",btnShare:"Share කරන්න",btnFB:"ෆේස්බුක්",btnPNG:"📸  රූපයක් ලෙස Share",btnAlerts:"🔔 දෛනික දැනුම්දීම්",bestTitle:"🌾 දැන් හොඳම භාණ්ඩය",bestSell:"🟢 දැන් විකිණීමට",bestBuy:"🔴 දැන් ගැනීමට",bestHint:"සජීවී දත්ත · 📍 ප්‍රධාන වෙළඳපොළ සිල්ලර මිල · tap →",insightLabel:"🧠 තොරතුරු",retailLabel:"සිල්ලර",wholesaleLabel:"තොග",spikeUp:"ඉහළ නැගීමක්",spikeDown:"පහළ වැටීම",dlList:"නොමිලේ බාගන්න (CSV)",printList:"මුද්‍රණය",staleNote:"අද යාවත්කාලීන නොවේ — අවසන්: %DATE%"},
- ta:{kicker:'மொத்த விலை தரவு <span class="org">HARTI — ஹெக்டர் கொப்பேகடுவ வேளாண் ஆராய்ச்சி நிறுவனம்</span> வழியாக',latestReport:"சமீபத்திய அறிக்கை",sub:"மொத்த விலை &middot; 10 சந்தைகள் &middot; பேலியகோட நடுப்புள்ளி",movers:"இன்றைய பெரிய மாற்றங்கள்",moversHint:"தானியங்கி தரவரிசை &middot; தட்டவும் &rarr;",all:"அனைத்து பொருட்கள்",items:"பொருட்கள்",searchPh:"ஒரு பொருளைத் தேடுங்கள்\u2026",sortAZ:"அகர வரிசை",sortUp:"அதிக உயர்வுகள்",sortDown:"அதிக குறைவுகள்",sortHigh:"அதிக விலை",lgUp:"விலை அதிகரித்தது",lgDown:"விலை குறைந்தது",footNote:"HARTI தினசரி மொத்த விலை அறிக்கைகளில் இருந்து தானாக எடுக்கப்பட்டது. அதிகாரப்பூர்வ வெளியீடு அல்ல.",creditPre:"வடிவமைப்பு &amp; உருவாக்கம்:",vsLast:"முந்தையதை விட",latest:"சமீபத்தியது",change:"மாற்றம்",low:"2026 குறைந்தது",high:"2026 அதிகபட்சம்",retail:"சில்லறை",across:"சந்தைகளில் &mdash; சமீபத்திய அறிக்கை",priceOn:"சில்லறை விலை",reason:'முந்தைய அறிக்கையுடன் ஒப்பிடுகையில் <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; உடன் பொருந்தும் பொருள் இல்லை.',notEnough:"இந்த வரம்பில் இன்னும் போதிய தரவு இல்லை.",na:"இல்லை",allCat:"அனைத்தும்",weather:"🌤️ வானிலை",btnRetail:"சில்லறை",btnWholesale:"மொத்தம்",btnGap:"💡 இடைவெளி",btnCalc:"🧮 கணிப்பி",btnRead:"படிக்க",btnShare:"பகிர்",btnFB:"பேஸ்புக்",btnPNG:"📸 படமாக பகிர்",btnAlerts:"🔔 தினசரி விழிப்பூட்டல்",bestTitle:"🌾 இப்போது சிறந்த பயிர்",bestSell:"🟢 இப்போது விற்க",bestBuy:"🔴 இப்போது வாங்க",bestHint:"நேரடி தரவு · 📍 முதன்மை சந்தை சில்லறை விலை · தட்டவும் →",insightLabel:"🧠 நுண்ணறிவு",retailLabel:"சில்லறை",wholesaleLabel:"மொத்தம்",spikeUp:"விலை உயர்வு",spikeDown:"விலை வீழ்ச்சி",dlList:"இலவச பதிவிறக்கம் (CSV)",printList:"அச்சிடு",staleNote:"இன்று புதுப்பிக்கப்படவில்லை — கடைசி: %DATE%"}
+ en:{kicker:'Wholesale data from <span class="org">Hector Kobbekaduwa Agrarian Research &amp; Training Institute</span>',latestReport:"Latest report",sub:"Wholesale prices · 10 markets · Peliyagoda midpoint",movers:"Today\u2019s sharpest movements",moversHint:"Peliyagoda midpoint &middot; tap &rarr;",all:"All commodities",items:"items",searchPh:"Search a commodity\u2026",sortAZ:"Sort: A\u2013Z",sortUp:"Biggest increases",sortDown:"Biggest decreases",sortHigh:"Highest price",lgUp:"Price increased",lgDown:"Price decreased",footNote:"Auto-extracted from HARTI Daily Wholesale Price Reports. Not an official publication.",creditPre:"Design &amp; development by",vsLast:"vs last",latest:"Latest",change:"Change",low:"2026 Low",high:"2026 High",retail:"retail",across:"Across markets \u2014 latest report",priceOn:"Retail price on",reason:'Moved <b>%A</b> &rarr; <b>%B</b> since the previous report.',noMatch:'No commodity matches &ldquo;%Q&rdquo;.',notEnough:"Not enough data in this range yet.",na:"n.a.",allCat:"All",weather:"🌤️ Weather",btnRetail:"Retail",btnWholesale:"Wholesale",btnGap:"💡 Gap",btnCalc:"🧮 Calculator",btnRead:"Read",btnShare:"Share",btnFB:"Facebook",btnPNG:"📸 Share as Image",btnAlerts:"🔔 Daily Alerts",bestTitle:"🌾 Best Crop Right Now",bestSell:"🟢 Sell Now",bestBuy:"🔴 Buy Now",bestHint:"live data · 📍 Primary market retail price · tap →",insightLabel:"🧠 Insight",retailLabel:"Retail",wholesaleLabel:"Wholesale",spikeUp:"Price spike up",spikeDown:"Price drop"},
+ si:{kicker:'තොග මිල දත්ත <span class="org">හෙක්ටර් කොබ්බෑකඩුව ගොවිගටයුතු පර්යේෂණ ආයතනය</span> වෙතින්',latestReport:"නවතම වාර්තාව",sub:"තොග මිල · වෙළඳපොළ 10ක් · පෑලියගොඩ මධ්‍යගතය",movers:"අද වැඩිම වෙනස්වීම්",moversHint:"පෑලියගොඩ මධ්‍යගතය &middot; තට්ටු කරන්න &rarr;",all:"සියලු භාණ්ඩ",items:"භාණ්ඩ",searchPh:"භාණ්ඩයක් සොයන්න\u2026",sortAZ:"අකාරාදී",sortUp:"වැඩිම වැඩිවීම්",sortDown:"වැඩිම අඩුවීම්",sortHigh:"ඉහළම මිල",lgUp:"මිල ඉහළ ගියා",lgDown:"මිල පහළ ගියා",footNote:"මහ බැංකුවේ දෛනික මිල වාර්තාවලින් ස්වයංක්‍රීයව උපුටා ගන්නා ලදි. නිල ප්‍රකාශනයක් නොවේ.",creditPre:"නිර්මාණය හා සංවර්ධනය:",vsLast:"පෙරට වඩා",latest:"නවතම",change:"වෙනස",low:"2026 අවම",high:"2026 උපරිම",retail:"සිල්ලර",across:"වෙළඳපොළ අතර &mdash; නවතම වාර්තාව",priceOn:"සිල්ලර මිල",reason:'පෙර වාර්තාවට සාපේක්ෂව <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; සඳහා භාණ්ඩයක් හමු නොවීය.',notEnough:"මෙම පරාසය සඳහා තවම ප්‍රමාණවත් දත්ත නැත.",na:"නැත",allCat:"සියල්ල",weather:"🌤️ කාලගුණය",btnRetail:"සිල්ලර",btnWholesale:"තොග",btnGap:"💡 පරතරය",btnCalc:"🧮 ගණකය",btnRead:"කියවන්න",btnShare:"Share කරන්න",btnFB:"ෆේස්බුක්",btnPNG:"📸  රූපයක් ලෙස Share",btnAlerts:"🔔 දෛනික දැනුම්දීම්",bestTitle:"🌾 දැන් හොඳම භාණ්ඩය",bestSell:"🟢 දැන් විකිණීමට",bestBuy:"🔴 දැන් ගැනීමට",bestHint:"සජීවී දත්ත · 📍 ප්‍රධාන වෙළඳපොළ සිල්ලර මිල · tap →",insightLabel:"🧠 තොරතුරු",retailLabel:"සිල්ලර",wholesaleLabel:"තොග",spikeUp:"ඉහළ නැගීමක්",spikeDown:"පහළ වැටීම"},
+ ta:{kicker:'மொத்த விலை தரவு <span class="org">HARTI — ஹெக்டர் கொப்பேகடுவ வேளாண் ஆராய்ச்சி நிறுவனம்</span> வழியாக',latestReport:"சமீபத்திய அறிக்கை",sub:"மொத்த விலை &middot; 10 சந்தைகள் &middot; பேலியகோட நடுப்புள்ளி",movers:"இன்றைய பெரிய மாற்றங்கள்",moversHint:"தானியங்கி தரவரிசை &middot; தட்டவும் &rarr;",all:"அனைத்து பொருட்கள்",items:"பொருட்கள்",searchPh:"ஒரு பொருளைத் தேடுங்கள்\u2026",sortAZ:"அகர வரிசை",sortUp:"அதிக உயர்வுகள்",sortDown:"அதிக குறைவுகள்",sortHigh:"அதிக விலை",lgUp:"விலை அதிகரித்தது",lgDown:"விலை குறைந்தது",footNote:"HARTI தினசரி மொத்த விலை அறிக்கைகளில் இருந்து தானாக எடுக்கப்பட்டது. அதிகாரப்பூர்வ வெளியீடு அல்ல.",creditPre:"வடிவமைப்பு &amp; உருவாக்கம்:",vsLast:"முந்தையதை விட",latest:"சமீபத்தியது",change:"மாற்றம்",low:"2026 குறைந்தது",high:"2026 அதிகபட்சம்",retail:"சில்லறை",across:"சந்தைகளில் &mdash; சமீபத்திய அறிக்கை",priceOn:"சில்லறை விலை",reason:'முந்தைய அறிக்கையுடன் ஒப்பிடுகையில் <b>%A</b> &rarr; <b>%B</b>.',noMatch:'&ldquo;%Q&rdquo; உடன் பொருந்தும் பொருள் இல்லை.',notEnough:"இந்த வரம்பில் இன்னும் போதிய தரவு இல்லை.",na:"இல்லை",allCat:"அனைத்தும்",weather:"🌤️ வானிலை",btnRetail:"சில்லறை",btnWholesale:"மொத்தம்",btnGap:"💡 இடைவெளி",btnCalc:"🧮 கணிப்பி",btnRead:"படிக்க",btnShare:"பகிர்",btnFB:"பேஸ்புக்",btnPNG:"📸 படமாக பகிர்",btnAlerts:"🔔 தினசரி விழிப்பூட்டல்",bestTitle:"🌾 இப்போது சிறந்த பயிர்",bestSell:"🟢 இப்போது விற்க",bestBuy:"🔴 இப்போது வாங்க",bestHint:"நேரடி தரவு · 📍 முதன்மை சந்தை சில்லறை விலை · தட்டவும் →",insightLabel:"🧠 நுண்ணறிவு",retailLabel:"சில்லறை",wholesaleLabel:"மொத்தம்",spikeUp:"விலை உயர்வு",spikeDown:"விலை வீழ்ச்சி"}
 };
 const CATS={Vegetables:{si:"එළවළු",ta:"காய்கறிகள்"},Other:{si:"වෙනත්",ta:"பிற"},Rice:{si:"සහල්",ta:"அரிசி"},Fish:{si:"මාළු",ta:"மீன்"},Fruits:{si:"පළතුරු",ta:"பழங்கள்"}};
 const MARKETS={Pettah:{si:"පිටකොටුව",ta:"பேட்டை"},Dambulla:{si:"දඹුල්ල",ta:"தம்புள்ள"},Narahenpita:{si:"නාරාහේන්පිට",ta:"நாரஹேன்பிட்ட"},Negombo:{si:"මීගමුව",ta:"நீர்கொழும்பு"},Marandagahamula:{si:"මාරන්දගහමුල",ta:"மரந்தகஹமுல"}};
@@ -737,15 +708,7 @@ const NAMES={
  "Orange (Imp)":{si:"දොඩම් (ආනයනික)",ta:"ஆரஞ்சு (இறக்குமதி)"},
  "Red Dhal":{si:"රතු පරිප්පු",ta:"சிவப்பு பருப்பு"},
  "Sprat (Imp)":{si:"හාල් මැස්සෝ (ආනයනික)",ta:"மத்தி (இறக்குமதி)"},
- "Sugar (White)":{si:"සීනි (සුදු)",ta:"சர்க்கரை (வெள்ளை)"},
- "Woodapple":{si:"දිවුල්",ta:"விளாம்பழம்"},
- "Anamalu":{si:"අනමාලු",ta:"அணமாலு"},
- "Mango (Betti)":{si:"අඹ (බැට්ටි)",ta:"மாம்பழம் (பெட்டி)"},
- "Mango (Karathakolomban)":{si:"අඹ (කරුත්තකොළොඹන්)",ta:"மாம்பழம் (கருத்தகொழும்பன்)"},
- "Orange":{si:"දොඩම්",ta:"ஆரஞ்சு"},
- "Passion Fruit":{si:"වැල් දොඩම්",ta:"பேஷன் பழம்"},
- "Pineapple (Medium)":{si:"අන්නාසි (මධ්‍යම)",ta:"அன்னாசி (நடுத்தர)"},
- "Pineapple (Small)":{si:"අන්නාසි (කුඩා)",ta:"அன்னாசி (சிறிய)"}
+ "Sugar (White)":{si:"සීනි (සුදු)",ta:"சர்க்கரை (வெள்ளை)"}
 };
 /* ===== HARTI Wholesale commodity names ===== */
 const HARTI_NAMES_SI = {
@@ -912,7 +875,6 @@ function applyLang(){
   const set=(id,html)=>{const e=document.getElementById(id);if(e)e.innerHTML=html;};
   set("kickerTxt",t("kicker"));set("lblLatest",t("latestReport"));set("lblSub",t("sub"));
   set("hMovers",t("movers"));set("hintMovers",t("moversHint"));set("hAll",t("all"));
-  set("dlListBtnTxt",t("dlList"));set("printListBtnTxt",t("printList"));
   set("lgUp",t("lgUp"));set("lgDown",t("lgDown"));set("footNote",t("footNote"));set("creditPre",t("creditPre"));
   const s=document.getElementById("search");if(s)s.placeholder=t("searchPh");
   const sel=document.getElementById("sort");
@@ -957,22 +919,6 @@ function setLang(l){
 document.querySelector(".lang").addEventListener("click",function(e){var b=e.target.closest("button[data-lang]");if(b)setLang(b.dataset.lang);});
 
 const vpts = s => s.map((v,i)=>[i,hartiMid(v)]).filter(p=>p[1]!=null);
-function lastValidInfo(series){
-  const v=vpts(series);
-  if(!v.length)return{idx:-1,date:null,isStale:true};
-  const idx=v[v.length-1][0];
-  const isStale = DB.dates.length ? idx !== (DB.dates.length-1) : false;
-  return{idx, date: DB.dates[idx]||null, isStale};
-}
-function fmtStaleDate(dateStr){
-  if(!dateStr)return"";
-  const dt=new Date(dateStr+"T00:00:00");
-  const MONTHS_SHORT={en:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
-    si:["ජන","පෙබ","මාර්","අප්‍රේ","මැයි","ජූනි","ජූලි","අගෝ","සැප්","ඔක්","නොවැ","දෙසැ"],
-    ta:["ஜன","பிப்","மார்","ஏப்","மே","ஜூன்","ஜூலை","ஆக","செப்","அக்","நவ","டிச"]};
-  const mn=(MONTHS_SHORT[lang]||MONTHS_SHORT.en);
-  return dt.getDate()+" "+mn[dt.getMonth()];
-}
 const latestVal = s => {const v=vpts(s);return v.length?v[v.length-1][1]:null;};
 const fmt = n => n==null ? "&mdash;" : Math.round(n).toLocaleString("en-US");
 function changeOf(s){const v=vpts(s);if(v.length<2)return{abs:0,pct:0,dir:"flat"};
@@ -980,117 +926,6 @@ function changeOf(s){const v=vpts(s);if(v.length<2)return{abs:0,pct:0,dir:"flat"
   return{abs,pct,dir:Math.abs(pct)<0.5?"flat":(abs>0?"up":"down")};}
 const arrow = d => d==="up"?"&#9650;":d==="down"?"&#9660;":"&#9632;";
 const strokeFor = d => d==="up"?"#b23a2e":d==="down"?"#2c7a52":"#8a8170";
-
-function downloadPriceListCSV(){
-  if(!DATA.length)return;
-  if(typeof gtag==="function")gtag('event','download_csv',{event_category:'engagement',event_label:'wholesale_price_list',page_type:'wholesale'});
-  const dateStr=DATES[DATES.length-1]||"";
-  const reportDate=DB.dates[DB.dates.length-1]||"";
-  const dtObj=reportDate?new Date(reportDate+"T00:00:00"):null;
-  const MONTHS={
-    en:["January","February","March","April","May","June","July","August","September","October","November","December"],
-    si:["ජනවාරි","පෙබරවාරි","මාර්තු","අප්‍රේල්","මැයි","ජූනි","ජූලි","අගෝස්තු","සැප්තැම්බර්","ඔක්තෝබර්","නොවැම්බර්","දෙසැම්බර්"],
-    ta:["ஜனவரி","பிப்ரவரி","மார்ச்","ஏப்ரல்","மே","ஜூன்","ஜூலை","ஆகஸ்ட்","செப்டம்பர்","அக்டோபர்","நவம்பர்","டிசம்பர்"]
-  };
-  const monthNames=MONTHS[lang]||MONTHS.en;
-  const humanDate=dtObj?(dtObj.getDate()+" "+monthNames[dtObj.getMonth()]+" "+dtObj.getFullYear()):dateStr;
-  const TITLE_MAP={
-    en:["TopGoviya.lk — Daily Wholesale Price Report",
-        "Report Date: "+humanDate,
-        "Source: HARTI (Hector Kobbekaduwa Agrarian Research & Training Institute) Daily Wholesale Price Reports",
-        "www.topgoviya.lk"],
-    si:["TopGoviya.lk — දෛනික තොග මිල වාර්තාව",
-        "වාර්තා දිනය: "+humanDate,
-        "මූලාශ්‍රය: හෙක්ටර් කොබ්බෑකඩුව ගොවිගටයුතු පර්යේෂණ ආයතනය (HARTI) දෛනික තොග මිල වාර්තා",
-        "www.topgoviya.lk"],
-    ta:["TopGoviya.lk — தினசரி மொத்த விலை அறிக்கை",
-        "அறிக்கை தேதி: "+humanDate,
-        "மூலம்: HARTI தினசரி மொத்த விலை அறிக்கைகள்",
-        "www.topgoviya.lk"]
-  };
-  const titleLines=TITLE_MAP[lang]||TITLE_MAP.en;
-  const HEADERS_MAP={
-    en:["Commodity","Category","Primary Market","Unit","Latest Price","Change (Rs.)","Change (%)","Price Date","Status","Report Date"],
-    si:["භාණ්ඩය","වර්ගය","ප්‍රධාන වෙළඳපොළ","ඒකකය","නවතම මිල","වෙනස (රු.)","වෙනස (%)","මිල දිනය","තත්ත්වය","වාර්තා දිනය"],
-    ta:["பொருள்","வகை","முதன்மை சந்தை","அலகு","சமீபத்திய விலை","மாற்றம் (ரூ.)","மாற்றம் (%)","விலை தேதி","நிலை","அறிக்கை தேதி"]
-  };
-  const headers=HEADERS_MAP[lang]||HEADERS_MAP.en;
-  const STATUS_MAP={
-    en:{current:"Current",stale:"Not updated today"},
-    si:{current:"වත්මන්",stale:"අද යාවත්කාලීන නොවේ"},
-    ta:{current:"தற்போதைய",stale:"இன்று புதுப்பிக்கப்படவில்லை"}
-  };
-  const statusLabels=STATUS_MAP[lang]||STATUS_MAP.en;
-  const esc=v=>{ const s=String(v==null?"":v); return /[",\n]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s; };
-  const rows=[...titleLines,"",headers.map(esc).join(",")];
-  DATA.forEach(d=>{
-    const cur=latestVal(d.series), ch=changeOf(d.series), sv=lastValidInfo(d.series);
-    rows.push([
-      tName(d.name), tCat(d.category), tMkt(d.primaryMarket), tUnit(d.unit),
-      cur==null?"":Math.round(cur), ch.abs?Math.round(ch.abs):0, ch.pct?ch.pct.toFixed(1):"0.0",
-      sv.date||"", sv.isStale?statusLabels.stale:statusLabels.current,
-      DB.dates[DB.dates.length-1]||dateStr
-    ].map(esc).join(","));
-  });
-  const csv="\uFEFF"+rows.join("\r\n");
-  const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;
-  a.download="topgoviya-wholesale-prices-"+(DB.dates[DB.dates.length-1]||"today")+".csv";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
-function printPriceList(){
-  if(!DATA.length)return;
-  if(typeof gtag==="function")gtag('event','print_report',{event_category:'engagement',event_label:'wholesale_price_list',page_type:'wholesale'});
-  const reportDate=DB.dates[DB.dates.length-1]||"";
-  const dtObj=reportDate?new Date(reportDate+"T00:00:00"):null;
-  const MONTHS={
-    en:["January","February","March","April","May","June","July","August","September","October","November","December"],
-    si:["ජනවාරි","පෙබරවාරි","මාර්තු","අප්‍රේල්","මැයි","ජූනි","ජූලි","අගෝස්තු","සැප්තැම්බර්","ඔක්තෝබර්","නොවැම්බර්","දෙසැම්බර්"],
-    ta:["ஜனவரி","பிப்ரவரி","மார்ச்","ஏப்ரல்","மே","ஜூன்","ஜூலை","ஆகஸ்ட்","செப்டம்பர்","அக்டோபர்","நவம்பர்","டிசம்பர்"]
-  };
-  const monthNames=MONTHS[lang]||MONTHS.en;
-  const humanDate=dtObj?(dtObj.getDate()+" "+monthNames[dtObj.getMonth()]+" "+dtObj.getFullYear()):reportDate;
-  const TITLE_MAP={
-    en:{h:"TopGoviya.lk — Daily Wholesale Price Report",d:"Report Date: "+humanDate,s:"Source: HARTI Daily Wholesale Price Reports"},
-    si:{h:"TopGoviya.lk — දෛනික තොග මිල වාර්තාව",d:"වාර්තා දිනය: "+humanDate,s:"මූලාශ්‍රය: HARTI දෛනික තොග මිල වාර්තා"},
-    ta:{h:"TopGoviya.lk — தினசரி மொத்த விலை அறிக்கை",d:"அறிக்கை தேதி: "+humanDate,s:"மூலம்: HARTI தினசரி மொத்த விலை அறிக்கைகள்"}
-  };
-  const tt=TITLE_MAP[lang]||TITLE_MAP.en;
-  const HEADERS_MAP={
-    en:["Commodity","Category","Primary Market","Unit","Latest Price","Change (Rs.)","Change (%)","Price Date"],
-    si:["භාණ්ඩය","වර්ගය","ප්‍රධාන වෙළඳපොළ","ඒකකය","නවතම මිල","වෙනස (රු.)","වෙනස (%)","මිල දිනය"],
-    ta:["பொருள்","வகை","முதன்மை சந்தை","அலகு","சமீபத்திய விலை","மாற்றம் (ரூ.)","மாற்றம் (%)","விலை தேதி"]
-  };
-  const headers=HEADERS_MAP[lang]||HEADERS_MAP.en;
-  const esc=v=>String(v==null?"":v).replace(/&/g,"&amp;").replace(/</g,"&lt;");
-  let rowsHtml="";
-  DATA.forEach(d=>{
-    const cur=latestVal(d.series), ch=changeOf(d.series), sv=lastValidInfo(d.series);
-    const rowStyle=sv.isStale?' style="color:#a9802a"':'';
-    rowsHtml+="<tr"+rowStyle+"><td>"+esc(tName(d.name))+"</td><td>"+esc(tCat(d.category))+"</td><td>"+esc(tMkt(d.primaryMarket))+"</td><td>"+esc(tUnit(d.unit))+"</td><td>"+(cur==null?"—":fmt(cur))+"</td><td>"+(ch.abs?fmt(ch.abs):"0")+"</td><td>"+(ch.pct?ch.pct.toFixed(1):"0.0")+"%</td><td>"+(sv.date||"—")+(sv.isStale?" ⚠️":"")+"</td></tr>";
-  });
-  document.getElementById("printListWrap").innerHTML=
-    '<div class="plh-head">'+
-      '<div><div class="plh-brand">'+tt.h+'</div><div class="plh-meta">'+tt.d+'<br>'+tt.s+'<br>www.topgoviya.lk</div></div>'+
-      '<div class="plh-qr"><img id="plhQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://topgoviya.lk" alt="topgoviya.lk QR"><div>topgoviya.lk</div></div>'+
-    '</div>'+
-    '<table><thead><tr>'+headers.map(h=>"<th>"+esc(h)+"</th>").join("")+'</tr></thead><tbody>'+rowsHtml+'</tbody></table>';
-  const qrImg=document.getElementById("plhQrImg");
-  let printed=false;
-  const doPrint=()=>{ if(printed)return; printed=true; window.print(); };
-  if(qrImg.complete){ doPrint(); }
-  else{
-    qrImg.onload=doPrint;
-    qrImg.onerror=doPrint;
-    setTimeout(doPrint,1200);
-  }
-}
 
 function spark(s,w,h,stroke){
   const pts0=vpts(s),n=s.length;if(pts0.length<2)return"";
@@ -1118,21 +953,12 @@ function renderGrid(){
   if(state.sort==="up")list.sort((a,b)=>c(b).pct-c(a).pct);
   if(state.sort==="down")list.sort((a,b)=>c(a).pct-c(b).pct);
   if(state.sort==="high")list.sort((a,b)=>(latestVal(b.series)||0)-(latestVal(a.series)||0));
-  // Secondary sort: items with no price for today's report drop to the bottom,
-  // regardless of the primary sort selected above.
-  list.sort((a,b)=>{
-    const aStale=lastValidInfo(a.series).isStale?1:0;
-    const bStale=lastValidInfo(b.series).isStale?1:0;
-    return aStale-bStale;
-  });
   const g=document.getElementById("grid");
   document.getElementById("count").textContent=list.length+" "+t("items");
   if(!list.length){g.innerHTML='<div class="empty">'+t("noMatch").replace("%Q",state.q)+'</div>';return;}
   g.innerHTML=list.map(d=>{const ch=c(d),cur=latestVal(d.series);
     const primaryP=d.markets&&d.primaryMarket?d.markets[d.primaryMarket]:null;
-    const sv=lastValidInfo(d.series);
-    const staleHtml=sv.isStale?'<div class="stale-note">⏱ '+t("staleNote").replace("%DATE%",fmtStaleDate(sv.date))+'</div>':'';
-    return '<div class="item" onclick="openDetail('+d.id+')"><div class="top"><div><div class="cat" style="display:flex;justify-content:space-between;align-items:center">'+tCat(d.category)+'<span style="font-family:monospace;font-size:9px;font-weight:700;color:#0F5C4D;letter-spacing:.3px">TopGoviya.lk</span></div><div class="nm">'+tEmoji(d.name)+' '+tName(d.name)+'</div></div><span class="chg '+ch.dir+'">'+arrow(ch.dir)+' '+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</span></div>'+spark(d.series,220,42,strokeFor(ch.dir))+'<div class="foot"><span class="price">'+fmt(cur)+'<small> '+tUnit(d.unit)+'</small></span></div>'+(primaryP&&primaryP.min&&primaryP.max?'<div style="font-size:10px;color:var(--muted);font-family:\'JetBrains Mono\',monospace">Rs.'+primaryP.min+'–'+primaryP.max+'</div>':'')+staleHtml+"</div>";
+    return '<div class="item" onclick="openDetail('+d.id+')"><div class="top"><div><div class="cat" style="display:flex;justify-content:space-between;align-items:center">'+tCat(d.category)+'<span style="font-family:monospace;font-size:9px;font-weight:700;color:#0F5C4D;letter-spacing:.3px">TopGoviya.lk</span></div><div class="nm">'+tEmoji(d.name)+' '+tName(d.name)+'</div></div><span class="chg '+ch.dir+'">'+arrow(ch.dir)+' '+(ch.pct>0?"+":"")+ch.pct.toFixed(1)+'%</span></div>'+spark(d.series,220,42,strokeFor(ch.dir))+'<div class="foot"><span class="price">'+fmt(cur)+'<small> '+tUnit(d.unit)+'</small></span></div>'+(primaryP&&primaryP.min&&primaryP.max?'<div style="font-size:10px;color:var(--muted);font-family:\'JetBrains Mono\',monospace">Rs.'+primaryP.min+'–'+primaryP.max+'</div>':'')+"</div>";
   }).join("");
 }
 
@@ -1777,7 +1603,6 @@ function openDetail(id){
     '</div>'+
     '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">'+
       '<button class="close" onclick="closeDetail()" aria-label="Close">&#10005;</button>'+
-      '<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://topgoviya.lk" alt="topgoviya.lk QR" style="width:64px;height:64px;border-radius:6px;border:1px solid var(--line-strong)">'+
       '<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;font-weight:700;color:var(--petrol)">TopGoviya.lk</div>'+
       '<div style="font-size:10px;color:var(--muted)">'+DATES[DATES.length-1]+'</div>'+
     '</div>'+
@@ -2370,7 +2195,6 @@ setTimeout(()=>{
 
 
 function init(){
-  new Image().src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://topgoviya.lk";
   DATES=DB.dateLabels;
   /* Store market dates for detail popup */
   if(DB.markets) window.HARTI_DB_MARKETS = DB.markets;
@@ -2724,14 +2548,9 @@ function downloadBestColPNG(type){
       <div style="font-family:Georgia,serif;font-size:20px;font-weight:600;color:${accent};text-align:center;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid ${accent}33">${title}</div>
       <div id="bcColClone"></div>
     </div>
-    <div style="background:#0e4f4a;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px">
-      <div>
-        <div style="font-family:monospace;font-size:15px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
-        <div style="font-size:9px;color:#7ab8b0;margin-top:3px">For Farmers. For Traders. Free.</div>
-      </div>
-      <div style="background:#fff;padding:4px;border-radius:6px;flex-shrink:0;line-height:0">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://topgoviya.lk" crossorigin="anonymous" style="display:block;width:50px;height:50px">
-      </div>
+    <div style="background:#0e4f4a;padding:12px 24px;text-align:center">
+      <div style="font-family:monospace;font-size:15px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
+      <div style="font-size:9px;color:#7ab8b0;margin-top:3px">For Farmers. For Traders. Free.</div>
     </div>
   `;
   card.querySelector("#bcColClone").innerHTML=rowsHTML;
@@ -2822,14 +2641,9 @@ function buildCardCanvas(type,langCode){
         <div style="font-family:Georgia,serif;font-size:20px;font-weight:600;color:${accent};text-align:center;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid ${accent}33">${title}</div>
         <div id="bcColClone2"></div>
       </div>
-      <div style="background:#0e4f4a;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px">
-        <div>
-          <div style="font-family:monospace;font-size:15px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
-          <div style="font-size:9px;color:#7ab8b0;margin-top:3px">For Farmers. For Traders. Free.</div>
-        </div>
-        <div style="background:#fff;padding:4px;border-radius:6px;flex-shrink:0;line-height:0">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://topgoviya.lk" crossorigin="anonymous" style="display:block;width:50px;height:50px">
-        </div>
+      <div style="background:#0e4f4a;padding:12px 24px;text-align:center">
+        <div style="font-family:monospace;font-size:15px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
+        <div style="font-size:9px;color:#7ab8b0;margin-top:3px">For Farmers. For Traders. Free.</div>
       </div>
     `;
     card.querySelector("#bcColClone2").innerHTML=rowsHTML;
@@ -3000,15 +2814,10 @@ function facebookShare(d){
         </div>`).join("")}
       </div>
     </div>
-    <div style="background:#0e4f4a;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px">
-      <div>
-        <div style="font-family:monospace;font-size:16px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
-        <div style="font-size:11px;color:#9fd4c8;margin-top:4px;font-style:italic">"${dQuote}"</div>
-        <div style="font-size:10px;color:#7ab8b0;margin-top:3px">For Farmers. For Traders. Free.</div>
-      </div>
-      <div style="background:#fff;padding:4px;border-radius:6px;flex-shrink:0;line-height:0">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://topgoviya.lk" crossorigin="anonymous" style="display:block;width:52px;height:52px">
-      </div>
+    <div style="background:#0e4f4a;padding:14px 28px;text-align:center">
+      <div style="font-family:monospace;font-size:16px;font-weight:700;color:#ffd98a;letter-spacing:1px">www.TopGoviya.lk</div>
+      <div style="font-size:11px;color:#9fd4c8;margin-top:4px;font-style:italic">"${dQuote}"</div>
+      <div style="font-size:10px;color:#7ab8b0;margin-top:3px">For Farmers. For Traders. Free.</div>
     </div>
   `;
   document.body.appendChild(card);

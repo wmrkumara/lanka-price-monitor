@@ -185,36 +185,6 @@ body{background:var(--paper);color:var(--ink);
 .rec-box .rec-text strong{display:block;font-size:15px;margin-bottom:3px}
 .rec-box.profit .rec-text strong{color:var(--down)}
 .rec-box.loss .rec-text strong{color:var(--up)}
-.summary-card{background:linear-gradient(150deg,var(--petrol),var(--petrol-deep));border-radius:14px;
-  padding:20px 22px;margin-bottom:16px;color:#fff;box-shadow:0 14px 30px -16px rgba(10,30,28,.5)}
-.summary-card .sc-head{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;
-  letter-spacing:.06em;text-transform:uppercase;color:#d8ecc9;margin-bottom:12px}
-.summary-card .sc-line{font-size:14.5px;line-height:1.65;margin-bottom:8px;display:flex;gap:8px}
-.summary-card .sc-line:last-child{margin-bottom:0}
-.summary-card .sc-icon{flex-shrink:0}
-.summary-card b{color:#ffd98a;font-weight:700}
-@media(max-width:480px){.summary-card{padding:16px 16px}.summary-card .sc-line{font-size:13.5px}}
-.print-btn{width:100%;font:inherit;font-size:14px;font-weight:700;padding:13px;border-radius:11px;
-  border:1.5px solid var(--petrol);background:var(--card);color:var(--petrol);cursor:pointer;
-  margin-bottom:10px;transition:.18s}
-.print-btn:hover{background:var(--petrol);color:#fff}
-.print-header{display:none}
-@media print{
-  body{background:#fff}
-  .topnav,.lang-row,.share-btn,.reset-btn,.print-btn,footer,
-  #sec1-label,#sec2-label,#input-card-1,#input-card-2,#calcBtn,#farmer-kit-box{display:none!important}
-  .page-header,.results{margin:0}
-  .card,.rec-box,.summary-card{box-shadow:none!important;border:1px solid #ccc!important;
-    break-inside:avoid;page-break-inside:avoid}
-  .summary-card{background:#0e4f4a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .print-header{display:block;margin-bottom:18px;padding-bottom:14px;border-bottom:2px solid #0e4f4a}
-  .print-header .ph-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
-  .print-header .ph-brand{font-family:'Newsreader',serif;font-size:22px;font-weight:600;color:#0e4f4a}
-  .print-header .ph-meta{font-size:12px;color:#7a7264;margin-top:4px}
-  .print-header .ph-qr{flex-shrink:0;text-align:center}
-  .print-header .ph-qr img{width:64px;height:64px;border:1px solid #ccc;border-radius:4px}
-  .print-header .ph-qr div{font-size:9px;color:#7a7264;margin-top:3px}
-}
 
 /* ── SCENARIO TABLE ── */
 .scenario-table{width:100%;border-collapse:collapse;font-size:13.5px}
@@ -249,7 +219,7 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
 <!-- ══ NAVBAR ══ -->
 <nav class="topnav">
   <div class="topnav-inner">
-    <a href="index.html" class="topnav-brand">Lanka <em>Price</em> Monitor</a>
+    <a href="index.html" class="topnav-brand" style="display:inline-flex;align-items:center;gap:7px"><img src="logo-mark.png" alt="TopGoviya" style="width:22px;height:22px;object-fit:contain;flex-shrink:0">Top<em>Goviya</em>.lk</a>
     <div class="navlinks">
       <a href="index.html" class="navlink retail">📊 <span id="nav-retail">Retail</span> <span class="navlink-badge">CBSL</span></a>
       <a href="wholesale.html" class="navlink wholesale">📦 <span id="nav-wholesale">Wholesale</span> <span class="navlink-badge">HARTI</span></a>
@@ -278,7 +248,7 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
   </div>
 
   <!-- FARMER RECORD KIT DOWNLOAD -->
-  <div id="farmer-kit-box" style="background:var(--card);border:1px solid var(--line-strong);border-radius:var(--r);padding:16px 18px;margin-bottom:22px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;box-shadow:var(--shadow)">
+  <div style="background:var(--card);border:1px solid var(--line-strong);border-radius:var(--r);padding:16px 18px;margin-bottom:22px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;box-shadow:var(--shadow)">
     <div>
       <div style="font-family:'Newsreader',serif;font-size:16.5px;color:var(--ink);margin-bottom:4px;line-height:1.3">
         <span id="kit-title">📋 වගා වියදම් අතින් සටහන් කරගන්න</span>
@@ -288,7 +258,6 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
       </div>
     </div>
     <a href="downloads/topgoviya-farmer-record-kit.pdf" target="_blank" rel="noopener"
-       onclick="if(typeof gtag==='function')gtag('event','download_pdf',{event_category:'engagement',event_label:'farmer_record_kit'})"
        style="background:var(--petrol);color:#fff;font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:10px;text-decoration:none;white-space:nowrap;flex-shrink:0" id="kit-btn">
       ⬇ PDF බාගත කරගන්න
     </a>
@@ -296,7 +265,7 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
 
   <!-- ── SECTION 1: CROP INFO ── -->
   <div class="sec-label" id="sec1-label">🌾 භෝග තොරතුරු</div>
-  <div class="card" id="input-card-1">
+  <div class="card">
     <div class="two-col">
       <div class="field">
         <label id="lbl-crop">භෝගය <span class="hint" id="lbl-crop-hint">(උදා: තක්කාලි)</span></label>
@@ -324,7 +293,7 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
 
   <!-- ── SECTION 2: COSTS ── -->
   <div class="sec-label" id="sec2-label">💰 වගා වියදම් (රු.)</div>
-  <div class="card" id="input-card-2">
+  <div class="card">
     <div class="two-col">
       <div class="field">
         <label id="lbl-seed">බීජ / පැල</label>
@@ -373,17 +342,6 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
   <!-- ══ RESULTS ══ -->
   <div class="results" id="results">
 
-    <!-- PRINT-ONLY HEADER -->
-    <div class="print-header" id="print-header">
-      <div class="ph-head">
-        <div>
-          <div class="ph-brand">TopGoviya.lk — <span id="ph-title">ලාභ අලාභ සීමා ගණකය</span></div>
-          <div class="ph-meta" id="ph-meta"></div>
-        </div>
-        <div class="ph-qr"><img id="phQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://topgoviya.lk" alt="topgoviya.lk QR"><div>topgoviya.lk</div></div>
-      </div>
-    </div>
-
     <!-- HERO: BREAK-EVEN PRICE -->
     <div class="sec-label" style="margin-top:28px" id="sec3-label">📊 ගණනය කළ ප්‍රතිඵල</div>
     <div class="result-hero">
@@ -423,36 +381,6 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
       <div class="sec-label" style="margin:0 0 14px" id="sec5-label">📈 මිල අවස්ථා විශ්ලේෂණය</div>
       <div id="scenario-wrap"></div>
     </div>
-
-    <!-- TOPGOVIYA ANALYSIS SUMMARY -->
-    <div class="summary-card" id="summary-card"></div>
-
-    <!-- LOAN & LEASING CALCULATOR CROSS-LINK -->
-    <a href="loan-calculator.html"
-       onclick="if(typeof gtag==='function')gtag('event','click_loan_banner',{event_category:'engagement',event_label:'breakeven_to_loan'})"
-       style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
-              background:var(--card);border:1px solid var(--line-strong);border-left:4px solid var(--gold);
-              border-radius:var(--r);padding:16px 18px;margin:16px 0;text-decoration:none;
-              box-shadow:var(--shadow);transition:transform .15s"
-       onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
-      <div>
-        <div style="font-family:'Newsreader',serif;font-size:16.5px;color:var(--ink);margin-bottom:4px;line-height:1.3">
-          <span id="loan-title">උපකරණ සඳහා මුදල් අවශ්‍යද?</span>
-        </div>
-        <div style="font-size:12.5px;color:var(--muted);line-height:1.4" id="loan-desc">
-          ට්‍රැක්ටරයක්, පොම්පයක් හෝ වාහනයක් සඳහා ණය ගැනීම vs ලීසින් — කුමක් ලාභදායීදැයි සසඳන්න.
-        </div>
-      </div>
-      <span style="background:var(--gold);color:#fff;font-weight:700;font-size:13.5px;padding:10px 18px;
-                    border-radius:10px;white-space:nowrap;flex-shrink:0" id="loan-btn">
-        ණය සහ ලීසින් ගණකය →
-      </span>
-    </a>
-
-    <!-- PRINT / SAVE AS PDF -->
-    <button class="print-btn" onclick="printResult()" id="print-btn">
-      🖨️ <span id="btn-print">මුද්‍රණය කරන්න / PDF ලෙස සුරකින්න</span>
-    </button>
 
     <!-- SHARE + RESET -->
     <button class="share-btn" onclick="shareResult()" id="share-btn">
@@ -499,8 +427,6 @@ const T = {
     lblPack:"ඇසිරීම / ඇසුරුම්",lblLand:"ඉඩම් කුලිය",lblLandHint:"(නොමිලේ නම් 0)",
     lblOther:"වෙනත් වියදම්",
     btnCalc:"ගණනය කරන්න",btnShare:"WhatsApp හරහා බෙදාහරින්න",btnReset:"නැවත ගණනය කරන්න",
-    btnPrint:"මුද්‍රණය කරන්න / PDF ලෙස සුරකින්න",
-    phGenerated:"උත්පාදනය කළේ topgoviya.lk මගිනි &middot; %DATE% &middot; භෝගය: %CROP%",
     rhLabel:"ඔබේ අලාභ-ලාභ සීමා මිල",rhUnit:"රු. / කි.ග්‍රෑ.",
     rhSub1:"ඉහළ විකුණන්න",rhSub2:"ලාභ ලැබීමට",
     statTotal:"මුළු වියදම",statNet:"විකිණිය හැකි අස්වැන්න",statBe:"අලාභ-ලාභ සීමා මිල",
@@ -510,14 +436,6 @@ const T = {
     recProfitDesc:"දැනට වෙළඳපොළ මිල ඔබේ අලාභ-ලාභ සීමා මිලට වඩා ඉහළයි. දැනට විකිණීම ලාභදායී!",
     recLossDesc:"දැනට වෙළඳපොළ මිල ඔබේ අලාභ-ලාභ සීමා මිලට වඩා අඩුයි. ටිකක් රඳා සිටීම සලකා බලන්න.",
     recNoData:"දත්ත නොමැත — ඔබේ භෝගය සඳහා CBSL දත්ත ලබා ගත නොහැකිය.",
-    sumHeader:"📋 TopGoviya විශ්ලේෂණය",
-    sumProfitPos:"ඔබේ අපේක්ෂිත ලාභය රු. %AMT% කි (%PCT%% ලාභ ප්‍රතිශතයක් — %LABEL%).",
-    sumProfitNeg:"ඔබට අපේක්ෂිත අලාභයක් රු. %AMT% කි (%PCT%%).",
-    sumBEHigher:"ඔබේ ලාභ - අලාභ  සීමා මිල රු. %BE%/කි.ග්‍රෑ. — වර්තමාන වෙළඳපොළ මිල ගණන් ඊට වඩා වැඩිය.",
-    sumBELower:"ඔබේ ලාභ - අලාභ  සීමා මිල රු. %BE%/කි.ග්‍රෑ. — වර්තමාන වෙළඳපොළ මිල ගණන් ඊට වඩා අඩුය.",
-    sumCostBig:"වියදමින් වැඩිම කොටස %CAT% (%PCT%%) — මෙය හොඳින් සැලසුම් කරන්න.",
-    sumRisk:"වෙළඳපොළ මිල රු. %BE% ට වඩා අඩු වුවහොත්, ලාභය සැලකිය යුතු ලෙස අඩු වේ.",
-    sumNoData:"මෙම භෝගය සඳහා තවම වෙළඳපොළ දත්ත නොමැත — ලාභ අනුමානය සීමිතයි.",
     mktThMarket:"වෙළඳපොළ",mktThPrice:"මිල (රු./කි.ග්‍රෑ.)",mktThResult:"ප්‍රතිඵලය",mktThRec:"",
     mktBest:"හොඳම ✅",mktAvoid:"හොඳ නෑ ⚠️",mktNa:"දත්ත නැත",
     scnThPrice:"විකුණුම් මිල",scnThProfit:"ලාභය/පාඩුව",scnThTotal:"මුළු ලාභය",
@@ -527,9 +445,6 @@ const T = {
     errCosts:"කරුණාකර අවම වශයෙන් එක් වියදමක් ඇතුළු කරන්න.",
     shareMsg:"🧮 *TopGoviya.lk — ලාභ අලාභ සීමා ගණකය*\n\n🌾 භෝගය: %CROP%\n💰 මුළු වියදම: රු.%COST%\n📦 අස්වැන්න: %KG% kg\n🎯 අලාභ-ලාභ සීමා: රු.%BE%/kg\n\n%REC%\n\n🔗 https://topgoviya.lk/breakeven.html\n🤝 *මේ තොරතුරු ඔබේ මිතුරන්ටත් දැනගන්න බෙදාහරින්න!*",
     shareProfit:"✅ දැනට ලාභදායී!",shareLoss:"⚠️ දැනට පාඩුයි — රඳා සිටින්න.",shareNoData:"📊 වෙළඳපොළ සංසන්දනය: දත්ත නොමැත.",
-    loanTitle:"උපකරණ සඳහා මුදල් අවශ්‍යද?",
-    loanDesc:"ට්‍රැක්ටරයක්, පොම්පයක් හෝ වාහනයක් සඳහා ණය ගැනීම vs ලීසින් — කුමක් ලාභදායීදැයි සසඳන්න.",
-    loanBtn:"ණය සහ ලීසින් ගණකය →",
   },
   ta:{
     navRetail:"சில்லறை",navWholesale:"மொத்தம்",navWeather:"வானிலை",navBe:"முறிவு",
@@ -544,8 +459,6 @@ const T = {
     lblPack:"பேக்கிங்",lblLand:"நில வாடகை",lblLandHint:"(இலவசமாக இருந்தால் 0)",
     lblOther:"பிற செலவுகள்",
     btnCalc:"கணக்கிடு",btnShare:"WhatsApp மூலம் பகிர்",btnReset:"மீண்டும் கணக்கிடு",
-    btnPrint:"அச்சிடவும் / PDF ஆக சேமிக்கவும்",
-    phGenerated:"topgoviya.lk மூலம் உருவாக்கப்பட்டது &middot; %DATE% &middot; பயிர்: %CROP%",
     rhLabel:"உங்கள் முறிவு விலை",rhUnit:"ரூ. / கி.கி.",
     rhSub1:"இதற்கு மேல் விற்கவும்",rhSub2:"லாபம் பெற",
     statTotal:"மொத்த செலவு",statNet:"விற்கக்கூடிய மகசூல்",statBe:"முறிவு விலை",
@@ -555,14 +468,6 @@ const T = {
     recProfitDesc:"தற்போதைய சந்தை விலை உங்கள் முறிவு விலையை விட அதிகமாக உள்ளது. இப்போது விற்பது லாபகரமானது!",
     recLossDesc:"தற்போதைய சந்தை விலை உங்கள் முறிவு விலையை விட குறைவாக உள்ளது. சற்று காத்திருங்கள்.",
     recNoData:"தரவு இல்லை — உங்கள் பயிருக்கு CBSL தரவு கிடைக்கவில்லை.",
-    sumHeader:"📋 TopGoviya பகுப்பாய்வு",
-    sumProfitPos:"உங்கள் எதிர்பார்க்கப்படும் லாபம் ரூ. %AMT% (%PCT%% லாப வீதம் — %LABEL%).",
-    sumProfitNeg:"உங்களுக்கு எதிர்பார்க்கப்படும் நஷ்டம் ரூ. %AMT% (%PCT%%).",
-    sumBEHigher:"உங்கள் லாப - நஷ்ட வரம்பு விலை ரூ. %BE%/கி.கி. — தற்போதைய சந்தை விலைகள் அதை விட அதிகம்.",
-    sumBELower:"உங்கள் லாப - நஷ்ட வரம்பு விலை ரூ. %BE%/கி.கி. — தற்போதைய சந்தை விலைகள் அதை விட குறைவு.",
-    sumCostBig:"செலவில் மிகப்பெரிய பகுதி %CAT% (%PCT%%) — இதை கவனமாக திட்டமிடுங்கள்.",
-    sumRisk:"சந்தை விலை ரூ. %BE% க்கும் குறைவாக குறைந்தால், லாபம் கணிசமாக குறையும்.",
-    sumNoData:"இந்த பயிருக்கான சந்தை தரவு இன்னும் இல்லை — லாப மதிப்பீடு வரையறுக்கப்பட்டது.",
     mktThMarket:"சந்தை",mktThPrice:"விலை (ரூ./கி.கி.)",mktThResult:"முடிவு",mktThRec:"",
     mktBest:"சிறந்தது ✅",mktAvoid:"கவனம் ⚠️",mktNa:"தரவு இல்லை",
     scnThPrice:"விற்பனை விலை",scnThProfit:"லாபம்/நஷ்டம்",scnThTotal:"மொத்த லாபம்",
@@ -571,9 +476,6 @@ const T = {
     errHarvest:"மகசூல் அளவை உள்ளிடவும்.",errCosts:"குறைந்தது ஒரு செலவை உள்ளிடவும்.",
     shareMsg:"🧮 *TopGoviya.lk — முறிவு கணிப்பி*\n\n🌾 பயிர்: %CROP%\n💰 மொத்த செலவு: ரூ.%COST%\n📦 மகசூல்: %KG% kg\n🎯 முறிவு விலை: ரூ.%BE%/kg\n\n%REC%\n\n🔗 https://topgoviya.lk/breakeven.html\n🤝 *இந்த தகவலை உங்கள் நண்பர்களுடன் பகிருங்கள்!*",
     shareProfit:"✅ தற்போது லாபகரமானது!",shareLoss:"⚠️ தற்போது நஷ்டம் — காத்திருங்கள்.",shareNoData:"📊 சந்தை ஒப்பீடு: தரவு இல்லை.",
-    loanTitle:"உபகரணங்களுக்கு நிதி தேவையா?",
-    loanDesc:"டிராக்டர், பம்ப் அல்லது வாகனத்திற்கு கடன் vs லீசிங் — எது லாபகரம் என ஒப்பிடுங்கள்.",
-    loanBtn:"கடன் & லீசிங் கால்குலேட்டர் →",
     kitTitle:"📋 உங்கள் விவசாய செலவுகளை கையால் பதிவு செய்யுங்கள்",
     kitDesc:"இலவச அச்சு பிரதி — சுருக்க தாள் + தினசரி பதிவேடு (சிங்களம் · தமிழ் · English)",
     kitBtn:"⬇ இலவசமாக PDF பதிவிறக்கவும்",
@@ -592,8 +494,6 @@ const T = {
     lblPack:"Packing / Packaging",lblLand:"Land Rent",lblLandHint:"(0 if own land)",
     lblOther:"Other Expenses",
     btnCalc:"Calculate",btnShare:"Share via WhatsApp",btnReset:"Calculate Again",
-    btnPrint:"Print / Save as PDF",
-    phGenerated:"Generated by topgoviya.lk &middot; %DATE% &middot; Crop: %CROP%",
     rhLabel:"Your Break-even Price",rhUnit:"Rs. / kg",
     rhSub1:"Sell above this price",rhSub2:"to make a profit",
     statTotal:"Total Cost",statNet:"Sellable Harvest",statBe:"Break-even Price",
@@ -603,14 +503,6 @@ const T = {
     recProfitDesc:"Current market prices are above your break-even price. Selling now is likely to be profitable!",
     recLossDesc:"Current market prices are below your break-even price. Consider waiting for better prices.",
     recNoData:"No data — CBSL market data not available for this crop.",
-    sumHeader:"📋 TopGoviya Analysis",
-    sumProfitPos:"Your expected profit is Rs. %AMT% (%PCT%% margin — %LABEL%).",
-    sumProfitNeg:"You're expected to have a loss of Rs. %AMT% (%PCT%%).",
-    sumBEHigher:"Your break-even price is Rs. %BE%/kg — current market prices are above that.",
-    sumBELower:"Your break-even price is Rs. %BE%/kg — current market prices are below that.",
-    sumCostBig:"Your biggest cost is %CAT% (%PCT%%) — plan this carefully.",
-    sumRisk:"If market price falls below Rs. %BE%, your profit will decrease significantly.",
-    sumNoData:"No market data available yet for this crop — profit estimate is limited.",
     mktThMarket:"Market",mktThPrice:"Price (Rs./kg)",mktThResult:"Result",mktThRec:"",
     mktBest:"Best ✅",mktAvoid:"Avoid ⚠️",mktNa:"No data",
     scnThPrice:"Selling Price",scnThProfit:"Profit/Loss per kg",scnThTotal:"Total Profit/Loss",
@@ -619,9 +511,6 @@ const T = {
     errHarvest:"Please enter your expected harvest.",errCosts:"Please enter at least one cost.",
     shareMsg:"🧮 *TopGoviya.lk — Break-even Calculator*\n\n🌾 Crop: %CROP%\n💰 Total Cost: Rs.%COST%\n📦 Harvest: %KG% kg\n🎯 Break-even: Rs.%BE%/kg\n\n%REC%\n\n🔗 https://topgoviya.lk/breakeven.html\n🤝 *Share this with your farming friends!*",
     shareProfit:"✅ Currently profitable!",shareLoss:"⚠️ Loss at current prices — wait.",shareNoData:"📊 Market comparison: data not available.",
-    loanTitle:"Financing equipment?",
-    loanDesc:"Compare a bank loan vs leasing for a tractor, pump, or vehicle — see which is more profitable.",
-    loanBtn:"Loan & Leasing Calculator →",
     kitTitle:"📋 Track your farm costs by hand",
     kitDesc:"Free printable copy — Summary Sheet + Daily Log Sheet (Sinhala · Tamil · English)",
     kitBtn:"⬇ Download PDF Free",
@@ -675,9 +564,6 @@ function applyLang(){
   document.getElementById("kit-title").textContent=t("kitTitle");
   document.getElementById("kit-desc").textContent=t("kitDesc");
   document.getElementById("kit-btn").textContent=t("kitBtn");
-  document.getElementById("loan-title").textContent=t("loanTitle");
-  document.getElementById("loan-desc").textContent=t("loanDesc");
-  document.getElementById("loan-btn").textContent=t("loanBtn");
 }
 
 document.querySelector(".lang").addEventListener("click",function(e){
@@ -719,7 +605,6 @@ function findCropMarkets(cropName){
 let lastResult = null;
 
 function calculate(){
-  if(typeof gtag==="function")gtag('event','calculate_breakeven',{event_category:'engagement',event_label:'breakeven_calculator'});
   const cropName = document.getElementById("cropName").value.trim();
   const landArea = parseFloat(document.getElementById("landArea").value)||1;
   const harvest  = parseFloat(document.getElementById("harvest").value);
@@ -796,59 +681,6 @@ function renderCostBreakdown(r){
     </div>`).join("");
 }
 
-function renderSummary(r){
-  const wrap=document.getElementById("summary-card");
-  if(!wrap)return;
-  const keyToLabel={seed:"lblSeed",fert:"lblFert",pest:"lblPest",labor:"lblLabor",
-    irr:"lblIrr",transport:"lblTransport",pack:"lblPack",land:"lblLand",other:"lblOther"};
-  const lines=[];
-
-  // Profit / loss
-  if(r.expectedProfit!=null){
-    if(r.expectedProfit>=0){
-      lines.push({icon:"✅",html:t("sumProfitPos")
-        .replace("%AMT%",fmt(r.expectedProfit))
-        .replace("%PCT%",fmt(r.profitMargin,1))
-        .replace("%LABEL%",marginLabel(r.profitMargin))});
-    } else {
-      lines.push({icon:"⚠️",html:t("sumProfitNeg")
-        .replace("%AMT%",fmt(Math.abs(r.expectedProfit)))
-        .replace("%PCT%",fmt(r.profitMargin,1))});
-    }
-  }
-
-  // Break-even vs current market
-  if(r.markets && r.markets.length && r.bestMktPrice!=null){
-    if(r.bestMktPrice>=r.breakeven){
-      lines.push({icon:"✅",html:t("sumBEHigher").replace("%BE%",fmt(r.breakeven,2))});
-    } else {
-      lines.push({icon:"⚠️",html:t("sumBELower").replace("%BE%",fmt(r.breakeven,2))});
-    }
-  } else {
-    lines.push({icon:"📊",html:t("sumNoData")});
-  }
-
-  // Biggest cost category
-  if(r.costs && r.totalCost>0){
-    const entries=Object.entries(r.costs).filter(([k,v])=>v>0);
-    if(entries.length){
-      const [bigKey,bigAmt]=entries.sort((a,b)=>b[1]-a[1])[0];
-      const bigPct=bigAmt/r.totalCost*100;
-      lines.push({icon:"⚠️",html:t("sumCostBig")
-        .replace("%CAT%",t(keyToLabel[bigKey]||bigKey))
-        .replace("%PCT%",fmt(bigPct,1))});
-    }
-  }
-
-  // Risk note
-  if(r.breakeven!=null){
-    lines.push({icon:"💡",html:t("sumRisk").replace("%BE%",fmt(r.breakeven,2))});
-  }
-
-  wrap.innerHTML='<div class="sc-head">'+t("sumHeader")+'</div>'+
-    lines.map(l=>'<div class="sc-line"><span class="sc-icon">'+l.icon+'</span><span>'+l.html+'</span></div>').join("");
-}
-
 function renderResults(r){
   // Hero
   document.getElementById("rh-label").textContent=t("rhLabel");
@@ -892,9 +724,6 @@ function renderResults(r){
   // Cost Breakdown
   document.getElementById("sec-cost-label").textContent=t("secCost");
   renderCostBreakdown(r);
-
-  // TopGoviya Analysis Summary
-  renderSummary(r);
 
   // Market table
   document.getElementById("sec3-label").textContent=t("sec3");
@@ -949,23 +778,9 @@ function renderResults(r){
       </tbody>
     </table>`;
 
-  // Share, Print & Reset buttons
+  // Share & Reset buttons
   document.getElementById("btn-share").textContent=t("btnShare");
-  document.getElementById("btn-print").textContent=t("btnPrint");
   document.getElementById("btn-reset").textContent=t("btnReset");
-
-  // Print header content
-  const phTitleEl=document.getElementById("ph-title");
-  if(phTitleEl) phTitleEl.textContent=t("pageTitle").replace(/<[^>]*>/g,"");
-  const phMetaEl=document.getElementById("ph-meta");
-  if(phMetaEl){
-    const MONTHS_={en:["January","February","March","April","May","June","July","August","September","October","November","December"],
-      si:["ජනවාරි","පෙබරවාරි","මාර්තු","අප්‍රේල්","මැයි","ජූනි","ජූලි","අගෝස්තු","සැප්තැම්බර්","ඔක්තෝබර්","නොවැම්බර්","දෙසැම්බර්"],
-      ta:["ஜனவரி","பிப்ரவரி","மார்ச்","ஏப்ரல்","மே","ஜூன்","ஜூலை","ஆகஸ்ட்","செப்டம்பர்","அக்டோபர்","நவம்பர்","டிசம்பர்"]}[lang]||["January","February","March","April","May","June","July","August","September","October","November","December"];
-    const nowD=new Date();
-    const todayStr=nowD.getDate()+" "+MONTHS_[nowD.getMonth()]+" "+nowD.getFullYear();
-    phMetaEl.innerHTML=t("phGenerated").replace("%DATE%",todayStr).replace("%CROP%",r.cropName||"—");
-  }
 
   // Show results
   const res=document.getElementById("results");
@@ -974,18 +789,6 @@ function renderResults(r){
   setTimeout(()=>res.scrollIntoView({behavior:"smooth",block:"start"}),100);
 }
 
-function printResult(){
-  if(typeof gtag==="function")gtag('event','print_report',{event_category:'engagement',event_label:'breakeven_calculator',page_type:'breakeven'});
-  const qrImg=document.getElementById("phQrImg");
-  let printed=false;
-  const doPrint=()=>{ if(printed)return; printed=true; window.print(); };
-  if(!qrImg || qrImg.complete){ doPrint(); }
-  else{
-    qrImg.onload=doPrint;
-    qrImg.onerror=doPrint;
-    setTimeout(doPrint,1200);
-  }
-}
 function shareResult(){
   if(!lastResult)return;
   const r=lastResult;
