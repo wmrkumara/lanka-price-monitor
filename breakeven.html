@@ -369,6 +369,16 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
       <div id="cost-breakdown-wrap"></div>
     </div>
 
+    <!-- LOAN & LEASING CALCULATOR CROSS-PROMO -->
+    <a href="loan-calculator.html" style="display:flex;align-items:center;gap:14px;background:var(--card);border:1.5px solid var(--gold);border-radius:var(--r);padding:16px 18px;margin-bottom:16px;text-decoration:none;color:inherit">
+      <div style="font-size:28px;flex-shrink:0">🏦</div>
+      <div style="flex:1;min-width:0">
+        <div id="loan-promo-title" style="font-weight:700;font-size:14.5px;color:var(--ink);margin-bottom:3px"></div>
+        <div id="loan-promo-desc" style="font-size:12.5px;color:var(--muted);line-height:1.45"></div>
+        <div id="loan-promo-btn" style="font-size:12.5px;font-weight:700;color:var(--petrol);margin-top:6px"></div>
+      </div>
+    </a>
+
     <!-- MARKET COMPARISON -->
     <div class="card">
       <div class="sec-label" style="margin:0 0 14px" id="sec4-label">🏪 වෙළඳපොළ සංසන්දනය</div>
@@ -445,6 +455,9 @@ const T = {
     errCosts:"කරුණාකර අවම වශයෙන් එක් වියදමක් ඇතුළු කරන්න.",
     shareMsg:"🧮 *TopGoviya.lk — ලාභ අලාභ සීමා ගණකය*\n\n🌾 භෝගය: %CROP%\n💰 මුළු වියදම: රු.%COST%\n📦 අස්වැන්න: %KG% kg\n🎯 අලාභ-ලාභ සීමා: රු.%BE%/kg\n\n%REC%\n\n🔗 https://topgoviya.lk/breakeven.html\n🤝 *මේ තොරතුරු ඔබේ මිතුරන්ටත් දැනගන්න බෙදාහරින්න!*",
     shareProfit:"✅ දැනට ලාභදායී!",shareLoss:"⚠️ දැනට පාඩුයි — රඳා සිටින්න.",shareNoData:"📊 වෙළඳපොළ සංසන්දනය: දත්ත නොමැත.",
+    loanPromoTitle:"🏦 වගා වියදම් සඳහා මුදල් අවශ්‍යද?",
+    loanPromoDesc:"බීජ, පොහොර, යන්ත්‍රෝපකරණ හෝ වෙනත් වගා අවශ්‍යතා සඳහා ණය හෝ ලීසිං සලකා බලනවා නම්, මාසික වාරිකය කලින්ම ගණනය කරගන්න.",
+    loanPromoBtn:"ණය සහ ලීසිං ගණකය අත්හදා බලන්න →",
   },
   ta:{
     navRetail:"சில்லறை",navWholesale:"மொத்தம்",navWeather:"வானிலை",navBe:"முறிவு",
@@ -480,6 +493,9 @@ const T = {
     kitDesc:"இலவச அச்சு பிரதி — சுருக்க தாள் + தினசரி பதிவேடு (சிங்களம் · தமிழ் · English)",
     kitBtn:"⬇ இலவசமாக PDF பதிவிறக்கவும்",
     kitBadge:"இலவசம்",
+    loanPromoTitle:"🏦 சாகுபடி செலவுகளுக்கு பணம் தேவையா?",
+    loanPromoDesc:"விதைகள், உரம், இயந்திரங்கள் அல்லது பிற தேவைகளுக்கு கடன் அல்லது லீசிங் பரிசீலிக்கிறீர்களா? மாதாந்திர தவணையை முன்கூட்டியே கணக்கிடுங்கள்.",
+    loanPromoBtn:"கடன் & லீசிங் கணிப்பியை முயற்சிக்கவும் →",
   },
   en:{
     navRetail:"Retail",navWholesale:"Wholesale",navWeather:"Weather",navBe:"Break-even",
@@ -515,6 +531,9 @@ const T = {
     kitDesc:"Free printable copy — Summary Sheet + Daily Log Sheet (Sinhala · Tamil · English)",
     kitBtn:"⬇ Download PDF Free",
     kitBadge:"FREE",
+    loanPromoTitle:"🏦 Need funding for cultivation costs?",
+    loanPromoDesc:"Considering a loan or lease for seeds, fertilizer, machinery, or other farming needs? Work out your monthly installment in advance.",
+    loanPromoBtn:"Try the Loan & Leasing Calculator →",
   }
 };
 function t(k){return (T[lang]&&T[lang][k])||T.en[k]||k;}
@@ -564,6 +583,10 @@ function applyLang(){
   document.getElementById("kit-title").textContent=t("kitTitle");
   document.getElementById("kit-desc").textContent=t("kitDesc");
   document.getElementById("kit-btn").textContent=t("kitBtn");
+  // loan/leasing promo box
+  const lpt=document.getElementById("loan-promo-title");if(lpt)lpt.textContent=t("loanPromoTitle");
+  const lpd=document.getElementById("loan-promo-desc");if(lpd)lpd.textContent=t("loanPromoDesc");
+  const lpb=document.getElementById("loan-promo-btn");if(lpb)lpb.textContent=t("loanPromoBtn");
 }
 
 document.querySelector(".lang").addEventListener("click",function(e){
