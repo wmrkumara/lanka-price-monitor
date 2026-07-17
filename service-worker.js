@@ -1,9 +1,9 @@
 /* ===== TopGoviya PWA Service Worker ===== */
 /* Version: 2.6 | topgoviya.lk | Built in Gampola 🇱🇰 */
-/* Updated: 9 July 2026 — bumped cache version so browsers pick up Best Sell/Buy stale-data filter fix */
+/* Updated: 17 July 2026 — v12: added reports.html (Price Report Generator) */
 
-const CACHE_NAME = 'topgoviya-v11';
-const DATA_CACHE = 'topgoviya-data-v11';
+const CACHE_NAME = 'topgoviya-v12';
+const DATA_CACHE = 'topgoviya-data-v12';
 
 /* ── Static files to cache for offline use ── */
 const STATIC_ASSETS = [
@@ -12,6 +12,7 @@ const STATIC_ASSETS = [
   '/wholesale.html',
   '/weather.html',
   '/breakeven.html',
+  '/reports.html',
   '/insights.html',
   '/blog.html',
   '/about.html',
