@@ -62,6 +62,8 @@ body{background:var(--paper);color:var(--ink);
 .navlink.weather:hover{background:rgba(100,200,220,.30);color:#fff}
 .navlink.breakeven{background:var(--gold);color:#fff}
 .navlink.breakeven:hover{background:#c4921f}
+.navlink.reports{background:rgba(255,255,255,.1);color:rgba(255,255,255,.75)}
+.navlink.reports:hover{background:rgba(255,255,255,.18);color:#fff}
 .navlink-badge{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.08em;
   background:rgba(255,255,255,.25);padding:2px 5px;border-radius:4px;margin-left:5px;vertical-align:middle}
 @media(max-width:600px){
@@ -225,6 +227,7 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
       <a href="wholesale.html" class="navlink wholesale">📦 <span id="nav-wholesale">Wholesale</span> <span class="navlink-badge">HARTI</span></a>
       <a href="weather.html" class="navlink weather">🌤️ <span id="nav-weather">Weather</span> <span class="navlink-badge">10</span></a>
       <a href="breakeven.html" class="navlink breakeven">🧮 <span id="nav-be">Break-even</span></a>
+      <a href="reports.html" class="navlink reports">📄 <span id="nav-reports">Reports</span></a>
     </div>
   </div>
 </nav>
@@ -425,7 +428,7 @@ const T = {
     kitDesc:"නොමිලේ මුද්‍රණ පිටපත — සාරාංශ පත්‍රය + දෛනික සටහන් පත්‍රය (සිංහල · தமிழ் · English)",
     kitBtn:"⬇ නොමිලේ PDF බාගත කරගන්න",
     kitBadge:"නොමිලේ",
-    navRetail:"සිල්ලර",navWholesale:"තොග",navWeather:"කාලගුණ",navBe:"අලාභ-ලාභ",
+    navRetail:"සිල්ලර",navWholesale:"තොග",navWeather:"කාලගුණ",navBe:"අලාභ-ලාභ",navReports:"වාර්තා",
     kickerTag:"ගොවි තීරණ මෙවලම",pageTitle:"ලාභ අලාභ සීමා <em>ගණකය</em>",
     pageDesc:"ඔබේ භෝගයේ වගා පිරිවැය ඇතුළු කරන්න — ලාභ ලැබීමට අවශ්‍ය අවම මිල ක්ෂණිකව දැනගන්න.",
     sec1:"🌾 භෝග තොරතුරු",sec2:"💰 වගා වියදම් (රු.)",sec3:"📊 ගණනය කළ ප්‍රතිඵල",
@@ -460,7 +463,7 @@ const T = {
     loanPromoBtn:"ණය සහ ලීසිං ගණකය අත්හදා බලන්න →",
   },
   ta:{
-    navRetail:"சில்லறை",navWholesale:"மொத்தம்",navWeather:"வானிலை",navBe:"முறிவு",
+    navRetail:"சில்லறை",navWholesale:"மொத்தம்",navWeather:"வானிலை",navBe:"முறிவு",navReports:"அறிக்கைகள்",
     kickerTag:"விவசாயி முடிவு கருவி",pageTitle:"முறிவு <em>கணிப்பி</em>",
     pageDesc:"உங்கள் பயிர் செலவுகளை உள்ளிடவும் — லாபம் பெற தேவையான குறைந்தபட்ச விலையை உடனடியாக அறியவும்.",
     sec1:"🌾 பயிர் தகவல்",sec2:"💰 சாகுபடி செலவுகள் (ரூ.)",sec3:"📊 கணக்கீட்டு முடிவுகள்",
@@ -498,7 +501,7 @@ const T = {
     loanPromoBtn:"கடன் & லீசிங் கணிப்பியை முயற்சிக்கவும் →",
   },
   en:{
-    navRetail:"Retail",navWholesale:"Wholesale",navWeather:"Weather",navBe:"Break-even",
+    navRetail:"Retail",navWholesale:"Wholesale",navWeather:"Weather",navBe:"Break-even",navReports:"Reports",
     kickerTag:"Farmer Decision Tool",pageTitle:"Break-even <em>Calculator</em>",
     pageDesc:"Enter your crop production costs — instantly find the minimum selling price you need to avoid a loss.",
     sec1:"🌾 Crop Information",sec2:"💰 Production Costs (Rs.)",sec3:"📊 Calculated Results",
@@ -546,6 +549,7 @@ function applyLang(){
   document.getElementById("nav-wholesale").textContent=t("navWholesale");
   document.getElementById("nav-weather").textContent=t("navWeather");
   document.getElementById("nav-be").textContent=t("navBe");
+  var nvR=document.getElementById("nav-reports");if(nvR)nvR.textContent=t("navReports");
   // header
   document.getElementById("kicker-tag").textContent=t("kickerTag");
   document.getElementById("page-title").innerHTML=t("pageTitle");
