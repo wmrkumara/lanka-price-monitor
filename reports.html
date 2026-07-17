@@ -281,7 +281,7 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
   <div id="report">
     <div class="rep-head">
       <div class="rep-brand">
-        <span class="b1">Top<em>Goviya</em>.lk</span>
+        <span class="b1" style="display:inline-flex;align-items:center;gap:8px"><img src="logo-mark.png" alt="" style="width:22px;height:22px;object-fit:contain">Top<em>Goviya</em>.lk</span>
         <span class="b2" id="rep-b2">මිල වාර්තාව · Price Report</span>
       </div>
       <h2 class="rep-title" id="rep-title"></h2>
@@ -290,6 +290,7 @@ footer a{color:var(--petrol);font-weight:700;text-decoration:none}
         <span id="rep-meta-gen"></span>
         <span id="rep-meta-rows"></span>
         <span id="rep-meta-unit"></span>
+        <span id="rep-meta-mkt"></span>
       </div>
     </div>
 
@@ -347,7 +348,7 @@ si:{
   rangeNote:"තෝරාගත් සීමාවේ වාර්තා දින %N ක් ඇත",
   repB2:"මිල වාර්තාව · Price Report",
   repSub:"%A සිට %B දක්වා · තොග සහ සිල්ලර මිල",
-  metaGen:"සාදන ලද්දේ: ", metaRows:"පේළි: ", metaUnit:"ඒකකය: ",
+  metaGen:"සාදන ලද්දේ: ", metaRows:"පේළි: ", metaUnit:"ඒකකය: ", metaMkt:"වෙළඳපොළ: ",
   lgWs:"තොග මිල", lgRt:"සිල්ලර මිල",
   statWsAvg:"තොග සාමාන්‍ය", statWsMin:"තොග අවම", statWsMax:"තොග උපරිම",
   statRtAvg:"සිල්ලර සාමාන්‍ය", statRtMin:"සිල්ලර අවම", statRtMax:"සිල්ලර උපරිම",
@@ -370,7 +371,7 @@ ta:{
   rangeNote:"தேர்ந்த வரம்பில் %N அறிக்கை நாட்கள் உள்ளன",
   repB2:"விலை அறிக்கை · Price Report",
   repSub:"%A முதல் %B வரை · மொத்த மற்றும் சில்லறை விலை",
-  metaGen:"உருவாக்கியது: ", metaRows:"வரிசைகள்: ", metaUnit:"அலகு: ",
+  metaGen:"உருவாக்கியது: ", metaRows:"வரிசைகள்: ", metaUnit:"அலகு: ", metaMkt:"சந்தை: ",
   lgWs:"மொத்த விலை", lgRt:"சில்லறை விலை",
   statWsAvg:"மொத்த சராசரி", statWsMin:"மொத்த குறைந்தது", statWsMax:"மொத்த அதிகபட்சம்",
   statRtAvg:"சில்லறை சராசரி", statRtMin:"சில்லறை குறைந்தது", statRtMax:"சில்லறை அதிகபட்சம்",
@@ -393,7 +394,7 @@ en:{
   rangeNote:"%N report days in the selected range",
   repB2:"Price Report",
   repSub:"%A to %B · Wholesale & retail prices",
-  metaGen:"Generated: ", metaRows:"Rows: ", metaUnit:"Unit: ",
+  metaGen:"Generated: ", metaRows:"Rows: ", metaUnit:"Unit: ", metaMkt:"Market: ",
   lgWs:"Wholesale", lgRt:"Retail",
   statWsAvg:"Wholesale avg", statWsMin:"Wholesale low", statWsMax:"Wholesale high",
   statRtAvg:"Retail avg", statRtMin:"Retail low", statRtMax:"Retail high",
@@ -430,6 +431,8 @@ var UNITS={"Rs./kg":{si:"රු./කි.ග්‍රෑ.",ta:"ரூ./கி."},
 function tName(n){return (NAMES[n]&&NAMES[n][lang])||n;}
 function tCat(c){return lang==="en"?c:((CATS[c]&&CATS[c][lang])||c);}
 function tUnit(u){return lang==="en"?u:((UNITS[u]&&UNITS[u][lang])||u);}
+var MARKETS={Pettah:{si:"පිටකොටුව",ta:"பேட்டை"},Dambulla:{si:"දඹුල්ල",ta:"தம்புள்ள"},Narahenpita:{si:"නාරාහේන්පිට",ta:"நாரஹேன்பிட்ட"},Negombo:{si:"මීගමුව",ta:"நீர்கொழும்பு"},Marandagahamula:{si:"මාරන්දගහමුල",ta:"மரந்தகஹமுல"}};
+function tMkt(m){return lang==="en"?m:((MARKETS[m]&&MARKETS[m][lang])||m);}
 
 /* Gregorian month names — explicit arrays (never toLocaleDateString for si/ta) */
 var MON={
@@ -580,6 +583,7 @@ function renderReport(){
   document.getElementById("rep-meta-gen").innerHTML=t("metaGen")+"<b>"+genStr+"</b>";
   document.getElementById("rep-meta-rows").innerHTML=t("metaRows")+"<b>"+rows.length+"</b>";
   document.getElementById("rep-meta-unit").innerHTML=t("metaUnit")+"<b>"+tUnit(c.unit)+"</b>";
+  document.getElementById("rep-meta-mkt").innerHTML=t("metaMkt")+"<b>"+tMkt(c.primaryMarket)+"</b>";
   document.getElementById("rep-src").innerHTML=t("srcTxt");
 
   var host=document.getElementById("chart-host"),tblHost=document.getElementById("tbl-host"),statRow=document.getElementById("statrow");
@@ -671,8 +675,17 @@ document.getElementById("btn-csv").addEventListener("click",function(){
   lines.push("Commodity,"+'"'+c.name+'"');
   lines.push("Unit,"+'"'+c.unit+'"');
   lines.push("Range,"+REPORT.start+" to "+REPORT.end);
+  lines.push("Market,"+'"'+c.primaryMarket+' (primary market)"');
   lines.push("Source,Central Bank of Sri Lanka - Daily Price Report");
   lines.push("Generated,"+new Date().toISOString().slice(0,10));
+  var wsv=REPORT.rows.map(function(r){return r.ws;}).filter(function(x){return x!=null;});
+  var rtv=REPORT.rows.map(function(r){return r.rt;}).filter(function(x){return x!=null;});
+  function s3(v){if(!v.length)return null;var s=0,mn=v[0],mx=v[0];v.forEach(function(x){s+=x;if(x<mn)mn=x;if(x>mx)mx=x;});return[Math.round(s/v.length),mn,mx];}
+  var wS=s3(wsv),rS=s3(rtv);
+  lines.push("");
+  lines.push("Summary,Average,Min,Max");
+  if(wS)lines.push("Wholesale (Rs.),"+wS[0]+","+wS[1]+","+wS[2]);
+  if(rS)lines.push("Retail (Rs.),"+rS[0]+","+rS[1]+","+rS[2]);
   lines.push("");
   lines.push("Date,Wholesale (Rs.),Retail (Rs.)");
   REPORT.rows.forEach(function(r){
@@ -694,6 +707,9 @@ document.getElementById("btn-png").addEventListener("click",function(){
   var xml=new XMLSerializer().serializeToString(svg);
   var img=new Image();
   var url="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(xml);
+  var logo=new Image();var logoReady=false;
+  logo.onload=function(){logoReady=true;};
+  logo.src="logo-mark.png";
   img.onload=function(){
     var scale=2,pad=30,head=64;
     var cv=document.createElement("canvas");
@@ -702,9 +718,10 @@ document.getElementById("btn-png").addEventListener("click",function(){
     ctx.scale(scale,scale);
     ctx.fillStyle="#fffdf7";ctx.fillRect(0,0,cv.width,cv.height);
     ctx.fillStyle="#0e4f4a";ctx.font="700 20px Georgia, serif";
-    ctx.fillText("TopGoviya.lk",pad,pad+8);
+    if(logoReady){try{ctx.drawImage(logo,pad,pad-12,26,26);}catch(e){}ctx.fillText("TopGoviya.lk",pad+34,pad+8);}
+    else{ctx.fillText("TopGoviya.lk",pad,pad+8);}
     ctx.fillStyle="#191d1a";ctx.font="600 15px Georgia, serif";
-    ctx.fillText(c.name+"  ·  "+REPORT.start+" → "+REPORT.end+"  ·  "+c.unit,pad,pad+32);
+    ctx.fillText(c.name+" ("+c.primaryMarket+")  ·  "+REPORT.start+" → "+REPORT.end+"  ·  "+c.unit,pad,pad+32);
     ctx.fillStyle="#a9802a";ctx.font="600 12px monospace";ctx.fillText("— Wholesale",pad,pad+52);
     ctx.fillStyle="#0e4f4a";ctx.fillText("— Retail",pad+110,pad+52);
     ctx.drawImage(img,pad,pad+head,680,260);
