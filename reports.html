@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZBN8Z32S4J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZBN8Z32S4J');
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TopGoviya">
+<meta name="theme-color" content="#0e4f4a">
+<link rel="apple-touch-icon" href="icon-192x192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png">
+<title>මිල වාර්තා ජනකය | Price Report Generator | TopGoviya.lk</title>
+<meta name="description" content="ඕනෑම භාණ්ඩයක තොග සහ සිල්ලර මිල ඉතිහාසය — ඕනෑම කාල සීමාවකට. Print, CSV, PNG. Sri Lanka commodity price history report generator. CBSL data. TopGoviya.lk">
+<meta property="og:title" content="Price Report Generator | TopGoviya.lk">
+<meta property="og:description" content="තෝරාගත් භාණ්ඩයක තොග + සිල්ලර මිල වාර්තාවක් සාදන්න — ප්‍රින්ට් / CSV / ප්‍රස්ථාර PNG.">
+<meta property="og:url" content="https://topgoviya.lk/reports.html">
+<link rel="canonical" href="https://topgoviya.lk/reports.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4efe4;--paper-2:#efe8d8;--card:#fffdf7;--ink:#191d1a;--ink-soft:#3a403a;
+  --muted:#7a7264;--line:#e3d9c4;--line-strong:#cdbf9f;--petrol:#0e4f4a;--petrol-deep:#0a3a36;
+  --gold:#a9802a;--up:#b23a2e;--up-bg:#f7e6e2;--down:#2c7a52;--down-bg:#e3efe6;
+  --shadow:0 1px 0 rgba(0,0,0,.02),0 12px 30px -18px rgba(20,40,38,.35);--r:14px;
+}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);
+  font-family:'Hanken Grotesk','Noto Sans Sinhala','Noto Sans Tamil',sans-serif;
+  -webkit-font-smoothing:antialiased;line-height:1.5;
+  background-image:radial-gradient(circle at 12% -10%,rgba(14,79,74,.06),transparent 38%),
+                   radial-gradient(circle at 95% 0%,rgba(169,128,42,.07),transparent 30%);
+  background-attachment:fixed;}
+
+/* ── NAVBAR ── */
+.topnav{background:var(--petrol);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(10,30,28,.4)}
+.topnav-inner{max-width:1160px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:0}
+.topnav-brand{font-family:'Newsreader',serif;font-size:16px;font-weight:500;color:#fff;
+  padding:12px 18px 12px 0;border-right:1px solid rgba(255,255,255,.18);margin-right:4px;
+  white-space:nowrap;text-decoration:none;letter-spacing:-.01em}
+.topnav-brand em{font-style:italic;color:#ffd98a}
+.navlinks{display:flex;gap:2px;padding:8px 0;flex-wrap:wrap}
+.navlink{font:inherit;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:7px 16px;border-radius:8px;text-decoration:none;transition:.18s;white-space:nowrap}
+.navlink.retail{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+.navlink.retail:hover{background:rgba(255,255,255,.18);color:#fff}
+.navlink.wholesale{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+.navlink.wholesale:hover{background:rgba(255,255,255,.18);color:#fff}
+.navlink.weather{background:rgba(100,200,220,.18);color:#a8dfe8;border:1px solid rgba(100,200,220,.25)}
+.navlink.weather:hover{background:rgba(100,200,220,.30);color:#fff}
+.navlink.breakeven{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+.navlink.breakeven:hover{background:rgba(255,255,255,.18);color:#fff}
+.navlink.reports{background:var(--gold);color:#fff}
+.navlink.reports:hover{background:#c4921f}
+.navlink-badge{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.08em;
+  background:rgba(255,255,255,.25);padding:2px 5px;border-radius:4px;margin-left:5px;vertical-align:middle}
+@media(max-width:600px){
+  .topnav-inner{flex-wrap:wrap;padding:0}
+  .topnav-brand{font-size:15px;padding:9px 14px;border-right:none;margin-right:0;width:100%;border-bottom:1px solid rgba(255,255,255,.12)}
+  .navlinks{width:100%;padding:5px 10px;gap:4px}
+  .navlink{font-size:10.5px;padding:6px 8px;flex:1;text-align:center}
+  .navlink-badge{display:none}
+}
+
+/* ── LAYOUT ── */
+.wrap{max-width:820px;margin:0 auto;padding:0 18px 60px}
+
+/* ── PAGE HEADER ── */
+.page-header{padding:28px 0 20px;border-bottom:2px solid var(--ink);margin-bottom:22px}
+.page-kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:8px}
+.page-kicker span{color:var(--petrol)}
+.page-title{font-family:'Newsreader','Noto Sans Sinhala','Noto Sans Tamil',serif;font-size:clamp(28px,5vw,46px);font-weight:500;
+  line-height:1;letter-spacing:-.015em;margin:0 0 8px}
+.page-title em{font-style:italic;color:var(--gold)}
+.page-desc{font-size:14px;color:var(--ink-soft);max-width:560px;line-height:1.55}
+
+/* ── LANG TOGGLE ── */
+.lang-row{display:flex;justify-content:flex-end;margin-bottom:18px}
+.lang{display:flex;gap:2px;border:1px solid var(--line-strong);border-radius:999px;overflow:hidden}
+.lang button{font:inherit;font-size:11px;letter-spacing:.12em;font-weight:700;text-transform:uppercase;
+  border:0;background:transparent;color:var(--muted);padding:5px 12px;cursor:pointer;transition:.2s}
+.lang button.on{background:var(--petrol);color:#fff}
+
+/* ── SECTION LABEL ── */
+.sec-label{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--petrol);
+  font-weight:800;margin:22px 0 10px;display:flex;align-items:center;gap:8px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--line-strong)}
+
+/* ── CARDS & INPUTS ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;box-shadow:var(--shadow);margin-bottom:16px}
+.field{margin-bottom:14px}
+.field:last-child{margin-bottom:0}
+.field label{display:block;font-size:12.5px;font-weight:700;color:var(--ink-soft);margin-bottom:5px}
+.field label .hint{font-weight:500;color:var(--muted);font-size:11px;margin-left:4px}
+.field input,.field select{width:100%;font:inherit;font-size:15px;padding:11px 13px;
+  border-radius:10px;border:1px solid var(--line-strong);background:#fff;color:var(--ink);
+  outline:none;transition:.2s;-webkit-appearance:none}
+.field input:focus,.field select:focus{border-color:var(--petrol);box-shadow:0 0 0 3px rgba(14,79,74,.1)}
+.field input[type=date]{font-family:'JetBrains Mono',monospace;font-weight:600}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.two-col{grid-template-columns:1fr}}
+
+/* ── PRESET CHIPS ── */
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.preset{font:inherit;font-size:12.5px;font-weight:700;padding:8px 15px;border-radius:999px;cursor:pointer;
+  border:1px solid var(--line-strong);background:var(--card);color:var(--ink-soft);transition:.18s}
+.preset:hover{border-color:var(--petrol)}
+.preset.on{background:var(--petrol);color:#fff;border-color:var(--petrol)}
+.range-note{font-size:12px;color:var(--muted);margin-top:2px}
+.range-note b{font-family:'JetBrains Mono',monospace;color:var(--ink-soft)}
+
+/* ── GENERATE BUTTON ── */
+.btn-main{display:block;width:100%;font:inherit;font-size:16px;font-weight:800;letter-spacing:.02em;
+  background:var(--petrol);color:#fff;border:0;border-radius:12px;padding:15px;cursor:pointer;
+  transition:.2s;box-shadow:var(--shadow);margin:6px 0 26px}
+.btn-main:hover{background:var(--petrol-deep)}
+.btn-main:disabled{opacity:.5;cursor:not-allowed}
+
+/* ── REPORT ── */
+#report{display:none}
+#report.show{display:block;animation:rise .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.rep-head{background:var(--card);border:1px solid var(--line-strong);border-top:4px solid var(--petrol);
+  border-radius:var(--r);padding:22px 22px 18px;box-shadow:var(--shadow);margin-bottom:14px}
+.rep-brand{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;
+  border-bottom:1px dashed var(--line-strong);padding-bottom:10px;margin-bottom:12px}
+.rep-brand .b1{font-family:'Newsreader',serif;font-size:17px;font-weight:600;color:var(--petrol)}
+.rep-brand .b1 em{font-style:italic;color:var(--gold)}
+.rep-brand .b2{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.rep-title{font-family:'Newsreader','Noto Sans Sinhala','Noto Sans Tamil',serif;font-size:clamp(24px,4vw,34px);
+  font-weight:500;line-height:1.05;margin:0 0 4px}
+.rep-sub{font-size:13px;color:var(--ink-soft)}
+.rep-sub b{font-family:'JetBrains Mono',monospace;font-weight:600}
+.rep-meta{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:11.5px;color:var(--muted)}
+.rep-meta span b{color:var(--ink-soft);font-family:'JetBrains Mono',monospace;font-weight:600}
+
+.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+@media(max-width:560px){.statrow{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:11px 13px;box-shadow:var(--shadow)}
+.stat .l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.stat .v{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:19px;margin-top:3px}
+.stat .v.ws{color:var(--gold)}
+.stat .v.rt{color:var(--petrol)}
+
+.chart-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:16px;box-shadow:var(--shadow);margin-bottom:14px}
+.legend{display:flex;gap:18px;margin-bottom:8px;font-size:12px;font-weight:600;color:var(--ink-soft)}
+.legend .sq{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+.tbl-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:16px;box-shadow:var(--shadow);margin-bottom:14px;overflow-x:auto}
+table.rep{width:100%;border-collapse:collapse;font-size:13px}
+table.rep th{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  font-weight:800;text-align:right;padding:7px 10px;border-bottom:2px solid var(--line-strong)}
+table.rep th:first-child{text-align:left}
+table.rep td{font-family:'JetBrains Mono',monospace;font-weight:500;text-align:right;
+  padding:6px 10px;border-bottom:1px solid var(--line)}
+table.rep td:first-child{text-align:left;color:var(--ink-soft)}
+table.rep td.ws{color:var(--gold);font-weight:600}
+table.rep td.rt{color:var(--petrol);font-weight:600}
+table.rep td.na{color:var(--muted);font-weight:400}
+table.rep tr:nth-child(even) td{background:rgba(239,232,216,.4)}
+
+.rep-src{font-size:11.5px;color:var(--muted);line-height:1.6;margin-bottom:18px;padding:0 4px}
+.rep-src b{color:var(--ink-soft)}
+
+/* ── ACTION BUTTONS ── */
+.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:26px}
+@media(max-width:560px){.actions{grid-template-columns:1fr}}
+.btn-act{font:inherit;font-size:13.5px;font-weight:800;padding:13px;border-radius:11px;cursor:pointer;
+  border:1.5px solid var(--petrol);background:var(--card);color:var(--petrol);transition:.18s;box-shadow:var(--shadow)}
+.btn-act:hover{background:var(--petrol);color:#fff}
+
+.loading,.errbox{text-align:center;color:var(--muted);font-style:italic;padding:26px 0;
+  font-family:'Newsreader','Noto Sans Sinhala','Noto Sans Tamil',serif;font-size:16px}
+.errbox{color:var(--up)}
+
+footer{margin:40px 0 20px;padding-top:20px;border-top:1px solid var(--line-strong);
+  text-align:center;font-size:12px;color:var(--muted);line-height:1.7}
+footer a{color:var(--petrol);font-weight:700;text-decoration:none}
+
+/* ── PRINT ── */
+@media print{
+  body{background:#fff}
+  .topnav,.lang-row,.page-header,#form-area,.btn-main,.actions,footer,.sec-label{display:none !important}
+  .wrap{max-width:100%;padding:0}
+  #report{display:block !important}
+  .rep-head,.chart-card,.tbl-card,.stat{box-shadow:none;border-color:#bbb}
+  table.rep{font-size:11px}
+  table.rep td{padding:4px 8px}
+  .chart-card{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a href="index.html" class="topnav-brand" style="display:inline-flex;align-items:center;gap:8px"><span style="background:#f4efe4;border-radius:50%;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 0 1px rgba(255,255,255,.25)"><img src="logo-mark.png" alt="TopGoviya" style="width:20px;height:20px;object-fit:contain"></span>Top<em>Goviya</em>.lk</a>
+    <div class="navlinks">
+      <a href="index.html" class="navlink retail">📊 <span id="nav-retail">Retail</span> <span class="navlink-badge">CBSL</span></a>
+      <a href="wholesale.html" class="navlink wholesale">📦 <span id="nav-wholesale">Wholesale</span> <span class="navlink-badge">HARTI</span></a>
+      <a href="breakeven.html" class="navlink breakeven">🧮 <span id="nav-be">Break-even</span></a>
+      <a href="reports.html" class="navlink reports">📄 <span id="nav-reports">Reports</span></a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ══ PAGE HEADER ══ -->
+  <header class="page-header">
+    <div class="page-kicker"><span>TOPGOVIYA.LK</span> &nbsp;·&nbsp; <span id="kicker-txt">දත්ත වාර්තා</span></div>
+    <h1 class="page-title" id="page-title">මිල <em>වාර්තා</em> ජනකය</h1>
+    <p class="page-desc" id="page-desc">ඕනෑම භාණ්ඩයක් තෝරා, කාල සීමාවක් දී, තොග සහ සිල්ලර මිල ඉතිහාසය එකම වාර්තාවකින් ලබාගන්න — ප්‍රින්ට් කරන්න, Excel (CSV) හෝ ප්‍රස්ථාර පින්තූරය බාගන්න.</p>
+  </header>
+
+  <div class="lang-row">
+    <div class="lang" role="group" aria-label="Language">
+      <button data-lang="si" class="on">සිං</button>
+      <button data-lang="ta">தமிழ்</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </div>
+
+  <!-- ══ FORM ══ -->
+  <div id="form-area">
+    <div id="loadbox" class="loading">දත්ත ලබාගනිමින්…</div>
+
+    <div id="form-inner" style="display:none">
+      <div class="sec-label" id="sec1-label">① භාණ්ඩය තෝරන්න</div>
+      <div class="card">
+        <div class="field">
+          <label id="lbl-commodity">භාණ්ඩය</label>
+          <select id="sel-commodity"></select>
+        </div>
+      </div>
+
+      <div class="sec-label" id="sec2-label">② කාල සීමාව</div>
+      <div class="card">
+        <div class="presets" id="presets">
+          <button class="preset" data-days="31">1M</button>
+          <button class="preset on" data-days="92">3M</button>
+          <button class="preset" data-days="183">6M</button>
+          <button class="preset" data-days="366">1Y</button>
+          <button class="preset" data-days="0" id="preset-all">All</button>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label id="lbl-start">ආරම්භ දිනය</label>
+            <input type="date" id="date-start">
+          </div>
+          <div class="field">
+            <label id="lbl-end">අවසන් දිනය</label>
+            <input type="date" id="date-end">
+          </div>
+        </div>
+        <div class="range-note" id="range-note"></div>
+      </div>
+
+      <button class="btn-main" id="btn-generate">📄 වාර්තාව සාදන්න</button>
+    </div>
+  </div>
+
+  <!-- ══ REPORT ══ -->
+  <div id="report">
+    <div class="rep-head">
+      <div class="rep-brand">
+        <span class="b1">Top<em>Goviya</em>.lk</span>
+        <span class="b2" id="rep-b2">මිල වාර්තාව · Price Report</span>
+      </div>
+      <h2 class="rep-title" id="rep-title"></h2>
+      <div class="rep-sub" id="rep-sub"></div>
+      <div class="rep-meta">
+        <span id="rep-meta-gen"></span>
+        <span id="rep-meta-rows"></span>
+        <span id="rep-meta-unit"></span>
+      </div>
+    </div>
+
+    <div class="statrow" id="statrow"></div>
+
+    <div class="chart-card">
+      <div class="legend">
+        <span><span class="sq" style="background:var(--gold)"></span><span id="lg-ws">තොග මිල</span></span>
+        <span><span class="sq" style="background:var(--petrol)"></span><span id="lg-rt">සිල්ලර මිල</span></span>
+      </div>
+      <div id="chart-host"></div>
+    </div>
+
+    <div class="tbl-card" id="tbl-host"></div>
+
+    <div class="rep-src" id="rep-src"></div>
+
+    <div class="actions">
+      <button class="btn-act" id="btn-print">🖨️ <span id="t-print">ප්‍රින්ට් / PDF</span></button>
+      <button class="btn-act" id="btn-csv">📥 <span id="t-csv">CSV (Excel)</span></button>
+      <button class="btn-act" id="btn-png">🖼️ <span id="t-png">ප්‍රස්ථාරය PNG</span></button>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <div style="margin-bottom:10px">
+    <a href="https://topgoviya.lk/index.html">← අද සිල්ලර මිල වෙත ආපසු | Back to Live Prices</a>
+  </div>
+  <div id="footer-disc">මිල ගණන් මාර්ගෝපදේශයක් පමණි. ඔබගේ තීරණ ඔබගේ වගකීම වේ.</div>
+  <div style="margin-top:6px">
+    <a href="https://topgoviya.lk">topgoviya.lk</a> &nbsp;·&nbsp;
+    <a href="https://ebooklanka.com" target="_blank">ebooklanka.com</a>
+    &nbsp;·&nbsp; රත්න, ගම්පොළ 🇱🇰
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════
+   i18n
+══════════════════════════════════════ */
+var lang="si";
+var T={
+si:{
+  kicker:"දත්ත වාර්තා",
+  pageTitle:'මිල <em>වාර්තා</em> ජනකය',
+  pageDesc:"ඕනෑම භාණ්ඩයක් තෝරා, කාල සීමාවක් දී, තොග සහ සිල්ලර මිල ඉතිහාසය එකම වාර්තාවකින් ලබාගන්න — ප්‍රින්ට් කරන්න, Excel (CSV) හෝ ප්‍රස්ථාර පින්තූරය බාගන්න.",
+  navRetail:"සිල්ලර", navWholesale:"තොග", navBe:"ලාභ-අලාභ", navReports:"වාර්තා",
+  sec1:"① භාණ්ඩය තෝරන්න", sec2:"② කාල සීමාව",
+  lblCommodity:"භාණ්ඩය", lblStart:"ආරම්භ දිනය", lblEnd:"අවසන් දිනය",
+  presetAll:"සියල්ල", generate:"📄 වාර්තාව සාදන්න",
+  loading:"දත්ත ලබාගනිමින්…",
+  loadErr:"දත්ත ලබාගැනීමට නොහැකි විය. කරුණාකර පිටුව නැවත load කරන්න.",
+  rangeNote:"තෝරාගත් සීමාවේ වාර්තා දින %N ක් ඇත",
+  repB2:"මිල වාර්තාව · Price Report",
+  repSub:"%A සිට %B දක්වා · තොග සහ සිල්ලර මිල",
+  metaGen:"සාදන ලද්දේ: ", metaRows:"පේළි: ", metaUnit:"ඒකකය: ",
+  lgWs:"තොග මිල", lgRt:"සිල්ලර මිල",
+  statWsAvg:"තොග සාමාන්‍ය", statWsMin:"තොග අවම", statWsMax:"තොග උපරිම",
+  statRtAvg:"සිල්ලර සාමාන්‍ය", statRtMin:"සිල්ලර අවම", statRtMax:"සිල්ලර උපරිම",
+  thDate:"දිනය", thWs:"තොග (රු.)", thRt:"සිල්ලර (රු.)",
+  srcTxt:"<b>මූලාශ්‍රය:</b> ශ්‍රී ලංකා මහ බැංකුවේ දෛනික මිල වාර්තාව (CBSL Daily Price Report). මිල ගණන් ප්‍රධාන වෙළඳපොළවල් නියෝජනය කරයි. <b>වියාචනය:</b> මිල ගණන් මාර්ගෝපදේශයක් පමණි — ඔබගේ තීරණ ඔබගේ වගකීම වේ. topgoviya.lk",
+  btnPrint:"ප්‍රින්ට් / PDF", btnCsv:"CSV (Excel)", btnPng:"ප්‍රස්ථාරය PNG",
+  noData:"මෙම සීමාව තුළ මෙම භාණ්ඩයට දත්ත නැත. වෙනත් කාල සීමාවක් උත්සාහ කරන්න.",
+  footDisc:"මිල ගණන් මාර්ගෝපදේශයක් පමණි. ඔබගේ තීරණ ඔබගේ වගකීම වේ."
+},
+ta:{
+  kicker:"தரவு அறிக்கைகள்",
+  pageTitle:'விலை <em>அறிக்கை</em> உருவாக்கி',
+  pageDesc:"எந்தப் பொருளையும் தேர்ந்தெடுத்து, கால வரம்பு கொடுத்து, மொத்த மற்றும் சில்லறை விலை வரலாற்றை ஒரே அறிக்கையில் பெறுங்கள் — அச்சிடுங்கள், Excel (CSV) அல்லது வரைபடப் படத்தைப் பதிவிறக்குங்கள்.",
+  navRetail:"சில்லறை", navWholesale:"மொத்தம்", navBe:"இலாப-நட்ட", navReports:"அறிக்கைகள்",
+  sec1:"① பொருளைத் தேர்ந்தெடுக்கவும்", sec2:"② கால வரம்பு",
+  lblCommodity:"பொருள்", lblStart:"தொடக்க தேதி", lblEnd:"இறுதி தேதி",
+  presetAll:"அனைத்தும்", generate:"📄 அறிக்கையை உருவாக்கு",
+  loading:"தரவு பெறப்படுகிறது…",
+  loadErr:"தரவைப் பெற முடியவில்லை. பக்கத்தை மீண்டும் ஏற்றவும்.",
+  rangeNote:"தேர்ந்த வரம்பில் %N அறிக்கை நாட்கள் உள்ளன",
+  repB2:"விலை அறிக்கை · Price Report",
+  repSub:"%A முதல் %B வரை · மொத்த மற்றும் சில்லறை விலை",
+  metaGen:"உருவாக்கியது: ", metaRows:"வரிசைகள்: ", metaUnit:"அலகு: ",
+  lgWs:"மொத்த விலை", lgRt:"சில்லறை விலை",
+  statWsAvg:"மொத்த சராசரி", statWsMin:"மொத்த குறைந்தது", statWsMax:"மொத்த அதிகபட்சம்",
+  statRtAvg:"சில்லறை சராசரி", statRtMin:"சில்லறை குறைந்தது", statRtMax:"சில்லறை அதிகபட்சம்",
+  thDate:"தேதி", thWs:"மொத்தம் (ரூ.)", thRt:"சில்லறை (ரூ.)",
+  srcTxt:"<b>மூலம்:</b> இலங்கை மத்திய வங்கியின் தினசரி விலை அறிக்கை (CBSL Daily Price Report). விலைகள் முதன்மை சந்தைகளைக் குறிக்கின்றன. <b>மறுப்பு:</b> விலைகள் வழிகாட்டல் மட்டுமே — உங்கள் முடிவுகளுக்கு நீங்களே பொறுப்பு. topgoviya.lk",
+  btnPrint:"அச்சிடு / PDF", btnCsv:"CSV (Excel)", btnPng:"வரைபடம் PNG",
+  noData:"இந்த வரம்பில் இந்தப் பொருளுக்குத் தரவு இல்லை. வேறு கால வரம்பை முயற்சிக்கவும்.",
+  footDisc:"விலைகள் வழிகாட்டல் மட்டுமே. உங்கள் முடிவுகளுக்கு நீங்களே பொறுப்பு."
+},
+en:{
+  kicker:"DATA REPORTS",
+  pageTitle:'Price <em>Report</em> Generator',
+  pageDesc:"Pick any commodity, set a date range, and get wholesale + retail price history in one report — print it, or download as Excel (CSV) or a chart image.",
+  navRetail:"Retail", navWholesale:"Wholesale", navBe:"Break-even", navReports:"Reports",
+  sec1:"① Select commodity", sec2:"② Date range",
+  lblCommodity:"Commodity", lblStart:"Start date", lblEnd:"End date",
+  presetAll:"All", generate:"📄 Generate report",
+  loading:"Loading data…",
+  loadErr:"Could not load data. Please reload the page.",
+  rangeNote:"%N report days in the selected range",
+  repB2:"Price Report",
+  repSub:"%A to %B · Wholesale & retail prices",
+  metaGen:"Generated: ", metaRows:"Rows: ", metaUnit:"Unit: ",
+  lgWs:"Wholesale", lgRt:"Retail",
+  statWsAvg:"Wholesale avg", statWsMin:"Wholesale low", statWsMax:"Wholesale high",
+  statRtAvg:"Retail avg", statRtMin:"Retail low", statRtMax:"Retail high",
+  thDate:"Date", thWs:"Wholesale (Rs.)", thRt:"Retail (Rs.)",
+  srcTxt:"<b>Source:</b> Central Bank of Sri Lanka — Daily Price Report. Prices represent primary markets. <b>Disclaimer:</b> Prices are indicative only — decisions are your responsibility. topgoviya.lk",
+  btnPrint:"Print / PDF", btnCsv:"CSV (Excel)", btnPng:"Chart PNG",
+  noData:"No data for this commodity in the selected range. Try another date range.",
+  footDisc:"Prices are indicative only. Decisions are your responsibility."
+}};
+function t(k){return (T[lang]&&T[lang][k])||T.en[k]||k;}
+
+var NAMES={
+"Beans":{si:"බෝංචි",ta:"பீன்ஸ்"},"Carrot":{si:"කැරට්",ta:"கேரட்"},"Cabbage":{si:"ගෝවා",ta:"முட்டைக்கோஸ்"},
+"Tomato":{si:"තක්කාලි",ta:"தக்காளி"},"Brinjal":{si:"වම්බටු",ta:"கத்தரிக்காய்"},"Pumpkin":{si:"වට්ටක්කා",ta:"பூசணி"},
+"Snake gourd":{si:"පතෝල",ta:"புடலங்காய்"},"Green Chilli":{si:"අමු මිරිස්",ta:"பச்சை மிளகாய்"},"Lime":{si:"දෙහි",ta:"எலுமிச்சை"},
+"Red Onion (Local)":{si:"රතු ළූණු (දේශීය)",ta:"சிவப்பு வெங்காயம் (உள்ளூர்)"},"Red Onion (lmp)":{si:"රතු ළූණු (ආනයනික)",ta:"சிவப்பு வெங்காயம் (இறக்குமதி)"},
+"Big Onion (Local)":{si:"ලොකු ළූණු (දේශීය)",ta:"பெரிய வெங்காயம் (உள்ளூர்)"},"Big Onion (Imp)":{si:"ලොකු ළූණු (ආනයනික)",ta:"பெரிய வெங்காயம் (இறக்குமதி)"},
+"Potato (Local)":{si:"අර්තාපල් (දේශීය)",ta:"உருளைக்கிழங்கு (உள்ளூர்)"},"Potato (Imp)":{si:"අර්තාපල් (ආනයනික)",ta:"உருளைக்கிழங்கு (இறக்குமதி)"},
+"Dried Chilli (Imp)":{si:"වියළි මිරිස් (ආනයනික)",ta:"உலர் மிளகாய் (இறக்குமதி)"},"Coconut (Avg.)":{si:"පොල් (සාමාන්‍ය)",ta:"தேங்காய் (சராசரி)"},
+"Coconut oil":{si:"පොල් තෙල්",ta:"தேங்காய் எண்ணெய்"},"Red Dhal":{si:"රතු පරිප්පු",ta:"சிவப்பு பருப்பு"},
+"Sugar (White)":{si:"සීනි (සුදු)",ta:"சர்க்கரை (வெள்ளை)"},"Egg (White)":{si:"බිත්තර (සුදු)",ta:"முட்டை (வெள்ளை)"},
+"Katta":{si:"කට්ට",ta:"கட்டா"},"Katta (Imp)":{si:"කට්ට (ආනයනික)",ta:"கட்டா (இறக்குமதி)"},
+"Sprat (Imp)":{si:"හාල්මැස්සන් (ආනයනික)",ta:"நெத்திலி (இறக்குமதி)"},
+"Banana (Sour)":{si:"කෙසෙල් (ඇඹුල්)",ta:"வாழைப்பழம் (புளிப்பு)"},"Papaw":{si:"පැපොල්",ta:"பப்பாளி"},"Pineapple":{si:"අන්නාසි",ta:"அன்னாசி"},
+"Apple (Imp)":{si:"ඇපල් (ආනයනික)",ta:"ஆப்பிள் (இறக்குமதி)"},"Orange (Imp)":{si:"දොඩම් (ආනයනික)",ta:"ஆரஞ்சு (இறக்குமதி)"},
+"Samba":{si:"සම්බා",ta:"சம்பா"},"Nadu":{si:"නාඩු",ta:"நாடு"},"Nadu (Imp)":{si:"නාඩු (ආනයනික)",ta:"நாடு (இறக்குமதி)"},
+"Kekulu (White)":{si:"කැකුළු (සුදු)",ta:"கெகுளு (வெள்ளை)"},"Kekulu (Red)":{si:"කැකුළු (රතු)",ta:"கெகுளு (சிவப்பு)"},
+"Kekulu (White) (Imp)":{si:"කැකුළු (සුදු) (ආනයනික)",ta:"கெகுளு (வெள்ளை) (இறக்குமதி)"},"Ponni Samba (Imp)":{si:"පොන්නි සම්බා (ආනයනික)",ta:"பொன்னி சம்பா (இறக்குமதி)"},
+"Kelawalla":{si:"කෙළවල්ලා",ta:"கெளவல்லா"},"Thalapath":{si:"තලපත්",ta:"தலபத்"},"Balaya":{si:"බලයා",ta:"சூரை"},
+"Paraw":{si:"පරාවා",ta:"பராவ்"},"Salaya":{si:"සාලයා",ta:"சாளை"},"Hurulla":{si:"හුරුල්ලා",ta:"ஹுருல்லா"},"Linna":{si:"ලින්නා",ta:"லின்னா"}
+};
+var CATS={Vegetables:{si:"එළවළු",ta:"காய்கறிகள்"},Other:{si:"වෙනත්",ta:"பிற"},Rice:{si:"සහල්",ta:"அரிசி"},Fish:{si:"මාළු",ta:"மீன்"},Fruits:{si:"පළතුරු",ta:"பழங்கள்"}};
+var UNITS={"Rs./kg":{si:"රු./කි.ග්‍රෑ.",ta:"ரூ./கி."},"Rs./Nut":{si:"රු./ගෙඩිය",ta:"ரூ./காய்"},"Rs./Ltr":{si:"රු./ලීටරය",ta:"ரூ./லிட்டர்"},"Rs./Each":{si:"රු./එකක්",ta:"ரூ./ஒன்று"}};
+function tName(n){return (NAMES[n]&&NAMES[n][lang])||n;}
+function tCat(c){return lang==="en"?c:((CATS[c]&&CATS[c][lang])||c);}
+function tUnit(u){return lang==="en"?u:((UNITS[u]&&UNITS[u][lang])||u);}
+
+/* Gregorian month names — explicit arrays (never toLocaleDateString for si/ta) */
+var MON={
+ si:["ජනවාරි","පෙබරවාරි","මාර්තු","අප්‍රේල්","මැයි","ජූනි","ජූලි","අගෝස්තු","සැප්තැම්බර්","ඔක්තෝබර්","නොවැම්බර්","දෙසැම්බර්"],
+ ta:["ஜனவரி","பிப்ரவரி","மார்ச்","ஏப்ரல்","மே","ஜூன்","ஜூலை","ஆகஸ்ட்","செப்டம்பர்","அக்டோபர்","நவம்பர்","டிசம்பர்"],
+ en:["January","February","March","April","May","June","July","August","September","October","November","December"]};
+var MON_S={
+ si:["ජන","පෙබ","මාර්","අප්‍රේ","මැයි","ජූනි","ජූලි","අගෝ","සැප්","ඔක්","නොවැ","දෙසැ"],
+ ta:["ஜன","பிப்","மார்","ஏப்","மே","ஜூன்","ஜூலை","ஆக","செப்","அக்","நவ","டிச"],
+ en:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]};
+function fmtDateLong(iso){var p=iso.split("-");return (+p[2])+" "+MON[lang][+p[1]-1]+" "+p[0];}
+function fmtDateShort(iso){var p=iso.split("-");return (+p[2])+" "+MON_S[lang][+p[1]-1]+" "+p[0].slice(2);}
+function fmtDateTbl(iso){var p=iso.split("-");return p[0]+"-"+p[1]+"-"+p[2];}
+
+/* ══════════════════════════════════════
+   State & data
+══════════════════════════════════════ */
+var DB=null, CUR=null, REPORT=null;
+var fmt=function(n){return n==null?"—":Math.round(n).toLocaleString("en-US");};
+
+function applyLang(){
+  document.documentElement.lang=lang;
+  var set=function(id,html){var e=document.getElementById(id);if(e)e.innerHTML=html;};
+  set("kicker-txt",t("kicker"));set("page-title",t("pageTitle"));set("page-desc",t("pageDesc"));
+  set("nav-retail",t("navRetail"));set("nav-wholesale",t("navWholesale"));set("nav-be",t("navBe"));set("nav-reports",t("navReports"));
+  set("sec1-label",t("sec1"));set("sec2-label",t("sec2"));
+  set("lbl-commodity",t("lblCommodity"));set("lbl-start",t("lblStart"));set("lbl-end",t("lblEnd"));
+  set("preset-all",t("presetAll"));
+  set("btn-generate",t("generate"));
+  set("t-print",t("btnPrint"));set("t-csv",t("btnCsv"));set("t-png",t("btnPng"));
+  set("lg-ws",t("lgWs"));set("lg-rt",t("lgRt"));
+  set("footer-disc",t("footDisc"));set("rep-b2",t("repB2"));
+  var lb=document.getElementById("loadbox");if(lb&&lb.style.display!=="none"&&!lb.classList.contains("errbox"))lb.textContent=t("loading");
+  if(DB){buildSelect();updateRangeNote();}
+  if(REPORT)renderReport();
+}
+document.querySelector(".lang").addEventListener("click",function(e){
+  var b=e.target.closest("button[data-lang]");if(!b)return;
+  lang=b.dataset.lang;
+  document.querySelectorAll(".lang button").forEach(function(x){x.classList.toggle("on",x.dataset.lang===lang);});
+  applyLang();
+});
+
+/* ══════════════════════════════════════
+   Form
+══════════════════════════════════════ */
+function buildSelect(){
+  var sel=document.getElementById("sel-commodity");
+  var prev=sel.value;
+  var byCat={};
+  DB.commodities.forEach(function(c,i){
+    if(!byCat[c.category])byCat[c.category]=[];
+    byCat[c.category].push({i:i,c:c});
+  });
+  sel.innerHTML="";
+  Object.keys(byCat).forEach(function(cat){
+    var og=document.createElement("optgroup");og.label=tCat(cat);
+    byCat[cat].sort(function(a,b){return tName(a.c.name).localeCompare(tName(b.c.name));});
+    byCat[cat].forEach(function(o){
+      var op=document.createElement("option");op.value=o.i;op.textContent=tName(o.c.name);
+      og.appendChild(op);
+    });
+    sel.appendChild(og);
+  });
+  if(prev!=="")sel.value=prev;
+  if(sel.value==="")sel.selectedIndex=0;
+}
+function firstDate(){return DB.dates[0];}
+function lastDate(){return DB.dates[DB.dates.length-1];}
+function setRangeFromDays(days){
+  var end=lastDate();
+  var start;
+  if(days===0){start=firstDate();}
+  else{
+    var d=new Date(end+"T00:00:00");d.setDate(d.getDate()-days);
+    var iso=d.toISOString().slice(0,10);
+    start=iso<firstDate()?firstDate():iso;
+  }
+  document.getElementById("date-start").value=start;
+  document.getElementById("date-end").value=end;
+  updateRangeNote();
+}
+function countRows(){
+  var s=document.getElementById("date-start").value,e=document.getElementById("date-end").value;
+  if(!s||!e)return 0;
+  var n=0;
+  for(var i=0;i<DB.dates.length;i++){if(DB.dates[i]>=s&&DB.dates[i]<=e)n++;}
+  return n;
+}
+function updateRangeNote(){
+  var el=document.getElementById("range-note");
+  if(!DB){el.textContent="";return;}
+  el.innerHTML=t("rangeNote").replace("%N","<b>"+countRows()+"</b>");
+}
+document.getElementById("presets").addEventListener("click",function(e){
+  var b=e.target.closest(".preset");if(!b)return;
+  document.querySelectorAll(".preset").forEach(function(x){x.classList.remove("on");});
+  b.classList.add("on");
+  setRangeFromDays(+b.dataset.days);
+});
+["date-start","date-end"].forEach(function(id){
+  document.getElementById(id).addEventListener("change",function(){
+    document.querySelectorAll(".preset").forEach(function(x){x.classList.remove("on");});
+    updateRangeNote();
+  });
+});
+
+/* ══════════════════════════════════════
+   Report build
+══════════════════════════════════════ */
+document.getElementById("btn-generate").addEventListener("click",function(){
+  var idx=+document.getElementById("sel-commodity").value;
+  var s=document.getElementById("date-start").value,e=document.getElementById("date-end").value;
+  if(!s||!e)return;
+  if(s>e){var tmp=s;s=e;e=tmp;document.getElementById("date-start").value=s;document.getElementById("date-end").value=e;}
+  var c=DB.commodities[idx];
+  var rows=[];
+  for(var i=0;i<DB.dates.length;i++){
+    var d=DB.dates[i];
+    if(d<s||d>e)continue;
+    var ws=(c.wholesaleSeries&&c.wholesaleSeries[i]!=null)?c.wholesaleSeries[i]:null;
+    var rt=(c.series&&c.series[i]!=null)?c.series[i]:null;
+    if(ws==null&&rt==null)continue;
+    rows.push({date:d,ws:ws,rt:rt});
+  }
+  REPORT={c:c,start:s,end:e,rows:rows};
+  if(typeof gtag==="function")gtag('event','generate_report',{commodity:c.name,range_days:countRows()});
+  renderReport();
+  document.getElementById("report").classList.add("show");
+  try{document.getElementById("report").scrollIntoView({behavior:"smooth",block:"start"});}catch(e){}
+});
+
+function stats(arr){
+  var v=arr.filter(function(x){return x!=null;});
+  if(!v.length)return null;
+  var sum=0,mn=v[0],mx=v[0];
+  v.forEach(function(x){sum+=x;if(x<mn)mn=x;if(x>mx)mx=x;});
+  return {avg:sum/v.length,min:mn,max:mx,n:v.length};
+}
+
+function renderReport(){
+  if(!REPORT)return;
+  var c=REPORT.c,rows=REPORT.rows;
+  document.getElementById("rep-title").textContent=tName(c.name)+(lang==="en"?"":" · "+c.name);
+  document.getElementById("rep-sub").innerHTML=t("repSub").replace("%A","<b>"+fmtDateLong(REPORT.start)+"</b>").replace("%B","<b>"+fmtDateLong(REPORT.end)+"</b>");
+  var now=new Date();
+  var genStr=now.getDate()+" "+MON[lang][now.getMonth()]+" "+now.getFullYear();
+  document.getElementById("rep-meta-gen").innerHTML=t("metaGen")+"<b>"+genStr+"</b>";
+  document.getElementById("rep-meta-rows").innerHTML=t("metaRows")+"<b>"+rows.length+"</b>";
+  document.getElementById("rep-meta-unit").innerHTML=t("metaUnit")+"<b>"+tUnit(c.unit)+"</b>";
+  document.getElementById("rep-src").innerHTML=t("srcTxt");
+
+  var host=document.getElementById("chart-host"),tblHost=document.getElementById("tbl-host"),statRow=document.getElementById("statrow");
+  if(!rows.length){
+    statRow.innerHTML="";
+    host.innerHTML='<div class="errbox">'+t("noData")+'</div>';
+    tblHost.innerHTML="";
+    return;
+  }
+  var wsS=stats(rows.map(function(r){return r.ws;}));
+  var rtS=stats(rows.map(function(r){return r.rt;}));
+  var st="";
+  if(wsS){st+='<div class="stat"><div class="l">'+t("statWsAvg")+'</div><div class="v ws">'+fmt(wsS.avg)+'</div></div>'
+          +'<div class="stat"><div class="l">'+t("statWsMin")+'</div><div class="v ws">'+fmt(wsS.min)+'</div></div>'
+          +'<div class="stat"><div class="l">'+t("statWsMax")+'</div><div class="v ws">'+fmt(wsS.max)+'</div></div>';}
+  if(rtS){st+='<div class="stat"><div class="l">'+t("statRtAvg")+'</div><div class="v rt">'+fmt(rtS.avg)+'</div></div>'
+          +'<div class="stat"><div class="l">'+t("statRtMin")+'</div><div class="v rt">'+fmt(rtS.min)+'</div></div>'
+          +'<div class="stat"><div class="l">'+t("statRtMax")+'</div><div class="v rt">'+fmt(rtS.max)+'</div></div>';}
+  statRow.innerHTML=st;
+
+  host.innerHTML=buildChart(rows,c);
+  buildTable(rows,tblHost);
+}
+
+/* ── SVG dual-line chart ── */
+function buildChart(rows,c){
+  var W=680,H=260,L=52,R=14,T=18,B=34;
+  var all=[];
+  rows.forEach(function(r){if(r.ws!=null)all.push(r.ws);if(r.rt!=null)all.push(r.rt);});
+  if(all.length<2)return '<div class="errbox">'+t("noData")+'</div>';
+  var mn=Math.min.apply(null,all),mx=Math.max.apply(null,all);
+  var pad=(mx-mn)*0.12||10,lo=Math.max(0,Math.floor((mn-pad)/10)*10),hi=Math.ceil((mx+pad)/10)*10;
+  var n=rows.length;
+  var X=function(i){return L+i*(W-L-R)/((n-1)||1);};
+  var Y=function(v){return T+(H-T-B)*(1-(v-lo)/((hi-lo)||1));};
+  function pathFor(key){
+    var pts=[];rows.forEach(function(r,i){if(r[key]!=null)pts.push([X(i),Y(r[key])]);});
+    if(pts.length<2)return "";
+    return pts.map(function(p,i){return (i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1);}).join(" ");
+  }
+  var grid="",ylab="",steps=4;
+  for(var i=0;i<=steps;i++){
+    var v=lo+(hi-lo)*i/steps,y=Y(v);
+    grid+='<line x1="'+L+'" y1="'+y.toFixed(1)+'" x2="'+(W-R)+'" y2="'+y.toFixed(1)+'" stroke="#e3d9c4" stroke-width="1"/>';
+    ylab+='<text x="'+(L-8)+'" y="'+(y+3).toFixed(1)+'" text-anchor="end" font-size="10" fill="#7a7264" font-family="JetBrains Mono, monospace">'+Math.round(v)+'</text>';
+  }
+  var lblN=Math.min(6,n),xlab="";
+  for(var j=0;j<lblN;j++){
+    var idx=Math.round(j*(n-1)/((lblN-1)||1));
+    xlab+='<text x="'+X(idx).toFixed(1)+'" y="'+(H-10)+'" text-anchor="middle" font-size="9" fill="#7a7264" font-family="JetBrains Mono, monospace">'+fmtDateShort(rows[idx].date)+'</text>';
+  }
+  var wsPath=pathFor("ws"),rtPath=pathFor("rt");
+  return '<svg id="rep-chart" viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block" xmlns="http://www.w3.org/2000/svg">'
+    +'<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#fffdf7"/>'
+    +grid+ylab+xlab
+    +(wsPath?'<path d="'+wsPath+'" fill="none" stroke="#a9802a" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>':'')
+    +(rtPath?'<path d="'+rtPath+'" fill="none" stroke="#0e4f4a" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>':'')
+    +'</svg>';
+}
+
+function buildTable(rows,host){
+  var h='<table class="rep"><thead><tr><th>'+t("thDate")+'</th><th>'+t("thWs")+'</th><th>'+t("thRt")+'</th></tr></thead><tbody>';
+  rows.forEach(function(r){
+    h+='<tr><td>'+fmtDateTbl(r.date)+'</td>'
+      +'<td class="'+(r.ws==null?'na':'ws')+'">'+fmt(r.ws)+'</td>'
+      +'<td class="'+(r.rt==null?'na':'rt')+'">'+fmt(r.rt)+'</td></tr>';
+  });
+  h+='</tbody></table>';
+  host.innerHTML=h;
+}
+
+/* ══════════════════════════════════════
+   Actions: Print / CSV / PNG
+══════════════════════════════════════ */
+document.getElementById("btn-print").addEventListener("click",function(){
+  if(!REPORT)return;
+  if(typeof gtag==="function")gtag('event','print_report',{page:'reports',commodity:REPORT.c.name});
+  var old=document.title;
+  document.title="TopGoviya-Report-"+REPORT.c.name.replace(/[^A-Za-z0-9]+/g,"-")+"-"+REPORT.start+"-to-"+REPORT.end;
+  window.print();
+  document.title=old;
+});
+
+document.getElementById("btn-csv").addEventListener("click",function(){
+  if(!REPORT)return;
+  if(typeof gtag==="function")gtag('event','download_report_csv',{commodity:REPORT.c.name});
+  var c=REPORT.c,lines=[];
+  lines.push("TopGoviya.lk - Price Report");
+  lines.push("Commodity,"+'"'+c.name+'"');
+  lines.push("Unit,"+'"'+c.unit+'"');
+  lines.push("Range,"+REPORT.start+" to "+REPORT.end);
+  lines.push("Source,Central Bank of Sri Lanka - Daily Price Report");
+  lines.push("Generated,"+new Date().toISOString().slice(0,10));
+  lines.push("");
+  lines.push("Date,Wholesale (Rs.),Retail (Rs.)");
+  REPORT.rows.forEach(function(r){
+    lines.push(r.date+","+(r.ws==null?"":r.ws)+","+(r.rt==null?"":r.rt));
+  });
+  var blob=new Blob(["\uFEFF"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"});
+  var a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="topgoviya-report-"+c.name.replace(/[^A-Za-z0-9]+/g,"-").toLowerCase()+"-"+REPORT.start+"-to-"+REPORT.end+".csv";
+  document.body.appendChild(a);a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},400);
+});
+
+document.getElementById("btn-png").addEventListener("click",function(){
+  if(!REPORT)return;
+  var svg=document.getElementById("rep-chart");if(!svg)return;
+  if(typeof gtag==="function")gtag('event','download_report_png',{commodity:REPORT.c.name});
+  var c=REPORT.c;
+  var xml=new XMLSerializer().serializeToString(svg);
+  var img=new Image();
+  var url="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(xml);
+  img.onload=function(){
+    var scale=2,pad=30,head=64;
+    var cv=document.createElement("canvas");
+    cv.width=(680+pad*2)*scale;cv.height=(260+pad*2+head)*scale;
+    var ctx=cv.getContext("2d");
+    ctx.scale(scale,scale);
+    ctx.fillStyle="#fffdf7";ctx.fillRect(0,0,cv.width,cv.height);
+    ctx.fillStyle="#0e4f4a";ctx.font="700 20px Georgia, serif";
+    ctx.fillText("TopGoviya.lk",pad,pad+8);
+    ctx.fillStyle="#191d1a";ctx.font="600 15px Georgia, serif";
+    ctx.fillText(c.name+"  ·  "+REPORT.start+" → "+REPORT.end+"  ·  "+c.unit,pad,pad+32);
+    ctx.fillStyle="#a9802a";ctx.font="600 12px monospace";ctx.fillText("— Wholesale",pad,pad+52);
+    ctx.fillStyle="#0e4f4a";ctx.fillText("— Retail",pad+110,pad+52);
+    ctx.drawImage(img,pad,pad+head,680,260);
+    ctx.fillStyle="#7a7264";ctx.font="10px monospace";
+    ctx.fillText("Source: Central Bank of Sri Lanka Daily Price Report · topgoviya.lk",pad,260+pad+head+18);
+    var a=document.createElement("a");
+    a.href=cv.toDataURL("image/png");
+    a.download="topgoviya-chart-"+c.name.replace(/[^A-Za-z0-9]+/g,"-").toLowerCase()+"-"+REPORT.start+"-to-"+REPORT.end+".png";
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){a.remove();},400);
+  };
+  img.src=url;
+});
+
+/* ══════════════════════════════════════
+   Init
+══════════════════════════════════════ */
+(function(){
+  fetch("data.json",{cache:"no-store"}).then(function(r){
+    if(!r.ok)throw new Error("HTTP "+r.status);
+    return r.json();
+  }).then(function(j){
+    DB=j;
+    document.getElementById("loadbox").style.display="none";
+    document.getElementById("form-inner").style.display="block";
+    buildSelect();
+    var ds=document.getElementById("date-start"),de=document.getElementById("date-end");
+    ds.min=firstDate();ds.max=lastDate();de.min=firstDate();de.max=lastDate();
+    setRangeFromDays(92);
+    applyLang();
+  }).catch(function(err){
+    var lb=document.getElementById("loadbox");
+    lb.classList.add("errbox");lb.textContent=t("loadErr");
+  });
+  applyLang();
+})();
+</script>
+</body>
+</html>
