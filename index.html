@@ -414,6 +414,8 @@
   .navlink.weather:hover{background:rgba(100,200,220,.30);color:#fff}
   .navlink.breakeven{background:rgba(169,128,42,.25);color:#ffd98a;border:1px solid rgba(169,128,42,.35)}
   .navlink.breakeven:hover{background:rgba(169,128,42,.4);color:#fff}
+  .navlink.reports{background:rgba(255,255,255,.1);color:rgba(255,255,255,.75)}
+  .navlink.reports:hover{background:rgba(255,255,255,.18);color:#fff}
   .navlink-badge{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.08em;
     background:rgba(255,255,255,.25);padding:2px 5px;border-radius:4px;margin-left:5px;vertical-align:middle}
   @media(max-width:600px){
@@ -461,6 +463,7 @@
       <a href="wholesale.html" class="navlink wholesale" id="navWholesale">📦 <span class="navlink-badge">HARTI</span></a>
       <a href="weather.html" class="navlink weather" id="navWeather">🌤️ <span class="navlink-badge" id="navWeatherBadge">Weather</span></a>
       <a href="breakeven.html" class="navlink breakeven" id="navBreakeven">🧮 <span id="navBreakevenLbl">Break-even</span></a>
+      <a href="reports.html" class="navlink reports" id="navReports">📄 Reports</a>
     </div>
   </div>
 </nav>
@@ -887,16 +890,18 @@ function applyLang(){
   const navWholesale=document.getElementById('navWholesale');
   const navWeather=document.getElementById('navWeather');
   const navBreakeven=document.getElementById('navBreakeven');
+  const navReports=document.getElementById('navReports');
   const labels={
-    si:{retail:'📊 සිල්ලර',wholesale:'📦 තොග',weather:'🌤️ කාලගුණ',breakeven:'🧮 ලාභ අලාභ සීමා'},
-    en:{retail:'📊 Retail',wholesale:'📦 Wholesale',weather:'🌤️ Weather',breakeven:'🧮 Break-even'},
-    ta:{retail:'📊 சில்லறை',wholesale:'📦 மொத்தம்',weather:'🌤️ வானிலை',breakeven:'🧮 Break-even'}
+    si:{retail:'📊 සිල්ලර',wholesale:'📦 තොග',weather:'🌤️ කාලගුණ',breakeven:'🧮 ලාභ අලාභ සීමා',reports:'📄 වාර්තා'},
+    en:{retail:'📊 Retail',wholesale:'📦 Wholesale',weather:'🌤️ Weather',breakeven:'🧮 Break-even',reports:'📄 Reports'},
+    ta:{retail:'📊 சில்லறை',wholesale:'📦 மொத்தம்',weather:'🌤️ வானிலை',breakeven:'🧮 Break-even',reports:'📄 அறிக்கைகள்'}
   };
   const lb=labels[lang]||labels.en;
   if(navRetail)navRetail.innerHTML=lb.retail+' <span class="navlink-badge">CBSL</span>';
   if(navWholesale)navWholesale.innerHTML=lb.wholesale+' <span class="navlink-badge">HARTI</span>';
   if(navWeather)navWeather.innerHTML=lb.weather;
   if(navBreakeven)navBreakeven.innerHTML=lb.breakeven;
+  if(navReports)navReports.innerHTML=lb.reports;
   set("kickerTxt",t("kicker"));set("lblLatest",t("latestReport"));set("lblSub",t("sub"));
   set("heroTagline",t("heroTagline"));
   set("hMovers",t("movers"));set("hintMovers",t("moversHint"));set("hAll",t("all"));
