@@ -1493,6 +1493,28 @@ function aiInsight(d){
   }
 
   if(!rows.length)return"";
+  /* 6. Same date last year comparison (±5-day window) */
+  if(cur!=null && DATE_OBJS.length){
+    const todayDt=DATE_OBJS[DATE_OBJS.length-1];
+    const targetDt=new Date(todayDt.getFullYear()-1, todayDt.getMonth(), todayDt.getDate());
+    const WINDOW=5;
+    const matches=[];
+    DB.dates.forEach((ds,i)=>{
+      const v=d.series[i];if(v==null)return;
+      const dt=new Date(ds+"T00:00:00");
+      const diffDays=Math.abs((dt-targetDt)/86400000);
+      if(diffDays<=WINDOW)matches.push(v);
+    });
+    if(matches.length){
+      const avgVal=matches.reduce((a,b)=>a+b,0)/matches.length;
+      const diffPct=((cur-avgVal)/avgVal*100);
+      if(Math.abs(diffPct)>=1){
+        const mktN=tMkt(d.primaryMarket);
+        rows.push({cls:diffPct>=0?"warn":"good",icon:"📅",
+          text:lang==="si"?`ගිය අවුරුද්දේ මේ කාලයේ ${mktN} වෙළඳපොළේ මිල රු.${fmt(avgVal)} පමණ විය — අද මිල ඊට වඩා ${Math.abs(diffPct).toFixed(1)}% ${diffPct>=0?"වැඩි":"අඩු"}`:lang==="ta"?`கடந்த ஆண்டு இதே காலத்தில் ${mktN} சந்தையில் விலை சுமார் ரூ.${fmt(avgVal)} ஆக இருந்தது — இன்றைய விலை அதை விட ${Math.abs(diffPct).toFixed(1)}% ${diffPct>=0?"அதிகம்":"குறைவு"}`:`Around this time last year, ${d.primaryMarket} price was ~Rs.${fmt(avgVal)} — today's price is ${Math.abs(diffPct).toFixed(1)}% ${diffPct>=0?"higher":"lower"}`});
+      }
+    }
+  }
   return`<div class="insight-box">
     <div class="ihead">${t('insightLabel')} — ${tName(d.name)}</div>
     ${rows.map(r=>`<div class="irow ${r.cls}">${r.icon} ${r.text}</div>`).join("")}
