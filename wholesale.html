@@ -419,7 +419,13 @@
   .navlink.reports:hover{background:rgba(255,255,255,.18);color:#fff}
   .navlink-badge{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.08em;
     background:rgba(255,255,255,.25);padding:2px 5px;border-radius:4px;margin-left:5px;vertical-align:middle}
-  @media(max-width:560px){.navlink{font-size:11px;padding:6px 10px}}
+  @media(max-width:600px){
+    .topnav-inner{flex-wrap:wrap;padding:0}
+    .topnav-brand{font-size:15px;padding:9px 14px;border-right:none;margin-right:0;width:100%;border-bottom:1px solid rgba(255,255,255,.12)}
+    .navlinks{width:100%;padding:5px 10px;gap:4px;flex-wrap:wrap;justify-content:center}
+    .navlink{font-size:11px;padding:6px 10px;text-align:center}
+    .navlink-badge{display:none}
+  }
 </style>
 </head>
 <body>
