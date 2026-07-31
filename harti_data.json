@@ -1,5 +1,5 @@
 {
- "generated": "2026-07-28T13:07:21",
+ "generated": "2026-07-31T13:10:51",
  "source": "Hector Kobbekaduwa Agrarian Research and Training Institute — Daily Wholesale Price Report",
  "sourceUrl": "https://www.harti.gov.lk/daily-price.php",
  "dates": [
@@ -1211,7 +1211,8 @@
   "2026-07-24",
   "2026-07-25",
   "2026-07-27",
-  "2026-07-28"
+  "2026-07-28",
+  "2026-07-31"
  ],
  "dateLabels": [
   "2 Jan",
@@ -2422,7 +2423,8 @@
   "24 Jul",
   "25 Jul",
   "27 Jul",
-  "28 Jul"
+  "28 Jul",
+  "31 Jul"
  ],
  "markets": [
   "Peliyagoda",
@@ -2445,46 +2447,46 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
+     "min": 200,
+     "max": 300,
+     "mid": 250
+    },
+    "Kandy": {
+     "min": 250,
+     "max": 300,
+     "mid": 275
+    },
+    "Dambulla": {
+     "min": 260,
+     "max": 350,
+     "mid": 305
+    },
+    "Meegoda": {
+     "min": 340,
+     "max": 380,
+     "mid": 360
+    },
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": {
      "min": 300,
      "max": 350,
      "mid": 325
     },
-    "Kandy": {
-     "min": 350,
-     "max": 380,
-     "mid": 365
-    },
-    "Dambulla": {
-     "min": 250,
-     "max": 300,
-     "mid": 275
-    },
-    "Meegoda": {
-     "min": 400,
-     "max": 460,
-     "mid": 430
-    },
-    "Norochchole": null,
-    "Thambuththegama": {
-     "min": 380,
-     "max": 450,
-     "mid": 415
-    },
-    "Keppetipola": null,
     "Nuwaraeliya": {
-     "min": 260,
-     "max": 300,
-     "mid": 280
+     "min": 320,
+     "max": 360,
+     "mid": 340
     },
     "Bandarawela": {
-     "min": 250,
-     "max": 300,
-     "mid": 275
+     "min": 300,
+     "max": 320,
+     "mid": 310
     },
     "Veyangoda": {
-     "min": 400,
-     "max": 440,
-     "mid": 420
+     "min": 360,
+     "max": 400,
+     "mid": 380
     }
    },
    "series": [
@@ -3696,7 +3698,8 @@
     275,
     325,
     375,
-    325
+    325,
+    250
    ]
   },
   {
@@ -3707,9 +3710,9 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 260,
-     "max": 300,
-     "mid": 280
+     "min": 250,
+     "max": 280,
+     "mid": 265
     },
     "Kandy": {
      "min": 250,
@@ -3718,25 +3721,25 @@
     },
     "Dambulla": {
      "min": 240,
-     "max": 300,
-     "mid": 270
+     "max": 280,
+     "mid": 260
     },
     "Meegoda": {
      "min": 240,
-     "max": 310,
-     "mid": 275
+     "max": 300,
+     "mid": 270
     },
     "Norochchole": null,
-    "Thambuththegama": {
-     "min": 280,
-     "max": 330,
-     "mid": 305
+    "Thambuththegama": null,
+    "Keppetipola": {
+     "min": 220,
+     "max": 250,
+     "mid": 235
     },
-    "Keppetipola": null,
     "Nuwaraeliya": {
-     "min": 265,
-     "max": 275,
-     "mid": 270
+     "min": 270,
+     "max": 290,
+     "mid": 280
     },
     "Bandarawela": {
      "min": 220,
@@ -3744,9 +3747,9 @@
      "mid": 235
     },
     "Veyangoda": {
-     "min": 230,
+     "min": 260,
      "max": 280,
-     "mid": 255
+     "mid": 270
     }
    },
    "series": [
@@ -4958,7 +4961,8 @@
     225,
     235,
     265,
-    280
+    280,
+    265
    ]
   },
   {
@@ -4970,40 +4974,40 @@
    "markets": {
     "Peliyagoda": {
      "min": 180,
-     "max": 220,
-     "mid": 200
-    },
-    "Kandy": {
-     "min": 180,
      "max": 200,
      "mid": 190
     },
+    "Kandy": {
+     "min": 190,
+     "max": 200,
+     "mid": 195
+    },
     "Dambulla": {
      "min": 160,
-     "max": 200,
-     "mid": 180
+     "max": 180,
+     "mid": 170
     },
     "Meegoda": {
-     "min": 200,
+     "min": 190,
      "max": 230,
-     "mid": 215
+     "mid": 210
     },
     "Norochchole": null,
-    "Thambuththegama": {
-     "min": 220,
-     "max": 260,
-     "mid": 240
+    "Thambuththegama": null,
+    "Keppetipola": {
+     "min": 150,
+     "max": 180,
+     "mid": 165
     },
-    "Keppetipola": null,
     "Nuwaraeliya": {
-     "min": 195,
+     "min": 190,
      "max": 210,
-     "mid": 202
+     "mid": 200
     },
     "Bandarawela": {
-     "min": 170,
+     "min": 160,
      "max": 180,
-     "mid": 175
+     "mid": 170
     },
     "Veyangoda": {
      "min": 200,
@@ -6220,7 +6224,8 @@
     180,
     190,
     190,
-    200
+    200,
+    190
    ]
   },
   {
@@ -6231,42 +6236,38 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 280,
-     "max": 320,
-     "mid": 300
+     "min": 200,
+     "max": 250,
+     "mid": 225
     },
     "Kandy": {
-     "min": 260,
-     "max": 280,
-     "mid": 270
+     "min": 210,
+     "max": 230,
+     "mid": 220
     },
     "Dambulla": {
-     "min": 220,
-     "max": 300,
-     "mid": 260
+     "min": 180,
+     "max": 250,
+     "mid": 215
     },
     "Meegoda": {
-     "min": 280,
-     "max": 310,
-     "mid": 295
+     "min": 220,
+     "max": 250,
+     "mid": 235
     },
     "Norochchole": {
-     "min": 150,
-     "max": 170,
-     "mid": 160
+     "min": 160,
+     "max": 200,
+     "mid": 180
     },
-    "Thambuththegama": {
-     "min": 260,
-     "max": 320,
-     "mid": 290
-    },
+    "Thambuththegama": null,
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": null,
     "Veyangoda": {
-     "min": 260,
-     "max": 300,
-     "mid": 280
+     "min": 230,
+     "max": 250,
+     "mid": 240
     }
    },
    "series": [
@@ -7478,7 +7479,8 @@
     335,
     335,
     325,
-    300
+    300,
+    225
    ]
   },
   {
@@ -7489,42 +7491,46 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 120,
-     "max": 150,
-     "mid": 135
+     "min": 80,
+     "max": 120,
+     "mid": 100
     },
     "Kandy": {
-     "min": 120,
-     "max": 130,
-     "mid": 125
+     "min": 80,
+     "max": 100,
+     "mid": 90
     },
     "Dambulla": {
      "min": 100,
-     "max": 130,
-     "mid": 115
+     "max": 120,
+     "mid": 110
     },
     "Meegoda": {
-     "min": 140,
+     "min": 150,
      "max": 170,
-     "mid": 155
+     "mid": 160
     },
     "Norochchole": null,
     "Thambuththegama": null,
-    "Keppetipola": null,
-    "Nuwaraeliya": {
-     "min": 130,
-     "max": 150,
-     "mid": 140
+    "Keppetipola": {
+     "min": 100,
+     "max": 140,
+     "mid": 120
     },
-    "Bandarawela": {
+    "Nuwaraeliya": {
      "min": 120,
      "max": 140,
      "mid": 130
     },
-    "Veyangoda": {
+    "Bandarawela": {
      "min": 120,
-     "max": 170,
-     "mid": 145
+     "max": 130,
+     "mid": 125
+    },
+    "Veyangoda": {
+     "min": 160,
+     "max": 180,
+     "mid": 170
     }
    },
    "series": [
@@ -8736,7 +8742,8 @@
     140,
     135,
     115,
-    135
+    135,
+    100
    ]
   },
   {
@@ -8747,50 +8754,50 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 120,
-     "max": 150,
-     "mid": 135
+     "min": 60,
+     "max": 100,
+     "mid": 80
     },
     "Kandy": {
-     "min": 90,
-     "max": 100,
-     "mid": 95
-    },
-    "Dambulla": {
-     "min": 35,
-     "max": 50,
-     "mid": 42
-    },
-    "Meegoda": {
-     "min": 120,
-     "max": 140,
-     "mid": 130
-    },
-    "Norochchole": {
-     "min": 30,
-     "max": 50,
-     "mid": 40
-    },
-    "Thambuththegama": {
-     "min": 100,
-     "max": 140,
-     "mid": 120
-    },
-    "Keppetipola": null,
-    "Nuwaraeliya": {
      "min": 70,
      "max": 80,
      "mid": 75
     },
+    "Dambulla": {
+     "min": 50,
+     "max": 60,
+     "mid": 55
+    },
+    "Meegoda": {
+     "min": 90,
+     "max": 130,
+     "mid": 110
+    },
+    "Norochchole": {
+     "min": 40,
+     "max": 70,
+     "mid": 55
+    },
+    "Thambuththegama": null,
+    "Keppetipola": {
+     "min": 50,
+     "max": 70,
+     "mid": 60
+    },
+    "Nuwaraeliya": {
+     "min": 60,
+     "max": 80,
+     "mid": 70
+    },
     "Bandarawela": {
-     "min": 70,
-     "max": 90,
-     "mid": 80
+     "min": 55,
+     "max": 70,
+     "mid": 62
     },
     "Veyangoda": {
-     "min": 90,
-     "max": 120,
-     "mid": 105
+     "min": 100,
+     "max": 130,
+     "mid": 115
     }
    },
    "series": [
@@ -10002,7 +10009,8 @@
     90,
     85,
     125,
-    135
+    135,
+    80
    ]
   },
   {
@@ -10019,29 +10027,25 @@
      "mid": 135
     },
     "Dambulla": null,
-    "Meegoda": {
-     "min": 120,
-     "max": 160,
-     "mid": 140
-    },
+    "Meegoda": null,
     "Norochchole": null,
     "Thambuththegama": null,
-    "Keppetipola": null,
+    "Keppetipola": {
+     "min": 80,
+     "max": 120,
+     "mid": 100
+    },
     "Nuwaraeliya": {
      "min": 120,
-     "max": 130,
-     "mid": 125
+     "max": 140,
+     "mid": 130
     },
     "Bandarawela": {
      "min": 90,
      "max": 110,
      "mid": 100
     },
-    "Veyangoda": {
-     "min": 130,
-     "max": 150,
-     "mid": 140
-    }
+    "Veyangoda": null
    },
    "series": [
     108,
@@ -11252,6 +11256,7 @@
     145,
     135,
     125,
+    135,
     135
    ]
   },
@@ -11263,9 +11268,9 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 130,
-     "max": 150,
-     "mid": 140
+     "min": 120,
+     "max": 140,
+     "mid": 130
     },
     "Kandy": {
      "min": 100,
@@ -11273,21 +11278,25 @@
      "mid": 110
     },
     "Dambulla": {
+     "min": 120,
+     "max": 150,
+     "mid": 135
+    },
+    "Meegoda": {
      "min": 100,
-     "max": 120,
-     "mid": 110
+     "max": 150,
+     "mid": 125
     },
-    "Meegoda": null,
     "Norochchole": null,
-    "Thambuththegama": {
-     "min": 130,
-     "max": 160,
-     "mid": 145
-    },
+    "Thambuththegama": null,
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": null,
-    "Veyangoda": null
+    "Veyangoda": {
+     "min": 140,
+     "max": 160,
+     "mid": 150
+    }
    },
    "series": [
     105,
@@ -12498,7 +12507,8 @@
     115,
     115,
     140,
-    140
+    140,
+    130
    ]
   },
   {
@@ -12509,50 +12519,50 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 250,
-     "max": 300,
-     "mid": 275
-    },
-    "Kandy": {
      "min": 200,
      "max": 250,
      "mid": 225
     },
+    "Kandy": {
+     "min": 200,
+     "max": 230,
+     "mid": 215
+    },
     "Dambulla": {
-     "min": 230,
-     "max": 300,
-     "mid": 265
+     "min": 180,
+     "max": 250,
+     "mid": 215
     },
     "Meegoda": {
-     "min": 350,
-     "max": 380,
-     "mid": 365
+     "min": 330,
+     "max": 350,
+     "mid": 340
     },
     "Norochchole": {
-     "min": 340,
-     "max": 350,
-     "mid": 345
+     "min": 300,
+     "max": 330,
+     "mid": 315
     },
-    "Thambuththegama": {
-     "min": 280,
-     "max": 320,
-     "mid": 300
+    "Thambuththegama": null,
+    "Keppetipola": {
+     "min": 220,
+     "max": 250,
+     "mid": 235
     },
-    "Keppetipola": null,
     "Nuwaraeliya": {
      "min": 230,
-     "max": 250,
-     "mid": 240
+     "max": 260,
+     "mid": 245
     },
     "Bandarawela": {
-     "min": 250,
-     "max": 270,
-     "mid": 260
+     "min": 220,
+     "max": 250,
+     "mid": 235
     },
     "Veyangoda": {
-     "min": 340,
-     "max": 380,
-     "mid": 360
+     "min": 320,
+     "max": 350,
+     "mid": 335
     }
    },
    "series": [
@@ -13764,7 +13774,8 @@
     325,
     375,
     325,
-    275
+    275,
+    225
    ]
   },
   {
@@ -13775,35 +13786,31 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 60,
+     "min": 80,
      "max": 100,
-     "mid": 80
+     "mid": 90
     },
     "Kandy": {
-     "min": 100,
-     "max": 110,
-     "mid": 105
-    },
-    "Dambulla": {
      "min": 80,
      "max": 90,
      "mid": 85
     },
+    "Dambulla": {
+     "min": 60,
+     "max": 70,
+     "mid": 65
+    },
     "Meegoda": {
-     "min": 100,
-     "max": 120,
-     "mid": 110
+     "min": 90,
+     "max": 110,
+     "mid": 100
     },
     "Norochchole": {
-     "min": 40,
-     "max": 50,
-     "mid": 45
+     "min": 60,
+     "max": 70,
+     "mid": 65
     },
-    "Thambuththegama": {
-     "min": 40,
-     "max": 60,
-     "mid": 50
-    },
+    "Thambuththegama": null,
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
@@ -13812,9 +13819,9 @@
      "mid": 105
     },
     "Veyangoda": {
-     "min": 90,
-     "max": 110,
-     "mid": 100
+     "min": 100,
+     "max": 130,
+     "mid": 115
     }
    },
    "series": [
@@ -15026,7 +15033,8 @@
     65,
     65,
     100,
-    80
+    80,
+    90
    ]
   },
   {
@@ -15042,9 +15050,9 @@
      "mid": 350
     },
     "Kandy": {
-     "min": 350,
-     "max": 380,
-     "mid": 365
+     "min": 250,
+     "max": 300,
+     "mid": 275
     },
     "Dambulla": {
      "min": 250,
@@ -15052,31 +15060,31 @@
      "mid": 300
     },
     "Meegoda": {
-     "min": 350,
-     "max": 400,
-     "mid": 375
+     "min": 370,
+     "max": 420,
+     "mid": 395
     },
     "Norochchole": {
-     "min": 150,
-     "max": 200,
-     "mid": 175
+     "min": 200,
+     "max": 230,
+     "mid": 215
     },
-    "Thambuththegama": {
-     "min": 300,
-     "max": 370,
-     "mid": 335
+    "Thambuththegama": null,
+    "Keppetipola": {
+     "min": 250,
+     "max": 300,
+     "mid": 275
     },
-    "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 340,
-     "max": 360,
-     "mid": 350
+     "min": 300,
+     "max": 340,
+     "mid": 320
     },
     "Veyangoda": {
-     "min": 330,
-     "max": 400,
-     "mid": 365
+     "min": 360,
+     "max": 420,
+     "mid": 390
     }
    },
    "series": [
@@ -16288,6 +16296,7 @@
     350,
     350,
     350,
+    350,
     350
    ]
   },
@@ -16304,45 +16313,45 @@
      "mid": 600
     },
     "Kandy": {
-     "min": 580,
+     "min": 550,
      "max": 600,
-     "mid": 590
+     "mid": 575
     },
     "Dambulla": {
-     "min": 400,
-     "max": 500,
-     "mid": 450
+     "min": 500,
+     "max": 550,
+     "mid": 525
     },
     "Meegoda": {
-     "min": 580,
-     "max": 620,
-     "mid": 600
+     "min": 600,
+     "max": 680,
+     "mid": 640
     },
     "Norochchole": {
      "min": 500,
      "max": 550,
      "mid": 525
     },
-    "Thambuththegama": {
-     "min": 500,
-     "max": 600,
-     "mid": 550
+    "Thambuththegama": null,
+    "Keppetipola": {
+     "min": 650,
+     "max": 700,
+     "mid": 675
     },
-    "Keppetipola": null,
     "Nuwaraeliya": {
-     "min": 640,
-     "max": 660,
-     "mid": 650
+     "min": 680,
+     "max": 720,
+     "mid": 700
     },
     "Bandarawela": {
-     "min": 600,
-     "max": 630,
-     "mid": 615
+     "min": 630,
+     "max": 660,
+     "mid": 645
     },
     "Veyangoda": {
-     "min": 550,
-     "max": 600,
-     "mid": 575
+     "min": 600,
+     "max": 650,
+     "mid": 625
     }
    },
    "series": [
@@ -17554,6 +17563,7 @@
     715,
     700,
     600,
+    600,
     600
    ]
   },
@@ -17570,37 +17580,37 @@
      "mid": 145
     },
     "Kandy": {
-     "min": 130,
-     "max": 140,
-     "mid": 135
+     "min": 120,
+     "max": 130,
+     "mid": 125
     },
     "Dambulla": {
-     "min": 80,
-     "max": 110,
-     "mid": 95
+     "min": 120,
+     "max": 140,
+     "mid": 130
     },
     "Meegoda": {
+     "min": 120,
+     "max": 140,
+     "mid": 130
+    },
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": {
+     "min": 150,
+     "max": 160,
+     "mid": 155
+    },
+    "Nuwaraeliya": null,
+    "Bandarawela": {
+     "min": 150,
+     "max": 155,
+     "mid": 152
+    },
+    "Veyangoda": {
      "min": 130,
      "max": 150,
      "mid": 140
-    },
-    "Norochchole": null,
-    "Thambuththegama": {
-     "min": 100,
-     "max": 120,
-     "mid": 110
-    },
-    "Keppetipola": null,
-    "Nuwaraeliya": null,
-    "Bandarawela": {
-     "min": 140,
-     "max": 145,
-     "mid": 142
-    },
-    "Veyangoda": {
-     "min": 140,
-     "max": 160,
-     "mid": 150
     }
    },
    "series": [
@@ -18812,6 +18822,7 @@
     155,
     145,
     145,
+    145,
     145
    ]
   },
@@ -18823,9 +18834,9 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 50,
-     "max": 80,
-     "mid": 65
+     "min": 70,
+     "max": 100,
+     "mid": 85
     },
     "Kandy": {
      "min": 70,
@@ -18833,26 +18844,26 @@
      "mid": 75
     },
     "Dambulla": {
-     "min": 30,
-     "max": 50,
-     "mid": 40
+     "min": 40,
+     "max": 60,
+     "mid": 50
     },
     "Meegoda": {
      "min": 60,
-     "max": 90,
-     "mid": 75
+     "max": 80,
+     "mid": 70
     },
     "Norochchole": {
-     "min": 30,
-     "max": 50,
-     "mid": 40
+     "min": 50,
+     "max": 80,
+     "mid": 65
     },
-    "Thambuththegama": {
-     "min": 30,
-     "max": 45,
-     "mid": 38
+    "Thambuththegama": null,
+    "Keppetipola": {
+     "min": 80,
+     "max": 90,
+     "mid": 85
     },
-    "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
      "min": 80,
@@ -20074,7 +20085,8 @@
     60,
     70,
     70,
-    65
+    65,
+    85
    ]
   },
   {
@@ -20090,9 +20102,9 @@
      "mid": 275
     },
     "Kandy": {
-     "min": 280,
-     "max": 300,
-     "mid": 290
+     "min": 250,
+     "max": 280,
+     "mid": 265
     },
     "Dambulla": {
      "min": 230,
@@ -20101,30 +20113,26 @@
     },
     "Meegoda": {
      "min": 320,
-     "max": 370,
-     "mid": 345
+     "max": 350,
+     "mid": 335
     },
     "Norochchole": {
      "min": 200,
-     "max": 250,
-     "mid": 225
+     "max": 270,
+     "mid": 235
     },
-    "Thambuththegama": {
-     "min": 220,
-     "max": 260,
-     "mid": 240
-    },
+    "Thambuththegama": null,
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 330,
-     "max": 350,
-     "mid": 340
+     "min": 320,
+     "max": 340,
+     "mid": 330
     },
     "Veyangoda": {
-     "min": 260,
-     "max": 320,
-     "mid": 290
+     "min": 280,
+     "max": 330,
+     "mid": 305
     }
    },
    "series": [
@@ -21336,6 +21344,7 @@
     325,
     325,
     325,
+    275,
     275
    ]
   },
@@ -21347,42 +21356,38 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 200,
+     "min": 220,
      "max": 250,
-     "mid": 225
+     "mid": 235
     },
     "Kandy": {
-     "min": 150,
-     "max": 160,
-     "mid": 155
+     "min": 120,
+     "max": 140,
+     "mid": 130
     },
     "Dambulla": {
-     "min": 90,
-     "max": 150,
-     "mid": 120
+     "min": 100,
+     "max": 160,
+     "mid": 130
     },
     "Meegoda": {
-     "min": 170,
-     "max": 210,
+     "min": 180,
+     "max": 200,
      "mid": 190
     },
     "Norochchole": null,
-    "Thambuththegama": {
-     "min": 140,
-     "max": 160,
-     "mid": 150
-    },
+    "Thambuththegama": null,
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 200,
-     "max": 220,
-     "mid": 210
+     "min": 220,
+     "max": 230,
+     "mid": 225
     },
     "Veyangoda": {
-     "min": 180,
-     "max": 220,
-     "mid": 200
+     "min": 200,
+     "max": 240,
+     "mid": 220
     }
    },
    "series": [
@@ -22594,7 +22599,8 @@
     225,
     215,
     225,
-    225
+    225,
+    235
    ]
   },
   {
@@ -22605,46 +22611,42 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 130,
+     "min": 100,
      "max": 150,
-     "mid": 140
+     "mid": 125
     },
     "Kandy": {
-     "min": 240,
-     "max": 260,
-     "mid": 250
+     "min": 200,
+     "max": 220,
+     "mid": 210
     },
     "Dambulla": {
-     "min": 180,
+     "min": 150,
      "max": 200,
-     "mid": 190
+     "mid": 175
     },
     "Meegoda": {
-     "min": 160,
+     "min": 170,
      "max": 200,
-     "mid": 180
+     "mid": 185
     },
     "Norochchole": {
-     "min": 90,
-     "max": 120,
-     "mid": 105
-    },
-    "Thambuththegama": {
      "min": 100,
-     "max": 130,
-     "mid": 115
+     "max": 140,
+     "mid": 120
     },
+    "Thambuththegama": null,
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 160,
-     "max": 170,
-     "mid": 165
+     "min": 170,
+     "max": 180,
+     "mid": 175
     },
     "Veyangoda": {
-     "min": 170,
-     "max": 220,
-     "mid": 195
+     "min": 180,
+     "max": 240,
+     "mid": 210
     }
    },
    "series": [
@@ -23856,7 +23858,8 @@
     140,
     135,
     140,
-    140
+    140,
+    125
    ]
   },
   {
@@ -23867,46 +23870,42 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 200,
-     "max": 300,
-     "mid": 250
+     "min": 180,
+     "max": 250,
+     "mid": 215
     },
     "Kandy": {
      "min": 200,
-     "max": 250,
-     "mid": 225
+     "max": 230,
+     "mid": 215
     },
     "Dambulla": {
-     "min": 90,
-     "max": 150,
-     "mid": 120
+     "min": 140,
+     "max": 180,
+     "mid": 160
     },
     "Meegoda": {
-     "min": 200,
-     "max": 250,
-     "mid": 225
+     "min": 180,
+     "max": 240,
+     "mid": 210
     },
     "Norochchole": {
-     "min": 80,
-     "max": 100,
-     "mid": 90
+     "min": 140,
+     "max": 150,
+     "mid": 145
     },
-    "Thambuththegama": {
-     "min": 100,
-     "max": 140,
-     "mid": 120
-    },
+    "Thambuththegama": null,
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 200,
-     "max": 230,
-     "mid": 215
+     "min": 180,
+     "max": 200,
+     "mid": 190
     },
     "Veyangoda": {
      "min": 200,
-     "max": 230,
-     "mid": 215
+     "max": 250,
+     "mid": 225
     }
    },
    "series": [
@@ -25118,7 +25117,8 @@
     225,
     200,
     225,
-    250
+    250,
+    215
    ]
   },
   {
@@ -25129,9 +25129,9 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 120,
+     "min": 130,
      "max": 150,
-     "mid": 135
+     "mid": 140
     },
     "Kandy": {
      "min": 120,
@@ -25139,21 +25139,17 @@
      "mid": 130
     },
     "Dambulla": {
-     "min": 90,
-     "max": 120,
-     "mid": 105
+     "min": 120,
+     "max": 140,
+     "mid": 130
     },
     "Meegoda": {
-     "min": 110,
-     "max": 140,
-     "mid": 125
+     "min": 130,
+     "max": 150,
+     "mid": 140
     },
     "Norochchole": null,
-    "Thambuththegama": {
-     "min": 70,
-     "max": 100,
-     "mid": 85
-    },
+    "Thambuththegama": null,
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
@@ -25162,9 +25158,9 @@
      "mid": 125
     },
     "Veyangoda": {
-     "min": 130,
-     "max": 150,
-     "mid": 140
+     "min": 120,
+     "max": 140,
+     "mid": 130
     }
    },
    "series": [
@@ -26376,7 +26372,8 @@
     130,
     140,
     135,
-    135
+    135,
+    140
    ]
   },
   {
@@ -26387,9 +26384,9 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 1200,
-     "max": 1300,
-     "mid": 1250
+     "min": 900,
+     "max": 1000,
+     "mid": 950
     },
     "Kandy": {
      "min": 1200,
@@ -26398,35 +26395,35 @@
     },
     "Dambulla": {
      "min": 1000,
-     "max": 1200,
-     "mid": 1100
+     "max": 1100,
+     "mid": 1050
     },
     "Meegoda": {
-     "min": 1100,
-     "max": 1200,
-     "mid": 1150
+     "min": 1350,
+     "max": 1500,
+     "mid": 1425
     },
     "Norochchole": {
-     "min": 1000,
-     "max": 1000,
-     "mid": 1000
-    },
-    "Thambuththegama": {
-     "min": 1100,
+     "min": 1200,
      "max": 1200,
-     "mid": 1150
+     "mid": 1200
     },
-    "Keppetipola": null,
+    "Thambuththegama": null,
+    "Keppetipola": {
+     "min": 1200,
+     "max": 1300,
+     "mid": 1250
+    },
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 1100,
-     "max": 1200,
-     "mid": 1150
+     "min": 1250,
+     "max": 1350,
+     "mid": 1300
     },
     "Veyangoda": {
-     "min": 1100,
-     "max": 1200,
-     "mid": 1150
+     "min": 1400,
+     "max": 1500,
+     "mid": 1450
     }
    },
    "series": [
@@ -27638,7 +27635,8 @@
     950,
     1050,
     1150,
-    1250
+    1250,
+    950
    ]
   },
   {
@@ -27654,37 +27652,33 @@
      "mid": 275
     },
     "Kandy": {
-     "min": 280,
-     "max": 320,
-     "mid": 300
+     "min": 400,
+     "max": 450,
+     "mid": 425
     },
     "Dambulla": {
-     "min": 250,
-     "max": 260,
-     "mid": 255
+     "min": 280,
+     "max": 350,
+     "mid": 315
     },
     "Meegoda": {
-     "min": 280,
-     "max": 330,
-     "mid": 305
+     "min": 300,
+     "max": 380,
+     "mid": 340
     },
     "Norochchole": null,
-    "Thambuththegama": {
-     "min": 200,
-     "max": 250,
-     "mid": 225
-    },
+    "Thambuththegama": null,
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 300,
-     "max": 350,
-     "mid": 325
+     "min": 350,
+     "max": 380,
+     "mid": 365
     },
     "Veyangoda": {
-     "min": 280,
-     "max": 330,
-     "mid": 305
+     "min": 330,
+     "max": 380,
+     "mid": 355
     }
    },
    "series": [
@@ -28896,6 +28890,7 @@
     225,
     225,
     250,
+    275,
     275
    ]
   },
@@ -28907,14 +28902,14 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 130,
+     "min": 120,
      "max": 150,
-     "mid": 140
+     "mid": 135
     },
     "Kandy": {
      "min": 140,
-     "max": 150,
-     "mid": 145
+     "max": 160,
+     "mid": 150
     },
     "Dambulla": {
      "min": 90,
@@ -28922,27 +28917,27 @@
      "mid": 105
     },
     "Meegoda": {
-     "min": 100,
-     "max": 120,
-     "mid": 110
-    },
-    "Norochchole": null,
-    "Thambuththegama": {
-     "min": 100,
-     "max": 130,
-     "mid": 115
-    },
-    "Keppetipola": null,
-    "Nuwaraeliya": null,
-    "Bandarawela": {
-     "min": 140,
-     "max": 150,
-     "mid": 145
-    },
-    "Veyangoda": {
      "min": 120,
      "max": 140,
      "mid": 130
+    },
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": {
+     "min": 150,
+     "max": 160,
+     "mid": 155
+    },
+    "Nuwaraeliya": null,
+    "Bandarawela": {
+     "min": 150,
+     "max": 160,
+     "mid": 155
+    },
+    "Veyangoda": {
+     "min": 120,
+     "max": 150,
+     "mid": 135
     }
    },
    "series": [
@@ -30154,7 +30149,8 @@
     145,
     135,
     135,
-    140
+    140,
+    135
    ]
   },
   {
@@ -30170,14 +30166,14 @@
      "mid": 130
     },
     "Kandy": {
-     "min": 120,
-     "max": 130,
-     "mid": 125
+     "min": 110,
+     "max": 120,
+     "mid": 115
     },
     "Dambulla": {
      "min": 100,
-     "max": 120,
-     "mid": 110
+     "max": 130,
+     "mid": 115
     },
     "Meegoda": {
      "min": 100,
@@ -30185,18 +30181,18 @@
      "mid": 110
     },
     "Norochchole": null,
-    "Thambuththegama": {
-     "min": 100,
-     "max": 120,
-     "mid": 110
+    "Thambuththegama": null,
+    "Keppetipola": {
+     "min": 130,
+     "max": 140,
+     "mid": 135
     },
-    "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": null,
     "Veyangoda": {
-     "min": 110,
+     "min": 120,
      "max": 140,
-     "mid": 125
+     "mid": 130
     }
    },
    "series": [
@@ -31408,6 +31404,7 @@
     130,
     140,
     145,
+    130,
     130
    ]
   },
@@ -31424,14 +31421,14 @@
      "mid": 325
     },
     "Kandy": {
-     "min": 300,
-     "max": 310,
-     "mid": 305
+     "min": 310,
+     "max": 320,
+     "mid": 315
     },
     "Dambulla": {
-     "min": 280,
-     "max": 300,
-     "mid": 290
+     "min": 270,
+     "max": 290,
+     "mid": 280
     },
     "Meegoda": {
      "min": 320,
@@ -31443,8 +31440,8 @@
     "Keppetipola": null,
     "Nuwaraeliya": {
      "min": 285,
-     "max": 295,
-     "mid": 290
+     "max": 300,
+     "mid": 292
     },
     "Bandarawela": null,
     "Veyangoda": {
@@ -32661,6 +32658,7 @@
     330,
     325,
     330,
+    325,
     325,
     325
    ]
@@ -33900,6 +33898,7 @@
     185,
     null,
     165,
+    185,
     185
    ]
   },
@@ -33911,9 +33910,9 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 400,
+     "min": 380,
      "max": 420,
-     "mid": 410
+     "mid": 400
     },
     "Kandy": null,
     "Dambulla": null,
@@ -35134,7 +35133,8 @@
     410,
     null,
     390,
-    410
+    410,
+    400
    ]
   },
   {
@@ -35146,8 +35146,8 @@
    "markets": {
     "Peliyagoda": {
      "min": 120,
-     "max": 150,
-     "mid": 135
+     "max": 160,
+     "mid": 140
     },
     "Kandy": {
      "min": 120,
@@ -36372,7 +36372,8 @@
     150,
     null,
     130,
-    135
+    135,
+    140
    ]
   },
   {
@@ -36383,14 +36384,14 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 130,
-     "max": 170,
-     "mid": 150
+     "min": 170,
+     "max": 200,
+     "mid": 185
     },
     "Kandy": {
-     "min": 140,
-     "max": 150,
-     "mid": 145
+     "min": 150,
+     "max": 160,
+     "mid": 155
     },
     "Dambulla": null,
     "Meegoda": null,
@@ -37610,7 +37611,8 @@
     160,
     null,
     135,
-    150
+    150,
+    185
    ]
   },
   {
@@ -38844,6 +38846,7 @@
     335,
     null,
     365,
+    375,
     375
    ]
   },
@@ -38855,9 +38858,9 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 170,
-     "max": 200,
-     "mid": 185
+     "min": 135,
+     "max": 170,
+     "mid": 152
     },
     "Kandy": null,
     "Dambulla": null,
@@ -40078,7 +40081,8 @@
     168,
     null,
     200,
-    185
+    185,
+    152
    ]
   },
   {
@@ -40089,19 +40093,19 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 230,
-     "max": 280,
-     "mid": 255
+     "min": 220,
+     "max": 250,
+     "mid": 235
     },
     "Kandy": {
-     "min": 230,
-     "max": 250,
-     "mid": 240
+     "min": 250,
+     "max": 270,
+     "mid": 260
     },
     "Dambulla": {
-     "min": 200,
-     "max": 250,
-     "mid": 225
+     "min": 240,
+     "max": 280,
+     "mid": 260
     },
     "Meegoda": {
      "min": 250,
@@ -40110,14 +40114,10 @@
     },
     "Norochchole": {
      "min": 140,
-     "max": 180,
-     "mid": 160
-    },
-    "Thambuththegama": {
-     "min": 150,
      "max": 200,
-     "mid": 175
+     "mid": 170
     },
+    "Thambuththegama": null,
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
@@ -40126,9 +40126,9 @@
      "mid": 255
     },
     "Veyangoda": {
-     "min": 250,
-     "max": 280,
-     "mid": 265
+     "min": 280,
+     "max": 300,
+     "mid": 290
     }
    },
    "series": [
@@ -41340,7 +41340,8 @@
     225,
     235,
     235,
-    255
+    255,
+    235
    ]
   },
   {
@@ -41356,41 +41357,41 @@
      "mid": 200
     },
     "Kandy": {
-     "min": 150,
-     "max": 280,
-     "mid": 215
-    },
-    "Dambulla": {
-     "min": 180,
-     "max": 220,
-     "mid": 200
-    },
-    "Meegoda": {
-     "min": 260,
-     "max": 300,
-     "mid": 280
-    },
-    "Norochchole": {
      "min": 200,
      "max": 250,
      "mid": 225
     },
-    "Thambuththegama": {
+    "Dambulla": {
+     "min": 150,
+     "max": 180,
+     "mid": 165
+    },
+    "Meegoda": {
+     "min": 230,
+     "max": 280,
+     "mid": 255
+    },
+    "Norochchole": {
+     "min": 160,
+     "max": 200,
+     "mid": 180
+    },
+    "Thambuththegama": null,
+    "Keppetipola": {
      "min": 220,
      "max": 250,
      "mid": 235
     },
-    "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 200,
+     "min": 220,
      "max": 250,
-     "mid": 225
+     "mid": 235
     },
     "Veyangoda": {
-     "min": 230,
-     "max": 270,
-     "mid": 250
+     "min": 260,
+     "max": 300,
+     "mid": 280
     }
    },
    "series": [
@@ -42602,6 +42603,7 @@
     200,
     225,
     240,
+    200,
     200
    ]
   },
@@ -42613,9 +42615,9 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 29,
-     "max": 37,
-     "mid": 33
+     "min": 33,
+     "max": 39,
+     "mid": 36
     },
     "Kandy": null,
     "Dambulla": null,
@@ -43836,7 +43838,8 @@
     32,
     null,
     31,
-    33
+    33,
+    36
    ]
   },
   {
@@ -43847,9 +43850,9 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 45,
-     "max": 50,
-     "mid": 48
+     "min": 50,
+     "max": 70,
+     "mid": 60
     },
     "Kandy": null,
     "Dambulla": null,
@@ -45070,7 +45073,8 @@
     45,
     null,
     50,
-    48
+    48,
+    60
    ]
   },
   {
@@ -46304,6 +46308,7 @@
     255,
     null,
     275,
+    285,
     285
    ]
   },
@@ -47538,6 +47543,7 @@
     210,
     null,
     220,
+    230,
     230
    ]
   },
@@ -47548,7 +47554,11 @@
    "unit": "Rs./kg",
    "primaryMarket": "Peliyagoda",
    "markets": {
-    "Peliyagoda": null,
+    "Peliyagoda": {
+     "min": 80,
+     "max": 80,
+     "mid": 80
+    },
     "Kandy": null,
     "Dambulla": null,
     "Meegoda": null,
@@ -48768,7 +48778,8 @@
     80,
     null,
     null,
-    null
+    null,
+    80
    ]
   },
   {
@@ -48779,9 +48790,9 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 200,
-     "max": 235,
-     "mid": 218
+     "min": 320,
+     "max": 400,
+     "mid": 360
     },
     "Kandy": null,
     "Dambulla": null,
@@ -50002,7 +50013,8 @@
     245,
     null,
     195,
-    218
+    218,
+    360
    ]
   },
   {
@@ -50013,9 +50025,9 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 90,
+     "min": 96,
      "max": 120,
-     "mid": 105
+     "mid": 108
     },
     "Kandy": null,
     "Dambulla": null,
@@ -51236,7 +51248,8 @@
     115,
     null,
     100,
-    105
+    105,
+    108
    ]
   },
   {
@@ -51248,8 +51261,8 @@
    "markets": {
     "Peliyagoda": {
      "min": 60,
-     "max": 70,
-     "mid": 65
+     "max": 85,
+     "mid": 72
     },
     "Kandy": null,
     "Dambulla": null,
@@ -52470,1245 +52483,12 @@
     60,
     null,
     75,
-    65
+    65,
+    72
    ]
   },
   {
    "id": 40,
-   "name": "Potato (Welimada)",
-   "category": "Potatoes & Onions",
-   "unit": "Rs./kg",
-   "primaryMarket": "Bandarawela",
-   "markets": {
-    "Peliyagoda": null,
-    "Kandy": null,
-    "Dambulla": null,
-    "Meegoda": null,
-    "Norochchole": null,
-    "Thambuththegama": null,
-    "Keppetipola": null,
-    "Nuwaraeliya": null,
-    "Bandarawela": {
-     "min": 280,
-     "max": 290,
-     "mid": 285
-    },
-    "Veyangoda": null
-   },
-   "series": [
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    285
-   ]
-  },
-  {
-   "id": 41,
    "name": "Beetroot (N.Eliya)",
    "category": "Up Country Vegetables",
    "unit": "Rs./kg",
@@ -53716,9 +52496,9 @@
    "markets": {
     "Peliyagoda": null,
     "Kandy": {
-     "min": 300,
-     "max": 320,
-     "mid": 310
+     "min": 250,
+     "max": 270,
+     "mid": 260
     },
     "Dambulla": {
      "min": 350,
@@ -53728,16 +52508,20 @@
     "Meegoda": null,
     "Norochchole": null,
     "Thambuththegama": null,
-    "Keppetipola": null,
+    "Keppetipola": {
+     "min": 260,
+     "max": 300,
+     "mid": 280
+    },
     "Nuwaraeliya": {
      "min": 280,
      "max": 300,
      "mid": 290
     },
     "Bandarawela": {
-     "min": 280,
-     "max": 320,
-     "mid": 300
+     "min": 260,
+     "max": 300,
+     "mid": 280
     },
     "Veyangoda": null
    },
@@ -54950,42 +53734,39 @@
     null,
     null,
     310,
-    310
+    310,
+    260
    ]
   },
   {
-   "id": 42,
+   "id": 41,
    "name": "Potato (Imported)",
    "category": "Potatoes & Onions",
    "unit": "Rs./kg",
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 160,
-     "max": 200,
-     "mid": 180
+     "min": 140,
+     "max": 180,
+     "mid": 160
     },
     "Kandy": {
-     "min": 155,
-     "max": 160,
-     "mid": 158
-    },
-    "Dambulla": {
-     "min": 130,
-     "max": 175,
+     "min": 150,
+     "max": 155,
      "mid": 152
     },
+    "Dambulla": {
+     "min": 140,
+     "max": 170,
+     "mid": 155
+    },
     "Meegoda": {
-     "min": 155,
-     "max": 200,
-     "mid": 178
+     "min": 150,
+     "max": 195,
+     "mid": 172
     },
     "Norochchole": null,
-    "Thambuththegama": {
-     "min": 140,
-     "max": 140,
-     "mid": 140
-    },
+    "Thambuththegama": null,
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
@@ -54994,9 +53775,9 @@
      "mid": 185
     },
     "Veyangoda": {
-     "min": 155,
+     "min": 150,
      "max": 200,
-     "mid": 178
+     "mid": 175
     }
    },
    "series": [
@@ -56208,43 +54989,44 @@
     null,
     null,
     170,
-    180
+    180,
+    160
    ]
   },
   {
-   "id": 43,
+   "id": 42,
    "name": "Big Onion (Imported)",
    "category": "Potatoes & Onions",
    "unit": "Rs./kg",
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 200,
-     "max": 230,
-     "mid": 215
+     "min": 180,
+     "max": 190,
+     "mid": 185
     },
     "Kandy": {
-     "min": 160,
-     "max": 225,
-     "mid": 192
+     "min": 210,
+     "max": 220,
+     "mid": 215
     },
     "Dambulla": {
-     "min": 140,
+     "min": 150,
      "max": 210,
-     "mid": 175
+     "mid": 180
     },
     "Meegoda": {
-     "min": 220,
-     "max": 235,
-     "mid": 228
+     "min": 188,
+     "max": 195,
+     "mid": 192
     },
     "Norochchole": null,
-    "Thambuththegama": {
-     "min": 150,
-     "max": 205,
-     "mid": 178
+    "Thambuththegama": null,
+    "Keppetipola": {
+     "min": 220,
+     "max": 230,
+     "mid": 225
     },
-    "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
      "min": 160,
@@ -56252,9 +55034,9 @@
      "mid": 190
     },
     "Veyangoda": {
-     "min": 220,
-     "max": 230,
-     "mid": 225
+     "min": 180,
+     "max": 200,
+     "mid": 190
     }
    },
    "series": [
@@ -57466,7 +56248,1251 @@
     null,
     null,
     225,
-    215
+    215,
+    185
+   ]
+  },
+  {
+   "id": 43,
+   "name": "Potato (Welimada)",
+   "category": "Potatoes & Onions",
+   "unit": "Rs./kg",
+   "primaryMarket": "Meegoda",
+   "markets": {
+    "Peliyagoda": null,
+    "Kandy": null,
+    "Dambulla": null,
+    "Meegoda": {
+     "min": 295,
+     "max": 300,
+     "mid": 298
+    },
+    "Norochchole": null,
+    "Thambuththegama": null,
+    "Keppetipola": {
+     "min": 280,
+     "max": 300,
+     "mid": 290
+    },
+    "Nuwaraeliya": null,
+    "Bandarawela": {
+     "min": 280,
+     "max": 300,
+     "mid": 290
+    },
+    "Veyangoda": null
+   },
+   "series": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    298
    ]
   }
  ]
