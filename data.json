@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-06T13:12:29",
+ "generated": "2026-08-07T12:13:50",
  "source": "Central Bank of Sri Lanka - Daily Price Report",
  "dates": [
   "2023-01-03",
@@ -726,7 +726,9 @@
   "2026-07-31",
   "2026-08-03",
   "2026-08-04",
-  "2026-08-05"
+  "2026-08-05",
+  "2026-08-06",
+  "2026-08-07"
  ],
  "dateLabels": [
   "3 Jan",
@@ -1453,7 +1455,9 @@
   "31 Jul",
   "3 Aug",
   "4 Aug",
-  "5 Aug"
+  "5 Aug",
+  "6 Aug",
+  "7 Aug"
  ],
  "commodities": [
   {
@@ -2186,11 +2190,13 @@
     335.0,
     395.0,
     390.0,
-    395.0
+    395.0,
+    355.0,
+    380.0
    ],
    "markets": {
-    "Pettah": 450.0,
-    "Dambulla": 395.0,
+    "Pettah": 350.0,
+    "Dambulla": 380.0,
     "Narahenpita": 560.0
    },
    "wholesaleSeries": [
@@ -2918,11 +2924,13 @@
     305.0,
     365.0,
     360.0,
-    365.0
+    365.0,
+    325.0,
+    350.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 400.0,
-    "Dambulla": 365.0
+    "Pettah": 300.0,
+    "Dambulla": 350.0
    }
   },
   {
@@ -3655,11 +3663,13 @@
     285.0,
     340.0,
     330.0,
-    280.0
+    280.0,
+    280.0,
+    185.0
    ],
    "markets": {
-    "Pettah": 300.0,
-    "Dambulla": 280.0,
+    "Pettah": 250.0,
+    "Dambulla": 185.0,
     "Narahenpita": 400.0
    },
    "wholesaleSeries": [
@@ -4387,11 +4397,13 @@
     255.0,
     310.0,
     300.0,
-    250.0
+    250.0,
+    250.0,
+    155.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 250.0,
-    "Dambulla": 250.0
+    "Pettah": 200.0,
+    "Dambulla": 155.0
    }
   },
   {
@@ -5124,12 +5136,14 @@
     165.0,
     175.0,
     165.0,
-    135.0
+    135.0,
+    120.0,
+    120.0
    ],
    "markets": {
-    "Pettah": 230.0,
-    "Dambulla": 135.0,
-    "Narahenpita": 280.0
+    "Pettah": 200.0,
+    "Dambulla": 120.0,
+    "Narahenpita": 320.0
    },
    "wholesaleSeries": [
     78.0,
@@ -5856,11 +5870,13 @@
     135.0,
     145.0,
     135.0,
-    105.0
+    105.0,
+    90.0,
+    90.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 180.0,
-    "Dambulla": 105.0
+    "Pettah": 150.0,
+    "Dambulla": 90.0
    }
   },
   {
@@ -6593,12 +6609,14 @@
     245.0,
     235.0,
     220.0,
-    220.0
+    220.0,
+    220.0,
+    195.0
    ],
    "markets": {
     "Pettah": 300.0,
-    "Dambulla": 220.0,
-    "Narahenpita": 480.0
+    "Dambulla": 195.0,
+    "Narahenpita": 400.0
    },
    "wholesaleSeries": [
     68.0,
@@ -7325,11 +7343,13 @@
     215.0,
     205.0,
     190.0,
-    190.0
+    190.0,
+    190.0,
+    165.0
    ],
    "wholesaleMarkets": {
     "Pettah": 250.0,
-    "Dambulla": 190.0
+    "Dambulla": 165.0
    }
   },
   {
@@ -8062,11 +8082,13 @@
     285.0,
     320.0,
     265.0,
-    280.0
+    280.0,
+    230.0,
+    290.0
    ],
    "markets": {
     "Pettah": 300.0,
-    "Dambulla": 280.0,
+    "Dambulla": 290.0,
     "Narahenpita": 560.0
    },
    "wholesaleSeries": [
@@ -8794,11 +8816,13 @@
     255.0,
     290.0,
     235.0,
-    250.0
+    250.0,
+    200.0,
+    260.0
    ],
    "wholesaleMarkets": {
     "Pettah": 250.0,
-    "Dambulla": 250.0
+    "Dambulla": 260.0
    }
   },
   {
@@ -9531,11 +9555,13 @@
     175.0,
     188.0,
     130.0,
-    160.0
+    160.0,
+    150.0,
+    155.0
    ],
    "markets": {
     "Pettah": 200.0,
-    "Dambulla": 160.0,
+    "Dambulla": 155.0,
     "Narahenpita": 240.0
    },
    "wholesaleSeries": [
@@ -10263,11 +10289,13 @@
     145.0,
     158.0,
     100.0,
-    130.0
+    130.0,
+    120.0,
+    125.0
    ],
    "wholesaleMarkets": {
     "Pettah": 150.0,
-    "Dambulla": 130.0
+    "Dambulla": 125.0
    }
   },
   {
@@ -11000,11 +11028,13 @@
     220.0,
     180.0,
     170.0,
-    140.0
+    140.0,
+    140.0,
+    170.0
    ],
    "markets": {
     "Pettah": 250.0,
-    "Dambulla": 140.0,
+    "Dambulla": 170.0,
     "Narahenpita": 360.0
    },
    "wholesaleSeries": [
@@ -11732,11 +11762,13 @@
     190.0,
     150.0,
     140.0,
-    110.0
+    110.0,
+    110.0,
+    140.0
    ],
    "wholesaleMarkets": {
     "Pettah": 200.0,
-    "Dambulla": 110.0
+    "Dambulla": 140.0
    }
   },
   {
@@ -12469,11 +12501,13 @@
     1080.0,
     780.0,
     780.0,
-    780.0
+    780.0,
+    680.0,
+    680.0
    ],
    "markets": {
     "Pettah": 1000.0,
-    "Dambulla": 780.0,
+    "Dambulla": 680.0,
     "Narahenpita": 1200.0
    },
    "wholesaleSeries": [
@@ -13201,11 +13235,13 @@
     1050.0,
     750.0,
     750.0,
-    750.0
+    750.0,
+    650.0,
+    650.0
    ],
    "wholesaleMarkets": {
     "Pettah": 900.0,
-    "Dambulla": 750.0
+    "Dambulla": 650.0
    }
   },
   {
@@ -13938,11 +13974,13 @@
     335.0,
     290.0,
     265.0,
-    265.0
+    265.0,
+    255.0,
+    275.0
    ],
    "markets": {
     "Pettah": 350.0,
-    "Dambulla": 265.0,
+    "Dambulla": 275.0,
     "Narahenpita": 600.0
    },
    "wholesaleSeries": [
@@ -14670,11 +14708,13 @@
     305.0,
     260.0,
     235.0,
-    235.0
+    235.0,
+    225.0,
+    245.0
    ],
    "wholesaleMarkets": {
     "Pettah": 250.0,
-    "Dambulla": 235.0
+    "Dambulla": 245.0
    }
   },
   {
@@ -15407,11 +15447,13 @@
     270.0,
     225.0,
     195.0,
-    185.0
+    185.0,
+    195.0,
+    195.0
    ],
    "markets": {
-    "Pettah": 357.0,
-    "Dambulla": 185.0,
+    "Pettah": 353.0,
+    "Dambulla": 195.0,
     "Narahenpita": null
    },
    "wholesaleSeries": [
@@ -16139,18 +16181,20 @@
     250.0,
     205.0,
     175.0,
-    165.0
+    165.0,
+    175.0,
+    175.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 274.0,
-    "Dambulla": 165.0
+    "Pettah": 262.0,
+    "Dambulla": 175.0
    }
   },
   {
    "name": "Red Onion (lmp)",
    "category": "Other",
    "unit": "Rs./kg",
-   "primaryMarket": "Dambulla",
+   "primaryMarket": "Pettah",
    "series": [
     495.0,
     655.0,
@@ -16876,11 +16920,13 @@
     375.0,
     225.0,
     275.0,
-    275.0
+    275.0,
+    275.0,
+    350.0
    ],
    "markets": {
     "Pettah": 350.0,
-    "Dambulla": 275.0,
+    "Dambulla": null,
     "Narahenpita": 650.0
    },
    "wholesaleSeries": [
@@ -17608,11 +17654,13 @@
     282.0,
     205.0,
     255.0,
-    255.0
+    255.0,
+    255.0,
+    268.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 290.0,
-    "Dambulla": 255.0
+    "Pettah": 268.0,
+    "Dambulla": null
    }
   },
   {
@@ -18345,6 +18393,8 @@
     null,
     null,
     null,
+    null,
+    null,
     null
    ],
    "markets": {
@@ -18950,6 +19000,8 @@
     null,
     null,
     135.0,
+    null,
+    null,
     null,
     null,
     null,
@@ -19814,11 +19866,13 @@
     225.0,
     173.0,
     190.0,
-    208.0
+    208.0,
+    195.0,
+    200.0
    ],
    "markets": {
-    "Pettah": 200.0,
-    "Dambulla": 208.0,
+    "Pettah": 208.0,
+    "Dambulla": 200.0,
     "Narahenpita": 300.0
    },
    "wholesaleSeries": [
@@ -20546,11 +20600,13 @@
     205.0,
     153.0,
     170.0,
-    188.0
+    188.0,
+    175.0,
+    180.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 174.0,
-    "Dambulla": 188.0
+    "Pettah": 191.0,
+    "Dambulla": 180.0
    }
   },
   {
@@ -21283,11 +21339,13 @@
     290.0,
     295.0,
     290.0,
-    275.0
+    275.0,
+    293.0,
+    280.0
    ],
    "markets": {
     "Pettah": 405.0,
-    "Dambulla": 275.0,
+    "Dambulla": 280.0,
     "Narahenpita": 520.0
    },
    "wholesaleSeries": [
@@ -22015,11 +22073,13 @@
     270.0,
     275.0,
     270.0,
-    255.0
+    255.0,
+    273.0,
+    260.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 338.0,
-    "Dambulla": 255.0
+    "Pettah": 340.0,
+    "Dambulla": 260.0
    }
   },
   {
@@ -22752,11 +22812,13 @@
     165.0,
     175.0,
     170.0,
-    165.0
+    165.0,
+    185.0,
+    145.0
    ],
    "markets": {
-    "Pettah": 207.0,
-    "Dambulla": 165.0,
+    "Pettah": 218.0,
+    "Dambulla": 145.0,
     "Narahenpita": 240.0
    },
    "wholesaleSeries": [
@@ -23484,11 +23546,13 @@
     145.0,
     155.0,
     153.0,
-    145.0
+    145.0,
+    155.0,
+    125.0
    ],
    "wholesaleMarkets": {
     "Pettah": 170.0,
-    "Dambulla": 145.0
+    "Dambulla": 125.0
    }
   },
   {
@@ -24221,10 +24285,12 @@
     1105.0,
     1075.0,
     1105.0,
+    1105.0,
+    1105.0,
     1105.0
    ],
    "markets": {
-    "Pettah": 1173.0,
+    "Pettah": 1167.0,
     "Dambulla": 1105.0,
     "Narahenpita": 1240.0
    },
@@ -24953,10 +25019,12 @@
     1075.0,
     1045.0,
     1075.0,
+    1075.0,
+    1075.0,
     1075.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 1068.0,
+    "Pettah": 1064.0,
     "Dambulla": 1075.0
    }
   },
@@ -25690,11 +25758,13 @@
     120.0,
     120.0,
     110.0,
-    110.0
+    110.0,
+    110.0,
+    120.0
    ],
    "markets": {
     "Pettah": 167.0,
-    "Dambulla": 110.0,
+    "Dambulla": 120.0,
     "Narahenpita": 180.0
    },
    "wholesaleSeries": [
@@ -26422,11 +26492,13 @@
     115.0,
     115.0,
     105.0,
-    105.0
+    105.0,
+    105.0,
+    115.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 130.0,
-    "Dambulla": 105.0
+    "Pettah": 129.0,
+    "Dambulla": 115.0
    }
   },
   {
@@ -27159,14 +27231,18 @@
     887.0,
     887.0,
     887.0,
+    884.0,
+    884.0,
     884.0
    ],
    "markets": {
-    "Pettah": 816.0,
+    "Pettah": 812.0,
     "Dambulla": 884.0,
     "Narahenpita": 852.0
    },
    "wholesaleSeries": [
+    null,
+    null,
     null,
     null,
     null,
@@ -28625,14 +28701,18 @@
     245.0,
     247.0,
     247.0,
-    252.0
+    252.0,
+    248.0,
+    247.0
    ],
    "markets": {
-    "Pettah": 229.0,
-    "Dambulla": 252.0,
+    "Pettah": 228.0,
+    "Dambulla": 247.0,
     "Narahenpita": 260.0
    },
    "wholesaleSeries": [
+    null,
+    null,
     null,
     null,
     null,
@@ -30091,6 +30171,8 @@
     225.0,
     225.0,
     225.0,
+    225.0,
+    225.0,
     225.0
    ],
    "markets": {
@@ -30099,6 +30181,8 @@
     "Narahenpita": 230.0
    },
    "wholesaleSeries": [
+    null,
+    null,
     null,
     null,
     null,
@@ -31557,6 +31641,8 @@
     42.0,
     44.0,
     44.0,
+    43.0,
+    43.0,
     43.0
    ],
    "markets": {
@@ -31565,6 +31651,8 @@
     "Narahenpita": 46.0
    },
    "wholesaleSeries": [
+    null,
+    null,
     null,
     null,
     null,
@@ -33023,6 +33111,8 @@
     null,
     null,
     null,
+    null,
+    null,
     null
    ],
    "markets": {
@@ -33178,6 +33268,8 @@
     1700.0,
     1700.0,
     1700.0,
+    null,
+    null,
     null,
     null,
     null,
@@ -34490,10 +34582,12 @@
     1563.0,
     1617.0,
     1617.0,
-    1600.0
+    1600.0,
+    1617.0,
+    1700.0
    ],
    "markets": {
-    "Pettah": 1600.0,
+    "Pettah": 1700.0,
     "Narahenpita": 1600.0
    },
    "wholesaleSeries": [
@@ -35221,10 +35315,12 @@
     1330.0,
     1325.0,
     1325.0,
-    1325.0
+    1325.0,
+    1417.0,
+    1388.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 1325.0
+    "Pettah": 1388.0
    }
   },
   {
@@ -35957,11 +36053,13 @@
     165.0,
     160.0,
     140.0,
-    140.0
+    140.0,
+    140.0,
+    135.0
    ],
    "markets": {
-    "Pettah": 230.0,
-    "Dambulla": 140.0,
+    "Pettah": 200.0,
+    "Dambulla": 135.0,
     "Narahenpita": 290.0
    },
    "wholesaleSeries": [
@@ -36689,11 +36787,13 @@
     135.0,
     130.0,
     110.0,
-    110.0
+    110.0,
+    110.0,
+    105.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 180.0,
-    "Dambulla": 110.0
+    "Pettah": 150.0,
+    "Dambulla": 105.0
    }
   },
   {
@@ -37426,11 +37526,13 @@
     150.0,
     145.0,
     145.0,
-    130.0
+    130.0,
+    135.0,
+    175.0
    ],
    "markets": {
     "Pettah": 170.0,
-    "Dambulla": 130.0,
+    "Dambulla": 175.0,
     "Narahenpita": 280.0
    },
    "wholesaleSeries": [
@@ -38158,11 +38260,13 @@
     120.0,
     115.0,
     115.0,
-    100.0
+    100.0,
+    105.0,
+    145.0
    ],
    "wholesaleMarkets": {
     "Pettah": 120.0,
-    "Dambulla": 100.0
+    "Dambulla": 145.0
    }
   },
   {
@@ -38895,11 +38999,13 @@
     360.0,
     390.0,
     355.0,
-    350.0
+    350.0,
+    335.0,
+    375.0
    ],
    "markets": {
     "Pettah": 375.0,
-    "Dambulla": 350.0,
+    "Dambulla": 375.0,
     "Narahenpita": 460.0
    },
    "wholesaleSeries": [
@@ -39627,11 +39733,13 @@
     330.0,
     360.0,
     325.0,
-    320.0
+    320.0,
+    355.0,
+    345.0
    ],
    "wholesaleMarkets": {
     "Pettah": null,
-    "Dambulla": 320.0
+    "Dambulla": 345.0
    }
   },
   {
@@ -40364,12 +40472,16 @@
     195.0,
     195.0,
     195.0,
+    195.0,
+    195.0,
     195.0
    ],
    "markets": {
     "Narahenpita": 195.0
    },
    "wholesaleSeries": [
+    null,
+    null,
     null,
     null,
     null,
@@ -41828,12 +41940,16 @@
     180.0,
     180.0,
     180.0,
+    180.0,
+    180.0,
     180.0
    ],
    "markets": {
     "Narahenpita": 180.0
    },
    "wholesaleSeries": [
+    null,
+    null,
     null,
     null,
     null,
@@ -43292,10 +43408,12 @@
     240.0,
     240.0,
     240.0,
+    240.0,
+    240.0,
     240.0
    ],
    "markets": {
-    "Pettah": 247.0,
+    "Pettah": 248.0,
     "Dambulla": 240.0,
     "Narahenpita": 240.0
    },
@@ -44024,11 +44142,13 @@
     238.0,
     238.0,
     235.0,
-    235.0
+    235.0,
+    235.0,
+    238.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 242.0,
-    "Dambulla": 235.0
+    "Pettah": 243.0,
+    "Dambulla": 238.0
    }
   },
   {
@@ -44737,6 +44857,8 @@
     235.0,
     235.0,
     223.0,
+    235.0,
+    235.0,
     235.0,
     235.0,
     235.0,
@@ -45493,11 +45615,13 @@
     189.0,
     192.0,
     190.0,
-    190.0
+    190.0,
+    198.0,
+    192.0
    ],
    "wholesaleMarkets": {
     "Pettah": 203.0,
-    "Dambulla": 190.0
+    "Dambulla": 192.0
    }
   },
   {
@@ -46230,10 +46354,12 @@
     200.0,
     200.0,
     200.0,
+    200.0,
+    200.0,
     200.0
    ],
    "markets": {
-    "Pettah": 207.0,
+    "Pettah": 205.0,
     "Dambulla": 200.0,
     "Narahenpita": 220.0
    },
@@ -46962,6 +47088,8 @@
     191.0,
     185.0,
     185.0,
+    185.0,
+    188.0,
     185.0
    ],
    "wholesaleMarkets": {
@@ -47675,6 +47803,8 @@
     225.0,
     225.0,
     197.0,
+    184.0,
+    184.0,
     184.0,
     184.0,
     184.0,
@@ -48431,6 +48561,8 @@
     176.0,
     176.0,
     174.0,
+    174.0,
+    174.0,
     174.0
    ],
    "wholesaleMarkets": {
@@ -49095,6 +49227,8 @@
     null,
     null,
     null,
+    240.0,
+    240.0,
     240.0,
     240.0,
     240.0,
@@ -49899,6 +50033,8 @@
     235.0,
     235.0,
     235.0,
+    235.0,
+    235.0,
     235.0
    ],
    "wholesaleMarkets": {
@@ -50636,6 +50772,8 @@
     null,
     null,
     null,
+    null,
+    null,
     null
    ],
    "markets": {
@@ -51176,6 +51314,8 @@
     205.0,
     205.0,
     205.0,
+    null,
+    null,
     null,
     null,
     null,
@@ -52104,6 +52244,8 @@
     null,
     null,
     null,
+    null,
+    null,
     null
    ],
    "markets": {
@@ -52835,6 +52977,8 @@
     null,
     null,
     null,
+    null,
+    null,
     null
    ],
    "wholesaleMarkets": {
@@ -52846,7 +52990,7 @@
    "name": "Kelawalla",
    "category": "Fish",
    "unit": "Rs./kg",
-   "primaryMarket": "Negombo",
+   "primaryMarket": "Marandagahamula",
    "series": [
     1790.0,
     1480.0,
@@ -53572,10 +53716,12 @@
     2100.0,
     2760.0,
     2380.0,
-    2380.0
+    2380.0,
+    2380.0,
+    3220.0
    ],
    "markets": {
-    "Negombo": 2380.0,
+    "Negombo": null,
     "Marandagahamula": 3220.0
    },
    "wholesaleSeries": [
@@ -54303,11 +54449,13 @@
     1300.0,
     null,
     1600.0,
-    1600.0
+    1600.0,
+    1500.0,
+    2000.0
    ],
    "wholesaleMarkets": {
     "Peliyagoda": 2000.0,
-    "Negombo": 1600.0
+    "Negombo": null
    }
   },
   {
@@ -55040,10 +55188,12 @@
     2840.0,
     3080.0,
     3080.0,
-    2840.0
+    2840.0,
+    3080.0,
+    2980.0
    ],
    "markets": {
-    "Negombo": 2840.0,
+    "Negombo": 2980.0,
     "Marandagahamula": 3080.0
    },
    "wholesaleSeries": [
@@ -55771,11 +55921,13 @@
     2100.0,
     2500.0,
     2500.0,
-    2100.0
+    2100.0,
+    null,
+    2200.0
    ],
    "wholesaleMarkets": {
-    "Peliyagoda": null,
-    "Negombo": 2100.0
+    "Peliyagoda": 2600.0,
+    "Negombo": 2200.0
    }
   },
   {
@@ -56506,6 +56658,8 @@
     1520.0,
     null,
     1320.0,
+    null,
+    null,
     null,
     null,
     null
@@ -57239,10 +57393,12 @@
     1100.0,
     1300.0,
     1500.0,
-    null
+    null,
+    1400.0,
+    1300.0
    ],
    "wholesaleMarkets": {
-    "Peliyagoda": null,
+    "Peliyagoda": 1300.0,
     "Negombo": null
    }
   },
@@ -57976,11 +58132,13 @@
     2700.0,
     null,
     1980.0,
-    2080.0
+    2080.0,
+    1880.0,
+    1680.0
    ],
    "markets": {
     "Negombo": null,
-    "Marandagahamula": 2080.0
+    "Marandagahamula": 1680.0
    },
    "wholesaleSeries": [
     1200.0,
@@ -58707,10 +58865,12 @@
     1450.0,
     1800.0,
     1800.0,
-    1700.0
+    1700.0,
+    1800.0,
+    1600.0
    ],
    "wholesaleMarkets": {
-    "Peliyagoda": 1700.0,
+    "Peliyagoda": 1600.0,
     "Negombo": null
    }
   },
@@ -59444,11 +59604,13 @@
     820.0,
     860.0,
     960.0,
-    860.0
+    860.0,
+    780.0,
+    980.0
    ],
    "markets": {
-    "Negombo": 860.0,
-    "Marandagahamula": 940.0
+    "Negombo": 980.0,
+    "Marandagahamula": 760.0
    },
    "wholesaleSeries": [
     420.0,
@@ -60175,11 +60337,13 @@
     600.0,
     720.0,
     850.0,
-    800.0
+    800.0,
+    650.0,
+    770.0
    ],
    "wholesaleMarkets": {
-    "Peliyagoda": 600.0,
-    "Negombo": 800.0
+    "Peliyagoda": 700.0,
+    "Negombo": 770.0
    }
   },
   {
@@ -60912,11 +61076,13 @@
     1400.0,
     1660.0,
     1660.0,
+    1480.0,
+    1140.0,
     1480.0
    ],
    "markets": {
     "Negombo": 1480.0,
-    "Marandagahamula": 1360.0
+    "Marandagahamula": null
    },
    "wholesaleSeries": [
     750.0,
@@ -61643,10 +61809,12 @@
     1120.0,
     1200.0,
     1300.0,
+    1200.0,
+    900.0,
     1200.0
    ],
    "wholesaleMarkets": {
-    "Peliyagoda": 1300.0,
+    "Peliyagoda": 900.0,
     "Negombo": 1200.0
    }
   },
@@ -62380,10 +62548,12 @@
     890.0,
     1060.0,
     1260.0,
-    1360.0
+    1360.0,
+    1290.0,
+    1380.0
    ],
    "markets": {
-    "Negombo": 1360.0,
+    "Negombo": 1380.0,
     "Marandagahamula": 1220.0
    },
    "wholesaleSeries": [
@@ -63111,11 +63281,13 @@
     750.0,
     880.0,
     1000.0,
-    1150.0
+    1150.0,
+    1050.0,
+    1100.0
    ],
    "wholesaleMarkets": {
-    "Peliyagoda": 1000.0,
-    "Negombo": 1150.0
+    "Peliyagoda": 1100.0,
+    "Negombo": 1100.0
    }
   },
   {
@@ -63848,10 +64020,12 @@
     2733.0,
     2700.0,
     2700.0,
-    2683.0
+    2683.0,
+    2750.0,
+    2750.0
    ],
    "markets": {
-    "Pettah": 2683.0,
+    "Pettah": 2750.0,
     "Narahenpita": null
    },
    "wholesaleSeries": [
@@ -64579,10 +64753,12 @@
     2188.0,
     2100.0,
     2100.0,
-    2100.0
+    2100.0,
+    2150.0,
+    2125.0
    ],
    "wholesaleMarkets": {
-    "Pettah": 2100.0
+    "Pettah": 2125.0
    }
   }
  ]
