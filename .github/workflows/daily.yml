@@ -1,8 +1,10 @@
 name: Update price data
 on:
   schedule:
-    # 5:00 PM Sri Lanka time = 11:30 UTC daily
-    - cron: "30 11 * * *"
+    # Runs 3x daily (Sri Lanka time = UTC + 5:30)
+    - cron: "20 8 * * *"    # 1:50 PM Sri Lanka time
+    - cron: "30 11 * * *"   # 5:00 PM Sri Lanka time
+    - cron: "20 14 * * *"   # 7:50 PM Sri Lanka time
   workflow_dispatch:
 permissions:
   contents: write
