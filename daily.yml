@@ -1,8 +1,10 @@
 name: Update price data
 on:
   schedule:
-    # 5:00 PM Sri Lanka time = 11:30 UTC daily
-    - cron: "30 11 * * *"
+    # Runs 3x daily (Sri Lanka time = UTC + 5:30)
+    - cron: "20 8 * * *"    # 1:50 PM Sri Lanka time
+    - cron: "30 11 * * *"   # 5:00 PM Sri Lanka time
+    - cron: "20 14 * * *"   # 7:50 PM Sri Lanka time
   workflow_dispatch:
 permissions:
   contents: write
@@ -52,6 +54,23 @@ jobs:
             echo "No HARTI changes today."
           else
             git commit -m "Auto-update HARTI wholesale data ($(date +%Y-%m-%d))"
+            git pull --rebase origin main
+            git push origin main
+          fi
+
+      # ── CBSL Daily Economic Indicators ─────────────────────
+      - name: Fetch latest DEI report
+        run: python dei_update.py
+
+      - name: Commit DEI data if changed
+        run: |
+          git config user.name  "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add dei_data.json dei_pdfs/ || true
+          if git diff --staged --quiet; then
+            echo "No DEI changes today."
+          else
+            git commit -m "Auto-update DEI economic data ($(date +%Y-%m-%d))"
             git pull --rebase origin main
             git push origin main
           fi

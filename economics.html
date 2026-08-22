@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ආර්ථික දර්ශක | USD/LKR Exchange Rate, ASPI, Money Market | TopGoviya.lk</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0e4f4a">
+<link rel="apple-touch-icon" href="icon-192x192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png">
+<meta name="description" content="CBSL Daily Economic Indicators — USD/LKR exchange rate today, ASPI stock market, AWCMR money market rates. Free daily update from Central Bank of Sri Lanka. TopGoviya.lk">
+<meta name="keywords" content="USD LKR exchange rate today, dollar rate sri lanka today, ASPI today, share market sri lanka, CBSL economic indicators, AWCMR rate, money market sri lanka, TopGoviya">
+<meta property="og:title" content="ආර්ථික දර්ශක | TopGoviya.lk">
+<meta property="og:description" content="USD/LKR Exchange Rate, ASPI Share Market, Money Market Rates — daily from Central Bank of Sri Lanka.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://topgoviya.lk/economics.html">
+<link rel="canonical" href="https://topgoviya.lk/economics.html">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZBN8Z32S4J"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZBN8Z32S4J');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4efe4;--paper-2:#efe8d8;--card:#fffdf7;--ink:#191d1a;--ink-soft:#3a403a;
+    --muted:#7a7264;--line:#e3d9c4;--line-strong:#cdbf9f;--petrol:#0e4f4a;--petrol-deep:#0a3a36;
+    --gold:#a9802a;--up:#b23a2e;--up-bg:#f7e6e2;--down:#2c7a52;--down-bg:#e3efe6;--flat:#8a8170;
+    --shadow:0 1px 0 rgba(0,0,0,.02), 0 12px 30px -18px rgba(20,40,38,.35);--r:14px;
+  }
+  *{box-sizing:border-box} html,body{margin:0;padding:0;overflow-x:hidden}
+  body{background:var(--paper);color:var(--ink);font-family:'Hanken Grotesk','Noto Sans Sinhala','Noto Sans Tamil',sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.45;
+    background-image:radial-gradient(circle at 12% -10%, rgba(14,79,74,.06), transparent 38%),
+                     radial-gradient(circle at 95% 0%, rgba(169,128,42,.07), transparent 30%);background-attachment:fixed;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  /* ── NAV (exact from index.html) ── */
+  .topnav{background:var(--petrol-deep);border-bottom:2px solid var(--gold);padding:0}
+  .topnav-inner{max-width:1160px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:0}
+  .topnav-brand{font-family:'Newsreader',serif;font-size:16px;font-weight:500;color:#fff;
+    padding:12px 18px 12px 0;border-right:1px solid rgba(255,255,255,.18);margin-right:4px;
+    white-space:nowrap;text-decoration:none;letter-spacing:-.01em}
+  .topnav-brand em{font-style:italic;color:#ffd98a}
+  .navlinks{display:flex;gap:2px;padding:8px 0}
+  .navlink{font:inherit;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    padding:7px 16px;border-radius:8px;text-decoration:none;transition:.18s;white-space:nowrap}
+  .navlink.retail{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+  .navlink.retail:hover{background:rgba(255,255,255,.18);color:#fff}
+  .navlink.wholesale{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+  .navlink.wholesale:hover{background:rgba(255,255,255,.18);color:#fff}
+  .navlink.weather{background:rgba(100,200,220,.18);color:#a8dfe8;border:1px solid rgba(100,200,220,.25)}
+  .navlink.weather:hover{background:rgba(100,200,220,.30);color:#fff}
+  .navlink.breakeven{background:rgba(169,128,42,.25);color:#ffd98a;border:1px solid rgba(169,128,42,.35)}
+  .navlink.breakeven:hover{background:rgba(169,128,42,.4);color:#fff}
+  .navlink.reports{background:rgba(255,255,255,.1);color:rgba(255,255,255,.75)}
+  .navlink.reports:hover{background:rgba(255,255,255,.18);color:#fff}
+  .navlink.economics{background:var(--gold);color:#fff}
+  .navlink.economics:hover{background:#c4921f}
+  .navlink-badge{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.08em;
+    background:rgba(255,255,255,.25);padding:2px 5px;border-radius:4px;margin-left:5px;vertical-align:middle}
+  @media(max-width:600px){
+    .topnav-inner{flex-wrap:wrap;padding:0}
+    .topnav-brand{font-size:16px;padding:10px 16px;border-right:none;margin-right:0;width:100%;
+      border-bottom:1px solid rgba(255,255,255,.12);letter-spacing:-.01em}
+    .navlinks{width:100%;padding:6px 8px;gap:5px;flex-wrap:wrap;justify-content:center}
+    .navlink{font-size:11px;padding:7px 10px;text-align:center;white-space:nowrap}
+    .navlink-badge{font-size:8px;padding:1px 4px;display:none}
+  }
+  @media(max-width:400px){
+    .topnav-brand{font-size:15px;padding:9px 14px}
+    .navlink{font-size:10.5px;padding:6px 9px}
+  }
+  /* nav-legend (exact from index.html) */
+  .nav-legend{background:#0a3a36;border-bottom:1px solid rgba(169,128,42,.3);padding:5px 22px;
+    display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
+  .nav-legend-inner{max-width:1160px;width:100%;display:flex;align-items:center;
+    justify-content:center;gap:16px;flex-wrap:wrap}
+  .nav-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.75);
+    font-weight:600;letter-spacing:.02em}
+  .nav-legend-item .nl-icon{font-size:13px}
+  .nav-legend-item .nl-label{color:#fff}
+  .nav-legend-item .nl-sub{color:#9fd4c8;font-size:10px;font-weight:500}
+  .nav-legend-sep{color:rgba(255,255,255,.25);font-size:14px}
+  .nav-legend-cta{font-size:10px;color:#ffd98a;font-weight:700;letter-spacing:.04em;
+    background:rgba(169,128,42,.2);padding:2px 8px;border-radius:6px;white-space:nowrap}
+  @media(max-width:560px){
+    .nav-legend{padding:5px 12px}
+    .nav-legend-item{font-size:10px}
+    .nav-legend-item .nl-sub{font-size:9px}
+    .nav-legend-cta{font-size:9px}
+  }
+  /* ── MASTHEAD (exact from index.html) ── */
+  .masthead{padding:30px 0 16px;border-bottom:2px solid var(--ink)}
+  .kicker{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap;
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .kicker .org{color:var(--petrol)}
+  .lang{display:flex;gap:2px;border:1px solid var(--line-strong);border-radius:999px;overflow:hidden}
+  .lang button{font:inherit;font-size:11px;letter-spacing:.12em;font-weight:700;text-transform:uppercase;
+    border:0;background:transparent;color:var(--muted);padding:5px 11px;cursor:pointer;transition:.2s}
+  .lang button.on{background:var(--petrol);color:#fff}
+  .title{font-family:'Newsreader',serif;font-weight:500;font-size:clamp(34px,6vw,62px);
+    line-height:.98;letter-spacing:-.015em;margin:14px 0 6px}
+  .title em{font-style:italic;color:var(--petrol)}
+  .dateline{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:13.5px;color:var(--ink-soft)}
+  .dateline .stamp{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--ink)}
+  .dateline .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);display:inline-block}
+  /* ── SECTION HEADERS ── */
+  .section-h{display:flex;align-items:center;gap:12px;margin:34px 0 14px}
+  .section-h h2{font-family:'Newsreader',serif;font-weight:500;font-size:24px;margin:0;letter-spacing:-.01em}
+  .section-h .rule{flex:1;height:1px;background:var(--line-strong)}
+  .section-h .hint{font-size:12px;color:var(--muted)}
+  /* ── HERO STAT CARDS ── */
+  .hero-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:18px}
+  .hcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 18px;
+    box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .hcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r) var(--r) 0 0}
+  .hcard.usd::before{background:linear-gradient(90deg,var(--petrol),var(--gold))}
+  .hcard.aspi::before{background:linear-gradient(90deg,var(--petrol),#2c7a52)}
+  .hcard.sp20::before{background:linear-gradient(90deg,#2c7a52,#4caf80)}
+  .hcard.awcmr::before{background:linear-gradient(90deg,var(--gold),#c4921f)}
+  .hcard.awrr::before{background:linear-gradient(90deg,#c4921f,var(--gold))}
+  .hcard.liq::before{background:linear-gradient(90deg,#5b8a9e,var(--petrol))}
+  .hcard .hlabel{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .hcard .hval{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:30px;letter-spacing:-.02em;line-height:1}
+  .hcard .hunit{font-size:12px;font-weight:500;color:var(--muted);margin-left:4px}
+  .hcard .hsub{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.4}
+  .hcard .hchg{display:inline-flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace;
+    font-size:12px;font-weight:700;padding:3px 9px;border-radius:7px;margin-top:9px}
+  .hchg.up{color:var(--up);background:var(--up-bg)}
+  .hchg.down{color:var(--down);background:var(--down-bg)}
+  .hchg.flat{color:var(--flat);background:#efeada}
+  .hval-na{font-family:'JetBrains Mono',monospace;font-size:22px;color:var(--muted)}
+  /* ── CHARTS ── */
+  .chart-wrap{position:relative;border:1px solid var(--line);border-radius:12px;
+    background:linear-gradient(180deg,#fffefb,#fbf7ee);padding:8px 6px 4px;margin-bottom:6px}
+  .chart-wrap .clabel{position:absolute;top:10px;left:14px;font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);font-weight:700}
+  .ranges{display:flex;gap:4px;margin:0 0 10px;justify-content:flex-end}
+  .ranges button{font:inherit;font-size:11.5px;font-weight:700;letter-spacing:.04em;padding:5px 11px;border-radius:8px;
+    border:1px solid var(--line-strong);background:var(--card);color:var(--muted);cursor:pointer;transition:.15s}
+  .ranges button:hover{border-color:var(--petrol);color:var(--ink-soft)}
+  .ranges button.on{background:var(--petrol);color:#fff;border-color:var(--petrol)}
+  .tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--paper);font-family:'JetBrains Mono',monospace;
+    font-size:11px;font-weight:600;padding:5px 8px;border-radius:7px;transform:translate(-50%,-130%);
+    white-space:nowrap;opacity:0;transition:opacity .12s;z-index:3}
+  .tip b{color:#ffd98a}
+  /* ── INFO BOX ── */
+  .info-box{background:linear-gradient(135deg,rgba(14,79,74,.06),rgba(169,128,42,.04));
+    border:1px solid rgba(14,79,74,.15);border-radius:11px;padding:14px 18px;
+    margin:12px 0 24px;font-size:13px;color:var(--ink-soft);line-height:1.6}
+  .info-box strong{color:var(--petrol)}
+  /* ── NO DATA / LOADING ── */
+  .loading-state{display:flex;align-items:center;justify-content:center;gap:10px;
+    padding:60px 0;color:var(--muted);font-size:14px}
+  .spinner{width:20px;height:20px;border:2px solid var(--line-strong);border-top-color:var(--petrol);
+    border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .no-data-state{text-align:center;padding:60px 20px;color:var(--muted);
+    font-family:'Newsreader',serif;font-size:20px;font-style:italic}
+  .no-data-state small{display:block;font-family:'Hanken Grotesk',sans-serif;
+    font-style:normal;font-size:13px;margin-top:10px;color:var(--muted)}
+  /* ── FOOTER (exact from index.html) ── */
+  footer{margin:46px 0 60px;padding-top:22px;border-top:1px solid var(--line-strong);
+    font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer .legend{display:flex;gap:14px;align-items:center}
+  footer .dotL{display:inline-flex;align-items:center;gap:6px}
+  footer .sq{width:11px;height:11px;border-radius:3px;display:inline-block}
+  .credit{flex-basis:100%;text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--line);
+    font-size:13.5px;color:var(--ink-soft);letter-spacing:.01em}
+  .credit a{color:var(--petrol);font-weight:700;text-decoration:none;
+    border-bottom:1.5px solid var(--line-strong);transition:.18s}
+  .credit a:hover{border-color:var(--petrol)}
+  @media(max-width:560px){.hero-grid{grid-template-columns:repeat(2,1fr)}.hcard .hval{font-size:24px}}
+</style>
+</head>
+<body>
+
+<!-- ── NAV (exact structure from index.html) ── -->
+<nav class="topnav" role="navigation">
+  <div class="topnav-inner">
+    <a href="index.html" class="topnav-brand" style="display:inline-flex;align-items:center;gap:8px">
+      <span style="background:#f4efe4;border-radius:50%;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 0 1px rgba(255,255,255,.25)">
+        <img src="logo-mark.png" alt="TopGoviya" style="width:20px;height:20px;object-fit:contain">
+      </span>
+      Top<em>Goviya</em>.lk
+    </a>
+    <div class="navlinks">
+      <a href="index.html"     class="navlink retail"    id="navRetail">📊 <span class="navlink-badge">CBSL</span></a>
+      <a href="wholesale.html" class="navlink wholesale" id="navWholesale">📦 <span class="navlink-badge">HARTI</span></a>
+      <a href="weather.html"   class="navlink weather"   id="navWeather">🌤️ <span class="navlink-badge" id="navWeatherBadge">Weather</span></a>
+      <a href="breakeven.html" class="navlink breakeven" id="navBreakeven">🧮 <span id="navBreakevenLbl">Break-even</span></a>
+      <a href="reports.html"   class="navlink reports"   id="navReports">📄 Reports</a>
+      <a href="economics.html" class="navlink economics" id="navEcon">📈 <span id="navEconLbl">Economy</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- nav-legend bar -->
+<div class="nav-legend" id="navLegend">
+  <div class="nav-legend-inner">
+    <div class="nav-legend-item">
+      <span class="nl-icon">📈</span>
+      <span class="nl-label" id="nl1">USD/LKR</span>
+      <span class="nl-sub">Exchange Rate</span>
+    </div>
+    <span class="nav-legend-sep">·</span>
+    <div class="nav-legend-item">
+      <span class="nl-icon">📊</span>
+      <span class="nl-label" id="nl2">ASPI</span>
+      <span class="nl-sub">Share Market</span>
+    </div>
+    <span class="nav-legend-sep">·</span>
+    <div class="nav-legend-item">
+      <span class="nl-icon">💰</span>
+      <span class="nl-label" id="nl3">AWCMR</span>
+      <span class="nl-sub">Money Market</span>
+    </div>
+    <span class="nav-legend-sep">·</span>
+    <span class="nav-legend-cta" id="nlCta">CBSL Daily Economic Indicators ↑</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="masthead">
+    <div class="kicker">
+      <span id="kickerTxt">Data from <span class="org">Central Bank of Sri Lanka</span> Daily Economic Indicators</span>
+      <div class="lang" role="group" aria-label="Language">
+        <button data-lang="si" class="on">සිංහල</button>
+        <button data-lang="ta">தமிழ்</button>
+        <button data-lang="en">EN</button>
+      </div>
+    </div>
+    <h1 class="title" id="mainTitle">ආර්ථික <em>දර්ශක</em></h1>
+    <div style="font-family:'Hanken Grotesk',sans-serif;font-size:14px;font-weight:700;letter-spacing:.3px;color:var(--gold);margin-top:-2px">by TopGoviya.lk</div>
+    <p id="heroTagline" style="font-family:'Hanken Grotesk',sans-serif;font-size:clamp(14px,2.2vw,16.5px);color:var(--ink-soft);line-height:1.55;margin:6px 0 0;max-width:620px"></p>
+    <div class="dateline">
+      <span id="lblLatest">නවතම දත්ත</span><span class="dot"></span>
+      <span class="stamp" id="stampDate">—</span><span class="dot"></span>
+      <span id="lblSub">විනිමය අනුපාත · කොටස් වෙළඳපොළ · මුදල් වෙළඳපොළ</span>
+    </div>
+    <div style="margin-top:8px;font-size:11.5px;color:var(--gold);font-style:italic">
+      <span id="disclaimer">⚠️ මෙහි දත්ත CBSL ප්‍රකාශිත DEI දත්ත ය. ඔබගේ ආයෝජන තීරණ ඔබගේ වගකීම වේ.</span>
+    </div>
+  </header>
+
+  <!-- Social row (exact from index.html) -->
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px;justify-content:flex-end">
+    <a href="https://www.facebook.com/TopGoviyaLK" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;background:#1877F2;color:#fff;font-weight:700;font-size:11.5px;padding:6px 11px;border-radius:8px;text-decoration:none">📘 Facebook</a>
+    <a href="https://www.youtube.com/@TopGoviyaLK" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;background:#FF0000;color:#fff;font-weight:700;font-size:11.5px;padding:6px 11px;border-radius:8px;text-decoration:none">▶️ YouTube</a>
+    <a href="https://www.tiktok.com/@topgoviyalk" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;background:#000;color:#fff;font-weight:700;font-size:11.5px;padding:6px 11px;border-radius:8px;text-decoration:none">🎵 TikTok</a>
+  </div>
+
+  <!-- LOADING STATE -->
+  <div id="loadingState" class="loading-state">
+    <div class="spinner"></div>
+    <span id="loadingTxt">දත්ත පූරණය වෙමින්...</span>
+  </div>
+
+  <!-- NO DATA STATE -->
+  <div id="noDataState" class="no-data-state" style="display:none">
+    <span id="noDataMsg">DEI දත්ත තවම නොමැත</span>
+    <small id="noDataSub">dei_data.json ගොනු GitHub Actions මගින් ස්වයංක්‍රීයව යාවත්කාලීන කෙරේ. කෙටි වේලාවකින් නැවත පරීක්ෂා කරන්න.</small>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="mainContent" style="display:none">
+
+    <!-- ── Exchange Rates ── -->
+    <div class="section-h">
+      <h2 id="secExchange">💱 විනිමය අනුපාත</h2>
+      <span class="rule"></span>
+      <span class="hint" id="hintExchange">TT · 9:30 AM</span>
+    </div>
+    <div class="hero-grid" id="exchangeCards"></div>
+    <div class="ranges" id="fxRanges">
+      <button data-r="1M">1M</button>
+      <button data-r="3M">3M</button>
+      <button data-r="6M">6M</button>
+      <button data-r="1Y">1Y</button>
+      <button data-r="All" class="on">All</button>
+    </div>
+    <div class="chart-wrap">
+      <span class="clabel" id="fxChartLbl">USD/LKR · Rs. per 1 USD</span>
+      <div class="tip" id="fxTip"></div>
+      <div id="fxChart"></div>
+    </div>
+    <div class="info-box" id="fxInfoBox">
+      <strong id="fxInfoTitle">විනිමය අනුපාතය ගැන</strong> —
+      <span id="fxInfoText">CBSL විසින් තෝරාගත් ලයිසන්ස් ලත් බැංකු 9:30 AM දී ලබා දෙන TT (Telegraphic Transfer) ගිනුමෙන් ගණනය කළ සාමාන්‍ය ගැනීම් හා විකිණීම් අනුපාත. USD/LKR Spot rate ද ඇතුළත්ව DEI PDF හරහා නිකුත් කෙරේ.</span>
+    </div>
+
+    <!-- ── Stock Market ── -->
+    <div class="section-h">
+      <h2 id="secStock">📊 කොටස් වෙළඳපොළ</h2>
+      <span class="rule"></span>
+      <span class="hint" id="hintStock">CSE · Colombo Stock Exchange</span>
+    </div>
+    <div class="hero-grid" id="stockCards"></div>
+    <div class="ranges" id="stockRanges">
+      <button data-r="1M">1M</button>
+      <button data-r="3M">3M</button>
+      <button data-r="6M">6M</button>
+      <button data-r="1Y">1Y</button>
+      <button data-r="All" class="on">All</button>
+    </div>
+    <div class="chart-wrap">
+      <span class="clabel" id="stockChartLbl">ASPI · All Share Price Index</span>
+      <div class="tip" id="stockTip"></div>
+      <div id="stockChart"></div>
+    </div>
+
+    <!-- ── Money Market ── -->
+    <div class="section-h">
+      <h2 id="secMoney">💰 මුදල් වෙළඳපොළ</h2>
+      <span class="rule"></span>
+      <span class="hint" id="hintMoney">CBSL · Primary Market</span>
+    </div>
+    <div class="hero-grid" id="moneyCards"></div>
+    <div class="ranges" id="moneyRanges">
+      <button data-r="1M">1M</button>
+      <button data-r="3M">3M</button>
+      <button data-r="6M">6M</button>
+      <button data-r="1Y">1Y</button>
+      <button data-r="All" class="on">All</button>
+    </div>
+    <div class="chart-wrap">
+      <span class="clabel" id="moneyChartLbl">AWCMR & AWRR · % per annum</span>
+      <div class="tip" id="moneyTip"></div>
+      <div id="moneyChart"></div>
+    </div>
+
+  </div><!-- /mainContent -->
+
+  <footer>
+    <div id="footNote">CBSL Daily Economic Indicators දත්ත ස්වයංක්‍රීයව ලබාගනී. නිල ප්‍රකාශනයක් නොවේ.</div>
+    <div style="flex-basis:100%;border-top:1px solid var(--line);margin-top:16px;padding-top:16px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:16px">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--petrol);margin-bottom:6px">Data Source</div>
+          <p style="font-size:12px;color:var(--muted);line-height:1.6">Central Bank of Sri Lanka Daily Economic Indicators (DEI) PDF | Auto-updated daily | Free | No login required</p>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--petrol);margin-bottom:6px">Pages</div>
+          <p style="font-size:12px;color:var(--muted);line-height:1.8">
+            <a href="index.html" style="color:var(--petrol);font-weight:600;text-decoration:none">📊 සිල්ලර මිල | Retail Prices (CBSL)</a><br>
+            <a href="wholesale.html" style="color:var(--petrol);font-weight:600;text-decoration:none">📦 තොග මිල | Wholesale Prices (HARTI)</a><br>
+            <a href="weather.html" style="color:var(--petrol);font-weight:600;text-decoration:none">🌤️ කාලගුණය | Market Weather</a><br>
+            <a href="breakeven.html" style="color:var(--petrol);font-weight:600;text-decoration:none">🧮 ලාභ අලාභ | Break-even Calculator</a><br>
+            <a href="reports.html" style="color:var(--petrol);font-weight:600;text-decoration:none">📄 වාර්තා | Price Reports</a><br>
+            <a href="bulletin.html" style="color:var(--petrol);font-weight:600;text-decoration:none">📈 කෘෂිකාර්මික දත්ත වාර්තාව | Agriculture Bulletin</a><br>
+            <a href="loan-calculator.html" style="color:var(--petrol);font-weight:600;text-decoration:none">🏦 ණය ගණකය | Loan Calculator</a><br>
+            <a href="about.html" style="color:var(--petrol);font-weight:600;text-decoration:none">ℹ️ අප පිළිබඳව | About</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="credit">
+      <span id="creditPre">නිර්මාණය හා සංවර්ධනය:</span>
+      <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a>
+      &nbsp;·&nbsp;
+      <a href="https://www.facebook.com/TopGoviyaLK" target="_blank" rel="noopener" title="TopGoviya.lk on Facebook" style="display:inline-flex;align-items:center;gap:5px;background:#1877F2;color:#fff;font-weight:700;font-size:12px;padding:4px 10px;border-radius:6px;text-decoration:none;vertical-align:middle">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Facebook
+      </a>
+      <a href="https://www.youtube.com/@TopGoviyaLK" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;background:#FF0000;color:#fff;font-weight:700;font-size:12px;padding:4px 10px;border-radius:6px;text-decoration:none;vertical-align:middle;margin-left:6px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a2.994 2.994 0 0 0-2.112-2.118C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.386.523A2.994 2.994 0 0 0 .502 6.186 31.26 31.26 0 0 0 0 12a31.26 31.26 0 0 0 .502 5.814 2.994 2.994 0 0 0 2.112 2.118c1.881.523 9.386.523 9.386.523s7.505 0 9.386-.523a2.994 2.994 0 0 0 2.112-2.118A31.26 31.26 0 0 0 24 12a31.26 31.26 0 0 0-.502-5.814zM9.75 15.5v-7l6 3.5-6 3.5z"/></svg>
+        YouTube
+      </a>
+      <a href="https://www.tiktok.com/@topgoviyalk" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;background:#000;color:#fff;font-weight:700;font-size:12px;padding:4px 10px;border-radius:6px;text-decoration:none;vertical-align:middle;margin-left:6px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg>
+        TikTok
+      </a>
+    </div>
+  </footer>
+</div><!-- /wrap -->
+
+<!-- PWA Service Worker -->
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('/lanka-price-monitor/service-worker.js')
+      .then(r=>console.log('[TopGoviya] SW registered ✅'))
+      .catch(e=>console.log('[TopGoviya] SW error:',e));
+  });
+}
+</script>
+
+<script>
+/* ── i18n (mirrors index.html structure exactly) ── */
+let lang="si";
+const I18N={
+  si:{
+    kicker:'දත්ත <span class="org">ශ්‍රී ලංකා මහ බැංකුවේ</span> Daily Economic Indicators වලින්',
+    title:'ආර්ථික <em>දර්ශක</em>',
+    tagline:'CBSL Daily Economic Indicators — USD/LKR විනිමය අනුපාතය, කොළඹ කොටස් වෙළඳපොළ (ASPI, S&P SL20), සහ මුදල් වෙළඳපොළ අනුපාත (AWCMR, AWRR) — දිනපතා ස්වයංක්‍රීය යාවත්කාලීන.',
+    latestData:'නවතම දත්ත',
+    sub:'විනිමය අනුපාත · කොටස් වෙළඳපොළ · මුදල් වෙළඳපොළ',
+    loading:'දත්ත පූරණය වෙමින්...',
+    secExchange:'💱 විනිමය අනුපාත',hintExchange:'TT · 9:30 AM',
+    secStock:'📊 කොටස් වෙළඳපොළ',hintStock:'CSE · Colombo Stock Exchange',
+    secMoney:'💰 මුදල් වෙළඳපොළ',hintMoney:'CBSL · Primary Market',
+    usdLabel:'USD / LKR',usdSub:'සාමාන්‍ය TT ගැනීමේ අනුපාතය · Rs. per 1 USD',
+    aspiLabel:'ASPI',aspiSub:'All Share Price Index · CSE',
+    sp20Label:'S&P SL20',sp20Sub:'S&P Sri Lanka 20 Index',
+    awcmrLabel:'AWCMR',awcmrSub:'Avg. Weighted Call Money Rate · % p.a.',
+    awrrLabel:'AWRR',awrrSub:'Avg. Weighted Repo Rate · % p.a.',
+    liqLabel:'රාත්‍රී ද්‍රවශීලතා',liqSub:'Overnight Liquidity · Rs. bn',
+    vsLast:'ඊයේට සාපේක්ෂව',
+    noData:'DEI දත්ත තවම නොමැත',
+    noDataSub:'dei_data.json ගොනු GitHub Actions මගින් ස්වයංක්‍රීයව daily යාවත්කාලීන කෙරේ.',
+    footNote:'CBSL Daily Economic Indicators දත්ත ස්වයංක්‍රීයව ලබාගනී. නිල ප්‍රකාශනයක් නොවේ.',
+    creditPre:'නිර්මාණය හා සංවර්ධනය:',
+    disclaimer:'⚠️ මෙහි දත්ත CBSL ප්‍රකාශිත DEI දත්ත ය. ඔබගේ ආයෝජන තීරණ ඔබගේ වගකීම වේ.',
+    fxInfoTitle:'විනිමය අනුපාතය ගැන',
+    fxInfoText:'CBSL විසින් තෝරාගත් ලයිසන්ස් ලත් බැංකු 9:30 AM දී ලබා දෙන TT (Telegraphic Transfer) ගිනුමෙන් ගණනය කළ සාමාන්‍ය ගැනීම් හා විකිණීම් අනුපාත. USD/LKR Spot rate ද ඇතුළත්ව DEI PDF හරහා නිකුත් කෙරේ.',
+    fxChartLbl:'USD/LKR · Rs. per 1 USD',
+    stockChartLbl:'ASPI · All Share Price Index',
+    moneyChartLbl:'AWCMR & AWRR · % per annum',
+    navBreakeven:'🧮 ලාභ අලාභ',navReports:'📄 වාර්තා',navEcon:'📈 ආර්ථිකය',
+  },
+  en:{
+    kicker:'Data from <span class="org">Central Bank of Sri Lanka</span> Daily Economic Indicators',
+    title:'Economic <em>Indicators</em>',
+    tagline:'CBSL Daily Economic Indicators — USD/LKR exchange rate, Colombo Stock Exchange (ASPI, S&P SL20), and money market rates (AWCMR, AWRR) — updated daily automatically.',
+    latestData:'Latest Data',
+    sub:'Exchange Rates · Stock Market · Money Market',
+    loading:'Loading data...',
+    secExchange:'💱 Exchange Rates',hintExchange:'TT · 9:30 AM',
+    secStock:'📊 Stock Market',hintStock:'CSE · Colombo Stock Exchange',
+    secMoney:'💰 Money Market',hintMoney:'CBSL · Primary Market',
+    usdLabel:'USD / LKR',usdSub:'Avg. TT buying rate · Rs. per 1 USD',
+    aspiLabel:'ASPI',aspiSub:'All Share Price Index · CSE',
+    sp20Label:'S&P SL20',sp20Sub:'S&P Sri Lanka 20 Index',
+    awcmrLabel:'AWCMR',awcmrSub:'Avg. Weighted Call Money Rate · % p.a.',
+    awrrLabel:'AWRR',awrrSub:'Avg. Weighted Repo Rate · % p.a.',
+    liqLabel:'Overnight Liquidity',liqSub:'Rs. billion',
+    vsLast:'vs previous',
+    noData:'No DEI data yet',
+    noDataSub:'dei_data.json is auto-updated daily by GitHub Actions.',
+    footNote:'Auto-extracted from CBSL Daily Economic Indicators. Not an official publication.',
+    creditPre:'Design &amp; development by',
+    disclaimer:'⚠️ Data sourced from CBSL DEI publications. Investment decisions are your own responsibility.',
+    fxInfoTitle:'About Exchange Rates',
+    fxInfoText:'Average buying and selling TT (Telegraphic Transfer) exchange rates calculated from quotes provided at 9:30 AM by selected Licensed Banks. Published daily by the Central Bank of Sri Lanka in the DEI PDF.',
+    fxChartLbl:'USD/LKR · Rs. per 1 USD',
+    stockChartLbl:'ASPI · All Share Price Index',
+    moneyChartLbl:'AWCMR & AWRR · % per annum',
+    navBreakeven:'🧮 Break-even',navReports:'📄 Reports',navEcon:'📈 Economy',
+  },
+  ta:{
+    kicker:'தரவு <span class="org">இலங்கை மத்திய வங்கி</span> Daily Economic Indicators இலிருந்து',
+    title:'பொருளாதார <em>குறியீடுகள்</em>',
+    tagline:'CBSL Daily Economic Indicators — USD/LKR மாற்று விகிதம், கொழும்பு பங்கு சந்தை (ASPI, S&P SL20), மற்றும் பண சந்தை விகிதங்கள் (AWCMR, AWRR) — தினசரி தானாக புதுப்பிக்கப்படும்.',
+    latestData:'சமீபத்திய தரவு',
+    sub:'மாற்று விகிதங்கள் · பங்கு சந்தை · பண சந்தை',
+    loading:'தரவு ஏற்றுகிறது...',
+    secExchange:'💱 மாற்று விகிதங்கள்',hintExchange:'TT · 9:30 AM',
+    secStock:'📊 பங்கு சந்தை',hintStock:'CSE · Colombo Stock Exchange',
+    secMoney:'💰 பண சந்தை',hintMoney:'CBSL · Primary Market',
+    usdLabel:'USD / LKR',usdSub:'சராசரி TT வாங்கும் விகிதம் · Rs. ஒரு USD க்கு',
+    aspiLabel:'ASPI',aspiSub:'All Share Price Index · CSE',
+    sp20Label:'S&P SL20',sp20Sub:'S&P இலங்கை 20 குறியீடு',
+    awcmrLabel:'AWCMR',awcmrSub:'சராசரி கால் மணி விகிதம் · % p.a.',
+    awrrLabel:'AWRR',awrrSub:'சராசரி ரெப்போ விகிதம் · % p.a.',
+    liqLabel:'இரவோடு பணப்புழக்கம்',liqSub:'Overnight Liquidity · Rs. bn',
+    vsLast:'முந்தைய நாளுடன்',
+    noData:'DEI தரவு இல்லை',
+    noDataSub:'dei_data.json தினசரி தானாக புதுப்பிக்கப்படும்.',
+    footNote:'CBSL Daily Economic Indicators இலிருந்து தானாக பெறப்பட்டது. அதிகாரப்பூர்வ வெளியீடு அல்ல.',
+    creditPre:'வடிவமைப்பு &amp; உருவாக்கம்:',
+    disclaimer:'⚠️ CBSL DEI வெளியீடுகளிலிருந்து தரவு. முதலீட்டு முடிவுகளுக்கு நீங்களே பொறுப்பாவீர்கள்.',
+    fxInfoTitle:'மாற்று விகிதங்கள் பற்றி',
+    fxInfoText:'CBSL தேர்ந்தெடுக்கப்பட்ட வங்கிகள் காலை 9:30 மணிக்கு வழங்கும் TT மேற்கோள்களின் அடிப்படையில் கணக்கிடப்படும் சராசரி வாங்கும் மற்றும் விற்கும் விகிதங்கள். DEI PDF மூலம் தினசரி வெளியிடப்படுகிறது.',
+    fxChartLbl:'USD/LKR · Rs. ஒரு USD க்கு',
+    stockChartLbl:'ASPI · All Share Price Index',
+    moneyChartLbl:'AWCMR & AWRR · % per annum',
+    navBreakeven:'🧮 இலாப நஷ்டம்',navReports:'📄 அறிக்கைகள்',navEcon:'📈 பொருளாதாரம்',
+  }
+};
+
+function t(k){return (I18N[lang]&&I18N[lang][k])||I18N.en[k]||k;}
+
+function applyLang(){
+  document.documentElement.lang=lang==="ta"?"ta":lang==="si"?"si":"en";
+  document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.lang===lang));
+  const set=(id,html)=>{const e=document.getElementById(id);if(e)e.innerHTML=html;};
+  set("kickerTxt",t("kicker"));
+  set("mainTitle",t("title"));
+  set("heroTagline",t("tagline"));
+  set("lblLatest",t("latestData"));
+  set("lblSub",t("sub"));
+  set("loadingTxt",t("loading"));
+  set("disclaimer",t("disclaimer"));
+  set("footNote",t("footNote"));
+  set("creditPre",t("creditPre"));
+  set("noDataMsg",t("noData"));
+  set("noDataSub",t("noDataSub"));
+  set("secExchange",t("secExchange"));set("hintExchange",t("hintExchange"));
+  set("secStock",t("secStock"));set("hintStock",t("hintStock"));
+  set("secMoney",t("secMoney"));set("hintMoney",t("hintMoney"));
+  set("fxChartLbl",t("fxChartLbl"));
+  set("stockChartLbl",t("stockChartLbl"));
+  set("moneyChartLbl",t("moneyChartLbl"));
+  set("fxInfoTitle",t("fxInfoTitle"));set("fxInfoText",t("fxInfoText"));
+  const bk=document.getElementById("navBreakevenLbl");if(bk)bk.textContent=t("navBreakeven").replace(/^[^ ]+ /,"");
+  const rp=document.getElementById("navReports");if(rp)rp.textContent="📄 "+t("navReports").replace(/^[^ ]+ /,"");
+  const ec=document.getElementById("navEconLbl");if(ec)ec.textContent=t("navEcon").replace(/^[^ ]+ /,"");
+  if(DB&&DB.records&&DB.records.length) renderAll();
+}
+
+document.querySelector(".lang").addEventListener("click",e=>{
+  const b=e.target.closest("button[data-lang]");
+  if(b){lang=b.dataset.lang;applyLang();}
+});
+
+/* ── Data & Rendering ── */
+let DB=null;
+
+function fmt(v,dec){
+  if(v==null||isNaN(v))return "—";
+  dec=dec!=null?dec:2;
+  return (+v).toLocaleString("en-US",{minimumFractionDigits:dec,maximumFractionDigits:dec});
+}
+
+function calcChange(curr,prev){
+  if(curr==null||prev==null||prev===0)return null;
+  const diff=curr-prev,pct=diff/prev*100;
+  const dir=Math.abs(pct)<0.05?"flat":diff>0?"up":"down";
+  return {dir,diff,pct};
+}
+
+function chgHtml(chg){
+  if(!chg)return "";
+  const arrow=chg.dir==="up"?"▲":chg.dir==="down"?"▼":"■";
+  return `<div class="hchg ${chg.dir}">${arrow} ${chg.diff>0?"+":""}${chg.pct.toFixed(2)}%<br><span style="font-size:10px;font-weight:500;opacity:.8">${t("vsLast")}</span></div>`;
+}
+
+function hCard(cls,label,value,unit,sub,chg){
+  const valDisplay=value==null
+    ?`<span class="hval-na">—</span>`
+    :`<span class="hval">${value}</span>${unit?`<span class="hunit">${unit}</span>`:""}`;
+  return `<div class="hcard ${cls}">
+    <div class="hlabel">${label}</div>
+    <div>${valDisplay}</div>
+    ${chgHtml(chg)}
+    <div class="hsub">${sub}</div>
+  </div>`;
+}
+
+function getRange(field,range){
+  if(!DB||!DB.records)return [];
+  const recs=DB.records;
+  const last=new Date(recs[recs.length-1].date+"T00:00:00");
+  const days={"1M":31,"3M":92,"6M":183,"1Y":366,"All":1e9}[range]||1e9;
+  const cutoff=new Date(last.getTime()-days*864e5);
+  return recs.filter(r=>new Date(r.date+"T00:00:00")>=cutoff&&r[field]!=null)
+             .map(r=>({date:r.date,v:r[field]}));
+}
+
+/* SVG line chart — same logic as index.html wireChart */
+function svgLine(pts,stroke,label,tipId,dec){
+  dec=dec!=null?dec:2;
+  if(!pts||pts.length<2)
+    return `<div style="padding:40px;text-align:center;color:var(--muted);font-style:italic">දත්ත ප්‍රමාණවත් නැත</div>`;
+  const W=680,H=200,L=56,R=14,T=24,B=28;
+  const vals=pts.map(p=>p.v),minV=Math.min(...vals),maxV=Math.max(...vals);
+  const pad=(maxV-minV)*0.14||1,lo=minV-pad,hi=maxV+pad;
+  const n=pts.length;
+  const X=i=>L+i*(W-L-R)/(n-1||1);
+  const Y=v=>T+(H-T-B)*(1-(v-lo)/(hi-lo||1));
+  const line=pts.map((p,i)=>(i?"L":"M")+X(i).toFixed(1)+" "+Y(p.v).toFixed(1)).join(" ");
+  const area=line+" L"+X(n-1).toFixed(1)+" "+(H-B)+" L"+X(0).toFixed(1)+" "+(H-B)+" Z";
+  let grid="",ylab="";
+  for(let i=0;i<=4;i++){
+    const v=lo+(hi-lo)*i/4,y=Y(v);
+    grid+=`<line x1="${L}" y1="${y.toFixed(1)}" x2="${W-R}" y2="${y.toFixed(1)}" stroke="#e3d9c4" stroke-width="1"/>`;
+    ylab+=`<text x="${L-6}" y="${(y+3).toFixed(1)}" text-anchor="end" font-size="9.5" fill="#7a7264" font-family="JetBrains Mono">${(+v).toFixed(dec)}</text>`;
+  }
+  const step=Math.max(1,Math.ceil(n/6));
+  let xlab="";
+  pts.forEach((p,i)=>{
+    if(i%step===0||i===n-1)
+      xlab+=`<text x="${X(i).toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="9" fill="#7a7264" font-family="JetBrains Mono">${p.date.slice(5)}</text>`;
+  });
+  const baseR=n>60?0:2.8;
+  const dots=pts.map((p,i)=>`<circle class="pt" data-i="${i}" data-v="${p.v}" data-d="${p.date}" cx="${X(i).toFixed(1)}" cy="${Y(p.v).toFixed(1)}" r="${baseR}" fill="#fffdf7" stroke="${stroke}" stroke-width="1.8"/>`).join("");
+  const gid="g"+Math.random().toString(36).slice(2,7);
+  return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block">
+    <defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="${stroke}" stop-opacity=".15"/>
+      <stop offset="1" stop-color="${stroke}" stop-opacity="0"/>
+    </linearGradient></defs>
+    ${grid}${ylab}${xlab}
+    <path d="${area}" fill="url(#${gid})"/>
+    <path d="${line}" fill="none" stroke="${stroke}" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <line id="cross_${tipId}" x1="0" x2="0" y1="${T}" y2="${H-B}" stroke="#a9802a" stroke-width="1" stroke-dasharray="3 3" opacity="0"/>
+    ${dots}
+  </svg>`;
+}
+
+function svgDual(pts1,pts2,s1,s2,lbl1,lbl2,tipId){
+  const allPts=[...pts1,...pts2];
+  if(allPts.length<2)
+    return `<div style="padding:40px;text-align:center;color:var(--muted);font-style:italic">දත්ත ප්‍රමාණවත් නැත</div>`;
+  const W=680,H=200,L=56,R=14,T=24,B=28;
+  const vals=allPts.map(p=>p.v),minV=Math.min(...vals),maxV=Math.max(...vals);
+  const pad=(maxV-minV)*0.14||0.5,lo=minV-pad,hi=maxV+pad;
+  const allDates=[...new Set([...pts1.map(p=>p.date),...pts2.map(p=>p.date)])].sort();
+  const n=allDates.length;
+  const X=i=>L+i*(W-L-R)/(n-1||1);
+  const Y=v=>T+(H-T-B)*(1-(v-lo)/(hi-lo||1));
+  const m1=Object.fromEntries(pts1.map(p=>[p.date,p.v]));
+  const m2=Object.fromEntries(pts2.map(p=>[p.date,p.v]));
+  const mkPath=(m)=>{
+    const segs=allDates.map((d,i)=>m[d]!=null?[i,m[d]]:null).filter(Boolean);
+    if(segs.length<2)return "";
+    return segs.map((s,i)=>(i?"L":"M")+X(s[0]).toFixed(1)+" "+Y(s[1]).toFixed(1)).join(" ");
+  };
+  const l1=mkPath(m1),l2=mkPath(m2);
+  let grid="",ylab="";
+  for(let i=0;i<=4;i++){
+    const v=lo+(hi-lo)*i/4,y=Y(v);
+    grid+=`<line x1="${L}" y1="${y.toFixed(1)}" x2="${W-R}" y2="${y.toFixed(1)}" stroke="#e3d9c4" stroke-width="1"/>`;
+    ylab+=`<text x="${L-6}" y="${(y+3).toFixed(1)}" text-anchor="end" font-size="9.5" fill="#7a7264" font-family="JetBrains Mono">${(+v).toFixed(2)}</text>`;
+  }
+  const step=Math.max(1,Math.ceil(n/6));
+  let xlab="";
+  allDates.forEach((d,i)=>{
+    if(i%step===0||i===n-1)
+      xlab+=`<text x="${X(i).toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="9" fill="#7a7264" font-family="JetBrains Mono">${d.slice(5)}</text>`;
+  });
+  const legend=`
+    <text x="${L+6}" y="${T+13}" font-size="10" fill="${s1}" font-family="JetBrains Mono" font-weight="700">— ${lbl1}</text>
+    <text x="${L+90}" y="${T+13}" font-size="10" fill="${s2}" font-family="JetBrains Mono" font-weight="700">- - ${lbl2}</text>`;
+  return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block">
+    ${grid}${ylab}${xlab}${legend}
+    ${l1?`<path d="${l1}" fill="none" stroke="${s1}" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>`:""}
+    ${l2?`<path d="${l2}" fill="none" stroke="${s2}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="5 3"/>`:""}
+  </svg>`;
+}
+
+function wireTooltip(hostId,tipId){
+  const host=document.getElementById(hostId);
+  const tip=document.getElementById(tipId);
+  if(!host||!tip)return;
+  const svg=host.querySelector("svg");if(!svg)return;
+  const dots=[...svg.querySelectorAll(".pt")];if(!dots.length)return;
+  const cross=svg.querySelector(`#cross_${tipId}`);
+  function show(dot){
+    const cx=+dot.getAttribute("cx"),cy=+dot.getAttribute("cy");
+    const vb=svg.viewBox.baseVal,rect=svg.getBoundingClientRect();
+    const wrap=host.closest(".chart-wrap"),wr=wrap.getBoundingClientRect();
+    const px=cx/vb.width*rect.width,py=cy/vb.height*rect.height;
+    tip.style.left=(rect.left-wr.left+px)+"px";
+    tip.style.top=(rect.top-wr.top+py)+"px";
+    tip.innerHTML=dot.getAttribute("data-d")+" &nbsp;<b>"+dot.getAttribute("data-v")+"</b>";
+    tip.style.opacity=1;
+    if(cross){cross.setAttribute("x1",cx);cross.setAttribute("x2",cx);cross.setAttribute("opacity","1");}
+    dots.forEach(o=>o.setAttribute("r","2.8"));dot.setAttribute("r","5");
+  }
+  function hide(){
+    tip.style.opacity=0;
+    if(cross)cross.setAttribute("opacity","0");
+    dots.forEach(o=>o.setAttribute("r","2.8"));
+  }
+  svg.addEventListener("mousemove",e=>{
+    const rect=svg.getBoundingClientRect(),rel=(e.clientX-rect.left)/rect.width;
+    let best=null,bd=1e9;
+    dots.forEach(o=>{const cx=+o.getAttribute("cx")/svg.viewBox.baseVal.width;const dd=Math.abs(cx-rel);if(dd<bd){bd=dd;best=o;}});
+    if(best)show(best);
+  });
+  svg.addEventListener("mouseleave",hide);
+  dots.forEach(o=>o.addEventListener("mouseenter",()=>show(o)));
+}
+
+/* Range buttons */
+const activeRanges={fx:"All",stock:"All",money:"All"};
+
+function setRange(section,range){
+  activeRanges[section]=range;
+  document.querySelectorAll(`#${section}Ranges button`).forEach(b=>b.classList.toggle("on",b.dataset.r===range));
+  drawChart(section);
+}
+
+function wireRanges(section){
+  const cont=document.getElementById(section+"Ranges");
+  if(!cont)return;
+  cont.querySelectorAll("button").forEach(b=>{
+    b.addEventListener("click",()=>setRange(section,b.dataset.r));
+  });
+}
+
+function drawChart(section){
+  if(!DB)return;
+  const range=activeRanges[section];
+  if(section==="fx"){
+    const pts=getRange("usd_lkr",range);
+    document.getElementById("fxChart").innerHTML=svgLine(pts,"#0e4f4a","USD/LKR","fxTip",2);
+    requestAnimationFrame(()=>wireTooltip("fxChart","fxTip"));
+  } else if(section==="stock"){
+    const aspi=getRange("aspi",range);
+    const sp20=getRange("sp_sl20",range);
+    document.getElementById("stockChart").innerHTML=svgDual(aspi,sp20,"#0e4f4a","#2c7a52","ASPI","S&P SL20","stockTip");
+  } else if(section==="money"){
+    const awcmr=getRange("awcmr",range);
+    const awrr=getRange("awrr",range);
+    document.getElementById("moneyChart").innerHTML=svgDual(awcmr,awrr,"#a9802a","#c4921f","AWCMR","AWRR","moneyTip");
+  }
+}
+
+function renderAll(){
+  if(!DB||!DB.records||!DB.records.length){
+    document.getElementById("loadingState").style.display="none";
+    document.getElementById("noDataState").style.display="block";
+    return;
+  }
+  const recs=DB.records;
+  const last=recs[recs.length-1];
+  const prev=recs.length>1?recs[recs.length-2]:null;
+
+  /* Stamp date */
+  const dt=new Date(last.date+"T00:00:00");
+  document.getElementById("stampDate").textContent=dt.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
+
+  /* Exchange cards */
+  document.getElementById("exchangeCards").innerHTML=
+    hCard("usd",t("usdLabel"),last.usd_lkr!=null?fmt(last.usd_lkr,2):null,"LKR",t("usdSub"),calcChange(last.usd_lkr,prev?.usd_lkr));
+
+  /* Stock cards */
+  document.getElementById("stockCards").innerHTML=
+    hCard("aspi",t("aspiLabel"),last.aspi!=null?Math.round(last.aspi).toLocaleString("en-US"):null,"",t("aspiSub"),calcChange(last.aspi,prev?.aspi))+
+    hCard("sp20",t("sp20Label"),last.sp_sl20!=null?Math.round(last.sp_sl20).toLocaleString("en-US"):null,"",t("sp20Sub"),calcChange(last.sp_sl20,prev?.sp_sl20));
+
+  /* Money cards */
+  document.getElementById("moneyCards").innerHTML=
+    hCard("awcmr",t("awcmrLabel"),last.awcmr!=null?fmt(last.awcmr,2):null,"% p.a.",t("awcmrSub"),calcChange(last.awcmr,prev?.awcmr))+
+    hCard("awrr",t("awrrLabel"),last.awrr!=null?fmt(last.awrr,2):null,"% p.a.",t("awrrSub"),calcChange(last.awrr,prev?.awrr))+
+    hCard("liq",t("liqLabel"),last.overnight_liquidity_bn!=null?fmt(last.overnight_liquidity_bn,2):null,"bn",t("liqSub"),calcChange(last.overnight_liquidity_bn,prev?.overnight_liquidity_bn));
+
+  wireRanges("fx");wireRanges("stock");wireRanges("money");
+  drawChart("fx");drawChart("stock");drawChart("money");
+
+  document.getElementById("loadingState").style.display="none";
+  document.getElementById("mainContent").style.display="block";
+}
+
+/* ── Init ── */
+(async()=>{
+  try{
+    const r=await fetch("dei_data.json?v="+Date.now(),{cache:"no-store"});
+    if(r.ok) DB=await r.json();
+  }catch(e){console.warn("dei_data.json not found:",e);}
+  applyLang();
+  renderAll();
+})();
+</script>
+</body>
+</html>
