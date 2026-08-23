@@ -95,13 +95,13 @@ def parse_dei_pdf(path):
         result["awrr"]  = None
 
     # ── Stock Market ──
-    # ASPI: large number like 21,405.62 (5 digits with comma)
-    aspi_candidates = re.findall(r'(\d{2},\d{3}\.\d+)', text)
-    result["aspi"] = flt(aspi_candidates[0]) if aspi_candidates else None
+    # ASPI: number immediately before "PE Ratio" line
+    aspi = re.search(r'([\d,]+\.\d+)\s*\nPE Ratio', text)
+    result["aspi"] = flt(aspi.group(1)) if aspi else None
 
-    # S&P SL20: 4-digit number like 6,019.25
-    sp20_candidates = re.findall(r'(\d{1},\d{3}\.\d+)', text)
-    result["sp_sl20"] = flt(sp20_candidates[-1]) if sp20_candidates else None
+    # S&P SL20: number between PE Ratio line and "(Rs. mn)"
+    sp20 = re.search(r'PE Ratio[\s\d.]+\n([\d,]+\.\d+)\s*\n\(Rs\.', text)
+    result["sp_sl20"] = flt(sp20.group(1)) if sp20 else None
 
     # ── Currency & Reserve Money ──
     cic = re.search(r'Currency in Circulation\s+([\d,]+\.\d+)\s+([\d,]+\.\d+)', text)
