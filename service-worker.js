@@ -1,9 +1,9 @@
 /* ===== TopGoviya PWA Service Worker ===== */
-/* Version: 2.6 | topgoviya.lk | Built in Gampola 🇱🇰 */
-/* Updated: 17 July 2026 — v12: added reports.html (Price Report Generator) */
+/* Version: 2.7 | topgoviya.lk | Built in Gampola 🇱🇰 */
+/* Updated: 24 Aug 2026 — v13: added economics.html + dei_data.json network-first */
 
-const CACHE_NAME = 'topgoviya-v12';
-const DATA_CACHE = 'topgoviya-data-v12';
+const CACHE_NAME = 'topgoviya-v13';
+const DATA_CACHE = 'topgoviya-data-v13';
 
 /* ── Static files to cache for offline use ── */
 const STATIC_ASSETS = [
@@ -13,6 +13,7 @@ const STATIC_ASSETS = [
   '/weather.html',
   '/breakeven.html',
   '/reports.html',
+  '/economics.html',
   '/insights.html',
   '/blog.html',
   '/about.html',
@@ -33,7 +34,7 @@ const STATIC_ASSETS = [
 
 /* ── Install — cache all static assets ── */
 self.addEventListener('install', event => {
-  console.log('[TopGoviya SW v2.6] Installing...');
+  console.log('[TopGoviya SW v2.7] Installing...');
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       console.log('[TopGoviya SW] Caching all pages + assets');
@@ -47,7 +48,7 @@ self.addEventListener('install', event => {
 
 /* ── Activate — remove old caches ── */
 self.addEventListener('activate', event => {
-  console.log('[TopGoviya SW v2.6] Activating...');
+  console.log('[TopGoviya SW v2.7] Activating...');
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
@@ -69,7 +70,8 @@ self.addEventListener('fetch', event => {
   /* data.json & harti_data.json — always network first (fresh prices!) */
   if (url.pathname.includes('data.json') || url.href.includes('data.json') ||
       url.pathname.includes('harti_data.json') || url.href.includes('harti_data.json') ||
-      url.pathname.includes('bulletin_data.json') || url.href.includes('bulletin_data.json')) {
+      url.pathname.includes('bulletin_data.json') || url.href.includes('bulletin_data.json') ||
+      url.pathname.includes('dei_data.json') || url.href.includes('dei_data.json')) {
     event.respondWith(
       fetch(event.request)
         .then(response => {
@@ -155,4 +157,4 @@ self.addEventListener('notificationclick', event => {
   );
 });
 
-console.log('[TopGoviya SW v2.6] Service Worker loaded ✅ | topgoviya.lk');
+console.log('[TopGoviya SW v2.7] Service Worker loaded ✅ | topgoviya.lk');
