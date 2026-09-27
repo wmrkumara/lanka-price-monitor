@@ -639,7 +639,12 @@ def hub_page(items, dates, latest_idx):
     body = (f'<p class="crumb"><a href="../index.html">TopGoviya.lk</a> / මිල ගණන්</p>'
             f'<h1>අද එළවළු, පළතුරු හා ආහාර මිල</h1>'
             f'<p class="alt">Today\'s vegetable, fruit, rice and fish prices in Sri Lanka<br>இன்றைய காய்கறி, பழம், அரிசி, மீன் விலைகள்</p>'
-            f'<p class="asof" style="margin-top:14px">නවතම වාර්තාව / Latest report: {fdate(dates[latest_idx],"si")}</p>')
+            f'<p class="asof" style="margin-top:14px">නවතම වාර්තාව / Latest report: {fdate(dates[latest_idx],"si")}</p>'
+            f'<div class="story" style="margin:18px 0 0;font-size:14.5px"><p>සිල්ලර මිල, එක් එක් භාණ්ඩයේ ප්‍රධාන වෙළඳපොළ අනුව (📍 සලකුණින් පෙන්වා ඇත). '
+            f'පිටකොටුව, දඹුල්ල හා නාරාහේන්පිට මිල සැසඳීමට භාණ්ඩයක් තට්ටු කරන්න.</p>'
+            f'<p lang="en">Retail prices at each item\'s main market (shown with 📍), from the Central Bank of Sri Lanka daily price report. '
+            f'Tap an item to compare Pettah, Dambulla and Narahenpita.</p>'
+            f'<p lang="ta">ஒவ்வொரு பொருளின் முதன்மை சந்தையின் சில்லறை விலை (📍). சந்தைகளை ஒப்பிட பொருளைத் தட்டவும்.</p></div>')
     for cat in cats:
         rows = ""
         for c in sorted([x for x in items if x["category"] == cat], key=lambda x: x["name"]):
@@ -648,7 +653,8 @@ def hub_page(items, dates, latest_idx):
                 continue
             price = v[-1][1]
             rows += (f'<tr><td><a href="{slug(c["name"])}.html">{emoji(c["name"])} {e(n_si(c["name"]))}</a> '
-                     f'<span style="color:var(--muted)">/ {e(c["name"])}</span></td>'
+                     f'<span style="color:var(--muted)">/ {e(c["name"])}</span>'
+                     f'<br><span style="font-size:12.5px;color:var(--muted)">📍 {e(m_tr(c["primaryMarket"],"si"))} / {e(c["primaryMarket"])}</span></td>'
                      f'<td class="n">රු. {money(price)} <span style="color:var(--muted);font-weight:500;font-size:12px">{e(u_tr(c["unit"],"si"))}</span></td></tr>')
         body += f'<h2 class="cat">{e(c_tr(cat,"si"))} <span>{e(cat)}</span></h2><div class="scroll"><table><tbody>{rows}</tbody></table></div>'
     body += '<a class="cta" href="../index.html">සම්පූර්ණ ප්‍රස්ථාර හා ගණක බලන්න</a>'
