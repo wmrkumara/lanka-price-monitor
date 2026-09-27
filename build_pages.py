@@ -608,7 +608,8 @@ def commodity_page(c, dates, latest_idx, all_items):
   <div class="big">රු. {money(price)}<small>{e(u_tr(unit,'si'))}</small></div>
   <span class="chg {direction}">{arrow} {sign}{pct:.1f}%</span>
 </div>
-<p class="asof">{e(m_tr(mkt,'si'))} ({e(mkt)}) සිල්ලර මිල · {fdate(d,'si')}</p>
+<p class="asof"><b>🏷️ සිල්ලර මිල / Retail price</b> · 📍 {e(m_tr(mkt,'si'))} ({e(mkt)}) · {fdate(d,'si')}<br>
+<a href="../wholesale.html">තොග මිල (HARTI) බලන්න / See wholesale prices →</a></p>
 {stale}
 <div class="story">
   <p>{e(p_si)}</p>
@@ -639,7 +640,9 @@ def hub_page(items, dates, latest_idx):
     body = (f'<p class="crumb"><a href="../index.html">TopGoviya.lk</a> / මිල ගණන්</p>'
             f'<h1>අද එළවළු, පළතුරු හා ආහාර මිල</h1>'
             f'<p class="alt">Today\'s vegetable, fruit, rice and fish prices in Sri Lanka<br>இன்றைய காய்கறி, பழம், அரிசி, மீன் விலைகள்</p>'
-            f'<p class="asof" style="margin-top:14px">නවතම වාර්තාව / Latest report: {fdate(dates[latest_idx],"si")}</p>'
+            f'<p class="asof" style="margin-top:14px"><b>🏷️ සිල්ලර මිල / Retail prices / சில்லறை விலை</b><br>'
+            f'නවතම වාර්තාව / Latest report: {fdate(dates[latest_idx],"si")}<br>'
+            f'<a href="../wholesale.html">තොග මිල (HARTI) බලන්න / See wholesale prices →</a></p>'
             f'<div class="story" style="margin:18px 0 0;font-size:14.5px"><p>සිල්ලර මිල, එක් එක් භාණ්ඩයේ ප්‍රධාන වෙළඳපොළ අනුව (📍 සලකුණින් පෙන්වා ඇත). '
             f'පිටකොටුව, දඹුල්ල හා නාරාහේන්පිට මිල සැසඳීමට භාණ්ඩයක් තට්ටු කරන්න.</p>'
             f'<p lang="en">Retail prices at each item\'s main market (shown with 📍), from the Central Bank of Sri Lanka daily price report. '
