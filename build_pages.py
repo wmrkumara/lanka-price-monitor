@@ -387,20 +387,23 @@ def year_ago(series, dates, idx):
     return best
 
 # ---------------------------------------------------------------- SVG chart
-def chart_svg(points, dates):
-    """points = [(index, value)] for the last ~30 days."""
+def chart_svg(points, dates, wpoints=None):
+    """points = retail [(index, value)] for the last ~30 days; wpoints = wholesale (optional)."""
     if len(points) < 2:
         return ""
+    wpoints = wpoints if (wpoints and len(wpoints) >= 2) else []
     W, H, L, R, T, B = 640, 220, 50, 16, 18, 34
-    vals = [v for _, v in points]
+    vals = [v for _, v in points] + [v for _, v in wpoints]
     lo, hi = min(vals), max(vals)
     pad = (hi - lo) * 0.15 or max(hi * 0.05, 5)
     lo, hi = lo - pad, hi + pad
-    i0, i1 = points[0][0], points[-1][0]
+    i0 = min([points[0][0]] + [p[0] for p in wpoints[:1]])
+    i1 = max([points[-1][0]] + [p[0] for p in wpoints[-1:]])
     X = lambda i: L + (i - i0) * (W - L - R) / ((i1 - i0) or 1)
     Y = lambda v: T + (H - T - B) * (1 - (v - lo) / ((hi - lo) or 1))
-    line = " ".join(("M" if k == 0 else "L") + f"{X(i):.1f} {Y(v):.1f}" for k, (i, v) in enumerate(points))
-    area = line + f" L{X(i1):.1f} {H-B} L{X(i0):.1f} {H-B} Z"
+    def path(pts): return " ".join(("M" if k == 0 else "L") + f"{X(i):.1f} {Y(v):.1f}" for k, (i, v) in enumerate(pts))
+    line = path(points)
+    area = line + f" L{X(points[-1][0]):.1f} {H-B} L{X(points[0][0]):.1f} {H-B} Z"
     grid = ""
     for k in range(4):
         v = lo + (hi - lo) * k / 3
@@ -410,13 +413,28 @@ def chart_svg(points, dates):
     d0, d1 = dates[i0], dates[i1]
     xl = (f'<text x="{L}" y="{H-10}" class="ax">{d0.day} {MONTHS["en"][d0.month-1][:3]}</text>'
           f'<text x="{W-R}" y="{H-10}" text-anchor="end" class="ax">{d1.day} {MONTHS["en"][d1.month-1][:3]}</text>')
+    wl = ""
+    if wpoints:
+        wl = (f'<path d="{path(wpoints)}" fill="none" stroke="#a9802a" stroke-width="2.2" stroke-dasharray="6 4" stroke-linejoin="round" stroke-linecap="round"/>'
+              f'<circle cx="{X(wpoints[-1][0]):.1f}" cy="{Y(wpoints[-1][1]):.1f}" r="4" fill="#a9802a"/>')
     lx, ly = X(points[-1][0]), Y(points[-1][1])
     return (f'<svg viewBox="0 0 {W} {H}" role="img" aria-label="30 day price chart" class="chart">'
-            f'<defs><linearGradient id="a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0e4f4a" stop-opacity=".18"/>'
+            f'<defs><linearGradient id="a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0e4f4a" stop-opacity=".16"/>'
             f'<stop offset="1" stop-color="#0e4f4a" stop-opacity="0"/></linearGradient></defs>'
-            f'{grid}{xl}<path d="{area}" fill="url(#a)"/>'
+            f'{grid}{xl}<path d="{area}" fill="url(#a)"/>{wl}'
             f'<path d="{line}" fill="none" stroke="#0e4f4a" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>'
-            f'<circle cx="{lx:.1f}" cy="{ly:.1f}" r="4.5" fill="#a9802a" stroke="#fffdf7" stroke-width="2"/></svg>')
+            f'<circle cx="{lx:.1f}" cy="{ly:.1f}" r="4.5" fill="#0e4f4a" stroke="#fffdf7" stroke-width="2"/></svg>')
+
+def wholesale_latest(c, latest_idx):
+    """CBSL wholesale price for the latest report + which market it is from. None if not reported today."""
+    w = c.get("wholesaleSeries") or []
+    v = valid(w)
+    if not v or v[-1][0] != latest_idx:
+        return None
+    price = v[-1][1]
+    wm = c.get("wholesaleMarkets") or {}
+    mkt = c["primaryMarket"] if wm.get(c["primaryMarket"]) == price else next((k for k, x in wm.items() if x == price), c["primaryMarket"])
+    return price, mkt, v
 
 # ---------------------------------------------------------------- shared page shell
 CSS = """
@@ -435,6 +453,14 @@ h1{font-family:'Newsreader','Noto Sans Sinhala',serif;font-weight:500;font-size:
 .hero{display:flex;flex-wrap:wrap;align-items:flex-end;gap:14px 22px;margin:26px 0 8px}
 .big{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:clamp(46px,11vw,72px);line-height:1;letter-spacing:-.03em}
 .big small{font-size:15px;font-weight:500;color:var(--muted);letter-spacing:0;margin-left:6px}
+.big .rs{font-family:'Noto Sans Sinhala','Hanken Grotesk',sans-serif;font-size:.36em;font-weight:600;color:var(--muted);margin-right:8px;letter-spacing:0;vertical-align:.55em}
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:18px 0 0}
+.duo div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.duo b{display:block;font-family:'JetBrains Mono',monospace;font-size:22px}
+.duo span{font-size:13px;color:var(--muted)}
+.duo .w{border-left:4px solid var(--gold)}.duo .r{border-left:4px solid var(--petrol)}.duo .g{border-left:4px solid var(--line2)}
+.key{font-size:13px;color:var(--muted);margin:8px 0 0}.key i{display:inline-block;width:18px;height:3px;vertical-align:middle;margin:0 5px 0 12px}
+td.w{color:#7a5c1c}
 .chg{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;padding:5px 11px;border-radius:9px;display:inline-block}
 .chg.up{color:var(--up);background:var(--upbg)}.chg.down{color:var(--down);background:var(--downbg)}.chg.flat{color:var(--muted);background:#efeada}
 .asof{font-size:14px;color:var(--soft);margin:4px 0 0}
@@ -547,25 +573,46 @@ def commodity_page(c, dates, latest_idx, all_items):
     p_en = f"On {fdate(d,'en')}, the retail price of {name} at {mkt} market was Rs. {money(price)} {per['en']}. {ch_en}"
     p_ta = f"{fdate(d,'ta')} அன்று {m_tr(mkt,'ta')} சந்தையில் {n_ta(name)} சில்லறை விலை {per['ta']} ரூ. {money(price)}. {ch_ta}"
 
+    wl0 = wholesale_latest(c, latest_idx) if li == latest_idx else None
+    if wl0:
+        wp0, wm0 = wl0[0], wl0[1]
+        gap0 = price - wp0
+        p_si += f" {m_tr(wm0,'si')} තොග මිල රු. {money(wp0)} කි; සිල්ලර හා තොග මිල අතර පරතරය රු. {money(gap0)} කි."
+        p_en += f" The CBSL wholesale price at {wm0} was Rs. {money(wp0)}, a retail–wholesale gap of Rs. {money(gap0)}."
+        p_ta += f" {m_tr(wm0,'ta')} மொத்த விலை ரூ. {money(wp0)}; சில்லறை–மொத்த இடைவெளி ரூ. {money(gap0)}."
+
     stale = ""
     if li != latest_idx:
         stale = (f'<p class="stale">⚠ මෙම භාණ්ඩය අවසන් වරට වාර්තා වූයේ {fdate(d,"si")} දිනයි. '
                  f'Last reported on {fdate(d,"en")}.</p>')
 
-    # markets table
+    # CBSL wholesale (same report) - None if not reported today
+    wl = wholesale_latest(c, latest_idx) if li == latest_idx else None
+    wprice, wmkt, wv = wl if wl else (None, None, [])
+
+    # markets table: wholesale + retail side by side
+    rmk = c.get("markets") or {}
+    wmk = c.get("wholesaleMarkets") or {} if wl else {}
+    order_m = list(dict.fromkeys(list(wmk.keys()) + list(rmk.keys())))
     rows = ""
-    for mk, mv in (c.get("markets") or {}).items():
+    for mk in order_m:
+        wv_ = wmk.get(mk); rv_ = rmk.get(mk)
         rows += (f'<tr><td>{e(m_tr(mk,"si"))} <span style="color:var(--muted)">/ {e(mk)}</span></td>'
-                 f'<td class="n">{"රු. " + money(mv) if mv is not None else "—"}</td></tr>')
-    markets_html = (f'<h2>වෙළඳපොළ අනුව මිල<span>Price by market</span></h2>'
-                    f'<div class="scroll"><table><thead><tr><th>වෙළඳපොළ / Market</th><th class="n">{e(u_tr(unit,"si"))}</th></tr></thead>'
+                 + (f'<td class="n w">{"රු. " + money(wv_) if wv_ is not None else "—"}</td>' if wl else "")
+                 + f'<td class="n">{"රු. " + money(rv_) if rv_ is not None else "—"}</td></tr>')
+    whead = '<th class="n">තොග / Wholesale</th>' if wl else ""
+    markets_html = (f'<h2>වෙළඳපොළ අනුව මිල<span>Price by market, {e(u_tr(unit,"si"))}</span></h2>'
+                    f'<div class="scroll"><table><thead><tr><th>වෙළඳපොළ / Market</th>{whead}<th class="n">සිල්ලර / Retail</th></tr></thead>'
                     f'<tbody>{rows}</tbody></table></div>') if rows else ""
 
-    # 30-day chart
+    # 30-day chart (retail solid, wholesale dashed)
     cutoff = dates[latest_idx] - timedelta(days=31)
     pts30 = [(i, x) for i, x in v if dates[i] >= cutoff]
-    svg = chart_svg(pts30, dates)
-    chart_html = f'<h2>පසුගිය දින 30<span>Last 30 days</span></h2>{svg}' if svg else ""
+    wpts30 = [(i, x) for i, x in wv if dates[i] >= cutoff]
+    svg = chart_svg(pts30, dates, wpts30)
+    key = (f'<p class="key"><i style="background:#0e4f4a"></i>සිල්ලර / Retail ({e(mkt)})'
+           f'<i style="background:repeating-linear-gradient(90deg,#a9802a 0 6px,transparent 6px 10px)"></i>තොග / Wholesale ({e(wmkt)})</p>') if (svg and len(wpts30) >= 2) else ""
+    chart_html = f'<h2>පසුගිය දින 30<span>Last 30 days</span></h2>{svg}{key}' if svg else ""
 
     # stats
     stats = []
@@ -600,16 +647,28 @@ def commodity_page(c, dates, latest_idx, all_items):
     rel = "".join(f'<a href="{slug(x["name"])}.html">{emoji(x["name"])} {e(n_si(x["name"]))}</a>' for x in same[:12])
     rel_html = f'<h2>{e(c_tr(c["category"],"si"))} මිල<span>Other {e(c["category"].lower())} prices</span></h2><div class="rel">{rel}</div>' if rel else ""
 
+    if wl:
+        gap = price - wprice
+        gpct = gap / wprice * 100 if wprice else 0
+        duo_html = (f'<div class="duo">'
+                    f'<div class="w"><b>රු. {money(wprice)}</b><span>තොග මිල / Wholesale · 📍 {e(m_tr(wmkt,"si"))}</span></div>'
+                    f'<div class="r"><b>රු. {money(price)}</b><span>සිල්ලර මිල / Retail · 📍 {e(m_tr(mkt,"si"))}</span></div>'
+                    f'<div class="g"><b>රු. {money(gap)}</b><span>පරතරය / Gap ({gpct:.0f}%)</span></div></div>'
+                    f'<p class="asof" style="margin-top:8px">මූලාශ්‍රය: CBSL දෛනික මිල වාර්තාව · '
+                    f'<a href="../wholesale.html">HARTI වෙළඳපොළ 10ක තොග මිල →</a></p>')
+    else:
+        duo_html = '<p class="asof" style="margin-top:6px"><a href="../wholesale.html">HARTI තොග මිල බලන්න / See HARTI wholesale prices →</a></p>'
+
     body = f"""
 <p class="crumb"><a href="../index.html">TopGoviya.lk</a> / <a href="index.html">මිල ගණන්</a> / {e(n_si(name))}</p>
 <h1>{emoji(name)} {e(n_si(name))} මිල අද</h1>
 <p class="alt">{e(name)} price today in Sri Lanka<br>{e(n_ta(name))} விலை இன்று</p>
 <div class="hero">
-  <div class="big">රු. {money(price)}<small>{e(u_tr(unit,'si'))}</small></div>
+  <div class="big"><span class="rs">රු.</span>{money(price)}<small>{e(u_tr(unit,'si'))}</small></div>
   <span class="chg {direction}">{arrow} {sign}{pct:.1f}%</span>
 </div>
-<p class="asof"><b>🏷️ සිල්ලර මිල / Retail price</b> · 📍 {e(m_tr(mkt,'si'))} ({e(mkt)}) · {fdate(d,'si')}<br>
-<a href="../wholesale.html">තොග මිල (HARTI) බලන්න / See wholesale prices →</a></p>
+<p class="asof"><b>🏷️ සිල්ලර මිල / Retail price</b> · 📍 {e(m_tr(mkt,'si'))} ({e(mkt)}) · {fdate(d,'si')}</p>
+{duo_html}
 {stale}
 <div class="story">
   <p>{e(p_si)}</p>
@@ -624,9 +683,10 @@ def commodity_page(c, dates, latest_idx, all_items):
 {rel_html}
 """
     url = f"{SITE}/{OUT_DIR}/{slug(name)}.html"
-    title = f"{n_si(name)} මිල අද | {name} Price Today Sri Lanka – TopGoviya.lk"
-    desc = (f"{name} retail price today: Rs. {money(price)} {per['en']} at {mkt} ({fdate(d,'en')}). "
-            f"Compare markets and see the 30-day trend. {n_si(name)} අද මිල රු. {money(price)}.")
+    title = f"{n_si(name)} මිල අද – තොග හා සිල්ලර | {name} Price Today Sri Lanka – TopGoviya.lk"
+    wtxt = f"Wholesale Rs. {money(wprice)} at {wmkt}, retail Rs. {money(price)} at {mkt}" if wl else f"Retail Rs. {money(price)} at {mkt}"
+    desc = (f"{name} price today ({fdate(d,'en')}): {wtxt} {per['en']}. "
+            f"Compare markets and the 30-day trend. {n_si(name)} තොග හා සිල්ලර මිල.")
     jsonld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "TopGoviya.lk", "item": SITE + "/"},
         {"@type": "ListItem", "position": 2, "name": "Prices", "item": f"{SITE}/{OUT_DIR}/"},
@@ -639,15 +699,16 @@ def hub_page(items, dates, latest_idx):
     cats = sorted({c["category"] for c in items}, key=lambda x: order.index(x) if x in order else 99)
     body = (f'<p class="crumb"><a href="../index.html">TopGoviya.lk</a> / මිල ගණන්</p>'
             f'<h1>අද එළවළු, පළතුරු හා ආහාර මිල</h1>'
-            f'<p class="alt">Today\'s vegetable, fruit, rice and fish prices in Sri Lanka<br>இன்றைய காய்கறி, பழம், அரிசி, மீன் விலைகள்</p>'
-            f'<p class="asof" style="margin-top:14px"><b>🏷️ සිල්ලර මිල / Retail prices / சில்லறை விலை</b><br>'
-            f'නවතම වාර්තාව / Latest report: {fdate(dates[latest_idx],"si")}<br>'
-            f'<a href="../wholesale.html">තොග මිල (HARTI) බලන්න / See wholesale prices →</a></p>'
-            f'<div class="story" style="margin:18px 0 0;font-size:14.5px"><p>සිල්ලර මිල, එක් එක් භාණ්ඩයේ ප්‍රධාන වෙළඳපොළ අනුව (📍 සලකුණින් පෙන්වා ඇත). '
-            f'පිටකොටුව, දඹුල්ල හා නාරාහේන්පිට මිල සැසඳීමට භාණ්ඩයක් තට්ටු කරන්න.</p>'
-            f'<p lang="en">Retail prices at each item\'s main market (shown with 📍), from the Central Bank of Sri Lanka daily price report. '
-            f'Tap an item to compare Pettah, Dambulla and Narahenpita.</p>'
-            f'<p lang="ta">ஒவ்வொரு பொருளின் முதன்மை சந்தையின் சில்லறை விலை (📍). சந்தைகளை ஒப்பிட பொருளைத் தட்டவும்.</p></div>')
+            f'<p class="alt">Today\'s wholesale and retail prices in Sri Lanka<br>இன்றைய மொத்த மற்றும் சில்லறை விலைகள்</p>'
+            f'<p class="asof" style="margin-top:14px"><b>🏷️ තොග හා සිල්ලර මිල / Wholesale &amp; retail / மொத்த &amp; சில்லறை</b><br>'
+            f'නවතම වාර්තාව / Latest report: {fdate(dates[latest_idx],"si")} · CBSL</p>'
+            f'<div class="story" style="margin:18px 0 0;font-size:14.5px">'
+            f'<p>තොග මිල යනු වෙළඳපොළේ තොග වශයෙන් විකිණෙන මිලයි (ගොවියාට ලැබෙන මිල සාමාන්‍යයෙන් මීට අඩුයි). සිල්ලර මිල යනු පාරිභෝගිකයා ගෙවන මිලයි. දෙකම මහ බැංකුවේ දෛනික මිල වාර්තාවෙනි, '
+            f'📍 සලකුණින් පෙන්වන වෙළඳපොළ අනුව. අනෙක් වෙළඳපොළවල් සැසඳීමට භාණ්ඩයක් තට්ටු කරන්න.</p>'
+            f'<p lang="en">Wholesale is the bulk trading price at the market (farm-gate prices are usually lower); retail is what shoppers pay. Both come from the Central Bank of Sri Lanka '
+            f'daily price report, at the market shown with 📍. Tap an item to compare other markets.</p>'
+            f'<p lang="ta">மொத்த விலை சந்தையின் மொத்த வியாபார விலை (பண்ணை விலை பொதுவாக குறைவு); சில்லறை விலை வாங்குபவர் செலுத்துவது. இரண்டும் இலங்கை மத்திய வங்கி அறிக்கையிலிருந்து.</p>'
+            f'<p><a href="../wholesale.html">HARTI වෙළඳපොළ 10ක තොග මිල බලන්න / HARTI wholesale for 10 markets →</a></p></div>')
     for cat in cats:
         rows = ""
         for c in sorted([x for x in items if x["category"] == cat], key=lambda x: x["name"]):
@@ -655,16 +716,24 @@ def hub_page(items, dates, latest_idx):
             if not v:
                 continue
             price = v[-1][1]
+            wl = wholesale_latest(c, latest_idx) if v[-1][0] == latest_idx else None
+            same_mkt = wl and wl[1] == c["primaryMarket"]
+            mk_line = (f'📍 {e(m_tr(c["primaryMarket"],"si"))} / {e(c["primaryMarket"])}' if (not wl or same_mkt)
+                       else f'📍 තොග {e(m_tr(wl[1],"si"))} · සිල්ලර {e(m_tr(c["primaryMarket"],"si"))}')
             rows += (f'<tr><td><a href="{slug(c["name"])}.html">{emoji(c["name"])} {e(n_si(c["name"]))}</a> '
                      f'<span style="color:var(--muted)">/ {e(c["name"])}</span>'
-                     f'<br><span style="font-size:12.5px;color:var(--muted)">📍 {e(m_tr(c["primaryMarket"],"si"))} / {e(c["primaryMarket"])}</span></td>'
-                     f'<td class="n">රු. {money(price)} <span style="color:var(--muted);font-weight:500;font-size:12px">{e(u_tr(c["unit"],"si"))}</span></td></tr>')
-        body += f'<h2 class="cat">{e(c_tr(cat,"si"))} <span>{e(cat)}</span></h2><div class="scroll"><table><tbody>{rows}</tbody></table></div>'
+                     f'<br><span style="font-size:12.5px;color:var(--muted)">{mk_line} · {e(u_tr(c["unit"],"si"))}</span></td>'
+                     f'<td class="n w">{money(wl[0]) if wl else "—"}</td>'
+                     f'<td class="n">{money(price)}</td></tr>')
+        body += (f'<h2 class="cat">{e(c_tr(cat,"si"))} <span>{e(cat)}</span></h2><div class="scroll"><table>'
+                 f'<thead><tr><th>භාණ්ඩය / Item</th><th class="n">තොග<br>Wholesale</th><th class="n">සිල්ලර<br>Retail</th></tr></thead>'
+                 f'<tbody>{rows}</tbody></table></div>')
+    body += '<p class="asof" style="margin-top:10px">මිල රුපියල් වලින් / Prices in Rs. · — = එදින වාර්තා නොවීය / not reported that day</p>'
     body += '<a class="cta" href="../index.html">සම්පූර්ණ ප්‍රස්ථාර හා ගණක බලන්න</a>'
     url = f"{SITE}/{OUT_DIR}/"
-    title = "අද එළවළු මිල | Vegetable Prices Today Sri Lanka – TopGoviya.lk"
-    desc = (f"Today's retail prices for {len(items)} vegetables, fruits, rice and fish in Sri Lanka "
-            f"({fdate(dates[latest_idx],'en')}). Daily from CBSL reports. අද එළවළු හා ආහාර මිල ගණන්.")
+    title = "අද එළවළු මිල – තොග හා සිල්ලර | Vegetable Prices Today Sri Lanka – TopGoviya.lk"
+    desc = (f"Today's wholesale and retail prices for {len(items)} vegetables, fruits, rice and fish in Sri Lanka "
+            f"({fdate(dates[latest_idx],'en')}). Daily from CBSL reports. අද එළවළු තොග හා සිල්ලර මිල.")
     jsonld = {"@context": "https://schema.org", "@type": "CollectionPage", "name": title, "url": url}
     return shell(title, desc, url, body, jsonld)
 
