@@ -35,6 +35,21 @@ jobs:
             git pull --rebase origin main
             git push origin main
           fi
+      # ── SEO price pages (topgoviya.lk/price/...) ───────────
+      - name: Build SEO price pages
+        run: python build_pages.py
+      - name: Commit SEO pages if changed
+        run: |
+          git config user.name  "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add price/ sitemap.xml || true
+          if git diff --staged --quiet; then
+            echo "No SEO page changes today."
+          else
+            git commit -m "Auto-update SEO price pages ($(date +%Y-%m-%d))"
+            git pull --rebase origin main
+            git push origin main
+          fi
       # ── HARTI Wholesale Prices ──────────────────────────────
       - name: Fetch latest HARTI report
         run: python harti_update.py
