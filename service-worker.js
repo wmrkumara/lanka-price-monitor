@@ -1,9 +1,10 @@
 /* ===== TopGoviya PWA Service Worker ===== */
 /* Version: 2.7 | topgoviya.lk | Built in Gampola 🇱🇰 */
 /* Updated: 24 Aug 2026 — v13: added economics.html + dei_data.json network-first */
+/* Updated: 27 Sep 2026 — v14: all HTML pages network-first (daily /price/ pages never go stale) */
 
-const CACHE_NAME = 'topgoviya-v13';
-const DATA_CACHE = 'topgoviya-data-v13';
+const CACHE_NAME = 'topgoviya-v14';
+const DATA_CACHE = 'topgoviya-data-v14';
 
 /* ── Static files to cache for offline use ── */
 const STATIC_ASSETS = [
@@ -114,7 +115,24 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  /* Everything else — cache first, network fallback */
+  /* HTML pages (index, /price/ pages, all others) — network first, cache fallback.
+     Prices change every day, so visitors must always get the fresh page when online. */
+  if (event.request.mode === 'navigate' || event.request.destination === 'document') {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          }
+          return response;
+        })
+        .catch(() => caches.match(event.request).then(c => c || caches.match('/index.html')))
+    );
+    return;
+  }
+
+  /* Everything else (icons, fonts, images) — cache first, network fallback */
   event.respondWith(
     caches.match(event.request).then(cached => {
       if (cached) return cached;
