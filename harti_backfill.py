@@ -1,24 +1,21 @@
 #!/usr/bin/env python3
 """
 HARTI Wholesale Price Backfill Script
-Downloads 2023-2026 PDFs using known URL pattern.
-Run ONCE manually via GitHub Actions, then harti_update.py handles daily.
+Downloads PDFs using known URL pattern.
+Run ONCE for full history, or use --days N to fetch last N days.
 
 URL pattern:
   https://www.harti.gov.lk/assets/pdf/food_price/daily/eng/YYYY/MonthName/Vegetable Pricenew ex1(YYYY.MM.DD).pdf
   https://www.harti.gov.lk/assets/pdf/food_price/daily/eng/YYYY/MonthName/Vegetables Wholesale Prices (YYYY.MM.DD).pdf
 """
 
-import os, datetime, time
+import os, datetime, time, sys, argparse
 from urllib.parse import quote
 import requests
 
 PDF_DIR   = "harti_pdfs"
 BASE      = "https://www.harti.gov.lk/assets/pdf/food_price/daily/eng"
 HEADERS   = {"User-Agent": "Mozilla/5.0 (Lanka Price Monitor; topgoviya.lk)"}
-
-START     = datetime.date(2023, 1, 1)
-END       = datetime.date.today()
 
 # Two filename patterns HARTI uses
 PATTERNS  = [
@@ -67,6 +64,19 @@ def try_download(date):
     return False  # All patterns failed for this date
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--days", type=int, default=None,
+        help="Fetch only the last N days (e.g. --days 3). Omit for full history since 2023.")
+    args = parser.parse_args()
+
+    END   = datetime.date.today()
+    if args.days:
+        START = END - datetime.timedelta(days=args.days)
+        print(f"📅 Mode: Last {args.days} days ({START} → {END})")
+    else:
+        START = datetime.date(2023, 1, 1)
+        print(f"📅 Mode: Full history ({START} → {END})")
+
     os.makedirs(PDF_DIR, exist_ok=True)
 
     print("=" * 60)
@@ -76,7 +86,6 @@ def main():
 
     current = START
     downloaded = skipped = failed = 0
-    total_days = (END - START).days + 1
 
     while current <= END:
         # Skip Sundays (HARTI usually no report)
@@ -84,7 +93,6 @@ def main():
             current += datetime.timedelta(days=1)
             continue
 
-        # Check if already have this date
         yyyy = current.strftime("%Y")
         mm   = current.strftime("%m")
         dd   = current.strftime("%d")
@@ -109,7 +117,6 @@ def main():
             time.sleep(0.3)  # Be polite to HARTI server
         else:
             failed += 1
-            # Only print failures for recent dates (old dates may not exist)
             if current >= datetime.date(2024, 1, 1):
                 print(f"  ⚠️  {current} — no PDF found")
 
@@ -122,7 +129,6 @@ def main():
     print(f"   ❌ {failed} dates with no PDF")
     print("=" * 60)
     print("\n🔨 Now run: python harti_update.py --no-download")
-    print("   This will build harti_data.json with full history!")
 
 if __name__ == "__main__":
     main()
