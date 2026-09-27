@@ -962,6 +962,12 @@ function changeOf(s){const v=vpts(s);if(v.length<2)return{abs:0,pct:0,dir:"flat"
   return{abs,pct,dir:Math.abs(pct)<0.5?"flat":(abs>0?"up":"down")};}
 const arrow = d => d==="up"?"&#9650;":d==="down"?"&#9660;":"&#9632;";
 const strokeFor = d => d==="up"?"#b23a2e":d==="down"?"#2c7a52":"#8a8170";
+/* One-day spike reversal: yesterday jumped 25%+ away from the day before,
+   and today is back within 5% of the day before (e.g. 1,800 -> 2,880 -> 1,800).
+   That is noise returning to normal, not a real market move. */
+function isSpikeReversal(s){const v=vpts(s);if(v.length<3)return false;
+  const a=v[v.length-3][1],b=v[v.length-2][1],c=v[v.length-1][1];if(!a)return false;
+  return Math.abs(b-a)/a>=0.25 && Math.abs(c-a)/a<=0.05;}
 
 function spark(s,w,h,stroke){
   const pts0=vpts(s),n=s.length;if(pts0.length<2)return"";
@@ -1004,7 +1010,7 @@ function renderMovers(){
       const v=vpts(x.d.series);
       // Only include items actually updated in the LATEST report,
       // not items whose last known value is from an older, stale date.
-      return v.length && v[v.length-1][0]===lastIdx;
+      return v.length && v[v.length-1][0]===lastIdx && !isSpikeReversal(x.d.series);
     })
     .sort((a,b)=>Math.abs(b.ch.pct)-Math.abs(a.ch.pct)).slice(0,7);
   document.getElementById("movers").innerHTML=m.map(({d,ch})=>{
@@ -2431,7 +2437,7 @@ function renderBestCrop(){
       const v=vpts(x.d.series);
       // Only include items actually updated in the LATEST report,
       // not items whose last known value is from an older, stale date.
-      return v.length && v[v.length-1][0]===lastIdx;
+      return v.length && v[v.length-1][0]===lastIdx && !isSpikeReversal(x.d.series);
     })
     .sort((a,b)=>b.ch.pct-a.ch.pct);
   const sell=ranked.filter(x=>x.ch.pct>0).slice(0,5);
@@ -2535,7 +2541,7 @@ const POST_LANGS=[{code:"si",label:"සිංහල"},{code:"en",label:"English"
 function getBestCropRanked(){
   const lastIdx=DATES.length-1;
   const ranked=DATA.map(d=>({d,ch:changeOf(d.series)}))
-    .filter(x=>{const v=vpts(x.d.series);return v.length && v[v.length-1][0]===lastIdx;})
+    .filter(x=>{const v=vpts(x.d.series);return v.length && v[v.length-1][0]===lastIdx && !isSpikeReversal(x.d.series);})
     .sort((a,b)=>b.ch.pct-a.ch.pct);
   return {sell:ranked.filter(x=>x.ch.pct>0).slice(0,5),buy:ranked.filter(x=>x.ch.pct<0).slice(-5).reverse()};
 }
