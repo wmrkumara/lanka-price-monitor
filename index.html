@@ -451,6 +451,34 @@
     .nav-legend-item .nl-sub{font-size:9px}
     .nav-legend-cta{font-size:9px}
   }
+
+  /* ══ SPICE BANNER ══ */
+  .spice-banner{background:linear-gradient(135deg,#0a3a36 0%,#0e4f4a 60%,#1a6b5a 100%);
+    border-bottom:2px solid #a9802a;padding:10px 22px}
+  .spice-banner-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;
+    gap:16px;flex-wrap:wrap;justify-content:space-between}
+  .spice-banner-left{display:flex;align-items:center;gap:12px;flex:1;min-width:200px}
+  .spice-banner-icon{font-size:28px;flex-shrink:0}
+  .spice-banner-title{font-size:13px;font-weight:800;color:#fff;letter-spacing:.02em;
+    font-family:'Hanken Grotesk',sans-serif}
+  .spice-banner-sub{font-size:11px;color:#9fd4c8;margin-top:2px}
+  .spice-banner-prices{display:flex;gap:8px;flex-wrap:wrap}
+  .spice-price-chip{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:4px 10px}
+  .sp-icon{font-size:13px}
+  .sp-label{font-size:10px;color:rgba(255,255,255,.7);font-weight:600}
+  .sp-val{font-size:12px;color:#ffd98a;font-weight:800;font-family:'JetBrains Mono',monospace;
+    margin-left:4px}
+  .spice-banner-btn{background:#a9802a;color:#fff;font-weight:800;font-size:12px;
+    padding:8px 18px;border-radius:999px;text-decoration:none;white-space:nowrap;
+    letter-spacing:.04em;transition:.2s;flex-shrink:0;border:2px solid transparent}
+  .spice-banner-btn:hover{background:#c4921f;transform:translateY(-1px);
+    box-shadow:0 4px 12px rgba(169,128,42,.4)}
+  @media(max-width:600px){
+    .spice-banner{padding:10px 14px}
+    .spice-banner-prices{display:none}
+    .spice-banner-title{font-size:12px}
+  }
 </style>
 </head>
 <body>
@@ -486,6 +514,28 @@
     <span class="nav-legend-cta" id="nlCta">දෙකම compare කරන්න ↑</span>
   </div>
 </div>
+
+<!-- ══ SPICE REPORT BANNER ══ -->
+<div class="spice-banner" id="spiceBanner">
+  <div class="spice-banner-inner">
+    <div class="spice-banner-left">
+      <span class="spice-banner-icon">🌶️</span>
+      <div>
+        <div class="spice-banner-title" id="sb-title">නව! කුළුබඩු ගොවිපළ දොරටු මිල වාර්තාව</div>
+        <div class="spice-banner-sub" id="sb-sub">DEA · 2023–2026 · සති 185 · ගම්මිරිස්, කුරුඳු, කරාබු සහ තවත්</div>
+      </div>
+    </div>
+    <div class="spice-banner-prices" id="sb-prices">
+      <div class="spice-price-chip"><span class="sp-icon">🌶️</span><span class="sp-label">ගම්මිරිස්</span><span class="sp-val" id="sb-pepper">...</span></div>
+      <div class="spice-price-chip"><span class="sp-icon">🪵</span><span class="sp-label">කුරුඳු</span><span class="sp-val" id="sb-cinnamon">...</span></div>
+      <div class="spice-price-chip"><span class="sp-icon">🌿</span><span class="sp-label">කරාබු</span><span class="sp-val" id="sb-clove">...</span></div>
+    </div>
+    <a href="spice-report.html" class="spice-banner-btn" id="sb-btn">
+      වාර්තාව බලන්න →
+    </a>
+  </div>
+</div>
+
 <div class="wrap">
   <header class="masthead" itemscope itemtype="https://schema.org/WebSite">
   <meta itemprop="name" content="Lanka Price Monitor | TopGoviya.lk">
@@ -2811,5 +2861,26 @@ window.addEventListener('appinstalled',()=>{
   console.log('[TopGoviya] App installed!');
 });
 </script>
+
+// ── Load spice prices into banner ──
+(async function loadSpiceBanner(){
+  try{
+    const r = await fetch('dea_data.json',{cache:'no-store'});
+    const d = await r.json();
+    if(!d.weeks||!d.weeks.length) return;
+    const latest = d.weeks[d.weeks.length-1];
+    const pepper = latest.commodities?.pepper?.districts?.National?.['GR-1 (Average Price)'];
+    const cinnamon = latest.commodities?.cinnamon?.districts?.National?.['C-5 (Average Price)'];
+    const clove = latest.commodities?.clove?.districts?.National?.['CLOVE (Average Price)'];
+    const fmt = v => v ? 'රු.' + Math.round(v).toLocaleString() : '—';
+    const pe = document.getElementById('sb-pepper');
+    const ci = document.getElementById('sb-cinnamon');
+    const cl = document.getElementById('sb-clove');
+    if(pe) pe.textContent = fmt(pepper);
+    if(ci) ci.textContent = fmt(cinnamon);
+    if(cl) cl.textContent = fmt(clove);
+  }catch(e){}
+})();
+
 </body>
 </html>
