@@ -276,7 +276,7 @@ footer{margin:46px 0 60px;padding-top:22px;border-top:1px solid var(--line-stron
     <div class="dateline">
       <span id="lbl-latest">නවතම වාර්තාව</span>
       <span class="dot"></span>
-      <span class="stamp" id="lbl-date">18 අගෝස්තු 2026</span>
+      <span class="stamp" id="lbl-date">පූරණය වෙමින්...</span>
       <span class="dot"></span>
       <span id="lbl-sub">ගොවිපළ දොරටු මිල (Farm Gate) · දිස්ත්‍රික් අනුව · DEA සතිපතා</span>
     </div>
@@ -960,17 +960,10 @@ function applyLang(l){
         'Hambantota':'Hambantota','Monaragala':'Monaragala','National':'🇱🇰 National'}
   };
 
-  // Translate date
-  const rawDate = "18 අගෝස්තු 2026";
-  const SI_M=['ජනවාරි','පෙබරවාරි','මාර්තු','අප්‍රේල්','මැයි','ජූනි','ජූලි','අගෝස්තු','සැප්තැම්බර්','ඔක්තෝබර්','නොවැම්බර්','දෙසැම්බර්'];
-  const TA_M=['ஜனவரி','பிப்ரவரி','மார்ச்','ஏப்ரல்','மே','ஜூன்','ஜூலை','ஆகஸ்ட்','செப்டம்பர்','அக்டோபர்','நவம்பர்','டிசம்பர்'];
-  const EN_M=['January','February','March','April','May','June','July','August','September','October','November','December'];
-  const mIdx = SI_M.indexOf('අගෝස්තු'); // 7
+  // Translate date dynamically from loaded data
   const dateEl = document.getElementById('lbl-date');
-  if(dateEl){
-    if(l==='en') dateEl.textContent = '18 ' + EN_M[mIdx] + ' 2026';
-    else if(l==='ta') dateEl.textContent = '18 ' + TA_M[mIdx] + ' 2026';
-    else dateEl.textContent = '18 ' + SI_M[mIdx] + ' 2026';
+  if(dateEl && window._dateLabels){
+    dateEl.textContent = window._dateLabels[l] || window._dateLabels['si'];
   }
   // Translate nat-stat labels
   document.querySelectorAll('.l[data-lbl]').forEach(el=>{
@@ -1006,6 +999,51 @@ function applyLang(l){
     });
     window._siLabelsStored=true;
   }
+
+// Load latest date from dea_data.json
+(async()=>{
+  try{
+    const r = await fetch('dea_data.json', {cache:'no-store'});
+    if(r.ok){
+      const d = await r.json();
+      if(d.weeks && d.weeks.length){
+        // Get latest week date
+        const latest = d.weeks[d.weeks.length-1];
+        const dateLabel = latest.date_label || latest.date;
+        // Convert to display format
+        // date_label like "15-September-2026" or date like "2026-09-15"
+        let displaySI = dateLabel;
+        let displayTA = dateLabel;
+        let displayEN = dateLabel;
+        
+        const SI_M = ['ජනවාරි','පෙබරවාරි','මාර්තු','අප්‍රේල්','මැයි','ජූනි','ජූලි','අගෝස්තු','සැප්තැම්බර්','ඔක්තෝබර්','නොවැම්බර්','දෙසැම්බර්'];
+        const TA_M = ['ஜனவரி','பிப்ரவரி','மார்ச்','ஏப்ரல்','மே','ஜூன்','ஜூலை','ஆகஸ்ட்','செப்டம்பர்','அக்டோபர்','நவம்பர்','டிசம்பர்'];
+        const EN_M = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        
+        // Parse date string
+        let day, monthIdx, year;
+        if(latest.date){
+          // ISO format: 2026-09-15
+          const parts = latest.date.split('-');
+          year = parts[0]; monthIdx = parseInt(parts[1])-1; day = parseInt(parts[2]);
+        }
+        
+        if(day && monthIdx>=0 && year){
+          displaySI = day+' '+SI_M[monthIdx]+' '+year;
+          displayTA = day+' '+TA_M[monthIdx]+' '+year;
+          displayEN = day+' '+EN_M[monthIdx]+' '+year;
+        }
+        
+        // Store for language switching
+        window._dateLabels = {si: displaySI, ta: displayTA, en: displayEN};
+        
+        // Set initial date
+        const el = document.getElementById('lbl-date');
+        if(el) el.textContent = displaySI;
+      }
+    }
+  }catch(e){ console.log('Date load error:', e); }
+})();
 
 // Apply language on page load (default = Sinhala)
 applyLang('si');
