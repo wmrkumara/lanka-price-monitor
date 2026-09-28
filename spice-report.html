@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Sri Lanka Spice Price Report | DEA Weekly Analysis | TopGoviya.lk</title>
+<meta name="description" content="Interactive spice price trend reports for Sri Lanka. YoY analysis of Pepper, Cinnamon, Clove & more from DEA farm gate data 2023-2026.">
+<meta property="og:title" content="Sri Lanka Spice Price Report | TopGoviya.lk">
+<meta property="og:description" content="4 years of weekly DEA farm gate prices. Compare 2023-2026 trends for 11 export spices across 14 districts.">
+<meta property="og:url" content="https://topgoviya.lk/spice-report.html">
+<link rel="canonical" href="https://topgoviya.lk/spice-report.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZBN8Z32S4J"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZBN8Z32S4J');</script>
+
+<style>
+:root{
+  --paper:#f4efe4;--paper-2:#efe8d8;--card:#fffdf7;--ink:#191d1a;--ink-soft:#3a403a;
+  --muted:#7a7264;--line:#e3d9c4;--line-strong:#cdbf9f;
+  --petrol:#0e4f4a;--petrol-deep:#0a3a36;--petrol-light:rgba(14,79,74,.08);
+  --gold:#a9802a;--gold-light:rgba(169,128,42,.12);
+  --up:#b23a2e;--up-bg:#f7e6e2;--down:#2c7a52;--down-bg:#e3efe6;
+  --shadow:0 1px 0 rgba(0,0,0,.02),0 12px 30px -18px rgba(20,40,38,.35);
+  --shadow-lg:0 4px 6px -1px rgba(0,0,0,.07),0 24px 48px -12px rgba(20,40,38,.25);
+  --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--ink);
+  font-family:'Hanken Grotesk','Noto Sans Sinhala','Noto Sans Tamil',sans-serif;
+  -webkit-font-smoothing:antialiased;line-height:1.45}
+body{background-image:radial-gradient(circle at 12% -10%,rgba(14,79,74,.06),transparent 38%),
+     radial-gradient(circle at 95% 0%,rgba(169,128,42,.07),transparent 30%);
+     background-attachment:fixed}
+.wrap{max-width:1200px;margin:0 auto;padding:0 22px}
+
+/* ── MASTHEAD ── */
+.masthead{padding:28px 0 16px;border-bottom:2px solid var(--ink)}
+.kicker{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap;
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.kicker .org{color:var(--petrol)}
+.lang{display:flex;gap:2px;border:1px solid var(--line-strong);border-radius:999px;overflow:hidden}
+.lang button{font:inherit;font-size:11px;letter-spacing:.12em;font-weight:700;text-transform:uppercase;
+  border:0;background:transparent;color:var(--muted);padding:5px 11px;cursor:pointer;transition:.2s}
+.lang button.on{background:var(--petrol);color:#fff}
+.title{font-family:'Newsreader','Noto Sans Sinhala',serif;font-weight:500;
+  font-size:clamp(28px,4.5vw,52px);line-height:.98;letter-spacing:-.015em;margin:14px 0 6px}
+.title em{font-style:italic;color:var(--petrol)}
+.dateline{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:13px;color:var(--ink-soft)}
+.dateline .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);display:inline-block}
+.stamp{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--ink)}
+
+/* ── NAV ── */
+.sitenav{display:flex;gap:6px;flex-wrap:wrap;padding:14px 0 0;font-size:12px}
+.sitenav a{color:var(--muted);text-decoration:none;font-weight:600;letter-spacing:.06em;
+  padding:4px 10px;border-radius:999px;border:1px solid transparent;transition:.18s}
+.sitenav a:hover{color:var(--petrol);border-color:var(--line-strong)}
+.sitenav a.active{color:var(--petrol);background:var(--petrol-light);border-color:var(--line-strong)}
+
+/* ── SECTION ── */
+.section-h{display:flex;align-items:center;gap:12px;margin:32px 0 18px}
+.section-h h2{font-family:'Newsreader','Noto Sans Sinhala',serif;font-weight:500;
+  font-size:22px;margin:0;letter-spacing:-.01em}
+.section-h .rule{flex:1;height:1px;background:var(--line-strong)}
+.section-h .hint{font-size:12px;color:var(--muted);white-space:nowrap}
+
+/* ── SPICE CARDS GRID ── */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:40px}
+.spice-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:18px 16px 16px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.spice-card:hover{border-color:var(--petrol);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.spice-card.active{border-color:var(--petrol);border-width:2px;background:var(--petrol-light)}
+.spice-card .icon{font-size:22px;margin-bottom:8px;display:block}
+.spice-card .name-si{font-family:'Newsreader','Noto Sans Sinhala',serif;font-size:18px;
+  font-weight:500;line-height:1.1;margin-bottom:2px}
+.spice-card .name-en{font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;
+  font-weight:600;margin-bottom:12px}
+.spice-card .price{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:22px;color:var(--ink)}
+.spice-card .price-label{font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;margin-bottom:3px}
+.spice-card .change{display:inline-flex;align-items:center;gap:4px;font-size:12px;
+  font-weight:700;padding:3px 8px;border-radius:999px;margin-top:6px}
+.change.up{background:var(--up-bg);color:var(--up)}
+.change.down{background:var(--down-bg);color:var(--down)}
+.change.flat{background:var(--paper-2);color:var(--muted)}
+
+/* sparkline */
+.sparkline-wrap{height:36px;margin-top:10px}
+.sparkline-wrap canvas{width:100%!important;height:36px!important}
+
+/* ── MODAL ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,28,.55);
+  backdrop-filter:blur(4px);z-index:1000;align-items:flex-end;justify-content:center}
+.modal-overlay.open{display:flex}
+@media(min-width:680px){.modal-overlay{align-items:center}}
+.modal{background:var(--card);border-radius:20px 20px 0 0;width:100%;max-width:820px;
+  max-height:92vh;overflow-y:auto;box-shadow:var(--shadow-lg);position:relative}
+@media(min-width:680px){.modal{border-radius:20px;max-height:90vh}}
+.modal-head{padding:22px 22px 16px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;background:var(--card);z-index:10}
+.modal-head-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.modal-icon{font-size:28px}
+.modal-title-si{font-family:'Newsreader','Noto Sans Sinhala',serif;font-size:26px;font-weight:500}
+.modal-title-en{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  font-weight:600;margin-top:1px}
+.close-btn{background:var(--paper-2);border:1px solid var(--line);border-radius:999px;
+  width:32px;height:32px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:16px;color:var(--muted);flex-shrink:0;transition:.18s}
+.close-btn:hover{background:var(--line);color:var(--ink)}
+.modal-body{padding:20px 22px 28px}
+
+/* grade selector */
+.grade-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.grade-btn{font:inherit;font-size:12px;font-weight:700;padding:6px 14px;border-radius:999px;
+  border:1px solid var(--line-strong);background:var(--paper);color:var(--ink-soft);
+  cursor:pointer;transition:.18s}
+.grade-btn:hover{border-color:var(--petrol);color:var(--petrol)}
+.grade-btn.on{background:var(--petrol);color:#fff;border-color:var(--petrol)}
+
+/* stat boxes */
+.stat-boxes{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:22px}
+@media(min-width:480px){.stat-boxes{grid-template-columns:repeat(4,1fr)}}
+.stat-box{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+.stat-box .sl{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  font-weight:700;margin-bottom:4px}
+.stat-box .sv{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:20px;color:var(--ink)}
+.stat-box .sv.gold{color:var(--gold)}
+.stat-box .sv.up{color:var(--up)}
+.stat-box .sv.down{color:var(--down)}
+
+/* chart area */
+.chart-section{background:var(--paper);border:1px solid var(--line);border-radius:12px;
+  padding:16px;margin-bottom:20px}
+.chart-section h3{font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:14px;
+  letter-spacing:.04em}
+.chart-wrap{position:relative;height:220px}
+
+/* range buttons */
+.range-row{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.range-btn{font:inherit;font-size:11px;font-weight:700;padding:5px 10px;border-radius:8px;
+  border:1px solid var(--line);background:var(--card);color:var(--muted);cursor:pointer;transition:.18s}
+.range-btn:hover{border-color:var(--petrol);color:var(--petrol)}
+.range-btn.on{background:var(--petrol);color:#fff;border-color:var(--petrol)}
+
+/* loading */
+.loading{text-align:center;padding:40px;color:var(--muted);font-size:14px}
+
+/* share row */
+.share-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.share-btn{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:12px;
+  font-weight:700;padding:8px 14px;border-radius:999px;border:1px solid var(--line);
+  background:var(--card);color:var(--ink-soft);cursor:pointer;text-decoration:none;transition:.18s}
+.share-btn:hover{border-color:var(--petrol);color:var(--petrol)}
+.share-btn.fb{background:#1877f2;color:#fff;border-color:#1877f2}
+.share-btn.wa{background:#25d366;color:#fff;border-color:#25d366}
+
+/* footer */
+footer{margin:40px 0 60px;padding-top:20px;border-top:1px solid var(--line-strong);
+  font-size:12.5px;color:var(--muted)}
+.footer-links{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.footer-links a{color:var(--muted);text-decoration:none;font-weight:600;
+  padding:4px 10px;border-radius:999px;border:1px solid var(--line);transition:.18s}
+.footer-links a:hover{color:var(--petrol);border-color:var(--petrol)}
+.credit{text-align:center;margin-top:14px;font-size:13px;color:var(--ink-soft)}
+.credit a{color:var(--petrol);font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--line-strong)}
+.credit a:hover{border-color:var(--petrol)}
+
+@media(max-width:600px){
+  .cards-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .spice-card{padding:14px 12px 12px}
+  .spice-card .price{font-size:18px}
+  .modal-body{padding:16px 16px 24px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="kicker">
+    <span>දත්ත <span class="org">අපනයන කෘෂිකර්ම දෙපාර්තමේන්තුවෙන්</span> (DEA)</span>
+    <div class="lang">
+      <button data-lang="si" class="on">සිං</button>
+      <button data-lang="ta">தமிழ்</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </div>
+  <h1 class="title">කුළුබඩු මිල <em>වාර්තාව</em></h1>
+  <div class="dateline">
+    <span>2023 — 2026</span>
+    <span class="dot"></span>
+    <span class="stamp" id="lbl-date">පූරණය වෙමින්...</span>
+    <span class="dot"></span>
+    <span>DEA ගොවිපළ දොරටු මිල · සතිපතා</span>
+  </div>
+  <nav class="sitenav">
+    <a href="index.html">📊 CBSL</a>
+    <a href="wholesale.html">📦 HARTI</a>
+    <a href="bulletin.html">📈 දත්ත</a>
+    <a href="breakeven.html">🧮 ලාභ-අලාභ</a>
+    <a href="loan-calculator.html">🏦 ණය</a>
+    <a href="weather.html">🌤️ කාලගුණය</a>
+    <a href="reports.html">📄 වාර්තා</a>
+    <a href="spices.html">🌶️ කුළුබඩු</a>
+    <a href="spice-report.html" class="active">📊 කුළුබඩු වාර්තාව</a>
+  </nav>
+</header>
+
+<!-- SPICE CARDS -->
+<div class="section-h" style="margin-top:28px">
+  <h2 id="sh-cards">කුළුබඩු සාරාංශය</h2>
+  <span class="rule"></span>
+  <span class="hint">ජාතික සාමාන්‍ය · GR-1 / No.1 · රු./කි.ග්‍රෑ.</span>
+</div>
+
+<div class="cards-grid" id="cards-grid">
+  <div class="loading">දත්ත පූරණය වෙමින්... ⏳</div>
+</div>
+
+</div><!-- /wrap -->
+
+<!-- ═══════════ MODAL ═══════════ -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-head">
+      <div class="modal-head-top">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="modal-icon" id="m-icon">🌶️</span>
+            <div>
+              <div class="modal-title-si" id="m-title-si">ගම්මිරිස්</div>
+              <div class="modal-title-en" id="m-title-en">PEPPER · DEA Farm Gate</div>
+            </div>
+          </div>
+        </div>
+        <button class="close-btn" onclick="closeModalDirect()">✕</button>
+      </div>
+      <!-- Grade selector -->
+      <div class="grade-row" id="grade-row" style="margin-top:14px"></div>
+    </div>
+
+    <div class="modal-body">
+      <!-- Stat boxes -->
+      <div class="stat-boxes">
+        <div class="stat-box">
+          <div class="sl" id="sl-current">නවතම සාමාන්‍ය</div>
+          <div class="sv gold" id="sv-current">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="sl" id="sl-change">සතිය වෙනස</div>
+          <div class="sv" id="sv-change">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="sl" id="sl-high">4 අවු. ඉහළම</div>
+          <div class="sv" id="sv-high">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="sl" id="sl-low">4 අවු. පහළම</div>
+          <div class="sv" id="sv-low">—</div>
+        </div>
+      </div>
+
+      <!-- YoY Chart -->
+      <div class="chart-section">
+        <h3 id="chart-title">වාර්ෂික සංසන්දනය (YoY) — ගම්මිරිස් GR-1 සාමාන්‍ය</h3>
+        <div class="range-row">
+          <button class="range-btn on" onclick="setRange('all',this)" id="rb-all">සියල්ල</button>
+          <button class="range-btn" onclick="setRange('2026',this)">2026</button>
+          <button class="range-btn" onclick="setRange('2025',this)">2025</button>
+          <button class="range-btn" onclick="setRange('2024',this)">2024</button>
+          <button class="range-btn" onclick="setRange('2023',this)">2023</button>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="yoy-chart"></canvas>
+        </div>
+      </div>
+
+      <!-- Share -->
+      <div class="share-row">
+        <a href="#" class="share-btn fb" id="share-fb" target="_blank">📘 Facebook</a>
+        <a href="#" class="share-btn wa" id="share-wa" target="_blank">💬 WhatsApp</a>
+        <button class="share-btn" onclick="copyLink()">🔗 <span id="lbl-copy">Link Copy</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+<footer>
+  <div class="footer-links">
+    <a href="index.html">📊 CBSL</a>
+    <a href="wholesale.html">📦 HARTI</a>
+    <a href="bulletin.html">📈 දත්ත</a>
+    <a href="breakeven.html">🧮 ලාභ-අලාභ</a>
+    <a href="loan-calculator.html">🏦 ණය</a>
+    <a href="weather.html">🌤️ කාලගුණය</a>
+    <a href="reports.html">📄 වාර්තා</a>
+    <a href="spices.html">🌶️ කුළුබඩු</a>
+    <a href="about.html">ℹ️ About</a>
+  </div>
+  <div class="credit">නිර්මාණය හා සංවර්ධනය: <a href="https://ebooklanka.com" target="_blank">ebooklanka.com</a></div>
+</footer>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+// CONFIG — spice definitions
+// ═══════════════════════════════════════════════════
+const SPICES = {
+  pepper:   {icon:'🌶️', si:'ගම්මිරිස්',  ta:'மிளகு',       en:'Pepper',
+             grades:['GR-1 (Average Price)','GR-1 (Highest Price)','GR-2 (Average Price)','WHITE (Average Price)'],
+             defaultGrade:'GR-1 (Average Price)', unit:'රු./කි.ග්‍රෑ.'},
+  clove:    {icon:'🌿', si:'කරාබු නැටි', ta:'கிராம்பு',     en:'Clove',
+             grades:['CLOVE (Average Price)','CLOVE (Highest Price)','STEM (Average Price)'],
+             defaultGrade:'CLOVE (Average Price)', unit:'රු./කි.ග්‍රෑ.'},
+  coffee:   {icon:'☕', si:'කෝපි',        ta:'காபி',         en:'Coffee',
+             grades:['GR 1 (Average Price)','GR 1 (Highest Price)','PARCHMENT (Average Price)'],
+             defaultGrade:'GR 1 (Average Price)', unit:'රු./කි.ග්‍රෑ.'},
+  cocoa:    {icon:'🍫', si:'කොකෝ',        ta:'கொக்கோ',       en:'Cocoa',
+             grades:['GR 1 (Average Price)','GR 1 (Highest Price)','GR 2 (Average Price)'],
+             defaultGrade:'GR 1 (Average Price)', unit:'රු./කි.ග්‍රෑ.'},
+  cardamom: {icon:'🫚', si:'එනසාල්',      ta:'ஏலக்காய்',    en:'Cardamom',
+             grades:['LLG1 (Average Price)','LG (Average Price)','LLG2 (Average Price)','LB (Average Price)'],
+             defaultGrade:'LLG1 (Average Price)', unit:'රු./කි.ග්‍රෑ.'},
+  nutmeg:   {icon:'🥜', si:'සාදික්කා',    ta:'ஜாதிக்காய்',  en:'Nutmeg',
+             grades:['NUTMEG No.1 (Average Price)','NUTMEG No.2 (Average Price)','MACE No.1 (Average Price)'],
+             defaultGrade:'NUTMEG No.1 (Average Price)', unit:'රු./කි.ග්‍රෑ.'},
+  cinnamon: {icon:'🪵', si:'කුරුඳු',      ta:'இலவங்கப்பட்டை',en:'Cinnamon',
+             grades:['C-5 (Average Price)','Alba (Average Price)','H-1 (Average Price)','H-2 (Average Price)'],
+             defaultGrade:'C-5 (Average Price)', unit:'රු./කි.ග්‍රෑ.'},
+  betel:    {icon:'🍃', si:'බුලත්',        ta:'வெற்றிலை',   en:'Betel',
+             grades:['Local-Peedunu-(Average Price)','Local-Keti-(Average Price)'],
+             defaultGrade:'Local-Peedunu-(Average Price)', unit:'රු./1000 කොල'},
+  arecanut: {icon:'🌴', si:'පුවක්',        ta:'பாக்கு',      en:'Arecanut',
+             grades:['Dried-(Karunka)-(Rs./k.g.) (Average Price)','Fresh-(100 nuts) (Average Price)'],
+             defaultGrade:'Dried-(Karunka)-(Rs./k.g.) (Average Price)', unit:'රු./කි.ග්‍රෑ.'},
+  other:    {icon:'🌾', si:'ගොරකා/ඉඟුරු', ta:'கோரக்கா/இஞ்சி',en:'Goraka/Ginger',
+             grades:['Goraka (Average Price)','Ginger (Average Price)','Turmeric (Average Price)','Kithul Jaggery (Average Price)'],
+             defaultGrade:'Goraka (Average Price)', unit:'රු./කි.ග්‍රෑ.'},
+  oil:      {icon:'💧', si:'සුගන්ධ තෙල්', ta:'எண்ணெய்கள்',  en:'Essential Oils',
+             grades:['Cinnamon Leaf Oil (Average Price)','Citronella Oil (Average Price)'],
+             defaultGrade:'Cinnamon Leaf Oil (Average Price)', unit:'රු./කි.ග්‍රෑ.'},
+};
+
+const YEAR_COLORS = {
+  '2023': '#94a3b8',
+  '2024': '#f59e0b',
+  '2025': '#10b981',
+  '2026': '#ef4444',
+};
+
+// ═══════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════
+let DEA = null;
+let currentSpice = 'pepper';
+let currentGrade = 'GR-1 (Average Price)';
+let currentRange = 'all';
+let yoyChart = null;
+let lang = 'si';
+
+const MONTH_NAMES = {
+  si:['ජන','පෙබ','මාර්','අප්‍ර','මැයි','ජූනි','ජූලි','අගෝ','සැප්','ඔක්','නොව','දෙස්'],
+  ta:['ஜன','பிப்','மார்','ஏப்','மே','ஜூன்','ஜூலை','ஆக்','செப்','அக்','நவ','டிச்'],
+  en:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+};
+
+// ═══════════════════════════════════════════════════
+// DATA LOADING
+// ═══════════════════════════════════════════════════
+async function loadData() {
+  try {
+    const r = await fetch('dea_data.json', {cache:'no-store'});
+    DEA = await r.json();
+    initPage();
+  } catch(e) {
+    document.getElementById('cards-grid').innerHTML =
+      '<div class="loading">දත්ත පූරණය නොවිය. නැවත උත්සාහ කරන්න.</div>';
+  }
+}
+
+function initPage() {
+  updateDateLabel();
+  renderCards();
+  // Open pepper by default
+  openModal('pepper');
+}
+
+function updateDateLabel() {
+  if (!DEA?.weeks?.length) return;
+  const latest = DEA.weeks[DEA.weeks.length - 1];
+  const parts = latest.date.split('-');
+  const y = parts[0], mi = parseInt(parts[1])-1, d = parseInt(parts[2]);
+  const mn = MONTH_NAMES[lang][mi];
+  document.getElementById('lbl-date').textContent = `${d} ${mn} ${y}`;
+}
+
+// ═══════════════════════════════════════════════════
+// CARDS
+// ═══════════════════════════════════════════════════
+function getLatestValue(spiceKey, grade) {
+  if (!DEA?.weeks) return null;
+  for (let i = DEA.weeks.length - 1; i >= 0; i--) {
+    const w = DEA.weeks[i];
+    const c = w.commodities?.[spiceKey];
+    if (!c) continue;
+    const v = c.districts?.['National']?.[grade];
+    if (v !== null && v !== undefined) return {value: v, date: w.date, weekIdx: i};
+  }
+  return null;
+}
+
+function getPrevValue(spiceKey, grade, weekIdx) {
+  for (let i = weekIdx - 1; i >= 0; i--) {
+    const w = DEA.weeks[i];
+    const v = w.commodities?.[spiceKey]?.districts?.['National']?.[grade];
+    if (v !== null && v !== undefined) return v;
+  }
+  return null;
+}
+
+function getSparklineData(spiceKey, grade, n=12) {
+  const vals = [];
+  for (const w of DEA.weeks) {
+    const v = w.commodities?.[spiceKey]?.districts?.['National']?.[grade];
+    if (v !== null && v !== undefined) vals.push(v);
+  }
+  return vals.slice(-n);
+}
+
+function renderCards() {
+  const grid = document.getElementById('cards-grid');
+  grid.innerHTML = '';
+  Object.entries(SPICES).forEach(([key, sp]) => {
+    const latest = getLatestValue(key, sp.defaultGrade);
+    const val = latest?.value;
+    const prev = latest ? getPrevValue(key, sp.defaultGrade, latest.weekIdx) : null;
+    const pct = val && prev ? ((val - prev) / prev * 100) : null;
+    const spark = getSparklineData(key, sp.defaultGrade);
+
+    const chClass = pct === null ? 'flat' : pct > 0 ? 'up' : pct < 0 ? 'down' : 'flat';
+    const chText = pct === null ? '—' : (pct > 0 ? '▲' : '▼') + ' ' + Math.abs(pct).toFixed(1) + '%';
+
+    const card = document.createElement('div');
+    card.className = 'spice-card' + (key === currentSpice ? ' active' : '');
+    card.id = 'card-' + key;
+    card.onclick = () => openModal(key);
+    card.innerHTML = `
+      <span class="icon">${sp.icon}</span>
+      <div class="name-si">${lang==='en'?sp.en:lang==='ta'?sp.ta:sp.si}</div>
+      <div class="name-en">${sp.en}</div>
+      <div class="price-label">ජාතික සාමාන්‍ය</div>
+      <div class="price">රු. ${val ? val.toLocaleString('en-US',{maximumFractionDigits:0}) : '—'}</div>
+      <span class="change ${chClass}">${chText}</span>
+      <div class="sparkline-wrap"><canvas id="spark-${key}"></canvas></div>
+    `;
+    grid.appendChild(card);
+
+    // Draw sparkline
+    setTimeout(() => {
+      const ctx = document.getElementById('spark-' + key)?.getContext('2d');
+      if (!ctx || spark.length < 2) return;
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: spark.map((_,i) => i),
+          datasets: [{data: spark, borderColor: key===currentSpice?'#0e4f4a':'#a9802a',
+            borderWidth: 1.5, pointRadius: 0, fill: false, tension: 0.4}]
+        },
+        options: {responsive:false, plugins:{legend:{display:false},tooltip:{enabled:false}},
+          scales:{x:{display:false},y:{display:false}}, animation:{duration:0}}
+      });
+    }, 50);
+  });
+}
+
+// ═══════════════════════════════════════════════════
+// MODAL
+// ═══════════════════════════════════════════════════
+function openModal(spiceKey) {
+  currentSpice = spiceKey;
+  const sp = SPICES[spiceKey];
+  currentGrade = sp.defaultGrade;
+
+  // Update card active state
+  document.querySelectorAll('.spice-card').forEach(c => c.classList.remove('active'));
+  document.getElementById('card-' + spiceKey)?.classList.add('active');
+
+  // Update modal header
+  document.getElementById('m-icon').textContent = sp.icon;
+  document.getElementById('m-title-si').textContent = lang==='en'?sp.en:lang==='ta'?sp.ta:sp.si;
+  document.getElementById('m-title-en').textContent = sp.en.toUpperCase() + ' · DEA Farm Gate';
+
+  // Render grade buttons
+  const gradeRow = document.getElementById('grade-row');
+  gradeRow.innerHTML = '';
+  sp.grades.forEach(g => {
+    const label = g.replace(' (Average Price)','').replace(' (Highest Price)',' ↑')
+                   .replace('-(Rs./k.g.)','').replace('-(','').replace(')','');
+    const btn = document.createElement('button');
+    btn.className = 'grade-btn' + (g === currentGrade ? ' on' : '');
+    btn.textContent = label;
+    btn.onclick = () => { currentGrade = g; updateGradeButtons(); updateModal(); };
+    gradeRow.appendChild(btn);
+  });
+
+  updateModal();
+
+  // Update URL
+  const url = new URL(window.location);
+  url.searchParams.set('spice', spiceKey);
+  url.searchParams.set('grade', currentGrade);
+  history.replaceState({}, '', url);
+
+  // Open overlay
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  // Analytics
+  gtag('event', 'view_spice_report', {spice: spiceKey});
+}
+
+function updateGradeButtons() {
+  document.querySelectorAll('.grade-btn').forEach((b, i) => {
+    b.classList.toggle('on', SPICES[currentSpice].grades[i] === currentGrade);
+  });
+}
+
+function updateModal() {
+  const sp = SPICES[currentSpice];
+  const latest = getLatestValue(currentSpice, currentGrade);
+  const val = latest?.value;
+  const prev = latest ? getPrevValue(currentSpice, currentGrade, latest.weekIdx) : null;
+  const pct = val && prev ? ((val - prev) / prev * 100) : null;
+
+  // All-time high/low
+  let high = -Infinity, low = Infinity;
+  DEA.weeks.forEach(w => {
+    const v = w.commodities?.[currentSpice]?.districts?.['National']?.[currentGrade];
+    if (v !== null && v !== undefined) { high = Math.max(high, v); low = Math.min(low, v); }
+  });
+
+  document.getElementById('sv-current').textContent = val ? 'රු. ' + val.toLocaleString('en-US',{maximumFractionDigits:0}) : '—';
+  const chEl = document.getElementById('sv-change');
+  if (pct !== null) {
+    chEl.textContent = (pct >= 0 ? '▲ +' : '▼ ') + pct.toFixed(1) + '%';
+    chEl.className = 'sv ' + (pct > 0 ? 'up' : pct < 0 ? 'down' : '');
+  } else { chEl.textContent = '—'; chEl.className = 'sv'; }
+  document.getElementById('sv-high').textContent = high > -Infinity ? 'රු. ' + high.toLocaleString('en-US',{maximumFractionDigits:0}) : '—';
+  document.getElementById('sv-low').textContent = low < Infinity ? 'රු. ' + low.toLocaleString('en-US',{maximumFractionDigits:0}) : '—';
+
+  // Chart title
+  const gradeLabel = currentGrade.replace(' (Average Price)','').replace(' (Highest Price)',' ↑');
+  document.getElementById('chart-title').textContent = `YoY සංසන්දනය — ${sp.si} ${gradeLabel}`;
+
+  renderYoYChart();
+  updateShareLinks();
+}
+
+// ═══════════════════════════════════════════════════
+// YoY CHART
+// ═══════════════════════════════════════════════════
+function getYoYData(years) {
+  // Build week-of-year indexed data per year
+  const result = {};
+  years.forEach(yr => { result[yr] = new Array(53).fill(null); });
+
+  DEA.weeks.forEach(w => {
+    const yr = w.date.substring(0, 4);
+    if (!years.includes(yr)) return;
+    const date = new Date(w.date);
+    const startOfYear = new Date(yr, 0, 1);
+    const weekNum = Math.ceil(((date - startOfYear) / 86400000 + startOfYear.getDay() + 1) / 7);
+    const v = w.commodities?.[currentSpice]?.districts?.['National']?.[currentGrade];
+    if (v !== null && v !== undefined) result[yr][weekNum] = v;
+  });
+  return result;
+}
+
+function renderYoYChart() {
+  const years = currentRange === 'all' ? ['2023','2024','2025','2026'] : [currentRange];
+  const data = getYoYData(years);
+
+  // X labels = week numbers 1-52
+  const labels = Array.from({length:52}, (_,i) => i+1);
+
+  const datasets = years.map(yr => ({
+    label: yr,
+    data: labels.map(w => data[yr]?.[w] ?? null),
+    borderColor: YEAR_COLORS[yr],
+    backgroundColor: YEAR_COLORS[yr] + '18',
+    borderWidth: yr === '2026' ? 2.5 : 1.5,
+    pointRadius: 0,
+    pointHoverRadius: 4,
+    fill: false,
+    tension: 0.3,
+    spanGaps: true,
+  }));
+
+  if (yoyChart) yoyChart.destroy();
+  const ctx = document.getElementById('yoy-chart').getContext('2d');
+  yoyChart = new Chart(ctx, {
+    type: 'line',
+    data: {labels, datasets},
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {mode:'index', intersect:false},
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+          labels: {boxWidth:12, font:{size:11}, usePointStyle:true}
+        },
+        tooltip: {
+          callbacks: {
+            label: ctx => ctx.parsed.y !== null ?
+              `${ctx.dataset.label}: රු. ${ctx.parsed.y.toLocaleString('en-US',{maximumFractionDigits:0})}` : null
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: {color:'rgba(0,0,0,.04)'},
+          ticks: {font:{size:10}, maxTicksLimit:13,
+            callback: (v,i) => { const w=i+1; return [1,5,10,15,20,25,30,35,40,45,50].includes(w)?`W${w}`:''; }
+          }
+        },
+        y: {
+          grid: {color:'rgba(0,0,0,.04)'},
+          ticks: {font:{size:10,family:'JetBrains Mono'}, callback: v => 'රු.'+v.toLocaleString()}
+        }
+      }
+    }
+  });
+}
+
+function setRange(range, btn) {
+  currentRange = range;
+  document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  renderYoYChart();
+}
+
+// ═══════════════════════════════════════════════════
+// SHARE
+// ═══════════════════════════════════════════════════
+function updateShareLinks() {
+  const sp = SPICES[currentSpice];
+  const latest = getLatestValue(currentSpice, currentGrade);
+  const val = latest?.value;
+  const url = `https://topgoviya.lk/spice-report.html?spice=${currentSpice}&grade=${encodeURIComponent(currentGrade)}`;
+  const text = `🌶️ ${sp.si} ගොවිපළ දොරටු මිල: රු. ${val ? val.toLocaleString('en-US',{maximumFractionDigits:0}) : '—'}/කි.ග්‍රෑ.\n\nDEA ${new Date().getFullYear()} · TopGoviya.lk\n${url}`;
+
+  document.getElementById('share-fb').href =
+    `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+  document.getElementById('share-wa').href =
+    `https://wa.me/?text=${encodeURIComponent(text)}`;
+}
+
+function copyLink() {
+  const url = `https://topgoviya.lk/spice-report.html?spice=${currentSpice}&grade=${encodeURIComponent(currentGrade)}`;
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.getElementById('lbl-copy');
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => btn.textContent = 'Link Copy', 2000);
+  });
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModalDirect();
+}
+function closeModalDirect() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ═══════════════════════════════════════════════════
+// LANGUAGE
+// ═══════════════════════════════════════════════════
+document.querySelector('.lang').addEventListener('click', e => {
+  const b = e.target.closest('button[data-lang]');
+  if (!b) return;
+  lang = b.dataset.lang;
+  document.querySelectorAll('.lang button').forEach(x => x.classList.toggle('on', x.dataset.lang===lang));
+  updateDateLabel();
+  renderCards();
+  if (document.getElementById('modal-overlay').classList.contains('open')) {
+    const sp = SPICES[currentSpice];
+    document.getElementById('m-title-si').textContent = lang==='en'?sp.en:lang==='ta'?sp.ta:sp.si;
+  }
+});
+
+// ═══════════════════════════════════════════════════
+// URL PARAMS — restore state
+// ═══════════════════════════════════════════════════
+function checkUrlParams() {
+  const p = new URLSearchParams(window.location.search);
+  const sp = p.get('spice');
+  const gr = p.get('grade');
+  if (sp && SPICES[sp]) {
+    currentSpice = sp;
+    if (gr) currentGrade = gr;
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════
+checkUrlParams();
+loadData();
+</script>
+</body>
+</html>
