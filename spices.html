@@ -121,6 +121,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -226,9 +227,24 @@ body{
 .dist-table .pv.na{color:var(--muted);font-weight:400;font-style:italic;font-size:12px}
 .dist-table .pv.high{color:var(--gold);font-weight:700}
 .col-h{font-size:10px;color:var(--muted);font-weight:500}
+  /* Goraka table - white headers */
+  #sec-goraka .col-h{color:rgba(255,255,255,.85);font-size:11px;font-weight:700}
+  #sec-goraka .col-a{color:#ffd98a;font-size:11px;font-weight:800}
 .col-a{font-size:12px;color:var(--petrol);font-weight:700}
 
 /* ── SOURCE NOTE ── */
+.img-dl-btn{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:12px;
+    font-weight:700;padding:7px 16px;border-radius:999px;border:none;cursor:pointer;
+    background:#b23a2e;color:#fff;transition:.2s;margin-bottom:12px}
+  .img-dl-btn:hover{background:#8e2c22;transform:translateY(-1px)}
+  .img-dl-btn.loading{opacity:.7;cursor:wait}
+  .share-btns-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .share-btn-sm{display:inline-flex;align-items:center;gap:5px;font:inherit;font-size:12px;
+    font-weight:700;padding:7px 14px;border-radius:999px;border:none;cursor:pointer;transition:.2s;
+    text-decoration:none}
+  .share-btn-sm.wa{background:#25d366;color:#fff}
+  .share-btn-sm.fb{background:#1877f2;color:#fff}
+  .share-btn-sm.wa:hover,.share-btn-sm.fb:hover{opacity:.88;transform:translateY(-1px)}
 .source-note{background:rgba(14,79,74,.05);border:1px solid rgba(14,79,74,.15);border-radius:11px;
   padding:13px 16px;font-size:12px;color:var(--ink-soft);margin:24px 0 0;line-height:1.6}
 .source-note strong{color:var(--petrol)}
@@ -276,7 +292,7 @@ footer{margin:46px 0 60px;padding-top:22px;border-top:1px solid var(--line-stron
     <div class="dateline">
       <span id="lbl-latest">නවතම වාර්තාව</span>
       <span class="dot"></span>
-      <span class="stamp" id="lbl-date">පූරණය වෙමින්...</span>
+      <span class="stamp" id="lbl-date" style="background:#b23a2e;color:#fff;padding:2px 10px;border-radius:999px;font-size:12px">පූරණය වෙමින්...</span>
       <span class="dot"></span>
       <span id="lbl-sub">ගොවිපළ දොරටු මිල (Farm Gate) · දිස්ත්‍රික් අනුව · DEA සතිපතා</span>
     </div>
@@ -299,6 +315,17 @@ footer{margin:46px 0 60px;padding-top:22px;border-top:1px solid var(--line-stron
     <h2 id="sh-select">කුළුබඩු වර්ගය තෝරන්න</h2>
     <span class="rule"></span>
     <span class="hint" id="sh-hint">DEA · සතිපතා</span>
+  </div>
+
+  <!-- RED DATE BANNER -->
+  <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+    <span style="background:#b23a2e;color:#fff;font-size:12px;font-weight:800;
+      padding:5px 14px;border-radius:999px;letter-spacing:.03em" id="global-date-badge">
+      📅 නවතම දත්ත: 15 සැප්තැම්බර් 2026
+    </span>
+    <span style="font-size:12px;color:var(--muted);font-weight:600">
+      DEA ගොවිපළ දොරටු මිල · සතිපතා
+    </span>
   </div>
 
   <div class="spice-pills" id="pills-container">
@@ -331,6 +358,11 @@ footer{margin:46px 0 60px;padding-top:22px;border-top:1px solid var(--line-stron
         <div class="nat-stat"><div class="l" data-lbl="GR-1 National Highest" data-lbl-si="">GR-1 ජාතික උපරිම මිල</div><div class="v">රු. 2,050</div></div>
         <div class="nat-stat"><div class="l" data-lbl="WHITE National Average" data-lbl-si="">WHITE ජාතික සාමාන්‍ය මිල</div><div class="v gold">රු. 2,972</div></div>
         <div class="nat-stat"><div class="l" data-lbl="WHITE National Highest" data-lbl-si="">WHITE ජාතික උපරිම මිල</div><div class="v">රු. 3,300</div></div>
+      </div>
+      <div class="share-btns-row">
+        <button class="img-dl-btn" onclick="downloadTableImage('sec-pepper',this.parentElement,'topgoviya-pepper-prices')">📸 Image Download</button>
+        <a class="share-btn-sm wa" href="#" onclick="shareWhatsApp('pepper')" target="_blank">💬 WhatsApp</a>
+        <a class="share-btn-sm fb" href="#" onclick="shareFacebook()" target="_blank">📘 Facebook</a>
       </div>
       <div class="dist-table-wrap">
         <table class="dist-table">
@@ -725,6 +757,15 @@ footer{margin:46px 0 60px;padding-top:22px;border-top:1px solid var(--line-stron
         <div>
           <div class="card-sub">DEA · අපනයන කෘෂිකර්ම දෙපාර්තමේන්තුව</div>
           <h3 class="card-title">ගොරකා / ඉඟුරු / කිතුල් හකුරු / කහ / වැනිලා</h3>
+          <div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <span style="background:#b23a2e;color:#fff;font-size:11px;font-weight:800;
+              padding:3px 10px;border-radius:999px;letter-spacing:.04em">
+              📅 නවතම: 15 සැප්තැම්බර් 2026
+            </span>
+            <span style="font-size:11px;color:var(--muted);font-weight:600">
+              ↑ ඉහළම · ~ සාමාන්‍ය (රු./කි.ග්‍රෑ.)
+            </span>
+          </div>
         </div>
         <span class="unit-badge">රු. / කි.ග්‍රෑ.</span>
       </div>
@@ -734,31 +775,41 @@ footer{margin:46px 0 60px;padding-top:22px;border-top:1px solid var(--line-stron
         <div class="nat-stat"><div class="l" data-lbl="Turmeric National Average" data-lbl-si="">කහ ජාතික සාමාන්‍ය මිල</div><div class="v gold">රු. 250</div></div>
         <div class="nat-stat"><div class="l" data-lbl="Kithul Jaggery" data-lbl-si="">කිතුල් හකුරු</div><div class="v gold">රු. 1,200</div></div>
       </div>
+      <div class="share-btns-row" id="goraka-share-row">
+        <button class="img-dl-btn" id="goraka-dl-btn" onclick="downloadTableImage('sec-goraka','goraka-share-row','topgoviya-goraka-prices')">
+          📸 Image Download
+        </button>
+        <a class="share-btn-sm wa" id="goraka-wa" href="#" target="_blank">💬 WhatsApp</a>
+        <a class="share-btn-sm fb" id="goraka-fb" href="#" target="_blank">📘 Facebook</a>
+      </div>
       <div class="dist-table-wrap">
         <table class="dist-table">
           <thead><tr>
             <th id="th-district">දිස්ත්‍රික්කය</th>
-            <th><span class="col-h">ගොරකා</span><br><span class="col-a">ඉහළ / සාමා.</span></th>
-            <th><span class="col-h">ඉඟුරු</span><br><span class="col-a">ඉහළ / සාමා.</span></th>
-            <th><span class="col-h">කිතුල් හකුරු</span><br><span class="col-a">ඉහළ / සාමා.</span></th>
-            <th><span class="col-h">කහ</span><br><span class="col-a">ඉහළ / සාමා.</span></th>
+            <th><span class="col-h">🌾 ගොරකා</span><br><span class="col-a">↑ ඉහළ</span></th>
+            <th><span class="col-h">🌾 ගොරකා</span><br><span class="col-a">~ සාමාන්‍ය</span></th>
+            <th><span class="col-h">🫚 ඉඟුරු</span><br><span class="col-a">↑ ඉහළ</span></th>
+            <th><span class="col-h">🫚 ඉඟුරු</span><br><span class="col-a">~ සාමාන්‍ය</span></th>
+            <th><span class="col-h">🍯 කිතුල්</span><br><span class="col-a">~ සාමාන්‍ය</span></th>
+            <th><span class="col-h">🟡 කහ</span><br><span class="col-a">↑ ඉහළ</span></th>
+            <th><span class="col-h">🟡 කහ</span><br><span class="col-a">~ සාමාන්‍ය</span></th>
           </tr></thead>
           <tbody>
-            <tr><td data-dist="Kandy">මහනුවර</td><td class="pv">380 / 325</td><td class="pv">1,000 / 926</td><td class="pv na">—</td><td class="pv">300 / 260</td></tr>
-            <tr><td data-dist="Matale">මාතලේ</td><td class="pv">400 / 391</td><td class="pv">1,000 / 1,000</td><td class="pv na">—</td><td class="pv">250 / 237</td></tr>
-            <tr><td data-dist="Nuwara_eliya">නුවරඑළිය</td><td class="pv">280 / 274</td><td class="pv">800 / 793</td><td class="pv na">—</td><td class="pv na">—</td></tr>
-            <tr><td data-dist="Kegalle">කෑගල්ල</td><td class="pv">280 / 278</td><td class="pv">800 / 800</td><td class="pv na">—</td><td class="pv">300 / 300</td></tr>
-            <tr><td data-dist="Ratnapura">රත්නපුර</td><td class="pv">320 / 300</td><td class="pv">900 / 800</td><td class="pv na">—</td><td class="pv">250 / 250</td></tr>
-            <tr><td data-dist="Badulla">බදුල්ල</td><td class="pv">300 / 300</td><td class="pv">900 / 900</td><td class="pv">1,200 / 1,200</td><td class="pv">300 / 275</td></tr>
-            <tr><td data-dist="Kurunegala">කුරුණෑගල</td><td class="pv">320 / 307</td><td class="pv">900 / 900</td><td class="pv na">—</td><td class="pv">250 / 250</td></tr>
-            <tr><td data-dist="Colombo">කොළඹ</td><td class="pv">350 / 317</td><td class="pv na">—</td><td class="pv na">—</td><td class="pv">300 / 300</td></tr>
-            <tr><td data-dist="Gampaha">ගම්පහ</td><td class="pv">280 / 250</td><td class="pv">850 / 800</td><td class="pv na">—</td><td class="pv">230 / 220</td></tr>
-            <tr><td data-dist="Kalutara">කළුතර</td><td class="pv">300 / 300</td><td class="pv">800 / 800</td><td class="pv na">—</td><td class="pv na">—</td></tr>
-            <tr><td data-dist="Galle">ගාල්ල</td><td class="pv">325 / 313</td><td class="pv na">—</td><td class="pv na">—</td><td class="pv na">—</td></tr>
-            <tr><td data-dist="Matara">මාතර</td><td class="pv">300 / 291</td><td class="pv">900 / 900</td><td class="pv na">—</td><td class="pv">170 / 170</td></tr>
-            <tr><td data-dist="Hambantota">හම්බන්තොට</td><td class="pv">300 / 286</td><td class="pv na">—</td><td class="pv na">—</td><td class="pv na">—</td></tr>
-            <tr><td data-dist="Monaragala">මොනරාගල</td><td class="pv">350 / 320</td><td class="pv">1,000 / 800</td><td class="pv na">—</td><td class="pv">300 / 240</td></tr>
-            <tr class="national-row-tr"><td data-dist="National">🇱🇰 ජාතික</td><td class="pv high">400 / 304</td><td class="pv high">1,000 / 856</td><td class="pv high">1,200 / 1,200</td><td class="pv high">300 / 250</td></tr>
+            <tr><td data-dist="Kandy">මහනුවර</td><td class="pv">380</td><td class="pv">325</td><td class="pv">1,000</td><td class="pv">926</td><td class="pv na">—</td><td class="pv">300</td><td class="pv">260</td></tr>
+            <tr><td data-dist="Matale">මාතලේ</td><td class="pv">400</td><td class="pv">391</td><td class="pv">1,000</td><td class="pv">1,000</td><td class="pv na">—</td><td class="pv">250</td><td class="pv">237</td></tr>
+            <tr><td data-dist="Nuwara_eliya">නුවරඑළිය</td><td class="pv">280</td><td class="pv">274</td><td class="pv">800</td><td class="pv">793</td><td class="pv na">—</td><td class="pv na">—</td><td class="pv na">—</td></tr>
+            <tr><td data-dist="Kegalle">කෑගල්ල</td><td class="pv">280</td><td class="pv">278</td><td class="pv">800</td><td class="pv">800</td><td class="pv na">—</td><td class="pv">300</td><td class="pv">300</td></tr>
+            <tr><td data-dist="Ratnapura">රත්නපුර</td><td class="pv">320</td><td class="pv">300</td><td class="pv">900</td><td class="pv">800</td><td class="pv na">—</td><td class="pv">250</td><td class="pv">250</td></tr>
+            <tr><td data-dist="Badulla">බදුල්ල</td><td class="pv">300</td><td class="pv">300</td><td class="pv">900</td><td class="pv">900</td><td class="pv">1,200</td><td class="pv">300</td><td class="pv">275</td></tr>
+            <tr><td data-dist="Kurunegala">කුරුණෑගල</td><td class="pv">320</td><td class="pv">307</td><td class="pv">900</td><td class="pv">900</td><td class="pv na">—</td><td class="pv">250</td><td class="pv">250</td></tr>
+            <tr><td data-dist="Colombo">කොළඹ</td><td class="pv">350</td><td class="pv">317</td><td class="pv na">—</td><td class="pv na">—</td><td class="pv na">—</td><td class="pv">300</td><td class="pv">300</td></tr>
+            <tr><td data-dist="Gampaha">ගම්පහ</td><td class="pv">280</td><td class="pv">250</td><td class="pv">850</td><td class="pv">800</td><td class="pv na">—</td><td class="pv">230</td><td class="pv">220</td></tr>
+            <tr><td data-dist="Kalutara">කළුතර</td><td class="pv">300</td><td class="pv">300</td><td class="pv">800</td><td class="pv">800</td><td class="pv na">—</td><td class="pv na">—</td><td class="pv na">—</td></tr>
+            <tr><td data-dist="Galle">ගාල්ල</td><td class="pv">325</td><td class="pv">313</td><td class="pv na">—</td><td class="pv na">—</td><td class="pv na">—</td><td class="pv na">—</td><td class="pv na">—</td></tr>
+            <tr><td data-dist="Matara">මාතර</td><td class="pv">300</td><td class="pv">291</td><td class="pv">900</td><td class="pv">900</td><td class="pv na">—</td><td class="pv">170</td><td class="pv">170</td></tr>
+            <tr><td data-dist="Hambantota">හම්බන්තොට</td><td class="pv">300</td><td class="pv">286</td><td class="pv na">—</td><td class="pv na">—</td><td class="pv na">—</td><td class="pv na">—</td><td class="pv na">—</td></tr>
+            <tr><td data-dist="Monaragala">මොනරාගල</td><td class="pv">350</td><td class="pv">320</td><td class="pv">1,000</td><td class="pv">800</td><td class="pv na">—</td><td class="pv">300</td><td class="pv">240</td></tr>
+            <tr class="national-row-tr"><td data-dist="National">🇱🇰 ජාතික</td><td class="pv high">400</td><td class="pv high">304</td><td class="pv high">1,000</td><td class="pv high">856</td><td class="pv high">1,200</td><td class="pv high">300</td><td class="pv high">250</td></tr>
           </tbody>
         </table>
       </div>
@@ -1025,6 +1076,83 @@ const EN_M_D=['January','February','March','April','May','June','July','August',
   // Apply language AFTER date is loaded
   applyLang('si');
 })();
+
+// ═══════════════════════════════
+// IMAGE DOWNLOAD + SHARE
+// ═══════════════════════════════
+async function downloadTableImage(sectionId, shareRowEl, filename) {
+  const btn = event.target.closest('button');
+  if (!btn) return;
+  const origText = btn.innerHTML;
+  btn.innerHTML = '⏳ සාදමින්...';
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  try {
+    const section = document.getElementById(sectionId);
+    
+    // Hide share buttons temporarily
+    const shareRow = typeof shareRowEl === 'string' 
+      ? document.getElementById(shareRowEl)
+      : shareRowEl;
+    if(shareRow) shareRow.style.display = 'none';
+
+    // Add watermark
+    const wm = document.createElement('div');
+    wm.style.cssText = 'text-align:center;padding:10px;background:#0e4f4a;color:#ffd98a;font-weight:800;font-size:12px;border-radius:0 0 12px 12px;margin-top:8px;letter-spacing:.04em';
+    wm.innerHTML = '🌿 www.TopGoviya.lk · DEA ගොවිපළ දොරටු මිල · නිදහස් දත්ත · 15 සැප්තැම්බර් 2026';
+    section.appendChild(wm);
+
+    const canvas = await html2canvas(section, {
+      scale: 2,
+      backgroundColor: '#fffdf7',
+      useCORS: true,
+      logging: false,
+    });
+
+    // Remove watermark + restore share row
+    section.removeChild(wm);
+    if(shareRow) shareRow.style.display = '';
+
+    // Download PNG
+    const link = document.createElement('a');
+    link.download = filename + '-' + new Date().toISOString().slice(0,10) + '.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+
+    // Update WhatsApp/Facebook links with image
+    const waLink = section.querySelector('.share-btn-sm.wa');
+    const fbLink = section.querySelector('.share-btn-sm.fb');
+    
+    const pageUrl = 'https://topgoviya.lk/spices.html';
+    const spiceName = section.querySelector('.card-title')?.textContent || 'කුළුබඩු';
+    const msg = `🌿 ${spiceName} ගොවිපළ දොරටු මිල | 15 සැප්තැම්බර් 2026
+
+DEA සතිපතා දත්ත — TopGoviya.lk
+${pageUrl}`;
+    
+    if(waLink) waLink.href = 'https://wa.me/?text=' + encodeURIComponent(msg);
+    if(fbLink) fbLink.href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(pageUrl);
+
+    // Mobile native share with image
+    canvas.toBlob(async blob => {
+      try {
+        const file = new File([blob], link.download, {type:'image/png'});
+        if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})) {
+          await navigator.share({files:[file], title:spiceName + ' මිල | TopGoviya.lk', text:msg});
+        }
+      } catch(e) {}
+    });
+
+  } catch(e) {
+    console.error('Image error:', e);
+    alert('Image download failed. Please try again.');
+  }
+
+  btn.innerHTML = origText;
+  btn.classList.remove('loading');
+  btn.disabled = false;
+}
 
 document.querySelector('.lang').addEventListener('click',e=>{
   const b=e.target.closest('button[data-lang]');if(b)applyLang(b.dataset.lang);
