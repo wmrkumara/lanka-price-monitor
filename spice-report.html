@@ -647,12 +647,51 @@ function openModal(spiceKey) {
   const gradeRow = document.getElementById('grade-row');
   gradeRow.innerHTML = '';
   sp.grades.forEach(g => {
-    const label = g.replace(' (Average Price)','').replace(' (Highest Price)',' ↑')
+    // Better grade labels especially for "other" commodity
+    const GRADE_LABELS_SI = {
+      'Goraka (Average Price)': 'ගොරකා',
+      'Ginger (Average Price)': 'ඉඟුරු',
+      'Turmeric (Average Price)': '🟡 කහ',
+      'Kithul Jaggery (Average Price)': '🍯 කිතුල් හකුරු',
+      'Goraka (Highest Price)': 'ගොරකා ↑',
+      'Ginger (Highest Price)': 'ඉඟුරු ↑',
+    };
+    const GRADE_LABELS_EN = {
+      'Goraka (Average Price)': 'Goraka',
+      'Ginger (Average Price)': 'Ginger',
+      'Turmeric (Average Price)': '🟡 Turmeric',
+      'Kithul Jaggery (Average Price)': '🍯 Kithul Jaggery',
+    };
+    const GRADE_LABELS_TA = {
+      'Goraka (Average Price)': 'கோரக்கா',
+      'Ginger (Average Price)': 'இஞ்சி',
+      'Turmeric (Average Price)': '🟡 மஞ்சள்',
+      'Kithul Jaggery (Average Price)': '🍯 கிதுல் வெல்லம்',
+    };
+    const gradeMap = lang==='ta' ? GRADE_LABELS_TA : lang==='en' ? GRADE_LABELS_EN : GRADE_LABELS_SI;
+    const label = gradeMap[g] || g.replace(' (Average Price)','').replace(' (Highest Price)',' ↑')
                    .replace('-(Rs./k.g.)','').replace('-(','').replace(')','');
     const btn = document.createElement('button');
     btn.className = 'grade-btn' + (g === currentGrade ? ' on' : '');
     btn.textContent = label;
-    btn.onclick = () => { currentGrade = g; updateGradeButtons(); updateModal(); };
+    btn.onclick = () => { 
+      currentGrade = g; 
+      updateGradeButtons(); 
+      // Update modal title for multi-commodity sections
+      const GRADE_SI_MAP = {
+        'Goraka (Average Price)':'ගොරකා','Ginger (Average Price)':'ඉඟුරු',
+        'Turmeric (Average Price)':'කහ','Kithul Jaggery (Average Price)':'කිතුල් හකුරු',
+        'Cinnamon Leaf Oil (Average Price)':'Cinnamon Leaf Oil',
+        'Citronella Oil (Average Price)':'Citronella Oil',
+      };
+      const gradeTitle = GRADE_SI_MAP[g];
+      if (gradeTitle && ['other','oil'].includes(currentSpice)) {
+        const sp = SPICES[currentSpice];
+        document.getElementById('m-title-si').textContent = gradeTitle;
+        document.getElementById('m-title-en').textContent = g.replace(' (Average Price)','').toUpperCase() + ' · DEA Farm Gate';
+      }
+      updateModal(); 
+    };
     gradeRow.appendChild(btn);
   });
 
@@ -702,8 +741,17 @@ function updateModal() {
   document.getElementById('sv-low').textContent = low < Infinity ? 'රු. ' + low.toLocaleString('en-US',{maximumFractionDigits:0}) : '—';
 
   // Chart title
-  const gradeLabel = currentGrade.replace(' (Average Price)','').replace(' (Highest Price)',' ↑');
-  document.getElementById('chart-title').textContent = `YoY සංසන්දනය — ${sp.si} ${gradeLabel}`;
+  // Better grade label for chart title
+  const GRADE_SI_NAMES = {
+    'Goraka (Average Price)': 'ගොරකා',
+    'Ginger (Average Price)': 'ඉඟුරු',
+    'Turmeric (Average Price)': 'කහ (Turmeric)',
+    'Kithul Jaggery (Average Price)': 'කිතුල් හකුරු',
+  };
+  const gradeLabel = GRADE_SI_NAMES[currentGrade] || 
+    currentGrade.replace(' (Average Price)','').replace(' (Highest Price)',' ↑');
+  const chartSpiceName = lang==='en' ? sp.en : lang==='ta' ? sp.ta : sp.si;
+  document.getElementById('chart-title').textContent = `YoY සංසන්දනය — ${GRADE_SI_NAMES[currentGrade] || sp.si + ' ' + gradeLabel}`;
 
   renderYoYChart();
   renderDistrictTable();
