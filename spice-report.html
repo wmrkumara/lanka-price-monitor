@@ -654,22 +654,28 @@ const MONTH_NAMES = {
 // DATA LOADING
 // ═══════════════════════════════════════════════════
 async function loadData() {
+  const grid = document.getElementById('cards-grid');
   try {
+    if(grid) grid.innerHTML = '<div class="loading">දත්ත පූරණය වෙමින්... ⏳</div>';
     const r = await fetch('dea_data.json', {cache:'no-store'});
+    if (!r.ok) throw new Error('HTTP ' + r.status);
     DEA = await r.json();
+    console.log('DEA loaded:', DEA.weeks?.length, 'weeks');
     initPage();
   } catch(e) {
-    document.getElementById('cards-grid').innerHTML =
-      '<div class="loading">දත්ත පූරණය නොවිය. නැවත උත්සාහ කරන්න.</div>';
+    console.error('Load failed:', e);
+    if(grid) grid.innerHTML =
+      '<div class="loading">දත්ත පූරණය නොවිය: ' + e.message + '<br>නැවත උත්සාහ කරන්න.</div>';
   }
 }
 
 function initPage() {
   updateDateLabel();
   renderCards();
-  initReportGenerator();
   // Open pepper by default
   openModal('pepper');
+  // Init report generator AFTER data is loaded
+  initReportGenerator();
 }
 
 function updateDateLabel() {
@@ -1451,7 +1457,9 @@ function checkUrlParams() {
 // ═══════════════════════════════════════════════════
 
 function updateReportGrades() {
-  const spiceKey = document.getElementById('rg-spice').value;
+  const rgSpice = document.getElementById('rg-spice');
+  if (!rgSpice) return;
+  const spiceKey = rgSpice.value;
   const sp = SPICES[spiceKey];
   const sel = document.getElementById('rg-grade');
   sel.innerHTML = '';
@@ -1514,7 +1522,11 @@ function getReportData() {
 }
 
 function updatePreview() {
-  if (!DEA?.weeks) return;
+  if (!DEA?.weeks) {
+    const prev = document.getElementById('rg-preview');
+    if(prev) prev.innerHTML = 'දත්ත පූරණය වෙමින්...';
+    return;
+  }
   const rows = getReportData();
   const spiceKey = document.getElementById('rg-spice').value;
   const sp = SPICES[spiceKey];
