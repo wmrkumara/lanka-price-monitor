@@ -653,19 +653,73 @@ const MONTH_NAMES = {
 // ═══════════════════════════════════════════════════
 // DATA LOADING
 // ═══════════════════════════════════════════════════
+// Year files cache
+const YEAR_CACHE = {};
+let YEAR_WEEKS = {}; // all weeks merged from year files
+
 async function loadData() {
   const grid = document.getElementById('cards-grid');
   try {
     if(grid) grid.innerHTML = '<div class="loading">දත්ත පූරණය වෙමින්... ⏳</div>';
+    // Load slim index first (fast ~580KB)
     const r = await fetch('dea_data.json', {cache:'no-store'});
     if (!r.ok) throw new Error('HTTP ' + r.status);
     DEA = await r.json();
-    console.log('DEA loaded:', DEA.weeks?.length, 'weeks');
+    console.log('DEA slim loaded:', DEA.weeks?.length, 'weeks');
     initPage();
+    // Then load all year files in background
+    loadAllYears();
   } catch(e) {
     console.error('Load failed:', e);
     if(grid) grid.innerHTML =
-      '<div class="loading">දත්ත පූරණය නොවිය: ' + e.message + '<br>නැවත උත්සාහ කරන්න.</div>';
+      '<div class="loading">දත්ත පූරණය නොවිය. නැවත උත්සාහ කරන්න.<br><small>' + e.message + '</small></div>';
+  }
+}
+
+async function loadAllYears() {
+  // Load all year files in parallel
+  const years = ['2023','2024','2025','2026'];
+  const promises = years.map(yr => loadYear(yr));
+  await Promise.all(promises);
+  // Merge all year weeks into DEA.weeks
+  const allWeeks = [];
+  years.forEach(yr => {
+    if (YEAR_CACHE[yr]?.weeks) allWeeks.push(...YEAR_CACHE[yr].weeks);
+  });
+  allWeeks.sort((a,b) => a.date.localeCompare(b.date));
+  DEA.weeks = allWeeks;
+  console.log('All years loaded:', DEA.weeks.length, 'weeks');
+  // Re-render with full data
+  renderCards();
+  updatePreview();
+}
+
+async function loadYear(yr) {
+  if (YEAR_CACHE[yr]) return YEAR_CACHE[yr];
+  try {
+    const r = await fetch('dea_' + yr + '.json', {cache:'no-store'});
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    YEAR_CACHE[yr] = await r.json();
+    return YEAR_CACHE[yr];
+  } catch(e) {
+    console.warn('Year', yr, 'load failed:', e.message);
+    return null;
+  }
+}
+
+// Ensure year data loaded before showing modal chart
+async function ensureYearData(spiceKey) {
+  const years = ['2023','2024','2025','2026'];
+  const missing = years.filter(yr => !YEAR_CACHE[yr]);
+  if (missing.length > 0) {
+    await Promise.all(missing.map(yr => loadYear(yr)));
+    // Merge
+    const allWeeks = [];
+    years.forEach(yr => {
+      if (YEAR_CACHE[yr]?.weeks) allWeeks.push(...YEAR_CACHE[yr].weeks);
+    });
+    allWeeks.sort((a,b) => a.date.localeCompare(b.date));
+    DEA.weeks = allWeeks;
   }
 }
 
@@ -694,9 +748,9 @@ function getLatestValue(spiceKey, grade) {
   if (!DEA?.weeks) return null;
   for (let i = DEA.weeks.length - 1; i >= 0; i--) {
     const w = DEA.weeks[i];
-    const c = w.commodities?.[spiceKey];
-    if (!c) continue;
-    const v = c.districts?.['National']?.[grade];
+    // Support both slim format (nat) and full format (commodities)
+    const v = w.commodities?.[spiceKey]?.districts?.['National']?.[grade]
+           ?? w.nat?.[spiceKey]?.[grade];
     if (v !== null && v !== undefined) return {value: v, date: w.date, weekIdx: i};
   }
   return null;
@@ -705,7 +759,8 @@ function getLatestValue(spiceKey, grade) {
 function getPrevValue(spiceKey, grade, weekIdx) {
   for (let i = weekIdx - 1; i >= 0; i--) {
     const w = DEA.weeks[i];
-    const v = w.commodities?.[spiceKey]?.districts?.['National']?.[grade];
+    const v = w.commodities?.[spiceKey]?.districts?.['National']?.[grade]
+           ?? w.nat?.[spiceKey]?.[grade];
     if (v !== null && v !== undefined) return v;
   }
   return null;
@@ -714,7 +769,8 @@ function getPrevValue(spiceKey, grade, weekIdx) {
 function getSparklineData(spiceKey, grade, n=12) {
   const vals = [];
   for (const w of DEA.weeks) {
-    const v = w.commodities?.[spiceKey]?.districts?.['National']?.[grade];
+    const v = w.commodities?.[spiceKey]?.districts?.['National']?.[grade]
+           ?? w.nat?.[spiceKey]?.[grade];
     if (v !== null && v !== undefined) vals.push(v);
   }
   return vals.slice(-n);
@@ -769,8 +825,10 @@ function renderCards() {
 // ═══════════════════════════════════════════════════
 // MODAL
 // ═══════════════════════════════════════════════════
-function openModal(spiceKey) {
+async function openModal(spiceKey) {
   currentSpice = spiceKey;
+  // Ensure full year data is loaded for charts
+  await ensureYearData(spiceKey);
   const sp = SPICES[spiceKey];
   currentGrade = sp.defaultGrade;
 
