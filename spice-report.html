@@ -159,6 +159,65 @@ body{background-image:radial-gradient(circle at 12% -10%,rgba(14,79,74,.06),tran
 .share-btn.fb{background:#1877f2;color:#fff;border-color:#1877f2}
 .share-btn.wa{background:#25d366;color:#fff;border-color:#25d366}
 
+
+/* ── AI INSIGHTS BOX ── */
+.insights-box{background:linear-gradient(135deg,#0e4f4a 0%,#0a3a36 100%);
+  border-radius:12px;padding:16px 18px;margin-bottom:20px;color:#fff}
+.insights-head{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.insights-head .ai-badge{background:var(--gold);color:#fff;font-size:9px;font-weight:800;
+  letter-spacing:.1em;padding:2px 7px;border-radius:999px;text-transform:uppercase}
+.insights-head span{font-size:13px;font-weight:700;color:#fff}
+.insights-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.insights-list li{font-size:12.5px;color:rgba(255,255,255,.9);line-height:1.5;
+  padding-left:18px;position:relative}
+.insights-list li::before{content:'•';position:absolute;left:0;color:var(--gold);font-weight:800}
+.insights-list li strong{color:#ffd98a}
+
+/* ── DISTRICT TABLE ── */
+.dist-section{margin-bottom:20px}
+.dist-section h3{font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:12px;
+  letter-spacing:.04em}
+.dist-table-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--line)}
+.dist-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.dist-table thead tr{background:var(--petrol);color:#fff}
+.dist-table thead th{padding:8px 12px;text-align:left;font-size:10.5px;
+  letter-spacing:.08em;text-transform:uppercase;font-weight:700;white-space:nowrap}
+.dist-table tbody tr{border-bottom:1px solid var(--line);transition:background .12s}
+.dist-table tbody tr:last-child{border-bottom:none}
+.dist-table tbody tr:hover{background:rgba(14,79,74,.04)}
+.dist-table tbody tr.national{background:rgba(169,128,42,.08);font-weight:700}
+.dist-table tbody tr.national td{border-top:2px solid var(--line-strong)}
+.dist-table td{padding:7px 12px;white-space:nowrap}
+.dist-table td:first-child{font-weight:600;color:var(--ink-soft);font-size:12px}
+.dist-table .pv{font-family:"JetBrains Mono",monospace;font-weight:600;font-size:12.5px}
+.dist-table .pv.na{color:var(--muted);font-style:italic;font-size:11px}
+.dist-table .pv.high{color:var(--gold);font-weight:800}
+/* bar inside table */
+.bar-cell{min-width:80px}
+.mini-bar{height:6px;border-radius:3px;background:var(--petrol);opacity:.7;transition:.3s}
+
+/* ── VOICE FEATURES ── */
+.voice-row{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.voice-search-wrap{flex:1;min-width:200px;position:relative}
+.voice-input{width:100%;font:inherit;font-size:13px;padding:9px 40px 9px 14px;
+  border:1.5px solid var(--line-strong);border-radius:999px;background:var(--paper);
+  color:var(--ink);outline:none;transition:.2s}
+.voice-input:focus{border-color:var(--petrol);box-shadow:0 0 0 3px rgba(14,79,74,.12)}
+.voice-input::placeholder{color:var(--muted)}
+.mic-btn{position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  background:none;border:none;font-size:18px;cursor:pointer;padding:4px;
+  color:var(--petrol);transition:.2s}
+.mic-btn:hover{transform:translateY(-50%) scale(1.15)}
+.mic-btn.listening{animation:pulse 1s infinite;color:var(--up)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.speak-btn{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:12px;
+  font-weight:700;padding:8px 16px;border-radius:999px;border:1.5px solid var(--petrol);
+  background:var(--petrol-light);color:var(--petrol);cursor:pointer;transition:.18s;
+  white-space:nowrap}
+.speak-btn:hover{background:var(--petrol);color:#fff}
+.speak-btn.speaking{background:var(--petrol);color:#fff;animation:pulse 1s infinite}
+.voice-status{font-size:11px;color:var(--muted);margin-top:4px;min-height:16px}
+
 /* footer */
 footer{margin:40px 0 60px;padding-top:20px;border-top:1px solid var(--line-strong);
   font-size:12.5px;color:var(--muted)}
@@ -246,6 +305,32 @@ footer{margin:40px 0 60px;padding-top:20px;border-top:1px solid var(--line-stron
     </div>
 
     <div class="modal-body">
+
+      <!-- VOICE ROW -->
+      <div class="voice-row">
+        <div class="voice-search-wrap">
+          <input type="text" class="voice-input" id="voice-input"
+            placeholder="🔍 ගම්මිරිස් / Pepper / மிளகு..."
+            oninput="handleSearch(this.value)" onkeydown="if(event.key==='Enter')handleSearch(this.value)">
+          <button class="mic-btn" id="mic-btn" onclick="startVoice()" title="Voice Search">🎤</button>
+        </div>
+        <button class="speak-btn" id="speak-btn" onclick="speakPrice()">
+          🔊 <span id="speak-label">මිල කියවන්න</span>
+        </button>
+      </div>
+      <div class="voice-status" id="voice-status"></div>
+
+      <!-- AI INSIGHTS -->
+      <div class="insights-box" id="insights-box">
+        <div class="insights-head">
+          <span class="ai-badge">AI</span>
+          <span id="insights-title">විශ්ලේෂණය</span>
+        </div>
+        <ul class="insights-list" id="insights-list">
+          <li>දත්ත පූරණය වෙමින්...</li>
+        </ul>
+      </div>
+
       <!-- Stat boxes -->
       <div class="stat-boxes">
         <div class="stat-box">
@@ -278,6 +363,25 @@ footer{margin:40px 0 60px;padding-top:20px;border-top:1px solid var(--line-stron
         </div>
         <div class="chart-wrap">
           <canvas id="yoy-chart"></canvas>
+        </div>
+      </div>
+
+      <!-- DISTRICT TABLE -->
+      <div class="dist-section">
+        <h3 id="dist-title">දිස්ත්‍රික් අනුව මිල ගණන් — නවතම සතිය</h3>
+        <div class="dist-table-wrap">
+          <table class="dist-table" id="dist-table">
+            <thead><tr>
+              <th id="th-district">දිස්ත්‍රික්කය</th>
+              <th id="th-highest">උපරිම මිල</th>
+              <th id="th-average">සාමාන්‍ය මිල</th>
+              <th id="th-bar">සාපේක්ෂතාව</th>
+            </tr></thead>
+            <tbody id="dist-tbody">
+              <tr><td colspan="4" style="text-align:center;color:var(--muted);padding:20px">
+                පූරණය වෙමින්...</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -560,7 +664,10 @@ function updateModal() {
   document.getElementById('chart-title').textContent = `YoY සංසන්දනය — ${sp.si} ${gradeLabel}`;
 
   renderYoYChart();
+  renderDistrictTable();
+  generateInsights();
   updateShareLinks();
+  updateVoiceLabels();
 }
 
 // ═══════════════════════════════════════════════════
@@ -681,6 +788,356 @@ function closeModalDirect() {
   document.body.style.overflow = '';
 }
 
+
+// ═══════════════════════════════════════════════════
+// DISTRICT TABLE
+// ═══════════════════════════════════════════════════
+const DISTRICT_NAMES = {
+  si:{'Kandy':'මහනුවර','Matale':'මාතලේ','Nuwara_eliya':'නුවරඑළිය','Kegalle':'කෑගල්ල',
+      'Ratnapura':'රත්නපුර','Badulla':'බදුල්ල','Kurunegala':'කුරුණෑගල','Colombo':'කොළඹ',
+      'Gampaha':'ගම්පහ','Kalutara':'කළුතර','Galle':'ගාල්ල','Matara':'මාතර',
+      'Hambantota':'හම්බන්තොට','Monaragala':'මොනරාගල','National':'🇱🇰 ජාතික'},
+  ta:{'Kandy':'கண்டி','Matale':'மாத்தளை','Nuwara_eliya':'நுவரெலியா','Kegalle':'கேகாலை',
+      'Ratnapura':'இரத்தினபுரி','Badulla':'பதுளை','Kurunegala':'குருணாகல்','Colombo':'கொழும்பு',
+      'Gampaha':'கம்பஹா','Kalutara':'களுத்துறை','Galle':'காலி','Matara':'மாத்தறை',
+      'Hambantota':'அம்பாந்தோட்டை','Monaragala':'மொணராகலை','National':'🇱🇰 தேசிய'},
+  en:{'Kandy':'Kandy','Matale':'Matale','Nuwara_eliya':'Nuwara Eliya','Kegalle':'Kegalle',
+      'Ratnapura':'Ratnapura','Badulla':'Badulla','Kurunegala':'Kurunegala','Colombo':'Colombo',
+      'Gampaha':'Gampaha','Kalutara':'Kalutara','Galle':'Galle','Matara':'Matara',
+      'Hambantota':'Hambantota','Monaragala':'Monaragala','National':'🇱🇰 National'},
+};
+
+function renderDistrictTable() {
+  const tbody = document.getElementById('dist-tbody');
+  if (!tbody || !DEA) return;
+
+  // Get latest week data for this spice
+  let latestWeek = null;
+  for (let i = DEA.weeks.length - 1; i >= 0; i--) {
+    if (DEA.weeks[i].commodities?.[currentSpice]) {
+      latestWeek = DEA.weeks[i];
+      break;
+    }
+  }
+  if (!latestWeek) { tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:20px">දත්ත නොමැත</td></tr>'; return; }
+
+  const commodity = latestWeek.commodities[currentSpice];
+  const districts = commodity?.districts || {};
+
+  // Determine highest and average price columns
+  const highCol = currentGrade.replace('Average Price', 'Highest Price');
+  const avgCol = currentGrade;
+
+  // Get all values to calculate max for bar
+  const values = Object.entries(districts)
+    .filter(([d]) => d !== 'National')
+    .map(([d, v]) => v?.[avgCol])
+    .filter(v => v !== null && v !== undefined);
+  const maxVal = Math.max(...values);
+
+  tbody.innerHTML = '';
+  // Sort districts by average price descending
+  const sorted = Object.entries(districts)
+    .filter(([d]) => d !== 'National')
+    .sort((a, b) => (b[1]?.[avgCol] || 0) - (a[1]?.[avgCol] || 0));
+
+  // Add regular districts
+  sorted.forEach(([distKey, vals]) => {
+    const high = vals?.[highCol];
+    const avg = vals?.[avgCol];
+    if (avg === null || avg === undefined) return;
+    const pct = maxVal > 0 ? (avg / maxVal * 100) : 0;
+    const distName = DISTRICT_NAMES[lang]?.[distKey] || distKey;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${distName}</td>
+      <td class="pv ${high ? '' : 'na'}">${high ? 'රු. ' + high.toLocaleString('en-US',{maximumFractionDigits:0}) : '—'}</td>
+      <td class="pv">${avg ? 'රු. ' + avg.toLocaleString('en-US',{maximumFractionDigits:0}) : '—'}</td>
+      <td class="bar-cell"><div class="mini-bar" style="width:${pct.toFixed(0)}%"></div></td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  // Add National row at bottom
+  const nat = districts['National'];
+  if (nat) {
+    const high = nat?.[highCol];
+    const avg = nat?.[avgCol];
+    const natName = DISTRICT_NAMES[lang]?.['National'] || '🇱🇰 National';
+    const tr = document.createElement('tr');
+    tr.className = 'national';
+    tr.innerHTML = `
+      <td>${natName}</td>
+      <td class="pv high">${high ? 'රු. ' + high.toLocaleString('en-US',{maximumFractionDigits:0}) : '—'}</td>
+      <td class="pv high">${avg ? 'රු. ' + avg.toLocaleString('en-US',{maximumFractionDigits:0}) : '—'}</td>
+      <td class="bar-cell"><div class="mini-bar" style="width:100%;background:var(--gold)"></div></td>
+    `;
+    tbody.appendChild(tr);
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// AI INSIGHTS
+// ═══════════════════════════════════════════════════
+function generateInsights() {
+  const sp = SPICES[currentSpice];
+  const latest = getLatestValue(currentSpice, currentGrade);
+  const val = latest?.value;
+  if (!val) return;
+
+  const prev = latest ? getPrevValue(currentSpice, currentGrade, latest.weekIdx) : null;
+  const pct = val && prev ? ((val - prev) / prev * 100) : null;
+
+  // Get 4yr high and low
+  let high = -Infinity, low = Infinity, highYear = '', lowYear = '';
+  DEA.weeks.forEach(w => {
+    const v = w.commodities?.[currentSpice]?.districts?.['National']?.[currentGrade];
+    if (v !== null && v !== undefined) {
+      if (v > high) { high = v; highYear = w.date.substring(0,4); }
+      if (v < low) { low = v; lowYear = w.date.substring(0,4); }
+    }
+  });
+
+  // Get 2026 vs 2025 same period comparison
+  const weeks2026 = DEA.weeks.filter(w => w.date.startsWith('2026'));
+  const weeks2025 = DEA.weeks.filter(w => w.date.startsWith('2025'));
+  let avg2026 = 0, avg2025 = 0, cnt2026 = 0, cnt2025 = 0;
+  weeks2026.forEach(w => {
+    const v = w.commodities?.[currentSpice]?.districts?.['National']?.[currentGrade];
+    if (v) { avg2026 += v; cnt2026++; }
+  });
+  weeks2025.forEach(w => {
+    const v = w.commodities?.[currentSpice]?.districts?.['National']?.[currentGrade];
+    if (v) { avg2025 += v; cnt2025++; }
+  });
+  avg2026 = cnt2026 ? avg2026/cnt2026 : 0;
+  avg2025 = cnt2025 ? avg2025/cnt2025 : 0;
+  const yoyPct = avg2025 > 0 ? ((avg2026 - avg2025) / avg2025 * 100) : 0;
+
+  // Get best district for current week
+  let bestDist = '', bestVal = 0;
+  const latestWeek = DEA.weeks[DEA.weeks.length-1];
+  const distData = latestWeek?.commodities?.[currentSpice]?.districts || {};
+  Object.entries(distData).forEach(([d, v]) => {
+    if (d === 'National') return;
+    const dv = v?.[currentGrade];
+    if (dv && dv > bestVal) { bestVal = dv; bestDist = d; }
+  });
+  const bestDistName = DISTRICT_NAMES[lang]?.[bestDist] || bestDist;
+
+  const gradeLabel = currentGrade.replace(' (Average Price)','').replace(' (Highest Price)',' ↑');
+  const spName = lang==='en'?sp.en:lang==='ta'?sp.ta:sp.si;
+
+  const insights = [];
+
+  // Insight 1: Current price vs week ago
+  if (pct !== null) {
+    const dir = pct > 0 ? (lang==='si'?'ඉහළ ගොස්':lang==='ta'?'உயர்ந்துள்ளது':'increased') :
+                          (lang==='si'?'පහළ ගොස්':lang==='ta'?'குறைந்துள்ளது':'decreased');
+    insights.push(lang==='si' ?
+      `<strong>${spName} ${gradeLabel}</strong> ජාතික සාමාන්‍ය <strong>රු. ${val.toLocaleString('en-US',{maximumFractionDigits:0})}</strong> — සතියේ ${dir} <strong>${Math.abs(pct).toFixed(1)}%</strong>` :
+      lang==='ta' ?
+      `<strong>${spName} ${gradeLabel}</strong> தேசிய சராசரி <strong>ரூ. ${val.toLocaleString('en-US',{maximumFractionDigits:0})}</strong> — வாரத்தில் ${dir} <strong>${Math.abs(pct).toFixed(1)}%</strong>` :
+      `<strong>${spName} ${gradeLabel}</strong> national average is <strong>Rs. ${val.toLocaleString('en-US',{maximumFractionDigits:0})}</strong> — ${dir} by <strong>${Math.abs(pct).toFixed(1)}%</strong> this week`
+    );
+  }
+
+  // Insight 2: YoY comparison
+  if (yoyPct !== 0 && avg2025 > 0) {
+    const dir2 = yoyPct > 0 ? (lang==='si'?'ඉහළ':lang==='ta'?'அதிகம்':'higher') :
+                               (lang==='si'?'පහළ':lang==='ta'?'குறைவு':'lower');
+    insights.push(lang==='si' ?
+      `2026 සාමාන්‍ය <strong>රු. ${Math.round(avg2026).toLocaleString()}</strong> — 2025 හා සසඳලේ <strong>${Math.abs(yoyPct).toFixed(1)}%</strong> ${dir2}` :
+      lang==='ta' ?
+      `2026 சராசரி <strong>ரூ. ${Math.round(avg2026).toLocaleString()}</strong> — 2025 உடன் ஒப்பிடும்போது <strong>${Math.abs(yoyPct).toFixed(1)}%</strong> ${dir2}` :
+      `2026 average <strong>Rs. ${Math.round(avg2026).toLocaleString()}</strong> is <strong>${Math.abs(yoyPct).toFixed(1)}%</strong> ${dir2} than 2025`
+    );
+  }
+
+  // Insight 3: 4yr high/low
+  if (high > -Infinity) {
+    insights.push(lang==='si' ?
+      `4 අවු. ඉහළම <strong>රු. ${high.toLocaleString('en-US',{maximumFractionDigits:0})}</strong> (${highYear}) · 4 අවු. පහළම <strong>රු. ${low.toLocaleString('en-US',{maximumFractionDigits:0})}</strong> (${lowYear})` :
+      lang==='ta' ?
+      `4 ஆண்டு உயர்வு <strong>ரூ. ${high.toLocaleString('en-US',{maximumFractionDigits:0})}</strong> (${highYear}) · குறைவு <strong>ரூ. ${low.toLocaleString('en-US',{maximumFractionDigits:0})}</strong> (${lowYear})` :
+      `4-year high: <strong>Rs. ${high.toLocaleString('en-US',{maximumFractionDigits:0})}</strong> (${highYear}) · 4-year low: <strong>Rs. ${low.toLocaleString('en-US',{maximumFractionDigits:0})}</strong> (${lowYear})`
+    );
+  }
+
+  // Insight 4: Best district
+  if (bestDist) {
+    insights.push(lang==='si' ?
+      `මෙම සතිය උපරිම මිල: <strong>${bestDistName}</strong> — <strong>රු. ${bestVal.toLocaleString('en-US',{maximumFractionDigits:0})}</strong>/කි.ග්‍රෑ.` :
+      lang==='ta' ?
+      `இந்த வாரம் அதிகபட்ச விலை: <strong>${bestDistName}</strong> — <strong>ரூ. ${bestVal.toLocaleString('en-US',{maximumFractionDigits:0})}</strong>/கிலோ` :
+      `Highest price this week: <strong>${bestDistName}</strong> district — <strong>Rs. ${bestVal.toLocaleString('en-US',{maximumFractionDigits:0})}</strong>/kg`
+    );
+  }
+
+  const list = document.getElementById('insights-list');
+  if (list) list.innerHTML = insights.map(i => `<li>${i}</li>`).join('');
+
+  const title = document.getElementById('insights-title');
+  if (title) title.textContent = lang==='si'?'විශ්ලේෂණය':lang==='ta'?'பகுப்பாய்வு':'Analysis';
+}
+
+// ═══════════════════════════════════════════════════
+// VOICE SEARCH
+// ═══════════════════════════════════════════════════
+const VOICE_KEYWORDS = {
+  pepper:   ['pepper','ගම්මිරිස්','gammiris','மிளகு','milagu','black pepper'],
+  clove:    ['clove','කරාබු','karabu','கிராம்பு','kirambu','cloves'],
+  coffee:   ['coffee','කෝපි','kopi','காபி','kapi'],
+  cocoa:    ['cocoa','කොකෝ','koko','கொக்கோ','cacao'],
+  cardamom: ['cardamom','එනසාල්','enasaal','ஏலக்காய்','elakkai'],
+  nutmeg:   ['nutmeg','සාදික්කා','sadikka','ஜாதிக்காய்','jathikkai','mace'],
+  cinnamon: ['cinnamon','කුරුඳු','kurundu','இலவங்கப்பட்டை','ilavangam'],
+  betel:    ['betel','බුලත්','bulath','வெற்றிலை','vetrilai'],
+  arecanut: ['arecanut','areca','පුවක්','puwak','பாக்கு','pakku'],
+  other:    ['goraka','ගොරකා','ginger','ඉඟුරු','inguru','turmeric','கோரக்கா','இஞ்சி'],
+  oil:      ['oil','තෙල්','thel','எண்ணெய்','ennai','cinnamon oil','citronella'],
+};
+
+function handleSearch(val) {
+  if (!val || val.length < 2) return;
+  const lower = val.toLowerCase();
+  for (const [spiceKey, keywords] of Object.entries(VOICE_KEYWORDS)) {
+    if (keywords.some(k => lower.includes(k.toLowerCase()))) {
+      document.getElementById('voice-status').textContent =
+        lang==='si' ? `"${val}" — ${SPICES[spiceKey].si} සොයා ගන්නා ලදී ✅` :
+        lang==='ta' ? `"${val}" — ${SPICES[spiceKey].ta} கண்டறியப்பட்டது ✅` :
+        `"${val}" → ${SPICES[spiceKey].en} found ✅`;
+      setTimeout(() => openModal(spiceKey), 300);
+      return;
+    }
+  }
+  document.getElementById('voice-status').textContent =
+    lang==='si' ? `"${val}" — හඳුනා නොගැනීය. නැවත උත්සාහ කරන්න.` :
+    lang==='ta' ? `"${val}" — கண்டறியவில்லை. மீண்டும் முயற்சிக்கவும்.` :
+    `"${val}" — not recognized. Try again.`;
+}
+
+let recognition = null;
+function startVoice() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+    document.getElementById('voice-status').textContent =
+      lang==='si' ? 'Voice search මෙම browser හි ක්‍රියා නොකරයි. Chrome භාවිත කරන්න.' :
+      'Voice search not supported. Please use Chrome.';
+    return;
+  }
+  if (recognition) { recognition.stop(); return; }
+  recognition = new SpeechRecognition();
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  recognition.lang = lang === 'si' ? 'si-LK' : lang === 'ta' ? 'ta-LK' : 'en-US';
+
+  const micBtn = document.getElementById('mic-btn');
+  const status = document.getElementById('voice-status');
+
+  recognition.onstart = () => {
+    micBtn.classList.add('listening');
+    status.textContent = lang==='si' ? '🎤 සවන් දෙමින්...' : lang==='ta' ? '🎤 கேட்கிறேன்...' : '🎤 Listening...';
+  };
+  recognition.onresult = e => {
+    const transcript = e.results[0][0].transcript;
+    document.getElementById('voice-input').value = transcript;
+    handleSearch(transcript);
+  };
+  recognition.onerror = () => {
+    status.textContent = lang==='si' ? 'නැවත උත්සාහ කරන්න.' : 'Please try again.';
+  };
+  recognition.onend = () => {
+    micBtn.classList.remove('listening');
+    recognition = null;
+  };
+  recognition.start();
+}
+
+// ═══════════════════════════════════════════════════
+// PRICE READ ALOUD
+// ═══════════════════════════════════════════════════
+function numToWordsSI(n) {
+  const ones = ['','එක','දෙක','තුන','හතර','පහ','හය','හත','අට','නව','දහ',
+    'එකොළොස','දොළොස','දහතුන','දහහතර','පහළොස','දහසය','දහහත','දහඅට','දහනව'];
+  const tens = ['','','විස්ස','තිස','හතළිස','පනස','හැට','හැත්තෑ','අසූ','අනූ'];
+  if (n === 0) return 'බිංදුව';
+  if (n < 20) return ones[n];
+  if (n < 100) return tens[Math.floor(n/10)] + (n%10 ? ' ' + ones[n%10] : '');
+  if (n < 1000) return ones[Math.floor(n/100)] + ' සිය' + (n%100 ? ' ' + numToWordsSI(n%100) : '');
+  if (n < 10000) return ones[Math.floor(n/1000)] + ' දහස' + (n%1000 ? ' ' + numToWordsSI(n%1000) : '');
+  return n.toString();
+}
+
+function numToWordsEN(n) {
+  const ones = ['','one','two','three','four','five','six','seven','eight','nine','ten',
+    'eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen'];
+  const tens = ['','','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety'];
+  if (n === 0) return 'zero';
+  if (n < 20) return ones[n];
+  if (n < 100) return tens[Math.floor(n/10)] + (n%10 ? '-' + ones[n%10] : '');
+  if (n < 1000) return ones[Math.floor(n/100)] + ' hundred' + (n%100 ? ' and ' + numToWordsEN(n%100) : '');
+  if (n < 10000) return ones[Math.floor(n/1000)] + ' thousand' + (n%1000 ? ' ' + numToWordsEN(n%1000) : '');
+  return n.toString();
+}
+
+let utterance = null;
+function speakPrice() {
+  if (speechSynthesis.speaking) {
+    speechSynthesis.cancel();
+    document.getElementById('speak-btn').classList.remove('speaking');
+    return;
+  }
+  const sp = SPICES[currentSpice];
+  const latest = getLatestValue(currentSpice, currentGrade);
+  const val = latest?.value;
+  if (!val) return;
+
+  const rounded = Math.round(val);
+  const gradeLabel = currentGrade.replace(' (Average Price)','').replace(' (Highest Price)',' ');
+
+  let text = '';
+  let voiceLang = 'en-US';
+
+  if (lang === 'si') {
+    text = `${sp.si} ${gradeLabel} ජාතික සාමාන්‍ය ගොවිපළ දොරටු මිල රුපියල් ${numToWordsSI(rounded)}`;
+    voiceLang = 'si-LK';
+  } else if (lang === 'ta') {
+    text = `${sp.ta} ${gradeLabel} தேசிய சராசரி பண்ணை வாயில் விலை ${rounded.toLocaleString()} ரூபாய்`;
+    voiceLang = 'ta-IN';
+  } else {
+    text = `${sp.en} ${gradeLabel} national average farm gate price is ${numToWordsEN(rounded)} rupees per kilogram`;
+    voiceLang = 'en-US';
+  }
+
+  utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = voiceLang;
+  utterance.rate = 0.85;
+  utterance.pitch = 1;
+
+  const speakBtn = document.getElementById('speak-btn');
+  utterance.onstart = () => speakBtn.classList.add('speaking');
+  utterance.onend = () => speakBtn.classList.remove('speaking');
+  utterance.onerror = () => speakBtn.classList.remove('speaking');
+
+  speechSynthesis.speak(utterance);
+}
+
+// Update speak button label by language
+function updateVoiceLabels() {
+  const lbl = document.getElementById('speak-label');
+  if (lbl) lbl.textContent = lang==='si'?'මිල කියවන්න':lang==='ta'?'விலை சொல்லு':'Read Price';
+  const inp = document.getElementById('voice-input');
+  if (inp) inp.placeholder = lang==='si'?'🔍 ගම්මිරිස් / Pepper / மிளகு...':
+    lang==='ta'?'🔍 மிளகு / Pepper / ගම්මිරිස்...':'🔍 Pepper / ගම්මිරිස් / மிளகு...';
+  const dth = document.getElementById('th-district');
+  if(dth) dth.textContent = lang==='si'?'දිස්ත්‍රික්කය':lang==='ta'?'மாவட்டம்':'District';
+  const thi = document.getElementById('th-highest');
+  if(thi) thi.textContent = lang==='si'?'උපරිම':lang==='ta'?'அதிகபட்சம்':'Highest';
+  const tha = document.getElementById('th-average');
+  if(tha) tha.textContent = lang==='si'?'සාමාන්‍ය':lang==='ta'?'சராசரி':'Average';
+}
+
 // ═══════════════════════════════════════════════════
 // LANGUAGE
 // ═══════════════════════════════════════════════════
@@ -694,6 +1151,9 @@ document.querySelector('.lang').addEventListener('click', e => {
   if (document.getElementById('modal-overlay').classList.contains('open')) {
     const sp = SPICES[currentSpice];
     document.getElementById('m-title-si').textContent = lang==='en'?sp.en:lang==='ta'?sp.ta:sp.si;
+    generateInsights();
+    renderDistrictTable();
+    updateVoiceLabels();
   }
 });
 
