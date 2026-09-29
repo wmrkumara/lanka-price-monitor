@@ -158,6 +158,13 @@ body{background-image:radial-gradient(circle at 12% -10%,rgba(14,79,74,.06),tran
 .share-btn:hover{border-color:var(--petrol);color:var(--petrol)}
 .share-btn.fb{background:#1877f2;color:#fff;border-color:#1877f2}
 .share-btn.wa{background:#25d366;color:#fff;border-color:#25d366}
+.share-btn.speak-style{background:var(--ink);color:#fff;border-color:var(--ink)}
+.share-btn.speak-style:hover{background:#333}
+.share-btn.img-share{background:var(--paper-2);color:var(--ink-soft);border-color:var(--line-strong)}
+.share-btn.img-share:hover{border-color:var(--petrol);color:var(--petrol)}
+.share-btn.price-page{background:var(--gold-light);color:var(--gold);border-color:var(--gold);
+  text-decoration:none}
+.share-btn.price-page:hover{background:var(--gold);color:#fff}
 
 
 /* ── AI INSIGHTS BOX ── */
@@ -375,7 +382,7 @@ footer{margin:40px 0 60px;padding-top:20px;border-top:1px solid var(--line-stron
               <th id="th-district">දිස්ත්‍රික්කය</th>
               <th id="th-highest">උපරිම මිල</th>
               <th id="th-average">සාමාන්‍ය මිල</th>
-              <th id="th-bar">සාපේක්ෂතාව</th>
+              <th id="th-bar">මිල රේඛාව</th>
             </tr></thead>
             <tbody id="dist-tbody">
               <tr><td colspan="4" style="text-align:center;color:var(--muted);padding:20px">
@@ -385,11 +392,29 @@ footer{margin:40px 0 60px;padding-top:20px;border-top:1px solid var(--line-stron
         </div>
       </div>
 
-      <!-- Share -->
+      <!-- Share Row — HARTI style -->
       <div class="share-row">
-        <a href="#" class="share-btn fb" id="share-fb" target="_blank">📘 Facebook</a>
-        <a href="#" class="share-btn wa" id="share-wa" target="_blank">💬 WhatsApp</a>
-        <button class="share-btn" onclick="copyLink()">🔗 <span id="lbl-copy">Link Copy</span></button>
+        <button class="share-btn speak-style" onclick="speakPrice()">
+          🔊 <span id="lbl-speak-btn">සයටන</span>
+        </button>
+        <a href="#" class="share-btn wa" id="share-wa" target="_blank">
+          💬 <span id="lbl-wa">Share කරන්න</span>
+        </a>
+        <a href="#" class="share-btn fb" id="share-fb" target="_blank">
+          📘 <span id="lbl-fb">ෆේස්බුක්</span>
+        </a>
+        <button class="share-btn img-share" onclick="copyLink()">
+          🖼️ <span id="lbl-copy">රූපයක් ලෙස Share</span>
+        </button>
+        <a href="spices.html" class="share-btn price-page">
+          📊 <span id="lbl-price-page">මිල පිටුව</span>
+        </a>
+      </div>
+      <div style="text-align:center;margin-top:12px;font-size:11px;color:var(--muted);
+        border-top:1px solid var(--line);padding-top:10px">
+        <strong style="color:var(--petrol)">www.TopGoviya.lk</strong>
+        <span style="margin:0 8px;color:var(--line-strong)">·</span>
+        <span id="lbl-source-note">"මිල දත්ත සොයා ගැනීමට කවදාවත් ගෙවන්නේ නැහැ"</span>
       </div>
     </div>
   </div>
@@ -1127,6 +1152,19 @@ function speakPrice() {
 function updateVoiceLabels() {
   const lbl = document.getElementById('speak-label');
   if (lbl) lbl.textContent = lang==='si'?'මිල කියවන්න':lang==='ta'?'விலை சொல்லு':'Read Price';
+  const spkBtn = document.getElementById('lbl-speak-btn');
+  if(spkBtn) spkBtn.textContent = lang==='si'?'සයටන':lang==='ta'?'சொல்லு':'Speak';
+  const waLbl = document.getElementById('lbl-wa');
+  if(waLbl) waLbl.textContent = lang==='si'?'Share කරන්න':lang==='ta'?'பகிர்':'Share';
+  const fbLbl = document.getElementById('lbl-fb');
+  if(fbLbl) fbLbl.textContent = lang==='si'?'ෆේස්බුක්':lang==='ta'?'முகநூல்':'Facebook';
+  const ppLbl = document.getElementById('lbl-price-page');
+  if(ppLbl) ppLbl.textContent = lang==='si'?'මිල පිටුව':lang==='ta'?'விலை பக்கம்':'Price Page';
+  const srcNote = document.getElementById('lbl-source-note');
+  if(srcNote) srcNote.textContent = lang==='si'?'"මිල දත්ත සොයා ගැනීමට කවදාවත් ගෙවන්නේ නැහැ"':
+    lang==='ta'?'"விலை தகவல் எப்போதும் இலவசம்"':'"Price data — always free"';
+  const thBar = document.getElementById('th-bar');
+  if(thBar) thBar.textContent = lang==='si'?'මිල රේඛාව':lang==='ta'?'விலை பட்டை':'Price Bar';
   const inp = document.getElementById('voice-input');
   if (inp) inp.placeholder = lang==='si'?'🔍 ගම්මිරිස් / Pepper / மிளகு...':
     lang==='ta'?'🔍 மிளகு / Pepper / ගම්මිරිස்...':'🔍 Pepper / ගම්මිරිස් / மிளகு...';
