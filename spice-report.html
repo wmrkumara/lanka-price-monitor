@@ -226,6 +226,43 @@ body{background-image:radial-gradient(circle at 12% -10%,rgba(14,79,74,.06),tran
 .speak-btn.speaking{background:var(--petrol);color:#fff;animation:pulse 1s infinite}
 .voice-status{font-size:11px;color:var(--muted);margin-top:4px;min-height:16px}
 
+
+/* ── REPORT GENERATOR ── */
+.report-section{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:24px;margin:32px 0 40px;box-shadow:var(--shadow)}
+.report-section h2{font-family:'Newsreader','Noto Sans Sinhala',serif;font-size:22px;
+  font-weight:500;margin-bottom:6px;letter-spacing:-.01em}
+.report-section .sub{font-size:13px;color:var(--muted);margin-bottom:22px}
+.report-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;
+  margin-bottom:20px}
+.report-field label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.report-field select{width:100%;font:inherit;font-size:13px;font-weight:600;
+  padding:9px 12px;border:1.5px solid var(--line-strong);border-radius:10px;
+  background:var(--paper);color:var(--ink);cursor:pointer;outline:none;transition:.2s}
+.report-field select:focus{border-color:var(--petrol);box-shadow:0 0 0 3px rgba(14,79,74,.12)}
+.report-preview{background:var(--paper);border:1px solid var(--line);border-radius:10px;
+  padding:14px 16px;margin-bottom:18px;font-size:12.5px;color:var(--ink-soft)}
+.report-preview strong{color:var(--petrol)}
+.report-preview .preview-count{font-family:'JetBrains Mono',monospace;font-weight:700;
+  color:var(--gold);font-size:14px}
+.report-btns{display:flex;gap:10px;flex-wrap:wrap}
+.dl-btn{display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:13px;
+  font-weight:700;padding:11px 22px;border-radius:999px;border:none;cursor:pointer;
+  transition:.2s;text-decoration:none}
+.dl-btn.csv{background:var(--petrol);color:#fff}
+.dl-btn.csv:hover{background:var(--petrol-deep);transform:translateY(-1px)}
+.dl-btn.excel{background:#217346;color:#fff}
+.dl-btn.excel:hover{background:#1a5c38;transform:translateY(-1px)}
+.dl-btn.json{background:var(--paper-2);color:var(--ink-soft);border:1.5px solid var(--line-strong)}
+.dl-btn.json:hover{border-color:var(--petrol);color:var(--petrol)}
+.dl-btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+@media(max-width:600px){
+  .report-grid{grid-template-columns:1fr 1fr}
+  .report-btns{flex-direction:column}
+  .dl-btn{justify-content:center}
+}
+
 /* footer */
 footer{margin:40px 0 60px;padding-top:20px;border-top:1px solid var(--line-strong);
   font-size:12.5px;color:var(--muted)}
@@ -422,6 +459,118 @@ footer{margin:40px 0 60px;padding-top:20px;border-top:1px solid var(--line-stron
 </div>
 
 <div class="wrap">
+
+<!-- ══ REPORT GENERATOR ══ -->
+<div class="section-h" style="margin-top:40px">
+  <h2 id="rg-heading">වාර්තා බාගත කරන්න</h2>
+  <span class="rule"></span>
+  <span class="hint" id="rg-hint">DEA · 2023–2026 · CSV / Excel / JSON</span>
+</div>
+
+<div class="report-section">
+  <h2 id="rg-title">DEA කුළුබඩු මිල වාර්තා ජනකය</h2>
+  <div class="sub" id="rg-sub">බෝගය, ශ්‍රේණිය, දිස්ත්‍රිය සහ දිනය තෝරා ඔබගේ format එකේ download කරන්න</div>
+
+  <div class="report-grid">
+    <!-- Spice -->
+    <div class="report-field">
+      <label id="rg-lbl-spice">කුළුබඩු වර්ගය</label>
+      <select id="rg-spice" onchange="updateReportGrades();updatePreview()">
+        <option value="pepper">🌶️ ගම්මිරිස් (Pepper)</option>
+        <option value="clove">🌿 කරාබු නැටි (Clove)</option>
+        <option value="coffee">☕ කෝපි (Coffee)</option>
+        <option value="cocoa">🍫 කොකෝ (Cocoa)</option>
+        <option value="cardamom">🫚 එනසාල් (Cardamom)</option>
+        <option value="nutmeg">🥜 සාදික්කා (Nutmeg)</option>
+        <option value="cinnamon">🪵 කුරුඳු (Cinnamon)</option>
+        <option value="betel">🍃 බුලත් (Betel)</option>
+        <option value="arecanut">🌴 පුවක් (Arecanut)</option>
+        <option value="other">🌾 ගොරකා/ඉඟුරු (Goraka/Ginger)</option>
+        <option value="oil">💧 සුගන්ධ තෙල් (Essential Oils)</option>
+      </select>
+    </div>
+
+    <!-- Grade -->
+    <div class="report-field">
+      <label id="rg-lbl-grade">ශ්‍රේණිය</label>
+      <select id="rg-grade" onchange="updatePreview()"></select>
+    </div>
+
+    <!-- District -->
+    <div class="report-field">
+      <label id="rg-lbl-district">දිස්ත්‍රිය</label>
+      <select id="rg-district" onchange="updatePreview()">
+        <option value="all">සියලු දිස්ත්‍රික් (All Districts)</option>
+        <option value="National">🇱🇰 ජාතික (National)</option>
+        <option value="Kandy">මහනුවර (Kandy)</option>
+        <option value="Matale">මාතලේ (Matale)</option>
+        <option value="Nuwara_eliya">නුවරඑළිය (Nuwara Eliya)</option>
+        <option value="Kegalle">කෑගල්ල (Kegalle)</option>
+        <option value="Ratnapura">රත්නපුර (Ratnapura)</option>
+        <option value="Badulla">බදුල්ල (Badulla)</option>
+        <option value="Kurunegala">කුරුණෑගල (Kurunegala)</option>
+        <option value="Colombo">කොළඹ (Colombo)</option>
+        <option value="Gampaha">ගම්පහ (Gampaha)</option>
+        <option value="Kalutara">කළුතර (Kalutara)</option>
+        <option value="Galle">ගාල්ල (Galle)</option>
+        <option value="Matara">මාතර (Matara)</option>
+        <option value="Hambantota">හම්බන්තොට (Hambantota)</option>
+        <option value="Monaragala">මොනරාගල (Monaragala)</option>
+      </select>
+    </div>
+
+    <!-- From Year -->
+    <div class="report-field">
+      <label id="rg-lbl-from">සිට (From Year)</label>
+      <select id="rg-from" onchange="updatePreview()">
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+      </select>
+    </div>
+
+    <!-- To Year -->
+    <div class="report-field">
+      <label id="rg-lbl-to">දක්වා (To Year)</label>
+      <select id="rg-to" onchange="updatePreview()">
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026" selected>2026</option>
+      </select>
+    </div>
+
+    <!-- Price Type -->
+    <div class="report-field">
+      <label id="rg-lbl-type">මිල වර්ගය</label>
+      <select id="rg-pricetype" onchange="updatePreview()">
+        <option value="both">සාමාන්‍ය + උපරිම (Both)</option>
+        <option value="avg">සාමාන්‍ය පමණි (Average Only)</option>
+        <option value="high">උපරිම පමණි (Highest Only)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Preview -->
+  <div class="report-preview" id="rg-preview">
+    දත්ත පූරණය වෙමින්...
+  </div>
+
+  <!-- Download buttons -->
+  <div class="report-btns">
+    <button class="dl-btn csv" id="btn-csv" onclick="downloadReport('csv')">
+      📄 CSV බාගත කරන්න
+    </button>
+    <button class="dl-btn excel" id="btn-excel" onclick="downloadReport('excel')">
+      📊 Excel බාගත කරන්න
+    </button>
+    <button class="dl-btn json" id="btn-json" onclick="downloadReport('json')">
+      { } JSON බාගත කරන්න
+    </button>
+  </div>
+</div>
+
 <footer>
   <div class="footer-links">
     <a href="index.html">📊 CBSL</a>
@@ -518,6 +667,7 @@ async function loadData() {
 function initPage() {
   updateDateLabel();
   renderCards();
+  initReportGenerator();
   // Open pepper by default
   openModal('pepper');
 }
@@ -1293,6 +1443,305 @@ function checkUrlParams() {
     currentSpice = sp;
     if (gr) currentGrade = gr;
   }
+}
+
+
+// ═══════════════════════════════════════════════════
+// REPORT GENERATOR
+// ═══════════════════════════════════════════════════
+
+function updateReportGrades() {
+  const spiceKey = document.getElementById('rg-spice').value;
+  const sp = SPICES[spiceKey];
+  const sel = document.getElementById('rg-grade');
+  sel.innerHTML = '';
+  sp.grades.forEach(g => {
+    const opt = document.createElement('option');
+    opt.value = g;
+    opt.textContent = g.replace(' (Average Price)',' — සාමාන්‍ය')
+                       .replace(' (Highest Price)',' — උපරිම')
+                       .replace('-(Rs./k.g.)','').replace('-(','').replace(')','');
+    sel.appendChild(opt);
+  });
+  updatePreview();
+}
+
+function getReportData() {
+  if (!DEA?.weeks) return [];
+  const spiceKey = document.getElementById('rg-spice').value;
+  const grade    = document.getElementById('rg-grade').value;
+  const district = document.getElementById('rg-district').value;
+  const fromYear = parseInt(document.getElementById('rg-from').value);
+  const toYear   = parseInt(document.getElementById('rg-to').value);
+  const priceType= document.getElementById('rg-pricetype').value;
+
+  const highGrade = grade.replace('Average Price','Highest Price');
+  const rows = [];
+
+  DEA.weeks.forEach(w => {
+    const yr = parseInt(w.date.substring(0,4));
+    if (yr < fromYear || yr > toYear) return;
+    const commodity = w.commodities?.[spiceKey];
+    if (!commodity) return;
+
+    const distList = district === 'all'
+      ? Object.keys(commodity.districts || {})
+      : [district];
+
+    distList.forEach(d => {
+      const vals = commodity.districts?.[d];
+      if (!vals) return;
+      const avg  = vals[grade];
+      const high = vals[highGrade];
+
+      if (avg === null && avg === undefined && high === null && high === undefined) return;
+
+      const row = {
+        date: w.date,
+        date_label: w.date_label || w.date,
+        year: w.date.substring(0,4),
+        district: d,
+        district_si: DISTRICT_NAMES['si']?.[d] || d,
+        grade: grade.replace(' (Average Price)','').replace(' (Highest Price)',' ↑'),
+      };
+      if (priceType === 'both' || priceType === 'avg') row.average_price = avg ?? '';
+      if (priceType === 'both' || priceType === 'high') row.highest_price = high ?? '';
+      rows.push(row);
+    });
+  });
+
+  return rows;
+}
+
+function updatePreview() {
+  if (!DEA?.weeks) return;
+  const rows = getReportData();
+  const spiceKey = document.getElementById('rg-spice').value;
+  const sp = SPICES[spiceKey];
+  const fromYear = document.getElementById('rg-from').value;
+  const toYear   = document.getElementById('rg-to').value;
+  const district = document.getElementById('rg-district').value;
+  const grade    = document.getElementById('rg-grade').value;
+
+  const gradeLabel = grade.replace(' (Average Price)',' සාමාන්‍ය').replace(' (Highest Price)',' උපරිම');
+  const distLabel  = district === 'all' ? 'සියලු දිස්ත්‍රික්' :
+                     DISTRICT_NAMES['si']?.[district] || district;
+
+  document.getElementById('rg-preview').innerHTML = `
+    <strong>${sp.icon} ${sp.si}</strong> · ${gradeLabel} · <strong>${distLabel}</strong> ·
+    ${fromYear} → ${toYear} &nbsp;|&nbsp;
+    <span class="preview-count">${rows.length.toLocaleString()}</span> වාර්තා සූදානම්
+    &nbsp;|&nbsp; DEA ගොවිපළ දොරටු මිල · TopGoviya.lk
+  `;
+}
+
+function downloadReport(format) {
+  const rows = getReportData();
+  if (rows.length === 0) {
+    alert('No data found for selected filters. Try different options.');
+    return;
+  }
+
+  const spiceKey = document.getElementById('rg-spice').value;
+  const sp = SPICES[spiceKey];
+  const fromYear = document.getElementById('rg-from').value;
+  const toYear   = document.getElementById('rg-to').value;
+  const filename = `topgoviya-dea-${sp.en.toLowerCase()}-${fromYear}-${toYear}`;
+
+  if (format === 'json') {
+    downloadJSON(rows, filename);
+  } else if (format === 'csv') {
+    downloadCSV(rows, filename);
+  } else if (format === 'excel') {
+    downloadExcel(rows, filename, sp);
+  }
+
+  // Analytics
+  gtag('event', 'download_report', {format, spice: spiceKey, rows: rows.length});
+}
+
+// ── CSV DOWNLOAD ──────────────────────────────────
+function downloadCSV(rows, filename) {
+  const hasAvg  = 'average_price' in rows[0];
+  const hasHigh = 'highest_price' in rows[0];
+
+  const headers = ['Date','Date Label','Year','District','District (Sinhala)','Grade'];
+  if (hasAvg)  headers.push('Average Price (Rs.)');
+  if (hasHigh) headers.push('Highest Price (Rs.)');
+  headers.push('Source','Publisher');
+
+  const csvRows = [headers.join(',')];
+  rows.forEach(r => {
+    const cols = [
+      r.date, `"${r.date_label}"`, r.year,
+      r.district, `"${r.district_si}"`, `"${r.grade}"`
+    ];
+    if (hasAvg)  cols.push(r.average_price !== '' ? r.average_price : '');
+    if (hasHigh) cols.push(r.highest_price !== '' ? r.highest_price : '');
+    cols.push('Department of Export Agriculture (DEA) Sri Lanka');
+    cols.push('TopGoviya.lk');
+    csvRows.push(cols.join(','));
+  });
+
+  // Add metadata at top
+  const meta = [
+    `# TopGoviya.lk — DEA Spice Price Report`,
+    `# Downloaded: ${new Date().toISOString().slice(0,10)}`,
+    `# Source: Department of Export Agriculture (DEA) Sri Lanka`,
+    `# Website: https://topgoviya.lk/spice-report.html`,
+    `# Data: Producers Prices (Farm Gate) of Export Agricultural Commodities`,
+    ``,
+  ].join('
+');
+
+  const blob = new Blob(['﻿' + meta + csvRows.join('
+')], {type:'text/csv;charset=utf-8'});
+  triggerDownload(blob, filename + '.csv');
+}
+
+// ── JSON DOWNLOAD ─────────────────────────────────
+function downloadJSON(rows, filename) {
+  const spiceKey = document.getElementById('rg-spice').value;
+  const sp = SPICES[spiceKey];
+  const output = {
+    title: `DEA Spice Price Report — ${sp.en}`,
+    source: 'Department of Export Agriculture (DEA), Sri Lanka',
+    publisher: 'TopGoviya.lk',
+    url: 'https://topgoviya.lk/spice-report.html',
+    downloaded: new Date().toISOString().slice(0,10),
+    total_records: rows.length,
+    data: rows
+  };
+  const blob = new Blob([JSON.stringify(output, null, 2)], {type:'application/json'});
+  triggerDownload(blob, filename + '.json');
+}
+
+// ── EXCEL DOWNLOAD ────────────────────────────────
+function downloadExcel(rows, filename, sp) {
+  // Build Excel-compatible XML (SpreadsheetML)
+  const hasAvg  = 'average_price' in rows[0];
+  const hasHigh = 'highest_price' in rows[0];
+
+  const escXML = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+  // Sheet 1: Raw Data
+  let sheet1 = `<Worksheet ss:Name="DEA Price Data">
+  <Table>
+    <Row>
+      <Cell><Data ss:Type="String">Date</Data></Cell>
+      <Cell><Data ss:Type="String">Year</Data></Cell>
+      <Cell><Data ss:Type="String">District</Data></Cell>
+      <Cell><Data ss:Type="String">District (Sinhala)</Data></Cell>
+      <Cell><Data ss:Type="String">Grade</Data></Cell>
+      ${hasAvg ? '<Cell><Data ss:Type="String">Average Price (Rs.)</Data></Cell>' : ''}
+      ${hasHigh ? '<Cell><Data ss:Type="String">Highest Price (Rs.)</Data></Cell>' : ''}
+    </Row>`;
+
+  rows.forEach(r => {
+    sheet1 += `
+    <Row>
+      <Cell><Data ss:Type="String">${escXML(r.date)}</Data></Cell>
+      <Cell><Data ss:Type="Number">${r.year}</Data></Cell>
+      <Cell><Data ss:Type="String">${escXML(r.district)}</Data></Cell>
+      <Cell><Data ss:Type="String">${escXML(r.district_si)}</Data></Cell>
+      <Cell><Data ss:Type="String">${escXML(r.grade)}</Data></Cell>
+      ${hasAvg ? `<Cell><Data ss:Type="${r.average_price!==''?'Number':'String'}">${r.average_price!==''?r.average_price:'-'}</Data></Cell>` : ''}
+      ${hasHigh ? `<Cell><Data ss:Type="${r.highest_price!==''?'Number':'String'}">${r.highest_price!==''?r.highest_price:'-'}</Data></Cell>` : ''}
+    </Row>`;
+  });
+  sheet1 += '
+  </Table>
+</Worksheet>';
+
+  // Sheet 2: Annual Summary (National averages per year)
+  const yearSummary = {};
+  rows.filter(r => r.district === 'National').forEach(r => {
+    if (!yearSummary[r.year]) yearSummary[r.year] = {sum:0, count:0, high:-Infinity, low:Infinity};
+    const v = parseFloat(r.average_price);
+    if (!isNaN(v)) {
+      yearSummary[r.year].sum += v;
+      yearSummary[r.year].count++;
+      yearSummary[r.year].high = Math.max(yearSummary[r.year].high, v);
+      yearSummary[r.year].low  = Math.min(yearSummary[r.year].low, v);
+    }
+  });
+
+  let sheet2 = `<Worksheet ss:Name="Annual Summary">
+  <Table>
+    <Row>
+      <Cell><Data ss:Type="String">Year</Data></Cell>
+      <Cell><Data ss:Type="String">Annual Average (Rs.)</Data></Cell>
+      <Cell><Data ss:Type="String">Year High (Rs.)</Data></Cell>
+      <Cell><Data ss:Type="String">Year Low (Rs.)</Data></Cell>
+      <Cell><Data ss:Type="String">Weeks of Data</Data></Cell>
+    </Row>`;
+
+  Object.entries(yearSummary).sort().forEach(([yr, s]) => {
+    const avg = s.count > 0 ? (s.sum / s.count).toFixed(2) : '-';
+    sheet2 += `
+    <Row>
+      <Cell><Data ss:Type="Number">${yr}</Data></Cell>
+      <Cell><Data ss:Type="${s.count>0?'Number':'String'}">${avg}</Data></Cell>
+      <Cell><Data ss:Type="${s.high>-Infinity?'Number':'String'}">${s.high>-Infinity?s.high:'-'}</Data></Cell>
+      <Cell><Data ss:Type="${s.low<Infinity?'Number':'String'}">${s.low<Infinity?s.low:'-'}</Data></Cell>
+      <Cell><Data ss:Type="Number">${s.count}</Data></Cell>
+    </Row>`;
+  });
+  sheet2 += '
+  </Table>
+</Worksheet>';
+
+  // Sheet 3: Info
+  const sheet3 = `<Worksheet ss:Name="About">
+  <Table>
+    <Row><Cell><Data ss:Type="String">Field</Data></Cell><Cell><Data ss:Type="String">Value</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">Report Title</Data></Cell><Cell><Data ss:Type="String">DEA ${escXML(sp.en)} Farm Gate Price Report</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">Spice (Sinhala)</Data></Cell><Cell><Data ss:Type="String">${escXML(sp.si)}</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">Data Source</Data></Cell><Cell><Data ss:Type="String">Department of Export Agriculture (DEA), Sri Lanka</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">Publisher</Data></Cell><Cell><Data ss:Type="String">TopGoviya.lk</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">URL</Data></Cell><Cell><Data ss:Type="String">https://topgoviya.lk/spice-report.html</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">Download Date</Data></Cell><Cell><Data ss:Type="String">${new Date().toISOString().slice(0,10)}</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">Total Records</Data></Cell><Cell><Data ss:Type="Number">${rows.length}</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">Price Type</Data></Cell><Cell><Data ss:Type="String">Producers Prices (Farm Gate)</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">Frequency</Data></Cell><Cell><Data ss:Type="String">Weekly (Tuesday)</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">Note</Data></Cell><Cell><Data ss:Type="String">This report is compiled from free public data published by DEA. For official data visit dea.gov.lk</Data></Cell></Row>
+  </Table>
+</Worksheet>`;
+
+  const xlsContent = `<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+  <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+    <Title>DEA ${escXML(sp.en)} Price Report — TopGoviya.lk</Title>
+    <Author>TopGoviya.lk</Author>
+    <Created>${new Date().toISOString()}</Created>
+  </DocumentProperties>
+  ${sheet1}
+  ${sheet2}
+  ${sheet3}
+</Workbook>`;
+
+  const blob = new Blob([xlsContent], {type:'application/vnd.ms-excel;charset=utf-8'});
+  triggerDownload(blob, filename + '.xls');
+}
+
+// ── HELPER ────────────────────────────────────────
+function triggerDownload(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// Init report generator after data loads
+function initReportGenerator() {
+  updateReportGrades();
+  updatePreview();
 }
 
 // ═══════════════════════════════════════════════════
