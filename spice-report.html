@@ -1183,108 +1183,80 @@ function updateVoiceLabels() {
 // ═══════════════════════════════════════════════════
 async function generateShareImage() {
   const btn = document.getElementById('img-share-btn');
-  const sp = SPICES[currentSpice];
-  const latest = getLatestValue(currentSpice, currentGrade);
-  const val = latest?.value;
-
-  // Show loading state
   const origText = btn.innerHTML;
   btn.innerHTML = '⏳ සාදමින්...';
   btn.disabled = true;
 
   try {
-    // Build a clean card to capture
-    const card = document.createElement('div');
-    card.style.cssText = `
-      position:fixed;left:-9999px;top:0;
-      width:600px;padding:32px;
-      background:linear-gradient(135deg,#0e4f4a 0%,#0a3a36 100%);
-      font-family:'Hanken Grotesk',sans-serif;
-      border-radius:20px;
+    // Capture the actual modal card
+    const modal = document.getElementById('modal');
+    if (!modal) throw new Error('Modal not found');
+
+    // Temporarily hide share row and voice row for cleaner capture
+    const shareRow = modal.querySelector('.share-row');
+    const voiceRow = modal.querySelector('.voice-row');
+    const voiceStatus = modal.querySelector('.voice-status');
+    const origShareDisplay = shareRow ? shareRow.style.display : '';
+    const origVoiceDisplay = voiceRow ? voiceRow.style.display : '';
+    const origStatusDisplay = voiceStatus ? voiceStatus.style.display : '';
+    if (shareRow) shareRow.style.display = 'none';
+    if (voiceRow) voiceRow.style.display = 'none';
+    if (voiceStatus) voiceStatus.style.display = 'none';
+
+    // Add TopGoviya watermark temporarily
+    const watermark = document.createElement('div');
+    watermark.id = 'wm-temp';
+    watermark.style.cssText = `
+      text-align:center;padding:12px;
+      background:linear-gradient(135deg,#0e4f4a,#0a3a36);
+      color:#ffd98a;font-weight:800;font-size:13px;
+      letter-spacing:.05em;border-radius:0 0 16px 16px;
+      margin-top:8px;
     `;
+    watermark.innerHTML = '🌿 www.TopGoviya.lk · DEA ගොවිපළ දොරටු මිල · නිදහස් දත්ත';
+    modal.appendChild(watermark);
 
-    const gradeLabel = currentGrade.replace(' (Average Price)','').replace(' (Highest Price)',' ↑');
-    const pct = (() => {
-      const prev = latest ? getPrevValue(currentSpice, currentGrade, latest.weekIdx) : null;
-      return val && prev ? ((val - prev) / prev * 100) : null;
-    })();
-    const chText = pct !== null ? (pct >= 0 ? '▲ +' : '▼ ') + Math.abs(pct).toFixed(1) + '%' : '';
-    const chColor = pct > 0 ? '#f87171' : pct < 0 ? '#34d399' : '#fbbf24';
-
-    // Get top 5 districts
-    const latestWeek = DEA.weeks[DEA.weeks.length-1];
-    const distData = latestWeek?.commodities?.[currentSpice]?.districts || {};
-    const top5 = Object.entries(distData)
-      .filter(([d]) => d !== 'National')
-      .map(([d,v]) => ({d, v:v?.[currentGrade]}))
-      .filter(x => x.v)
-      .sort((a,b) => b.v - a.v)
-      .slice(0,5);
-
-    card.innerHTML = `
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
-        <span style="font-size:40px">${sp.icon}</span>
-        <div>
-          <div style="color:#fff;font-size:28px;font-weight:800;font-family:'Newsreader',serif">${sp.si}</div>
-          <div style="color:#9fd4c8;font-size:12px;letter-spacing:.1em;text-transform:uppercase">${sp.en} · DEA Farm Gate Price</div>
-        </div>
-        <div style="margin-left:auto;text-align:right">
-          <div style="color:#ffd98a;font-size:36px;font-weight:800;font-family:monospace">රු.${val ? val.toLocaleString('en-US',{maximumFractionDigits:0}) : '—'}</div>
-          <div style="color:${chColor};font-size:16px;font-weight:700">${chText}</div>
-        </div>
-      </div>
-      <div style="background:rgba(255,255,255,.1);border-radius:12px;padding:16px;margin-bottom:20px">
-        <div style="color:#9fd4c8;font-size:11px;font-weight:700;letter-spacing:.08em;margin-bottom:10px">ශ්‍රේණිය: ${gradeLabel} · ජාතික සාමාන්‍ය</div>
-        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
-          ${top5.map(({d,v}) => `
-            <div style="display:flex;justify-content:space-between;align-items:center;
-              background:rgba(255,255,255,.08);border-radius:8px;padding:8px 12px">
-              <span style="color:rgba(255,255,255,.8);font-size:12px">${DISTRICT_NAMES['si']?.[d]||d}</span>
-              <span style="color:#ffd98a;font-size:13px;font-weight:700;font-family:monospace">රු.${v.toLocaleString('en-US',{maximumFractionDigits:0})}</span>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div style="color:rgba(255,255,255,.6);font-size:11px">DEA · ${latestWeek?.date_label || ''}</div>
-        <div style="color:#ffd98a;font-size:13px;font-weight:800">🌿 TopGoviya.lk</div>
-      </div>
-    `;
-
-    document.body.appendChild(card);
-
-    // Capture with html2canvas
-    const canvas = await html2canvas(card, {
+    const canvas = await html2canvas(modal, {
       scale: 2,
-      backgroundColor: null,
+      backgroundColor: '#fffdf7',
       useCORS: true,
       logging: false,
+      windowWidth: modal.scrollWidth,
+      windowHeight: modal.scrollHeight,
     });
 
-    document.body.removeChild(card);
+    // Restore hidden elements
+    if (shareRow) shareRow.style.display = origShareDisplay;
+    if (voiceRow) voiceRow.style.display = origVoiceDisplay;
+    if (voiceStatus) voiceStatus.style.display = origStatusDisplay;
+    modal.removeChild(watermark);
 
-    // Download image
+    // Download
+    const sp = SPICES[currentSpice];
     const link = document.createElement('a');
-    link.download = `topgoviya-${currentSpice}-${new Date().toISOString().slice(0,10)}.png`;
+    link.download = `topgoviya-${sp.en.toLowerCase()}-${new Date().toISOString().slice(0,10)}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
 
-    // Also offer WhatsApp share if mobile
+    // Mobile native share
     if (navigator.share && navigator.canShare) {
       canvas.toBlob(async blob => {
         try {
           const file = new File([blob], link.download, {type:'image/png'});
           if (navigator.canShare({files:[file]})) {
-            await navigator.share({files:[file], title:`${sp.si} ගොවිපළ දොරටු මිල`, text:`රු.${val.toLocaleString('en-US',{maximumFractionDigits:0})} · TopGoviya.lk`});
+            await navigator.share({
+              files:[file],
+              title:`${sp.si} ගොවිපළ දොරටු මිල`,
+              text:`TopGoviya.lk · DEA`
+            });
           }
-        } catch(e) {}
+        } catch(e){}
       });
     }
 
   } catch(e) {
-    console.error('Image generation failed:', e);
-    // Fallback to copy link
-    copyLink();
+    console.error('Image error:', e);
+    alert('Image generation failed. Please try again.');
   }
 
   btn.innerHTML = origText;
