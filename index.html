@@ -945,9 +945,9 @@ function applyLang(){
   const navBreakeven=document.getElementById('navBreakeven');
   const navReports=document.getElementById('navReports');
   const labels={
-    si:{retail:'📊 සිල්ලර',wholesale:'📦 තොග',weather:'🌤️ කාලගුණ',breakeven:'🧮 ලාභ අලාභ සීමා',reports:'📄 වාර්තා'},
-    en:{retail:'📊 Retail',wholesale:'📦 Wholesale',weather:'🌤️ Weather',breakeven:'🧮 Break-even',reports:'📄 Reports'},
-    ta:{retail:'📊 சில்லறை',wholesale:'📦 மொத்தம்',weather:'🌤️ வானிலை',breakeven:'🧮 Break-even',reports:'📄 அறிக்கைகள்'}
+    si:{retail:'📊 සිල්ලර',wholesale:'📦 තොග',weather:'🌤️ කාලගුණ',breakeven:'🧮 ලාභ අලාභ සීමා',reports:'📄 වාර්තා',spices:'කුළුබඩු මිල'},
+    en:{retail:'📊 Retail',wholesale:'📦 Wholesale',weather:'🌤️ Weather',breakeven:'🧮 Break-even',reports:'📄 Reports',spices:'Spices'},
+    ta:{retail:'📊 சில்லறை',wholesale:'📦 மொத்தம்',weather:'🌤️ வானிலை',breakeven:'🧮 Break-even',reports:'📄 அறிக்கைகள்',spices:'மசாலா விலை'}
   };
   const lb=labels[lang]||labels.en;
   if(navRetail)navRetail.innerHTML=lb.retail+' <span class="navlink-badge">CBSL</span>';
@@ -955,6 +955,11 @@ function applyLang(){
   if(navWeather)navWeather.innerHTML=lb.weather;
   if(navBreakeven)navBreakeven.innerHTML=lb.breakeven;
   if(navReports)navReports.innerHTML=lb.reports;
+  const navSpicesEl=document.getElementById('navSpices');
+  if(navSpicesEl){
+    const spicesLabel=document.getElementById('nav-spices-label');
+    if(spicesLabel) spicesLabel.textContent = lb.spices ? lb.spices.replace('🌶️ ','') : 'Spices';
+  }
   set("kickerTxt",t("kicker"));set("lblLatest",t("latestReport"));set("lblSub",t("sub"));
   set("heroTagline",t("heroTagline"));
   set("hMovers",t("movers"));set("hintMovers",t("moversHint"));set("hAll",t("all"));set("lnkAllPrices",t("allPrices")+" &rarr;");
