@@ -321,7 +321,7 @@ footer{margin:46px 0 60px;padding-top:22px;border-top:1px solid var(--line-stron
   <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
     <span style="background:#b23a2e;color:#fff;font-size:12px;font-weight:800;
       padding:5px 14px;border-radius:999px;letter-spacing:.03em" id="global-date-badge">
-      📅 නවතම දත්ත: 15 සැප්තැම්බර් 2026
+      📅 නවතම දත්ත: <span id="global-date-text">පූරණය...</span>
     </span>
     <span style="font-size:12px;color:var(--muted);font-weight:600">
       DEA ගොවිපළ දොරටු මිල · සතිපතා
@@ -760,7 +760,7 @@ footer{margin:46px 0 60px;padding-top:22px;border-top:1px solid var(--line-stron
           <div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
             <span style="background:#b23a2e;color:#fff;font-size:11px;font-weight:800;
               padding:3px 10px;border-radius:999px;letter-spacing:.04em">
-              📅 නවතම: 15 සැප්තැම්බර් 2026
+              📅 නවතම: <span id="goraka-date-text">පූරණය...</span>
             </span>
             <span style="font-size:11px;color:var(--muted);font-weight:600">
               ↑ ඉහළම · ~ සාමාන්‍ය (රු./කි.ග්‍රෑ.)
@@ -1100,7 +1100,7 @@ async function downloadTableImage(sectionId, shareRowEl, filename) {
     // Add watermark
     const wm = document.createElement('div');
     wm.style.cssText = 'text-align:center;padding:10px;background:#0e4f4a;color:#ffd98a;font-weight:800;font-size:12px;border-radius:0 0 12px 12px;margin-top:8px;letter-spacing:.04em';
-    wm.innerHTML = '🌿 www.TopGoviya.lk · DEA ගොවිපළ දොරටු මිල · නිදහස් දත්ත · 15 සැප්තැම්බර් 2026';
+    wm.innerHTML = '🌿 www.TopGoviya.lk · DEA ගොවිපළ දොරටු මිල · නිදහස් දත්ත · ' + (window._deaDateLabel || '');
     section.appendChild(wm);
 
     const canvas = await html2canvas(section, {
@@ -1126,7 +1126,7 @@ async function downloadTableImage(sectionId, shareRowEl, filename) {
     
     const pageUrl = 'https://topgoviya.lk/spices.html';
     const spiceName = section.querySelector('.card-title')?.textContent || 'කුළුබඩු';
-    const msg = `🌿 ${spiceName} ගොවිපළ දොරටු මිල | 15 සැප්තැම්බර් 2026
+    const msg = `🌿 ${spiceName} ගොවිපළ දොරටු මිල | ${window._deaDateLabel || '29 සැප්තැම්බර් 2026'}
 
 DEA සතිපතා දත්ත — TopGoviya.lk
 ${pageUrl}`;
