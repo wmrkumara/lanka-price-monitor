@@ -2,7 +2,7 @@
   "source": "Department of Export Agriculture (DEA), Sri Lanka",
   "description": "Producers' Prices (Farm Gate) of Export Agricultural Commodities",
   "frequency": "weekly",
-  "generated": "2026-09-29T00:00:00Z",
+  "generated": "2026-10-02T16:10:47Z",
   "weeks": [
     {
       "date": "2023-01-03",
@@ -323660,6 +323660,1780 @@
               "Cinnamon Bark Oil-40% (Average Price)": null,
               "Cinnamon Leaf Oil (Highest Price)": 5600.0,
               "Cinnamon Leaf Oil (Average Price)": 5496.5,
+              "Citronella Oil (Highest Price)": 13000.0,
+              "Citronella Oil (Average Price)": 12933.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "date": "2026-09-29",
+      "date_label": "29-September-2026",
+      "commodities": {
+        "pepper": {
+          "columns": [
+            "GR-1 (Highest Price)",
+            "GR-1 (Average Price)",
+            "GR-2 (Highest Price)",
+            "GR-2 (Average Price)",
+            "WHITE (Highest Price)",
+            "WHITE (Average Price)"
+          ],
+          "districts": {
+            "Kandy": {
+              "GR-1 (Highest Price)": 2000.0,
+              "GR-1 (Average Price)": 1950.0,
+              "GR-2 (Highest Price)": 1800.0,
+              "GR-2 (Average Price)": 1800.0,
+              "WHITE (Highest Price)": 3200.0,
+              "WHITE (Average Price)": 2941.0
+            },
+            "Matale": {
+              "GR-1 (Highest Price)": 2050.0,
+              "GR-1 (Average Price)": 2020.0,
+              "GR-2 (Highest Price)": null,
+              "GR-2 (Average Price)": null,
+              "WHITE (Highest Price)": 3200.0,
+              "WHITE (Average Price)": 3133.0
+            },
+            "Nuwara_eliya": {
+              "GR-1 (Highest Price)": 2050.0,
+              "GR-1 (Average Price)": 2043.0,
+              "GR-2 (Highest Price)": null,
+              "GR-2 (Average Price)": null,
+              "WHITE (Highest Price)": null,
+              "WHITE (Average Price)": null
+            },
+            "Kegalle": {
+              "GR-1 (Highest Price)": 2000.0,
+              "GR-1 (Average Price)": 2000.0,
+              "GR-2 (Highest Price)": null,
+              "GR-2 (Average Price)": null,
+              "WHITE (Highest Price)": 3000.0,
+              "WHITE (Average Price)": 2833.0
+            },
+            "Ratnapura": {
+              "GR-1 (Highest Price)": 2100.0,
+              "GR-1 (Average Price)": 2080.0,
+              "GR-2 (Highest Price)": 2000.0,
+              "GR-2 (Average Price)": 1980.0,
+              "WHITE (Highest Price)": null,
+              "WHITE (Average Price)": null
+            },
+            "Badulla": {
+              "GR-1 (Highest Price)": 2075.0,
+              "GR-1 (Average Price)": 2018.0,
+              "GR-2 (Highest Price)": null,
+              "GR-2 (Average Price)": null,
+              "WHITE (Highest Price)": 3000.0,
+              "WHITE (Average Price)": 2600.0
+            },
+            "Kurunegala": {
+              "GR-1 (Highest Price)": 2100.0,
+              "GR-1 (Average Price)": 2033.0,
+              "GR-2 (Highest Price)": null,
+              "GR-2 (Average Price)": null,
+              "WHITE (Highest Price)": null,
+              "WHITE (Average Price)": null
+            },
+            "Colombo": {
+              "GR-1 (Highest Price)": 2000.0,
+              "GR-1 (Average Price)": 1850.0,
+              "GR-2 (Highest Price)": null,
+              "GR-2 (Average Price)": null,
+              "WHITE (Highest Price)": null,
+              "WHITE (Average Price)": null
+            },
+            "Gampaha": {
+              "GR-1 (Highest Price)": 2050.0,
+              "GR-1 (Average Price)": 2000.0,
+              "GR-2 (Highest Price)": null,
+              "GR-2 (Average Price)": null,
+              "WHITE (Highest Price)": null,
+              "WHITE (Average Price)": null
+            },
+            "Kalutara": {
+              "GR-1 (Highest Price)": 2000.0,
+              "GR-1 (Average Price)": 1900.0,
+              "GR-2 (Highest Price)": null,
+              "GR-2 (Average Price)": null,
+              "WHITE (Highest Price)": null,
+              "WHITE (Average Price)": null
+            },
+            "Galle": {
+              "GR-1 (Highest Price)": 1980.0,
+              "GR-1 (Average Price)": 1965.0,
+              "GR-2 (Highest Price)": null,
+              "GR-2 (Average Price)": null,
+              "WHITE (Highest Price)": null,
+              "WHITE (Average Price)": null
+            },
+            "Matara": {
+              "GR-1 (Highest Price)": 2050.0,
+              "GR-1 (Average Price)": 2011.0,
+              "GR-2 (Highest Price)": null,
+              "GR-2 (Average Price)": null,
+              "WHITE (Highest Price)": null,
+              "WHITE (Average Price)": null
+            },
+            "Hambantota": {
+              "GR-1 (Highest Price)": 2050.0,
+              "GR-1 (Average Price)": 2046.0,
+              "GR-2 (Highest Price)": null,
+              "GR-2 (Average Price)": null,
+              "WHITE (Highest Price)": null,
+              "WHITE (Average Price)": null
+            },
+            "Monaragala": {
+              "GR-1 (Highest Price)": 2100.0,
+              "GR-1 (Average Price)": 2076.0,
+              "GR-2 (Highest Price)": null,
+              "GR-2 (Average Price)": null,
+              "WHITE (Highest Price)": 3100.0,
+              "WHITE (Average Price)": 3040.0
+            },
+            "National": {
+              "GR-1 (Highest Price)": 2100.0,
+              "GR-1 (Average Price)": 1999.43,
+              "GR-2 (Highest Price)": 2000.0,
+              "GR-2 (Average Price)": 1890.0,
+              "WHITE (Highest Price)": 3200.0,
+              "WHITE (Average Price)": 2909.4
+            }
+          }
+        },
+        "clove": {
+          "columns": [
+            "CLOVE (Highest Price)",
+            "CLOVE (Average Price)",
+            "STEM (Highest Price)",
+            "STEM (Average Price)"
+          ],
+          "districts": {
+            "Kandy": {
+              "CLOVE (Highest Price)": 3000.0,
+              "CLOVE (Average Price)": 2833.0,
+              "STEM (Highest Price)": 300.0,
+              "STEM (Average Price)": 277.0
+            },
+            "Matale": {
+              "CLOVE (Highest Price)": 3100.0,
+              "CLOVE (Average Price)": 2818.0,
+              "STEM (Highest Price)": 350.0,
+              "STEM (Average Price)": 304.0
+            },
+            "Nuwara_eliya": {
+              "CLOVE (Highest Price)": 2500.0,
+              "CLOVE (Average Price)": 2497.0,
+              "STEM (Highest Price)": 290.0,
+              "STEM (Average Price)": 284.0
+            },
+            "Kegalle": {
+              "CLOVE (Highest Price)": 2300.0,
+              "CLOVE (Average Price)": 2200.0,
+              "STEM (Highest Price)": 250.0,
+              "STEM (Average Price)": 250.0
+            },
+            "Ratnapura": {
+              "CLOVE (Highest Price)": 2550.0,
+              "CLOVE (Average Price)": 2500.0,
+              "STEM (Highest Price)": 300.0,
+              "STEM (Average Price)": 300.0
+            },
+            "Badulla": {
+              "CLOVE (Highest Price)": 2400.0,
+              "CLOVE (Average Price)": 2250.0,
+              "STEM (Highest Price)": null,
+              "STEM (Average Price)": null
+            },
+            "Kurunegala": {
+              "CLOVE (Highest Price)": 3000.0,
+              "CLOVE (Average Price)": 2867.0,
+              "STEM (Highest Price)": 300.0,
+              "STEM (Average Price)": 300.0
+            },
+            "Colombo": {
+              "CLOVE (Highest Price)": 2500.0,
+              "CLOVE (Average Price)": 2400.0,
+              "STEM (Highest Price)": null,
+              "STEM (Average Price)": null
+            },
+            "Gampaha": {
+              "CLOVE (Highest Price)": 2500.0,
+              "CLOVE (Average Price)": 2450.0,
+              "STEM (Highest Price)": 300.0,
+              "STEM (Average Price)": 300.0
+            },
+            "Kalutara": {
+              "CLOVE (Highest Price)": 2000.0,
+              "CLOVE (Average Price)": 2000.0,
+              "STEM (Highest Price)": null,
+              "STEM (Average Price)": null
+            },
+            "Galle": {
+              "CLOVE (Highest Price)": 2600.0,
+              "CLOVE (Average Price)": 2550.0,
+              "STEM (Highest Price)": 300.0,
+              "STEM (Average Price)": 278.0
+            },
+            "Matara": {
+              "CLOVE (Highest Price)": 2850.0,
+              "CLOVE (Average Price)": 2550.0,
+              "STEM (Highest Price)": 300.0,
+              "STEM (Average Price)": 278.0
+            },
+            "Hambantota": {
+              "CLOVE (Highest Price)": 2300.0,
+              "CLOVE (Average Price)": 2286.0,
+              "STEM (Highest Price)": null,
+              "STEM (Average Price)": null
+            },
+            "Monaragala": {
+              "CLOVE (Highest Price)": 2500.0,
+              "CLOVE (Average Price)": 2280.0,
+              "STEM (Highest Price)": null,
+              "STEM (Average Price)": null
+            },
+            "National": {
+              "CLOVE (Highest Price)": 3100.0,
+              "CLOVE (Average Price)": 2462.93,
+              "STEM (Highest Price)": 350.0,
+              "STEM (Average Price)": null
+            }
+          }
+        },
+        "coffee": {
+          "columns": [
+            "GR 1 (Highest Price)",
+            "GR 1 (Average Price)",
+            "GR 2 (Highest Price)",
+            "GR 2 (Average Price)",
+            "PARCHMENT (Highest Price)",
+            "PARCHMENT (Average Price)"
+          ],
+          "districts": {
+            "Kandy": {
+              "GR 1 (Highest Price)": 1500.0,
+              "GR 1 (Average Price)": 1450.0,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "PARCHMENT (Highest Price)": 2500.0,
+              "PARCHMENT (Average Price)": 2366.0
+            },
+            "Matale": {
+              "GR 1 (Highest Price)": 1500.0,
+              "GR 1 (Average Price)": 1483.0,
+              "GR 2 (Highest Price)": 1300.0,
+              "GR 2 (Average Price)": 1265.0,
+              "PARCHMENT (Highest Price)": 3000.0,
+              "PARCHMENT (Average Price)": 3000.0
+            },
+            "Nuwara_eliya": {
+              "GR 1 (Highest Price)": 1500.0,
+              "GR 1 (Average Price)": 1487.0,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "PARCHMENT (Highest Price)": null,
+              "PARCHMENT (Average Price)": null
+            },
+            "Kegalle": {
+              "GR 1 (Highest Price)": 1400.0,
+              "GR 1 (Average Price)": 1366.0,
+              "GR 2 (Highest Price)": 1300.0,
+              "GR 2 (Average Price)": 1266.0,
+              "PARCHMENT (Highest Price)": null,
+              "PARCHMENT (Average Price)": null
+            },
+            "Ratnapura": {
+              "GR 1 (Highest Price)": 1300.0,
+              "GR 1 (Average Price)": 1250.0,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "PARCHMENT (Highest Price)": null,
+              "PARCHMENT (Average Price)": null
+            },
+            "Badulla": {
+              "GR 1 (Highest Price)": 1800.0,
+              "GR 1 (Average Price)": 1750.0,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "PARCHMENT (Highest Price)": null,
+              "PARCHMENT (Average Price)": null
+            },
+            "Kurunegala": {
+              "GR 1 (Highest Price)": 1400.0,
+              "GR 1 (Average Price)": 1400.0,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "PARCHMENT (Highest Price)": null,
+              "PARCHMENT (Average Price)": null
+            },
+            "Colombo": {
+              "GR 1 (Highest Price)": 1500.0,
+              "GR 1 (Average Price)": 1367.0,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "PARCHMENT (Highest Price)": null,
+              "PARCHMENT (Average Price)": null
+            },
+            "Gampaha": {
+              "GR 1 (Highest Price)": 1400.0,
+              "GR 1 (Average Price)": 1350.0,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "PARCHMENT (Highest Price)": null,
+              "PARCHMENT (Average Price)": null
+            },
+            "Kalutara": {
+              "GR 1 (Highest Price)": 1200.0,
+              "GR 1 (Average Price)": 1200.0,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "PARCHMENT (Highest Price)": null,
+              "PARCHMENT (Average Price)": null
+            },
+            "Galle": {
+              "GR 1 (Highest Price)": 1500.0,
+              "GR 1 (Average Price)": 1375.0,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "PARCHMENT (Highest Price)": null,
+              "PARCHMENT (Average Price)": null
+            },
+            "Matara": {
+              "GR 1 (Highest Price)": 1350.0,
+              "GR 1 (Average Price)": 1186.0,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "PARCHMENT (Highest Price)": null,
+              "PARCHMENT (Average Price)": null
+            },
+            "Hambantota": {
+              "GR 1 (Highest Price)": 1250.0,
+              "GR 1 (Average Price)": 1250.0,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "PARCHMENT (Highest Price)": null,
+              "PARCHMENT (Average Price)": null
+            },
+            "Monaragala": {
+              "GR 1 (Highest Price)": 1250.0,
+              "GR 1 (Average Price)": 1220.0,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "PARCHMENT (Highest Price)": null,
+              "PARCHMENT (Average Price)": null
+            },
+            "National": {
+              "GR 1 (Highest Price)": 1800.0,
+              "GR 1 (Average Price)": 1366.71,
+              "GR 2 (Highest Price)": 1300.0,
+              "GR 2 (Average Price)": 1265.5,
+              "PARCHMENT (Highest Price)": 3000.0,
+              "PARCHMENT (Average Price)": 2683.0
+            }
+          }
+        },
+        "cocoa": {
+          "columns": [
+            "GR 1 (Highest Price)",
+            "GR 1 (Average Price)",
+            "GR 2 (Highest Price)",
+            "GR 2 (Average Price)",
+            "GR 3 (Highest Price)",
+            "GR 3 (Average Price)",
+            "BLACK (Highest Price)",
+            "BLACK (Average Price)"
+          ],
+          "districts": {
+            "Kandy": {
+              "GR 1 (Highest Price)": 1000.0,
+              "GR 1 (Average Price)": 975.0,
+              "GR 2 (Highest Price)": 800.0,
+              "GR 2 (Average Price)": 800.0,
+              "GR 3 (Highest Price)": null,
+              "GR 3 (Average Price)": null,
+              "BLACK (Highest Price)": null,
+              "BLACK (Average Price)": null
+            },
+            "Matale": {
+              "GR 1 (Highest Price)": 1200.0,
+              "GR 1 (Average Price)": 1080.0,
+              "GR 2 (Highest Price)": 1000.0,
+              "GR 2 (Average Price)": 959.0,
+              "GR 3 (Highest Price)": 900.0,
+              "GR 3 (Average Price)": 854.0,
+              "BLACK (Highest Price)": null,
+              "BLACK (Average Price)": null
+            },
+            "Nuwara_eliya": {
+              "GR 1 (Highest Price)": null,
+              "GR 1 (Average Price)": null,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "GR 3 (Highest Price)": null,
+              "GR 3 (Average Price)": null,
+              "BLACK (Highest Price)": null,
+              "BLACK (Average Price)": null
+            },
+            "Kegalle": {
+              "GR 1 (Highest Price)": 1000.0,
+              "GR 1 (Average Price)": 983.0,
+              "GR 2 (Highest Price)": 950.0,
+              "GR 2 (Average Price)": 916.0,
+              "GR 3 (Highest Price)": null,
+              "GR 3 (Average Price)": null,
+              "BLACK (Highest Price)": null,
+              "BLACK (Average Price)": null
+            },
+            "Ratnapura": {
+              "GR 1 (Highest Price)": null,
+              "GR 1 (Average Price)": null,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "GR 3 (Highest Price)": null,
+              "GR 3 (Average Price)": null,
+              "BLACK (Highest Price)": null,
+              "BLACK (Average Price)": null
+            },
+            "Badulla": {
+              "GR 1 (Highest Price)": 1000.0,
+              "GR 1 (Average Price)": 1000.0,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "GR 3 (Highest Price)": null,
+              "GR 3 (Average Price)": null,
+              "BLACK (Highest Price)": null,
+              "BLACK (Average Price)": null
+            },
+            "Kurunegala": {
+              "GR 1 (Highest Price)": 1000.0,
+              "GR 1 (Average Price)": 1000.0,
+              "GR 2 (Highest Price)": 800.0,
+              "GR 2 (Average Price)": 800.0,
+              "GR 3 (Highest Price)": null,
+              "GR 3 (Average Price)": null,
+              "BLACK (Highest Price)": null,
+              "BLACK (Average Price)": null
+            },
+            "Colombo": {
+              "GR 1 (Highest Price)": null,
+              "GR 1 (Average Price)": null,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "GR 3 (Highest Price)": null,
+              "GR 3 (Average Price)": null,
+              "BLACK (Highest Price)": null,
+              "BLACK (Average Price)": null
+            },
+            "Gampaha": {
+              "GR 1 (Highest Price)": null,
+              "GR 1 (Average Price)": null,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "GR 3 (Highest Price)": null,
+              "GR 3 (Average Price)": null,
+              "BLACK (Highest Price)": null,
+              "BLACK (Average Price)": null
+            },
+            "Kalutara": {
+              "GR 1 (Highest Price)": null,
+              "GR 1 (Average Price)": null,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "GR 3 (Highest Price)": null,
+              "GR 3 (Average Price)": null,
+              "BLACK (Highest Price)": null,
+              "BLACK (Average Price)": null
+            },
+            "Galle": {
+              "GR 1 (Highest Price)": null,
+              "GR 1 (Average Price)": null,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "GR 3 (Highest Price)": null,
+              "GR 3 (Average Price)": null,
+              "BLACK (Highest Price)": null,
+              "BLACK (Average Price)": null
+            },
+            "Matara": {
+              "GR 1 (Highest Price)": null,
+              "GR 1 (Average Price)": null,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "GR 3 (Highest Price)": null,
+              "GR 3 (Average Price)": null,
+              "BLACK (Highest Price)": null,
+              "BLACK (Average Price)": null
+            },
+            "Hambantota": {
+              "GR 1 (Highest Price)": null,
+              "GR 1 (Average Price)": null,
+              "GR 2 (Highest Price)": null,
+              "GR 2 (Average Price)": null,
+              "GR 3 (Highest Price)": null,
+              "GR 3 (Average Price)": null,
+              "BLACK (Highest Price)": null,
+              "BLACK (Average Price)": null
+            },
+            "Monaragala": {
+              "GR 1 (Highest Price)": 1100.0,
+              "GR 1 (Average Price)": 1060.0,
+              "GR 2 (Highest Price)": 1000.0,
+              "GR 2 (Average Price)": 980.0,
+              "GR 3 (Highest Price)": 950.0,
+              "GR 3 (Average Price)": 930.0,
+              "BLACK (Highest Price)": null,
+              "BLACK (Average Price)": null
+            },
+            "National": {
+              "GR 1 (Highest Price)": 1200.0,
+              "GR 1 (Average Price)": 1016.33,
+              "GR 2 (Highest Price)": 1000.0,
+              "GR 2 (Average Price)": 891.0,
+              "GR 3 (Highest Price)": 950.0,
+              "GR 3 (Average Price)": 892.0,
+              "BLACK (Highest Price)": null,
+              "BLACK (Average Price)": null
+            }
+          }
+        },
+        "cardamom": {
+          "columns": [
+            "LG (Highest Price)",
+            "LG (Average Price)",
+            "LLG1 (Highest Price)",
+            "LLG1 (Average Price)",
+            "LLG2 (Highest Price)",
+            "LLG2 (Average Price)",
+            "LB (Highest Price)",
+            "LB (Average Price)",
+            "LNS (Highest Price)",
+            "LNS (Average Price)"
+          ],
+          "districts": {
+            "Kandy": {
+              "LG (Highest Price)": null,
+              "LG (Average Price)": null,
+              "LLG1 (Highest Price)": 12000.0,
+              "LLG1 (Average Price)": 12000.0,
+              "LLG2 (Highest Price)": null,
+              "LLG2 (Average Price)": null,
+              "LB (Highest Price)": 6000.0,
+              "LB (Average Price)": 6000.0,
+              "LNS (Highest Price)": null,
+              "LNS (Average Price)": null
+            },
+            "Matale": {
+              "LG (Highest Price)": 16000.0,
+              "LG (Average Price)": 15166.0,
+              "LLG1 (Highest Price)": 13000.0,
+              "LLG1 (Average Price)": 12333.0,
+              "LLG2 (Highest Price)": null,
+              "LLG2 (Average Price)": null,
+              "LB (Highest Price)": null,
+              "LB (Average Price)": null,
+              "LNS (Highest Price)": null,
+              "LNS (Average Price)": null
+            },
+            "Nuwara_eliya": {
+              "LG (Highest Price)": null,
+              "LG (Average Price)": null,
+              "LLG1 (Highest Price)": null,
+              "LLG1 (Average Price)": null,
+              "LLG2 (Highest Price)": null,
+              "LLG2 (Average Price)": null,
+              "LB (Highest Price)": null,
+              "LB (Average Price)": null,
+              "LNS (Highest Price)": null,
+              "LNS (Average Price)": null
+            },
+            "Kegalle": {
+              "LG (Highest Price)": null,
+              "LG (Average Price)": null,
+              "LLG1 (Highest Price)": 12000.0,
+              "LLG1 (Average Price)": 12000.0,
+              "LLG2 (Highest Price)": 10000.0,
+              "LLG2 (Average Price)": 10000.0,
+              "LB (Highest Price)": null,
+              "LB (Average Price)": null,
+              "LNS (Highest Price)": null,
+              "LNS (Average Price)": null
+            },
+            "Ratnapura": {
+              "LG (Highest Price)": null,
+              "LG (Average Price)": null,
+              "LLG1 (Highest Price)": null,
+              "LLG1 (Average Price)": null,
+              "LLG2 (Highest Price)": null,
+              "LLG2 (Average Price)": null,
+              "LB (Highest Price)": 5500.0,
+              "LB (Average Price)": 5000.0,
+              "LNS (Highest Price)": null,
+              "LNS (Average Price)": null
+            },
+            "Badulla": {
+              "LG (Highest Price)": null,
+              "LG (Average Price)": null,
+              "LLG1 (Highest Price)": null,
+              "LLG1 (Average Price)": null,
+              "LLG2 (Highest Price)": null,
+              "LLG2 (Average Price)": null,
+              "LB (Highest Price)": null,
+              "LB (Average Price)": null,
+              "LNS (Highest Price)": null,
+              "LNS (Average Price)": null
+            },
+            "Kurunegala": {
+              "LG (Highest Price)": null,
+              "LG (Average Price)": null,
+              "LLG1 (Highest Price)": null,
+              "LLG1 (Average Price)": null,
+              "LLG2 (Highest Price)": 10000.0,
+              "LLG2 (Average Price)": 10000.0,
+              "LB (Highest Price)": null,
+              "LB (Average Price)": null,
+              "LNS (Highest Price)": null,
+              "LNS (Average Price)": null
+            },
+            "Colombo": {
+              "LG (Highest Price)": null,
+              "LG (Average Price)": null,
+              "LLG1 (Highest Price)": null,
+              "LLG1 (Average Price)": null,
+              "LLG2 (Highest Price)": null,
+              "LLG2 (Average Price)": null,
+              "LB (Highest Price)": null,
+              "LB (Average Price)": null,
+              "LNS (Highest Price)": null,
+              "LNS (Average Price)": null
+            },
+            "Gampaha": {
+              "LG (Highest Price)": null,
+              "LG (Average Price)": null,
+              "LLG1 (Highest Price)": null,
+              "LLG1 (Average Price)": null,
+              "LLG2 (Highest Price)": null,
+              "LLG2 (Average Price)": null,
+              "LB (Highest Price)": null,
+              "LB (Average Price)": null,
+              "LNS (Highest Price)": null,
+              "LNS (Average Price)": null
+            },
+            "Kalutara": {
+              "LG (Highest Price)": null,
+              "LG (Average Price)": null,
+              "LLG1 (Highest Price)": null,
+              "LLG1 (Average Price)": null,
+              "LLG2 (Highest Price)": null,
+              "LLG2 (Average Price)": null,
+              "LB (Highest Price)": null,
+              "LB (Average Price)": null,
+              "LNS (Highest Price)": null,
+              "LNS (Average Price)": null
+            },
+            "Galle": {
+              "LG (Highest Price)": null,
+              "LG (Average Price)": null,
+              "LLG1 (Highest Price)": null,
+              "LLG1 (Average Price)": null,
+              "LLG2 (Highest Price)": null,
+              "LLG2 (Average Price)": null,
+              "LB (Highest Price)": null,
+              "LB (Average Price)": null,
+              "LNS (Highest Price)": null,
+              "LNS (Average Price)": null
+            },
+            "Matara": {
+              "LG (Highest Price)": null,
+              "LG (Average Price)": null,
+              "LLG1 (Highest Price)": null,
+              "LLG1 (Average Price)": null,
+              "LLG2 (Highest Price)": null,
+              "LLG2 (Average Price)": null,
+              "LB (Highest Price)": null,
+              "LB (Average Price)": null,
+              "LNS (Highest Price)": null,
+              "LNS (Average Price)": null
+            },
+            "Hambantota": {
+              "LG (Highest Price)": null,
+              "LG (Average Price)": null,
+              "LLG1 (Highest Price)": null,
+              "LLG1 (Average Price)": null,
+              "LLG2 (Highest Price)": null,
+              "LLG2 (Average Price)": null,
+              "LB (Highest Price)": null,
+              "LB (Average Price)": null,
+              "LNS (Highest Price)": null,
+              "LNS (Average Price)": null
+            },
+            "Monaragala": {
+              "LG (Highest Price)": null,
+              "LG (Average Price)": null,
+              "LLG1 (Highest Price)": null,
+              "LLG1 (Average Price)": null,
+              "LLG2 (Highest Price)": null,
+              "LLG2 (Average Price)": null,
+              "LB (Highest Price)": null,
+              "LB (Average Price)": null,
+              "LNS (Highest Price)": null,
+              "LNS (Average Price)": null
+            },
+            "National": {
+              "LG (Highest Price)": 16000.0,
+              "LG (Average Price)": 15166.0,
+              "LLG1 (Highest Price)": 13000.0,
+              "LLG1 (Average Price)": 12111.0,
+              "LLG2 (Highest Price)": 10000.0,
+              "LLG2 (Average Price)": 10000.0,
+              "LB (Highest Price)": 6000.0,
+              "LB (Average Price)": 5500.0,
+              "LNS (Highest Price)": null,
+              "LNS (Average Price)": null
+            }
+          }
+        },
+        "nutmeg": {
+          "columns": [
+            "NUTMEG No.1 (Highest Price)",
+            "NUTMEG No.1 (Average Price)",
+            "NUTMEG No.2 (Highest Price)",
+            "NUTMEG No.2 (Average Price)",
+            "NUTMEG BWP (Highest Price)",
+            "NUTMEG BWP (Average Price)",
+            "MACE No.1 (Highest Price)",
+            "MACE No.1 (Average Price)",
+            "MACE No.2 (Highest Price)",
+            "MACE No.2 (Average Price)"
+          ],
+          "districts": {
+            "Kandy": {
+              "NUTMEG No.1 (Highest Price)": 1200.0,
+              "NUTMEG No.1 (Average Price)": 1140.0,
+              "NUTMEG No.2 (Highest Price)": 900.0,
+              "NUTMEG No.2 (Average Price)": 858.0,
+              "NUTMEG BWP (Highest Price)": 800.0,
+              "NUTMEG BWP (Average Price)": 684.0,
+              "MACE No.1 (Highest Price)": 6200.0,
+              "MACE No.1 (Average Price)": 6100.0,
+              "MACE No.2 (Highest Price)": 4100.0,
+              "MACE No.2 (Average Price)": 3775.0
+            },
+            "Matale": {
+              "NUTMEG No.1 (Highest Price)": 1200.0,
+              "NUTMEG No.1 (Average Price)": 1116.0,
+              "NUTMEG No.2 (Highest Price)": 1000.0,
+              "NUTMEG No.2 (Average Price)": 922.0,
+              "NUTMEG BWP (Highest Price)": 850.0,
+              "NUTMEG BWP (Average Price)": 716.0,
+              "MACE No.1 (Highest Price)": 6300.0,
+              "MACE No.1 (Average Price)": 6112.0,
+              "MACE No.2 (Highest Price)": 4000.0,
+              "MACE No.2 (Average Price)": 4000.0
+            },
+            "Nuwara_eliya": {
+              "NUTMEG No.1 (Highest Price)": 800.0,
+              "NUTMEG No.1 (Average Price)": 800.0,
+              "NUTMEG No.2 (Highest Price)": 750.0,
+              "NUTMEG No.2 (Average Price)": 750.0,
+              "NUTMEG BWP (Highest Price)": null,
+              "NUTMEG BWP (Average Price)": null,
+              "MACE No.1 (Highest Price)": 5000.0,
+              "MACE No.1 (Average Price)": 5000.0,
+              "MACE No.2 (Highest Price)": 4500.0,
+              "MACE No.2 (Average Price)": 4500.0
+            },
+            "Kegalle": {
+              "NUTMEG No.1 (Highest Price)": 1000.0,
+              "NUTMEG No.1 (Average Price)": 950.0,
+              "NUTMEG No.2 (Highest Price)": 900.0,
+              "NUTMEG No.2 (Average Price)": 883.0,
+              "NUTMEG BWP (Highest Price)": null,
+              "NUTMEG BWP (Average Price)": null,
+              "MACE No.1 (Highest Price)": 4500.0,
+              "MACE No.1 (Average Price)": 4333.0,
+              "MACE No.2 (Highest Price)": 4000.0,
+              "MACE No.2 (Average Price)": 3833.0
+            },
+            "Ratnapura": {
+              "NUTMEG No.1 (Highest Price)": null,
+              "NUTMEG No.1 (Average Price)": null,
+              "NUTMEG No.2 (Highest Price)": null,
+              "NUTMEG No.2 (Average Price)": null,
+              "NUTMEG BWP (Highest Price)": null,
+              "NUTMEG BWP (Average Price)": null,
+              "MACE No.1 (Highest Price)": null,
+              "MACE No.1 (Average Price)": null,
+              "MACE No.2 (Highest Price)": null,
+              "MACE No.2 (Average Price)": null
+            },
+            "Badulla": {
+              "NUTMEG No.1 (Highest Price)": null,
+              "NUTMEG No.1 (Average Price)": null,
+              "NUTMEG No.2 (Highest Price)": null,
+              "NUTMEG No.2 (Average Price)": null,
+              "NUTMEG BWP (Highest Price)": null,
+              "NUTMEG BWP (Average Price)": null,
+              "MACE No.1 (Highest Price)": null,
+              "MACE No.1 (Average Price)": null,
+              "MACE No.2 (Highest Price)": null,
+              "MACE No.2 (Average Price)": null
+            },
+            "Kurunegala": {
+              "NUTMEG No.1 (Highest Price)": 1100.0,
+              "NUTMEG No.1 (Average Price)": 1100.0,
+              "NUTMEG No.2 (Highest Price)": 900.0,
+              "NUTMEG No.2 (Average Price)": 900.0,
+              "NUTMEG BWP (Highest Price)": null,
+              "NUTMEG BWP (Average Price)": null,
+              "MACE No.1 (Highest Price)": 5500.0,
+              "MACE No.1 (Average Price)": 5500.0,
+              "MACE No.2 (Highest Price)": 4500.0,
+              "MACE No.2 (Average Price)": 4500.0
+            },
+            "Colombo": {
+              "NUTMEG No.1 (Highest Price)": null,
+              "NUTMEG No.1 (Average Price)": null,
+              "NUTMEG No.2 (Highest Price)": null,
+              "NUTMEG No.2 (Average Price)": null,
+              "NUTMEG BWP (Highest Price)": null,
+              "NUTMEG BWP (Average Price)": null,
+              "MACE No.1 (Highest Price)": null,
+              "MACE No.1 (Average Price)": null,
+              "MACE No.2 (Highest Price)": null,
+              "MACE No.2 (Average Price)": null
+            },
+            "Gampaha": {
+              "NUTMEG No.1 (Highest Price)": null,
+              "NUTMEG No.1 (Average Price)": null,
+              "NUTMEG No.2 (Highest Price)": null,
+              "NUTMEG No.2 (Average Price)": null,
+              "NUTMEG BWP (Highest Price)": null,
+              "NUTMEG BWP (Average Price)": null,
+              "MACE No.1 (Highest Price)": null,
+              "MACE No.1 (Average Price)": null,
+              "MACE No.2 (Highest Price)": null,
+              "MACE No.2 (Average Price)": null
+            },
+            "Kalutara": {
+              "NUTMEG No.1 (Highest Price)": null,
+              "NUTMEG No.1 (Average Price)": null,
+              "NUTMEG No.2 (Highest Price)": null,
+              "NUTMEG No.2 (Average Price)": null,
+              "NUTMEG BWP (Highest Price)": null,
+              "NUTMEG BWP (Average Price)": null,
+              "MACE No.1 (Highest Price)": null,
+              "MACE No.1 (Average Price)": null,
+              "MACE No.2 (Highest Price)": null,
+              "MACE No.2 (Average Price)": null
+            },
+            "Galle": {
+              "NUTMEG No.1 (Highest Price)": null,
+              "NUTMEG No.1 (Average Price)": null,
+              "NUTMEG No.2 (Highest Price)": null,
+              "NUTMEG No.2 (Average Price)": null,
+              "NUTMEG BWP (Highest Price)": null,
+              "NUTMEG BWP (Average Price)": null,
+              "MACE No.1 (Highest Price)": null,
+              "MACE No.1 (Average Price)": null,
+              "MACE No.2 (Highest Price)": null,
+              "MACE No.2 (Average Price)": null
+            },
+            "Matara": {
+              "NUTMEG No.1 (Highest Price)": null,
+              "NUTMEG No.1 (Average Price)": null,
+              "NUTMEG No.2 (Highest Price)": null,
+              "NUTMEG No.2 (Average Price)": null,
+              "NUTMEG BWP (Highest Price)": null,
+              "NUTMEG BWP (Average Price)": null,
+              "MACE No.1 (Highest Price)": null,
+              "MACE No.1 (Average Price)": null,
+              "MACE No.2 (Highest Price)": null,
+              "MACE No.2 (Average Price)": null
+            },
+            "Hambantota": {
+              "NUTMEG No.1 (Highest Price)": null,
+              "NUTMEG No.1 (Average Price)": null,
+              "NUTMEG No.2 (Highest Price)": null,
+              "NUTMEG No.2 (Average Price)": null,
+              "NUTMEG BWP (Highest Price)": null,
+              "NUTMEG BWP (Average Price)": null,
+              "MACE No.1 (Highest Price)": null,
+              "MACE No.1 (Average Price)": null,
+              "MACE No.2 (Highest Price)": null,
+              "MACE No.2 (Average Price)": null
+            },
+            "Monaragala": {
+              "NUTMEG No.1 (Highest Price)": null,
+              "NUTMEG No.1 (Average Price)": null,
+              "NUTMEG No.2 (Highest Price)": null,
+              "NUTMEG No.2 (Average Price)": null,
+              "NUTMEG BWP (Highest Price)": null,
+              "NUTMEG BWP (Average Price)": null,
+              "MACE No.1 (Highest Price)": null,
+              "MACE No.1 (Average Price)": null,
+              "MACE No.2 (Highest Price)": null,
+              "MACE No.2 (Average Price)": null
+            },
+            "National": {
+              "NUTMEG No.1 (Highest Price)": 1200.0,
+              "NUTMEG No.1 (Average Price)": 1021.2,
+              "NUTMEG No.2 (Highest Price)": 1000.0,
+              "NUTMEG No.2 (Average Price)": 862.6,
+              "NUTMEG BWP (Highest Price)": 850.0,
+              "NUTMEG BWP (Average Price)": 700.0,
+              "MACE No.1 (Highest Price)": 6300.0,
+              "MACE No.1 (Average Price)": 5409.0,
+              "MACE No.2 (Highest Price)": 4500.0,
+              "MACE No.2 (Average Price)": 4121.6
+            }
+          }
+        },
+        "cinnamon": {
+          "columns": [
+            "Alba (Highest Price)",
+            "Alba (Average Price)",
+            "C-5 Sp (Highest Price)",
+            "C-5 Sp (Average Price)",
+            "C-5 (Highest Price)",
+            "C-5 (Average Price)",
+            "C-4 (Highest Price)",
+            "C-4 (Average Price)",
+            "M-5 (Highest Price)",
+            "M-5 (Average Price)",
+            "M-4 (Highest Price)",
+            "M-4 (Average Price)",
+            "H-1 (Highest Price)",
+            "H-1 (Average Price)",
+            "H-2 (Highest Price)",
+            "H-2 (Average Price)",
+            "H-Faq (Highest Price)",
+            "H-Faq (Average Price)",
+            "Heen (Highest Price)",
+            "Heen (Average Price)",
+            "Gorosu (Highest Price)",
+            "Gorosu (Average Price)"
+          ],
+          "districts": {
+            "Ratnapura": {
+              "Alba (Highest Price)": 7200.0,
+              "Alba (Average Price)": 7000.0,
+              "C-5 Sp (Highest Price)": 5800.0,
+              "C-5 Sp (Average Price)": 5700.0,
+              "C-5 (Highest Price)": 5500.0,
+              "C-5 (Average Price)": 5400.0,
+              "C-4 (Highest Price)": 5300.0,
+              "C-4 (Average Price)": 5200.0,
+              "M-5 (Highest Price)": null,
+              "M-5 (Average Price)": null,
+              "M-4 (Highest Price)": null,
+              "M-4 (Average Price)": null,
+              "H-1 (Highest Price)": 4800.0,
+              "H-1 (Average Price)": 4700.0,
+              "H-2 (Highest Price)": 4600.0,
+              "H-2 (Average Price)": 4500.0,
+              "H-Faq (Highest Price)": null,
+              "H-Faq (Average Price)": null,
+              "Heen (Highest Price)": null,
+              "Heen (Average Price)": null,
+              "Gorosu (Highest Price)": null,
+              "Gorosu (Average Price)": null
+            },
+            "Badulla": {
+              "Alba (Highest Price)": null,
+              "Alba (Average Price)": null,
+              "C-5 Sp (Highest Price)": null,
+              "C-5 Sp (Average Price)": null,
+              "C-5 (Highest Price)": 5500.0,
+              "C-5 (Average Price)": 5500.0,
+              "C-4 (Highest Price)": 5200.0,
+              "C-4 (Average Price)": 5200.0,
+              "M-5 (Highest Price)": null,
+              "M-5 (Average Price)": null,
+              "M-4 (Highest Price)": null,
+              "M-4 (Average Price)": null,
+              "H-1 (Highest Price)": 4400.0,
+              "H-1 (Average Price)": 4400.0,
+              "H-2 (Highest Price)": 4000.0,
+              "H-2 (Average Price)": 4000.0,
+              "H-Faq (Highest Price)": null,
+              "H-Faq (Average Price)": null,
+              "Heen (Highest Price)": 3500.0,
+              "Heen (Average Price)": 3500.0,
+              "Gorosu (Highest Price)": 2500.0,
+              "Gorosu (Average Price)": 2500.0
+            },
+            "Kurunegala": {
+              "Alba (Highest Price)": null,
+              "Alba (Average Price)": null,
+              "C-5 Sp (Highest Price)": null,
+              "C-5 Sp (Average Price)": null,
+              "C-5 (Highest Price)": null,
+              "C-5 (Average Price)": null,
+              "C-4 (Highest Price)": null,
+              "C-4 (Average Price)": null,
+              "M-5 (Highest Price)": null,
+              "M-5 (Average Price)": null,
+              "M-4 (Highest Price)": null,
+              "M-4 (Average Price)": null,
+              "H-1 (Highest Price)": null,
+              "H-1 (Average Price)": null,
+              "H-2 (Highest Price)": null,
+              "H-2 (Average Price)": null,
+              "H-Faq (Highest Price)": null,
+              "H-Faq (Average Price)": null,
+              "Heen (Highest Price)": 3000.0,
+              "Heen (Average Price)": 3000.0,
+              "Gorosu (Highest Price)": 2500.0,
+              "Gorosu (Average Price)": 2500.0
+            },
+            "Colombo": {
+              "Alba (Highest Price)": null,
+              "Alba (Average Price)": null,
+              "C-5 Sp (Highest Price)": 6300.0,
+              "C-5 Sp (Average Price)": 6300.0,
+              "C-5 (Highest Price)": 5800.0,
+              "C-5 (Average Price)": 5800.0,
+              "C-4 (Highest Price)": 5600.0,
+              "C-4 (Average Price)": 5600.0,
+              "M-5 (Highest Price)": null,
+              "M-5 (Average Price)": null,
+              "M-4 (Highest Price)": null,
+              "M-4 (Average Price)": null,
+              "H-1 (Highest Price)": 4500.0,
+              "H-1 (Average Price)": 4500.0,
+              "H-2 (Highest Price)": 4200.0,
+              "H-2 (Average Price)": 4200.0,
+              "H-Faq (Highest Price)": null,
+              "H-Faq (Average Price)": null,
+              "Heen (Highest Price)": null,
+              "Heen (Average Price)": null,
+              "Gorosu (Highest Price)": null,
+              "Gorosu (Average Price)": null
+            },
+            "Gampaha": {
+              "Alba (Highest Price)": null,
+              "Alba (Average Price)": null,
+              "C-5 Sp (Highest Price)": null,
+              "C-5 Sp (Average Price)": null,
+              "C-5 (Highest Price)": 5600.0,
+              "C-5 (Average Price)": 5500.0,
+              "C-4 (Highest Price)": 5400.0,
+              "C-4 (Average Price)": 5350.0,
+              "M-5 (Highest Price)": null,
+              "M-5 (Average Price)": null,
+              "M-4 (Highest Price)": null,
+              "M-4 (Average Price)": null,
+              "H-1 (Highest Price)": null,
+              "H-1 (Average Price)": null,
+              "H-2 (Highest Price)": null,
+              "H-2 (Average Price)": null,
+              "H-Faq (Highest Price)": null,
+              "H-Faq (Average Price)": null,
+              "Heen (Highest Price)": null,
+              "Heen (Average Price)": null,
+              "Gorosu (Highest Price)": 2500.0,
+              "Gorosu (Average Price)": 2400.0
+            },
+            "Kalutara": {
+              "Alba (Highest Price)": 7500.0,
+              "Alba (Average Price)": 6900.0,
+              "C-5 Sp (Highest Price)": 6300.0,
+              "C-5 Sp (Average Price)": 6300.0,
+              "C-5 (Highest Price)": 5500.0,
+              "C-5 (Average Price)": 5500.0,
+              "C-4 (Highest Price)": 5300.0,
+              "C-4 (Average Price)": 5300.0,
+              "M-5 (Highest Price)": 5000.0,
+              "M-5 (Average Price)": 5000.0,
+              "M-4 (Highest Price)": 4800.0,
+              "M-4 (Average Price)": 4800.0,
+              "H-1 (Highest Price)": 4500.0,
+              "H-1 (Average Price)": 4500.0,
+              "H-2 (Highest Price)": 4400.0,
+              "H-2 (Average Price)": 4400.0,
+              "H-Faq (Highest Price)": null,
+              "H-Faq (Average Price)": null,
+              "Heen (Highest Price)": null,
+              "Heen (Average Price)": null,
+              "Gorosu (Highest Price)": null,
+              "Gorosu (Average Price)": null
+            },
+            "Galle": {
+              "Alba (Highest Price)": 7400.0,
+              "Alba (Average Price)": 7300.0,
+              "C-5 Sp (Highest Price)": 6300.0,
+              "C-5 Sp (Average Price)": 6050.0,
+              "C-5 (Highest Price)": 5800.0,
+              "C-5 (Average Price)": 5475.0,
+              "C-4 (Highest Price)": 5400.0,
+              "C-4 (Average Price)": 5350.0,
+              "M-5 (Highest Price)": null,
+              "M-5 (Average Price)": null,
+              "M-4 (Highest Price)": null,
+              "M-4 (Average Price)": null,
+              "H-1 (Highest Price)": 5050.0,
+              "H-1 (Average Price)": 5025.0,
+              "H-2 (Highest Price)": 4900.0,
+              "H-2 (Average Price)": 4850.0,
+              "H-Faq (Highest Price)": null,
+              "H-Faq (Average Price)": null,
+              "Heen (Highest Price)": null,
+              "Heen (Average Price)": null,
+              "Gorosu (Highest Price)": null,
+              "Gorosu (Average Price)": null
+            },
+            "Matara": {
+              "Alba (Highest Price)": 7500.0,
+              "Alba (Average Price)": 7375.0,
+              "C-5 Sp (Highest Price)": 7000.0,
+              "C-5 Sp (Average Price)": 6533.0,
+              "C-5 (Highest Price)": 5600.0,
+              "C-5 (Average Price)": 5475.0,
+              "C-4 (Highest Price)": 5500.0,
+              "C-4 (Average Price)": 5357.0,
+              "M-5 (Highest Price)": 5300.0,
+              "M-5 (Average Price)": 5200.0,
+              "M-4 (Highest Price)": 5200.0,
+              "M-4 (Average Price)": 5200.0,
+              "H-1 (Highest Price)": 5000.0,
+              "H-1 (Average Price)": 4887.0,
+              "H-2 (Highest Price)": 5000.0,
+              "H-2 (Average Price)": 4757.0,
+              "H-Faq (Highest Price)": 4600.0,
+              "H-Faq (Average Price)": 4425.0,
+              "Heen (Highest Price)": null,
+              "Heen (Average Price)": null,
+              "Gorosu (Highest Price)": null,
+              "Gorosu (Average Price)": null
+            },
+            "Hambantota": {
+              "Alba (Highest Price)": null,
+              "Alba (Average Price)": null,
+              "C-5 Sp (Highest Price)": null,
+              "C-5 Sp (Average Price)": null,
+              "C-5 (Highest Price)": 5550.0,
+              "C-5 (Average Price)": 5533.0,
+              "C-4 (Highest Price)": 5300.0,
+              "C-4 (Average Price)": 5300.0,
+              "M-5 (Highest Price)": null,
+              "M-5 (Average Price)": null,
+              "M-4 (Highest Price)": null,
+              "M-4 (Average Price)": null,
+              "H-1 (Highest Price)": 5000.0,
+              "H-1 (Average Price)": 4950.0,
+              "H-2 (Highest Price)": 4900.0,
+              "H-2 (Average Price)": 4880.0,
+              "H-Faq (Highest Price)": null,
+              "H-Faq (Average Price)": null,
+              "Heen (Highest Price)": null,
+              "Heen (Average Price)": null,
+              "Gorosu (Highest Price)": null,
+              "Gorosu (Average Price)": null
+            },
+            "Monaragala": {
+              "Alba (Highest Price)": null,
+              "Alba (Average Price)": null,
+              "C-5 Sp (Highest Price)": null,
+              "C-5 Sp (Average Price)": null,
+              "C-5 (Highest Price)": null,
+              "C-5 (Average Price)": null,
+              "C-4 (Highest Price)": 5000.0,
+              "C-4 (Average Price)": 5000.0,
+              "M-5 (Highest Price)": null,
+              "M-5 (Average Price)": null,
+              "M-4 (Highest Price)": null,
+              "M-4 (Average Price)": null,
+              "H-1 (Highest Price)": null,
+              "H-1 (Average Price)": null,
+              "H-2 (Highest Price)": null,
+              "H-2 (Average Price)": null,
+              "H-Faq (Highest Price)": null,
+              "H-Faq (Average Price)": null,
+              "Heen (Highest Price)": 2900.0,
+              "Heen (Average Price)": 2700.0,
+              "Gorosu (Highest Price)": 2600.0,
+              "Gorosu (Average Price)": 2500.0
+            },
+            "National": {
+              "Alba (Highest Price)": 7500.0,
+              "Alba (Average Price)": 7143.75,
+              "C-5 Sp (Highest Price)": 7000.0,
+              "C-5 Sp (Average Price)": 6176.6,
+              "C-5 (Highest Price)": 5800.0,
+              "C-5 (Average Price)": 5522.88,
+              "C-4 (Highest Price)": 5600.0,
+              "C-4 (Average Price)": 5295.22,
+              "M-5 (Highest Price)": 5300.0,
+              "M-5 (Average Price)": 5100.0,
+              "M-4 (Highest Price)": 5200.0,
+              "M-4 (Average Price)": 5000.0,
+              "H-1 (Highest Price)": 5050.0,
+              "H-1 (Average Price)": 4708.86,
+              "H-2 (Highest Price)": 5000.0,
+              "H-2 (Average Price)": 4512.43,
+              "H-Faq (Highest Price)": 4600.0,
+              "H-Faq (Average Price)": 4425.0,
+              "Heen (Highest Price)": 3500.0,
+              "Heen (Average Price)": 3066.67,
+              "Gorosu (Highest Price)": 2600.0,
+              "Gorosu (Average Price)": 2475.0
+            }
+          }
+        },
+        "betel": {
+          "columns": [
+            "Export-Peedunu-Max",
+            "Export-Peedunu-Min",
+            "Export-Kanda Kola-Max",
+            "Export-Kanda Kola-Min",
+            "Local-Peedunu-(Highest Price)",
+            "Local-Peedunu-(Average Price)",
+            "Local-Keti-(Highest Price)",
+            "Local-Keti-(Average Price)",
+            "Local-korikan-(Highest Price)",
+            "Local-korikan-(Average Price)"
+          ],
+          "districts": {
+            "Kandy": {
+              "Export-Peedunu-Max": null,
+              "Export-Peedunu-Min": null,
+              "Export-Kanda Kola-Max": null,
+              "Export-Kanda Kola-Min": null,
+              "Local-Peedunu-(Highest Price)": null,
+              "Local-Peedunu-(Average Price)": null,
+              "Local-Keti-(Highest Price)": null,
+              "Local-Keti-(Average Price)": null,
+              "Local-korikan-(Highest Price)": null,
+              "Local-korikan-(Average Price)": null
+            },
+            "Matale": {
+              "Export-Peedunu-Max": null,
+              "Export-Peedunu-Min": null,
+              "Export-Kanda Kola-Max": null,
+              "Export-Kanda Kola-Min": null,
+              "Local-Peedunu-(Highest Price)": null,
+              "Local-Peedunu-(Average Price)": null,
+              "Local-Keti-(Highest Price)": null,
+              "Local-Keti-(Average Price)": null,
+              "Local-korikan-(Highest Price)": null,
+              "Local-korikan-(Average Price)": null
+            },
+            "Nuwara_eliya": {
+              "Export-Peedunu-Max": null,
+              "Export-Peedunu-Min": null,
+              "Export-Kanda Kola-Max": null,
+              "Export-Kanda Kola-Min": null,
+              "Local-Peedunu-(Highest Price)": null,
+              "Local-Peedunu-(Average Price)": null,
+              "Local-Keti-(Highest Price)": null,
+              "Local-Keti-(Average Price)": null,
+              "Local-korikan-(Highest Price)": null,
+              "Local-korikan-(Average Price)": null
+            },
+            "Kegalle": {
+              "Export-Peedunu-Max": null,
+              "Export-Peedunu-Min": null,
+              "Export-Kanda Kola-Max": null,
+              "Export-Kanda Kola-Min": null,
+              "Local-Peedunu-(Highest Price)": null,
+              "Local-Peedunu-(Average Price)": null,
+              "Local-Keti-(Highest Price)": null,
+              "Local-Keti-(Average Price)": null,
+              "Local-korikan-(Highest Price)": null,
+              "Local-korikan-(Average Price)": null
+            },
+            "Ratnapura": {
+              "Export-Peedunu-Max": null,
+              "Export-Peedunu-Min": null,
+              "Export-Kanda Kola-Max": null,
+              "Export-Kanda Kola-Min": null,
+              "Local-Peedunu-(Highest Price)": 5000.0,
+              "Local-Peedunu-(Average Price)": 4500.0,
+              "Local-Keti-(Highest Price)": null,
+              "Local-Keti-(Average Price)": null,
+              "Local-korikan-(Highest Price)": null,
+              "Local-korikan-(Average Price)": null
+            },
+            "Badulla": {
+              "Export-Peedunu-Max": null,
+              "Export-Peedunu-Min": null,
+              "Export-Kanda Kola-Max": null,
+              "Export-Kanda Kola-Min": null,
+              "Local-Peedunu-(Highest Price)": null,
+              "Local-Peedunu-(Average Price)": null,
+              "Local-Keti-(Highest Price)": null,
+              "Local-Keti-(Average Price)": null,
+              "Local-korikan-(Highest Price)": null,
+              "Local-korikan-(Average Price)": null
+            },
+            "Kurunegala": {
+              "Export-Peedunu-Max": 12000.0,
+              "Export-Peedunu-Min": 10000.0,
+              "Export-Kanda Kola-Max": 8000.0,
+              "Export-Kanda Kola-Min": 6000.0,
+              "Local-Peedunu-(Highest Price)": 6000.0,
+              "Local-Peedunu-(Average Price)": 5000.0,
+              "Local-Keti-(Highest Price)": 4000.0,
+              "Local-Keti-(Average Price)": 3000.0,
+              "Local-korikan-(Highest Price)": 2000.0,
+              "Local-korikan-(Average Price)": 1500.0
+            },
+            "Colombo": {
+              "Export-Peedunu-Max": null,
+              "Export-Peedunu-Min": null,
+              "Export-Kanda Kola-Max": null,
+              "Export-Kanda Kola-Min": null,
+              "Local-Peedunu-(Highest Price)": 6000.0,
+              "Local-Peedunu-(Average Price)": 6000.0,
+              "Local-Keti-(Highest Price)": 4500.0,
+              "Local-Keti-(Average Price)": 4500.0,
+              "Local-korikan-(Highest Price)": null,
+              "Local-korikan-(Average Price)": null
+            },
+            "Gampaha": {
+              "Export-Peedunu-Max": 10000.0,
+              "Export-Peedunu-Min": 9000.0,
+              "Export-Kanda Kola-Max": 8000.0,
+              "Export-Kanda Kola-Min": 7000.0,
+              "Local-Peedunu-(Highest Price)": 6000.0,
+              "Local-Peedunu-(Average Price)": 5000.0,
+              "Local-Keti-(Highest Price)": 5000.0,
+              "Local-Keti-(Average Price)": 4000.0,
+              "Local-korikan-(Highest Price)": 2500.0,
+              "Local-korikan-(Average Price)": 2000.0
+            },
+            "Kalutara": {
+              "Export-Peedunu-Max": null,
+              "Export-Peedunu-Min": null,
+              "Export-Kanda Kola-Max": null,
+              "Export-Kanda Kola-Min": null,
+              "Local-Peedunu-(Highest Price)": null,
+              "Local-Peedunu-(Average Price)": null,
+              "Local-Keti-(Highest Price)": null,
+              "Local-Keti-(Average Price)": null,
+              "Local-korikan-(Highest Price)": null,
+              "Local-korikan-(Average Price)": null
+            },
+            "Galle": {
+              "Export-Peedunu-Max": null,
+              "Export-Peedunu-Min": null,
+              "Export-Kanda Kola-Max": null,
+              "Export-Kanda Kola-Min": null,
+              "Local-Peedunu-(Highest Price)": null,
+              "Local-Peedunu-(Average Price)": null,
+              "Local-Keti-(Highest Price)": null,
+              "Local-Keti-(Average Price)": null,
+              "Local-korikan-(Highest Price)": null,
+              "Local-korikan-(Average Price)": null
+            },
+            "Matara": {
+              "Export-Peedunu-Max": null,
+              "Export-Peedunu-Min": null,
+              "Export-Kanda Kola-Max": null,
+              "Export-Kanda Kola-Min": null,
+              "Local-Peedunu-(Highest Price)": null,
+              "Local-Peedunu-(Average Price)": null,
+              "Local-Keti-(Highest Price)": null,
+              "Local-Keti-(Average Price)": null,
+              "Local-korikan-(Highest Price)": null,
+              "Local-korikan-(Average Price)": null
+            },
+            "Hambantota": {
+              "Export-Peedunu-Max": null,
+              "Export-Peedunu-Min": null,
+              "Export-Kanda Kola-Max": null,
+              "Export-Kanda Kola-Min": null,
+              "Local-Peedunu-(Highest Price)": null,
+              "Local-Peedunu-(Average Price)": null,
+              "Local-Keti-(Highest Price)": null,
+              "Local-Keti-(Average Price)": null,
+              "Local-korikan-(Highest Price)": null,
+              "Local-korikan-(Average Price)": null
+            },
+            "Monaragala": {
+              "Export-Peedunu-Max": null,
+              "Export-Peedunu-Min": null,
+              "Export-Kanda Kola-Max": null,
+              "Export-Kanda Kola-Min": null,
+              "Local-Peedunu-(Highest Price)": null,
+              "Local-Peedunu-(Average Price)": null,
+              "Local-Keti-(Highest Price)": null,
+              "Local-Keti-(Average Price)": null,
+              "Local-korikan-(Highest Price)": null,
+              "Local-korikan-(Average Price)": null
+            },
+            "National": {
+              "Export-Peedunu-Max": 12000.0,
+              "Export-Peedunu-Min": 9000.0,
+              "Export-Kanda Kola-Max": 8000.0,
+              "Export-Kanda Kola-Min": 6000.0,
+              "Local-Peedunu-(Highest Price)": 6000.0,
+              "Local-Peedunu-(Average Price)": 5125.0,
+              "Local-Keti-(Highest Price)": 5000.0,
+              "Local-Keti-(Average Price)": 3833.33,
+              "Local-korikan-(Highest Price)": 2500.0,
+              "Local-korikan-(Average Price)": 1750.0
+            }
+          }
+        },
+        "arecanut": {
+          "columns": [
+            "Dried-(Karunka)-(Rs./k.g.) (Highest Price)",
+            "Dried-(Karunka)-(Rs./k.g.) (Average Price)",
+            "Fresh-(100 nuts) (Highest Price)",
+            "Fresh-(100 nuts) (Average Price)"
+          ],
+          "districts": {
+            "Kandy": {
+              "Dried-(Karunka)-(Rs./k.g.) (Highest Price)": 800.0,
+              "Dried-(Karunka)-(Rs./k.g.) (Average Price)": 750.0,
+              "Fresh-(100 nuts) (Highest Price)": 1000.0,
+              "Fresh-(100 nuts) (Average Price)": 710.0
+            },
+            "Matale": {
+              "Dried-(Karunka)-(Rs./k.g.) (Highest Price)": 770.0,
+              "Dried-(Karunka)-(Rs./k.g.) (Average Price)": 745.0,
+              "Fresh-(100 nuts) (Highest Price)": 900.0,
+              "Fresh-(100 nuts) (Average Price)": 862.0
+            },
+            "Nuwara_eliya": {
+              "Dried-(Karunka)-(Rs./k.g.) (Highest Price)": 750.0,
+              "Dried-(Karunka)-(Rs./k.g.) (Average Price)": 750.0,
+              "Fresh-(100 nuts) (Highest Price)": null,
+              "Fresh-(100 nuts) (Average Price)": null
+            },
+            "Kegalle": {
+              "Dried-(Karunka)-(Rs./k.g.) (Highest Price)": 780.0,
+              "Dried-(Karunka)-(Rs./k.g.) (Average Price)": 768.0,
+              "Fresh-(100 nuts) (Highest Price)": 1000.0,
+              "Fresh-(100 nuts) (Average Price)": 900.0
+            },
+            "Ratnapura": {
+              "Dried-(Karunka)-(Rs./k.g.) (Highest Price)": 800.0,
+              "Dried-(Karunka)-(Rs./k.g.) (Average Price)": 780.0,
+              "Fresh-(100 nuts) (Highest Price)": 1200.0,
+              "Fresh-(100 nuts) (Average Price)": 1100.0
+            },
+            "Badulla": {
+              "Dried-(Karunka)-(Rs./k.g.) (Highest Price)": 750.0,
+              "Dried-(Karunka)-(Rs./k.g.) (Average Price)": 725.0,
+              "Fresh-(100 nuts) (Highest Price)": 1200.0,
+              "Fresh-(100 nuts) (Average Price)": 1200.0
+            },
+            "Kurunegala": {
+              "Dried-(Karunka)-(Rs./k.g.) (Highest Price)": 820.0,
+              "Dried-(Karunka)-(Rs./k.g.) (Average Price)": 813.0,
+              "Fresh-(100 nuts) (Highest Price)": 1000.0,
+              "Fresh-(100 nuts) (Average Price)": 1000.0
+            },
+            "Colombo": {
+              "Dried-(Karunka)-(Rs./k.g.) (Highest Price)": 800.0,
+              "Dried-(Karunka)-(Rs./k.g.) (Average Price)": 725.0,
+              "Fresh-(100 nuts) (Highest Price)": 1100.0,
+              "Fresh-(100 nuts) (Average Price)": 1100.0
+            },
+            "Gampaha": {
+              "Dried-(Karunka)-(Rs./k.g.) (Highest Price)": 900.0,
+              "Dried-(Karunka)-(Rs./k.g.) (Average Price)": 875.0,
+              "Fresh-(100 nuts) (Highest Price)": 1000.0,
+              "Fresh-(100 nuts) (Average Price)": 975.0
+            },
+            "Kalutara": {
+              "Dried-(Karunka)-(Rs./k.g.) (Highest Price)": 750.0,
+              "Dried-(Karunka)-(Rs./k.g.) (Average Price)": 750.0,
+              "Fresh-(100 nuts) (Highest Price)": 800.0,
+              "Fresh-(100 nuts) (Average Price)": 800.0
+            },
+            "Galle": {
+              "Dried-(Karunka)-(Rs./k.g.) (Highest Price)": 750.0,
+              "Dried-(Karunka)-(Rs./k.g.) (Average Price)": 750.0,
+              "Fresh-(100 nuts) (Highest Price)": null,
+              "Fresh-(100 nuts) (Average Price)": null
+            },
+            "Matara": {
+              "Dried-(Karunka)-(Rs./k.g.) (Highest Price)": 760.0,
+              "Dried-(Karunka)-(Rs./k.g.) (Average Price)": 744.0,
+              "Fresh-(100 nuts) (Highest Price)": 1350.0,
+              "Fresh-(100 nuts) (Average Price)": 1186.0
+            },
+            "Hambantota": {
+              "Dried-(Karunka)-(Rs./k.g.) (Highest Price)": 750.0,
+              "Dried-(Karunka)-(Rs./k.g.) (Average Price)": 740.0,
+              "Fresh-(100 nuts) (Highest Price)": null,
+              "Fresh-(100 nuts) (Average Price)": null
+            },
+            "Monaragala": {
+              "Dried-(Karunka)-(Rs./k.g.) (Highest Price)": 780.0,
+              "Dried-(Karunka)-(Rs./k.g.) (Average Price)": 762.0,
+              "Fresh-(100 nuts) (Highest Price)": 1200.0,
+              "Fresh-(100 nuts) (Average Price)": 1100.0
+            },
+            "National": {
+              "Dried-(Karunka)-(Rs./k.g.) (Highest Price)": 900.0,
+              "Dried-(Karunka)-(Rs./k.g.) (Average Price)": 762.64,
+              "Fresh-(100 nuts) (Highest Price)": 1350.0,
+              "Fresh-(100 nuts) (Average Price)": 993.91
+            }
+          }
+        },
+        "other": {
+          "columns": [
+            "Goraka (Highest Price)",
+            "Goraka (Average Price)",
+            "Ginger (Highest Price)",
+            "Ginger (Average Price)",
+            "Kithul Jaggery (Highest Price)",
+            "Kithul Jaggery (Average Price)",
+            "Turmeric (Highest Price)",
+            "Turmeric (Average Price)",
+            "Vanilla (Highest Price)",
+            "Vanilla (Average Price)"
+          ],
+          "districts": {
+            "Kandy": {
+              "Goraka (Highest Price)": 350.0,
+              "Goraka (Average Price)": 302.0,
+              "Ginger (Highest Price)": 1000.0,
+              "Ginger (Average Price)": 759.0,
+              "Kithul Jaggery (Highest Price)": null,
+              "Kithul Jaggery (Average Price)": null,
+              "Turmeric (Highest Price)": 250.0,
+              "Turmeric (Average Price)": 232.0,
+              "Vanilla (Highest Price)": null,
+              "Vanilla (Average Price)": null
+            },
+            "Matale": {
+              "Goraka (Highest Price)": 300.0,
+              "Goraka (Average Price)": 300.0,
+              "Ginger (Highest Price)": 800.0,
+              "Ginger (Average Price)": 750.0,
+              "Kithul Jaggery (Highest Price)": null,
+              "Kithul Jaggery (Average Price)": null,
+              "Turmeric (Highest Price)": 300.0,
+              "Turmeric (Average Price)": 250.0,
+              "Vanilla (Highest Price)": null,
+              "Vanilla (Average Price)": null
+            },
+            "Nuwara_eliya": {
+              "Goraka (Highest Price)": 280.0,
+              "Goraka (Average Price)": 275.0,
+              "Ginger (Highest Price)": 700.0,
+              "Ginger (Average Price)": 693.0,
+              "Kithul Jaggery (Highest Price)": null,
+              "Kithul Jaggery (Average Price)": null,
+              "Turmeric (Highest Price)": null,
+              "Turmeric (Average Price)": null,
+              "Vanilla (Highest Price)": null,
+              "Vanilla (Average Price)": null
+            },
+            "Kegalle": {
+              "Goraka (Highest Price)": 300.0,
+              "Goraka (Average Price)": 293.0,
+              "Ginger (Highest Price)": 800.0,
+              "Ginger (Average Price)": 750.0,
+              "Kithul Jaggery (Highest Price)": null,
+              "Kithul Jaggery (Average Price)": null,
+              "Turmeric (Highest Price)": 300.0,
+              "Turmeric (Average Price)": 283.0,
+              "Vanilla (Highest Price)": null,
+              "Vanilla (Average Price)": null
+            },
+            "Ratnapura": {
+              "Goraka (Highest Price)": 330.0,
+              "Goraka (Average Price)": 320.0,
+              "Ginger (Highest Price)": 850.0,
+              "Ginger (Average Price)": 800.0,
+              "Kithul Jaggery (Highest Price)": null,
+              "Kithul Jaggery (Average Price)": null,
+              "Turmeric (Highest Price)": 250.0,
+              "Turmeric (Average Price)": 230.0,
+              "Vanilla (Highest Price)": null,
+              "Vanilla (Average Price)": null
+            },
+            "Badulla": {
+              "Goraka (Highest Price)": 400.0,
+              "Goraka (Average Price)": 345.0,
+              "Ginger (Highest Price)": 1000.0,
+              "Ginger (Average Price)": 900.0,
+              "Kithul Jaggery (Highest Price)": 1500.0,
+              "Kithul Jaggery (Average Price)": 1500.0,
+              "Turmeric (Highest Price)": 250.0,
+              "Turmeric (Average Price)": 250.0,
+              "Vanilla (Highest Price)": null,
+              "Vanilla (Average Price)": null
+            },
+            "Kurunegala": {
+              "Goraka (Highest Price)": 280.0,
+              "Goraka (Average Price)": 273.0,
+              "Ginger (Highest Price)": 800.0,
+              "Ginger (Average Price)": 800.0,
+              "Kithul Jaggery (Highest Price)": null,
+              "Kithul Jaggery (Average Price)": null,
+              "Turmeric (Highest Price)": 300.0,
+              "Turmeric (Average Price)": 300.0,
+              "Vanilla (Highest Price)": null,
+              "Vanilla (Average Price)": null
+            },
+            "Colombo": {
+              "Goraka (Highest Price)": 350.0,
+              "Goraka (Average Price)": 325.0,
+              "Ginger (Highest Price)": null,
+              "Ginger (Average Price)": null,
+              "Kithul Jaggery (Highest Price)": null,
+              "Kithul Jaggery (Average Price)": null,
+              "Turmeric (Highest Price)": 350.0,
+              "Turmeric (Average Price)": 325.0,
+              "Vanilla (Highest Price)": null,
+              "Vanilla (Average Price)": null
+            },
+            "Gampaha": {
+              "Goraka (Highest Price)": 300.0,
+              "Goraka (Average Price)": 280.0,
+              "Ginger (Highest Price)": 900.0,
+              "Ginger (Average Price)": 850.0,
+              "Kithul Jaggery (Highest Price)": null,
+              "Kithul Jaggery (Average Price)": null,
+              "Turmeric (Highest Price)": 250.0,
+              "Turmeric (Average Price)": 240.0,
+              "Vanilla (Highest Price)": null,
+              "Vanilla (Average Price)": null
+            },
+            "Kalutara": {
+              "Goraka (Highest Price)": 300.0,
+              "Goraka (Average Price)": 300.0,
+              "Ginger (Highest Price)": 800.0,
+              "Ginger (Average Price)": 800.0,
+              "Kithul Jaggery (Highest Price)": null,
+              "Kithul Jaggery (Average Price)": null,
+              "Turmeric (Highest Price)": 250.0,
+              "Turmeric (Average Price)": 250.0,
+              "Vanilla (Highest Price)": null,
+              "Vanilla (Average Price)": null
+            },
+            "Galle": {
+              "Goraka (Highest Price)": 300.0,
+              "Goraka (Average Price)": 295.0,
+              "Ginger (Highest Price)": null,
+              "Ginger (Average Price)": null,
+              "Kithul Jaggery (Highest Price)": null,
+              "Kithul Jaggery (Average Price)": null,
+              "Turmeric (Highest Price)": null,
+              "Turmeric (Average Price)": null,
+              "Vanilla (Highest Price)": null,
+              "Vanilla (Average Price)": null
+            },
+            "Matara": {
+              "Goraka (Highest Price)": 300.0,
+              "Goraka (Average Price)": 288.0,
+              "Ginger (Highest Price)": 800.0,
+              "Ginger (Average Price)": 800.0,
+              "Kithul Jaggery (Highest Price)": null,
+              "Kithul Jaggery (Average Price)": null,
+              "Turmeric (Highest Price)": 200.0,
+              "Turmeric (Average Price)": 190.0,
+              "Vanilla (Highest Price)": null,
+              "Vanilla (Average Price)": null
+            },
+            "Hambantota": {
+              "Goraka (Highest Price)": 310.0,
+              "Goraka (Average Price)": 303.0,
+              "Ginger (Highest Price)": null,
+              "Ginger (Average Price)": null,
+              "Kithul Jaggery (Highest Price)": null,
+              "Kithul Jaggery (Average Price)": null,
+              "Turmeric (Highest Price)": null,
+              "Turmeric (Average Price)": null,
+              "Vanilla (Highest Price)": null,
+              "Vanilla (Average Price)": null
+            },
+            "Monaragala": {
+              "Goraka (Highest Price)": 350.0,
+              "Goraka (Average Price)": 290.0,
+              "Ginger (Highest Price)": 800.0,
+              "Ginger (Average Price)": 800.0,
+              "Kithul Jaggery (Highest Price)": null,
+              "Kithul Jaggery (Average Price)": null,
+              "Turmeric (Highest Price)": 350.0,
+              "Turmeric (Average Price)": 300.0,
+              "Vanilla (Highest Price)": null,
+              "Vanilla (Average Price)": null
+            },
+            "National": {
+              "Goraka (Highest Price)": 400.0,
+              "Goraka (Average Price)": 299.21,
+              "Ginger (Highest Price)": 1000.0,
+              "Ginger (Average Price)": 791.09,
+              "Kithul Jaggery (Highest Price)": 1500.0,
+              "Kithul Jaggery (Average Price)": 1500.0,
+              "Turmeric (Highest Price)": 350.0,
+              "Turmeric (Average Price)": 259.09,
+              "Vanilla (Highest Price)": null,
+              "Vanilla (Average Price)": null
+            }
+          }
+        },
+        "oil": {
+          "columns": [
+            "Cinnamon Bark Oil-60% (Highest Price)",
+            "Cinnamon Bark Oil-60% (Average Price)",
+            "Cinnamon Bark Oil-40% (Highest Price)",
+            "Cinnamon Bark Oil-40% (Average Price)",
+            "Cinnamon Leaf Oil (Highest Price)",
+            "Cinnamon Leaf Oil (Average Price)",
+            "Citronella Oil (Highest Price)",
+            "Citronella Oil (Average Price)"
+          ],
+          "districts": {
+            "Ratnapura": {
+              "Cinnamon Bark Oil-60% (Highest Price)": null,
+              "Cinnamon Bark Oil-60% (Average Price)": null,
+              "Cinnamon Bark Oil-40% (Highest Price)": null,
+              "Cinnamon Bark Oil-40% (Average Price)": null,
+              "Cinnamon Leaf Oil (Highest Price)": null,
+              "Cinnamon Leaf Oil (Average Price)": null,
+              "Citronella Oil (Highest Price)": null,
+              "Citronella Oil (Average Price)": null
+            },
+            "Galle": {
+              "Cinnamon Bark Oil-60% (Highest Price)": null,
+              "Cinnamon Bark Oil-60% (Average Price)": null,
+              "Cinnamon Bark Oil-40% (Highest Price)": null,
+              "Cinnamon Bark Oil-40% (Average Price)": null,
+              "Cinnamon Leaf Oil (Highest Price)": 5670.0,
+              "Cinnamon Leaf Oil (Average Price)": 5579.0,
+              "Citronella Oil (Highest Price)": null,
+              "Citronella Oil (Average Price)": null
+            },
+            "Matara": {
+              "Cinnamon Bark Oil-60% (Highest Price)": null,
+              "Cinnamon Bark Oil-60% (Average Price)": null,
+              "Cinnamon Bark Oil-40% (Highest Price)": null,
+              "Cinnamon Bark Oil-40% (Average Price)": null,
+              "Cinnamon Leaf Oil (Highest Price)": 5200.0,
+              "Cinnamon Leaf Oil (Average Price)": 5200.0,
+              "Citronella Oil (Highest Price)": null,
+              "Citronella Oil (Average Price)": null
+            },
+            "Hambantota": {
+              "Cinnamon Bark Oil-60% (Highest Price)": null,
+              "Cinnamon Bark Oil-60% (Average Price)": null,
+              "Cinnamon Bark Oil-40% (Highest Price)": null,
+              "Cinnamon Bark Oil-40% (Average Price)": null,
+              "Cinnamon Leaf Oil (Highest Price)": null,
+              "Cinnamon Leaf Oil (Average Price)": null,
+              "Citronella Oil (Highest Price)": 13000.0,
+              "Citronella Oil (Average Price)": 12933.0
+            },
+            "National": {
+              "Cinnamon Bark Oil-60% (Highest Price)": null,
+              "Cinnamon Bark Oil-60% (Average Price)": null,
+              "Cinnamon Bark Oil-40% (Highest Price)": null,
+              "Cinnamon Bark Oil-40% (Average Price)": null,
+              "Cinnamon Leaf Oil (Highest Price)": 5670.0,
+              "Cinnamon Leaf Oil (Average Price)": 5389.5,
               "Citronella Oil (Highest Price)": 13000.0,
               "Citronella Oil (Average Price)": 12933.0
             }
