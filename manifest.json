@@ -1,7 +1,7 @@
 {
   "name": "TopGoviya.lk - Agricultural Intelligence Platform",
   "short_name": "TopGoviya",
-  "description": "Sri Lanka's Agricultural Intelligence Platform. Daily CBSL retail + HARTI wholesale prices, AI insights, farmer profit calculator, 4-year history. Sinhala · Tamil · English. නොමිලේ.",
+  "description": "Sri Lanka's Agricultural Intelligence Platform. Daily CBSL retail + HARTI wholesale prices, weekly DEA spice prices, AI insights, farmer calculators, price history since 2023. Sinhala · Tamil · English. නොමිලේ.",
   "start_url": "/?pwa=1",
   "scope": "/",
   "display": "standalone",
@@ -9,13 +9,39 @@
   "background_color": "#f4efe4",
   "theme_color": "#0e4f4a",
   "lang": "si",
-  "categories": ["food", "finance", "agriculture"],
+  "categories": [
+    "food",
+    "finance",
+    "agriculture"
+  ],
   "icons": [
-    { "src": "icon-72x72.png",   "sizes": "72x72",   "type": "image/png" },
-    { "src": "icon-96x96.png",   "sizes": "96x96",   "type": "image/png" },
-    { "src": "icon-128x128.png", "sizes": "128x128", "type": "image/png" },
-    { "src": "icon-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "icon-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    {
+      "src": "icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ],
   "screenshots": [
     {
@@ -31,42 +57,72 @@
       "short_name": "සිල්ලර මිල",
       "description": "CBSL daily retail prices — 43+ commodities",
       "url": "/?shortcut=prices",
-      "icons": [{ "src": "icon-96x96.png", "sizes": "96x96" }]
+      "icons": [
+        {
+          "src": "icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
     },
     {
       "name": "තොග මිල | Wholesale Prices",
       "short_name": "තොග මිල",
       "description": "HARTI wholesale prices — 10 markets",
       "url": "/wholesale.html?shortcut=wholesale",
-      "icons": [{ "src": "icon-96x96.png", "sizes": "96x96" }]
+      "icons": [
+        {
+          "src": "icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "කුළුබඩු මිල | Spice Prices",
+      "short_name": "කුළුබඩු මිල",
+      "description": "DEA weekly spice farm gate prices — 14 districts",
+      "url": "/spices.html?shortcut=spices",
+      "icons": [
+        {
+          "src": "icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
     },
     {
       "name": "ලාභ ගණකය | Profit Calculator",
       "short_name": "ගණකය",
       "description": "Farmer & trader profit calculator",
       "url": "/?shortcut=calculator",
-      "icons": [{ "src": "icon-96x96.png", "sizes": "96x96" }]
+      "icons": [
+        {
+          "src": "icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
     },
     {
       "name": "කාලගුණය | Market Weather",
       "short_name": "කාලගුණ",
       "description": "4-day weather for 10 HARTI markets",
       "url": "/weather.html?shortcut=weather",
-      "icons": [{ "src": "icon-96x96.png", "sizes": "96x96" }]
+      "icons": [
+        {
+          "src": "icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
     },
     {
       "name": "Break-even ගණකය",
       "short_name": "Break-even",
       "description": "Break-even calculator — minimum selling price",
       "url": "/breakeven.html?shortcut=breakeven",
-      "icons": [{ "src": "icon-96x96.png", "sizes": "96x96" }]
-    },
-    {
-      "name": "ගොවි පුවත් | Blog",
-      "short_name": "Blog",
-      "description": "Govi Puwath Blog — audio articles",
-      "url": "/blog.html?shortcut=blog",
-      "icons": [{ "src": "icon-96x96.png", "sizes": "96x96" }]
+      "icons": [
+        {
+          "src": "icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
     }
   ]
 }

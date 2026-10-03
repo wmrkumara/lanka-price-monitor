@@ -2,9 +2,10 @@
 /* Version: 2.7 | topgoviya.lk | Built in Gampola 🇱🇰 */
 /* Updated: 24 Aug 2026 — v13: added economics.html + dei_data.json network-first */
 /* Updated: 27 Sep 2026 — v14: all HTML pages network-first (daily /price/ pages never go stale) */
+/* Updated: 03 Oct 2026 — v15: spice pages, spice guide, data sources + /price/ hub added to offline cache */
 
-const CACHE_NAME = 'topgoviya-v14';
-const DATA_CACHE = 'topgoviya-data-v14';
+const CACHE_NAME = 'topgoviya-v15';
+const DATA_CACHE = 'topgoviya-data-v15';
 
 /* ── Static files to cache for offline use ── */
 const STATIC_ASSETS = [
@@ -23,6 +24,11 @@ const STATIC_ASSETS = [
   '/bulletin.html',
   '/netherlands-sri-lanka-agriculture.html',
   '/loan-calculator.html',
+  '/spices.html',
+  '/spice-report.html',
+  '/spice-price-guide.html',
+  '/data-sources.html',
+  '/price/',
   '/manifest.json',
   '/icon-72x72.png',
   '/icon-96x96.png',
