@@ -817,6 +817,7 @@ function renderYoYChart() {
         },
         tooltip: {
           callbacks: {
+            title: items => items.length ? (({si:'සතිය ', ta:'வாரம் ', en:'Week '})[lang] || 'Week ') + items[0].label : '',
             label: ctx => ctx.parsed.y !== null ?
               `${ctx.dataset.label}: රු. ${ctx.parsed.y.toLocaleString('en-US',{maximumFractionDigits:0})}` : null
           }
@@ -825,8 +826,11 @@ function renderYoYChart() {
       scales: {
         x: {
           grid: {color:'rgba(0,0,0,.04)'},
-          ticks: {font:{size:10}, maxTicksLimit:13,
-            callback: (v,i) => { const w=i+1; return [1,5,10,15,20,25,30,35,40,45,50].includes(w)?`W${w}`:''; }
+          title: {display:true,
+            text: ({si:'සති අංකය (වසරේ සතිය)', ta:'வார எண் (ஆண்டின் வாரம்)', en:'Week number (week of the year)'})[lang] || 'Week number',
+            font:{size:11, weight:'600'}, color:'#7a7264', padding:{top:6}},
+          ticks: {font:{size:10}, autoSkip:false, maxRotation:0,
+            callback: (v,i) => { const w=i+1, step=(window.innerWidth<600?8:4); return (w===1 || w%step===0) ? `W${w}` : ''; }
           }
         },
         y: {
