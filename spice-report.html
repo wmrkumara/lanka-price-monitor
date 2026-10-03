@@ -107,6 +107,8 @@ body{background-image:radial-gradient(circle at 12% -10%,rgba(14,79,74,.06),tran
 .modal-head-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .modal-icon{font-size:28px}
 .modal-title-si{font-family:'Newsreader','Noto Sans Sinhala',serif;font-size:26px;font-weight:500}
+.modal-date{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:12px;font-weight:700;color:#0e4f4a;background:#eef5f3;border:1px solid #cfe3dd;border-radius:999px;padding:3px 10px;font-family:'JetBrains Mono','Noto Sans Sinhala','Noto Sans Tamil',monospace}
+.modal-date .dot{width:7px;height:7px;border-radius:50%;background:#2c7a52}
 .modal-title-en{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
   font-weight:600;margin-top:1px}
 .close-btn{background:var(--paper-2);border:1px solid var(--line);border-radius:999px;
@@ -310,6 +312,7 @@ footer{margin:40px 0 60px;padding-top:20px;border-top:1px solid var(--line-stron
             <div>
               <div class="modal-title-si" id="m-title-si">ගම්මිරිස්</div>
               <div class="modal-title-en" id="m-title-en">PEPPER · DEA Farm Gate</div>
+              <div class="modal-date" id="m-date"><span class="dot"></span><span id="m-date-txt"></span></div>
             </div>
           </div>
         </div>
@@ -546,6 +549,20 @@ function updateDateLabel() {
   const y = parts[0], mi = parseInt(parts[1])-1, d = parseInt(parts[2]);
   const mn = MONTH_NAMES[lang][mi];
   document.getElementById('lbl-date').textContent = `${d} ${mn} ${y}`;
+  updateModalDate();
+}
+
+// Latest DEA report date, shown on the modal card and the downloaded image
+function reportDateText() {
+  if (!DEA?.weeks?.length) return '';
+  const latest = DEA.weeks[DEA.weeks.length - 1];
+  const [y, m, d] = latest.date.split('-');
+  const pre = {si:'DEA වාර්තාව', ta:'DEA அறிக்கை', en:'DEA report'}[lang] || 'DEA report';
+  return `${pre}: ${parseInt(d)} ${MONTH_NAMES[lang][parseInt(m)-1]} ${y}`;
+}
+function updateModalDate() {
+  const el = document.getElementById('m-date-txt');
+  if (el) el.textContent = reportDateText();
 }
 
 // ═══════════════════════════════════════════════════
@@ -642,6 +659,7 @@ function openModal(spiceKey) {
   document.getElementById('m-icon').textContent = sp.icon;
   document.getElementById('m-title-si').textContent = lang==='en'?sp.en:lang==='ta'?sp.ta:sp.si;
   document.getElementById('m-title-en').textContent = sp.en.toUpperCase() + ' · DEA Farm Gate';
+  updateModalDate();
 
   // Render grade buttons
   const gradeRow = document.getElementById('grade-row');
@@ -1281,7 +1299,7 @@ async function generateShareImage() {
       letter-spacing:.05em;border-radius:0 0 16px 16px;
       margin-top:8px;
     `;
-    watermark.innerHTML = '🌿 www.TopGoviya.lk · DEA ගොවිපළ දොරටු මිල · නිදහස් දත්ත';
+    watermark.innerHTML = '🌿 www.TopGoviya.lk · DEA ගොවිපළ දොරටු මිල · ' + reportDateText() + ' · නිදහස් දත්ත';
     modal.appendChild(watermark);
 
     const canvas = await html2canvas(modal, {
