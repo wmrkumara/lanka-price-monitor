@@ -1,0 +1,76 @@
+# TopGoviya.lk — 14 spice Shorts (one per spice) for YouTube / TikTok / Facebook
+# Runs after "DEA Spice Prices Weekly Update". Makes videos only when a NEW DEA week arrives.
+# Download: Actions → Weekly Spice Cards → latest run → Artifacts.
+
+name: Weekly Spice Cards
+
+on:
+  workflow_run:
+    workflows: ["DEA Spice Prices Weekly Update"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Make the videos even if this week was already done"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  spice-cards:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Is there a new DEA week?
+        id: check
+        run: |
+          LATEST=$(python3 -c "import json;print(json.load(open('dea_data.json'))['weeks'][-1]['date'])")
+          DONE=$(cat .spice_cards_last_week 2>/dev/null || echo none)
+          echo "latest=$LATEST" >> $GITHUB_OUTPUT
+          if [ "$LATEST" != "$DONE" ] || [ "${{ github.event.inputs.force }}" = "true" ]; then
+            echo "make=yes" >> $GITHUB_OUTPUT
+          else
+            echo "make=no" >> $GITHUB_OUTPUT
+            echo "Week $LATEST already done -> skipping"
+          fi
+
+      - name: Install video tools and fonts
+        if: steps.check.outputs.make == 'yes'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-noto-core fonts-noto-color-emoji
+          mkdir -p ~/.fonts
+          curl -sL -o ~/.fonts/NotoSansSinhala.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssinhala/NotoSansSinhala%5Bwdth,wght%5D.ttf"
+          curl -sL -o ~/.fonts/JetBrainsMono.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf"
+          fc-cache -f
+          pip install -q playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Make the 14 spice videos
+        if: steps.check.outputs.make == 'yes'
+        run: python3 make_spice_cards.py dea_data.json icon-512x512.png
+
+      - name: Save videos for download
+        if: steps.check.outputs.make == 'yes'
+        uses: actions/upload-artifact@v4
+        with:
+          name: topgoviya-spice-cards-${{ steps.check.outputs.latest }}
+          path: short/spices/
+          retention-days: 30
+
+      - name: Remember this week is done
+        if: steps.check.outputs.make == 'yes'
+        run: |
+          echo "${{ steps.check.outputs.latest }}" > .spice_cards_last_week
+          git config user.name "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add .spice_cards_last_week
+          git diff --cached --quiet || git commit -m "Spice cards made for DEA week ${{ steps.check.outputs.latest }}"
+          git pull --rebase -q origin main && git push -q origin main
