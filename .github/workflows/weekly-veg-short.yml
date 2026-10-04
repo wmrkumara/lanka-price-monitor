@@ -1,0 +1,43 @@
+# TopGoviya.lk — Weekly VEGETABLE YouTube Short (CBSL retail, week-over-week)
+# Runs every Monday 8:30 PM Sri Lanka time (after the daily CBSL update).
+# Download: Actions → Weekly Vegetable Short → latest run → Artifacts.
+
+name: Weekly Vegetable Short
+
+on:
+  schedule:
+    - cron: '0 15 * * 1'   # Monday 15:00 UTC = 8:30 PM Sri Lanka
+  workflow_dispatch:
+
+jobs:
+  veg-short:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Install video tools and fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-noto-core fonts-noto-color-emoji
+          mkdir -p ~/.fonts
+          curl -sL -o ~/.fonts/NotoSansSinhala.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssinhala/NotoSansSinhala%5Bwdth,wght%5D.ttf"
+          curl -sL -o ~/.fonts/JetBrainsMono.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf"
+          fc-cache -f
+          pip install -q playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Make the video
+        run: python3 make_veg_short.py data.json icon-512x512.png
+
+      - name: Find the report date
+        id: tag
+        run: echo "date=$(python3 -c "import json;print(json.load(open('data.json'))['dates'][-1])")" >> $GITHUB_OUTPUT
+
+      - name: Save video for download
+        uses: actions/upload-artifact@v4
+        with:
+          name: topgoviya-veg-short-${{ steps.tag.outputs.date }}
+          path: short/
+          retention-days: 30
