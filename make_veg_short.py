@@ -80,6 +80,32 @@ body{width:1080px;height:1920px;background:#f4efe4;font-family:'Noto Sans Sinhal
 .url{font-size:88px;font-weight:800;color:#0e4f4a;margin-top:30px}
 """
 
+CALC_CSS = """
+.ex{display:flex;justify-content:space-between;align-items:center;background:#fffdf7;border:4px solid #e3d9c4;border-radius:24px;padding:22px 38px;margin-bottom:14px}
+.ex.low{border-color:#e3c9c2;background:#fbf1ee}
+.ex .n{font-size:50px;font-weight:800}.ex .f{font-size:32px;color:#7a7264;margin-top:4px}
+.ex .v{font-size:56px;font-weight:800;color:#0e4f4a;text-align:right}
+.ex.best{border-color:#2c7a52;background:#eef6f0}
+.sub{font-size:36px;font-weight:700;color:#3a403a;margin:-10px 0 22px}
+.warn{background:#fff8ec;border-left:12px solid #a9802a;padding:22px 30px;font-size:36px;line-height:1.5;color:#3a403a;margin-top:10px}
+.go{background:#0e4f4a;color:#fff;border-radius:24px;padding:24px 34px;font-size:40px;font-weight:800;margin-top:18px;line-height:1.4}
+"""
+def calc_example(crop_si, rows, unit_si, url_text, kg=500):
+    """rows: list of (market_si, price). Shows harvest value = kg x price per market."""
+    rows = sorted(rows, key=lambda r: -r[1])
+    rows = rows[:3] + ([rows[-1]] if len(rows) > 3 else [])  # top 3 + lowest
+    hi = rows[0][1]
+    body = "".join(
+        f'<div class="ex{" best" if p == hi else (" low" if (m, p) == rows[-1] and len(rows) > 1 else "")}"><div><div class="n">{m}{" ✅" if p == hi else ""}</div>'
+        f'<div class="f mono">{kg} kg × රු.{p:,.0f}</div></div><div class="v mono">රු.{kg*p:,.0f}</div></div>' for m, p in rows)
+    diff = (rows[0][1] - rows[-1][1]) * kg
+    return f"""<div class="lbl" style="color:#0e4f4a;margin-bottom:24px">🧮 උදාහරණය: {crop_si} {kg} kg</div>
+<div class="sub">අස්වැන්නේ වටිනාකම · {unit_si}</div>{body}
+<div class="gap" style="font-size:40px;font-weight:800;color:#a9802a;margin:6px 0 10px">වෙනස: රු.{diff:,.0f} දක්වා</div>
+<div class="warn">⚠️ ප්‍රවාහන වියදම අඩු කළ පසු සැබෑ ලාභය වෙනස් වේ</div>
+<div class="go">🧮 ගොවියාගේ ලාභය | වෙළෙන්දාගේ ලාභය ගණනය කරගන්න<br><span style="color:#e7d3a3;font-size:36px">{url_text} · ඔබේ ප්‍රවාහන වියදම ඇතුළත් කරන්න</span></div>"""
+
+CSS = CSS + CALC_CSS
 def build(mode):
     M = MODES[mode]
     items = {}
@@ -139,6 +165,12 @@ def build(mode):
         mrows = "".join(f'<div class="mk{" best" if k==best else ""}"><span>{MARKETS[k]}{" ✅" if k==best else ""}</span><span class="mono">රු. {rs(v)}</span></div>' for k, v in order)
         slides.append(page(f'<div class="lbl" style="color:#0e4f4a">📍 {star["si"]} — වෙළඳපොළ අනුව</div>{mrows}'
                            f'<div class="note">✅ {M["best_note"]}<br>{T} මිල · {star["unit"]} · {DATE_NOW}</div>'))
+    if mode == "wholesale":
+        two = [r for r in items.values() if len(r["markets"]) >= 2 and r["unit"] == "/කි.ග්‍රෑ."]
+        if two:
+            ex = max(two, key=lambda r: max(r["markets"].values()) - min(r["markets"].values()))
+            slides.append(page(calc_example(ex["si"], [(MARKETS.get(k, k), p) for k, p in ex["markets"].items() if k in MARKETS],
+                                            "CBSL තොග මිල · " + DATE_NOW, "topgoviya.lk")))
     slides.append(page(f"""<div class="big" style="font-size:96px">එළවළු 40+<br>{T} සහ සිල්ලර මිල</div>
 <div class="url">👉 topgoviya.lk</div>
 <div class="note">නොමිලේ · සිංහල · தமிழ் · English<br>මිල ගණන් මඟපෙන්වීමක් පමණි.<br>ඔබේ තීරණ ඔබේ වගකීම වේ.</div>""" if mode == "wholesale" else
@@ -178,6 +210,7 @@ def build(mode):
             + ("\nමිල පහළ ගිය:\n" + "\n".join(dn) + "\n" if dn else "")
             + "\nප්‍රධාන භාණ්ඩ:\n" + "\n".join(st) + "\n" + mline +
             "\n👉 එළවළු 40+ තොග සහ සිල්ලර මිල: https://topgoviya.lk\n"
+            + ("🧮 ගොවියාගේ ලාභය | වෙළෙන්දාගේ ලාභය ගණනය කරගන්න: https://topgoviya.lk\n" if mode == "wholesale" else "") +
             "📊 මූලාශ්‍රය: ශ්‍රී ලංකා මහ බැංකුව (CBSL) දෛනික මිල වාර්තාව\n"
             "⚠️ මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.\n\n"
             f"{M['tags']} #TopGoviyaLK #SriLanka #shorts")
