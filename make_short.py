@@ -59,7 +59,7 @@ body{width:1080px;height:1920px;background:#f4efe4;font-family:'Noto Sans Sinhal
 .top .b{font-size:52px;font-weight:800;letter-spacing:.5px}
 .top .s{font-size:34px;color:#e7d3a3;margin-top:6px}
 .main{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 80px}
-.foot{background:#0b0b0b;color:#e7d3a3;text-align:center;padding:40px;font-size:34px;font-weight:600}
+.foot{background:#0b0b0b;color:#e7d3a3;text-align:center;padding:34px 40px;font-size:31px;font-weight:600;line-height:1.5}
 .mono{font-family:'JetBrains Mono',monospace}
 .big{font-size:120px;font-weight:800;line-height:1.15;color:#0e4f4a}
 .date{display:inline-block;margin-top:50px;font-size:48px;font-weight:700;background:#0e4f4a;color:#fff;
@@ -85,7 +85,7 @@ def page(inner):
     return f"""<html><head><meta charset="utf-8"><style>{CSS}</style></head><body>
 <div class="top"><img src="{logo}"><div><div class="b">TopGoviya.lk</div><div class="s">සතිපතා කුළුබඩු මිල · DEA</div></div></div>
 <div class="main">{inner}</div>
-<div class="foot">මූලාශ්‍රය: DEA · ගොවිපළ දොරටු මිල · {DATE_SI}</div></body></html>"""
+<div class="foot">දත්ත අපනයන කෘෂිකර්ම දෙපාර්තමේන්තුවෙන් (DEA) · ගොවිපළ දොරටු මිල · {DATE_SI}</div></body></html>"""
 
 def chip(p):
     if p is None: return '<span class="chip flat">—</span>'
@@ -94,7 +94,8 @@ def chip(p):
     return f'<span class="chip mono {c}">{a} {p:+.1f}%</span>'
 
 slides = [page(f"""<div class="big">මේ සතියේ<br>කුළුබඩු මිල</div>
-<div><span class="date mono">DEA · {DATE_SI}</span></div>
+<div><span class="date mono">DEA වාර්තාව · {DATE_SI}</span></div>
+<div class="note" style="margin-top:20px">දත්ත අපනයන කෘෂිකර්ම දෙපාර්තමේන්තුවෙන් (DEA)</div>
 <div class="note">ගම්මිරිස් · කුරුඳු · කරාබු නැටි · එනසාල්<br>ජාතික සාමාන්‍ය මිල · රු./කි.ග්‍රෑ.</div>""")]
 for r in rows:
     slides.append(page(f"""<div class="card"><div class="emo">{r['emo']}</div>
