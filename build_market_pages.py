@@ -309,8 +309,12 @@ def market_page(market, hm, harti, cats, cbsl):
     # ---- CBSL block (Dambulla only)
     cbsl_html = ""
     cbsl_count = 0
+    cbsl_first = False
+    cd = None
     if market == "Dambulla" and cbsl:
         cd, crow = cbsl_dambulla(cbsl)
+        # Show the CBSL table first when it is newer than the HARTI report
+        cbsl_first = bool(crow) and (not last or cd > d_(last))
         cbsl_count = len(crow)
         if crow:
             trs = "".join(
@@ -320,7 +324,14 @@ def market_page(market, hm, harti, cats, cbsl):
                 f'<td class="n w">{money(w) if w is not None else "—"}</td>'
                 f'<td class="n">{money(r) if r is not None else "—"}</td></tr>'
                 for c, w, r in crow)
-            cbsl_html = (f'<h2>CBSL දඹුල්ල තොග හා සිල්ලර මිල<span>Central Bank report, {fdate(cd,"en")}</span></h2>'
+            newest = ""
+            if cbsl_first:
+                newest = (f'<p class="tip" style="margin:0 0 12px;background:var(--goodbg,#e3efe6)">🟢 <b>නවතම මිල — {fdate(cd,"si")}</b>. '
+                          f'HARTI {fdate(cd,"si")} වාර්තාව තවම නිකුත් කර නැත; HARTI මිල ({fdate(d_(last),"si") if last else "—"}) පහළින් ඇත. '
+                          f'<span lang="en">Newest prices: CBSL report, {fdate(cd,"en")}. The HARTI report for this day is not out yet; '
+                          f'HARTI prices from {fdate(d_(last),"en") if last else "—"} are below.</span></p>')
+            cbsl_html = (f'<h2 id="cbsl">CBSL දඹුල්ල තොග හා සිල්ලර මිල<span>Central Bank report, {fdate(cd,"en")}</span></h2>'
+                         + newest +
                          f'<p class="asof" style="margin:0 0 10px">මහ බැංකුවේ දෛනික මිල වාර්තාවේ දඹුල්ල මිල (රු.) · '
                          f'Central Bank of Sri Lanka daily price report, Dambulla.</p>'
                          f'<div class="scroll"><table><thead><tr><th>භාණ්ඩය / Item</th><th class="n">තොග<br>Wholesale</th>'
@@ -335,12 +346,15 @@ def market_page(market, hm, harti, cats, cbsl):
                + (f'<div class="g"><b>{cbsl_count}</b><span>CBSL තොග හා සිල්ලර / retail items</span></div>' if cbsl_count else "")
                + '</div>')
 
+    harti_h2 = (f'<h2>HARTI {e(si)} තොග මිල<span>HARTI wholesale report, {fdate(d_(last),"en") if last else "—"}</span></h2>')
     others = "".join(f'<a href="{MKT[m]["slug"]}.html">📍 {e(MKT[m]["si"])} / {e(men(m))}</a>' for m in MKT if m != market)
 
     body = f"""
 <p class="crumb"><a href="../index.html">TopGoviya.lk</a> / <a href="index.html">වෙළඳපොළ මිල</a> / {e(si)}</p>
 <h1>🧺 {e(si)} එළවළු මිල අද</h1>
 <p class="alt">{e(en)} market price today – vegetable wholesale prices<br>{e(ta)} சந்தை விலை இன்று</p>
+{cbsl_html if cbsl_first else ''}
+{harti_h2 if cbsl_first else ''}
 <p class="asof" style="margin-top:14px"><b>📦 තොග මිල / Wholesale</b> · 📍 {e(si)} ({e(en)}) · {fdate(d_(last),'si') if last else '—'} · HARTI</p>
 {duo}
 {stale}
@@ -352,7 +366,7 @@ def market_page(market, hm, harti, cats, cbsl):
 {table}
 {table_note if rows else ''}
 {better_html}
-{cbsl_html}
+{'' if cbsl_first else cbsl_html}
 <a class="cta" href="../wholesale.html">වෙළඳපොළ 10ක ප්‍රස්ථාර හා ලාභ ගණකය බලන්න / Charts &amp; calculator →</a>
 <h2>අනෙක් වෙළඳපොළ<span>Other markets</span></h2>
 <div class="rel">{others}</div>
@@ -360,8 +374,15 @@ def market_page(market, hm, harti, cats, cbsl):
     dtxt = fdate(d_(last), "en") if last else ""
     title = f"{si} එළවළු මිල අද | {en} Market Price Today Sri Lanka – TopGoviya"
     top3 = ", ".join(f"{r['name']} Rs. {money(r['mid'])}" for r in rows[:3])
-    desc = (f"{en} market price today ({dtxt}): wholesale prices for {len(rows)} vegetables from the HARTI report"
-            + (", plus CBSL Dambulla retail and wholesale" if cbsl_count else "")
+    if cbsl_first:
+        top3 = ", ".join(f"{c['name']} Rs. {money(r)} retail" for c, w, r in crow[:3] if r is not None)
+    if cbsl_first:
+        desc = (f"{en} market price today ({fdate(cd,'en')}): CBSL wholesale and retail prices for {cbsl_count} items, "
+                f"plus HARTI wholesale prices for {len(rows)} vegetables ({dtxt})")
+    else:
+        desc = (f"{en} market price today ({dtxt}): wholesale prices for {len(rows)} vegetables from the HARTI report"
+                + (", plus CBSL Dambulla retail and wholesale" if cbsl_count else ""))
+    desc = (desc
             + f". {top3}. {si} එළවළු මිල අද · {en.lower()} elawalu mila.")
     jsonld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "TopGoviya.lk", "item": SITE + "/"},
