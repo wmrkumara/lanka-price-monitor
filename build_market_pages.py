@@ -14,7 +14,7 @@ Python standard library.
 import json, os, re
 from datetime import datetime, timedelta
 
-from build_pages import CSS, GA_ID, SITE, e, money, fdate, slug, MONTHS, NAMES as CBSL_NAMES, EMOJIS
+from build_pages import CSS, GA_ID, SITE, e, money, fdate, slug, MONTHS, NAMES as CBSL_NAMES, EMOJIS, UNITS
 
 OUT_DIR = "market"
 HIST_FILE = "harti_market_history.json"
@@ -154,11 +154,10 @@ def cbsl_dambulla(cbsl):
 
 # ---------------------------------------------------------------- download / share buttons
 # The phone makes the image and PDF from this page's prices (nothing is stored on GitHub).
-DL_JS = r'''<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
-<script>
+DL_JS = r'''<script>
 /* TopGoviya.lk - price list image / PDF made on the phone (nothing stored on the server) */
 (function(){
-const D = __DL_DATA__;
+const D = __DL_DATA__, K = D.key, CB = D.kind === 'cbsl';
 const W = 1080, X = 44, TW = 992, ROWS = 24;
 const C = {petrol:'#0e4f4a', gold:'#a9802a', cream:'#f4efe4', card:'#fffdf7', ink:'#191d1a', soft:'#3a403a',
            muted:'#7a7264', line:'#e3d9c4', head:'#efe8d8', cat:'#e6efec', up:'#b23a2e', upbg:'#f7e6e2',
@@ -189,7 +188,7 @@ function draw(lines, part, nparts, logo, qr){
   cv.width = W; cv.height = 10; ctx.font = '22px ' + SI;
   const foot = [].concat(...D.foot.map(t => wrap(ctx, t, TW - 210)));
   const stale = D.stale ? 70 : 0;
-  const R1 = 690, R2 = 830, R3 = TW + X - 16, NAMEMAX = R1 - 175;
+  const R1 = 690, R2 = 830, R3 = TW + X - 16, NAMEMAX = CB ? R2 - 200 : R1 - 175;
   const fitsEn = L => { ctx.font = '600 29px ' + SI; const nw = ctx.measureText(L.s).width;
     ctx.font = '18px ' + SI; return X + 16 + nw + 10 + ctx.measureText(L.e).width < NAMEMAX; };
   const rowH = L => L.c ? 44 : (fitsEn(L) ? 60 : 82);
@@ -206,11 +205,11 @@ function draw(lines, part, nparts, logo, qr){
   // title
   let y = 140 + 78;
   ctx.fillStyle = C.petrol; ctx.font = '600 60px ' + SI; ctx.fillText(D.si + ' වෙළඳපොළ', X, y);
-  y += 52; ctx.fillStyle = C.soft; ctx.font = '600 32px ' + SI; const t2 = 'එළවළු තොග මිල ලැයිස්තුව';
+  y += 52; ctx.fillStyle = C.soft; ctx.font = '600 32px ' + SI; const t2 = D.sub;
   ctx.fillText(t2, X, y); const w2 = ctx.measureText(t2).width;
-  ctx.fillStyle = C.muted; ctx.font = '22px ' + SI; ctx.fillText(' · ' + D.en + ' wholesale price list', X + w2 + 6, y);
+  ctx.fillStyle = C.muted; ctx.font = '22px ' + SI; ctx.fillText(' · ' + D.subEn, X + w2 + 6, y);
   // date pill
-  y += 26; ctx.font = '600 32px ' + SI; const dt = D.date + ' · HARTI වාර්තාව';
+  y += 26; ctx.font = '600 32px ' + SI; const dt = D.date + ' · ' + D.src;
   const dw = ctx.measureText(dt).width + 60; rr(ctx, X, y, dw, 60, 30, C.gold);
   ctx.fillStyle = '#fff'; ctx.fillText(dt, X + 30, y + 42);
   ctx.fillStyle = C.muted; ctx.font = '600 24px ' + SI;
@@ -222,7 +221,9 @@ function draw(lines, part, nparts, logo, qr){
   rr(ctx, X, y, TW, tableH, 18, C.card);
   ctx.save(); ctx.beginPath(); ctx.rect(X, y, TW, 50); ctx.clip(); rr(ctx, X, y, TW, tableH, 18, C.head); ctx.restore();
   ctx.fillStyle = C.muted; ctx.font = '600 21px ' + SI; ctx.textAlign = 'left'; ctx.fillText('භාණ්ඩය', X + 16, y + 33);
-  ctx.textAlign = 'right'; ctx.fillText('අවම – උපරිම', R1, y + 33); ctx.fillText('මධ්‍යගතය', R2, y + 33); ctx.fillText('සතියකට පෙර', R3, y + 33);
+  ctx.textAlign = 'right';
+  if (CB){ ctx.fillText('තොග / Wholesale', R2 + 20, y + 33); ctx.fillText('සිල්ලර / Retail', R3, y + 33); }
+  else { ctx.fillText('අවම – උපරිම', R1, y + 33); ctx.fillText('මධ්‍යගතය', R2, y + 33); ctx.fillText('සතියකට පෙර', R3, y + 33); }
   y += 50;
   for (const L of lines){
     ctx.textAlign = 'left';
@@ -235,6 +236,11 @@ function draw(lines, part, nparts, logo, qr){
     if (one) ctx.fillText(L.e, X + 16 + nw + 10, y + 40); else ctx.fillText(L.e, X + 16, y + 68);
     y += mid;
     ctx.textAlign = 'right';
+    if (CB){
+      ctx.font = '600 29px ' + MONO; ctx.fillStyle = C.gold; ctx.fillText(L.ws != null ? money(L.ws) : '—', R2 + 20, y + 40);
+      ctx.font = '700 31px ' + MONO; ctx.fillStyle = C.ink; ctx.fillText(L.rt != null ? money(L.rt) : '—', R3, y + 40);
+      y += h - mid; continue;
+    }
     ctx.font = '500 23px ' + MONO; ctx.fillStyle = C.muted; ctx.fillText(money(L.lo) + '–' + money(L.hi), R1, y + 39);
     ctx.font = '700 31px ' + MONO; ctx.fillStyle = C.ink; ctx.fillText(money(L.m), R2, y + 40);
     if (L.w){
@@ -269,7 +275,7 @@ async function make(){
 const blobOf = (cv, type, q) => new Promise(r => cv.toBlob(r, type, q));
 function save(blob, name){ const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
   document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000); }
-const base = () => D.slug + '-price-list-' + D.iso;
+const base = () => D.slug + '-' + D.fname + '-' + D.iso;
 
 async function pdfBlob(cvs){
   // simple A4 PDF with one JPEG per page (no extra library needed)
@@ -302,20 +308,20 @@ async function run(btn, job){ const t = btn.innerHTML; btn.disabled = true; btn.
   try { await job(); } catch(e){ console.error(e); alert('සමාවන්න, නැවත උත්සාහ කරන්න. Sorry, please try again.'); }
   btn.disabled = false; btn.innerHTML = t; }
 
-window.tgImage = btn => run(btn, async () => { const cvs = await make();
+window['tgImage_' + K] = btn => run(btn, async () => { const cvs = await make();
   for (let i = 0; i < cvs.length; i++){ save(await blobOf(cvs[i], 'image/png'), base() + (cvs.length > 1 ? '-' + (i + 1) : '') + '.png');
     await new Promise(r => setTimeout(r, 600)); } });
-window.tgPdf = btn => run(btn, async () => { save(await pdfBlob(await make()), base() + '.pdf'); });
-window.tgShare = btn => run(btn, async () => { const cvs = await make(), files = [];
+window['tgPdf_' + K] = btn => run(btn, async () => { save(await pdfBlob(await make()), base() + '.pdf'); });
+window['tgShare_' + K] = btn => run(btn, async () => { const cvs = await make(), files = [];
   for (let i = 0; i < cvs.length; i++) files.push(new File([await blobOf(cvs[i], 'image/png')],
     base() + (cvs.length > 1 ? '-' + (i + 1) : '') + '.png', {type: 'image/png'}));
-  const msg = D.si + ' වෙළඳපොළ තොග මිල (' + D.date + ', HARTI) ' + D.url;
+  const msg = D.msg;
   if (navigator.canShare && navigator.canShare({files})) await navigator.share({files, text: msg});
   else { for (const f of files) save(f, f.name); } });
 
-const bar = document.getElementById('tg-dl');
+const bar = document.getElementById('tg-dl-' + K);
 if (bar){ bar.style.display = 'flex';
-  const sh = document.getElementById('tg-share');
+  const sh = document.getElementById('tg-share-' + K);
   try { if (!(navigator.canShare && navigator.canShare({files: [new File([''], 'a.png', {type: 'image/png'})]}))) sh.style.display = 'none'; }
   catch(e){ sh.style.display = 'none'; } }
 })();
@@ -328,8 +334,30 @@ DL_FOOT = [
     "මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ. ප්‍රවාහන වියදම අනුව සැබෑ ලාභය වෙනස් වේ.",
 ]
 
+DL_LIB = '<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>\n'
+
+CBSL_FOOT = [
+    "දත්ත: ශ්‍රී ලංකා මහ බැංකුවේ දෛනික මිල වාර්තාව, දඹුල්ල වෙළඳපොළ. Central Bank of Sri Lanka daily price report.",
+    "තොග = වෙළඳපොළ තොග මිල · සිල්ලර = පාරිභෝගිකයා ගෙවන මිල. ඒකකය සඳහන් නොකළ භාණ්ඩ රු. / කි.ග්‍රෑ.",
+    "මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.",
+]
+
+
+def dl_buttons(key, data, label=""):
+    """PDF / image / share buttons + the data the phone uses to draw the list."""
+    btn = ("display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:999px;font:inherit;"
+           "font-weight:700;font-size:14px;cursor:pointer;")
+    lab = f" {label}" if label else ""
+    return (f'<div id="tg-dl-{key}" style="display:none;gap:8px;flex-wrap:wrap;margin:14px 0 4px">'
+            f'<button onclick="tgPdf_{key}(this)" style="{btn}background:var(--card);color:var(--petrol);border:1px solid var(--petrol)">📄{lab} PDF බාගන්න</button>'
+            f'<button onclick="tgImage_{key}(this)" style="{btn}border:0;background:var(--petrol);color:#fff">🖼️{lab} Image බාගන්න</button>'
+            f'<button id="tg-share-{key}" onclick="tgShare_{key}(this)" style="{btn}border:0;background:#25d366;color:#fff">📤 WhatsApp / Share</button>'
+            f'</div>'
+            + DL_JS.replace("__DL_DATA__", json.dumps(data, ensure_ascii=False).replace("</", "<\\/")))
+
+
 def download_bar(market, rows, last, latest_all, url):
-    """Share / image / PDF buttons + the data the phone uses to draw the price list."""
+    """HARTI wholesale price list (min / max / mid / last week) for one market."""
     if not rows or not last:
         return ""
     info = MKT[market]
@@ -342,16 +370,38 @@ def download_bar(market, rows, last, latest_all, url):
     stale = ""
     if last < latest_all:
         stale = f"HARTI නවතම වාර්තාවේ ({fdate(d_(latest_all), 'si')}) මෙම වෙළඳපොළ මිල නොතිබුණි. මෙහි ඇත්තේ {fdate(d_(last), 'si')} මිලයි."
-    data = {"slug": info["slug"], "si": info["si"], "en": men(market), "date": fdate(d_(last), "si"), "iso": last,
-            "url": url, "logo": "../icon-192x192.png", "stale": stale, "foot": DL_FOOT, "lines": lines}
-    btn = ("display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:999px;font:inherit;"
-           "font-weight:700;font-size:14px;cursor:pointer;")
-    return (f'<div id="tg-dl" style="display:none;gap:8px;flex-wrap:wrap;margin:14px 0 4px">'
-            f'<button onclick="tgPdf(this)" style="{btn}background:var(--card);color:var(--petrol);border:1px solid var(--petrol)">📄 PDF බාගන්න</button>'
-            f'<button onclick="tgImage(this)" style="{btn}border:0;background:var(--petrol);color:#fff">🖼️ Image බාගන්න</button>'
-            f'<button id="tg-share" onclick="tgShare(this)" style="{btn}border:0;background:#25d366;color:#fff">📤 WhatsApp / Share</button>'
-            f'</div>'
-            + DL_JS.replace("__DL_DATA__", json.dumps(data, ensure_ascii=False).replace("</", "<\\/")))
+    date_si = fdate(d_(last), "si")
+    data = {"key": "h", "kind": "harti", "slug": info["slug"], "fname": "price-list", "si": info["si"],
+            "sub": "එළවළු තොග මිල ලැයිස්තුව", "subEn": men(market) + " wholesale price list",
+            "src": "HARTI වාර්තාව", "date": date_si, "iso": last, "url": url, "logo": "../icon-192x192.png",
+            "stale": stale, "foot": DL_FOOT, "lines": lines,
+            "msg": f"{info['si']} වෙළඳපොළ තොග මිල ({date_si}, HARTI) {url}"}
+    return dl_buttons("h", data)
+
+
+CBSL_CAT_SI = {"Vegetables": "එළවළු", "Other": "වෙනත්", "Fruits": "පළතුරු", "Rice": "සහල්", "Fish": "මාළු"}
+
+
+def cbsl_download_bar(cd, crow, url):
+    """CBSL Dambulla wholesale + retail price list."""
+    if not crow:
+        return ""
+    lines, cur = [], None
+    for c, w, r in crow:
+        if c.get("category") != cur:
+            cur = c.get("category")
+            lines.append({"c": CBSL_CAT_SI.get(cur, cur)})
+        unit = c.get("unit", "Rs./kg")
+        en = c["name"] + ("" if unit == "Rs./kg" else " · " + ((UNITS.get(unit) or {}).get("si", unit)))
+        lines.append({"s": (CBSL_NAMES.get(c["name"]) or {}).get("si", c["name"]), "e": en, "ws": w, "rt": r})
+    date_si = fdate(cd, "si")
+    data = {"key": "c", "kind": "cbsl", "slug": "dambulla", "fname": "cbsl-price-list", "si": "දඹුල්ල",
+            "sub": "තොග හා සිල්ලර මිල ලැයිස්තුව", "subEn": "Dambulla wholesale & retail (CBSL)",
+            "src": "මහ බැංකු වාර්තාව", "date": date_si, "iso": cd.isoformat(), "url": url + "#cbsl",
+            "logo": "../icon-192x192.png", "stale": "", "foot": CBSL_FOOT, "lines": lines,
+            "msg": f"දඹුල්ල තොග හා සිල්ලර මිල ({date_si}, මහ බැංකුව) {url}"}
+    return dl_buttons("c", data, "CBSL")
+
 
 # ---------------------------------------------------------------- page shell
 def shell(title, desc, canonical, body, jsonld):
@@ -382,7 +432,7 @@ def shell(title, desc, canonical, body, jsonld):
 td.mid{{font-family:'JetBrains Mono',monospace;font-weight:700;text-align:right;white-space:nowrap}}
 .tip{{font-size:13.5px;color:var(--soft);background:var(--amberbg);border-radius:10px;padding:10px 13px;margin:10px 0 0}}
 </style>
-<script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>
+{DL_LIB}<script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>
 </head>
 <body>
 <div class="wrap">
@@ -542,6 +592,7 @@ def market_page(market, hm, harti, cats, cbsl):
                          + newest +
                          f'<p class="asof" style="margin:0 0 10px">මහ බැංකුවේ දෛනික මිල වාර්තාවේ දඹුල්ල මිල (රු.) · '
                          f'Central Bank of Sri Lanka daily price report, Dambulla.</p>'
+                         + cbsl_download_bar(cd, crow, url) +
                          f'<div class="scroll"><table><thead><tr><th>භාණ්ඩය / Item</th><th class="n">තොග<br>Wholesale</th>'
                          f'<th class="n">සිල්ලර<br>Retail</th></tr></thead><tbody>{trs}</tbody></table></div>')
 
