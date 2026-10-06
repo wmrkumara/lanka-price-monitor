@@ -80,6 +80,7 @@ footer a{font-weight:700}
 td.mid{font-family:'JetBrains Mono',monospace;font-weight:700;text-align:right;white-space:nowrap}
 .tip{font-size:13.5px;color:var(--soft);background:var(--amberbg);border-radius:10px;padding:10px 13px;margin:10px 0 0}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "TopGoviya.lk", "item": "https://topgoviya.lk/"}, {"@type": "ListItem", "position": 2, "name": "Market prices", "item": "https://topgoviya.lk/market/"}, {"@type": "ListItem", "position": 3, "name": "Peliyagoda market price", "item": "https://topgoviya.lk/market/peliyagoda.html"}]}</script>
 </head>
 <body>
@@ -92,11 +93,10 @@ td.mid{font-family:'JetBrains Mono',monospace;font-weight:700;text-align:right;w
 
 
 <p class="asof" style="margin-top:14px"><b>📦 තොග මිල / Wholesale</b> · 📍 පෑලියගොඩ (Peliyagoda) · 2026 ඔක්තෝබර් 5 · HARTI</p>
-<div id="tg-dl" style="display:none;gap:8px;flex-wrap:wrap;margin:14px 0 4px"><button onclick="tgPdf(this)" style="display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:999px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;background:var(--card);color:var(--petrol);border:1px solid var(--petrol)">📄 PDF බාගන්න</button><button onclick="tgImage(this)" style="display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:999px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;border:0;background:var(--petrol);color:#fff">🖼️ Image බාගන්න</button><button id="tg-share" onclick="tgShare(this)" style="display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:999px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;border:0;background:#25d366;color:#fff">📤 WhatsApp / Share</button></div><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
-<script>
+<div id="tg-dl-h" style="display:none;gap:8px;flex-wrap:wrap;margin:14px 0 4px"><button onclick="tgPdf_h(this)" style="display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:999px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;background:var(--card);color:var(--petrol);border:1px solid var(--petrol)">📄 PDF බාගන්න</button><button onclick="tgImage_h(this)" style="display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:999px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;border:0;background:var(--petrol);color:#fff">🖼️ Image බාගන්න</button><button id="tg-share-h" onclick="tgShare_h(this)" style="display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:999px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;border:0;background:#25d366;color:#fff">📤 WhatsApp / Share</button></div><script>
 /* TopGoviya.lk - price list image / PDF made on the phone (nothing stored on the server) */
 (function(){
-const D = {"slug": "peliyagoda", "si": "පෑලියගොඩ", "en": "Peliyagoda", "date": "2026 ඔක්තෝබර් 5", "iso": "2026-10-05", "url": "https://topgoviya.lk/market/peliyagoda.html", "logo": "../icon-192x192.png", "stale": "", "foot": ["දත්ත: HARTI දෛනික තොග මිල වාර්තාව (හෙක්ටර් කොබ්බෑකඩුව ගොවිකටයුතු පර්යේෂණ හා පුහුණු කිරීමේ ආයතනය).", "රු. / කි.ග්‍රෑ. · මධ්‍යගතය = (අවම + උපරිම) ÷ 2 · සතියකට පෙර = සතියකට පෙර වාර්තාවේ මධ්‍යගතය.", "මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ. ප්‍රවාහන වියදම අනුව සැබෑ ලාභය වෙනස් වේ."], "lines": [{"c": "උඩරට එළවළු"}, {"s": "බෝංචි", "e": "Beans", "lo": 500, "hi": 600, "m": 550, "w": 625}, {"s": "බීට්රූට්", "e": "Beetroot", "lo": 280, "hi": 300, "m": 290, "w": 310}, {"s": "බීට්රූට් (නුවරඑළිය)", "e": "Beetroot (N.Eliya)", "lo": 320, "hi": 350, "m": 335, "w": null}, {"s": "ගෝවා (නුවර)", "e": "Cabbage (Kandy)", "lo": 260, "hi": 300, "m": 280, "w": 235}, {"s": "කැරට්", "e": "Carrot", "lo": 160, "hi": 180, "m": 170, "w": 190}, {"s": "නෝල්කෝල්", "e": "Knolkhol", "lo": 160, "hi": 200, "m": 180, "w": 165}, {"s": "ලීක්ස්", "e": "Leeks", "lo": 120, "hi": 150, "m": 135, "w": 115}, {"s": "රාබු", "e": "Raddish", "lo": 80, "hi": 100, "m": 90, "w": 90}, {"s": "තක්කාලි", "e": "Tomato", "lo": 450, "hi": 500, "m": 475, "w": 425}, {"c": "පහතරට එළවළු"}, {"s": "අළු කෙසෙල්", "e": "Ash Plantains", "lo": 160, "hi": 180, "m": 170, "w": 165}, {"s": "කරවිල", "e": "Bitter Gourd", "lo": 400, "hi": 500, "m": 450, "w": 350}, {"s": "වම්බටු", "e": "Brinjals", "lo": 200, "hi": 350, "m": 275, "w": 400}, {"s": "මාළු මිරිස්", "e": "Capsicum", "lo": 350, "hi": 450, "m": 400, "w": 450}, {"s": "පිපිඤ්ඤා", "e": "Cucumber", "lo": 60, "hi": 100, "m": 80, "w": 80}, {"s": "මුරුංගා", "e": "Drumstick", "lo": 100, "hi": 150, "m": 125, "w": 140}, {"s": "එළබටු", "e": "Eggplant", "lo": 230, "hi": 280, "m": 255, "w": 275}, {"s": "අමු මිරිස්", "e": "Green Chillies", "lo": 250, "hi": 300, "m": 275, "w": 225}, {"s": "බණ්ඩක්කා", "e": "Ladies Fingers", "lo": 200, "hi": 250, "m": 225, "w": 190}, {"s": "දෙහි", "e": "Lime", "lo": 900, "hi": 1000, "m": 950, "w": 850}, {"s": "මෑකරල්", "e": "Long Beans", "lo": 250, "hi": 350, "m": 300, "w": 325}, {"s": "වැටකොළු", "e": "Luffa", "lo": 200, "hi": 250, "m": 225, "w": 225}, {"s": "මඤ්ඤොක්කා", "e": "Manioc", "lo": 80, "hi": 120, "m": 100, "w": 115}, {"s": "වට්ටක්කා", "e": "Pumpkin", "lo": 200, "hi": 220, "m": 210, "w": 225}, {"s": "පතෝල", "e": "Snake Gourd", "lo": 320, "hi": 350, "m": 335, "w": 265}, {"s": "බතල", "e": "Sweet Potato", "lo": 100, "hi": 130, "m": 115, "w": 150}, {"c": "අර්තාපල් හා ළූණු"}, {"s": "ලොකු ළූණු (ආනයනික)", "e": "Big Onion (Imported)", "lo": 230, "hi": 240, "m": 235, "w": 270}, {"s": "අර්තාපල් (ආනයනික)", "e": "Potato (Imported)", "lo": 140, "hi": 230, "m": 185, "w": 162}, {"s": "අර්තාපල් (නුවරඑළිය)", "e": "Potato (N.Eliya)", "lo": 250, "hi": 260, "m": 255, "w": 320}, {"s": "අර්තාපල් (වැලිමඩ)", "e": "Potato (Welimada)", "lo": 180, "hi": 220, "m": 200, "w": 265}, {"c": "පළතුරු හා කෙසෙල්"}, {"s": "ආනමාළු කෙසෙල්", "e": "Anamalu", "lo": 36, "hi": 40, "m": 38, "w": 40}, {"s": "අලිගැටපේර", "e": "Avocado", "lo": 100, "hi": 170, "m": 135, "w": 85}, {"s": "ඇඹුල් කෙසෙල්", "e": "Banana Ambul", "lo": 150, "hi": 180, "m": 165, "w": 205}, {"s": "කොලිකුට්ටු", "e": "Banana Kolikuttu", "lo": 470, "hi": 500, "m": 485, "w": 500}, {"s": "සීනි කෙසෙල්", "e": "Banana Seeni", "lo": 140, "hi": 170, "m": 155, "w": 160}, {"s": "අඹ (කර්තකොළඹ)", "e": "Mango (Karathakolomban)", "lo": 200, "hi": 270, "m": 235, "w": null}, {"s": "දොඩම්", "e": "Orange", "lo": 35, "hi": 42, "m": 38, "w": 30}, {"s": "පැපොල්", "e": "Papaya", "lo": 80, "hi": 120, "m": 100, "w": 135}, {"s": "වැල් දොඩම්", "e": "Passion Fruit", "lo": 40, "hi": 50, "m": 45, "w": 45}, {"s": "අන්නාසි (ලොකු)", "e": "Pineapple (Large)", "lo": 300, "hi": 350, "m": 325, "w": 385}, {"s": "අන්නාසි (මධ්‍යම)", "e": "Pineapple (Medium)", "lo": 230, "hi": 270, "m": 250, "w": 295}, {"s": "අන්නාසි (කුඩා)", "e": "Pineapple (Small)", "lo": 180, "hi": 220, "m": 200, "w": 240}, {"s": "දිවුල්", "e": "Woodapple", "lo": 14, "hi": 20, "m": 17, "w": 18}]};
+const D = {"key": "h", "kind": "harti", "slug": "peliyagoda", "fname": "price-list", "si": "පෑලියගොඩ", "sub": "එළවළු තොග මිල ලැයිස්තුව", "subEn": "Peliyagoda wholesale price list", "src": "HARTI වාර්තාව", "date": "2026 ඔක්තෝබර් 5", "iso": "2026-10-05", "url": "https://topgoviya.lk/market/peliyagoda.html", "logo": "../icon-192x192.png", "stale": "", "foot": ["දත්ත: HARTI දෛනික තොග මිල වාර්තාව (හෙක්ටර් කොබ්බෑකඩුව ගොවිකටයුතු පර්යේෂණ හා පුහුණු කිරීමේ ආයතනය).", "රු. / කි.ග්‍රෑ. · මධ්‍යගතය = (අවම + උපරිම) ÷ 2 · සතියකට පෙර = සතියකට පෙර වාර්තාවේ මධ්‍යගතය.", "මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ. ප්‍රවාහන වියදම අනුව සැබෑ ලාභය වෙනස් වේ."], "lines": [{"c": "උඩරට එළවළු"}, {"s": "බෝංචි", "e": "Beans", "lo": 500, "hi": 600, "m": 550, "w": 625}, {"s": "බීට්රූට්", "e": "Beetroot", "lo": 280, "hi": 300, "m": 290, "w": 310}, {"s": "බීට්රූට් (නුවරඑළිය)", "e": "Beetroot (N.Eliya)", "lo": 320, "hi": 350, "m": 335, "w": null}, {"s": "ගෝවා (නුවර)", "e": "Cabbage (Kandy)", "lo": 260, "hi": 300, "m": 280, "w": 235}, {"s": "කැරට්", "e": "Carrot", "lo": 160, "hi": 180, "m": 170, "w": 190}, {"s": "නෝල්කෝල්", "e": "Knolkhol", "lo": 160, "hi": 200, "m": 180, "w": 165}, {"s": "ලීක්ස්", "e": "Leeks", "lo": 120, "hi": 150, "m": 135, "w": 115}, {"s": "රාබු", "e": "Raddish", "lo": 80, "hi": 100, "m": 90, "w": 90}, {"s": "තක්කාලි", "e": "Tomato", "lo": 450, "hi": 500, "m": 475, "w": 425}, {"c": "පහතරට එළවළු"}, {"s": "අළු කෙසෙල්", "e": "Ash Plantains", "lo": 160, "hi": 180, "m": 170, "w": 165}, {"s": "කරවිල", "e": "Bitter Gourd", "lo": 400, "hi": 500, "m": 450, "w": 350}, {"s": "වම්බටු", "e": "Brinjals", "lo": 200, "hi": 350, "m": 275, "w": 400}, {"s": "මාළු මිරිස්", "e": "Capsicum", "lo": 350, "hi": 450, "m": 400, "w": 450}, {"s": "පිපිඤ්ඤා", "e": "Cucumber", "lo": 60, "hi": 100, "m": 80, "w": 80}, {"s": "මුරුංගා", "e": "Drumstick", "lo": 100, "hi": 150, "m": 125, "w": 140}, {"s": "එළබටු", "e": "Eggplant", "lo": 230, "hi": 280, "m": 255, "w": 275}, {"s": "අමු මිරිස්", "e": "Green Chillies", "lo": 250, "hi": 300, "m": 275, "w": 225}, {"s": "බණ්ඩක්කා", "e": "Ladies Fingers", "lo": 200, "hi": 250, "m": 225, "w": 190}, {"s": "දෙහි", "e": "Lime", "lo": 900, "hi": 1000, "m": 950, "w": 850}, {"s": "මෑකරල්", "e": "Long Beans", "lo": 250, "hi": 350, "m": 300, "w": 325}, {"s": "වැටකොළු", "e": "Luffa", "lo": 200, "hi": 250, "m": 225, "w": 225}, {"s": "මඤ්ඤොක්කා", "e": "Manioc", "lo": 80, "hi": 120, "m": 100, "w": 115}, {"s": "වට්ටක්කා", "e": "Pumpkin", "lo": 200, "hi": 220, "m": 210, "w": 225}, {"s": "පතෝල", "e": "Snake Gourd", "lo": 320, "hi": 350, "m": 335, "w": 265}, {"s": "බතල", "e": "Sweet Potato", "lo": 100, "hi": 130, "m": 115, "w": 150}, {"c": "අර්තාපල් හා ළූණු"}, {"s": "ලොකු ළූණු (ආනයනික)", "e": "Big Onion (Imported)", "lo": 230, "hi": 240, "m": 235, "w": 270}, {"s": "අර්තාපල් (ආනයනික)", "e": "Potato (Imported)", "lo": 140, "hi": 230, "m": 185, "w": 162}, {"s": "අර්තාපල් (නුවරඑළිය)", "e": "Potato (N.Eliya)", "lo": 250, "hi": 260, "m": 255, "w": 320}, {"s": "අර්තාපල් (වැලිමඩ)", "e": "Potato (Welimada)", "lo": 180, "hi": 220, "m": 200, "w": 265}, {"c": "පළතුරු හා කෙසෙල්"}, {"s": "ආනමාළු කෙසෙල්", "e": "Anamalu", "lo": 36, "hi": 40, "m": 38, "w": 40}, {"s": "අලිගැටපේර", "e": "Avocado", "lo": 100, "hi": 170, "m": 135, "w": 85}, {"s": "ඇඹුල් කෙසෙල්", "e": "Banana Ambul", "lo": 150, "hi": 180, "m": 165, "w": 205}, {"s": "කොලිකුට්ටු", "e": "Banana Kolikuttu", "lo": 470, "hi": 500, "m": 485, "w": 500}, {"s": "සීනි කෙසෙල්", "e": "Banana Seeni", "lo": 140, "hi": 170, "m": 155, "w": 160}, {"s": "අඹ (කර්තකොළඹ)", "e": "Mango (Karathakolomban)", "lo": 200, "hi": 270, "m": 235, "w": null}, {"s": "දොඩම්", "e": "Orange", "lo": 35, "hi": 42, "m": 38, "w": 30}, {"s": "පැපොල්", "e": "Papaya", "lo": 80, "hi": 120, "m": 100, "w": 135}, {"s": "වැල් දොඩම්", "e": "Passion Fruit", "lo": 40, "hi": 50, "m": 45, "w": 45}, {"s": "අන්නාසි (ලොකු)", "e": "Pineapple (Large)", "lo": 300, "hi": 350, "m": 325, "w": 385}, {"s": "අන්නාසි (මධ්‍යම)", "e": "Pineapple (Medium)", "lo": 230, "hi": 270, "m": 250, "w": 295}, {"s": "අන්නාසි (කුඩා)", "e": "Pineapple (Small)", "lo": 180, "hi": 220, "m": 200, "w": 240}, {"s": "දිවුල්", "e": "Woodapple", "lo": 14, "hi": 20, "m": 17, "w": 18}], "msg": "පෑලියගොඩ වෙළඳපොළ තොග මිල (2026 ඔක්තෝබර් 5, HARTI) https://topgoviya.lk/market/peliyagoda.html"}, K = D.key, CB = D.kind === 'cbsl';
 const W = 1080, X = 44, TW = 992, ROWS = 24;
 const C = {petrol:'#0e4f4a', gold:'#a9802a', cream:'#f4efe4', card:'#fffdf7', ink:'#191d1a', soft:'#3a403a',
            muted:'#7a7264', line:'#e3d9c4', head:'#efe8d8', cat:'#e6efec', up:'#b23a2e', upbg:'#f7e6e2',
@@ -127,7 +127,7 @@ function draw(lines, part, nparts, logo, qr){
   cv.width = W; cv.height = 10; ctx.font = '22px ' + SI;
   const foot = [].concat(...D.foot.map(t => wrap(ctx, t, TW - 210)));
   const stale = D.stale ? 70 : 0;
-  const R1 = 690, R2 = 830, R3 = TW + X - 16, NAMEMAX = R1 - 175;
+  const R1 = 690, R2 = 830, R3 = TW + X - 16, NAMEMAX = CB ? R2 - 200 : R1 - 175;
   const fitsEn = L => { ctx.font = '600 29px ' + SI; const nw = ctx.measureText(L.s).width;
     ctx.font = '18px ' + SI; return X + 16 + nw + 10 + ctx.measureText(L.e).width < NAMEMAX; };
   const rowH = L => L.c ? 44 : (fitsEn(L) ? 60 : 82);
@@ -144,11 +144,11 @@ function draw(lines, part, nparts, logo, qr){
   // title
   let y = 140 + 78;
   ctx.fillStyle = C.petrol; ctx.font = '600 60px ' + SI; ctx.fillText(D.si + ' වෙළඳපොළ', X, y);
-  y += 52; ctx.fillStyle = C.soft; ctx.font = '600 32px ' + SI; const t2 = 'එළවළු තොග මිල ලැයිස්තුව';
+  y += 52; ctx.fillStyle = C.soft; ctx.font = '600 32px ' + SI; const t2 = D.sub;
   ctx.fillText(t2, X, y); const w2 = ctx.measureText(t2).width;
-  ctx.fillStyle = C.muted; ctx.font = '22px ' + SI; ctx.fillText(' · ' + D.en + ' wholesale price list', X + w2 + 6, y);
+  ctx.fillStyle = C.muted; ctx.font = '22px ' + SI; ctx.fillText(' · ' + D.subEn, X + w2 + 6, y);
   // date pill
-  y += 26; ctx.font = '600 32px ' + SI; const dt = D.date + ' · HARTI වාර්තාව';
+  y += 26; ctx.font = '600 32px ' + SI; const dt = D.date + ' · ' + D.src;
   const dw = ctx.measureText(dt).width + 60; rr(ctx, X, y, dw, 60, 30, C.gold);
   ctx.fillStyle = '#fff'; ctx.fillText(dt, X + 30, y + 42);
   ctx.fillStyle = C.muted; ctx.font = '600 24px ' + SI;
@@ -160,7 +160,9 @@ function draw(lines, part, nparts, logo, qr){
   rr(ctx, X, y, TW, tableH, 18, C.card);
   ctx.save(); ctx.beginPath(); ctx.rect(X, y, TW, 50); ctx.clip(); rr(ctx, X, y, TW, tableH, 18, C.head); ctx.restore();
   ctx.fillStyle = C.muted; ctx.font = '600 21px ' + SI; ctx.textAlign = 'left'; ctx.fillText('භාණ්ඩය', X + 16, y + 33);
-  ctx.textAlign = 'right'; ctx.fillText('අවම – උපරිම', R1, y + 33); ctx.fillText('මධ්‍යගතය', R2, y + 33); ctx.fillText('සතියකට පෙර', R3, y + 33);
+  ctx.textAlign = 'right';
+  if (CB){ ctx.fillText('තොග / Wholesale', R2 + 20, y + 33); ctx.fillText('සිල්ලර / Retail', R3, y + 33); }
+  else { ctx.fillText('අවම – උපරිම', R1, y + 33); ctx.fillText('මධ්‍යගතය', R2, y + 33); ctx.fillText('සතියකට පෙර', R3, y + 33); }
   y += 50;
   for (const L of lines){
     ctx.textAlign = 'left';
@@ -173,6 +175,11 @@ function draw(lines, part, nparts, logo, qr){
     if (one) ctx.fillText(L.e, X + 16 + nw + 10, y + 40); else ctx.fillText(L.e, X + 16, y + 68);
     y += mid;
     ctx.textAlign = 'right';
+    if (CB){
+      ctx.font = '600 29px ' + MONO; ctx.fillStyle = C.gold; ctx.fillText(L.ws != null ? money(L.ws) : '—', R2 + 20, y + 40);
+      ctx.font = '700 31px ' + MONO; ctx.fillStyle = C.ink; ctx.fillText(L.rt != null ? money(L.rt) : '—', R3, y + 40);
+      y += h - mid; continue;
+    }
     ctx.font = '500 23px ' + MONO; ctx.fillStyle = C.muted; ctx.fillText(money(L.lo) + '–' + money(L.hi), R1, y + 39);
     ctx.font = '700 31px ' + MONO; ctx.fillStyle = C.ink; ctx.fillText(money(L.m), R2, y + 40);
     if (L.w){
@@ -207,7 +214,7 @@ async function make(){
 const blobOf = (cv, type, q) => new Promise(r => cv.toBlob(r, type, q));
 function save(blob, name){ const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
   document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000); }
-const base = () => D.slug + '-price-list-' + D.iso;
+const base = () => D.slug + '-' + D.fname + '-' + D.iso;
 
 async function pdfBlob(cvs){
   // simple A4 PDF with one JPEG per page (no extra library needed)
@@ -240,20 +247,20 @@ async function run(btn, job){ const t = btn.innerHTML; btn.disabled = true; btn.
   try { await job(); } catch(e){ console.error(e); alert('සමාවන්න, නැවත උත්සාහ කරන්න. Sorry, please try again.'); }
   btn.disabled = false; btn.innerHTML = t; }
 
-window.tgImage = btn => run(btn, async () => { const cvs = await make();
+window['tgImage_' + K] = btn => run(btn, async () => { const cvs = await make();
   for (let i = 0; i < cvs.length; i++){ save(await blobOf(cvs[i], 'image/png'), base() + (cvs.length > 1 ? '-' + (i + 1) : '') + '.png');
     await new Promise(r => setTimeout(r, 600)); } });
-window.tgPdf = btn => run(btn, async () => { save(await pdfBlob(await make()), base() + '.pdf'); });
-window.tgShare = btn => run(btn, async () => { const cvs = await make(), files = [];
+window['tgPdf_' + K] = btn => run(btn, async () => { save(await pdfBlob(await make()), base() + '.pdf'); });
+window['tgShare_' + K] = btn => run(btn, async () => { const cvs = await make(), files = [];
   for (let i = 0; i < cvs.length; i++) files.push(new File([await blobOf(cvs[i], 'image/png')],
     base() + (cvs.length > 1 ? '-' + (i + 1) : '') + '.png', {type: 'image/png'}));
-  const msg = D.si + ' වෙළඳපොළ තොග මිල (' + D.date + ', HARTI) ' + D.url;
+  const msg = D.msg;
   if (navigator.canShare && navigator.canShare({files})) await navigator.share({files, text: msg});
   else { for (const f of files) save(f, f.name); } });
 
-const bar = document.getElementById('tg-dl');
+const bar = document.getElementById('tg-dl-' + K);
 if (bar){ bar.style.display = 'flex';
-  const sh = document.getElementById('tg-share');
+  const sh = document.getElementById('tg-share-' + K);
   try { if (!(navigator.canShare && navigator.canShare({files: [new File([''], 'a.png', {type: 'image/png'})]}))) sh.style.display = 'none'; }
   catch(e){ sh.style.display = 'none'; } }
 })();
