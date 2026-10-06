@@ -125,11 +125,15 @@ def date_from_filename(path):
     if m: return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
     return None
 
+RECENT_DAYS = 14   # also pick up reports HARTI uploads late (up to 2 weeks)
+
 def download_today():
-    """Download ONLY today's PDF — fast!"""
+    """Download every HARTI report from the last RECENT_DAYS days that we don't have yet.
+    (HARTI sometimes uploads 2 days together, or a few days late.)"""
     os.makedirs(PDF_DIR, exist_ok=True)
-    today = datetime.date.today().strftime("%Y-%m-%d")
-    print(f"📥 Downloading today's PDF ({today})...")
+    today = datetime.date.today()
+    since = (today - datetime.timedelta(days=RECENT_DAYS)).isoformat()
+    print(f"📥 Checking HARTI for reports since {since}...")
 
     try:
         resp = requests.get(LISTING_URL, headers=HEADERS, timeout=30)
@@ -143,40 +147,34 @@ def download_today():
         html, re.IGNORECASE
     )
 
-    today_str = datetime.date.today().strftime("%Y.%m.%d")
-    today_links = [l for l in pdf_links if today_str in l or
-                   datetime.date.today().strftime("%Y-%m-%d") in l]
+    # dates we already have a PDF for
+    have = {date_from_filename(f) for f in glob.glob(os.path.join(PDF_DIR, "*.pdf"))}
 
-    if not today_links:
-        # Try yesterday (weekend/holiday)
-        yesterday = (datetime.date.today()-datetime.timedelta(days=1)).strftime("%Y.%m.%d")
-        today_links = [l for l in pdf_links if yesterday in l]
-        if today_links:
-            print(f"  Using yesterday's data ({yesterday})")
+    wanted = {}
+    for link in pdf_links:
+        d = date_from_filename(unquote(link))
+        if d and since <= d <= today.isoformat() and d not in have and d not in wanted:
+            wanted[d] = link
 
-    if not today_links:
-        print("  No new PDF found today — using existing data")
+    if not wanted:
+        print("  No new PDF found — using existing data")
         return
 
-    for link in today_links[:2]:  # max 2 files per day
+    for d, link in sorted(wanted.items()):
         url  = link if link.startswith("http") else urljoin(BASE_URL, link)
         dec  = unquote(url.split("/")[-1])
         safe = re.sub(r'[^\w\s\-\.]','_',dec).strip()
         safe = re.sub(r'\s+','_',safe)
         if not safe.endswith('.pdf'): safe += '.pdf'
         path = os.path.join(PDF_DIR, safe)
-
-        if os.path.exists(path):
-            print(f"  Already downloaded: {safe}")
-            continue
         try:
             r = requests.get(quote(url,safe=':/?=&%#'), headers=HEADERS, timeout=60)
             r.raise_for_status()
             if r.content.startswith(b'%PDF'):
                 with open(path,"wb") as f: f.write(r.content)
-                print(f"  ✅ Downloaded: {safe}")
+                print(f"  ✅ Downloaded {d}: {safe}")
         except Exception as e:
-            print(f"  ❌ {e}")
+            print(f"  ❌ {d}: {e}")
 
 def parse_veg_table(pdf_page):
     results = {}
@@ -399,6 +397,17 @@ def build():
             "primaryMarket":"Pettah","markets":{"Pettah":mid(pr)},
             "series":series,"pettahRange":pr,"pettahAvg":pa})
         idx+=1
+
+    # ── Keep the full 10-market snapshot when the latest day was not re-parsed ──
+    # (Adding a late, older report must not wipe the latest day's market prices.)
+    if existing_data and dates and dates[-1] not in {d for d,_,_ in new_days}:
+        old = {c["name"]: c for c in existing_data.get("commodities", [])}
+        for c in commodities:
+            o = old.get(c["name"])
+            if o and o.get("markets"):
+                c["markets"] = o["markets"]
+                for k in ("pettahRange", "pettahAvg"):
+                    if k in o: c[k] = o[k]
 
     data={"generated":datetime.datetime.now().isoformat(timespec="seconds"),
           "source":"Hector Kobbekaduwa Agrarian Research and Training Institute — Daily Wholesale Price Report",
