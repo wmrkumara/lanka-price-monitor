@@ -92,6 +92,166 @@ td.mid{font-family:'JetBrains Mono',monospace;font-weight:700;text-align:right;w
 
 
 <p class="asof" style="margin-top:14px"><b>📦 තොග මිල / Wholesale</b> · 📍 මහනුවර (Kandy) · 2026 ඔක්තෝබර් 5 · HARTI</p>
+<div id="tg-dl" style="display:none;gap:8px;flex-wrap:wrap;margin:14px 0 4px"><button onclick="tgPdf(this)" style="display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:999px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;background:var(--card);color:var(--petrol);border:1px solid var(--petrol)">📄 PDF බාගන්න</button><button onclick="tgImage(this)" style="display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:999px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;border:0;background:var(--petrol);color:#fff">🖼️ Image බාගන්න</button><button id="tg-share" onclick="tgShare(this)" style="display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:999px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;border:0;background:#25d366;color:#fff">📤 WhatsApp / Share</button></div><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+/* TopGoviya.lk - price list image / PDF made on the phone (nothing stored on the server) */
+(function(){
+const D = {"slug": "kandy", "si": "මහනුවර", "en": "Kandy", "date": "2026 ඔක්තෝබර් 5", "iso": "2026-10-05", "url": "https://topgoviya.lk/market/kandy.html", "logo": "../icon-192x192.png", "stale": "", "foot": ["දත්ත: HARTI දෛනික තොග මිල වාර්තාව (හෙක්ටර් කොබ්බෑකඩුව ගොවිකටයුතු පර්යේෂණ හා පුහුණු කිරීමේ ආයතනය).", "රු. / කි.ග්‍රෑ. · මධ්‍යගතය = (අවම + උපරිම) ÷ 2 · සතියකට පෙර = සතියකට පෙර වාර්තාවේ මධ්‍යගතය.", "මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ. ප්‍රවාහන වියදම අනුව සැබෑ ලාභය වෙනස් වේ."], "lines": [{"c": "උඩරට එළවළු"}, {"s": "බෝංචි", "e": "Beans", "lo": 450, "hi": 500, "m": 475, "w": 475}, {"s": "බීට්රූට්", "e": "Beetroot", "lo": 250, "hi": 270, "m": 260, "w": 300}, {"s": "බීට්රූට් (නුවරඑළිය)", "e": "Beetroot (N.Eliya)", "lo": 280, "hi": 300, "m": 290, "w": 340}, {"s": "ගෝවා (නුවර)", "e": "Cabbage (Kandy)", "lo": 240, "hi": 260, "m": 250, "w": 190}, {"s": "ගෝවා (නුවරඑළිය)", "e": "Cabbage (N.Eliya)", "lo": 280, "hi": 290, "m": 285, "w": 215}, {"s": "කැරට්", "e": "Carrot", "lo": 220, "hi": 240, "m": 230, "w": 185}, {"s": "නෝල්කෝල්", "e": "Knolkhol", "lo": 130, "hi": 150, "m": 140, "w": 170}, {"s": "ලීක්ස්", "e": "Leeks", "lo": 120, "hi": 140, "m": 130, "w": 170}, {"s": "රාබු", "e": "Raddish", "lo": 80, "hi": 100, "m": 90, "w": 110}, {"s": "තක්කාලි", "e": "Tomato", "lo": 480, "hi": 500, "m": 490, "w": 365}, {"c": "පහතරට එළවළු"}, {"s": "අළු කෙසෙල්", "e": "Ash Plantains", "lo": 150, "hi": 170, "m": 160, "w": 150}, {"s": "කරවිල", "e": "Bitter Gourd", "lo": 420, "hi": 450, "m": 435, "w": 360}, {"s": "වම්බටු", "e": "Brinjals", "lo": 250, "hi": 300, "m": 275, "w": 275}, {"s": "මාළු මිරිස්", "e": "Capsicum", "lo": 420, "hi": 450, "m": 435, "w": 465}, {"s": "පිපිඤ්ඤා", "e": "Cucumber", "lo": 80, "hi": 90, "m": 85, "w": 90}, {"s": "මුරුංගා", "e": "Drumstick", "lo": 130, "hi": 130, "m": 130, "w": 150}, {"s": "එළබටු", "e": "Eggplant", "lo": 250, "hi": 300, "m": 275, "w": 290}, {"s": "අමු මිරිස්", "e": "Green Chillies", "lo": 300, "hi": 350, "m": 325, "w": 290}, {"s": "බණ්ඩක්කා", "e": "Ladies Fingers", "lo": 180, "hi": 200, "m": 190, "w": 175}, {"s": "දෙහි", "e": "Lime", "lo": 1100, "hi": 1200, "m": 1150, "w": 975}, {"s": "මෑකරල්", "e": "Long Beans", "lo": 250, "hi": 300, "m": 275, "w": 300}, {"s": "වැටකොළු", "e": "Luffa", "lo": 220, "hi": 250, "m": 235, "w": 225}, {"s": "මඤ්ඤොක්කා", "e": "Manioc", "lo": 100, "hi": 110, "m": 105, "w": 105}, {"s": "වට්ටක්කා", "e": "Pumpkin", "lo": 200, "hi": 220, "m": 210, "w": 225}, {"s": "පතෝල", "e": "Snake Gourd", "lo": 260, "hi": 280, "m": 270, "w": 245}, {"s": "බතල", "e": "Sweet Potato", "lo": 100, "hi": 130, "m": 115, "w": 115}, {"c": "අර්තාපල් හා ළූණු"}, {"s": "ලොකු ළූණු (ආනයනික)", "e": "Big Onion (Imported)", "lo": 260, "hi": 275, "m": 268, "w": 288}, {"s": "අර්තාපල් (ආනයනික)", "e": "Potato (Imported)", "lo": 145, "hi": 155, "m": 150, "w": 158}, {"s": "අර්තාපල් (නුවරඑළිය)", "e": "Potato (N.Eliya)", "lo": 250, "hi": 260, "m": 255, "w": 315}, {"s": "අර්තාපල් (වැලිමඩ)", "e": "Potato (Welimada)", "lo": 220, "hi": 230, "m": 225, "w": 288}, {"c": "පළතුරු හා කෙසෙල්"}, {"s": "ඇඹුල් කෙසෙල්", "e": "Banana Ambul", "lo": 140, "hi": 180, "m": 160, "w": 160}, {"s": "සීනි කෙසෙල්", "e": "Banana Seeni", "lo": 130, "hi": 160, "m": 145, "w": 145}, {"s": "පැපොල්", "e": "Papaya", "lo": 120, "hi": 140, "m": 130, "w": 145}]};
+const W = 1080, X = 44, TW = 992, ROWS = 24;
+const C = {petrol:'#0e4f4a', gold:'#a9802a', cream:'#f4efe4', card:'#fffdf7', ink:'#191d1a', soft:'#3a403a',
+           muted:'#7a7264', line:'#e3d9c4', head:'#efe8d8', cat:'#e6efec', up:'#b23a2e', upbg:'#f7e6e2',
+           down:'#2c7a52', downbg:'#e3efe6', flat:'#8a8170', flatbg:'#efeada'};
+const SI = "'Noto Sans Sinhala', sans-serif", MONO = "'JetBrains Mono', monospace";
+const money = n => Math.round(n).toLocaleString('en-US');
+
+function parts(){
+  const lines = D.lines, n = Math.ceil(lines.length / ROWS), size = Math.ceil(lines.length / n) + 1;
+  const out = []; let cur = [], cat = null;
+  for (const L of lines){
+    if (L.c){ cat = L.c; if (cur.length >= size - 2){ out.push(cur); cur = []; } cur.push(L); }
+    else { if (cur.length >= size){ out.push(cur); cur = [{c: cat}]; } cur.push(L); }
+  }
+  if (cur.length) out.push(cur);
+  return out;
+}
+function rr(ctx, x, y, w, h, r, fill){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); ctx.fillStyle = fill; ctx.fill(); }
+function wrap(ctx, text, maxW){ const words = text.split(' '), out = []; let line = '';
+  for (const w of words){ const t = line ? line + ' ' + w : w;
+    if (ctx.measureText(t).width > maxW && line){ out.push(line); line = w; } else line = t; }
+  if (line) out.push(line); return out; }
+
+function draw(lines, part, nparts, logo, qr){
+  const cv = document.createElement('canvas'), ctx = cv.getContext('2d');
+  // footer text lines (needed for height)
+  cv.width = W; cv.height = 10; ctx.font = '22px ' + SI;
+  const foot = [].concat(...D.foot.map(t => wrap(ctx, t, TW - 210)));
+  const stale = D.stale ? 70 : 0;
+  const tableH = 50 + lines.reduce((h, L) => h + (L.c ? 44 : 60), 0);
+  const H = 140 + 250 + stale + tableH + 40 + Math.max(190, 50 + foot.length * 34) + 30;
+  cv.width = W; cv.height = H;
+  ctx.fillStyle = C.cream; ctx.fillRect(0, 0, W, H);
+  // top band
+  ctx.fillStyle = C.petrol; ctx.fillRect(0, 0, W, 140);
+  if (logo){ rr(ctx, X, 28, 84, 84, 18, '#fff'); ctx.drawImage(logo, X + 4, 32, 76, 76); }
+  ctx.fillStyle = '#fff'; ctx.font = '600 40px ' + SI; ctx.fillText('TopGoviya.lk', X + 106, 70);
+  ctx.fillStyle = '#e7d3a3'; ctx.font = '24px ' + SI; ctx.fillText('දත්තය බලලා තීරණ ගන්න', X + 106, 106);
+  // title
+  let y = 140 + 78;
+  ctx.fillStyle = C.petrol; ctx.font = '600 60px ' + SI; ctx.fillText(D.si + ' වෙළඳපොළ', X, y);
+  y += 52; ctx.fillStyle = C.soft; ctx.font = '600 32px ' + SI; const t2 = 'එළවළු තොග මිල ලැයිස්තුව';
+  ctx.fillText(t2, X, y); const w2 = ctx.measureText(t2).width;
+  ctx.fillStyle = C.muted; ctx.font = '22px ' + SI; ctx.fillText(' · ' + D.en + ' wholesale price list', X + w2 + 6, y);
+  // date pill
+  y += 26; ctx.font = '600 32px ' + SI; const dt = D.date + ' · HARTI වාර්තාව';
+  const dw = ctx.measureText(dt).width + 60; rr(ctx, X, y, dw, 60, 30, C.gold);
+  ctx.fillStyle = '#fff'; ctx.fillText(dt, X + 30, y + 42);
+  if (nparts > 1){ ctx.fillStyle = C.muted; ctx.font = '600 26px ' + SI; ctx.fillText('(' + part + '/' + nparts + ')', X + dw + 16, y + 40); }
+  y += 60 + 24;
+  if (D.stale){ ctx.fillStyle = '#fff3d6'; ctx.fillRect(X, y, TW, 56); ctx.fillStyle = C.gold; ctx.fillRect(X, y, 10, 56);
+    ctx.fillStyle = '#5a4a1a'; ctx.font = '22px ' + SI; ctx.fillText(D.stale, X + 24, y + 36); y += stale; }
+  // table
+  rr(ctx, X, y, TW, tableH, 18, C.card);
+  ctx.save(); ctx.beginPath(); ctx.rect(X, y, TW, 50); ctx.clip(); rr(ctx, X, y, TW, tableH, 18, C.head); ctx.restore();
+  const R1 = 690, R2 = 830, R3 = TW + X - 16;
+  ctx.fillStyle = C.muted; ctx.font = '600 21px ' + SI; ctx.textAlign = 'left'; ctx.fillText('භාණ්ඩය', X + 16, y + 33);
+  ctx.textAlign = 'right'; ctx.fillText('අවම – උපරිම', R1, y + 33); ctx.fillText('මධ්‍යගතය', R2, y + 33); ctx.fillText('සතියකට පෙර', R3, y + 33);
+  y += 50;
+  for (const L of lines){
+    ctx.textAlign = 'left';
+    if (L.c){ ctx.fillStyle = C.cat; ctx.fillRect(X, y, TW, 44); ctx.fillStyle = C.petrol; ctx.font = '600 25px ' + SI;
+      ctx.fillText(L.c, X + 16, y + 31); y += 44; continue; }
+    ctx.fillStyle = C.line; ctx.fillRect(X, y, TW, 1);
+    ctx.fillStyle = C.ink; ctx.font = '600 29px ' + SI; ctx.fillText(L.s, X + 16, y + 40);
+    const nw = ctx.measureText(L.s).width; ctx.font = '18px ' + SI; ctx.fillStyle = C.muted;
+    if (X + 16 + nw + 10 + ctx.measureText(L.e).width < R1 - 175) ctx.fillText(L.e, X + 16 + nw + 10, y + 40);
+    ctx.textAlign = 'right';
+    ctx.font = '500 23px ' + MONO; ctx.fillStyle = C.muted; ctx.fillText(money(L.lo) + '–' + money(L.hi), R1, y + 39);
+    ctx.font = '700 31px ' + MONO; ctx.fillStyle = C.ink; ctx.fillText(money(L.m), R2, y + 40);
+    if (L.w){
+      const pct = (L.m - L.w) / L.w * 100, k = Math.abs(pct) < 0.5 ? 'flat' : (pct > 0 ? 'up' : 'down');
+      const tx = ({up:'▲', down:'▼', flat:'■'})[k] + (pct > 0 ? '+' : '') + pct.toFixed(0) + '%';
+      ctx.font = '700 20px ' + MONO; const cw = ctx.measureText(tx).width + 16;
+      rr(ctx, R3 - cw, y + 16, cw, 30, 8, C[k + 'bg']); ctx.fillStyle = C[k]; ctx.textAlign = 'center'; ctx.fillText(tx, R3 - cw / 2, y + 38);
+      ctx.textAlign = 'right'; ctx.font = '500 25px ' + MONO; ctx.fillStyle = C.soft; ctx.fillText(money(L.w), R3 - cw - 8, y + 40);
+    } else { ctx.fillStyle = C.muted; ctx.font = '25px ' + MONO; ctx.fillText('—', R3, y + 40); }
+    y += 60;
+  }
+  // footer
+  y += 30; ctx.fillStyle = '#cdbf9f'; ctx.fillRect(X, y, TW, 2); y += 24; ctx.textAlign = 'left';
+  if (qr){ rr(ctx, X, y, 170, 170, 12, '#fff'); ctx.imageSmoothingEnabled = false; ctx.drawImage(qr, X + 8, y + 8, 154, 154); ctx.imageSmoothingEnabled = true; }
+  const fx = X + 196; ctx.fillStyle = C.petrol; ctx.font = '600 32px ' + SI; ctx.fillText(D.url.replace('https://', ''), fx, y + 34);
+  ctx.fillStyle = C.soft; ctx.font = '22px ' + SI; foot.forEach((t, i) => ctx.fillText(t, fx, y + 74 + i * 34));
+  return cv;
+}
+
+function loadImg(src){ return new Promise(r => { if (!src) return r(null); const im = new Image();
+  im.onload = () => r(im); im.onerror = () => r(null); im.src = src; }); }
+
+async function make(){
+  try { await Promise.all(['600 30px "Noto Sans Sinhala"', '400 22px "Noto Sans Sinhala"', '700 30px "JetBrains Mono"', '500 24px "JetBrains Mono"']
+    .map(f => document.fonts.load(f, 'අ1'))); } catch(e){}
+  let qrSrc = null;
+  try { const q = qrcode(0, 'M'); q.addData(D.url); q.make(); qrSrc = q.createDataURL(6, 0); } catch(e){}
+  const [logo, qr] = await Promise.all([loadImg(D.logo), loadImg(qrSrc)]);
+  const ps = parts();
+  return ps.map((p, i) => draw(p, i + 1, ps.length, logo, qr));
+}
+const blobOf = (cv, type, q) => new Promise(r => cv.toBlob(r, type, q));
+function save(blob, name){ const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000); }
+const base = () => D.slug + '-price-list-' + D.iso;
+
+async function pdfBlob(cvs){
+  // simple A4 PDF with one JPEG per page (no extra library needed)
+  const enc = new TextEncoder(), chunks = [], offs = []; let len = 0;
+  const put = x => { const b = typeof x === 'string' ? enc.encode(x) : x; chunks.push(b); len += b.length; };
+  const obj = (n, body) => { offs[n] = len; put(n + ' 0 obj\n'); body(); put('\nendobj\n'); };
+  const pages = []; for (const cv of cvs){ const b = new Uint8Array(await (await blobOf(cv, 'image/jpeg', 0.88)).arrayBuffer());
+    pages.push({b, w: cv.width, h: cv.height}); }
+  const n = pages.length, PW = 595.28, PH = 841.89, M = 22;
+  put('%PDF-1.4\n');
+  obj(1, () => put('<< /Type /Catalog /Pages 2 0 R >>'));
+  obj(2, () => put('<< /Type /Pages /Count ' + n + ' /Kids [' + pages.map((_, i) => (3 + i * 3) + ' 0 R').join(' ') + '] >>'));
+  pages.forEach((p, i) => {
+    const po = 3 + i * 3, im = po + 1, co = po + 2;
+    const s = Math.min((PW - 2 * M) / p.w, (PH - 2 * M) / p.h), w = p.w * s, h = p.h * s, x = (PW - w) / 2, y = PH - M - h;
+    const cs = 'q ' + w.toFixed(2) + ' 0 0 ' + h.toFixed(2) + ' ' + x.toFixed(2) + ' ' + y.toFixed(2) + ' cm /Im0 Do Q';
+    obj(po, () => put('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + PW + ' ' + PH + '] /Resources << /XObject << /Im0 ' + im + ' 0 R >> >> /Contents ' + co + ' 0 R >>'));
+    obj(im, () => { put('<< /Type /XObject /Subtype /Image /Width ' + p.w + ' /Height ' + p.h +
+      ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + p.b.length + ' >>\nstream\n'); put(p.b); put('\nendstream'); });
+    obj(co, () => put('<< /Length ' + cs.length + ' >>\nstream\n' + cs + '\nendstream'));
+  });
+  const xref = len, total = 3 + n * 3;
+  put('xref\n0 ' + total + '\n0000000000 65535 f \n');
+  for (let i = 1; i < total; i++) put(String(offs[i]).padStart(10, '0') + ' 00000 n \n');
+  put('trailer\n<< /Size ' + total + ' /Root 1 0 R >>\nstartxref\n' + xref + '\n%%EOF');
+  return new Blob(chunks, {type: 'application/pdf'});
+}
+
+async function run(btn, job){ const t = btn.innerHTML; btn.disabled = true; btn.innerHTML = '⏳ ...';
+  try { await job(); } catch(e){ console.error(e); alert('සමාවන්න, නැවත උත්සාහ කරන්න. Sorry, please try again.'); }
+  btn.disabled = false; btn.innerHTML = t; }
+
+window.tgImage = btn => run(btn, async () => { const cvs = await make();
+  for (let i = 0; i < cvs.length; i++){ save(await blobOf(cvs[i], 'image/png'), base() + (cvs.length > 1 ? '-' + (i + 1) : '') + '.png');
+    await new Promise(r => setTimeout(r, 600)); } });
+window.tgPdf = btn => run(btn, async () => { save(await pdfBlob(await make()), base() + '.pdf'); });
+window.tgShare = btn => run(btn, async () => { const cvs = await make(), files = [];
+  for (let i = 0; i < cvs.length; i++) files.push(new File([await blobOf(cvs[i], 'image/png')],
+    base() + (cvs.length > 1 ? '-' + (i + 1) : '') + '.png', {type: 'image/png'}));
+  const msg = D.si + ' වෙළඳපොළ තොග මිල (' + D.date + ', HARTI) ' + D.url;
+  if (navigator.canShare && navigator.canShare({files})) await navigator.share({files, text: msg});
+  else { for (const f of files) save(f, f.name); } });
+
+const bar = document.getElementById('tg-dl');
+if (bar){ bar.style.display = 'flex';
+  const sh = document.getElementById('tg-share');
+  try { if (!(navigator.canShare && navigator.canShare({files: [new File([''], 'a.png', {type: 'image/png'})]}))) sh.style.display = 'none'; }
+  catch(e){ sh.style.display = 'none'; } }
+})();
+</script>
+
 <div class="duo"><div class="r"><b>33</b><span>භාණ්ඩ / items · HARTI</span></div><div class="w"><b>▲ 11 · ▼ 16</b><span>සතියකට පෙරට වඩා / vs 1 week ago</span></div></div>
 
 <div class="story">
