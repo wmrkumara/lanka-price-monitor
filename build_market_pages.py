@@ -189,7 +189,12 @@ function draw(lines, part, nparts, logo, qr){
   cv.width = W; cv.height = 10; ctx.font = '22px ' + SI;
   const foot = [].concat(...D.foot.map(t => wrap(ctx, t, TW - 210)));
   const stale = D.stale ? 70 : 0;
-  const tableH = 50 + lines.reduce((h, L) => h + (L.c ? 44 : 60), 0);
+  const R1 = 690, R2 = 830, R3 = TW + X - 16, NAMEMAX = R1 - 175;
+  const fitsEn = L => { ctx.font = '600 29px ' + SI; const nw = ctx.measureText(L.s).width;
+    ctx.font = '18px ' + SI; return X + 16 + nw + 10 + ctx.measureText(L.e).width < NAMEMAX; };
+  const rowH = L => L.c ? 44 : (fitsEn(L) ? 60 : 82);
+  const tableH = 50 + lines.reduce((h, L) => h + rowH(L), 0);
+  const nItems = lines.filter(L => !L.c).length, allItems = D.lines.filter(L => !L.c).length;
   const H = 140 + 250 + stale + tableH + 40 + Math.max(190, 50 + foot.length * 34) + 30;
   cv.width = W; cv.height = H;
   ctx.fillStyle = C.cream; ctx.fillRect(0, 0, W, H);
@@ -208,14 +213,14 @@ function draw(lines, part, nparts, logo, qr){
   y += 26; ctx.font = '600 32px ' + SI; const dt = D.date + ' · HARTI වාර්තාව';
   const dw = ctx.measureText(dt).width + 60; rr(ctx, X, y, dw, 60, 30, C.gold);
   ctx.fillStyle = '#fff'; ctx.fillText(dt, X + 30, y + 42);
-  if (nparts > 1){ ctx.fillStyle = C.muted; ctx.font = '600 26px ' + SI; ctx.fillText('(' + part + '/' + nparts + ')', X + dw + 16, y + 40); }
+  ctx.fillStyle = C.muted; ctx.font = '600 24px ' + SI;
+  ctx.fillText((nparts > 1 ? '(' + part + '/' + nparts + ') · භාණ්ඩ ' + nItems + ' / ' + allItems : 'භාණ්ඩ ' + allItems), X + dw + 16, y + 40);
   y += 60 + 24;
   if (D.stale){ ctx.fillStyle = '#fff3d6'; ctx.fillRect(X, y, TW, 56); ctx.fillStyle = C.gold; ctx.fillRect(X, y, 10, 56);
     ctx.fillStyle = '#5a4a1a'; ctx.font = '22px ' + SI; ctx.fillText(D.stale, X + 24, y + 36); y += stale; }
   // table
   rr(ctx, X, y, TW, tableH, 18, C.card);
   ctx.save(); ctx.beginPath(); ctx.rect(X, y, TW, 50); ctx.clip(); rr(ctx, X, y, TW, tableH, 18, C.head); ctx.restore();
-  const R1 = 690, R2 = 830, R3 = TW + X - 16;
   ctx.fillStyle = C.muted; ctx.font = '600 21px ' + SI; ctx.textAlign = 'left'; ctx.fillText('භාණ්ඩය', X + 16, y + 33);
   ctx.textAlign = 'right'; ctx.fillText('අවම – උපරිම', R1, y + 33); ctx.fillText('මධ්‍යගතය', R2, y + 33); ctx.fillText('සතියකට පෙර', R3, y + 33);
   y += 50;
@@ -223,10 +228,12 @@ function draw(lines, part, nparts, logo, qr){
     ctx.textAlign = 'left';
     if (L.c){ ctx.fillStyle = C.cat; ctx.fillRect(X, y, TW, 44); ctx.fillStyle = C.petrol; ctx.font = '600 25px ' + SI;
       ctx.fillText(L.c, X + 16, y + 31); y += 44; continue; }
+    const one = fitsEn(L), h = one ? 60 : 82, mid = one ? 0 : 11;
     ctx.fillStyle = C.line; ctx.fillRect(X, y, TW, 1);
     ctx.fillStyle = C.ink; ctx.font = '600 29px ' + SI; ctx.fillText(L.s, X + 16, y + 40);
     const nw = ctx.measureText(L.s).width; ctx.font = '18px ' + SI; ctx.fillStyle = C.muted;
-    if (X + 16 + nw + 10 + ctx.measureText(L.e).width < R1 - 175) ctx.fillText(L.e, X + 16 + nw + 10, y + 40);
+    if (one) ctx.fillText(L.e, X + 16 + nw + 10, y + 40); else ctx.fillText(L.e, X + 16, y + 68);
+    y += mid;
     ctx.textAlign = 'right';
     ctx.font = '500 23px ' + MONO; ctx.fillStyle = C.muted; ctx.fillText(money(L.lo) + '–' + money(L.hi), R1, y + 39);
     ctx.font = '700 31px ' + MONO; ctx.fillStyle = C.ink; ctx.fillText(money(L.m), R2, y + 40);
@@ -237,7 +244,7 @@ function draw(lines, part, nparts, logo, qr){
       rr(ctx, R3 - cw, y + 16, cw, 30, 8, C[k + 'bg']); ctx.fillStyle = C[k]; ctx.textAlign = 'center'; ctx.fillText(tx, R3 - cw / 2, y + 38);
       ctx.textAlign = 'right'; ctx.font = '500 25px ' + MONO; ctx.fillStyle = C.soft; ctx.fillText(money(L.w), R3 - cw - 8, y + 40);
     } else { ctx.fillStyle = C.muted; ctx.font = '25px ' + MONO; ctx.fillText('—', R3, y + 40); }
-    y += 60;
+    y += h - mid;
   }
   // footer
   y += 30; ctx.fillStyle = '#cdbf9f'; ctx.fillRect(X, y, TW, 2); y += 24; ctx.textAlign = 'left';
