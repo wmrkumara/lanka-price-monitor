@@ -248,7 +248,8 @@ function draw(lines, part, nparts, logo, qr){
       const tx = ({up:'▲', down:'▼', flat:'■'})[k] + (pct > 0 ? '+' : '') + pct.toFixed(0) + '%';
       ctx.font = '700 20px ' + MONO; const cw = ctx.measureText(tx).width + 16;
       rr(ctx, R3 - cw, y + 16, cw, 30, 8, C[k + 'bg']); ctx.fillStyle = C[k]; ctx.textAlign = 'center'; ctx.fillText(tx, R3 - cw / 2, y + 38);
-      ctx.textAlign = 'right'; ctx.font = '500 25px ' + MONO; ctx.fillStyle = C.soft; ctx.fillText(money(L.w), R3 - cw - 8, y + 40);
+      ctx.textAlign = 'right'; ctx.font = '500 25px ' + MONO; ctx.fillStyle = C.soft; ctx.fillText((L.x ? '*' : '') + money(L.w), R3 - cw - 8, y + 40);
+      if (L.x){ ctx.font = '16px ' + SI; ctx.fillStyle = C.muted; ctx.fillText('(' + L.x + ')', R3, y + 58); }
     } else { ctx.fillStyle = C.muted; ctx.font = '25px ' + MONO; ctx.fillText('—', R3, y + 40); }
     y += h - mid;
   }
@@ -356,17 +357,39 @@ def dl_buttons(key, data, label=""):
             + DL_JS.replace("__DL_DATA__", json.dumps(data, ensure_ascii=False).replace("</", "<\\/")))
 
 
+SI_MON = ["ජන", "පෙබ", "මාර්", "අප්‍රේ", "මැයි", "ජූනි", "ජූලි", "අගෝ", "සැප්", "ඔක්", "නොවැ", "දෙසැ"]
+
+
+def short_si(iso):
+    d = d_(iso)
+    return f"{SI_MON[d.month - 1]} {d.day}"
+
+
+def main_wk_date(rows):
+    """The 'one week ago' report date used by most items (None if no item has one)."""
+    from collections import Counter
+    c = Counter(r["wkdate"] for r in rows if r.get("wkdate"))
+    return c.most_common(1)[0][0] if c else None
+
+
 def download_bar(market, rows, last, latest_all, url):
     """HARTI wholesale price list (min / max / mid / last week) for one market."""
     if not rows or not last:
         return ""
     info = MKT[market]
+    wkd = main_wk_date(rows)
     lines, cur = [], None
     for r in rows:
         if r["cat"] != cur:
             cur = r["cat"]
             lines.append({"c": CAT_SI.get(cur, cur)})
-        lines.append({"s": hsi(r["name"]), "e": r["name"], "lo": r["min"], "hi": r["max"], "m": r["mid"], "w": r["wk"]})
+        other = r.get("wkdate") and r["wkdate"] != wkd
+        lines.append({"s": hsi(r["name"]), "e": r["name"], "lo": r["min"], "hi": r["max"], "m": r["mid"], "w": r["wk"],
+                      "x": short_si(r["wkdate"]) if other else ""})
+    foot = list(DL_FOOT)
+    if wkd:
+        foot[1] = (f"රු. / කි.ග්‍රෑ. · මධ්‍යගතය = (අවම + උපරිම) ÷ 2 · සතියකට පෙර = {fdate(d_(wkd), 'si')} වාර්තාවේ මධ්‍යගතය"
+                   + (" (* = වෙනත් දිනයක වාර්තාව, දිනය සමඟ)." if any(L.get("x") for L in lines) else "."))
     stale = ""
     if last < latest_all:
         stale = f"HARTI නවතම වාර්තාවේ ({fdate(d_(latest_all), 'si')}) මෙම වෙළඳපොළ මිල නොතිබුණි. මෙහි ඇත්තේ {fdate(d_(last), 'si')} මිලයි."
@@ -374,7 +397,7 @@ def download_bar(market, rows, last, latest_all, url):
     data = {"key": "h", "kind": "harti", "slug": info["slug"], "fname": "price-list", "si": info["si"],
             "sub": "එළවළු තොග මිල ලැයිස්තුව", "subEn": men(market) + " wholesale price list",
             "src": "HARTI වාර්තාව", "date": date_si, "iso": last, "url": url, "logo": "../icon-192x192.png",
-            "stale": stale, "foot": DL_FOOT, "lines": lines,
+            "stale": stale, "foot": foot, "lines": lines,
             "msg": f"{info['si']} වෙළඳපොළ තොග මිල ({date_si}, HARTI) {url}"}
     return dl_buttons("h", data)
 
@@ -528,6 +551,7 @@ def market_page(market, hm, harti, cats, cbsl):
                  f'showing {fdate(d_(last),"en")}.</p>')
 
     # ---- HARTI table
+    wkd_main = main_wk_date(rows)
     table = ""
     cur = None
     for r in rows:
@@ -538,15 +562,20 @@ def market_page(market, hm, harti, cats, cbsl):
             table += (f'<h2 class="cat">{e(CAT_SI.get(cur, cur))} <span>{e(cur)}</span></h2><div class="scroll"><table>'
                       f'<thead><tr><th>භාණ්ඩය / Item</th><th class="n">අවම–උපරිම<br>Min–Max</th>'
                       f'<th class="n">මධ්‍යගතය<br>Mid</th><th class="n">සතියකට පෙර<br>1 week ago</th></tr></thead><tbody>')
-        wk = (f'{money(r["wk"])} {chg_badge(r["mid"], r["wk"])}' if r["wk"] else "—")
+        other = r.get("wkdate") and r["wkdate"] != wkd_main
+        wk = ((f'{"*" if other else ""}{money(r["wk"])} {chg_badge(r["mid"], r["wk"])}'
+               + (f'<br><small style="color:var(--muted)">({short_si(r["wkdate"])})</small>' if other else ""))
+              if r["wk"] else "—")
         table += (f'<tr><td>{crop_cell(r["name"])}</td>'
                   f'<td class="n rng">{money(r["min"])}–{money(r["max"])}</td>'
                   f'<td class="mid">{money(r["mid"])}</td><td class="n">{wk}</td></tr>')
     if cur is not None:
         table += "</tbody></table></div>"
-    wk_dates = sorted({r["wkdate"] for r in rows if r["wkdate"]})
+    wk_dates = [wkd_main] if wkd_main else []
+    has_other = any(r.get("wkdate") and r["wkdate"] != wkd_main for r in rows)
     table_note = ('<p class="asof" style="margin-top:10px">රුපියල් / කි.ග්‍රෑ. · Rs. per kg · HARTI තොග මිල මධ්‍යගතය = (අවම + උපරිම) ÷ 2'
-                  + (f' · සතියකට පෙර = {fdate(d_(wk_dates[-1]),"si")} වාර්තාව' if wk_dates else "") + '</p>')
+                  + (f' · සතියකට පෙර = {fdate(d_(wk_dates[-1]),"si")} වාර්තාව (තනි දිනයක මිල, සාමාන්‍යයක් නොවේ / a single day, not an average)' if wk_dates else "")
+                  + (' · * = එම භාණ්ඩය එදින වාර්තාවේ නොතිබූ නිසා ළඟම දිනයේ (දවස් 5–9 පෙර) මිල' if has_other else "") + '</p>')
 
     # ---- where pays more
     better_html = ""
