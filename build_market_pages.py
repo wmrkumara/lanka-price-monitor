@@ -145,6 +145,200 @@ def cbsl_dambulla(cbsl):
             rows.append((c, w if w_ok else None, r if r_ok else None))
     return d_(dates[li]), rows
 
+# ---------------------------------------------------------------- download / share buttons
+# The phone makes the image and PDF from this page's prices (nothing is stored on GitHub).
+DL_JS = r'''<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+/* TopGoviya.lk - price list image / PDF made on the phone (nothing stored on the server) */
+(function(){
+const D = __DL_DATA__;
+const W = 1080, X = 44, TW = 992, ROWS = 24;
+const C = {petrol:'#0e4f4a', gold:'#a9802a', cream:'#f4efe4', card:'#fffdf7', ink:'#191d1a', soft:'#3a403a',
+           muted:'#7a7264', line:'#e3d9c4', head:'#efe8d8', cat:'#e6efec', up:'#b23a2e', upbg:'#f7e6e2',
+           down:'#2c7a52', downbg:'#e3efe6', flat:'#8a8170', flatbg:'#efeada'};
+const SI = "'Noto Sans Sinhala', sans-serif", MONO = "'JetBrains Mono', monospace";
+const money = n => Math.round(n).toLocaleString('en-US');
+
+function parts(){
+  const lines = D.lines, n = Math.ceil(lines.length / ROWS), size = Math.ceil(lines.length / n) + 1;
+  const out = []; let cur = [], cat = null;
+  for (const L of lines){
+    if (L.c){ cat = L.c; if (cur.length >= size - 2){ out.push(cur); cur = []; } cur.push(L); }
+    else { if (cur.length >= size){ out.push(cur); cur = [{c: cat}]; } cur.push(L); }
+  }
+  if (cur.length) out.push(cur);
+  return out;
+}
+function rr(ctx, x, y, w, h, r, fill){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); ctx.fillStyle = fill; ctx.fill(); }
+function wrap(ctx, text, maxW){ const words = text.split(' '), out = []; let line = '';
+  for (const w of words){ const t = line ? line + ' ' + w : w;
+    if (ctx.measureText(t).width > maxW && line){ out.push(line); line = w; } else line = t; }
+  if (line) out.push(line); return out; }
+
+function draw(lines, part, nparts, logo, qr){
+  const cv = document.createElement('canvas'), ctx = cv.getContext('2d');
+  // footer text lines (needed for height)
+  cv.width = W; cv.height = 10; ctx.font = '22px ' + SI;
+  const foot = [].concat(...D.foot.map(t => wrap(ctx, t, TW - 210)));
+  const stale = D.stale ? 70 : 0;
+  const tableH = 50 + lines.reduce((h, L) => h + (L.c ? 44 : 60), 0);
+  const H = 140 + 250 + stale + tableH + 40 + Math.max(190, 50 + foot.length * 34) + 30;
+  cv.width = W; cv.height = H;
+  ctx.fillStyle = C.cream; ctx.fillRect(0, 0, W, H);
+  // top band
+  ctx.fillStyle = C.petrol; ctx.fillRect(0, 0, W, 140);
+  if (logo){ rr(ctx, X, 28, 84, 84, 18, '#fff'); ctx.drawImage(logo, X + 4, 32, 76, 76); }
+  ctx.fillStyle = '#fff'; ctx.font = '600 40px ' + SI; ctx.fillText('TopGoviya.lk', X + 106, 70);
+  ctx.fillStyle = '#e7d3a3'; ctx.font = '24px ' + SI; ctx.fillText('දත්තය බලලා තීරණ ගන්න', X + 106, 106);
+  // title
+  let y = 140 + 78;
+  ctx.fillStyle = C.petrol; ctx.font = '600 60px ' + SI; ctx.fillText(D.si + ' වෙළඳපොළ', X, y);
+  y += 52; ctx.fillStyle = C.soft; ctx.font = '600 32px ' + SI; const t2 = 'එළවළු තොග මිල ලැයිස්තුව';
+  ctx.fillText(t2, X, y); const w2 = ctx.measureText(t2).width;
+  ctx.fillStyle = C.muted; ctx.font = '22px ' + SI; ctx.fillText(' · ' + D.en + ' wholesale price list', X + w2 + 6, y);
+  // date pill
+  y += 26; ctx.font = '600 32px ' + SI; const dt = D.date + ' · HARTI වාර්තාව';
+  const dw = ctx.measureText(dt).width + 60; rr(ctx, X, y, dw, 60, 30, C.gold);
+  ctx.fillStyle = '#fff'; ctx.fillText(dt, X + 30, y + 42);
+  if (nparts > 1){ ctx.fillStyle = C.muted; ctx.font = '600 26px ' + SI; ctx.fillText('(' + part + '/' + nparts + ')', X + dw + 16, y + 40); }
+  y += 60 + 24;
+  if (D.stale){ ctx.fillStyle = '#fff3d6'; ctx.fillRect(X, y, TW, 56); ctx.fillStyle = C.gold; ctx.fillRect(X, y, 10, 56);
+    ctx.fillStyle = '#5a4a1a'; ctx.font = '22px ' + SI; ctx.fillText(D.stale, X + 24, y + 36); y += stale; }
+  // table
+  rr(ctx, X, y, TW, tableH, 18, C.card);
+  ctx.save(); ctx.beginPath(); ctx.rect(X, y, TW, 50); ctx.clip(); rr(ctx, X, y, TW, tableH, 18, C.head); ctx.restore();
+  const R1 = 690, R2 = 830, R3 = TW + X - 16;
+  ctx.fillStyle = C.muted; ctx.font = '600 21px ' + SI; ctx.textAlign = 'left'; ctx.fillText('භාණ්ඩය', X + 16, y + 33);
+  ctx.textAlign = 'right'; ctx.fillText('අවම – උපරිම', R1, y + 33); ctx.fillText('මධ්‍යගතය', R2, y + 33); ctx.fillText('සතියකට පෙර', R3, y + 33);
+  y += 50;
+  for (const L of lines){
+    ctx.textAlign = 'left';
+    if (L.c){ ctx.fillStyle = C.cat; ctx.fillRect(X, y, TW, 44); ctx.fillStyle = C.petrol; ctx.font = '600 25px ' + SI;
+      ctx.fillText(L.c, X + 16, y + 31); y += 44; continue; }
+    ctx.fillStyle = C.line; ctx.fillRect(X, y, TW, 1);
+    ctx.fillStyle = C.ink; ctx.font = '600 29px ' + SI; ctx.fillText(L.s, X + 16, y + 40);
+    const nw = ctx.measureText(L.s).width; ctx.font = '18px ' + SI; ctx.fillStyle = C.muted;
+    if (X + 16 + nw + 10 + ctx.measureText(L.e).width < R1 - 175) ctx.fillText(L.e, X + 16 + nw + 10, y + 40);
+    ctx.textAlign = 'right';
+    ctx.font = '500 23px ' + MONO; ctx.fillStyle = C.muted; ctx.fillText(money(L.lo) + '–' + money(L.hi), R1, y + 39);
+    ctx.font = '700 31px ' + MONO; ctx.fillStyle = C.ink; ctx.fillText(money(L.m), R2, y + 40);
+    if (L.w){
+      const pct = (L.m - L.w) / L.w * 100, k = Math.abs(pct) < 0.5 ? 'flat' : (pct > 0 ? 'up' : 'down');
+      const tx = ({up:'▲', down:'▼', flat:'■'})[k] + (pct > 0 ? '+' : '') + pct.toFixed(0) + '%';
+      ctx.font = '700 20px ' + MONO; const cw = ctx.measureText(tx).width + 16;
+      rr(ctx, R3 - cw, y + 16, cw, 30, 8, C[k + 'bg']); ctx.fillStyle = C[k]; ctx.textAlign = 'center'; ctx.fillText(tx, R3 - cw / 2, y + 38);
+      ctx.textAlign = 'right'; ctx.font = '500 25px ' + MONO; ctx.fillStyle = C.soft; ctx.fillText(money(L.w), R3 - cw - 8, y + 40);
+    } else { ctx.fillStyle = C.muted; ctx.font = '25px ' + MONO; ctx.fillText('—', R3, y + 40); }
+    y += 60;
+  }
+  // footer
+  y += 30; ctx.fillStyle = '#cdbf9f'; ctx.fillRect(X, y, TW, 2); y += 24; ctx.textAlign = 'left';
+  if (qr){ rr(ctx, X, y, 170, 170, 12, '#fff'); ctx.imageSmoothingEnabled = false; ctx.drawImage(qr, X + 8, y + 8, 154, 154); ctx.imageSmoothingEnabled = true; }
+  const fx = X + 196; ctx.fillStyle = C.petrol; ctx.font = '600 32px ' + SI; ctx.fillText(D.url.replace('https://', ''), fx, y + 34);
+  ctx.fillStyle = C.soft; ctx.font = '22px ' + SI; foot.forEach((t, i) => ctx.fillText(t, fx, y + 74 + i * 34));
+  return cv;
+}
+
+function loadImg(src){ return new Promise(r => { if (!src) return r(null); const im = new Image();
+  im.onload = () => r(im); im.onerror = () => r(null); im.src = src; }); }
+
+async function make(){
+  try { await Promise.all(['600 30px "Noto Sans Sinhala"', '400 22px "Noto Sans Sinhala"', '700 30px "JetBrains Mono"', '500 24px "JetBrains Mono"']
+    .map(f => document.fonts.load(f, 'අ1'))); } catch(e){}
+  let qrSrc = null;
+  try { const q = qrcode(0, 'M'); q.addData(D.url); q.make(); qrSrc = q.createDataURL(6, 0); } catch(e){}
+  const [logo, qr] = await Promise.all([loadImg(D.logo), loadImg(qrSrc)]);
+  const ps = parts();
+  return ps.map((p, i) => draw(p, i + 1, ps.length, logo, qr));
+}
+const blobOf = (cv, type, q) => new Promise(r => cv.toBlob(r, type, q));
+function save(blob, name){ const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000); }
+const base = () => D.slug + '-price-list-' + D.iso;
+
+async function pdfBlob(cvs){
+  // simple A4 PDF with one JPEG per page (no extra library needed)
+  const enc = new TextEncoder(), chunks = [], offs = []; let len = 0;
+  const put = x => { const b = typeof x === 'string' ? enc.encode(x) : x; chunks.push(b); len += b.length; };
+  const obj = (n, body) => { offs[n] = len; put(n + ' 0 obj\n'); body(); put('\nendobj\n'); };
+  const pages = []; for (const cv of cvs){ const b = new Uint8Array(await (await blobOf(cv, 'image/jpeg', 0.88)).arrayBuffer());
+    pages.push({b, w: cv.width, h: cv.height}); }
+  const n = pages.length, PW = 595.28, PH = 841.89, M = 22;
+  put('%PDF-1.4\n');
+  obj(1, () => put('<< /Type /Catalog /Pages 2 0 R >>'));
+  obj(2, () => put('<< /Type /Pages /Count ' + n + ' /Kids [' + pages.map((_, i) => (3 + i * 3) + ' 0 R').join(' ') + '] >>'));
+  pages.forEach((p, i) => {
+    const po = 3 + i * 3, im = po + 1, co = po + 2;
+    const s = Math.min((PW - 2 * M) / p.w, (PH - 2 * M) / p.h), w = p.w * s, h = p.h * s, x = (PW - w) / 2, y = PH - M - h;
+    const cs = 'q ' + w.toFixed(2) + ' 0 0 ' + h.toFixed(2) + ' ' + x.toFixed(2) + ' ' + y.toFixed(2) + ' cm /Im0 Do Q';
+    obj(po, () => put('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + PW + ' ' + PH + '] /Resources << /XObject << /Im0 ' + im + ' 0 R >> >> /Contents ' + co + ' 0 R >>'));
+    obj(im, () => { put('<< /Type /XObject /Subtype /Image /Width ' + p.w + ' /Height ' + p.h +
+      ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + p.b.length + ' >>\nstream\n'); put(p.b); put('\nendstream'); });
+    obj(co, () => put('<< /Length ' + cs.length + ' >>\nstream\n' + cs + '\nendstream'));
+  });
+  const xref = len, total = 3 + n * 3;
+  put('xref\n0 ' + total + '\n0000000000 65535 f \n');
+  for (let i = 1; i < total; i++) put(String(offs[i]).padStart(10, '0') + ' 00000 n \n');
+  put('trailer\n<< /Size ' + total + ' /Root 1 0 R >>\nstartxref\n' + xref + '\n%%EOF');
+  return new Blob(chunks, {type: 'application/pdf'});
+}
+
+async function run(btn, job){ const t = btn.innerHTML; btn.disabled = true; btn.innerHTML = '⏳ ...';
+  try { await job(); } catch(e){ console.error(e); alert('සමාවන්න, නැවත උත්සාහ කරන්න. Sorry, please try again.'); }
+  btn.disabled = false; btn.innerHTML = t; }
+
+window.tgImage = btn => run(btn, async () => { const cvs = await make();
+  for (let i = 0; i < cvs.length; i++){ save(await blobOf(cvs[i], 'image/png'), base() + (cvs.length > 1 ? '-' + (i + 1) : '') + '.png');
+    await new Promise(r => setTimeout(r, 600)); } });
+window.tgPdf = btn => run(btn, async () => { save(await pdfBlob(await make()), base() + '.pdf'); });
+window.tgShare = btn => run(btn, async () => { const cvs = await make(), files = [];
+  for (let i = 0; i < cvs.length; i++) files.push(new File([await blobOf(cvs[i], 'image/png')],
+    base() + (cvs.length > 1 ? '-' + (i + 1) : '') + '.png', {type: 'image/png'}));
+  const msg = D.si + ' වෙළඳපොළ තොග මිල (' + D.date + ', HARTI) ' + D.url;
+  if (navigator.canShare && navigator.canShare({files})) await navigator.share({files, text: msg});
+  else { for (const f of files) save(f, f.name); } });
+
+const bar = document.getElementById('tg-dl');
+if (bar){ bar.style.display = 'flex';
+  const sh = document.getElementById('tg-share');
+  try { if (!(navigator.canShare && navigator.canShare({files: [new File([''], 'a.png', {type: 'image/png'})]}))) sh.style.display = 'none'; }
+  catch(e){ sh.style.display = 'none'; } }
+})();
+</script>
+'''
+
+DL_FOOT = [
+    "දත්ත: HARTI දෛනික තොග මිල වාර්තාව (හෙක්ටර් කොබ්බෑකඩුව ගොවිකටයුතු පර්යේෂණ හා පුහුණු කිරීමේ ආයතනය).",
+    "රු. / කි.ග්‍රෑ. · මධ්‍යගතය = (අවම + උපරිම) ÷ 2 · සතියකට පෙර = සතියකට පෙර වාර්තාවේ මධ්‍යගතය.",
+    "මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ. ප්‍රවාහන වියදම අනුව සැබෑ ලාභය වෙනස් වේ.",
+]
+
+def download_bar(market, rows, last, latest_all, url):
+    """Share / image / PDF buttons + the data the phone uses to draw the price list."""
+    if not rows or not last:
+        return ""
+    info = MKT[market]
+    lines, cur = [], None
+    for r in rows:
+        if r["cat"] != cur:
+            cur = r["cat"]
+            lines.append({"c": CAT_SI.get(cur, cur)})
+        lines.append({"s": hsi(r["name"]), "e": r["name"], "lo": r["min"], "hi": r["max"], "m": r["mid"], "w": r["wk"]})
+    stale = ""
+    if last < latest_all:
+        stale = f"HARTI නවතම වාර්තාවේ ({fdate(d_(latest_all), 'si')}) මෙම වෙළඳපොළ මිල නොතිබුණි. මෙහි ඇත්තේ {fdate(d_(last), 'si')} මිලයි."
+    data = {"slug": info["slug"], "si": info["si"], "en": men(market), "date": fdate(d_(last), "si"), "iso": last,
+            "url": url, "logo": "../icon-192x192.png", "stale": stale, "foot": DL_FOOT, "lines": lines}
+    btn = ("display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:999px;font:inherit;"
+           "font-weight:700;font-size:14px;cursor:pointer;")
+    return (f'<div id="tg-dl" style="display:none;gap:8px;flex-wrap:wrap;margin:14px 0 4px">'
+            f'<button onclick="tgPdf(this)" style="{btn}background:var(--card);color:var(--petrol);border:1px solid var(--petrol)">📄 PDF බාගන්න</button>'
+            f'<button onclick="tgImage(this)" style="{btn}border:0;background:var(--petrol);color:#fff">🖼️ Image බාගන්න</button>'
+            f'<button id="tg-share" onclick="tgShare(this)" style="{btn}border:0;background:#25d366;color:#fff">📤 WhatsApp / Share</button>'
+            f'</div>'
+            + DL_JS.replace("__DL_DATA__", json.dumps(data, ensure_ascii=False).replace("</", "<\\/")))
+
 # ---------------------------------------------------------------- page shell
 def shell(title, desc, canonical, body, jsonld):
     return f"""<!DOCTYPE html>
@@ -356,6 +550,7 @@ def market_page(market, hm, harti, cats, cbsl):
 {cbsl_html if cbsl_first else ''}
 {harti_h2 if cbsl_first else ''}
 <p class="asof" style="margin-top:14px"><b>📦 තොග මිල / Wholesale</b> · 📍 {e(si)} ({e(en)}) · {fdate(d_(last),'si') if last else '—'} · HARTI</p>
+{download_bar(market, rows, last, latest_all, url)}
 {duo}
 {stale}
 <div class="story">
