@@ -80,3 +80,18 @@ jobs:
             git pull --rebase origin main
             git push origin main
           fi
+      # ── Market pages (topgoviya.lk/market/...) ─────────────
+      - name: Build market pages
+        run: python build_market_pages.py
+      - name: Commit market pages if changed
+        run: |
+          git config user.name  "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add market/ sitemap.xml harti_market_history.json || true
+          if git diff --staged --quiet; then
+            echo "No market page changes today."
+          else
+            git commit -m "Auto-update market pages ($(date +%Y-%m-%d))"
+            git pull --rebase origin main
+            git push origin main
+          fi
