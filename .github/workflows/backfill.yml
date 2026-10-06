@@ -10,7 +10,7 @@ permissions:
   contents: write
 jobs:
   backfill:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
         with:
@@ -37,4 +37,21 @@ jobs:
             git commit -m "Backfill history ($(date -u +%Y-%m-%d))"
             git pull --rebase
             git push
+          fi
+      # ── Rebuild pages so the site shows the new data straight away ──
+      - name: Rebuild price pages and market pages
+        run: |
+          python build_pages.py
+          python build_market_pages.py
+      - name: Commit pages if changed
+        run: |
+          git config user.name  "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add price/ market/ sitemap.xml harti_market_history.json || true
+          if git diff --staged --quiet; then
+            echo "No page changes."
+          else
+            git commit -m "Rebuild pages after backfill ($(date -u +%Y-%m-%d))"
+            git pull --rebase origin main
+            git push origin main
           fi
