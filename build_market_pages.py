@@ -51,7 +51,9 @@ H_SI = {
  "Big Onion (Imported)":"ලොකු ළූණු (ආනයනික)",
  "Banana Ambul":"ඇඹුල් කෙසෙල්","Banana Kolikuttu":"කොලිකුට්ටු","Banana Seeni":"සීනි කෙසෙල්",
  "Papaya":"පැපොල්","Pineapple (Large)":"අන්නාසි (ලොකු)","Avocado":"අලිගැටපේර",
- "Passion Fruit":"වැල් දොඩම්",
+ "Passion Fruit":"වැල් දොඩම්","Anamalu":"ආනමාළු කෙසෙල්","Pineapple (Medium)":"අන්නාසි (මධ්‍යම)",
+ "Pineapple (Small)":"අන්නාසි (කුඩා)","Mango (Betti)":"අඹ (බෙට්ටි)","Mango (Karathakolomban)":"අඹ (කර්තකොළඹ)",
+ "Woodapple":"දිවුල්","Orange":"දොඩම්",
 }
 H_TA = {
  "Beans":"பீன்ஸ்","Carrot":"கேரட்","Leeks":"லீக்ஸ்","Beetroot":"பீட்ரூட்",
@@ -65,6 +67,11 @@ H_TA = {
  "Manioc":"மரவள்ளி","Eggplant":"கத்திரிக்காய்",
  "Potato (Imported)":"உருளை (இறக்குமதி)","Potato (Welimada)":"உருளை (வெலிமட)",
  "Potato (N.Eliya)":"உருளை (நுவரெலியா)","Big Onion (Imported)":"பெரிய வெங்காயம் (இறக்குமதி)",
+ "Banana Ambul":"புளி வாழை","Banana Kolikuttu":"கோழிக்கூடு வாழை","Banana Seeni":"சீனி வாழை",
+ "Anamalu":"ஆனைமாலு வாழை","Papaya":"பப்பாளி","Pineapple (Large)":"அன்னாசி (பெரியது)",
+ "Pineapple (Medium)":"அன்னாசி (நடுத்தரம்)","Pineapple (Small)":"அன்னாசி (சிறியது)","Avocado":"அவகாடோ",
+ "Passion Fruit":"பேஷன் பழம்","Mango (Betti)":"மாம்பழம் (பெட்டி)",
+ "Mango (Karathakolomban)":"மாம்பழம் (கறுத்தக்கொழும்பான்)","Woodapple":"விளாம்பழம்","Orange":"தோடம்பழம்",
 }
 CAT_SI = {"Up Country Vegetables": "උඩරට එළවළු", "Low Country Vegetables": "පහතරට එළවළු",
           "Potatoes & Onions": "අර්තාපල් හා ළූණු", "Fruits & Banana": "පළතුරු හා කෙසෙල්"}
