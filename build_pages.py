@@ -711,6 +711,13 @@ def commodity_page(c, dates, latest_idx, all_items):
                           f'<p style="margin:0">{e(as_)}</p><p lang="en" style="margin:2px 0 0;color:var(--soft)">{e(ae)}</p>'
                           for qs, qe, as_, ae in faq) + '</div>')
 
+    # ---- trust line: the official PDF this price came from + how to report a wrong price
+    pdf_name = f"price_report_{d.strftime('%Y%m%d')}_e.pdf"
+    trust_html = ('<p class="asof" style="margin-top:14px">'
+                  + (f'📑 <a href="../pdfs/{pdf_name}" rel="noopener">මහ බැංකු මුල් වාර්තාව (නිල PDF) — {fdate(d,"si")}</a> · '
+                     f'Official CBSL report. ' if os.path.exists(os.path.join("pdfs", pdf_name)) else "")
+                  + 'මිලක් වැරදි යැයි සිතේද? <a href="../data-sources.html">අපට දන්වන්න</a> / Spotted a wrong price? Tell us.</p>')
+
     body = f"""
 <p class="crumb"><a href="../index.html">TopGoviya.lk</a> / <a href="index.html">මිල ගණන්</a> / {e(n_si(name))}</p>
 <h1>{emoji(name)} {e(n_si(name))} මිල අද</h1>
@@ -732,6 +739,7 @@ def commodity_page(c, dates, latest_idx, all_items):
 {stats_html}
 {hist_html}
 {faq_html}
+{trust_html}
 <a class="cta" href="../index.html">සම්පූර්ණ ප්‍රස්ථාර, වසර 4ක ඉතිහාසය හා ලාභ ගණකය බලන්න</a>
 {rel_html}
 """
