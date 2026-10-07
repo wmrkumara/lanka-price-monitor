@@ -354,6 +354,22 @@ PER = {
     "Rs./Ltr":  {"en": "per litre", "si": "ලීටරයක",       "ta": "ஒரு லிட்டர்"},
 }
 
+# How people type the crop name in English letters ("Singlish") when they search,
+# e.g. "thakkali mila", "dehi rate". Left out when it is the same as the English name.
+SINGLISH = {
+ "Beans":"bonchi","Cabbage":"gowa","Tomato":"thakkali","Brinjal":"wambatu","Pumpkin":"wattakka",
+ "Snake gourd":"pathola","Green Chilli":"amu miris","Lime":"dehi","Red Onion (Local)":"rathu lunu",
+ "Red Onion (lmp)":"rathu lunu","Big Onion (Local)":"loku lunu","Big Onion (Imp)":"loku lunu",
+ "Potato (Local)":"ala","Potato (Imp)":"ala","Dried Chilli (Imp)":"viyali miris","Coconut (Avg.)":"pol",
+ "Coconut oil":"pol thel","Red Dhal":"parippu","Sugar (White)":"seeni","Egg (White)":"biththara",
+ "Katta":"katta","Sprat (Imp)":"haal masso","Banana (Sour)":"embul kesel","Papaw":"papol","Pineapple":"annasi",
+ "Orange (Imp)":"dodam","Samba":"samba haal","Nadu":"nadu haal","Kekulu (White)":"kekulu haal",
+ "Kekulu (Red)":"rathu kekulu haal","Nadu (Imp)":"nadu haal","Kekulu (White) (Imp)":"kekulu haal",
+ "Kelawalla":"kelawalla","Thalapath":"thalapath","Balaya":"balaya","Paraw":"parawa","Salaya":"salaya",
+ "Hurulla":"hurulla","Linna":"linna","Katta (Imp)":"katta",
+}
+def sl(n): return SINGLISH.get(n, "")
+
 def e(s):  return html.escape(str(s), quote=True)
 def n_si(n): return (NAMES.get(n) or {}).get("si", n)
 def n_ta(n): return (NAMES.get(n) or {}).get("ta", n)
@@ -662,7 +678,7 @@ def commodity_page(c, dates, latest_idx, all_items):
     body = f"""
 <p class="crumb"><a href="../index.html">TopGoviya.lk</a> / <a href="index.html">මිල ගණන්</a> / {e(n_si(name))}</p>
 <h1>{emoji(name)} {e(n_si(name))} මිල අද</h1>
-<p class="alt">{e(name)} price today in Sri Lanka<br>{e(n_ta(name))} விலை இன்று</p>
+<p class="alt">{e(name)} price today in Sri Lanka{(" · " + e(sl(name)) + " mila ada · " + e(sl(name)) + " rate today") if sl(name) else ""}<br>{e(n_ta(name))} விலை இன்று</p>
 <div class="hero">
   <div class="big"><span class="rs">රු.</span>{money(price)}<small>{e(u_tr(unit,'si'))}</small></div>
   <span class="chg {direction}">{arrow} {sign}{pct:.1f}%</span>
@@ -683,10 +699,12 @@ def commodity_page(c, dates, latest_idx, all_items):
 {rel_html}
 """
     url = f"{SITE}/{OUT_DIR}/{slug(name)}.html"
-    title = f"{n_si(name)} මිල අද – තොග හා සිල්ලර | {name} Price Today Sri Lanka – TopGoviya.lk"
+    title = (f"{n_si(name)} මිල අද" + (f" ({sl(name).title()} Mila)" if sl(name) else "")
+             + f" – තොග හා සිල්ලර | {name} Price Today Sri Lanka – TopGoviya.lk")
     wtxt = f"Wholesale Rs. {money(wprice)} at {wmkt}, retail Rs. {money(price)} at {mkt}" if wl else f"Retail Rs. {money(price)} at {mkt}"
     desc = (f"{name} price today ({fdate(d,'en')}): {wtxt} {per['en']}. "
-            f"Compare markets and the 30-day trend. {n_si(name)} තොග හා සිල්ලර මිල.")
+            f"Compare markets and the 30-day trend. {n_si(name)} තොග හා සිල්ලර මිල."
+            + (f" {sl(name)} mila ada, {sl(name)} rate." if sl(name) else ""))
     jsonld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "TopGoviya.lk", "item": SITE + "/"},
         {"@type": "ListItem", "position": 2, "name": "Prices", "item": f"{SITE}/{OUT_DIR}/"},
@@ -699,7 +717,7 @@ def hub_page(items, dates, latest_idx):
     cats = sorted({c["category"] for c in items}, key=lambda x: order.index(x) if x in order else 99)
     body = (f'<p class="crumb"><a href="../index.html">TopGoviya.lk</a> / මිල ගණන්</p>'
             f'<h1>අද එළවළු, පළතුරු හා ආහාර මිල</h1>'
-            f'<p class="alt">Today\'s wholesale and retail prices in Sri Lanka<br>இன்றைய மொத்த மற்றும் சில்லறை விலைகள்</p>'
+            f'<p class="alt">Today\'s wholesale and retail prices in Sri Lanka · elawalu mila ada · elawalu rate today<br>இன்றைய மொத்த மற்றும் சில்லறை விலைகள்</p>'
             f'<p class="asof" style="margin-top:14px"><b>🏷️ තොග හා සිල්ලර මිල / Wholesale &amp; retail / மொத்த &amp; சில்லறை</b><br>'
             f'නවතම වාර්තාව / Latest report: {fdate(dates[latest_idx],"si")} · CBSL</p>'
             f'<div class="story" style="margin:18px 0 0;font-size:14.5px">'
@@ -731,9 +749,9 @@ def hub_page(items, dates, latest_idx):
     body += '<p class="asof" style="margin-top:10px">මිල රුපියල් වලින් / Prices in Rs. · — = එදින වාර්තා නොවීය / not reported that day</p>'
     body += '<a class="cta" href="../index.html">සම්පූර්ණ ප්‍රස්ථාර හා ගණක බලන්න</a>'
     url = f"{SITE}/{OUT_DIR}/"
-    title = "අද එළවළු මිල – තොග හා සිල්ලර | Vegetable Prices Today Sri Lanka – TopGoviya.lk"
+    title = "අද එළවළු මිල (Elawalu Mila Ada) – තොග හා සිල්ලර | Vegetable Prices Today Sri Lanka – TopGoviya.lk"
     desc = (f"Today's wholesale and retail prices for {len(items)} vegetables, fruits, rice and fish in Sri Lanka "
-            f"({fdate(dates[latest_idx],'en')}). Daily from CBSL reports. අද එළවළු තොග හා සිල්ලර මිල.")
+            f"({fdate(dates[latest_idx],'en')}). Daily from CBSL reports. අද එළවළු තොග හා සිල්ලර මිල. elawalu mila ada, thakkali mila, dehi mila.")
     jsonld = {"@context": "https://schema.org", "@type": "CollectionPage", "name": title, "url": url}
     return shell(title, desc, url, body, jsonld)
 
