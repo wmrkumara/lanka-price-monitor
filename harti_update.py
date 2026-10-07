@@ -176,6 +176,28 @@ def download_today():
         except Exception as e:
             print(f"  ❌ {d}: {e}")
 
+MARKET_DATES = {}   # report date -> {market: that market's own price date}
+
+def parse_market_dates(pdf_page):
+    """HARTI prints a date above every market column; some markets (e.g. Meegoda,
+    Veyangoda) give the previous day's prices. Returns {market: 'YYYY-MM-DD'}."""
+    out = {}
+    try:
+        for table in (pdf_page.extract_tables() or []):
+            if not table or len(table) < 2 or not table[0] or str(table[0][0] or "").strip() != "Variety":
+                continue
+            dates, names = table[0][1:], table[1][1:]
+            for dt, nm in zip(dates, names):
+                nm = str(nm or "").replace("\n", " ").split(" ")[0].strip()
+                m = re.search(r"(\d{4})[.\-/](\d{1,2})[.\-/](\d{1,2})", str(dt or ""))
+                if nm in MARKETS and m:
+                    out[nm] = f"{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+            if out:
+                return out
+    except Exception:
+        pass
+    return out
+
 def parse_veg_table(pdf_page):
     results = {}
     try:
@@ -263,6 +285,9 @@ def parse_pdf(path):
             if n>=1: rice=parse_rice_table(pdf.pages[0])
             if n>=2: veg=parse_veg_table(pdf.pages[1])
             if not veg and n>=1: veg=parse_veg_table(pdf.pages[0])
+            for pg in pdf.pages[:3]:
+                md = parse_market_dates(pg)
+                if md: MARKET_DATES[date_str] = md; break
     except: return date_str,{},{}
     print(f"  {date_str}: {len(veg)} veg, {len(rice)} essentials")
     return date_str,veg,rice
@@ -409,10 +434,15 @@ def build():
                 for k in ("pettahRange", "pettahAvg"):
                     if k in o: c[k] = o[k]
 
+    market_dates = MARKET_DATES.get(dates[-1]) if dates else None
+    if not market_dates and existing_data and existing_data.get("dates", [None])[-1] == (dates[-1] if dates else None):
+        market_dates = existing_data.get("marketDates")
     data={"generated":datetime.datetime.now().isoformat(timespec="seconds"),
           "source":"Hector Kobbekaduwa Agrarian Research and Training Institute — Daily Wholesale Price Report",
           "sourceUrl":"https://www.harti.gov.lk/daily-price.php",
-          "dates":dates,"dateLabels":labels,"markets":MARKETS,"commodities":commodities}
+          "dates":dates,"dateLabels":labels,"markets":MARKETS,
+          "marketDates":market_dates or {},   # each market's own price date in the latest report
+          "commodities":commodities}
 
     with open(OUT_FILE,"w",encoding="utf-8") as f:
         json.dump(data,f,indent=1,ensure_ascii=False)
