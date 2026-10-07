@@ -12,6 +12,7 @@ Uses build_pages.py (same folder) for the shared look, and only the
 Python standard library.
 """
 import json, os, re
+from urllib.parse import quote
 from datetime import datetime, timedelta
 
 from build_pages import CSS, GA_ID, SITE, e, money, fdate, slug, MONTHS, NAMES as CBSL_NAMES, EMOJIS, UNITS
@@ -95,6 +96,51 @@ def short(d): return f"{d.day} {MONTHS['en'][d.month-1][:3]}"
 # Markets whose column in the HARTI report carries the previous day's prices.
 # Used only if harti_data.json has no "marketDates" (harti_update.py reads the real dates).
 LAG_DAYS = {"Meegoda": 1, "Veyangoda": 1}
+
+# ---------------------------------------------------------------- official report links
+def _pdf_date(fname):
+    """Report date from a HARTI PDF file name (same rules as harti_update.py)."""
+    m = re.search(r"[\(\s_]?(20\d{2})\.(\d{2})\.(\d{2})[\)\s_]?", fname)
+    if m: return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+    m = re.search(r"daily[_\s](\d{2})-(\d{2})-(\d{4})", fname)
+    if m: return f"{m.group(3)}-{m.group(2)}-{m.group(1)}"
+    m = re.search(r"(20\d{2})[_-](\d{2})[_-](\d{2})", fname)
+    if m: return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+    return None
+
+_HARTI_PDFS = None
+def harti_pdf_for(report_date):
+    """File name in harti_pdfs/ for a report date, or None."""
+    global _HARTI_PDFS
+    if _HARTI_PDFS is None:
+        _HARTI_PDFS = {}
+        for f in sorted(os.listdir("harti_pdfs")) if os.path.isdir("harti_pdfs") else []:
+            if f.lower().endswith(".pdf"):
+                d = _pdf_date(f)
+                # prefer the full daily report when a day has two files
+                if d and (d not in _HARTI_PDFS or f.startswith("Vegetable_Pricenew")):
+                    _HARTI_PDFS[d] = f
+    return _HARTI_PDFS.get(report_date)
+
+def official_harti_link(harti, market, last):
+    """'Official HARTI report' link to the original PDF our prices came from."""
+    if not last:
+        return ""
+    report = harti["dates"][-1] if in_latest_report(harti, market) else \
+        (d_(last) + timedelta(days=LAG_DAYS.get(market, 0))).isoformat()
+    f = harti_pdf_for(report)
+    if not f:
+        return ""
+    return (f'<p class="asof" style="margin-top:6px">📑 <a href="../harti_pdfs/{quote(f)}" rel="noopener">'
+            f'HARTI මුල් වාර්තාව (නිල PDF) — {fdate(d_(report), "si")}</a> · Official HARTI report. '
+            f'මිලක් වැරදි යැයි සිතේද? <a href="../data-sources.html">අපට දන්වන්න</a> / Spotted a wrong price? Tell us.</p>')
+
+def official_cbsl_link(cd):
+    f = f"price_report_{cd.strftime('%Y%m%d')}_e.pdf"
+    if not os.path.exists(os.path.join("pdfs", f)):
+        return ""
+    return (f'<p class="asof" style="margin-top:6px">📑 <a href="../pdfs/{f}" rel="noopener">'
+            f'මහ බැංකු මුල් වාර්තාව (නිල PDF) — {fdate(cd, "si")}</a> · Official Central Bank report.</p>')
 
 def in_latest_report(harti, market):
     return any(isinstance((c.get("markets") or {}).get(market), dict) and c["markets"][market].get("mid") is not None
@@ -655,7 +701,8 @@ def market_page(market, hm, harti, cats, cbsl):
                          f'Central Bank of Sri Lanka daily price report, Dambulla.</p>'
                          + cbsl_download_bar(cd, crow, url) +
                          f'<div class="scroll"><table><thead><tr><th>භාණ්ඩය / Item</th><th class="n">තොග<br>Wholesale</th>'
-                         f'<th class="n">සිල්ලර<br>Retail</th></tr></thead><tbody>{trs}</tbody></table></div>')
+                         f'<th class="n">සිල්ලර<br>Retail</th></tr></thead><tbody>{trs}</tbody></table></div>'
+                         + official_cbsl_link(cd))
 
     # ---- summary cards
     duo = ""
@@ -686,6 +733,7 @@ def market_page(market, hm, harti, cats, cbsl):
 </div>
 {table}
 {table_note if rows else ''}
+{official_harti_link(harti, market, last)}
 {better_html}
 {'' if cbsl_first else cbsl_html}
 <a class="cta" href="../wholesale.html">වෙළඳපොළ 10ක ප්‍රස්ථාර හා ලාභ ගණකය බලන්න / Charts &amp; calculator →</a>
