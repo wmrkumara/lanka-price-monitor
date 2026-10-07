@@ -108,6 +108,24 @@ def pick_primary(markets, preferred):
             return m, val
     return preferred, None
 
+SERIES_WINDOW = 90   # reports used to choose each item's market
+
+def series_market(day_maps, preferred):
+    """Market used for this item's price history: the usual (preferred) market,
+    unless it reported the item much less often (under 80%) than another market
+    in the last SERIES_WINDOW reports - then the market that reported it most."""
+    counts = {}
+    for dm in [x for x in day_maps if x][-SERIES_WINDOW:]:
+        for m, v in dm.items():
+            if v is not None:
+                counts[m] = counts.get(m, 0) + 1
+    if not counts:
+        return preferred
+    best = max(counts.values())
+    if counts.get(preferred, 0) >= 0.8 * best:     # usual market reports often enough: keep it
+        return preferred
+    return max(counts, key=lambda m: counts[m])
+
 def parse_page2(path):
     with pdfplumber.open(path) as pdf:
         if len(pdf.pages) < 2:
@@ -154,7 +172,7 @@ def build(pdf_dir=PDF_DIR, out="data.json"):
     out_rows = []
     for n in names:
         cat = unit = None
-        retail_series, wholesale_series = [], []
+        day_retail, day_wholesale = [], []      # per day: {market: price} or None
         latest_retail, latest_wholesale = {}, {}
 
         for _, rows in days:
@@ -162,26 +180,31 @@ def build(pdf_dir=PDF_DIR, out="data.json"):
                 cat = rows[n]["category"]
                 unit = rows[n]["unit"]
                 p = extract_prices(cat, rows[n]["values"], n)
-                _, rval = pick_primary(p["retail"],    PRIMARY.get(cat, "Dambulla"))
-                _, wval = pick_primary(p["wholesale"], WHOLESALE_PRIMARY.get(cat, "Dambulla"))
-                retail_series.append(rval)
-                wholesale_series.append(wval)
+                day_retail.append(p["retail"])
+                day_wholesale.append(p["wholesale"])
                 latest_retail    = p["retail"]
                 latest_wholesale = p["wholesale"]
             else:
-                retail_series.append(None)
-                wholesale_series.append(None)
+                day_retail.append(None)
+                day_wholesale.append(None)
+
+        # One market per item for the whole history, so a change always compares
+        # the same market (before: a missing Dambulla price was silently filled
+        # with another market's price, which made fake rises and falls).
+        r_mkt = series_market(day_retail, PRIMARY.get(cat, "Dambulla"))
+        w_mkt = series_market(day_wholesale, WHOLESALE_PRIMARY.get(cat, "Dambulla"))
+        retail_series    = [(dm or {}).get(r_mkt) for dm in day_retail]
+        wholesale_series = [(dm or {}).get(w_mkt) for dm in day_wholesale]
 
         if len([x for x in retail_series if x is not None]) < 5:
             continue
 
-        primary_mkt, _ = pick_primary(latest_retail, PRIMARY.get(cat, "Dambulla"))
-
         out_rows.append({
             "name": n, "category": cat, "unit": unit,
-            "primaryMarket": primary_mkt,
+            "primaryMarket": r_mkt,
             "series": retail_series,
             "markets": latest_retail,
+            "wholesaleMarket": w_mkt,
             "wholesaleSeries": wholesale_series,
             "wholesaleMarkets": latest_wholesale
         })
