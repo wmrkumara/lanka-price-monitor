@@ -3,9 +3,10 @@
 /* Updated: 24 Aug 2026 — v13: added economics.html + dei_data.json network-first */
 /* Updated: 27 Sep 2026 — v14: all HTML pages network-first (daily /price/ pages never go stale) */
 /* Updated: 03 Oct 2026 — v15: spice pages, spice guide, data sources + /price/ hub added to offline cache */
+/* Updated: 07 Oct 2026 — v16: pages + data always re-checked with the server (no 10-minute browser copy); /market/ pages added */
 
-const CACHE_NAME = 'topgoviya-v15';
-const DATA_CACHE = 'topgoviya-data-v15';
+const CACHE_NAME = 'topgoviya-v16';
+const DATA_CACHE = 'topgoviya-data-v16';
 
 /* ── Static files to cache for offline use ── */
 const STATIC_ASSETS = [
@@ -29,6 +30,9 @@ const STATIC_ASSETS = [
   '/spice-price-guide.html',
   '/data-sources.html',
   '/price/',
+  '/market/',
+  '/market/dambulla.html',
+  '/market/peliyagoda.html',
   '/manifest.json',
   '/icon-72x72.png',
   '/icon-96x96.png',
@@ -41,7 +45,7 @@ const STATIC_ASSETS = [
 
 /* ── Install — cache all static assets ── */
 self.addEventListener('install', event => {
-  console.log('[TopGoviya SW v2.7] Installing...');
+  console.log('[TopGoviya SW v2.8] Installing...');
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       console.log('[TopGoviya SW] Caching all pages + assets');
@@ -55,7 +59,7 @@ self.addEventListener('install', event => {
 
 /* ── Activate — remove old caches ── */
 self.addEventListener('activate', event => {
-  console.log('[TopGoviya SW v2.7] Activating...');
+  console.log('[TopGoviya SW v2.8] Activating...');
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
@@ -70,6 +74,12 @@ self.addEventListener('activate', event => {
   self.clients.claim();
 });
 
+/* Ask the server for the newest copy (skips the browser's 10-minute saved copy).
+   The server answers "not changed" quickly when nothing is new, so this stays fast. */
+function freshFetch(request) {
+  return fetch(request.url, { cache: 'no-cache', credentials: 'same-origin' });
+}
+
 /* ── Fetch strategy ── */
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
@@ -80,7 +90,7 @@ self.addEventListener('fetch', event => {
       url.pathname.includes('bulletin_data.json') || url.href.includes('bulletin_data.json') ||
       url.pathname.includes('dei_data.json') || url.href.includes('dei_data.json')) {
     event.respondWith(
-      fetch(event.request)
+      freshFetch(event.request)
         .then(response => {
           const clone = response.clone();
           caches.open(DATA_CACHE).then(cache => cache.put(event.request, clone));
@@ -123,9 +133,10 @@ self.addEventListener('fetch', event => {
 
   /* HTML pages (index, /price/ pages, all others) — network first, cache fallback.
      Prices change every day, so visitors must always get the fresh page when online. */
-  if (event.request.mode === 'navigate' || event.request.destination === 'document') {
+  if ((event.request.mode === 'navigate' || event.request.destination === 'document') &&
+      url.origin === self.location.origin) {
     event.respondWith(
-      fetch(event.request)
+      freshFetch(event.request)
         .then(response => {
           if (response.ok) {
             const clone = response.clone();
@@ -181,4 +192,4 @@ self.addEventListener('notificationclick', event => {
   );
 });
 
-console.log('[TopGoviya SW v2.7] Service Worker loaded ✅ | topgoviya.lk');
+console.log('[TopGoviya SW v2.8] Service Worker loaded ✅ | topgoviya.lk');
