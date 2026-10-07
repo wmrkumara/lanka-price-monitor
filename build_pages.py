@@ -675,6 +675,42 @@ def commodity_page(c, dates, latest_idx, all_items):
     else:
         duo_html = '<p class="asof" style="margin-top:6px"><a href="../wholesale.html">HARTI තොග මිල බලන්න / See HARTI wholesale prices →</a></p>'
 
+    # ---- FAQ: short factual answers built from the same numbers (Sinhala + English)
+    faq = []   # (question_si, question_en, answer_si, answer_en)
+    a_si = f"{fdate(d,'si')} දින {m_tr(mkt,'si')} වෙළඳපොළේ සිල්ලර මිල {per['si']} රු. {money(price)}."
+    a_en = f"On {fdate(d,'en')}, the retail price at {mkt} was Rs. {money(price)} {per['en']}."
+    if wl:
+        a_si += f" {m_tr(wmkt,'si')} තොග මිල රු. {money(wprice)}."
+        a_en += f" The wholesale price at {wmkt} was Rs. {money(wprice)}."
+    faq.append((f"{n_si(name)} මිල අද කීයද?", f"What is the {name} price today in Sri Lanka?", a_si, a_en))
+    if prev:
+        faq.append((f"{n_si(name)} මිල ඉහළ ගියාද, පහළ ගියාද?", f"Did the {name} price go up or down?", ch_si, ch_en))
+    if li == latest_idx:
+        rv = [(m_, x) for m_, x in (c.get("markets") or {}).items() if x is not None]
+        if len(rv) >= 2:
+            lo_m, lo_v = min(rv, key=lambda t: t[1]); hi_m, hi_v = max(rv, key=lambda t: t[1])
+            faq.append((f"අද {n_si(name)} අඩුම මිලට ලැබෙන්නේ කොහේද?", f"Which market has the cheapest {name} today?",
+                        f"සිල්ලර මිල අඩුම {m_tr(lo_m,'si')} (රු. {money(lo_v)}), වැඩිම {m_tr(hi_m,'si')} (රු. {money(hi_v)}).",
+                        f"The lowest retail price was at {lo_m} (Rs. {money(lo_v)}) and the highest at {hi_m} (Rs. {money(hi_v)})."))
+    yr = [(i, x) for i, x in v if dates[i] >= dates[li] - timedelta(days=365)]
+    if len(yr) >= 20:
+        (hi_i, hi_x), (lo_i, lo_x) = max(yr, key=lambda t: t[1]), min(yr, key=lambda t: t[1])
+        faq.append((f"පසුගිය මාස 12 තුළ {n_si(name)} ඉහළම හා අඩුම මිල?", f"What were the highest and lowest {name} prices in the last 12 months?",
+                     f"{m_tr(mkt,'si')} සිල්ලර: ඉහළම රු. {money(hi_x)} ({fdate(dates[hi_i],'si')}), අඩුම රු. {money(lo_x)} ({fdate(dates[lo_i],'si')}).",
+                     f"At {mkt} (retail): highest Rs. {money(hi_x)} on {fdate(dates[hi_i],'en')}, lowest Rs. {money(lo_x)} on {fdate(dates[lo_i],'en')}."))
+    ya_ = year_ago(s, dates, li)
+    if ya_:
+        faq.append((f"වසරකට පෙර {n_si(name)} මිල කීයද?", f"What was the {name} price a year ago?",
+                     f"{fdate(dates[ya_[0]],'si')} දින {m_tr(mkt,'si')} සිල්ලර මිල රු. {money(ya_[1])} විය (අද රු. {money(price)}).",
+                     f"On {fdate(dates[ya_[0]],'en')} it was Rs. {money(ya_[1])} at {mkt} (today Rs. {money(price)})."))
+    faq.append((f"මෙම මිල ගණන් කොහෙන්ද?", f"Where do these {name} prices come from?",
+                 "ශ්‍රී ලංකා මහ බැංකුවේ දෛනික මිල වාර්තාවෙන් (සතියේ දින) ස්වයංක්‍රීයව ලබා ගනී. මිල ගණන් මඟපෙන්වීමක් පමණි.",
+                 "From the Central Bank of Sri Lanka daily price report (weekdays), collected automatically. Prices are indicative only."))
+    faq_html = ('<h2>නිතර අසන ප්‍රශ්න<span>Frequently asked questions</span></h2><div class="story" style="font-size:14.5px">'
+                + "".join(f'<h3 style="font-size:15.5px;margin:12px 0 4px">{e(qs)} <span style="color:var(--muted);font-weight:500">/ {e(qe)}</span></h3>'
+                          f'<p style="margin:0">{e(as_)}</p><p lang="en" style="margin:2px 0 0;color:var(--soft)">{e(ae)}</p>'
+                          for qs, qe, as_, ae in faq) + '</div>')
+
     body = f"""
 <p class="crumb"><a href="../index.html">TopGoviya.lk</a> / <a href="index.html">මිල ගණන්</a> / {e(n_si(name))}</p>
 <h1>{emoji(name)} {e(n_si(name))} මිල අද</h1>
@@ -695,6 +731,7 @@ def commodity_page(c, dates, latest_idx, all_items):
 {chart_html}
 {stats_html}
 {hist_html}
+{faq_html}
 <a class="cta" href="../index.html">සම්පූර්ණ ප්‍රස්ථාර, වසර 4ක ඉතිහාසය හා ලාභ ගණකය බලන්න</a>
 {rel_html}
 """
@@ -705,10 +742,22 @@ def commodity_page(c, dates, latest_idx, all_items):
     desc = (f"{name} price today ({fdate(d,'en')}): {wtxt} {per['en']}. "
             f"Compare markets and the 30-day trend. {n_si(name)} තොග හා සිල්ලර මිල."
             + (f" {sl(name)} mila ada, {sl(name)} rate." if sl(name) else ""))
-    jsonld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "TopGoviya.lk", "item": SITE + "/"},
-        {"@type": "ListItem", "position": 2, "name": "Prices", "item": f"{SITE}/{OUT_DIR}/"},
-        {"@type": "ListItem", "position": 3, "name": f"{name} price", "item": url}]}
+    first = dates[v[0][0]]
+    jsonld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "TopGoviya.lk", "item": SITE + "/"},
+            {"@type": "ListItem", "position": 2, "name": "Prices", "item": f"{SITE}/{OUT_DIR}/"},
+            {"@type": "ListItem", "position": 3, "name": f"{name} price", "item": url}]},
+        {"@type": "Dataset", "name": f"{name} price in Sri Lanka – daily retail and wholesale",
+         "description": (f"Daily {name} prices in Sri Lanka ({unit}) at {mkt} and other markets, from the Central Bank of Sri Lanka "
+                         f"daily price report, {fdate(first,'en')} to {fdate(d,'en')}. Latest retail price Rs. {money(price)} on {fdate(d,'en')}."),
+         "url": url, "inLanguage": ["si", "en", "ta"], "spatialCoverage": "Sri Lanka",
+         "temporalCoverage": f"{first.isoformat()}/{d.isoformat()}", "dateModified": d.isoformat(),
+         "variableMeasured": f"{name} price ({unit})",
+         "isBasedOn": "https://www.cbsl.gov.lk/en/statistics/economic-indicators/price-report",
+         "creator": {"@type": "Organization", "name": "TopGoviya.lk", "url": SITE + "/"}},
+        {"@type": "FAQPage", "mainEntity": [
+            {"@type": "Question", "name": qe, "acceptedAnswer": {"@type": "Answer", "text": ae}} for qs, qe, as_, ae in faq]}]}
     return shell(title, desc, url, body, jsonld)
 
 # ---------------------------------------------------------------- hub page
