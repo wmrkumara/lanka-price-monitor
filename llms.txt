@@ -1,0 +1,52 @@
+# TopGoviya.lk
+
+> Free, independent website with daily agricultural market prices for Sri Lanka, in Sinhala, Tamil and English. Prices come automatically from three official sources: the Central Bank of Sri Lanka (CBSL) daily price report (retail and wholesale, Pettah, Dambulla, Narahenpita, plus fish markets), the Hector Kobbekaduwa Agrarian Research and Training Institute (HARTI) daily wholesale report (10 markets), and the Department of Export Agriculture (DEA) weekly spice farm-gate prices. History since January 2023. TopGoviya.lk is not a government site and does not set prices.
+
+How to use and cite this data:
+
+- Every price page states its source, market, price type (retail / wholesale / farm-gate) and report date. Please quote the date and market with any price, e.g. "Rs. 505 per kg retail at Dambulla, CBSL report of 6 October 2026, via TopGoviya.lk".
+- CBSL publishes on weekdays; HARTI usually daily (some markets, e.g. Meegoda and Veyangoda, give the previous day's prices); DEA weekly. Pages update automatically several times a day.
+- Weekly changes compare the latest report with the report about one week earlier (single days, not averages).
+- Prices are indicative only. Decisions are the reader's responsibility.
+
+## Today's prices
+
+- [Vegetable prices today (homepage)](https://topgoviya.lk/): CBSL retail prices for about 40 items, biggest daily changes, charts and calculators. Includes a plain-text summary of the latest report.
+- [All prices by item](https://topgoviya.lk/price/): one page per item (vegetables, fruit, rice, fish, coconut, onions, potatoes) with retail and wholesale prices by market, 30-day trend, year-ago price and FAQ. Example: [Tomato price today](https://topgoviya.lk/price/tomato.html), [Lime price today](https://topgoviya.lk/price/lime.html).
+- [Market prices today (10 HARTI markets)](https://topgoviya.lk/market/): one page per wholesale market with min / max / midpoint prices and last week's prices. Example: [Dambulla market price today](https://topgoviya.lk/market/dambulla.html), [Peliyagoda market price today](https://topgoviya.lk/market/peliyagoda.html), [Keppetipola market price today](https://topgoviya.lk/market/keppetipola.html).
+- [Wholesale prices, 10 markets](https://topgoviya.lk/wholesale.html): HARTI wholesale prices with charts and a market comparison (arbitrage) calculator.
+- [Spice prices](https://topgoviya.lk/spices.html): DEA weekly farm-gate prices for pepper, cinnamon, cardamom, clove, nutmeg and other spices, by district and grade.
+
+## Guides and reports
+
+- [Spice price guide](https://topgoviya.lk/spice-price-guide.html): farm-gate vs FOB vs retail prices, grades, this week's spice prices.
+- [Spice reports](https://topgoviya.lk/spice-report.html): per-spice year-on-year charts and district tables.
+- [Agriculture data bulletin](https://topgoviya.lk/bulletin.html): CBSL monthly agriculture sector bulletin with trend charts.
+- [Market insights](https://topgoviya.lk/insights.html)
+- [Farmer's guide to using TopGoviya](https://topgoviya.lk/farmers-guide-topgoviya.html)
+- [Blog](https://topgoviya.lk/blog.html)
+
+## Farmer tools
+
+- [Break-even price calculator](https://topgoviya.lk/breakeven.html) and [guide](https://topgoviya.lk/breakeven-calculator-guide.html)
+- [Loan and leasing calculator](https://topgoviya.lk/loan-calculator.html)
+- [Price report generator](https://topgoviya.lk/reports.html)
+- [Market weather (10 markets)](https://topgoviya.lk/weather.html)
+
+## About and trust
+
+- [Data sources and method](https://topgoviya.lk/data-sources.html): the official datasets, how prices are collected and checked, and how to report a wrong price.
+- [About TopGoviya.lk](https://topgoviya.lk/about.html)
+- [Privacy policy](https://topgoviya.lk/privacy.html)
+
+## Official sources
+
+- [CBSL daily price report](https://www.cbsl.gov.lk/en/statistics/economic-indicators/price-report)
+- [HARTI daily wholesale prices](https://www.harti.gov.lk/daily-price.php)
+- [DEA weekly spice prices](https://exagri.info/mkt/index.html)
+- [CBSL agriculture data bulletin](https://www.cbsl.gov.lk/en/agriculture-data-bulletin)
+
+## Optional
+
+- [Sitemap](https://topgoviya.lk/sitemap.xml)
+- YouTube: https://www.youtube.com/@TopGoviyaLK · Facebook: https://www.facebook.com/TopGoviyaLK
