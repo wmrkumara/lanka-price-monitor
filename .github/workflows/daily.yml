@@ -59,7 +59,7 @@ jobs:
         run: |
           git config user.name  "price-bot"
           git config user.email "price-bot@users.noreply.github.com"
-          git add harti_data.json harti_pdfs/ || true
+          git add harti_data.json harti_market_series.json harti_pdfs/ || true
           if git diff --staged --quiet; then
             echo "No HARTI changes today."
           else
