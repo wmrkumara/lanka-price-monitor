@@ -292,6 +292,58 @@ def parse_pdf(path):
     print(f"  {date_str}: {len(veg)} veg, {len(rice)} essentials")
     return date_str,veg,rice
 
+# ── Dambulla + Peliyagoda price history (for the wholesale chart's 2 buttons) ──
+SERIES_FILE    = "harti_market_series.json"
+SERIES_MARKETS = ["Dambulla", "Peliyagoda"]
+SERIES_MAX_PARSE = 40      # PDFs read per run (newest first); the one-time rebuild reads all
+
+def update_market_series(max_parse=SERIES_MAX_PARSE):
+    """Keeps harti_market_series.json: each item's midpoint price at Dambulla and
+    at Peliyagoda for every HARTI report. Reads only reports not in the file yet,
+    so a late report or a missed run fills itself in on the next run."""
+    days = {}                                   # date -> {item: [dambulla, peliyagoda]}
+    if os.path.exists(SERIES_FILE):
+        try:
+            old = json.load(open(SERIES_FILE, encoding="utf-8"))
+            for i, d in enumerate(old.get("dates", [])):
+                days[d] = {}
+                for name, by in old.get("series", {}).items():
+                    vals = [by.get(m, [None] * len(old["dates"]))[i] for m in SERIES_MARKETS]
+                    if any(v is not None for v in vals):
+                        days[d][name] = vals
+        except Exception as e:
+            print(f"WARN: could not read {SERIES_FILE}: {e}")
+    files = {}
+    for f in sorted(glob.glob(os.path.join(PDF_DIR, "*.pdf"))):
+        d = date_from_filename(f)
+        if d and (d not in files or os.path.basename(f).startswith(("Vegetable_Pricenew", "daily"))):
+            files[d] = f
+    missing = sorted((d for d in files if d not in days), reverse=True)
+    if max_parse:
+        missing = missing[:max_parse]
+    idx = [MARKETS.index(m) for m in SERIES_MARKETS]
+    for n, d in enumerate(missing, 1):
+        veg = {}
+        try:
+            with pdfplumber.open(files[d]) as pdf:
+                if len(pdf.pages) >= 2: veg = parse_veg_table(pdf.pages[1])
+                if not veg and pdf.pages: veg = parse_veg_table(pdf.pages[0])
+        except Exception as e:
+            print(f"  WARN {d}: {e}")
+        days[d] = {name: [mid(p[i]) if i < len(p) and p[i] else None for i in idx] for name, p in veg.items()}
+        days[d] = {k: v for k, v in days[d].items() if any(x is not None for x in v)}
+        if n % 50 == 0 or n == len(missing):
+            print(f"  market series: {n}/{len(missing)} reports read")
+    dates = sorted(days)
+    names = sorted({name for d in dates for name in days[d]})
+    series = {name: {m: [(days[d].get(name) or [None, None])[k] for d in dates]
+                     for k, m in enumerate(SERIES_MARKETS)} for name in names}
+    with open(SERIES_FILE, "w", encoding="utf-8") as f:
+        json.dump({"note": "HARTI wholesale midpoint (Rs./kg) by market; made by harti_update.py",
+                   "markets": SERIES_MARKETS, "dates": dates, "series": series},
+                  f, ensure_ascii=False, separators=(",", ":"))
+    print(f"📈 {SERIES_FILE}: {len(dates)} reports, {len(names)} items ({len(missing)} newly read)")
+
 def build():
     """Smart incremental build — only parse NEW PDFs, merge with existing data."""
     files = sorted(glob.glob(os.path.join(PDF_DIR,"*.pdf")))
@@ -455,3 +507,7 @@ if __name__=="__main__":
     if "--no-download" not in sys.argv:
         download_today()
     build()
+    try:
+        update_market_series(0 if "--rebuild-series" in sys.argv else SERIES_MAX_PARSE)
+    except Exception as e:
+        print(f"WARN: market series not updated: {e}")

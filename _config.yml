@@ -1,0 +1,5 @@
+# GitHub Pages settings for topgoviya.lk
+# The saved HARTI report PDFs (over 1 GB) stay in the repository for the robots,
+# but are not copied into the published website. This keeps the website small.
+exclude:
+  - harti_pdfs

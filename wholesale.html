@@ -929,7 +929,7 @@ function setLang(l){
   /* Guide button label */
   const gbl=document.getElementById("guideBtnLabel");
   if(gbl)gbl.textContent=lang==="si"?"භාවිත කරන ආකාරය":lang==="ta"?"பயன்படுத்துவது எப்படி":"How to use";
-  if(scrim.classList.contains("open")&&curDetail)openDetail(curDetail.id);
+  if(scrim.classList.contains("open")&&curDetail)openDetail(curDetail.id, curMkt);
 }
 document.querySelector(".lang").addEventListener("click",function(e){var b=e.target.closest("button[data-lang]");if(b)setLang(b.dataset.lang);});
 
@@ -1574,8 +1574,11 @@ function wholesaleMarketTable(d) {
 }
 
 /* ===== SINGLE openDetail — wholesale aware ===== */
-function openDetail(id){
-  const d=DATA[id],ch=changeOf(d.series),vals=vpts(d.series).map(p=>p[1]);
+function openDetail(id, mkt){
+  if(MS===null){ loadMS().then(()=>{ if(scrim.classList.contains("open")&&curDetailId===id&&!mkt) openDetail(id); }); }
+  mkt = mkt || (MS ? defaultMkt(DATA[id]) : DATA[id].primaryMarket);
+  curMkt = mkt; curDetailId = id;
+  const d=marketView(DATA[id], mkt),ch=changeOf(d.series),vals=vpts(d.series).map(p=>p[1]);
   const min=Math.min(...vals),max=Math.max(...vals);
   /* 2026 only — this year low/high */
   const thisYear=new Date().getFullYear().toString();
@@ -1629,6 +1632,7 @@ function openDetail(id){
     '<div class="stat"><div class="l">'+t("low")+'</div><div class="v" id="statLow">'+fmt(yearMin)+'</div></div>'+
     '<div class="stat"><div class="l">'+t("high")+'</div><div class="v" id="statHigh">'+fmt(yearMax)+'</div></div>'+
   '</div>'+
+  marketSwitch(id, d.primaryMarket)+
   rangeBar+
   '<div id="chartHost"></div>'+
   '<div id="mktBarsHost">'+wholesaleMarketTable(d)+'</div>'+
@@ -2229,7 +2233,44 @@ function init(){
     if(r.ok){ DB=await r.json(); } 
   }catch(e){ /* offline: use embedded */ }
   init();
+  setTimeout(loadMS, 1500);   /* market histories load after the page is shown */
 })();
+
+/* ===== Dambulla / Peliyagoda chart switch (harti_market_series.json) ===== */
+let MS=null, MS_IDX=null, curMkt=null, curDetailId=null;
+function loadMS(){
+  if(MS!==null) return Promise.resolve(MS);
+  return fetch("https://raw.githubusercontent.com/wmrkumara/lanka-price-monitor/main/harti_market_series.json?v="+Date.now(),{cache:"no-store"})
+    .then(r=>r.ok?r.json():false)
+    .then(j=>{ MS=(j&&j.series)?j:false; if(MS){MS_IDX={};MS.dates.forEach((dt,i)=>MS_IDX[dt]=i);} return MS; })
+    .catch(()=>{ MS=false; return MS; });
+}
+function msSeries(name,mkt){
+  if(!MS||!MS.series[name]||!MS.series[name][mkt]) return null;
+  const src=MS.series[name][mkt];
+  return DB.dates.map(dt=>{const i=MS_IDX[dt];return i==null?null:src[i];});
+}
+function msCount(name,mkt){ const s=msSeries(name,mkt); return s?s.slice(-90).filter(v=>v!=null).length:0; }
+function defaultMkt(d){
+  /* Dambulla when it reports the item regularly (80% rule), else the usual market */
+  const dc=msCount(d.name,"Dambulla"), pc=msCount(d.name,"Peliyagoda");
+  return (dc>0 && dc>=0.8*Math.max(dc,pc)) ? "Dambulla" : d.primaryMarket;
+}
+function marketView(d,mkt){
+  if(!mkt||mkt===d.primaryMarket) return d;
+  const s=msSeries(d.name,mkt);
+  if(!s||!s.some(v=>v!=null)) return d;
+  return Object.assign({},d,{series:s,primaryMarket:mkt});
+}
+function marketSwitch(id,mkt){
+  const base=DATA[id];
+  const opts=["Dambulla","Peliyagoda"].filter(m=>m===base.primaryMarket||msCount(base.name,m)>0);
+  if(opts.length<2) return "";
+  return '<div class="ranges" id="mktsw" style="justify-content:flex-start;margin:4px 0 8px">'+
+    opts.map(m=>'<button class="'+(m===mkt?"on":"")+'" onclick="openDetail('+id+',\''+m+'\')">📍 '+tMkt(m)+'</button>').join("")+
+    '<span style="font-size:11px;color:var(--muted);align-self:center;margin-left:6px">'+
+    (lang==="si"?"ප්‍රස්ථාරයේ වෙළඳපොළ":lang==="ta"?"வரைபட சந்தை":"Chart market")+'</span></div>';
+}
 
 /* ===== yoyChart ===== */
 function yoyChart(d){
