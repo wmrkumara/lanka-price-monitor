@@ -749,6 +749,7 @@ def commodity_page(c, dates, latest_idx, all_items):
     wtxt = f"Wholesale Rs. {money(wprice)} at {wmkt}, retail Rs. {money(price)} at {mkt}" if wl else f"Retail Rs. {money(price)} at {mkt}"
     desc = (f"{name} price today ({fdate(d,'en')}): {wtxt} {per['en']}. "
             f"Compare markets and the 30-day trend. {n_si(name)} තොග හා සිල්ලර මිල."
+            + (f" {n_si(name).replace('ළ', 'ල')} මිල." if 'ළ' in n_si(name) else "")
             + (f" {sl(name)} mila ada, {sl(name)} rate." if sl(name) else ""))
     first = dates[v[0][0]]
     jsonld = {"@context": "https://schema.org", "@graph": [
@@ -808,7 +809,7 @@ def hub_page(items, dates, latest_idx):
     url = f"{SITE}/{OUT_DIR}/"
     title = "අද එළවළු මිල (Elawalu Mila Ada) – තොග හා සිල්ලර | Vegetable Prices Today Sri Lanka – TopGoviya.lk"
     desc = (f"Today's wholesale and retail prices for {len(items)} vegetables, fruits, rice and fish in Sri Lanka "
-            f"({fdate(dates[latest_idx],'en')}). Daily from CBSL reports. අද එළවළු තොග හා සිල්ලර මිල. elawalu mila ada, thakkali mila, dehi mila.")
+            f"({fdate(dates[latest_idx],'en')}). Daily from CBSL reports. අද එලවලු මිල, තොග හා සිල්ලර. elawalu mila ada, thakkali mila, dehi mila.")
     jsonld = {"@context": "https://schema.org", "@type": "CollectionPage", "name": title, "url": url}
     return shell(title, desc, url, body, jsonld)
 

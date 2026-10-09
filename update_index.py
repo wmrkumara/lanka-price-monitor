@@ -93,6 +93,7 @@ def today_section(db):
     return f"""{START}
 <section id="today-prices" style="max-width:1100px;margin:28px auto 0;padding:0 16px">
   <h2 style="font-size:20px;margin:0 0 8px">අද මිල සාරාංශය · Sri Lanka vegetable prices today — {fdate(d, 'en')}</h2>
+  <p style="font-size:12.5px;color:var(--muted);margin:0 0 6px">අද එලවලු මිල · දඹුල්ල (දබුල්ල) එලවලු මිල · elawalu mila ada</p>
   <p style="font-size:14px;line-height:1.6;margin:0 0 6px">{p_si}</p>
   <p style="font-size:14px;line-height:1.6;margin:0 0 8px" lang="en">{p_en}</p>
   <details style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px">
@@ -126,6 +127,11 @@ def main():
                       lambda m: m.group(1) + fdate(d, "si") + m.group(2), html, count=1)
     if not n:
         print("WARN: stampDate not found")
+
+    # 2b) homepage description for Google: today's date + the spelling most people type ("එලවලු")
+    desc = (f"අද එලවලු මිල ({fdate(d, 'si')}) — දඹුල්ල (දබුල්ල), පිටකොටුව, නාරාහේන්පිට සිල්ලර සහ තොග මිල, දිනපතා. "
+            f"Today's Dambulla vegetable prices in Sri Lanka from Central Bank daily reports. සිංහල · தமிழ் · English.")
+    html = re.sub(r'(<meta name="description" content=")[^"]*(")', lambda m: m.group(1) + desc + m.group(2), html, count=1)
 
     # 3) plain-text 'today' section (replace the old one, or add it before the footer the first time)
     sec = today_section(db)

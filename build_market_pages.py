@@ -720,7 +720,7 @@ def market_page(market, hm, harti, cats, cbsl):
     body = f"""
 <p class="crumb"><a href="../index.html">TopGoviya.lk</a> / <a href="index.html">වෙළඳපොළ මිල</a> / {e(si)}</p>
 <h1>🧺 {e(si)} එළවළු මිල අද</h1>
-<p class="alt">{e(en)} market price today – vegetable wholesale prices<br>{e(ta)} சந்தை விலை இன்று</p>
+<p class="alt">{e(en)} market price today – vegetable wholesale prices · {e(si)}{" (දබුල්ල)" if market == "Dambulla" else ""} එලවලු මිල<br>{e(ta)} சந்தை விலை இன்று</p>
 {cbsl_html if cbsl_first else ''}
 {harti_h2 if cbsl_first else ''}
 <p class="asof" style="margin-top:14px"><b>📦 තොග මිල / Wholesale</b> · 📍 {e(si)} ({e(en)}) · {fdate(d_(last),'si') if last else '—'} · HARTI</p>
@@ -753,7 +753,7 @@ def market_page(market, hm, harti, cats, cbsl):
         desc = (f"{en} market price today ({dtxt}): wholesale prices for {len(rows)} vegetables from the HARTI report"
                 + (", plus CBSL Dambulla retail and wholesale" if cbsl_count else ""))
     desc = (desc
-            + f". {top3}. {si} එළවළු මිල අද · {en.lower()} elawalu mila.")
+            + f". {top3}. {si} එලවලු මිල අද{' (දබුල්ල)' if market == 'Dambulla' else ''} · {en.lower()} elawalu mila.")
     jsonld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "TopGoviya.lk", "item": SITE + "/"},
         {"@type": "ListItem", "position": 2, "name": "Market prices", "item": f"{SITE}/{OUT_DIR}/"},
