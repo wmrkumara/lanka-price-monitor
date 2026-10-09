@@ -1,0 +1,56 @@
+# TopGoviya.lk — daily price image for WhatsApp / Facebook
+# Runs automatically after each "Update price data" run, and only redraws the
+# image when there is a new CBSL report. Image: https://topgoviya.lk/share/today.png
+
+name: Daily price image
+
+on:
+  workflow_run:
+    workflows: ["Update price data"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  image:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - name: Is there a new report?
+        id: check
+        run: python3 make_daily_image.py --check >> "$GITHUB_OUTPUT"
+
+      - name: Install fonts and browser
+        if: steps.check.outputs.need == 'yes'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-core fonts-noto-color-emoji
+          mkdir -p ~/.fonts
+          curl -sL -o ~/.fonts/NotoSansSinhala.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssinhala/NotoSansSinhala%5Bwdth,wght%5D.ttf"
+          curl -sL -o ~/.fonts/JetBrainsMono.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf"
+          fc-cache -f
+          pip install -q playwright qrcode pillow
+          python -m playwright install --with-deps chromium
+
+      - name: Make the image
+        if: steps.check.outputs.need == 'yes'
+        run: python3 make_daily_image.py
+
+      - name: Save the image
+        if: steps.check.outputs.need == 'yes'
+        run: |
+          git config user.name  "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add share/ || true
+          if git diff --staged --quiet; then
+            echo "No new image."
+          else
+            git commit -m "Daily price image ($(date +%Y-%m-%d))"
+            git pull --rebase origin main
+            git push origin main
+          fi
