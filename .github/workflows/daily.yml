@@ -39,12 +39,13 @@ jobs:
       - name: Build SEO price pages
         run: |
           python build_pages.py
+          python build_spice_pages.py
           python update_index.py
       - name: Commit SEO pages if changed
         run: |
           git config user.name  "price-bot"
           git config user.email "price-bot@users.noreply.github.com"
-          git add price/ sitemap.xml index.html || true
+          git add price/ spice/ sitemap.xml index.html || true
           if git diff --staged --quiet; then
             echo "No SEO page changes today."
           else
