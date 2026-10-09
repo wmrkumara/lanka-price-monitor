@@ -93,7 +93,8 @@ def today_section(db):
     return f"""{START}
 <section id="today-prices" style="max-width:1100px;margin:28px auto 0;padding:0 16px">
   <h2 style="font-size:20px;margin:0 0 8px">අද මිල සාරාංශය · Sri Lanka vegetable prices today — {fdate(d, 'en')}</h2>
-  <p style="font-size:12.5px;color:var(--muted);margin:0 0 6px">අද එලවලු මිල · දඹුල්ල (දබුල්ල) එලවලු මිල · elawalu mila ada</p>
+  <p style="font-size:12.5px;color:var(--muted);margin:0 0 6px">අද එලවලු මිල · දඹුල්ල (දබුල්ල) එලවලු මිල · elawalu mila ada ·
+  <a href="spice/pepper.html">⚫ ගම්මිරිස් මිල අද</a> · <a href="market/">🧺 වෙළඳපොළ මිල</a> · <a href="price/">🏷️ භාණ්ඩ අනුව මිල</a></p>
   <p style="font-size:14px;line-height:1.6;margin:0 0 6px">{p_si}</p>
   <p style="font-size:14px;line-height:1.6;margin:0 0 8px" lang="en">{p_en}</p>
   <details style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px">
