@@ -136,6 +136,72 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://topgoviya.lk/market/</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://topgoviya.lk/market/peliyagoda.html</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://topgoviya.lk/market/kandy.html</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://topgoviya.lk/market/dambulla.html</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://topgoviya.lk/market/meegoda.html</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://topgoviya.lk/market/norochchole.html</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://topgoviya.lk/market/thambuththegama.html</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://topgoviya.lk/market/keppetipola.html</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://topgoviya.lk/market/nuwara-eliya.html</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://topgoviya.lk/market/bandarawela.html</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://topgoviya.lk/market/veyangoda.html</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://topgoviya.lk/price/</loc>
     <lastmod>2026-10-08</lastmod>
     <changefreq>daily</changefreq>
@@ -406,69 +472,63 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://topgoviya.lk/market/</loc>
-    <lastmod>2026-10-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
+    <loc>https://topgoviya.lk/spice/cinnamon.html</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://topgoviya.lk/market/peliyagoda.html</loc>
-    <lastmod>2026-10-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
+    <loc>https://topgoviya.lk/spice/clove.html</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://topgoviya.lk/market/kandy.html</loc>
-    <lastmod>2026-10-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
+    <loc>https://topgoviya.lk/spice/cardamom.html</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://topgoviya.lk/market/dambulla.html</loc>
-    <lastmod>2026-10-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
+    <loc>https://topgoviya.lk/spice/nutmeg.html</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://topgoviya.lk/market/meegoda.html</loc>
-    <lastmod>2026-10-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
+    <loc>https://topgoviya.lk/spice/coffee.html</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://topgoviya.lk/market/norochchole.html</loc>
-    <lastmod>2026-10-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
+    <loc>https://topgoviya.lk/spice/cocoa.html</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://topgoviya.lk/market/thambuththegama.html</loc>
-    <lastmod>2026-10-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
+    <loc>https://topgoviya.lk/spice/arecanut.html</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://topgoviya.lk/market/keppetipola.html</loc>
-    <lastmod>2026-10-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
+    <loc>https://topgoviya.lk/spice/ginger.html</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://topgoviya.lk/market/nuwara-eliya.html</loc>
-    <lastmod>2026-10-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
+    <loc>https://topgoviya.lk/spice/turmeric.html</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://topgoviya.lk/market/bandarawela.html</loc>
-    <lastmod>2026-10-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://topgoviya.lk/market/veyangoda.html</loc>
-    <lastmod>2026-10-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
+    <loc>https://topgoviya.lk/spice/goraka.html</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
