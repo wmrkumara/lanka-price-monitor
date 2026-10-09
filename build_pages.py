@@ -371,6 +371,10 @@ SINGLISH = {
 def sl(n): return SINGLISH.get(n, "")
 
 def e(s):  return html.escape(str(s), quote=True)
+
+# Copyright line for every page (the year updates itself). The prices belong to the official sources.
+COPYRIGHT = (f'<span id="tg-copy">© {datetime.now().year} TopGoviya.lk · සියලු හිමිකම් ඇවිරිණි / All rights reserved · '
+             'මිල දත්ත: මහ බැංකුව, HARTI, DEA (නිල මූලාශ්‍ර) / Price data: CBSL, HARTI &amp; DEA</span>')
 def n_si(n): return (NAMES.get(n) or {}).get("si", n)
 def n_ta(n): return (NAMES.get(n) or {}).get("ta", n)
 def m_tr(m, l): return m if l == "en" else (MARKETS.get(m) or {}).get(l, m)
@@ -543,7 +547,7 @@ def shell(title, desc, canonical, body, jsonld, lang="si"):
 <p class="note">මිල ගණන් මඟ පෙන්වීමක් පමණි. ඔබගේ තීරණ ඔබගේ වගකීම වේ.<br>
 Prices are indicative only. Decisions are your responsibility. Source: Central Bank of Sri Lanka daily price reports (not an official publication).<br>
 விலைகள் வழிகாட்டல் மட்டுமே. உங்கள் முடிவுகளுக்கு நீங்களே பொறுப்பு.</p>
-<footer>Design &amp; development by <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a> · Built in Gampola, Sri Lanka</footer>
+<footer>{COPYRIGHT}<br>Design &amp; development by <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a> · Built in Gampola, Sri Lanka</footer>
 </div>
 </body>
 </html>

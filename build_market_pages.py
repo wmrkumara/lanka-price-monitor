@@ -15,7 +15,7 @@ import json, os, re
 from urllib.parse import quote
 from datetime import datetime, timedelta
 
-from build_pages import CSS, GA_ID, SITE, e, money, fdate, slug, MONTHS, NAMES as CBSL_NAMES, EMOJIS, UNITS
+from build_pages import CSS, GA_ID, SITE, COPYRIGHT, e, money, fdate, slug, MONTHS, NAMES as CBSL_NAMES, EMOJIS, UNITS
 
 OUT_DIR = "market"
 HIST_FILE = "harti_market_history.json"
@@ -533,7 +533,7 @@ Prices are indicative only. Decisions are your responsibility. Wholesale prices:
 Dambulla retail and wholesale: <a href="{CBSL_URL}" rel="noopener">Central Bank of Sri Lanka daily price report</a>. Not an official publication.
 <a href="../data-sources.html">How we collect the data →</a><br>
 விலைகள் வழிகாட்டல் மட்டுமே. உங்கள் முடிவுகளுக்கு நீங்களே பொறுப்பு.</p>
-<footer>Design &amp; development by <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a> · Built in Gampola, Sri Lanka</footer>
+<footer>{COPYRIGHT}<br>Design &amp; development by <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a> · Built in Gampola, Sri Lanka</footer>
 </div>
 </body>
 </html>

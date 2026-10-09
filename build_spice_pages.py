@@ -13,7 +13,7 @@ Uses build_pages.py (same folder) for the shared look.
 import json, os, re
 from datetime import datetime, timedelta
 
-from build_pages import CSS, GA_ID, SITE, e, money, fdate
+from build_pages import CSS, GA_ID, SITE, COPYRIGHT, e, money, fdate
 
 OUT_DIR = "spice"
 DEA_URL = "https://exagri.info/mkt/index.html"
@@ -173,7 +173,7 @@ Prices are indicative only. Decisions are your responsibility. Source: Departmen
 producers' (farm gate) prices — <a href="{DEA_URL}" rel="noopener">exagri.info</a>. Not an official publication.
 <a href="../data-sources.html">How we collect the data →</a> · මිලක් වැරදි යැයි සිතේද? <a href="../data-sources.html">අපට දන්වන්න</a><br>
 விலைகள் வழிகாட்டல் மட்டுமே. உங்கள் முடிவுகளுக்கு நீங்களே பொறுப்பு.</p>
-<footer>Design &amp; development by <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a> · Built in Gampola, Sri Lanka</footer>
+<footer>{COPYRIGHT}<br>Design &amp; development by <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a> · Built in Gampola, Sri Lanka</footer>
 </div>
 </body>
 </html>
