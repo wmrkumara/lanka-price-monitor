@@ -111,7 +111,9 @@ def today_section(db):
         ("market/", "🧺 වෙළඳපොළ මිල", "🧺 Market prices", "🧺 சந்தை விலைகள்"),
         ("price/", "🏷️ භාණ්ඩ අනුව මිල", "🏷️ Prices by item", "🏷️ பொருள் வாரியாக விலை"),
         ("spice/pepper.html", "⚫ ගම්මිරිස් මිල අද", "⚫ Pepper price today", "⚫ மிளகு விலை இன்று"),
-        ("spice/cinnamon.html", "🪵 කුරුඳු මිල අද", "🪵 Cinnamon price today", "🪵 கறுவா விலை இன்று")])
+        ("spice/cinnamon.html", "🪵 කුරුඳු මිල අද", "🪵 Cinnamon price today", "🪵 கறுவா விலை இன்று"),
+        # ?v=<date> so phones always get the newest image (old ones stay cached under their own date)
+        (f"share/today.png?v={dates[li]}", "📤 අද මිල පින්තූරය (WhatsApp)", "📤 Today's price image (WhatsApp)", "📤 இன்றைய விலைப் படம் (WhatsApp)")])
     th = 'style="text-align:right"'
     return f"""{START}
 <style>.tgl{{display:none}}html[lang="si"] .tgl-si,html[lang="en"] .tgl-en,html[lang="ta"] .tgl-ta{{display:revert}}</style>
