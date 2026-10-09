@@ -4,6 +4,7 @@ make_daily_image.py  -  TopGoviya.lk daily price image for WhatsApp / Facebook
 Makes ONE branded image after each new CBSL report:
   share/today.png    1080 x 1350, "අද එළවළු මිල" - Dambulla wholesale + retail,
                      change vs the previous report, date, source, QR code
+  share/today-wide.png  1200 x 630 preview shown when a topgoviya.lk link is shared
   share/today.json   which report the image was made from (so it is only redrawn
                      when there is a new report)
 
@@ -23,8 +24,9 @@ from build_pages import NAMES, EMOJIS, fdate, money
 
 OUT_DIR = "share"
 PNG = os.path.join(OUT_DIR, "today.png")
+WIDE = os.path.join(OUT_DIR, "today-wide.png")   # 1200 x 630 link preview (WhatsApp / Facebook)
 STATE = os.path.join(OUT_DIR, "today.json")
-STYLE_VERSION = "2"            # change to force a redraw after a design change
+STYLE_VERSION = "3"            # change to force a redraw after a design change
 MARKET = "Dambulla"
 MAX_ROWS = 13
 # items shown first, in this order (others from the report follow if there is room)
@@ -137,11 +139,48 @@ td.n{{text-align:right;white-space:nowrap}} td.w{{color:#a9802a}} td.r{{color:#1
 </body></html>"""
 
 
+def wide_html(rows, d, logo):
+    """1200 x 630 preview shown when a topgoviya.lk link is shared."""
+    def chg(c):
+        if c is None: return ""
+        cls = "flat" if abs(c) < 0.5 else ("up" if c > 0 else "down")
+        return f'<span class="chg {cls}">{ {"up": "▲", "down": "▼", "flat": "■"}[cls] } {"+" if c > 0 else ""}{c:.0f}%</span>'
+    trs = "".join(f'<tr><td class="nm"><span class="em">{EMOJIS.get(n, "🌿")}</span>{si(n)}</td>'
+                  f'<td class="n">රු. {money(r)}</td><td class="n">{chg(c)}</td></tr>' for n, w, r, c, u in rows[:6])
+    return f"""<!DOCTYPE html><html lang="si"><head><meta charset="utf-8"><style>
+*{{box-sizing:border-box;margin:0;padding:0}}
+body{{width:1200px;height:630px;display:flex;font-family:'Noto Sans Sinhala',sans-serif;background:#f4efe4;overflow:hidden}}
+.l{{width:430px;background:#0e4f4a;color:#fff;padding:40px 36px;display:flex;flex-direction:column}}
+.l img{{width:84px;height:84px;border-radius:18px;background:#fff}}
+.l h1{{font-size:62px;line-height:1.15;margin:26px 0 14px;font-weight:700}}
+.l .date{{display:inline-block;background:#a9802a;border-radius:999px;padding:8px 20px;font-size:25px;font-weight:700;align-self:flex-start}}
+.l .sub{{font-size:22px;color:#e7d3a3;margin-top:14px}}
+.l .u{{margin-top:auto;font-size:36px;font-weight:700}}
+.r{{flex:1;padding:30px 36px}}
+.r h2{{font-size:24px;color:#7a7264;font-weight:700;margin-bottom:8px}}
+table{{width:100%;border-collapse:collapse;background:#fffdf7;border-radius:16px;overflow:hidden}}
+td{{padding:12px 16px;border-top:1px solid #e3d9c4;font-size:34px;font-weight:700;color:#191d1a}}
+tr:first-child td{{border-top:0}}
+.em{{display:inline-block;width:52px}}
+td.n{{text-align:right;white-space:nowrap;font-family:'JetBrains Mono',monospace}}
+.chg{{font-size:24px;border-radius:8px;padding:3px 10px}}
+.chg.up{{color:#b23a2e;background:#f7e6e2}} .chg.down{{color:#2c7a52;background:#e3efe6}} .chg.flat{{color:#8a8170;background:#efeada}}
+.r .src{{font-size:19px;color:#7a7264;margin-top:10px}}
+</style></head><body>
+<div class="l">{f'<img src="{logo}">' if logo else ''}<h1>අද එළවළු මිල</h1>
+<div class="date">{fdate(d, 'si')}</div><div class="sub">දඹුල්ල සිල්ලර මිල · රු./කි.ග්‍රෑ.</div>
+<div class="u">topgoviya.lk</div></div>
+<div class="r"><h2>දඹුල්ල වෙළඳපොළ · පෙර වාර්තාවට සාපේක්ෂව</h2><table>{trs}</table>
+<div class="src">දත්ත: ශ්‍රී ලංකා මහ බැංකුව · සියලු මිල topgoviya.lk හි</div></div>
+</body></html>"""
+
+
 def wanted(db):
     """True when there is a new report (or a new design) since the last image."""
     try:
         st = json.load(open(STATE, encoding="utf-8"))
-        return not (st.get("date") == db["dates"][-1] and st.get("style") == STYLE_VERSION and os.path.exists(PNG))
+        return not (st.get("date") == db["dates"][-1] and st.get("style") == STYLE_VERSION
+                    and os.path.exists(PNG) and os.path.exists(WIDE))
     except Exception:
         return True
 
@@ -169,15 +208,20 @@ def main():
         pg.set_content(page_html(rows, d, logo), wait_until="load")
         pg.wait_for_timeout(500)
         pg.screenshot(path=PNG)
+        pg.set_viewport_size({"width": 1200, "height": 630})
+        pg.set_content(wide_html(rows, d, logo), wait_until="load")
+        pg.wait_for_timeout(500)
+        pg.screenshot(path=WIDE)
         b.close()
     try:                                   # smaller file, looks the same
         from PIL import Image
-        Image.open(PNG).convert("RGB").quantize(colors=96, method=Image.Quantize.MEDIANCUT).save(PNG, optimize=True)
+        for f in (PNG, WIDE):
+            Image.open(f).convert("RGB").quantize(colors=96, method=Image.Quantize.MEDIANCUT).save(f, optimize=True)
     except Exception as e:
         print("note: PNG not compressed:", e)
     json.dump({"date": db["dates"][-1], "style": STYLE_VERSION, "items": len(rows)},
               open(STATE, "w", encoding="utf-8"), ensure_ascii=False)
-    print(f"Made {PNG} for report {db['dates'][-1]} ({len(rows)} items, {os.path.getsize(PNG)//1024} KB)")
+    print(f"Made {PNG} + {WIDE} for report {db['dates'][-1]} ({len(rows)} items, {os.path.getsize(PNG)//1024} KB)")
 
 
 if __name__ == "__main__":

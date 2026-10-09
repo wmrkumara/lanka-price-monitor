@@ -160,6 +160,17 @@ def main():
     desc = (f"අද එලවලු මිල ({fdate(d, 'si')}) — දඹුල්ල (දබුල්ල), පිටකොටුව, නාරාහේන්පිට සිල්ලර සහ තොග මිල, දිනපතා. "
             f"Today's Dambulla vegetable prices in Sri Lanka from Central Bank daily reports. සිංහල · தமிழ் · English.")
     html = re.sub(r'(<meta name="description" content=")[^"]*(")', lambda m: m.group(1) + desc + m.group(2), html, count=1)
+    html = re.sub(r'(<meta property="og:description" content=")[^"]*(")', lambda m: m.group(1) + desc + m.group(2), html, count=1)
+
+    # 2c) link preview picture for WhatsApp / Facebook: today's prices (made by make_daily_image.py)
+    img = f"https://topgoviya.lk/share/today-wide.png?v={db['dates'][-1]}"
+    html = re.sub(r'\n?<meta (?:property="og:image[^"]*"|name="twitter:image")[^>]*>', "", html)
+    tags = (f'\n<meta property="og:image" content="{img}">'
+            f'\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">'
+            f'\n<meta property="og:image:alt" content="අද එළවළු මිල — {fdate(d, "si")} · TopGoviya.lk">'
+            f'\n<meta name="twitter:image" content="{img}">')
+    html = re.sub(r'(<meta property="og:description" content="[^"]*">)', lambda m: m.group(1) + tags, html, count=1)
+    html = html.replace('<meta name="twitter:card" content="summary">', '<meta name="twitter:card" content="summary_large_image">')
 
     # 3) plain-text 'today' section (replace the old one, or add it before the footer the first time)
     sec = today_section(db)
