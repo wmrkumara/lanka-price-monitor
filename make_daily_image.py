@@ -5,6 +5,7 @@ Makes ONE branded image after each new CBSL report:
   share/today.png    1080 x 1350, "අද එළවළු මිල" - Dambulla wholesale + retail,
                      change vs the previous report, date, source, QR code
   share/today-wide.png  1200 x 630 preview shown when a topgoviya.lk link is shared
+  share/today-story.png 1080 x 1920 for WhatsApp Status / Facebook & Instagram Stories
   share/today.json   which report the image was made from (so it is only redrawn
                      when there is a new report)
 
@@ -25,8 +26,9 @@ from build_pages import NAMES, EMOJIS, fdate, money
 OUT_DIR = "share"
 PNG = os.path.join(OUT_DIR, "today.png")
 WIDE = os.path.join(OUT_DIR, "today-wide.png")   # 1200 x 630 link preview (WhatsApp / Facebook)
+STORY = os.path.join(OUT_DIR, "today-story.png") # 1080 x 1920 WhatsApp Status / Facebook Story
 STATE = os.path.join(OUT_DIR, "today.json")
-STYLE_VERSION = "3"            # change to force a redraw after a design change
+STYLE_VERSION = "5"            # change to force a redraw after a design change
 MARKET = "Dambulla"
 MAX_ROWS = 13
 # items shown first, in this order (others from the report follow if there is room)
@@ -175,12 +177,53 @@ td.n{{text-align:right;white-space:nowrap;font-family:'JetBrains Mono',monospace
 </body></html>"""
 
 
+def story_html(rows, d, logo):
+    """1080 x 1920 for WhatsApp Status / Stories. Content kept in the middle,
+    away from the app's own name bar (top) and reply bar (bottom)."""
+    def chg(c):
+        if c is None: return '<span class="chg flat">—</span>'
+        cls = "flat" if abs(c) < 0.5 else ("up" if c > 0 else "down")
+        return f'<span class="chg {cls}">{ {"up": "▲", "down": "▼", "flat": "■"}[cls] } {"+" if c > 0 else ""}{c:.0f}%</span>'
+    trs = "".join(f'<tr><td class="nm"><span class="em">{EMOJIS.get(n, "🌿")}</span>{si(n)}</td>'
+                  f'<td class="n w">{money(w) if w is not None else "—"}</td><td class="n r">{money(r)}</td>'
+                  f'<td class="n">{chg(c)}</td></tr>' for n, w, r, c, u in rows[:11])
+    return f"""<!DOCTYPE html><html lang="si"><head><meta charset="utf-8"><style>
+*{{box-sizing:border-box;margin:0;padding:0}}
+body{{width:1080px;height:1920px;background:#0e4f4a;font-family:'Noto Sans Sinhala',sans-serif;overflow:hidden;position:relative}}
+.safe{{position:absolute;top:200px;left:50px;right:50px;bottom:230px;display:flex;flex-direction:column}}
+.brand{{display:flex;align-items:center;gap:18px;color:#fff}}
+.brand img{{width:78px;height:78px;border-radius:16px;background:#fff}}
+.brand b{{font-size:40px}} .brand span{{display:block;font-size:22px;color:#e7d3a3;font-weight:400}}
+h1{{color:#fff;font-size:104px;line-height:1.1;margin:34px 0 12px;font-weight:700}}
+.date{{align-self:flex-start;background:#a9802a;color:#fff;font-size:36px;font-weight:700;border-radius:999px;padding:10px 32px}}
+.sub{{color:#e7d3a3;font-size:28px;margin:16px 0 22px}}
+table{{width:100%;border-collapse:collapse;background:#fffdf7;border-radius:24px;overflow:hidden}}
+th{{font-size:24px;color:#7a7264;padding:12px 18px;background:#efe8d8;text-align:right}} th:first-child{{text-align:left}}
+td{{padding:12px 18px;border-top:1px solid #e3d9c4;font-size:38px;font-weight:700;color:#191d1a}}
+.em{{display:inline-block;width:56px}}
+td.n{{text-align:right;white-space:nowrap;font-family:'JetBrains Mono',monospace}} td.w{{color:#a9802a}}
+.chg{{font-size:26px;border-radius:10px;padding:4px 10px}}
+.chg.up{{color:#b23a2e;background:#f7e6e2}} .chg.down{{color:#2c7a52;background:#e3efe6}} .chg.flat{{color:#8a8170;background:#efeada}}
+.foot{{margin-top:auto;display:flex;gap:22px;align-items:center;color:#fff}}
+.foot svg{{width:150px;height:150px;flex:0 0 150px;background:#fff;border-radius:16px;padding:8px}}
+.foot .u{{font-size:52px;font-weight:700}} .foot .t{{font-size:24px;color:#e7d3a3;line-height:1.5}}
+</style></head><body><div class="safe">
+<div class="brand">{f'<img src="{logo}">' if logo else ''}<div><b>TopGoviya.lk</b><span>දත්තය බලලා තීරණ ගන්න</span></div></div>
+<h1>අද එළවළු මිල</h1>
+<div class="date">{fdate(d, 'si')}</div>
+<div class="sub">දඹුල්ල වෙළඳපොළ · තොග හා සිල්ලර · රු./කි.ග්‍රෑ.</div>
+<table><thead><tr><th>භාණ්ඩය</th><th>තොග</th><th>සිල්ලර</th><th>වෙනස</th></tr></thead><tbody>{trs}</tbody></table>
+<div class="foot">{qr_svg("https://topgoviya.lk/")}<div><div class="u">topgoviya.lk</div>
+<div class="t">සියලු මිල නොමිලේ · දත්ත: මහ බැංකුව<br>මිල ගණන් මඟපෙන්වීමක් පමණි.</div></div></div>
+</div></body></html>"""
+
+
 def wanted(db):
     """True when there is a new report (or a new design) since the last image."""
     try:
         st = json.load(open(STATE, encoding="utf-8"))
         return not (st.get("date") == db["dates"][-1] and st.get("style") == STYLE_VERSION
-                    and os.path.exists(PNG) and os.path.exists(WIDE))
+                    and os.path.exists(PNG) and os.path.exists(WIDE) and os.path.exists(STORY))
     except Exception:
         return True
 
@@ -212,16 +255,20 @@ def main():
         pg.set_content(wide_html(rows, d, logo), wait_until="load")
         pg.wait_for_timeout(500)
         pg.screenshot(path=WIDE)
+        pg.set_viewport_size({"width": 1080, "height": 1920})
+        pg.set_content(story_html(rows, d, logo), wait_until="load")
+        pg.wait_for_timeout(500)
+        pg.screenshot(path=STORY)
         b.close()
     try:                                   # smaller file, looks the same
         from PIL import Image
-        for f in (PNG, WIDE):
+        for f in (PNG, WIDE, STORY):
             Image.open(f).convert("RGB").quantize(colors=96, method=Image.Quantize.MEDIANCUT).save(f, optimize=True)
     except Exception as e:
         print("note: PNG not compressed:", e)
     json.dump({"date": db["dates"][-1], "style": STYLE_VERSION, "items": len(rows)},
               open(STATE, "w", encoding="utf-8"), ensure_ascii=False)
-    print(f"Made {PNG} + {WIDE} for report {db['dates'][-1]} ({len(rows)} items, {os.path.getsize(PNG)//1024} KB)")
+    print(f"Made {PNG} + {WIDE} + {STORY} for report {db['dates'][-1]} ({len(rows)} items, {os.path.getsize(PNG)//1024} KB)")
 
 
 if __name__ == "__main__":
