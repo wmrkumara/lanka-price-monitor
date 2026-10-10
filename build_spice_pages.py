@@ -129,10 +129,16 @@ def svg_line(points, w=640, h=170):
     for d in sorted({pts[0][0], pts[len(pts) // 2][0], pts[-1][0]}):
         lab += f'<text x="{X(d):.1f}" y="{h-6}" text-anchor="middle" font-size="10" fill="#7a7264">{d.strftime("%b %Y")}</text>'
     d_, v_ = pts[-1]
-    return (f'<svg viewBox="0 0 {w} {h}" style="width:100%;height:auto;display:block" role="img" '
+    # points for the hover / touch price box: [x, y, date, price]
+    data = json.dumps([[round(X(d), 1), round(Y(v), 1), fdate(d, "si"), money(v)] for d, v in pts], ensure_ascii=False)
+    return (f'<div class="tgc" data-w="{w}" data-p=\'{e(data)}\'>'
+            f'<svg viewBox="0 0 {w} {h}" style="width:100%;height:auto;display:block;touch-action:pan-y" role="img" '
             f'aria-label="National average price trend">{grid}{lab}'
             f'<path d="{path}" fill="none" stroke="#0e4f4a" stroke-width="2.2"/>'
-            f'<circle cx="{X(d_):.1f}" cy="{Y(v_):.1f}" r="3.5" fill="#a9802a"/></svg>')
+            f'<circle cx="{X(d_):.1f}" cy="{Y(v_):.1f}" r="3.5" fill="#a9802a"/>'
+            f'<line class="tgx" x1="0" x2="0" y1="12" y2="{h-24}" stroke="#a9802a" stroke-dasharray="3 3" opacity="0"/>'
+            f'<circle class="tgd" cx="0" cy="0" r="5" fill="#fffdf7" stroke="#0e4f4a" stroke-width="2.4" opacity="0"/></svg>'
+            f'<div class="tgt"></div></div>')
 
 
 def shell(title, desc, canonical, body, jsonld):
@@ -161,6 +167,10 @@ def shell(title, desc, canonical, body, jsonld):
 <style>{CSS}
 .rng{{font-size:12.5px;color:var(--muted);font-weight:500}}
 .chart{{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:10px 0}}
+.tgc{{position:relative}}
+.tgt{{position:absolute;pointer-events:none;background:#191d1a;color:#f4efe4;font-family:'JetBrains Mono',monospace;font-size:12px;
+     font-weight:600;padding:5px 9px;border-radius:8px;white-space:nowrap;transform:translate(-50%,-135%);opacity:0;transition:opacity .12s;z-index:3}}
+.tgt b{{color:#ffd98a}}
 </style>
 <script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>
 </head>
@@ -173,6 +183,27 @@ Prices are indicative only. Decisions are your responsibility. Source: Departmen
 producers' (farm gate) prices — <a href="{DEA_URL}" rel="noopener">exagri.info</a>. Not an official publication.
 <a href="../data-sources.html">How we collect the data →</a> · මිලක් වැරදි යැයි සිතේද? <a href="../data-sources.html">අපට දන්වන්න</a><br>
 விலைகள் வழிகாட்டல் மட்டுமே. உங்கள் முடிவுகளுக்கு நீங்களே பொறுப்பு.</p>
+<script>
+/* chart: hover (mouse) or touch-and-slide (phone) shows that week's date and price */
+document.querySelectorAll(".tgc").forEach(function (box) {{
+  var P = JSON.parse(box.getAttribute("data-p")), W = +box.getAttribute("data-w");
+  var svg = box.querySelector("svg"), x = box.querySelector(".tgx"), dot = box.querySelector(".tgd"), tip = box.querySelector(".tgt");
+  function show(cx) {{
+    var r = svg.getBoundingClientRect(), u = (cx - r.left) / r.width * W, best = P[0];
+    P.forEach(function (p) {{ if (Math.abs(p[0] - u) < Math.abs(best[0] - u)) best = p; }});
+    x.setAttribute("x1", best[0]); x.setAttribute("x2", best[0]); x.setAttribute("opacity", "1");
+    dot.setAttribute("cx", best[0]); dot.setAttribute("cy", best[1]); dot.setAttribute("opacity", "1");
+    var px = best[0] / W * r.width, py = best[1] / W * r.width;
+    tip.innerHTML = best[2] + " &nbsp;<b>රු. " + best[3] + "</b>";
+    tip.style.left = Math.min(Math.max(px, 70), r.width - 70) + "px"; tip.style.top = py + "px"; tip.style.opacity = 1;
+  }}
+  function hide() {{ tip.style.opacity = 0; x.setAttribute("opacity", "0"); dot.setAttribute("opacity", "0"); }}
+  svg.addEventListener("mousemove", function (ev) {{ show(ev.clientX); }});
+  svg.addEventListener("mouseleave", hide);
+  svg.addEventListener("touchstart", function (ev) {{ show(ev.touches[0].clientX); }}, {{passive: true}});
+  svg.addEventListener("touchmove", function (ev) {{ show(ev.touches[0].clientX); }}, {{passive: true}});
+}});
+</script>
 <footer>{COPYRIGHT}<br>Design &amp; development by <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a> · Built in Gampola, Sri Lanka</footer>
 </div>
 </body>
