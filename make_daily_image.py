@@ -6,6 +6,7 @@ Makes ONE branded image after each new CBSL report:
                      change vs the previous report, date, source, QR code
   share/today-wide.png  1200 x 630 preview shown when a topgoviya.lk link is shared
   share/today-story.png 1080 x 1920 for WhatsApp Status / Facebook & Instagram Stories
+  share/spice-<name>.png  1200 x 630 preview for each spice page (redrawn when DEA publishes a new week)
   share/today.json   which report the image was made from (so it is only redrawn
                      when there is a new report)
 
@@ -218,6 +219,100 @@ td.n{{text-align:right;white-space:nowrap;font-family:'JetBrains Mono',monospace
 </div></body></html>"""
 
 
+SPICE_STATE = os.path.join(OUT_DIR, "spices.json")
+SPICE_STYLE = "1"
+
+
+def spice_preview_html(sp, dea, logo):
+    """1200 x 630 link preview for one spice page (spice/<slug>.html)."""
+    from build_spice_pages import nat, chg, d_, UNIT_EN
+    from datetime import timedelta
+    c, G = sp["c"], sp["grades"]
+    N = lambda w, g: nat(w, g, "Average", c)
+    weeks = [w for w in dea["weeks"] if N(w, G[0][0])]
+    cur, prev = weeks[-1], weeks[-2]
+    d = d_(cur["date"])
+    rows = ""
+    for key, gsi, gen, unit in G[:3]:
+        a, ap = N(cur, key), N(prev, key)
+        if not a:
+            continue
+        t, cls, _ = chg(a, ap)
+        per = "" if unit == "kg" or "100" in gsi else f' <small>({"ගෙඩි 100" if unit == "100 nuts" else unit})</small>'
+        rows += (f'<tr><td class="nm">{gsi}{per}</td><td class="n">රු. {money(a)}</td>'
+                 f'<td class="n">{f"""<span class="chg {cls}">{t}</span>""" if t else ""}</td></tr>')
+    ya = next((w for w in weeks if abs((d_(w["date"]) - (d - timedelta(days=364))).days) <= 4), None)
+    yv = N(ya, G[0][0]) if ya else None
+    year_line = f'වසරකට පෙර ({G[0][1]}): රු. {money(yv)}' if yv else ""
+    return f"""<!DOCTYPE html><html lang="si"><head><meta charset="utf-8"><style>
+*{{box-sizing:border-box;margin:0;padding:0}}
+body{{width:1200px;height:630px;display:flex;font-family:'Noto Sans Sinhala',sans-serif;background:#f4efe4;overflow:hidden}}
+.l{{width:450px;background:#0e4f4a;color:#fff;padding:38px 36px;display:flex;flex-direction:column}}
+.l img{{width:80px;height:80px;border-radius:18px;background:#fff}}
+.l .em{{font-size:64px;margin-top:18px;line-height:1}}
+.l h1{{font-size:64px;line-height:1.15;margin:10px 0 14px;font-weight:700}}
+.l .date{{display:inline-block;background:#a9802a;border-radius:999px;padding:8px 20px;font-size:24px;font-weight:700;align-self:flex-start}}
+.l .sub{{font-size:22px;color:#e7d3a3;margin-top:12px}}
+.l .u{{margin-top:auto;font-size:34px;font-weight:700}}
+.r{{flex:1;padding:44px 36px;display:flex;flex-direction:column}}
+.r h2{{font-size:24px;color:#7a7264;font-weight:700;margin-bottom:12px}}
+table{{width:100%;border-collapse:collapse;background:#fffdf7;border-radius:16px;overflow:hidden}}
+td{{padding:18px 18px;border-top:1px solid #e3d9c4;font-size:34px;font-weight:700;color:#191d1a}}
+tr:first-child td{{border-top:0}} td small{{font-size:20px;color:#7a7264;font-weight:400}}
+td.n{{text-align:right;white-space:nowrap;font-family:'JetBrains Mono',monospace}}
+.chg{{font-size:24px;border-radius:8px;padding:3px 10px}}
+.chg.up{{color:#b23a2e;background:#f7e6e2}} .chg.down{{color:#2c7a52;background:#e3efe6}} .chg.flat{{color:#8a8170;background:#efeada}}
+.r .yr{{font-size:24px;color:#3a403a;margin-top:16px}}
+.r .src{{font-size:19px;color:#7a7264;margin-top:auto}}
+</style></head><body>
+<div class="l">{f'<img src="{logo}">' if logo else ''}<div class="em">{sp["emo"]}</div><h1>{sp["si"]} මිල අද</h1>
+<div class="date">{fdate(d, 'si')} සතිය</div><div class="sub">ගොවිපළ මිල · රු./{ "ගෙඩි 100" if G[0][3] == "100 nuts" else "කි.ග්‍රෑ." }</div>
+<div class="u">topgoviya.lk</div></div>
+<div class="r"><h2>{sp["en"]} · farm gate · national average</h2><table>{rows}</table>
+<div class="yr">{year_line}</div>
+<div class="src">දත්ත: අපනයන කෘෂිකර්ම දෙපාර්තමේන්තුව (DEA) · පෙර වාර්තාවට සාපේක්ෂව</div></div>
+</body></html>"""
+
+
+def dea_week():
+    try:
+        return json.load(open("dea_data.json", encoding="utf-8"))["weeks"][-1]["date"]
+    except Exception:
+        return None
+
+
+def spices_wanted():
+    """True when DEA has a new week (or a new design) since the last spice previews."""
+    wk = dea_week()
+    if not wk:
+        return False
+    try:
+        from build_spice_pages import SPICES
+        st = json.load(open(SPICE_STATE, encoding="utf-8"))
+        have = all(os.path.exists(os.path.join(OUT_DIR, f"spice-{s['slug']}.png")) for s in SPICES)
+        return not (st.get("week") == wk and st.get("style") == SPICE_STYLE and have)
+    except Exception:
+        return True
+
+
+def make_spice_previews(pg, logo):
+    from build_spice_pages import SPICES
+    dea = json.load(open("dea_data.json", encoding="utf-8"))
+    made = []
+    pg.set_viewport_size({"width": 1200, "height": 630})
+    for sp in SPICES:
+        try:
+            html = spice_preview_html(sp, dea, logo)
+        except Exception as e:
+            print(f"  {sp['slug']}: skipped ({e})"); continue
+        out = os.path.join(OUT_DIR, f"spice-{sp['slug']}.png")
+        pg.set_content(html, wait_until="load"); pg.wait_for_timeout(300)
+        pg.screenshot(path=out); made.append(out)
+    json.dump({"week": dea_week(), "style": SPICE_STYLE, "pages": len(made)},
+              open(SPICE_STATE, "w", encoding="utf-8"), ensure_ascii=False)
+    return made
+
+
 def wanted(db):
     """True when there is a new report (or a new design) since the last image."""
     try:
@@ -230,14 +325,15 @@ def wanted(db):
 
 def main():
     db = json.load(open("data.json", encoding="utf-8"))
+    need_veg, need_spice = wanted(db), spices_wanted()
     if "--check" in sys.argv:
-        print("need=" + ("yes" if wanted(db) else "no"))
+        print("need=" + ("yes" if (need_veg or need_spice) else "no"))
         return
-    if not wanted(db):
-        print("Image already up to date for report", db["dates"][-1]); return
+    if not (need_veg or need_spice):
+        print("Images already up to date for report", db["dates"][-1], "and DEA week", dea_week()); return
     rows, d = rows_for(db)
-    if len(rows) < 5:
-        print("Not enough Dambulla prices in the latest report - no image made."); return
+    if need_veg and len(rows) < 5:
+        print("Not enough Dambulla prices in the latest report - no vegetable image made."); need_veg = False
 
     import base64
     from playwright.sync_api import sync_playwright
@@ -245,30 +341,36 @@ def main():
     if os.path.exists("icon-512x512.png"):
         logo = "data:image/png;base64," + base64.b64encode(open("icon-512x512.png", "rb").read()).decode()
     os.makedirs(OUT_DIR, exist_ok=True)
+    made = []
     with sync_playwright() as p:
         b = p.chromium.launch()
         pg = b.new_page(viewport={"width": 1080, "height": 1350})
-        pg.set_content(page_html(rows, d, logo), wait_until="load")
-        pg.wait_for_timeout(500)
-        pg.screenshot(path=PNG)
-        pg.set_viewport_size({"width": 1200, "height": 630})
-        pg.set_content(wide_html(rows, d, logo), wait_until="load")
-        pg.wait_for_timeout(500)
-        pg.screenshot(path=WIDE)
-        pg.set_viewport_size({"width": 1080, "height": 1920})
-        pg.set_content(story_html(rows, d, logo), wait_until="load")
-        pg.wait_for_timeout(500)
-        pg.screenshot(path=STORY)
+        if need_veg:
+            pg.set_content(page_html(rows, d, logo), wait_until="load")
+            pg.wait_for_timeout(500)
+            pg.screenshot(path=PNG)
+            pg.set_viewport_size({"width": 1200, "height": 630})
+            pg.set_content(wide_html(rows, d, logo), wait_until="load")
+            pg.wait_for_timeout(500)
+            pg.screenshot(path=WIDE)
+            pg.set_viewport_size({"width": 1080, "height": 1920})
+            pg.set_content(story_html(rows, d, logo), wait_until="load")
+            pg.wait_for_timeout(500)
+            pg.screenshot(path=STORY)
+            made += [PNG, WIDE, STORY]
+        if need_spice:
+            made += make_spice_previews(pg, logo)
         b.close()
-    try:                                   # smaller file, looks the same
+    try:                                   # smaller files, look the same
         from PIL import Image
-        for f in (PNG, WIDE, STORY):
+        for f in made:
             Image.open(f).convert("RGB").quantize(colors=96, method=Image.Quantize.MEDIANCUT).save(f, optimize=True)
     except Exception as e:
         print("note: PNG not compressed:", e)
-    json.dump({"date": db["dates"][-1], "style": STYLE_VERSION, "items": len(rows)},
-              open(STATE, "w", encoding="utf-8"), ensure_ascii=False)
-    print(f"Made {PNG} + {WIDE} + {STORY} for report {db['dates'][-1]} ({len(rows)} items, {os.path.getsize(PNG)//1024} KB)")
+    if need_veg:
+        json.dump({"date": db["dates"][-1], "style": STYLE_VERSION, "items": len(rows)},
+                  open(STATE, "w", encoding="utf-8"), ensure_ascii=False)
+    print(f"Made {len(made)} image(s): " + ", ".join(os.path.basename(f) for f in made))
 
 
 if __name__ == "__main__":
