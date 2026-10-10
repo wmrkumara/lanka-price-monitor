@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>පිටුව සොයාගත නොහැක | TopGoviya.lk</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png">
+<script>
+/* Repairs broken links that point to TopGoviya.lk, then sends the visitor to the right page:
+   - a link pasted twice:   topgoviya.lk/https://topgoviya.lk/spice/cinnamon.html
+   - the old GitHub address: /lanka-price-monitor/wholesale.html
+   - a missing ".html":      /wholesale  ->  /wholesale.html                                  */
+(function () {
+  var path = location.pathname, rest = location.search + location.hash, target = null;
+  try { path = decodeURIComponent(path); } catch (e) {}
+  var low = path.toLowerCase(), k = low.lastIndexOf("topgoviya.lk");
+  if (k >= 0) {                                                  /* link pasted twice */
+    target = path.slice(k + "topgoviya.lk".length) || "/";
+  } else if (/^\/lanka-price-monitor(\/|$)/i.test(path)) {         /* old GitHub address */
+    target = path.replace(/^\/lanka-price-monitor/i, "") || "/";
+  } else if (/^\/(market|price|spice|share)$/i.test(path)) {       /* folder without "/" */
+    target = path + "/";
+  } else if (/^\/[a-z0-9-]+$/i.test(path)) {                      /* missing ".html" */
+    target = path + ".html";
+  }
+  if (target && target.charAt(0) !== "/") target = "/" + target;
+  if (target && target !== location.pathname) location.replace(target + rest);
+})();
+</script>
+<style>
+  body{margin:0;background:#f4efe4;color:#191d1a;font-family:'Noto Sans Sinhala','Hanken Grotesk',system-ui,sans-serif;
+       min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box}
+  .card{max-width:560px;width:100%;background:#fffdf7;border:1px solid #e3d9c4;border-radius:18px;padding:28px 24px;text-align:center}
+  h1{color:#0e4f4a;font-size:28px;margin:6px 0 8px}
+  p{color:#3a403a;line-height:1.6;margin:6px 0}
+  .links{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px}
+  .links a{display:inline-block;padding:9px 14px;border-radius:999px;border:1px solid #0e4f4a;color:#0e4f4a;
+           text-decoration:none;font-weight:700;font-size:14px;background:#fff}
+  .links a.main{background:#0e4f4a;color:#fff}
+  small{display:block;margin-top:16px;color:#7a7264}
+</style>
+</head>
+<body>
+<div class="card">
+  <div style="font-size:42px">🌾</div>
+  <h1>පිටුව සොයාගත නොහැක</h1>
+  <p>ඔබ ආ සබැඳිය (link) වැරදියි හෝ පිටුව ඉවත් කර ඇත.<br>
+     <span lang="en">This page could not be found.</span> · <span lang="ta">இந்தப் பக்கம் கிடைக்கவில்லை.</span></p>
+  <div class="links">
+    <a class="main" href="/">🏠 අද එළවළු මිල</a>
+    <a href="/market/">🧺 වෙළඳපොළ මිල</a>
+    <a href="/price/">🏷️ භාණ්ඩ අනුව මිල</a>
+    <a href="/spices.html">🌶️ කුළුබඩු මිල</a>
+    <a href="/wholesale.html">📦 තොග මිල</a>
+  </div>
+  <small>TopGoviya.lk — ශ්‍රී ලංකාවේ දෛනික කෘෂිකාර්මික මිල</small>
+</div>
+</body>
+</html>
