@@ -211,6 +211,7 @@ document.querySelectorAll(".tgc").forEach(function (box) {{
 </script>
 <footer>{COPYRIGHT}<br>Design &amp; development by <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a> · Built in Gampola, Sri Lanka</footer>
 </div>
+<script defer src="/events.js?v=1"></script>
 </body>
 </html>
 """

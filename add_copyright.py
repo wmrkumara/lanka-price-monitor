@@ -83,6 +83,14 @@ def add_preview(path, s):
     return s[:k] + tags + "\n" + s[k:] if k >= 0 else s
 
 
+def add_events(s):
+    """Loads events.js (Google Analytics action counts) once per page."""
+    if "events.js" in s or "</body>" not in s:
+        return s
+    k = s.rfind("</body>")
+    return s[:k] + '<script defer src="/events.js?v=1"></script>\n' + s[k:]
+
+
 def main():
     changed = []
     for path in sorted(glob.glob("*.html")):
@@ -99,6 +107,7 @@ def main():
         new = add_globe(new)
         new = add_spice_links(path, new)
         new = add_preview(path, new)
+        new = add_events(new)
         if new != s:
             open(path, "w", encoding="utf-8").write(new)
             changed.append(path)

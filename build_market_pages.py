@@ -535,6 +535,7 @@ Dambulla retail and wholesale: <a href="{CBSL_URL}" rel="noopener">Central Bank 
 விலைகள் வழிகாட்டல் மட்டுமே. உங்கள் முடிவுகளுக்கு நீங்களே பொறுப்பு.</p>
 <footer>{COPYRIGHT}<br>Design &amp; development by <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a> · Built in Gampola, Sri Lanka</footer>
 </div>
+<script defer src="/events.js?v=1"></script>
 </body>
 </html>
 """

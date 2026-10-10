@@ -54,10 +54,18 @@
   function toast(msg, ms) { try { showToast(msg, ms || 3000); } catch (e) {} }
   function L(si, ta, en) { const l = (typeof lang !== "undefined") ? lang : "si"; return l === "ta" ? ta : l === "en" ? en : si; }
 
+  function track(speak, result, name) {
+    try { if (window.tgEvent) window.tgEvent("ask_question", { method: speak ? "voice" : "text", result: result, item: name || "" }); } catch (e) {}
+  }
+
   /* returns true when something was found and opened */
   function ask(query, speak) {
+    const r = ask2(query, speak);
+    return r;
+  }
+  function ask2(query, speak) {
     const qc = clean(query);
-    if (!qc.trim()) return general(query);
+    if (!qc.trim()) { const g0 = general(query); track(speak, g0 ? "list" : "none", ""); return g0; }
     const item = best(qc, itemList());
     const spice = best(qc, AS.spices);
     const market = best(qc, AS.markets);
@@ -65,6 +73,7 @@
       const d = item.it.d;
       const searchEl = document.getElementById("search");
       if (searchEl) { searchEl.value = query; try { state.q = ""; renderGrid(); } catch (e) {} }
+      track(speak, "item", d.name);
       setTimeout(() => {
         try { openDetail(d.id); } catch (e) {}
         if (speak) setTimeout(() => { try { speakPrice(d); } catch (e) {} }, 600);
@@ -72,16 +81,20 @@
       return true;
     }
     if (spice) {
+      track(speak, "spice", spice.it.slug);
       toast(L("🌶️ " + spice.it.si + " මිල — පිටුව විවෘත වේ…", "🌶️ " + spice.it.si + " …", "🌶️ Opening spice prices…"));
       setTimeout(() => go("spice/" + spice.it.slug + ".html"), 700);
       return true;
     }
     if (market) {
+      track(speak, "market", market.it.slug);
       toast(L("🧺 " + market.it.si + " වෙළඳපොළ මිල — පිටුව විවෘත වේ…", "🧺 " + market.it.si + " …", "🧺 Opening market prices…"));
       setTimeout(() => go("market/" + market.it.slug + ".html"), 700);
       return true;
     }
-    return general(query);
+    const g = general(query);
+    track(speak, g ? "list" : "none", g ? "" : String(query).slice(0, 60));
+    return g;
   }
 
   /* a general question ("අද එලවලු මිල", "vegetable prices today"): show the full list */
