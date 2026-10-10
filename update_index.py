@@ -181,6 +181,11 @@ def main():
         k = html.index("<footer")
         html = html[:k] + sec + "\n\n  " + html[k:]
 
+    # 4) price assistant (assistant.js): understands "අද තක්කාලි මිල කීයද?", Singlish, spices, markets
+    if "assistant.js" not in html:
+        k = html.rfind("</body>")
+        html = html[:k] + '<script defer src="assistant.js?v=1"></script>\n' + html[k:]
+
     open(INDEX, "w", encoding="utf-8").write(html)
     print(f"index.html updated: latest report {db['dates'][-1]}, built-in data {KEEP_DAYS} reports, "
           f"{len(html) // 1024} KB")
