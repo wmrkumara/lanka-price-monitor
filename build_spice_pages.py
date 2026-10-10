@@ -346,7 +346,8 @@ def spice_page(dea, sp):
 {faq_html}
 <p class="asof" style="margin-top:14px">📑 <a href="{DEA_URL}" rel="noopener">DEA නිල වාර්තාව / Official DEA report</a> ·
 <a href="../spice-price-guide.html">ගොවිපළ, FOB හා සිල්ලර මිල පැහැදිලි කිරීම →</a></p>
-<a class="cta" href="../spices.html">සියලු කුළුබඩු මිල / All spice prices →</a>
+<a class="cta" href="../spice-report.html?spice={sp['slug']}">📊 සම්පූර්ණ වාර්තාව — ශ්‍රේණි, වසරින් වසර සැසඳීම, දිස්ත්‍රික්ක / Full report →</a>
+<p class="asof" style="margin-top:8px"><a href="../spices.html">සියලු කුළුබඩු මිල / All spice prices →</a></p>
 <h2>අනෙක් කුළුබඩු<span>Other spice prices</span></h2>
 <div class="rel">{others}</div>
 """
