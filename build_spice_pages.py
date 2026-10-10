@@ -141,7 +141,7 @@ def svg_line(points, w=640, h=170):
             f'<div class="tgt"></div></div>')
 
 
-def shell(title, desc, canonical, body, jsonld):
+def shell(title, desc, canonical, body, jsonld, image=""):
     return f"""<!DOCTYPE html>
 <html lang="si">
 <head>
@@ -157,7 +157,12 @@ def shell(title, desc, canonical, body, jsonld):
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{canonical}">
-<meta property="og:site_name" content="TopGoviya.lk">
+<meta property="og:site_name" content="TopGoviya.lk">{f"""
+<meta property="og:image" content="{image}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{image}">""" if image else ""}
 <meta name="theme-color" content="#0e4f4a">
 <link rel="icon" type="image/png" sizes="192x192" href="../icon-192x192.png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
@@ -371,7 +376,9 @@ def spice_page(dea, sp):
          "creator": {"@type": "Organization", "name": "TopGoviya.lk", "url": SITE + "/"}},
         {"@type": "FAQPage", "mainEntity": [
             {"@type": "Question", "name": qe, "acceptedAnswer": {"@type": "Answer", "text": b_}} for qs, qe, a_, b_ in faq]}]}
-    return shell(title, desc, url, body, jsonld), cur["date"]
+    # link preview picture made weekly by make_daily_image.py (share/spice-<slug>.png)
+    image = f"{SITE}/share/spice-{sp['slug']}.png?v={cur['date']}"
+    return shell(title, desc, url, body, jsonld, image), cur["date"]
 
 
 def update_sitemap(slugs, lastmod):
