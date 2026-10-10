@@ -5,13 +5,13 @@ The robot-made pages (price/, market/, spice/) get the line from their builders.
 This script covers every other .html page in the main folder (index.html,
 wholesale.html, spices.html, about.html ...). It also adds a 🌐 sign to the
 language switcher on pages that have one, and links to the 11 spice price pages
-on the hand-made spice pages:
+on the hand-made spice pages, and link-preview pictures for pages listed in PAGE_PREVIEWS:
   - adds the line once, just before </body>, if the page doesn't have it yet
   - otherwise only updates the year (so it changes by itself every January)
 It also closes a <script> left open just before </body> (that bug stopped the homepage
 spice banner from loading). Nothing else in the pages is touched. Runs daily from GitHub Actions.
 """
-import glob, re
+import glob, os, re
 
 from build_pages import COPYRIGHT
 
@@ -59,6 +59,30 @@ def add_spice_links(path, s):
     return s[:k] + block + s[k:] if k >= 0 else s
 
 
+# Fixed link-preview pictures (share/...) for hand-made pages that have none
+PAGE_PREVIEWS = {"breakeven.html": "share/breakeven.png", "breakeven-calculator-guide.html": "share/breakeven.png"}
+
+
+def add_preview(path, s):
+    """Adds og:image / twitter tags so WhatsApp and Facebook show a picture (only if missing)."""
+    img = PAGE_PREVIEWS.get(path)
+    if not img or 'property="og:image"' in s or not os.path.exists(img):
+        return s
+    url = "https://topgoviya.lk/" + img
+    tags = (f'\n<meta property="og:image" content="{url}">\n<meta property="og:image:width" content="1200">'
+            f'\n<meta property="og:image:height" content="630">')
+    if 'name="twitter:card"' in s:
+        s = re.sub(r'<meta name="twitter:card" content="[^"]*">', '<meta name="twitter:card" content="summary_large_image">', s, count=1)
+    else:
+        tags += '\n<meta name="twitter:card" content="summary_large_image">'
+    tags += f'\n<meta name="twitter:image" content="{url}">'
+    m = re.search(r'<meta property="og:description"[^>]*>', s) or re.search(r'<meta property="og:title"[^>]*>', s)
+    if m:
+        return s[:m.end()] + tags + s[m.end():]
+    k = s.find("</head>")
+    return s[:k] + tags + "\n" + s[k:] if k >= 0 else s
+
+
 def main():
     changed = []
     for path in sorted(glob.glob("*.html")):
@@ -74,6 +98,7 @@ def main():
             new = new[:i] + fix + BLOCK + new[i:]
         new = add_globe(new)
         new = add_spice_links(path, new)
+        new = add_preview(path, new)
         if new != s:
             open(path, "w", encoding="utf-8").write(new)
             changed.append(path)
