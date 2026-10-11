@@ -465,6 +465,7 @@ CSS = """
 body{background:var(--paper);color:var(--ink);font-family:'Hanken Grotesk','Noto Sans Sinhala','Noto Sans Tamil',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:var(--petrol)}
 .wrap{max-width:760px;margin:0 auto;padding:0 20px}
+.tgc-top{display:inline-flex;align-items:center;gap:4px;margin-left:10px;padding:5px 11px;border-radius:999px;background:#0e4f4a;color:#fff !important;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap}
 .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0;border-bottom:2px solid var(--ink);font-size:14px}
 .top .brand{font-family:'Newsreader',serif;font-size:21px;font-weight:600;color:var(--ink);text-decoration:none}
 .crumb{font-size:13px;color:var(--muted);margin:18px 0 0}
@@ -543,7 +544,7 @@ def shell(title, desc, canonical, body, jsonld, lang="si"):
 </head>
 <body>
 <div class="wrap">
-<header class="top"><a class="brand" href="../index.html">TopGoviya.lk</a><a href="index.html">සියලු මිල ගණන් / All prices</a></header>
+<header class="top"><a class="brand" href="../index.html">TopGoviya.lk</a><span><a href="index.html">සියලු මිල ගණන් / All prices</a><a class="tgc-top" href="../contact.html">📞 අමතන්න</a></span></header>
 {body}
 <p class="note">මිල ගණන් මඟ පෙන්වීමක් පමණි. ඔබගේ තීරණ ඔබගේ වගකීම වේ.<br>
 Prices are indicative only. Decisions are your responsibility. Source: Central Bank of Sri Lanka daily price reports (not an official publication).<br>

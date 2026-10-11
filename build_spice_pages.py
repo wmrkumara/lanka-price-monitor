@@ -183,7 +183,7 @@ def shell(title, desc, canonical, body, jsonld, image="", lang="si", alternates=
 </head>
 <body>
 <div class="wrap">
-<header class="top"><a class="brand" href="../index.html">TopGoviya.lk</a><a href="../spices.html">කුළුබඩු මිල / Spice prices</a></header>
+<header class="top"><a class="brand" href="../index.html">TopGoviya.lk</a><span><a href="../spices.html">කුළුබඩු මිල / Spice prices</a><a class="tgc-top" href="../contact.html">📞 අමතන්න</a></span></header>
 {body}
 <p class="note">මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.<br>
 Prices are indicative only. Decisions are your responsibility. Source: Department of Export Agriculture (DEA) weekly
@@ -560,7 +560,7 @@ def spice_page_en(dea, sp, cfg, dei):
             {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]}]}
     image = f"{SITE}/share/spice-{sp['slug']}.png?v={cur['date']}"
     page = shell(cfg["title"], desc, url, body, jsonld, image, lang="en", alternates=[("en", url), ("si", si_url)])
-    return page.replace("කුළුබඩු මිල / Spice prices</a></header>", "Spice prices</a></header>"), cur["date"]
+    return page.replace("කුළුබඩු මිල / Spice prices</a>", "Spice prices</a>").replace("📞 අමතන්න</a>", "📞 Contact</a>"), cur["date"]
 
 
 def update_sitemap(slugs, lastmod):

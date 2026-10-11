@@ -105,6 +105,22 @@ def ensure_sitemap():
         open("sitemap.xml", "w", encoding="utf-8").write(xml.replace("</urlset>", add + "</urlset>"))
 
 
+TOP_CONTACT = ('<style id="tgc-style">.tgc-top{display:inline-flex;align-items:center;gap:4px;margin:0 8px 0 auto;padding:5px 11px;text-transform:none;letter-spacing:0;'
+               'border-radius:999px;background:#0e4f4a;color:#fff!important;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap}'
+               '.tgc-top .tgc-ta,.tgc-top .tgc-en{display:none}html[lang="ta"] .tgc-top .tgc-si,html[lang="en"] .tgc-top .tgc-si{display:none}'
+               'html[lang="ta"] .tgc-top .tgc-ta,html[lang="en"] .tgc-top .tgc-en{display:inline}</style>'
+               '<a class="tgc-top" href="contact.html">📞 <span class="tgc-si">අමතන්න</span><span class="tgc-ta">தொடர்பு</span>'
+               '<span class="tgc-en">Contact</span></a>')
+
+
+def add_top_contact(path, s):
+    """A small Contact button next to the language switch (pages that have one), once."""
+    if path == "contact.html" or "tgc-top" in s:
+        return s
+    k = s.find('<div class="lang"')
+    return s[:k] + TOP_CONTACT + s[k:] if k >= 0 else s
+
+
 def main():
     changed = []
     for path in sorted(glob.glob("*.html")):
@@ -122,6 +138,7 @@ def main():
         new = add_spice_links(path, new)
         new = add_preview(path, new)
         new = add_events(new)
+        new = add_top_contact(path, new)
         if new != s:
             open(path, "w", encoding="utf-8").write(new)
             changed.append(path)

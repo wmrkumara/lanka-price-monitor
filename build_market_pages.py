@@ -526,7 +526,7 @@ td.mid{{font-family:'JetBrains Mono',monospace;font-weight:700;text-align:right;
 </head>
 <body>
 <div class="wrap">
-<header class="top"><a class="brand" href="../index.html">TopGoviya.lk</a><a href="index.html">වෙළඳපොළ 10 / All markets</a></header>
+<header class="top"><a class="brand" href="../index.html">TopGoviya.lk</a><span><a href="index.html">වෙළඳපොළ 10 / All markets</a><a class="tgc-top" href="../contact.html">📞 අමතන්න</a></span></header>
 {body}
 <p class="note">මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.<br>
 Prices are indicative only. Decisions are your responsibility. Wholesale prices: <a href="{HARTI_URL}" rel="noopener">HARTI daily wholesale price report</a>;
