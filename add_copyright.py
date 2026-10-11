@@ -91,7 +91,7 @@ def add_events(s):
     return s[:k] + '<script defer src="/events.js?v=1"></script>\n' + s[k:]
 
 
-EXTRA_SITEMAP = ["contact.html"]
+EXTRA_SITEMAP = ["contact.html", "useful-links.html"]
 
 
 def ensure_sitemap():

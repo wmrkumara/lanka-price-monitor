@@ -375,7 +375,7 @@ def e(s):  return html.escape(str(s), quote=True)
 # Copyright line for every page (the year updates itself). The prices belong to the official sources.
 COPYRIGHT = (f'<span id="tg-copy">© {datetime.now().year} TopGoviya.lk · සියලු හිමිකම් ඇවිරිණි / All rights reserved · '
              'මිල දත්ත: මහ බැංකුව, HARTI, DEA (නිල මූලාශ්‍ර) / Price data: CBSL, HARTI &amp; DEA · '
-             '<a href="/contact.html">සම්බන්ධ වන්න / Contact</a></span>')
+             '<a href="/contact.html">සම්බන්ධ වන්න / Contact</a> · <a href="/useful-links.html">සබැඳි / Links</a></span>')
 def n_si(n): return (NAMES.get(n) or {}).get("si", n)
 def n_ta(n): return (NAMES.get(n) or {}).get("ta", n)
 def m_tr(m, l): return m if l == "en" else (MARKETS.get(m) or {}).get(l, m)
