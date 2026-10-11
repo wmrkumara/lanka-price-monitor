@@ -60,6 +60,14 @@ def L(si_, en_, ta_, tag="span", style=""):
             f'<{tag} class="tgl tgl-ta" lang="ta"{st}>{ta_}</{tag}>')
 
 
+def harti_day():
+    """Latest HARTI report date (for the "where to sell" image link)."""
+    try:
+        return json.load(open("harti_data.json", encoding="utf-8"))["dates"][-1]
+    except Exception:
+        return ""
+
+
 def today_section(db):
     dates = db["dates"]
     li = len(dates) - 1
@@ -113,7 +121,8 @@ def today_section(db):
         ("spice/pepper.html", "⚫ ගම්මිරිස් මිල අද", "⚫ Pepper price today", "⚫ மிளகு விலை இன்று"),
         ("spice/cinnamon.html", "🪵 කුරුඳු මිල අද", "🪵 Cinnamon price today", "🪵 கறுவா விலை இன்று"),
         # ?v=<date> so phones always get the newest image (old ones stay cached under their own date)
-        (f"share/today.png?v={dates[li]}", "📤 අද මිල පින්තූරය (WhatsApp)", "📤 Today's price image (WhatsApp)", "📤 இன்றைய விலைப் படம் (WhatsApp)")])
+        (f"share/today.png?v={dates[li]}", "📤 අද මිල පින්තූරය (WhatsApp)", "📤 Today's price image (WhatsApp)", "📤 இன்றைய விலைப் படம் (WhatsApp)"),
+        (f"share/sell.png?v={harti_day()}", "🟢 අද වැඩිම තොග මිල කොහේද?", "🟢 Highest wholesale price today", "🟢 இன்று அதிக மொத்த விலை எங்கே?")])
     th = 'style="text-align:right"'
     return f"""{START}
 <style>.tgl{{display:none}}html[lang="si"] .tgl-si,html[lang="en"] .tgl-en,html[lang="ta"] .tgl-ta{{display:revert}}</style>

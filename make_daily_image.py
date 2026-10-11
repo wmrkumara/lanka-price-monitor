@@ -6,6 +6,7 @@ Makes ONE branded image after each new CBSL report:
                      change vs the previous report, date, source, QR code
   share/today-wide.png  1200 x 630 preview shown when a topgoviya.lk link is shared
   share/today-story.png 1080 x 1920 for WhatsApp Status / Facebook & Instagram Stories
+  share/sell.png     1080 x 1350 "where is the highest wholesale price today?" (HARTI, 10 markets)
   share/spice-<name>.png  1200 x 630 preview for each spice page (redrawn when DEA publishes a new week)
   share/today.json   which report the image was made from (so it is only redrawn
                      when there is a new report)
@@ -323,13 +324,104 @@ def wanted(db):
         return True
 
 
+# ---------------------------------------------------------------- "where to sell today" (HARTI, 10 markets)
+SELL = os.path.join(OUT_DIR, "sell.png")
+SELL_STATE = os.path.join(OUT_DIR, "sell.json")
+SELL_STYLE = "2"
+SELL_ORDER = ["Beans", "Carrot", "Tomato", "Brinjals", "Leeks", "Pumpkin", "Snake Gourd", "Green Chillies",
+              "Bitter Gourd", "Capsicum", "Lime", "Cabbage (Kandy)", "Potato (N.Eliya)"]
+
+
+def harti_date():
+    try:
+        return json.load(open("harti_data.json", encoding="utf-8"))["dates"][-1]
+    except Exception:
+        return None
+
+
+def sell_wanted():
+    hd = harti_date()
+    if not hd:
+        return False
+    try:
+        st = json.load(open(SELL_STATE, encoding="utf-8"))
+        return not (st.get("date") == hd and st.get("style") == SELL_STYLE and os.path.exists(SELL))
+    except Exception:
+        return True
+
+
+def sell_rows():
+    """Per item: highest and lowest HARTI midpoint among markets in the latest report."""
+    h = json.load(open("harti_data.json", encoding="utf-8"))
+    rep = h["dates"][-1]
+    mdates = h.get("marketDates") or {}
+    by = {c["name"]: c for c in h["commodities"]}
+    rows = []
+    for n in SELL_ORDER:
+        c = by.get(n)
+        if not c:
+            continue
+        pts = [(m, v["mid"]) for m, v in (c.get("markets") or {}).items() if isinstance(v, dict) and v.get("mid")]
+        if len(pts) < 3:
+            continue
+        hi, lo = max(pts, key=lambda t: t[1]), min(pts, key=lambda t: t[1])
+        lag = lambda m: bool(mdates.get(m)) and mdates.get(m) != rep
+        rows.append((n, hi[0], hi[1], lag(hi[0]), lo[0], lo[1], lag(lo[0]), len(pts)))
+    return rows, datetime.strptime(rep, "%Y-%m-%d").date()
+
+
+def sell_html(rows, d, logo):
+    import build_market_pages as mp
+    msi = lambda m: (mp.MKT.get(m) or {}).get("si", m)
+    trs, any_lag = "", False
+    for n, hm, hv, hl, lm, lv, ll, k in rows:
+        any_lag = any_lag or hl or ll
+        trs += (f'<tr><td class="nm">{mp.hsi(n)}</td>'
+                f'<td class="hi"><b>{msi(hm)}{"*" if hl else ""}</b><span>රු. {money(hv)}</span></td>'
+                f'<td class="lo">{msi(lm)}{"*" if ll else ""}<span>රු. {money(lv)}</span></td></tr>')
+    lag_note = "* පෙර දින මිල (HARTI වාර්තාවේ). " if any_lag else ""
+    return f"""<!DOCTYPE html><html lang="si"><head><meta charset="utf-8"><style>
+*{{box-sizing:border-box;margin:0;padding:0}}
+body{{width:1080px;height:1350px;background:#f4efe4;font-family:'Noto Sans Sinhala',sans-serif;color:#191d1a;overflow:hidden;position:relative}}
+.top{{background:#0e4f4a;color:#fff;display:flex;align-items:center;gap:20px;padding:24px 44px}}
+.top img{{width:76px;height:76px;border-radius:16px;background:#fff}}
+.top .b{{font-size:38px;font-weight:700}} .top .s{{font-size:22px;color:#e7d3a3}}
+.head{{padding:20px 44px 4px}}
+.head h1{{font-size:50px;line-height:1.15;color:#0e4f4a;font-weight:700}}
+.head .sub{{font-size:25px;color:#3a403a;margin-top:4px}}
+.date{{display:inline-block;margin-top:10px;background:#a9802a;color:#fff;font-size:27px;font-weight:700;border-radius:999px;padding:7px 26px}}
+table{{width:calc(100% - 88px);margin:14px 44px 0;border-collapse:collapse;background:#fffdf7;border-radius:18px;overflow:hidden}}
+th{{font-size:21px;color:#7a7264;font-weight:700;padding:9px 14px;background:#efe8d8;text-align:left}}
+td{{padding:7px 12px;border-top:1px solid #e3d9c4;font-size:25px;vertical-align:middle;white-space:nowrap}}
+td.nm{{font-weight:700}}
+td.hi{{background:#e3efe6;color:#1f5e3d}} td.hi b{{font-size:24px}}
+td span{{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:24px;margin-left:8px}}
+td.lo{{color:#7a7264;font-size:21px}} td.lo span{{font-size:20px;font-weight:600}}
+.warn{{margin:12px 44px 0;background:#f7e6e2;color:#8a2f25;border-radius:12px;padding:10px 16px;font-size:21px;line-height:1.45}}
+.foot{{position:absolute;left:44px;right:44px;bottom:24px;display:flex;gap:22px;align-items:center;border-top:2px solid #cdbf9f;padding-top:16px}}
+.foot svg{{width:120px;height:120px;flex:0 0 120px;background:#fff;border-radius:12px;padding:6px}}
+.foot .u{{font-size:32px;font-weight:700;color:#0e4f4a}} .foot .t{{font-size:19px;color:#3a403a;line-height:1.5}}
+</style></head><body>
+<div class="top">{f'<img src="{logo}">' if logo else ''}<div><div class="b">TopGoviya.lk</div><div class="s">දත්තය බලලා තීරණ ගන්න</div></div></div>
+<div class="head"><h1>අද වැඩිම තොග මිල කොහේද?</h1>
+<div class="sub">HARTI වෙළඳපොළ 10 · තොග මිල මධ්‍යගතය · රු. / කි.ග්‍රෑ.</div>
+<div class="date">{fdate(d, 'si')} · HARTI වාර්තාව</div></div>
+<table><thead><tr><th>භාණ්ඩය</th><th>🟢 වැඩිම මිල</th><th>අඩුම මිල</th></tr></thead><tbody>{trs}</tbody></table>
+<div class="warn">⚠️ ප්‍රවාහන වියදම, ගුණාත්මකභාවය හා එදින ඉල්ලුම අනුව ඔබට ලැබෙන සැබෑ ලාභය වෙනස් වේ. ලාභ ගණකයෙන් ගණනය කරන්න.</div>
+<div class="foot">{qr_svg("https://topgoviya.lk/market/")}<div>
+<div class="u">topgoviya.lk/market</div>
+<div class="t">වෙළඳපොළ 10ක සම්පූර්ණ මිල ලැයිස්තු · දත්ත: HARTI (හෙක්ටර් කොබ්බෑකඩුව ගොවිකටයුතු පර්යේෂණ ආයතනය).<br>
+{lag_note}මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.</div></div></div>
+</body></html>"""
+
+
 def main():
     db = json.load(open("data.json", encoding="utf-8"))
-    need_veg, need_spice = wanted(db), spices_wanted()
+    need_veg, need_spice, need_sell = wanted(db), spices_wanted(), sell_wanted()
     if "--check" in sys.argv:
-        print("need=" + ("yes" if (need_veg or need_spice) else "no"))
+        print("need=" + ("yes" if (need_veg or need_spice or need_sell) else "no"))
         return
-    if not (need_veg or need_spice):
+    if not (need_veg or need_spice or need_sell):
         print("Images already up to date for report", db["dates"][-1], "and DEA week", dea_week()); return
     rows, d = rows_for(db)
     if need_veg and len(rows) < 5:
@@ -360,6 +452,16 @@ def main():
             made += [PNG, WIDE, STORY]
         if need_spice:
             made += make_spice_previews(pg, logo)
+        if need_sell:
+            srows, sd = sell_rows()
+            if len(srows) >= 5:
+                pg.set_viewport_size({"width": 1080, "height": 1350})
+                pg.set_content(sell_html(srows, sd, logo), wait_until="load")
+                pg.wait_for_timeout(500)
+                pg.screenshot(path=SELL)
+                made.append(SELL)
+                json.dump({"date": harti_date(), "style": SELL_STYLE, "items": len(srows)},
+                          open(SELL_STATE, "w", encoding="utf-8"), ensure_ascii=False)
         b.close()
     try:                                   # smaller files, look the same
         from PIL import Image
