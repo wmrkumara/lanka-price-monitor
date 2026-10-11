@@ -91,13 +91,27 @@ def add_events(s):
     return s[:k] + '<script defer src="/events.js?v=1"></script>\n' + s[k:]
 
 
+EXTRA_SITEMAP = ["contact.html"]
+
+
+def ensure_sitemap():
+    """Adds hand-made pages listed in EXTRA_SITEMAP to sitemap.xml if they are missing."""
+    if not os.path.exists("sitemap.xml"):
+        return
+    xml = open("sitemap.xml", encoding="utf-8").read()
+    add = "".join(f"  <url>\n    <loc>https://topgoviya.lk/{p}</loc>\n    <changefreq>monthly</changefreq>\n    <priority>0.5</priority>\n  </url>\n"
+                  for p in EXTRA_SITEMAP if os.path.exists(p) and f"https://topgoviya.lk/{p}<" not in xml)
+    if add:
+        open("sitemap.xml", "w", encoding="utf-8").write(xml.replace("</urlset>", add + "</urlset>"))
+
+
 def main():
     changed = []
     for path in sorted(glob.glob("*.html")):
         s = open(path, encoding="utf-8").read()
         new = s
         if 'id="tg-copy"' in new:
-            new = re.sub(r'(<span id="tg-copy">)[^<]*(</span>)', lambda m: COPYRIGHT, new, count=1)
+            new = re.sub(r'<span id="tg-copy">.*?</span>', lambda m: COPYRIGHT, new, count=1, flags=re.S)
         elif "</body>" in new:
             i = new.rfind("</body>")
             # Repair: a <script> left open before </body> would swallow the rest of the page
@@ -111,6 +125,7 @@ def main():
         if new != s:
             open(path, "w", encoding="utf-8").write(new)
             changed.append(path)
+    ensure_sitemap()
     print(f"Copyright line / globe: {len(changed)} page(s) updated" + (f" ({', '.join(changed)})" if changed else ""))
 
 

@@ -188,7 +188,7 @@ def shell(title, desc, canonical, body, jsonld, image="", lang="si", alternates=
 <p class="note">මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.<br>
 Prices are indicative only. Decisions are your responsibility. Source: Department of Export Agriculture (DEA) weekly
 producers' (farm gate) prices — <a href="{DEA_URL}" rel="noopener">exagri.info</a>. Not an official publication.
-<a href="../data-sources.html">How we collect the data →</a> · මිලක් වැරදි යැයි සිතේද? <a href="../data-sources.html">අපට දන්වන්න</a><br>
+<a href="../data-sources.html">How we collect the data →</a> · මිලක් වැරදි යැයි සිතේද? <a href="../contact.html?t=price">අපට දන්වන්න</a><br>
 விலைகள் வழிகாட்டல் மட்டுமே. உங்கள் முடிவுகளுக்கு நீங்களே பொறுப்பு.</p>
 <script>
 /* chart: hover (mouse) or touch-and-slide (phone) shows that week's date and price */

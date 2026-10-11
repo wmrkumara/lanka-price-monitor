@@ -374,7 +374,8 @@ def e(s):  return html.escape(str(s), quote=True)
 
 # Copyright line for every page (the year updates itself). The prices belong to the official sources.
 COPYRIGHT = (f'<span id="tg-copy">© {datetime.now().year} TopGoviya.lk · සියලු හිමිකම් ඇවිරිණි / All rights reserved · '
-             'මිල දත්ත: මහ බැංකුව, HARTI, DEA (නිල මූලාශ්‍ර) / Price data: CBSL, HARTI &amp; DEA</span>')
+             'මිල දත්ත: මහ බැංකුව, HARTI, DEA (නිල මූලාශ්‍ර) / Price data: CBSL, HARTI &amp; DEA · '
+             '<a href="/contact.html">සම්බන්ධ වන්න / Contact</a></span>')
 def n_si(n): return (NAMES.get(n) or {}).get("si", n)
 def n_ta(n): return (NAMES.get(n) or {}).get("ta", n)
 def m_tr(m, l): return m if l == "en" else (MARKETS.get(m) or {}).get(l, m)
@@ -721,7 +722,7 @@ def commodity_page(c, dates, latest_idx, all_items):
     trust_html = ('<p class="asof" style="margin-top:14px">'
                   + (f'📑 <a href="../pdfs/{pdf_name}" rel="noopener">මහ බැංකු මුල් වාර්තාව (නිල PDF) — {fdate(d,"si")}</a> · '
                      f'Official CBSL report. ' if os.path.exists(os.path.join("pdfs", pdf_name)) else "")
-                  + 'මිලක් වැරදි යැයි සිතේද? <a href="../data-sources.html">අපට දන්වන්න</a> / Spotted a wrong price? Tell us.</p>')
+                  + 'මිලක් වැරදි යැයි සිතේද? <a href="../contact.html?t=price">අපට දන්වන්න</a> / Spotted a wrong price? Tell us.</p>')
 
     body = f"""
 <p class="crumb"><a href="../index.html">TopGoviya.lk</a> / <a href="index.html">මිල ගණන්</a> / {e(n_si(name))}</p>
