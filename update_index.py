@@ -128,7 +128,8 @@ def today_section(db):
         (("spice/cinnamon.html", "spice/ceylon-cinnamon-price.html"), "🪵 කුරුඳු මිල අද", "🪵 Ceylon cinnamon price (LKR & US$)", "🪵 கறுவா விலை இன்று"),
         # ?v=<date> so phones always get the newest image (old ones stay cached under their own date)
         (f"share/today.png?v={dates[li]}", "📤 අද මිල පින්තූරය (WhatsApp)", "📤 Today's price image (WhatsApp)", "📤 இன்றைய விலைப் படம் (WhatsApp)"),
-        (f"share/sell.png?v={harti_day()}", "🟢 අද වැඩිම තොග මිල කොහේද?", "🟢 Highest wholesale price today", "🟢 இன்று அதிக மொத்த விலை எங்கே?")])
+        (f"share/sell.png?v={harti_day()}", "🟢 අද වැඩිම තොග මිල කොහේද?", "🟢 Highest wholesale price today", "🟢 இன்று அதிக மொத்த விலை எங்கே?"),
+        ("contact.html", "📞 අප අමතන්න", "📞 Contact us", "📞 தொடர்பு கொள்ள")])
     th = 'style="text-align:right"'
     return f"""{START}
 <style>.tgl{{display:none}}html[lang="si"] .tgl-si,html[lang="en"] .tgl-en,html[lang="ta"] .tgl-ta{{display:revert}}</style>
