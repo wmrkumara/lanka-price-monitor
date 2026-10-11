@@ -108,7 +108,7 @@ def chg(now, old):
     return f'{arrow} {"+" if pct > 0 else ""}{pct:.1f}%', cls, pct
 
 
-def svg_line(points, w=640, h=170):
+def svg_line(points, w=640, h=170, lang="si"):
     """Simple inline SVG line for (date, value) points."""
     pts = [(d, v) for d, v in points if v]
     if len(pts) < 2:
@@ -130,8 +130,9 @@ def svg_line(points, w=640, h=170):
         lab += f'<text x="{X(d):.1f}" y="{h-6}" text-anchor="middle" font-size="10" fill="#7a7264">{d.strftime("%b %Y")}</text>'
     d_, v_ = pts[-1]
     # points for the hover / touch price box: [x, y, date, price]
-    data = json.dumps([[round(X(d), 1), round(Y(v), 1), fdate(d, "si"), money(v)] for d, v in pts], ensure_ascii=False)
-    return (f'<div class="tgc" data-w="{w}" data-p=\'{e(data)}\'>'
+    data = json.dumps([[round(X(d), 1), round(Y(v), 1), fdate(d, lang), money(v)] for d, v in pts], ensure_ascii=False)
+    cur = "Rs." if lang == "en" else "රු."
+    return (f'<div class="tgc" data-w="{w}" data-cur="{cur}" data-p=\'{e(data)}\'>'
             f'<svg viewBox="0 0 {w} {h}" style="width:100%;height:auto;display:block;touch-action:pan-y" role="img" '
             f'aria-label="National average price trend">{grid}{lab}'
             f'<path d="{path}" fill="none" stroke="#0e4f4a" stroke-width="2.2"/>'
@@ -141,9 +142,10 @@ def svg_line(points, w=640, h=170):
             f'<div class="tgt"></div></div>')
 
 
-def shell(title, desc, canonical, body, jsonld, image=""):
+def shell(title, desc, canonical, body, jsonld, image="", lang="si", alternates=None):
+    alt = "".join(f'\n<link rel="alternate" hreflang="{hl}" href="{u}">' for hl, u in (alternates or []))
     return f"""<!DOCTYPE html>
-<html lang="si">
+<html lang="{lang}">
 <head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
@@ -152,7 +154,7 @@ def shell(title, desc, canonical, body, jsonld, image=""):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
-<link rel="canonical" href="{canonical}">
+<link rel="canonical" href="{canonical}">{alt}
 <meta property="og:type" content="website">
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
@@ -199,7 +201,7 @@ document.querySelectorAll(".tgc").forEach(function (box) {{
     x.setAttribute("x1", best[0]); x.setAttribute("x2", best[0]); x.setAttribute("opacity", "1");
     dot.setAttribute("cx", best[0]); dot.setAttribute("cy", best[1]); dot.setAttribute("opacity", "1");
     var px = best[0] / W * r.width, py = best[1] / W * r.width;
-    tip.innerHTML = best[2] + " &nbsp;<b>රු. " + best[3] + "</b>";
+    tip.innerHTML = best[2] + " &nbsp;<b>" + (box.getAttribute("data-cur") || "රු.") + " " + best[3] + "</b>";
     tip.style.left = Math.min(Math.max(px, 70), r.width - 70) + "px"; tip.style.top = py + "px"; tip.style.opacity = 1;
   }}
   function hide() {{ tip.style.opacity = 0; x.setAttribute("opacity", "0"); dot.setAttribute("opacity", "0"); }}
@@ -379,7 +381,186 @@ def spice_page(dea, sp):
             {"@type": "Question", "name": qe, "acceptedAnswer": {"@type": "Answer", "text": b_}} for qs, qe, a_, b_ in faq]}]}
     # link preview picture made weekly by make_daily_image.py (share/spice-<slug>.png)
     image = f"{SITE}/share/spice-{sp['slug']}.png?v={cur['date']}"
-    return shell(title, desc, url, body, jsonld, image), cur["date"]
+    alts = None
+    if sp["slug"] in EN_PAGES:
+        en_url = f"{SITE}/{OUT_DIR}/{EN_PAGES[sp['slug']]['file']}.html"
+        alts = [("si", url), ("en", en_url)]
+        en_cfg = EN_PAGES[sp["slug"]]
+        en_link = ('<p class="asof" style="margin-top:8px">🌍 <a href="' + en_cfg["file"] + '.html">English: '
+                   + en_cfg["h1"] + ' (LKR &amp; US$) →</a></p>\n')
+        body = body.replace('<p class="asof" style="margin-top:14px"><b>🌾', en_link + '<p class="asof" style="margin-top:14px"><b>🌾', 1)
+    return shell(title, desc, url, body, jsonld, image, alternates=alts), cur["date"]
+
+
+# ---------------------------------------------------------------- English pages (foreign buyers)
+# Same DEA data, written for buyers abroad: LKR + USD per kg, grades, farm gate vs FOB.
+EN_PAGES = {
+ "cinnamon": {
+  "file": "ceylon-cinnamon-price", "name": "Ceylon cinnamon", "emo": "🪵",
+  "h1": "Ceylon Cinnamon Price Today",
+  "title": "Ceylon Cinnamon Price Today – Sri Lanka Farm Gate Price per kg (LKR & USD) | TopGoviya",
+  "grades": [("Alba", "Alba", "the thinnest, finest quills — the top grade"),
+             ("C-5 Sp", "C-5 Special", "fine Continental quills"),
+             ("C-5", "C-5", "Continental — the most widely quoted grade"),
+             ("C-4", "C-4", "Continental, slightly thicker than C-5"),
+             ("M-5", "M-5", "Mexican grade — thicker quills"),
+             ("M-4", "M-4", "Mexican grade"),
+             ("H-1", "H-1", "Hamburg grade — thicker, coarser quills"),
+             ("H-2", "H-2", "Hamburg grade"),
+             ("H-Faq", "H-FAQ", "Hamburg, fair average quality"),
+             ("Heen", "Heen", "small broken pieces (quillings)"),
+             ("Gorosu", "Gorosu", "coarse, thick bark pieces")],
+  "main": "C-5",
+  "extra": """<h2>Ceylon cinnamon vs cassia</h2><div class="story" style="font-size:14.5px">
+<p><b>Ceylon cinnamon</b> (<i>Cinnamomum verum</i>, "true cinnamon") is the cinnamon grown in Sri Lanka. Its quills are made of many thin,
+paper-like layers rolled together, light tan in colour, with a mild, sweet aroma.</p>
+<p><b>Cassia</b> (Chinese, Indonesian or Vietnamese cinnamon) is a different species. Its bark is a single thick, hard layer, darker and
+stronger tasting, and it contains <b>much more coumarin</b> than Ceylon cinnamon. That is why many buyers specifically look for Ceylon cinnamon.</p>
+<p>Ceylon cinnamon is graded mainly by <b>quill thickness</b>: Alba is the finest, followed by the Continental (C), Mexican (M) and
+Hamburg (H) groups. The table above shows how the price falls as the quills get thicker.</p></div>""",
+ },
+ "pepper": {
+  "file": "sri-lanka-black-pepper-price", "name": "Sri Lankan black pepper", "emo": "⚫",
+  "h1": "Sri Lanka Black Pepper Price Today",
+  "title": "Sri Lanka Black Pepper Price Today – GR-1 & White Pepper Farm Gate Price per kg (LKR & USD) | TopGoviya",
+  "grades": [("GR-1", "GR-1 black pepper", "the top black pepper grade — dense, clean berries"),
+             ("GR-2", "GR-2 black pepper", "the second black pepper grade"),
+             ("WHITE", "White pepper", "pepper with the outer skin removed")],
+  "main": "GR-1",
+  "extra": """<h2>About Sri Lankan pepper grades</h2><div class="story" style="font-size:14.5px">
+<p>DEA reports Sri Lankan black pepper in two grades. <b>GR-1</b> is the higher grade (heavier, denser, cleaner berries);
+<b>GR-2</b> is the next grade. <b>White pepper</b> is made by removing the outer skin, so it sells for more per kg.</p>
+<p>Export buyers often also specify <b>bulk density</b> (for example 550 g/L) and moisture. Our
+<a href="../spice-price-guide.html">spice price guide</a> explains these terms.</p></div>""",
+ },
+}
+
+
+def usd_rate_for(dei, day):
+    """CBSL indicative USD/LKR spot rate for the DEA week (nearest earlier day), with its date."""
+    recs = [r for r in (dei or {}).get("records", []) if r.get("usd_lkr_spot") or r.get("usd_lkr")]
+    if not recs:
+        return None, None
+    before = [r for r in recs if r["date"] <= day.isoformat()]
+    r = before[-1] if before else recs[0]
+    rate = r.get("usd_lkr_spot") or ((r.get("usd_lkr", 0) + r.get("usd_lkr_sell", r.get("usd_lkr", 0))) / 2)
+    return rate, d_(r["date"])
+
+
+def usd(v, rate):
+    return f"US$ {v / rate:,.2f}" if (v and rate) else "—"
+
+
+def spice_page_en(dea, sp, cfg, dei):
+    c = sp["c"]
+    N = lambda w, g, k="Average": nat(w, g, k, c)
+    main = cfg["main"]
+    weeks = [w for w in dea["weeks"] if N(w, main)]
+    if len(weeks) < 2:
+        return None, None
+    cur, prev = weeks[-1], weeks[-2]
+    d, dp = d_(cur["date"]), d_(prev["date"])
+    url = f"{SITE}/{OUT_DIR}/{cfg['file']}.html"
+    rate, rate_d = usd_rate_for(dei, d)
+    g1, g1p, g1h = N(cur, main), N(prev, main), N(cur, main, "Highest")
+    t_main, cls_main, _ = chg(g1, g1p)
+
+    # grade table
+    trs = ""
+    for key, name, note in cfg["grades"]:
+        a, ap, hi = N(cur, key), N(prev, key), N(cur, key, "Highest")
+        if not a:
+            continue
+        t, cls, _ = chg(a, ap)
+        trs += (f'<tr><td><b>{e(name)}</b><br><small style="color:var(--muted)">{e(note)}</small></td>'
+                f'<td class="n"><b>Rs. {money(a)}</b></td><td class="n">{usd(a, rate)}</td>'
+                f'<td class="n rng">{money(hi) if hi else "—"}</td>'
+                f'<td class="n">{f"""<span class="chg {cls}" style="font-size:11.5px;padding:2px 7px">{t}</span>""" if t else "—"}</td></tr>')
+
+    hist = [(d_(w["date"]), N(w, main)) for w in weeks]
+    hi_d, hi_v = max(hist, key=lambda t: t[1])
+    lo_d, lo_v = min(hist, key=lambda t: t[1])
+    ya = next((w for w in weeks if abs((d_(w["date"]) - (d - timedelta(days=364))).days) <= 4), None)
+    yv = N(ya, main) if ya else None
+    main_name = next(n for k, n, _ in cfg["grades"] if k == main)
+
+    # districts (main grade)
+    dist = (((cur.get("commodities") or {}).get(c) or {}).get("districts") or {})
+    drows = sorted([(k, v.get(f"{main} (Average Price)")) for k, v in dist.items() if k != "National" and v and v.get(f"{main} (Average Price)")],
+                   key=lambda r: -r[1])
+    dtrs = "".join(f'<tr><td>{e(den(k))}</td><td class="n"><b>Rs. {money(v)}</b></td><td class="n">{usd(v, rate)}</td></tr>' for k, v in drows)
+
+    rate_txt = (f"US$ prices use the Central Bank of Sri Lanka indicative USD/LKR spot rate of Rs. {rate:,.2f} "
+                f"({fdate(rate_d, 'en')}), for reference only." if rate else "")
+    story = (f"In the Department of Export Agriculture (DEA) report for the week of {fdate(d,'en')}, {cfg['name']} "
+             f"({main_name}) averaged <b>Rs. {money(g1)} per kg</b> at the farm gate across Sri Lanka "
+             f"(≈ <b>{usd(g1, rate)}</b>/kg)" + (f", highest Rs. {money(g1h)}" if g1h else "") + ". "
+             + (f"That is {'up' if cls_main == 'up' else 'down' if cls_main == 'down' else 'unchanged'} from Rs. {money(g1p)} "
+                f"in the previous DEA report (week of {fdate(dp,'en')})" + (f" ({t_main})" if cls_main != "flat" else "") + ". " if g1p else "")
+             + (f"A year earlier ({fdate(d_(ya['date']),'en')}) it was Rs. {money(yv)}." if yv else ""))
+
+    faq = [(f"What is the {cfg['name']} price today?",
+            f"For the week of {fdate(d,'en')}, {main_name} averaged Rs. {money(g1)} per kg at the farm gate in Sri Lanka "
+            f"(about {usd(g1, rate)} per kg), according to the Department of Export Agriculture."),
+           ("Is this the export (FOB) price?",
+            "No. These are farm gate prices — what growers receive. Export (FOB) prices are higher because they include "
+            "processing, grading, cleaning, fumigation, packing, transport and the exporter's margin."),
+           (f"What were the highest and lowest prices since {hist[0][0].year}?",
+            f"{main_name} national average: highest Rs. {money(hi_v)} ({fdate(hi_d,'en')}), lowest Rs. {money(lo_v)} ({fdate(lo_d,'en')})."),
+           ("How are the US$ prices calculated?",
+            rate_txt or "US$ prices are not available this week."),
+           ("Where does the data come from, and how often is it updated?",
+            "From the Department of Export Agriculture (DEA), Sri Lanka, weekly producers' (farm gate) price report. "
+            "This page updates automatically when DEA publishes a new week. TopGoviya.lk is independent and does not buy or sell spices.")]
+    faq_html = ('<h2>Frequently asked questions</h2><div class="story" style="font-size:14.5px">'
+                + "".join(f'<h3 style="font-size:15.5px;margin:12px 0 4px">{e(q)}</h3><p style="margin:0">{e(a)}</p>' for q, a in faq) + '</div>')
+
+    si_url = f"{SITE}/{OUT_DIR}/{sp['slug']}.html"
+    body = f"""
+<p class="crumb"><a href="../index.html">TopGoviya.lk</a> / <a href="../spices.html">Spice prices</a> / {e(cfg['name'])}</p>
+<h1>{cfg['emo']} {e(cfg['h1'])}</h1>
+<p class="alt">Weekly farm gate price in Sri Lanka · LKR and US$ per kg · <a href="{sp['slug']}.html">සිංහල: {e(sp['si'])} මිල අද →</a></p>
+<p class="asof" style="margin-top:14px"><b>🌾 Farm gate price</b> · DEA weekly report · week of {fdate(d,'en')} · per kg</p>
+<div class="duo"><div class="r"><b>Rs. {money(g1)}</b><span>{e(main_name)} · national average
+{f' · <span class="chg {cls_main}" style="font-size:11px;padding:1px 6px">{t_main}</span>' if t_main else ''}</span></div>
+<div class="w"><b>{usd(g1, rate)}</b><span>per kg · at CBSL rate {f"Rs. {rate:,.2f}" if rate else ""}</span></div></div>
+<div class="story"><p lang="en">{story}</p></div>
+<h2>Prices by grade<span>Week of {fdate(d,'en')} · national average, per kg</span></h2>
+<div class="scroll"><table><thead><tr><th>Grade</th><th class="n">LKR / kg</th><th class="n">≈ US$ / kg</th>
+<th class="n">Highest<br>LKR</th><th class="n">vs prev.<br>report</th></tr></thead><tbody>{trs}</tbody></table></div>
+<p class="asof" style="margin-top:8px">{e(rate_txt)} Farm gate prices — not export (FOB) or retail prices.</p>
+<h2>Price trend<span>{e(main_name)} · national average since {hist[0][0].year} · LKR per kg</span></h2>
+<div class="chart">{svg_line(hist, lang="en")}</div>
+<p class="asof">Highest since {hist[0][0].year}: Rs. {money(hi_v)} ({fdate(hi_d,'en')}) · lowest Rs. {money(lo_v)} ({fdate(lo_d,'en')})
+{f" · a year ago: Rs. {money(yv)}" if yv else ""}</p>
+<h2>By growing district<span>{e(main_name)} · week of {fdate(d,'en')}</span></h2>
+<div class="scroll"><table><thead><tr><th>District</th><th class="n">LKR / kg</th><th class="n">≈ US$ / kg</th></tr></thead><tbody>{dtrs}</tbody></table></div>
+{cfg['extra']}
+{faq_html}
+<p class="asof" style="margin-top:14px">📑 <a href="{DEA_URL}" rel="noopener">Official DEA report</a> ·
+<a href="../spice-report.html?spice={sp['slug']}">📊 Full report: all grades, year-on-year</a> · <a href="{sp['slug']}.html">සිංහල පිටුව</a></p>
+<a class="cta" href="../spices.html">All Sri Lanka spice prices →</a>
+"""
+    desc = (f"{cfg['h1']}: {main_name} Rs. {money(g1)}/kg (≈ {usd(g1, rate)}) farm gate, week of {fdate(d,'en')} (DEA). "
+            f"All grades, districts and weekly trend since {hist[0][0].year}.")
+    first = hist[0][0]
+    jsonld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "TopGoviya.lk", "item": SITE + "/"},
+            {"@type": "ListItem", "position": 2, "name": "Spice prices", "item": SITE + "/spices.html"},
+            {"@type": "ListItem", "position": 3, "name": cfg["h1"], "item": url}]},
+        {"@type": "Dataset", "name": f"{cfg['name'].capitalize()} farm gate price in Sri Lanka – weekly, by grade and district",
+         "description": (f"Weekly farm gate prices of {cfg['name']} in Sri Lanka by grade and district from the Department of Export "
+                         f"Agriculture, {fdate(first,'en')} to {fdate(d,'en')}, with US$ reference prices. Latest {main_name} Rs. {money(g1)} per kg."),
+         "url": url, "inLanguage": "en", "spatialCoverage": "Sri Lanka",
+         "temporalCoverage": f"{first.isoformat()}/{d.isoformat()}", "dateModified": d.isoformat(),
+         "variableMeasured": f"{cfg['name']} farm gate price (LKR per kg)", "isBasedOn": DEA_URL,
+         "creator": {"@type": "Organization", "name": "TopGoviya.lk", "url": SITE + "/"}},
+        {"@type": "FAQPage", "mainEntity": [
+            {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]}]}
+    image = f"{SITE}/share/spice-{sp['slug']}.png?v={cur['date']}"
+    page = shell(cfg["title"], desc, url, body, jsonld, image, lang="en", alternates=[("en", url), ("si", si_url)])
+    return page.replace("කුළුබඩු මිල / Spice prices</a></header>", "Spice prices</a></header>"), cur["date"]
 
 
 def update_sitemap(slugs, lastmod):
@@ -405,6 +586,18 @@ def main():
         open(os.path.join(OUT_DIR, sp["slug"] + ".html"), "w", encoding="utf-8").write(page)
         made.append(sp["slug"]); latest = max(latest, wk)
         print(f"  {sp['slug']:10} DEA week {wk}")
+    try:
+        dei = json.load(open("dei_data.json", encoding="utf-8"))
+    except Exception:
+        dei = None
+    for sp in SPICES:
+        cfg = EN_PAGES.get(sp["slug"])
+        if not cfg:
+            continue
+        page, wk = spice_page_en(dea, sp, cfg, dei)
+        if page:
+            open(os.path.join(OUT_DIR, cfg["file"] + ".html"), "w", encoding="utf-8").write(page)
+            made.append(cfg["file"]); print(f"  {cfg['file']} (English)")
     if made:
         update_sitemap(made, latest)
     print(f"Built {len(made)} spice pages, sitemap updated.")
