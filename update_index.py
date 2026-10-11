@@ -115,11 +115,17 @@ def today_section(db):
 
     chip = ('display:inline-flex;align-items:center;gap:4px;padding:5px 11px;border-radius:999px;border:1px solid var(--petrol);'
             'color:var(--petrol);background:var(--card);font-size:12.5px;font-weight:700;text-decoration:none')
-    chips = "".join(f'<a href="{href}" style="{chip}">{L(a_, b_, c_)}</a>' for href, a_, b_, c_ in [
+    def chip_html(href, a_, b_, c_):
+        if isinstance(href, tuple):        # (Sinhala/Tamil page, English page)
+            return (f'<span class="tgl tgl-si"><a href="{href[0]}" style="{chip}">{a_}</a></span>'
+                    f'<span class="tgl tgl-ta"><a href="{href[0]}" style="{chip}">{c_}</a></span>'
+                    f'<span class="tgl tgl-en"><a href="{href[1]}" style="{chip}">{b_}</a></span>')
+        return f'<a href="{href}" style="{chip}">{L(a_, b_, c_)}</a>'
+    chips = "".join(chip_html(href, a_, b_, c_) for href, a_, b_, c_ in [
         ("market/", "🧺 වෙළඳපොළ මිල", "🧺 Market prices", "🧺 சந்தை விலைகள்"),
         ("price/", "🏷️ භාණ්ඩ අනුව මිල", "🏷️ Prices by item", "🏷️ பொருள் வாரியாக விலை"),
-        ("spice/pepper.html", "⚫ ගම්මිරිස් මිල අද", "⚫ Pepper price today", "⚫ மிளகு விலை இன்று"),
-        ("spice/cinnamon.html", "🪵 කුරුඳු මිල අද", "🪵 Cinnamon price today", "🪵 கறுவா விலை இன்று"),
+        (("spice/pepper.html", "spice/sri-lanka-black-pepper-price.html"), "⚫ ගම්මිරිස් මිල අද", "⚫ Black pepper price (LKR & US$)", "⚫ மிளகு விலை இன்று"),
+        (("spice/cinnamon.html", "spice/ceylon-cinnamon-price.html"), "🪵 කුරුඳු මිල අද", "🪵 Ceylon cinnamon price (LKR & US$)", "🪵 கறுவா விலை இன்று"),
         # ?v=<date> so phones always get the newest image (old ones stay cached under their own date)
         (f"share/today.png?v={dates[li]}", "📤 අද මිල පින්තූරය (WhatsApp)", "📤 Today's price image (WhatsApp)", "📤 இன்றைய விலைப் படம் (WhatsApp)"),
         (f"share/sell.png?v={harti_day()}", "🟢 අද වැඩිම තොග මිල කොහේද?", "🟢 Highest wholesale price today", "🟢 இன்று அதிக மொத்த விலை எங்கே?")])
@@ -191,6 +197,11 @@ def main():
         html = html[:k] + sec + "\n\n  " + html[k:]
 
     # 4) price assistant (assistant.js): understands "අද තක්කාලි මිල කීයද?", Singlish, spices, markets
+    # banner translation (lang-extras.js)
+    if "lang-extras.js" not in html:
+        k = html.rfind("</body>")
+        html = html[:k] + '<script defer src="lang-extras.js?v=1"></script>\n' + html[k:]
+
     if "assistant.js" not in html:
         k = html.rfind("</body>")
         html = html[:k] + '<script defer src="assistant.js?v=1"></script>\n' + html[k:]
