@@ -17,102 +17,163 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Hanken+Grotesk:wght@400;600;700&family=Noto+Sans+Sinhala:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Hanken+Grotesk:wght@400;600;700&family=Noto+Sans+Sinhala:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--paper:#f4efe4;--card:#fffdf7;--ink:#191d1a;--soft:#3a403a;--muted:#7a7264;--line:#e3d9c4;--petrol:#0e4f4a;--gold:#a9802a;--wa:#25d366}
+  :root{--paper:#f4efe4;--card:#fffdf7;--ink:#191d1a;--soft:#3a403a;--muted:#7a7264;--line:#e3d9c4;--petrol:#0e4f4a;--gold:#a9802a;--wa:#1faa59}
   *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:'Hanken Grotesk','Noto Sans Sinhala','Noto Sans Tamil',sans-serif;line-height:1.55}
   .wrap{max-width:760px;margin:0 auto;padding:0 18px 40px}
-  header.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0 14px;border-bottom:2px solid var(--ink)}
+  header.top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:18px 0 14px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
   header.top a.brand{font-family:'Newsreader',serif;font-weight:600;font-size:22px;color:var(--ink);text-decoration:none}
-  header.top a{color:var(--petrol);font-size:14px}
-  h1{font-family:'Newsreader','Noto Sans Sinhala',serif;font-weight:500;font-size:38px;line-height:1.1;margin:22px 0 4px}
-  .alt{color:var(--soft);margin:0}
-  .ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:20px 0}
-  .way{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;text-decoration:none;color:var(--ink)}
-  .way .i{font-size:28px} .way b{display:block;font-size:16px} .way span{display:block;font-size:13.5px;color:var(--muted);word-break:break-all}
-  .way.wa{border-color:var(--wa)}
-  h2{font-family:'Newsreader','Noto Sans Sinhala',serif;font-weight:500;font-size:26px;margin:28px 0 6px}
-  h2 span{font-family:'Hanken Grotesk',sans-serif;font-size:14px;color:var(--muted);margin-left:8px}
+  .lang{display:flex;align-items:center;border:1px solid #cdbf9f;border-radius:999px;overflow:hidden;background:var(--card)}
+  .lang button{font:inherit;font-size:13px;font-weight:700;border:0;background:transparent;color:var(--muted);padding:6px 12px;cursor:pointer}
+  .lang button.on{background:var(--petrol);color:#fff}
+  h1{font-family:'Newsreader','Noto Sans Sinhala','Noto Sans Tamil',serif;font-weight:500;font-size:38px;line-height:1.15;margin:22px 0 8px}
+  .lead{margin:0 0 4px;color:var(--soft)}
+  .ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:22px 0}
+  .way{display:flex;flex-direction:column;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:18px;
+       padding:20px 12px 16px;text-decoration:none;color:var(--ink);text-align:center;transition:transform .15s,box-shadow .15s}
+  .way:hover{transform:translateY(-2px);box-shadow:0 12px 26px -18px rgba(14,79,74,.6)}
+  .ico{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff}
+  .ico svg{width:28px;height:28px}
+  .way b{font-size:16px} .way span.s{font-size:13px;color:var(--muted)}
+  .c-wa{background:var(--wa)} .c-em{background:var(--petrol)} .c-fb{background:#2f5fa7} .c-yt{background:#c8382c}
+  h2{font-family:'Newsreader','Noto Sans Sinhala','Noto Sans Tamil',serif;font-weight:500;font-size:26px;margin:28px 0 8px}
   form{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
   label{display:block;font-weight:700;font-size:14.5px;margin:12px 0 5px} label:first-child{margin-top:0}
-  label small{font-weight:400;color:var(--muted)}
   input,select,textarea{width:100%;font:inherit;font-size:16px;padding:11px 12px;border:1px solid #cdbf9f;border-radius:10px;background:#fff;color:var(--ink)}
   textarea{min-height:120px;resize:vertical}
   .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-  .btns button{flex:1;min-width:200px;font:inherit;font-weight:700;font-size:16px;padding:13px 16px;border-radius:12px;cursor:pointer;border:0}
-  .b-wa{background:var(--wa);color:#fff} .b-em{background:var(--petrol);color:#fff}
+  .btns button{flex:1;min-width:200px;font:inherit;font-weight:700;font-size:16px;padding:13px 16px;border-radius:12px;cursor:pointer;border:0;
+               display:flex;align-items:center;justify-content:center;gap:8px;color:#fff}
+  .btns svg{width:20px;height:20px}
+  .b-wa{background:var(--wa)} .b-em{background:var(--petrol)}
   .hint{font-size:13px;color:var(--muted);margin-top:10px}
   .err{color:#b23a2e;font-size:14px;margin-top:8px;display:none}
   .faq{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px 18px}
   .faq h3{font-size:16px;margin:14px 0 4px} .faq p{margin:0 0 12px;color:var(--soft);font-size:15px}
+  .faq a{color:var(--petrol)}
   .made{text-align:center;color:var(--muted);font-size:14px;margin-top:24px}
+  .made a{color:var(--petrol)}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header class="top"><a class="brand" href="index.html">TopGoviya.lk</a><a href="index.html">අද එළවළු මිල →</a></header>
+<!-- simple symbols (not company logos) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-chat" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-5 4v-4H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/><circle cx="8.5" cy="11" r="1.2" fill="currentColor"/><circle cx="12" cy="11" r="1.2" fill="currentColor"/><circle cx="15.5" cy="11" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.5 6.5l8.5 7 8.5-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-page" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.5 19c.6-3.3 2.8-5 5.5-5s4.9 1.7 5.5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="17" cy="9" r="2.3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 14.3c2.6-.4 4.6 1 5 4.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 8.5v7l6-3.5z" fill="currentColor"/></symbol>
+</svg>
 
-<h1>අප අමතන්න</h1>
-<p class="alt">Contact us · எங்களைத் தொடர்பு கொள்ள</p>
-<p>මිලක් වැරදි යැයි සිතේද? යෝජනාවක් තිබේද? සහයෝගිතාවක් ගැන කතා කරන්නද? පහත ඕනෑම ක්‍රමයකින් අමතන්න.<br>
-<span lang="en" style="color:var(--muted)">Spotted a wrong price, have a suggestion, or want to work together? Reach us any way below.</span></p>
+<div class="wrap">
+<header class="top">
+  <a class="brand" href="index.html">TopGoviya.lk</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button data-lang="si" class="on">සිංහල</button><button data-lang="ta">தமிழ்</button><button data-lang="en">EN</button>
+  </div>
+</header>
+
+<h1 data-t="h1">අප අමතන්න</h1>
+<p class="lead" data-t="lead">මිලක් වැරදි යැයි සිතේද? යෝජනාවක් තිබේද? සහයෝගිතාවක් ගැන කතා කරන්නද? පහත ඕනෑම ක්‍රමයකින් අමතන්න.</p>
 
 <div class="ways">
-  <a class="way wa" id="waLink" href="#"><span class="i">💬</span><span><b>WhatsApp</b><span id="waNum"></span></span></a>
-  <a class="way" href="mailto:topgoviya@gmail.com"><span class="i">✉️</span><span><b>Email</b><span>topgoviya@gmail.com</span></span></a>
-  <a class="way" href="https://www.facebook.com/TopGoviyaLK" target="_blank" rel="noopener"><span class="i">📘</span><span><b>Facebook</b><span>facebook.com/TopGoviyaLK</span></span></a>
-  <a class="way" href="https://www.youtube.com/@TopGoviyaLK" target="_blank" rel="noopener"><span class="i">▶️</span><span><b>YouTube</b><span>@TopGoviyaLK</span></span></a>
+  <a class="way" id="waLink" href="#" target="_blank" rel="noopener"><span class="ico c-wa"><svg><use href="#i-chat"/></svg></span><b>WhatsApp</b><span class="s" data-t="waS">කතා කරන්න</span></a>
+  <a class="way" href="mailto:topgoviya@gmail.com"><span class="ico c-em"><svg><use href="#i-mail"/></svg></span><b>Email</b><span class="s">topgoviya@gmail.com</span></a>
+  <a class="way" href="https://www.facebook.com/TopGoviyaLK" target="_blank" rel="noopener"><span class="ico c-fb"><svg><use href="#i-page"/></svg></span><b>Facebook</b><span class="s">TopGoviyaLK</span></a>
+  <a class="way" href="https://www.youtube.com/@TopGoviyaLK" target="_blank" rel="noopener"><span class="ico c-yt"><svg><use href="#i-play"/></svg></span><b>YouTube</b><span class="s">@TopGoviyaLK</span></a>
 </div>
 
-<h2>පණිවිඩයක් යවන්න<span>Send a message</span></h2>
+<h2 data-t="h2">පණිවිඩයක් යවන්න</h2>
 <form id="cf" onsubmit="return false">
-  <label for="topic">මාතෘකාව <small>/ Topic</small></label>
+  <label for="topic" data-t="lTopic">මාතෘකාව</label>
   <select id="topic">
-    <option value="price">⚠️ මිලක් වැරදියි / Wrong price</option>
-    <option value="idea">💡 යෝජනාවක් / Suggestion</option>
-    <option value="partner">🤝 සහයෝගිතා හෝ මාධ්‍ය / Partnership or media</option>
-    <option value="other">💬 වෙනත් / Other</option>
+    <option value="price" data-t="oPrice">⚠️ මිලක් වැරදියි</option>
+    <option value="idea" data-t="oIdea">💡 යෝජනාවක්</option>
+    <option value="partner" data-t="oPartner">🤝 සහයෝගිතා හෝ මාධ්‍ය</option>
+    <option value="other" data-t="oOther">💬 වෙනත්</option>
   </select>
-  <label for="msg">පණිවිඩය <small>/ Message</small></label>
-  <textarea id="msg" placeholder="උදා: දඹුල්ල තක්කාලි තොග මිල 2026 ඔක්තෝබර් 9 — නිල වාර්තාවේ රු. 400 ලෙස ඇත"></textarea>
-  <label for="name">ඔබේ නම <small>/ Your name (optional)</small></label>
-  <input id="name" autocomplete="name" placeholder="නම / Name">
-  <div class="err" id="err">කරුණාකර පණිවිඩයක් ලියන්න / Please write a message.</div>
+  <label for="msg" data-t="lMsg">පණිවිඩය</label>
+  <textarea id="msg"></textarea>
+  <label for="name" data-t="lName">ඔබේ නම (අවශ්‍ය නම් පමණක්)</label>
+  <input id="name" autocomplete="name">
+  <div class="err" id="err" data-t="err">කරුණාකර පණිවිඩයක් ලියන්න.</div>
   <div class="btns">
-    <button type="button" class="b-wa" id="sendWa">💬 WhatsApp හරහා යවන්න</button>
-    <button type="button" class="b-em" id="sendEm">✉️ Email හරහා යවන්න</button>
+    <button type="button" class="b-wa" id="sendWa"><svg><use href="#i-chat"/></svg><span data-t="bWa">WhatsApp හරහා යවන්න</span></button>
+    <button type="button" class="b-em" id="sendEm"><svg><use href="#i-mail"/></svg><span data-t="bEm">Email හරහා යවන්න</span></button>
   </div>
-  <p class="hint">ඔබේ WhatsApp හෝ email යෙදුම පණිවිඩය ලියා ඇතිව විවෘත වේ — "Send" ඔබන්න. මෙම වෙබ් අඩවිය කිසිවක් ගබඩා නොකරයි.<br>
-  <span lang="en">Your own WhatsApp or email app opens with the message ready — just press Send. Nothing is stored on this website.</span></p>
+  <p class="hint" data-t="hint">ඔබේ WhatsApp හෝ email යෙදුම පණිවිඩය ලියා ඇතිව විවෘත වේ — "Send" ඔබන්න. මෙම වෙබ් අඩවිය කිසිවක් ගබඩා නොකරයි.</p>
 </form>
 
-<h2>නිතර අසන ප්‍රශ්න<span>FAQ</span></h2>
+<h2 data-t="faqH">නිතර අසන ප්‍රශ්න</h2>
 <div class="faq">
-  <h3>TopGoviya.lk නොමිලේද? / Is it free?</h3>
-  <p>ඔව් — සම්පූර්ණයෙන්ම නොමිලේ, ලියාපදිංචි වීමක් අවශ්‍ය නැත. Yes, completely free, no sign-up.</p>
-  <h3>මිල ගණන් කොහෙන්ද? / Where do the prices come from?</h3>
-  <p>ශ්‍රී ලංකා මහ බැංකුව, HARTI හා අපනයන කෘෂිකර්ම දෙපාර්තමේන්තුවේ (DEA) නිල වාර්තාවලින්. <a href="data-sources.html">විස්තර →</a></p>
-  <h3>කොපමණ වාරයක් යාවත්කාලීන වේද? / How often is it updated?</h3>
-  <p>එළවළු මිල දිනපතා (සතියේ දින), තොග මිල දිනපතා, කුළුබඩු මිල සතිපතා. Vegetables daily, wholesale daily, spices weekly.</p>
-  <h3>මිලක් වැරදි නම්? / What if a price is wrong?</h3>
-  <p>භාණ්ඩය, වෙළඳපොළ හා දිනය සමඟ ඉහත පෝරමයෙන් දන්වන්න. අපි නිල වාර්තාව සමඟ පරීක්ෂා කර නිවැරදි කරමු.</p>
+  <h3 data-t="q1">TopGoviya.lk නොමිලේද?</h3><p data-t="a1">ඔව් — සම්පූර්ණයෙන්ම නොමිලේ, ලියාපදිංචි වීමක් අවශ්‍ය නැත.</p>
+  <h3 data-t="q2">මිල ගණන් කොහෙන්ද?</h3><p data-t="a2">ශ්‍රී ලංකා මහ බැංකුව, HARTI හා අපනයන කෘෂිකර්ම දෙපාර්තමේන්තුවේ (DEA) නිල වාර්තාවලින්.</p>
+  <h3 data-t="q3">කොපමණ වාරයක් යාවත්කාලීන වේද?</h3><p data-t="a3">එළවළු මිල දිනපතා (සතියේ දින), තොග මිල දිනපතා, කුළුබඩු මිල සතිපතා.</p>
+  <h3 data-t="q4">මිලක් වැරදි නම්?</h3><p data-t="a4">භාණ්ඩය, වෙළඳපොළ හා දිනය සමඟ ඉහත පෝරමයෙන් දන්වන්න. අපි නිල වාර්තාව සමඟ පරීක්ෂා කර නිවැරදි කරමු.</p>
+  <p><a href="data-sources.html" data-t="srcLink">දත්ත මූලාශ්‍ර ගැන විස්තර →</a></p>
 </div>
 
-<p class="made">🇱🇰 Built in Gampola, Sri Lanka · <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a></p>
+<p class="made"><span data-t="made">ගම්පොළදී නිර්මාණය කළා</span> · <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a></p>
 </div>
 
 <script>
-/* ---- the ONE place to change the WhatsApp number later ---- */
-var TG_WHATSAPP = "94701500743";          /* country code + number, no + or spaces */
+/* ---- the ONE place to change the WhatsApp number later (country code + number, no + or spaces) ---- */
+var TG_WHATSAPP = "94701500743";
 var TG_EMAIL = "topgoviya@gmail.com";
 
-(function () {
-  function pretty(n) { return "+" + n.slice(0, 2) + " " + n.slice(2, 4) + " " + n.slice(4, 7) + " " + n.slice(7); }
-  document.getElementById("waNum").textContent = pretty(TG_WHATSAPP);
-  document.getElementById("waLink").href = "https://wa.me/" + TG_WHATSAPP + "?text=" + encodeURIComponent("TopGoviya: ");
-  document.getElementById("waLink").target = "_blank";
+var T = {
+ si: { h1:"අප අමතන්න", lead:"මිලක් වැරදි යැයි සිතේද? යෝජනාවක් තිබේද? සහයෝගිතාවක් ගැන කතා කරන්නද? පහත ඕනෑම ක්‍රමයකින් අමතන්න.",
+   waS:"කතා කරන්න", h2:"පණිවිඩයක් යවන්න", lTopic:"මාතෘකාව", oPrice:"⚠️ මිලක් වැරදියි", oIdea:"💡 යෝජනාවක්", oPartner:"🤝 සහයෝගිතා හෝ මාධ්‍ය", oOther:"💬 වෙනත්",
+   lMsg:"පණිවිඩය", lName:"ඔබේ නම (අවශ්‍ය නම් පමණක්)", ph:"උදා: දඹුල්ල තක්කාලි තොග මිල 2026 ඔක්තෝබර් 9 — නිල වාර්තාවේ රු. 400 ලෙස ඇත", phName:"නම",
+   err:"කරුණාකර පණිවිඩයක් ලියන්න.", bWa:"WhatsApp හරහා යවන්න", bEm:"Email හරහා යවන්න",
+   hint:"ඔබේ WhatsApp හෝ email යෙදුම පණිවිඩය ලියා ඇතිව විවෘත වේ — \"Send\" ඔබන්න. මෙම වෙබ් අඩවිය කිසිවක් ගබඩා නොකරයි.",
+   faqH:"නිතර අසන ප්‍රශ්න", q1:"TopGoviya.lk නොමිලේද?", a1:"ඔව් — සම්පූර්ණයෙන්ම නොමිලේ, ලියාපදිංචි වීමක් අවශ්‍ය නැත.",
+   q2:"මිල ගණන් කොහෙන්ද?", a2:"ශ්‍රී ලංකා මහ බැංකුව, HARTI හා අපනයන කෘෂිකර්ම දෙපාර්තමේන්තුවේ (DEA) නිල වාර්තාවලින්.",
+   q3:"කොපමණ වාරයක් යාවත්කාලීන වේද?", a3:"එළවළු මිල දිනපතා (සතියේ දින), තොග මිල දිනපතා, කුළුබඩු මිල සතිපතා.",
+   q4:"මිලක් වැරදි නම්?", a4:"භාණ්ඩය, වෙළඳපොළ හා දිනය සමඟ ඉහත පෝරමයෙන් දන්වන්න. අපි නිල වාර්තාව සමඟ පරීක්ෂා කර නිවැරදි කරමු.",
+   srcLink:"දත්ත මූලාශ්‍ර ගැන විස්තර →", made:"ගම්පොළදී නිර්මාණය කළා", title:"අප අමතන්න | TopGoviya.lk" },
+ ta: { h1:"எங்களைத் தொடர்பு கொள்ள", lead:"விலை தவறாக உள்ளதா? பரிந்துரை உள்ளதா? கூட்டாண்மை பற்றி பேச வேண்டுமா? கீழே உள்ள எந்த வழியிலும் தொடர்பு கொள்ளுங்கள்.",
+   waS:"அரட்டை", h2:"செய்தி அனுப்ப", lTopic:"தலைப்பு", oPrice:"⚠️ விலை தவறு", oIdea:"💡 பரிந்துரை", oPartner:"🤝 கூட்டாண்மை அல்லது ஊடகம்", oOther:"💬 மற்றவை",
+   lMsg:"செய்தி", lName:"உங்கள் பெயர் (விருப்பம்)", ph:"எ.கா: தம்புள்ள தக்காளி மொத்த விலை 2026 அக்டோபர் 9 — அதிகாரப்பூர்வ அறிக்கையில் ரூ. 400", phName:"பெயர்",
+   err:"தயவுசெய்து ஒரு செய்தியை எழுதுங்கள்.", bWa:"WhatsApp மூலம் அனுப்ப", bEm:"Email மூலம் அனுப்ப",
+   hint:"உங்கள் WhatsApp அல்லது email செயலி செய்தியுடன் திறக்கும் — \"Send\" அழுத்துங்கள். இந்த இணையதளம் எதையும் சேமிப்பதில்லை.",
+   faqH:"அடிக்கடி கேட்கப்படும் கேள்விகள்", q1:"TopGoviya.lk இலவசமா?", a1:"ஆம் — முற்றிலும் இலவசம், பதிவு தேவையில்லை.",
+   q2:"விலைகள் எங்கிருந்து?", a2:"இலங்கை மத்திய வங்கி, HARTI மற்றும் ஏற்றுமதி விவசாயத் திணைக்களத்தின் (DEA) அதிகாரப்பூர்வ அறிக்கைகளிலிருந்து.",
+   q3:"எவ்வளவு அடிக்கடி புதுப்பிக்கப்படுகிறது?", a3:"காய்கறி விலை தினமும் (வார நாட்கள்), மொத்த விலை தினமும், மசாலா விலை வாராந்திரம்.",
+   q4:"விலை தவறாக இருந்தால்?", a4:"பொருள், சந்தை மற்றும் தேதியுடன் மேலே உள்ள படிவத்தில் தெரிவிக்கவும். அதிகாரப்பூர்வ அறிக்கையுடன் சரிபார்த்து திருத்துவோம்.",
+   srcLink:"தரவு மூலங்கள் பற்றி →", made:"கம்பளையில் உருவாக்கப்பட்டது", title:"தொடர்பு கொள்ள | TopGoviya.lk" },
+ en: { h1:"Contact us", lead:"Spotted a wrong price, have a suggestion, or want to work together? Reach us any way below.",
+   waS:"Chat with us", h2:"Send a message", lTopic:"Topic", oPrice:"⚠️ Wrong price", oIdea:"💡 Suggestion", oPartner:"🤝 Partnership or media", oOther:"💬 Other",
+   lMsg:"Message", lName:"Your name (optional)", ph:"e.g. Dambulla tomato wholesale price, 9 October 2026 — the official report says Rs. 400", phName:"Name",
+   err:"Please write a message.", bWa:"Send by WhatsApp", bEm:"Send by email",
+   hint:"Your own WhatsApp or email app opens with the message ready — just press Send. Nothing is stored on this website.",
+   faqH:"Frequently asked questions", q1:"Is TopGoviya.lk free?", a1:"Yes — completely free, no sign-up needed.",
+   q2:"Where do the prices come from?", a2:"From official reports of the Central Bank of Sri Lanka, HARTI and the Department of Export Agriculture (DEA).",
+   q3:"How often is it updated?", a3:"Vegetable prices daily (weekdays), wholesale prices daily, spice prices weekly.",
+   q4:"What if a price is wrong?", a4:"Tell us with the item, market and date using the form above. We check it against the official report and correct it.",
+   srcLink:"About our data sources →", made:"Built in Gampola, Sri Lanka", title:"Contact | TopGoviya.lk" }
+};
 
+(function () {
   var q = new URLSearchParams(location.search), topic = document.getElementById("topic"), msg = document.getElementById("msg");
+  var lang = "si";
+  try { var saved = localStorage.getItem("tg-contact-lang"); if (T[saved]) lang = saved; } catch (e) {}
+  if (T[q.get("lang")]) lang = q.get("lang");
+
+  function applyLang(l) {
+    lang = l; var t = T[l];
+    document.documentElement.lang = l; document.title = t.title;
+    document.querySelectorAll("[data-t]").forEach(function (el) { var k = el.getAttribute("data-t"); if (t[k]) el.textContent = t[k]; });
+    msg.placeholder = t.ph; document.getElementById("name").placeholder = t.phName;
+    document.querySelectorAll(".lang button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-lang") === l); });
+    try { localStorage.setItem("tg-contact-lang", l); } catch (e) {}
+  }
+  document.querySelector(".lang").addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-lang]"); if (b) applyLang(b.getAttribute("data-lang"));
+  });
+  applyLang(lang);
+
+  document.getElementById("waLink").href = "https://wa.me/" + TG_WHATSAPP + "?text=" + encodeURIComponent("TopGoviya: ");
   if (q.get("t") && topic.querySelector('option[value="' + q.get("t") + '"]')) topic.value = q.get("t");
   var from = q.get("from") || (document.referrer.indexOf("topgoviya.lk") > -1 ? document.referrer : "");
 
@@ -124,7 +185,7 @@ var TG_EMAIL = "topgoviya@gmail.com";
     return "TopGoviya: " + topic.options[topic.selectedIndex].text + "\n\n" + m +
            (name ? "\n\n— " + name : "") + (from ? "\n\n(Page: " + from + ")" : "");
   }
-  function track(method) { try { if (window.tgEvent) tgEvent("contact", { method: method, topic: topic.value }); } catch (e) {} }
+  function track(method) { try { if (window.tgEvent) tgEvent("contact", { method: method, topic: topic.value, language: lang }); } catch (e) {} }
 
   document.getElementById("sendWa").onclick = function () {
     var t = compose(); if (!t) return; track("whatsapp");
@@ -137,7 +198,5 @@ var TG_EMAIL = "topgoviya@gmail.com";
   };
 })();
 </script>
-<div id="tg-copy-wrap" style="text-align:center;font-size:12px;line-height:1.6;color:#7a7264;max-width:900px;margin:8px auto 76px;padding:0 16px"><span id="tg-copy">© 2026 TopGoviya.lk · සියලු හිමිකම් ඇවිරිණි / All rights reserved · මිල දත්ත: මහ බැංකුව, HARTI, DEA (නිල මූලාශ්‍ර) / Price data: CBSL, HARTI &amp; DEA · <a href="/contact.html">සම්බන්ධ වන්න / Contact</a></span></div>
-<script defer src="/events.js?v=1"></script>
 </body>
 </html>
