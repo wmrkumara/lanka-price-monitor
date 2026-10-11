@@ -197,6 +197,28 @@ def main():
         html = html[:k] + sec + "\n\n  " + html[k:]
 
     # 4) price assistant (assistant.js): understands "අද තක්කාලි මිල කීයද?", Singlish, spices, markets
+    # Organization details for Google: contact, logo, official social pages
+    def _org(m):
+        try:
+            d = json.loads(m.group(1))
+        except Exception:
+            return m.group(0)
+        if d.get("@type") != "Organization":
+            return m.group(0)
+        d["logo"] = "https://topgoviya.lk/icon-512x512.png"
+        d["email"] = "topgoviya@gmail.com"
+        d["contactPoint"] = {"@type": "ContactPoint", "contactType": "customer support",
+                             "email": "topgoviya@gmail.com", "url": "https://topgoviya.lk/contact.html",
+                             "availableLanguage": ["Sinhala", "Tamil", "English"], "areaServed": "LK"}
+        # sameAs = other pages of the SAME organization only (ebooklanka.com is a separate brand)
+        same = [u for u in d.get("sameAs", []) if u.rstrip("/") != "https://topgoviya.lk" and "ebooklanka" not in u]
+        for u in ["https://www.facebook.com/TopGoviyaLK", "https://www.youtube.com/@TopGoviyaLK"]:
+            if u not in same:
+                same.append(u)
+        d["sameAs"] = same
+        return '<script type="application/ld+json">' + json.dumps(d, ensure_ascii=False) + '</script>'
+    html = re.sub(r'<script type="application/ld\+json">(.*?)</script>', _org, html, flags=re.S)
+
     # banner translation (lang-extras.js)
     if "lang-extras.js" not in html:
         k = html.rfind("</body>")
