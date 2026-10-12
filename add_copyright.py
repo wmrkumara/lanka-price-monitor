@@ -121,6 +121,32 @@ def add_top_contact(path, s):
     return s[:k] + TOP_CONTACT + s[k:] if k >= 0 else s
 
 
+def add_quick_calc(path, s):
+    """Break-even page: load quick-calc.js (the ⚡ Quick calculation card), once."""
+    if path != "breakeven.html" or "quick-calc.js" in s or "</body>" not in s:
+        return s
+    k = s.rfind("</body>")
+    return s[:k] + '<script defer src="quick-calc.js?v=1"></script>\n' + s[k:]
+
+
+def fix_canonical(path, s):
+    """If a page tells Google its 'official address' is a page that does not exist,
+    point it back to the page's real address (found: the Netherlands article, Oct 2026)."""
+    def repl(m):
+        url = m.group(2)
+        local = url.replace("https://topgoviya.lk/", "", 1) if url.startswith("https://topgoviya.lk/") else None
+        if local is None:
+            return m.group(0)
+        target = local or "index.html"
+        if target.endswith("/"):
+            target += "index.html"
+        if os.path.exists(target):
+            return m.group(0)
+        return m.group(1) + "https://topgoviya.lk/" + ("" if path == "index.html" else path) + m.group(3)
+    s = re.sub(r'(<link rel="canonical" href=")([^"]+)(")', repl, s, count=1)
+    return re.sub(r'(<meta property="og:url" content=")([^"]+)(")', repl, s, count=1)
+
+
 def main():
     changed = []
     for path in sorted(glob.glob("*.html")):
@@ -139,6 +165,8 @@ def main():
         new = add_preview(path, new)
         new = add_events(new)
         new = add_top_contact(path, new)
+        new = add_quick_calc(path, new)
+        new = fix_canonical(path, new)
         if new != s:
             open(path, "w", encoding="utf-8").write(new)
             changed.append(path)
