@@ -1,12 +1,12 @@
 # TopGoviya.lk — daily price image for WhatsApp / Facebook
-# Runs automatically after each "Update price data" run, and only redraws the
-# image when there is a new CBSL report. Image: https://topgoviya.lk/share/today.png
+# Runs automatically after each "Update price data" or "Update HARTI wholesale data" run,
+# and only redraws an image when there is a new CBSL, HARTI or DEA report. Image: https://topgoviya.lk/share/today.png
 
 name: Daily price image
 
 on:
   workflow_run:
-    workflows: ["Update price data"]
+    workflows: ["Update price data", "Update HARTI wholesale data"]
     types: [completed]
   workflow_dispatch:
 
