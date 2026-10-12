@@ -20,6 +20,11 @@ jobs:
           python-version: "3.12"
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+      - name: Install Chrome for the CBSL browser route
+        run: |
+          pip install -q playwright
+          python -m playwright install --with-deps chromium
       # ── CBSL Retail Prices ──────────────────────────────────
       - name: Fetch latest CBSL report and rebuild data.json
         run: python update.py
