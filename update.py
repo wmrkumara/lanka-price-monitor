@@ -21,28 +21,64 @@ PRIMARY = {"Vegetables": "Dambulla", "Other": "Dambulla", "Fruits": "Dambulla",
 WHOLESALE_PRIMARY = {"Vegetables": "Dambulla", "Other": "Dambulla", "Fruits": "Dambulla",
                      "Rice": "Dambulla", "Fish": "Negombo"}
 
-def discover_and_download():
-    os.makedirs(PDF_DIR, exist_ok=True)
+PDF_BASE = "https://www.cbsl.gov.lk/sites/default/files/cbslweb_documents/statistics/pricerpt/"
+BROWSER_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,application/pdf,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+}
+
+
+def _save_pdf(url, path):
+    """Download one report; keep it only if it really is a PDF (not a 'blocked' web page)."""
     try:
-        html = requests.get(LISTING_URL, headers=HEADERS, timeout=30).text
+        r = requests.get(url, headers=BROWSER_HEADERS, timeout=60)
+        if r.status_code == 404:
+            return "missing"
+        r.raise_for_status()
+        if not r.content.startswith(b"%PDF"):
+            print("WARN: not a PDF (site may be blocking the robot):", url.split("/")[-1])
+            return "not-pdf"
+        with open(path, "wb") as f:
+            f.write(r.content)
+        print("Downloaded", os.path.basename(path))
+        return "ok"
+    except Exception as e:
+        print("WARN: failed to download", url.split("/")[-1], e)
+        return "error"
+
+
+def discover_and_download(days_back=10):
+    os.makedirs(PDF_DIR, exist_ok=True)
+    # Route 1: the CBSL list page
+    links = set()
+    try:
+        html = requests.get(LISTING_URL, headers=BROWSER_HEADERS, timeout=30).text
+        links = set(re.findall(r"https://[^\s\"']+price_report_\d{8}_e[^\s\"']*\.pdf", html))
     except Exception as e:
         print("WARN: could not reach listing page:", e)
-        return
-    links = set(re.findall(r"https://[^\s\"']+price_report_\d{8}_e[^\s\"']*\.pdf", html))
     print(f"Found {len(links)} report links on the listing page.")
     for url in sorted(links):
-        fname = url.split("/")[-1]
+        path = os.path.join(PDF_DIR, url.split("/")[-1])
+        if not os.path.exists(path):
+            _save_pdf(url, path)
+
+    # Route 2 (backup): ask for each recent day's PDF directly, in case the list page
+    # was blocked or not yet refreshed. Sri Lanka time = UTC + 5:30.
+    today = (datetime.datetime.utcnow() + datetime.timedelta(hours=5, minutes=30)).date()
+    got = 0
+    for k in range(days_back + 1):
+        d = today - datetime.timedelta(days=k)
+        if d.weekday() >= 5:                      # CBSL does not publish on Saturday/Sunday
+            continue
+        fname = f"price_report_{d:%Y%m%d}_e.pdf"
         path = os.path.join(PDF_DIR, fname)
         if os.path.exists(path):
             continue
-        try:
-            r = requests.get(url, headers=HEADERS, timeout=60)
-            r.raise_for_status()
-            with open(path, "wb") as f:
-                f.write(r.content)
-            print("Downloaded", fname)
-        except Exception as e:
-            print("WARN: failed to download", fname, e)
+        if _save_pdf(PDF_BASE + fname, path) == "ok":
+            got += 1
+    print(f"Direct check of the last {days_back} days: {got} new report(s).")
+
 
 def parse_values(s):
     vals, buf = [], ""
