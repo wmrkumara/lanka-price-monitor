@@ -48,6 +48,60 @@ def _save_pdf(url, path):
         return "error"
 
 
+def browser_download(days_back=10):
+    """Route 3: open the CBSL page in a real (headless) Chrome browser, like a normal visitor,
+    then download the reports through that same browser session.
+    Used when CBSL refuses the plain robot (it answered 403 Forbidden in Oct 2026)."""
+    try:
+        from playwright.sync_api import sync_playwright
+    except Exception:
+        print("Browser route skipped: Playwright is not installed.")
+        return 0
+    today = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=5, minutes=30)).date()
+    wanted = []
+    for k in range(days_back + 1):
+        d = today - datetime.timedelta(days=k)
+        fname = f"price_report_{d:%Y%m%d}_e.pdf"
+        if d.weekday() < 5 and not os.path.exists(os.path.join(PDF_DIR, fname)):
+            wanted.append(fname)
+    got = 0
+    try:
+        with sync_playwright() as p:
+            b = p.chromium.launch(args=["--disable-blink-features=AutomationControlled"])
+            ctx = b.new_context(user_agent=BROWSER_HEADERS["User-Agent"], locale="en-US",
+                                viewport={"width": 1366, "height": 900})
+            page = ctx.new_page()
+            page.goto(LISTING_URL, wait_until="domcontentloaded", timeout=60000)
+            links = set()
+            for _ in range(6):                 # give a security check up to ~30 s to finish
+                page.wait_for_timeout(5000)
+                html = page.content()
+                links = set(re.findall(r"https://[^\s\"']+price_report_\d{8}_e[^\s\"']*\.pdf", html))
+                links |= {PDF_BASE + m for m in re.findall(r"price_report_\d{8}_e\.pdf", html)}
+                if links:
+                    break
+            print(f"Browser route: found {len(links)} report links.")
+            urls = {u.split("/")[-1]: u for u in links}
+            for fname in wanted:
+                url = urls.get(fname, PDF_BASE + fname)
+                try:
+                    r = ctx.request.get(url, headers={"Referer": LISTING_URL}, timeout=60000)
+                    body = r.body() if r.ok else b""
+                    if body.startswith(b"%PDF"):
+                        with open(os.path.join(PDF_DIR, fname), "wb") as f:
+                            f.write(body)
+                        print("Downloaded (browser)", fname); got += 1
+                    elif r.status != 404:
+                        print(f"WARN (browser): {fname} -> HTTP {r.status}")
+                except Exception as e:
+                    print("WARN (browser):", fname, e)
+            b.close()
+    except Exception as e:
+        print("WARN: browser route failed:", e)
+    print(f"Browser route: {got} new report(s).")
+    return got
+
+
 def discover_and_download(days_back=10):
     os.makedirs(PDF_DIR, exist_ok=True)
     # Route 1: the CBSL list page
@@ -65,7 +119,7 @@ def discover_and_download(days_back=10):
 
     # Route 2 (backup): ask for each recent day's PDF directly, in case the list page
     # was blocked or not yet refreshed. Sri Lanka time = UTC + 5:30.
-    today = (datetime.datetime.utcnow() + datetime.timedelta(hours=5, minutes=30)).date()
+    today = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=5, minutes=30)).date()
     got = 0
     for k in range(days_back + 1):
         d = today - datetime.timedelta(days=k)
@@ -78,6 +132,8 @@ def discover_and_download(days_back=10):
         if _save_pdf(PDF_BASE + fname, path) == "ok":
             got += 1
     print(f"Direct check of the last {days_back} days: {got} new report(s).")
+    if not links:                                  # list page refused -> try a real browser
+        browser_download(days_back)
 
 
 def parse_values(s):
