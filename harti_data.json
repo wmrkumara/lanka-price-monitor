@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-07T20:07:08",
+ "generated": "2026-10-12T09:15:39",
  "source": "Hector Kobbekaduwa Agrarian Research and Training Institute — Daily Wholesale Price Report",
  "sourceUrl": "https://www.harti.gov.lk/daily-price.php",
  "dates": [
@@ -1283,7 +1283,11 @@
   "2026-10-04",
   "2026-10-05",
   "2026-10-06",
-  "2026-10-07"
+  "2026-10-07",
+  "2026-10-08",
+  "2026-10-09",
+  "2026-10-10",
+  "2026-10-11"
  ],
  "dateLabels": [
   "2 Jan",
@@ -2566,7 +2570,11 @@
   "4 Oct",
   "5 Oct",
   "6 Oct",
-  "7 Oct"
+  "7 Oct",
+  "8 Oct",
+  "9 Oct",
+  "10 Oct",
+  "11 Oct"
  ],
  "markets": [
   "Peliyagoda",
@@ -2581,14 +2589,16 @@
   "Veyangoda"
  ],
  "marketDates": {
-  "Peliyagoda": "2026-10-07",
-  "Kandy": "2026-10-07",
-  "Dambulla": "2026-10-07",
-  "Meegoda": "2026-10-06",
-  "Norochchole": "2026-10-07",
-  "Nuwaraeliya": "2026-10-07",
-  "Bandarawela": "2026-10-07",
-  "Veyangoda": "2026-10-06"
+  "Peliyagoda": "2026-10-11",
+  "Kandy": "2026-10-11",
+  "Dambulla": "2026-10-11",
+  "Meegoda": "2026-10-10",
+  "Norochchole": "2026-10-11",
+  "Thambuththegama": "2026-10-11",
+  "Keppetipola": "2026-10-11",
+  "Nuwaraeliya": "2026-10-11",
+  "Bandarawela": "2026-10-11",
+  "Veyangoda": "2026-10-10"
  },
  "commodities": [
   {
@@ -2599,46 +2609,46 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
+     "min": 500,
+     "max": 600,
+     "mid": 550
+    },
+    "Kandy": {
      "min": 400,
      "max": 450,
      "mid": 425
     },
-    "Kandy": {
+    "Dambulla": {
+     "min": 400,
+     "max": 500,
+     "mid": 450
+    },
+    "Meegoda": {
      "min": 450,
      "max": 500,
      "mid": 475
     },
-    "Dambulla": {
-     "min": 380,
-     "max": 450,
-     "mid": 415
-    },
-    "Meegoda": {
-     "min": 470,
-     "max": 510,
-     "mid": 490
-    },
     "Norochchole": null,
     "Thambuththegama": {
      "min": 400,
-     "max": 480,
-     "mid": 440
+     "max": 460,
+     "mid": 430
     },
     "Keppetipola": null,
     "Nuwaraeliya": {
-     "min": 360,
-     "max": 400,
-     "mid": 380
+     "min": 440,
+     "max": 460,
+     "mid": 450
     },
     "Bandarawela": {
-     "min": 400,
-     "max": 440,
-     "mid": 420
+     "min": 420,
+     "max": 460,
+     "mid": 440
     },
     "Veyangoda": {
-     "min": 440,
-     "max": 500,
-     "mid": 470
+     "min": 450,
+     "max": 480,
+     "mid": 465
     }
    },
    "series": [
@@ -3922,7 +3932,11 @@
     550,
     550,
     500,
-    425
+    425,
+    450,
+    450,
+    525,
+    550
    ]
   },
   {
@@ -3933,9 +3947,9 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 150,
-     "max": 160,
-     "mid": 155
+     "min": 180,
+     "max": 200,
+     "mid": 190
     },
     "Kandy": {
      "min": 180,
@@ -3943,36 +3957,36 @@
      "mid": 190
     },
     "Dambulla": {
-     "min": 150,
-     "max": 200,
-     "mid": 175
+     "min": 160,
+     "max": 220,
+     "mid": 190
     },
     "Meegoda": {
-     "min": 190,
-     "max": 230,
+     "min": 200,
+     "max": 220,
      "mid": 210
     },
     "Norochchole": null,
     "Thambuththegama": {
-     "min": 200,
-     "max": 240,
-     "mid": 220
+     "min": 180,
+     "max": 220,
+     "mid": 200
     },
     "Keppetipola": null,
     "Nuwaraeliya": {
-     "min": 170,
+     "min": 180,
      "max": 190,
-     "mid": 180
+     "mid": 185
     },
     "Bandarawela": {
-     "min": 140,
-     "max": 160,
-     "mid": 150
+     "min": 150,
+     "max": 180,
+     "mid": 165
     },
     "Veyangoda": {
      "min": 200,
-     "max": 230,
-     "mid": 215
+     "max": 220,
+     "mid": 210
     }
    },
    "series": [
@@ -5256,7 +5270,11 @@
     190,
     170,
     190,
-    155
+    155,
+    165,
+    190,
+    190,
+    190
    ]
   },
   {
@@ -5268,45 +5286,45 @@
    "markets": {
     "Peliyagoda": {
      "min": 100,
-     "max": 130,
-     "mid": 115
-    },
-    "Kandy": {
-     "min": 100,
      "max": 120,
      "mid": 110
     },
+    "Kandy": {
+     "min": 120,
+     "max": 140,
+     "mid": 130
+    },
     "Dambulla": {
      "min": 120,
-     "max": 150,
-     "mid": 135
+     "max": 140,
+     "mid": 130
     },
     "Meegoda": {
-     "min": 130,
-     "max": 180,
-     "mid": 155
-    },
-    "Norochchole": null,
-    "Thambuththegama": {
      "min": 130,
      "max": 160,
      "mid": 145
     },
+    "Norochchole": null,
+    "Thambuththegama": {
+     "min": 140,
+     "max": 170,
+     "mid": 155
+    },
     "Keppetipola": null,
     "Nuwaraeliya": {
-     "min": 130,
-     "max": 150,
-     "mid": 140
+     "min": 120,
+     "max": 130,
+     "mid": 125
     },
     "Bandarawela": {
-     "min": 110,
-     "max": 120,
-     "mid": 115
+     "min": 120,
+     "max": 130,
+     "mid": 125
     },
     "Veyangoda": {
-     "min": 150,
-     "max": 170,
-     "mid": 160
+     "min": 140,
+     "max": 160,
+     "mid": 150
     }
    },
    "series": [
@@ -6590,7 +6608,11 @@
     160,
     135,
     115,
-    115
+    115,
+    110,
+    165,
+    140,
+    110
    ]
   },
   {
@@ -6601,42 +6623,38 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 260,
-     "max": 300,
-     "mid": 280
+     "min": 220,
+     "max": 250,
+     "mid": 235
     },
     "Kandy": {
-     "min": 230,
-     "max": 250,
-     "mid": 240
+     "min": 180,
+     "max": 200,
+     "mid": 190
     },
     "Dambulla": {
-     "min": 180,
-     "max": 220,
-     "mid": 200
+     "min": 160,
+     "max": 200,
+     "mid": 180
     },
     "Meegoda": {
-     "min": 240,
-     "max": 270,
-     "mid": 255
-    },
-    "Norochchole": {
-     "min": 210,
+     "min": 200,
      "max": 220,
-     "mid": 215
+     "mid": 210
     },
+    "Norochchole": null,
     "Thambuththegama": {
-     "min": 230,
-     "max": 280,
-     "mid": 255
+     "min": 200,
+     "max": 250,
+     "mid": 225
     },
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": null,
     "Veyangoda": {
-     "min": 240,
-     "max": 270,
-     "mid": 255
+     "min": 200,
+     "max": 220,
+     "mid": 210
     }
    },
    "series": [
@@ -7920,7 +7938,11 @@
     290,
     290,
     290,
-    280
+    280,
+    255,
+    215,
+    215,
+    235
    ]
   },
   {
@@ -7931,14 +7953,14 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 130,
-     "max": 180,
-     "mid": 155
+     "min": 160,
+     "max": 200,
+     "mid": 180
     },
     "Kandy": {
-     "min": 150,
+     "min": 170,
      "max": 180,
-     "mid": 165
+     "mid": 175
     },
     "Dambulla": {
      "min": 140,
@@ -7947,26 +7969,26 @@
     },
     "Meegoda": {
      "min": 200,
-     "max": 220,
-     "mid": 210
+     "max": 230,
+     "mid": 215
     },
     "Norochchole": null,
     "Thambuththegama": null,
     "Keppetipola": null,
     "Nuwaraeliya": {
-     "min": 150,
-     "max": 170,
-     "mid": 160
+     "min": 180,
+     "max": 200,
+     "mid": 190
     },
     "Bandarawela": {
      "min": 160,
-     "max": 180,
-     "mid": 170
+     "max": 170,
+     "mid": 165
     },
     "Veyangoda": {
      "min": 200,
-     "max": 230,
-     "mid": 215
+     "max": 220,
+     "mid": 210
     }
    },
    "series": [
@@ -9250,7 +9272,11 @@
     210,
     180,
     175,
-    155
+    155,
+    175,
+    175,
+    180,
+    180
    ]
   },
   {
@@ -9261,34 +9287,30 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 80,
-     "max": 120,
-     "mid": 100
+     "min": 100,
+     "max": 150,
+     "mid": 125
     },
     "Kandy": {
      "min": 90,
-     "max": 100,
-     "mid": 95
+     "max": 120,
+     "mid": 105
     },
     "Dambulla": {
-     "min": 50,
-     "max": 70,
-     "mid": 60
+     "min": 60,
+     "max": 80,
+     "mid": 70
     },
     "Meegoda": {
-     "min": 100,
-     "max": 120,
-     "mid": 110
+     "min": 130,
+     "max": 150,
+     "mid": 140
     },
-    "Norochchole": {
-     "min": 40,
-     "max": 70,
-     "mid": 55
-    },
+    "Norochchole": null,
     "Thambuththegama": {
-     "min": 100,
-     "max": 120,
-     "mid": 110
+     "min": 130,
+     "max": 160,
+     "mid": 145
     },
     "Keppetipola": null,
     "Nuwaraeliya": {
@@ -9297,14 +9319,14 @@
      "mid": 100
     },
     "Bandarawela": {
-     "min": 70,
-     "max": 80,
-     "mid": 75
+     "min": 80,
+     "max": 90,
+     "mid": 85
     },
     "Veyangoda": {
-     "min": 100,
-     "max": 120,
-     "mid": 110
+     "min": 140,
+     "max": 160,
+     "mid": 150
     }
    },
    "series": [
@@ -10588,7 +10610,11 @@
     90,
     90,
     110,
-    100
+    100,
+    110,
+    90,
+    90,
+    125
    ]
   },
   {
@@ -10599,34 +10625,38 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 320,
-     "max": 350,
-     "mid": 335
+     "min": 360,
+     "max": 400,
+     "mid": 380
     },
     "Kandy": {
-     "min": 240,
-     "max": 260,
-     "mid": 250
+     "min": 280,
+     "max": 300,
+     "mid": 290
     },
     "Dambulla": {
-     "min": 250,
-     "max": 300,
-     "mid": 275
+     "min": 270,
+     "max": 320,
+     "mid": 295
     },
-    "Meegoda": null,
+    "Meegoda": {
+     "min": 350,
+     "max": 390,
+     "mid": 370
+    },
     "Norochchole": null,
     "Thambuththegama": {
-     "min": 320,
-     "max": 370,
+     "min": 330,
+     "max": 360,
      "mid": 345
     },
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": null,
     "Veyangoda": {
-     "min": 320,
-     "max": 360,
-     "mid": 340
+     "min": 350,
+     "max": 380,
+     "mid": 365
     }
    },
    "series": [
@@ -11910,7 +11940,11 @@
     335,
     280,
     335,
-    335
+    335,
+    345,
+    335,
+    380,
+    380
    ]
   },
   {
@@ -11921,46 +11955,46 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
+     "min": 550,
+     "max": 600,
+     "mid": 575
+    },
+    "Kandy": {
+     "min": 430,
+     "max": 450,
+     "mid": 440
+    },
+    "Dambulla": {
+     "min": 350,
+     "max": 430,
+     "mid": 390
+    },
+    "Meegoda": {
+     "min": 500,
+     "max": 560,
+     "mid": 530
+    },
+    "Norochchole": null,
+    "Thambuththegama": {
      "min": 500,
      "max": 550,
      "mid": 525
     },
-    "Kandy": {
-     "min": 530,
-     "max": 550,
-     "mid": 540
-    },
-    "Dambulla": {
-     "min": 400,
-     "max": 480,
-     "mid": 440
-    },
-    "Meegoda": {
-     "min": 530,
-     "max": 570,
-     "mid": 550
-    },
-    "Norochchole": null,
-    "Thambuththegama": {
-     "min": 450,
-     "max": 500,
-     "mid": 475
-    },
     "Keppetipola": null,
     "Nuwaraeliya": {
-     "min": 440,
-     "max": 460,
-     "mid": 450
+     "min": 480,
+     "max": 520,
+     "mid": 500
     },
     "Bandarawela": {
-     "min": 450,
-     "max": 500,
-     "mid": 475
+     "min": 500,
+     "max": 530,
+     "mid": 515
     },
     "Veyangoda": {
-     "min": 520,
-     "max": 550,
-     "mid": 535
+     "min": 500,
+     "max": 530,
+     "mid": 515
     }
    },
    "series": [
@@ -13244,7 +13278,11 @@
     525,
     475,
     525,
-    525
+    525,
+    525,
+    550,
+    525,
+    575
    ]
   },
   {
@@ -13255,14 +13293,14 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 200,
-     "max": 230,
-     "mid": 215
+     "min": 160,
+     "max": 200,
+     "mid": 180
     },
     "Kandy": {
-     "min": 190,
-     "max": 200,
-     "mid": 195
+     "min": 160,
+     "max": 180,
+     "mid": 170
     },
     "Dambulla": {
      "min": 150,
@@ -13274,15 +13312,11 @@
      "max": 220,
      "mid": 210
     },
-    "Norochchole": {
-     "min": 150,
-     "max": 160,
-     "mid": 155
-    },
+    "Norochchole": null,
     "Thambuththegama": {
-     "min": 120,
-     "max": 150,
-     "mid": 135
+     "min": 100,
+     "max": 130,
+     "mid": 115
     },
     "Keppetipola": null,
     "Nuwaraeliya": null,
@@ -13292,9 +13326,9 @@
      "mid": 210
     },
     "Veyangoda": {
-     "min": 190,
-     "max": 210,
-     "mid": 200
+     "min": 200,
+     "max": 220,
+     "mid": 210
     }
    },
    "series": [
@@ -14578,7 +14612,11 @@
     225,
     225,
     225,
-    215
+    215,
+    165,
+    175,
+    175,
+    180
    ]
   },
   {
@@ -14589,46 +14627,42 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 300,
-     "max": 400,
-     "mid": 350
+     "min": 400,
+     "max": 500,
+     "mid": 450
     },
     "Kandy": {
-     "min": 220,
-     "max": 250,
-     "mid": 235
+     "min": 250,
+     "max": 300,
+     "mid": 275
     },
     "Dambulla": {
-     "min": 220,
-     "max": 300,
-     "mid": 260
+     "min": 260,
+     "max": 350,
+     "mid": 305
     },
     "Meegoda": {
-     "min": 280,
-     "max": 360,
-     "mid": 320
+     "min": 350,
+     "max": 400,
+     "mid": 375
     },
-    "Norochchole": {
-     "min": 170,
-     "max": 200,
-     "mid": 185
-    },
+    "Norochchole": null,
     "Thambuththegama": {
-     "min": 260,
-     "max": 330,
-     "mid": 295
+     "min": 300,
+     "max": 350,
+     "mid": 325
     },
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 250,
-     "max": 270,
-     "mid": 260
+     "min": 270,
+     "max": 320,
+     "mid": 295
     },
     "Veyangoda": {
-     "min": 320,
-     "max": 350,
-     "mid": 335
+     "min": 380,
+     "max": 430,
+     "mid": 405
     }
    },
    "series": [
@@ -15912,7 +15946,11 @@
     275,
     275,
     325,
-    350
+    350,
+    400,
+    450,
+    450,
+    450
    ]
   },
   {
@@ -15923,50 +15961,46 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 350,
+     "min": 400,
      "max": 450,
-     "mid": 400
+     "mid": 425
     },
     "Kandy": {
-     "min": 400,
-     "max": 430,
-     "mid": 415
+     "min": 450,
+     "max": 480,
+     "mid": 465
     },
     "Dambulla": {
      "min": 350,
-     "max": 400,
-     "mid": 375
-    },
-    "Meegoda": {
-     "min": 370,
-     "max": 400,
+     "max": 420,
      "mid": 385
     },
-    "Norochchole": {
-     "min": 300,
-     "max": 400,
-     "mid": 350
+    "Meegoda": {
+     "min": 450,
+     "max": 480,
+     "mid": 465
     },
+    "Norochchole": null,
     "Thambuththegama": {
-     "min": 330,
-     "max": 380,
-     "mid": 355
+     "min": 320,
+     "max": 350,
+     "mid": 335
     },
     "Keppetipola": null,
     "Nuwaraeliya": {
-     "min": 560,
+     "min": 530,
      "max": 600,
-     "mid": 580
-    },
-    "Bandarawela": {
-     "min": 550,
-     "max": 580,
      "mid": 565
     },
+    "Bandarawela": {
+     "min": 530,
+     "max": 560,
+     "mid": 545
+    },
     "Veyangoda": {
-     "min": 350,
-     "max": 380,
-     "mid": 365
+     "min": 440,
+     "max": 470,
+     "mid": 455
     }
    },
    "series": [
@@ -17250,7 +17284,11 @@
     400,
     400,
     400,
-    400
+    400,
+    400,
+    400,
+    400,
+    425
    ]
   },
   {
@@ -17261,42 +17299,42 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 200,
-     "max": 220,
-     "mid": 210
+     "min": 220,
+     "max": 230,
+     "mid": 225
     },
     "Kandy": {
-     "min": 200,
-     "max": 220,
-     "mid": 210
+     "min": 180,
+     "max": 210,
+     "mid": 195
     },
     "Dambulla": {
-     "min": 140,
-     "max": 180,
-     "mid": 160
+     "min": 170,
+     "max": 200,
+     "mid": 185
     },
     "Meegoda": {
-     "min": 200,
-     "max": 220,
-     "mid": 210
+     "min": 210,
+     "max": 230,
+     "mid": 220
     },
     "Norochchole": null,
     "Thambuththegama": {
-     "min": 160,
+     "min": 180,
      "max": 200,
-     "mid": 180
+     "mid": 190
     },
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 210,
-     "max": 220,
-     "mid": 215
+     "min": 200,
+     "max": 210,
+     "mid": 205
     },
     "Veyangoda": {
-     "min": 210,
+     "min": 200,
      "max": 230,
-     "mid": 220
+     "mid": 215
     }
    },
    "series": [
@@ -18580,7 +18618,11 @@
     210,
     210,
     210,
-    210
+    210,
+    190,
+    190,
+    210,
+    225
    ]
   },
   {
@@ -18591,9 +18633,9 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 70,
-     "max": 100,
-     "mid": 85
+     "min": 60,
+     "max": 80,
+     "mid": 70
     },
     "Kandy": {
      "min": 80,
@@ -18601,36 +18643,32 @@
      "mid": 90
     },
     "Dambulla": {
+     "min": 40,
+     "max": 60,
+     "mid": 50
+    },
+    "Meegoda": {
+     "min": 80,
+     "max": 130,
+     "mid": 105
+    },
+    "Norochchole": null,
+    "Thambuththegama": {
      "min": 50,
      "max": 70,
      "mid": 60
     },
-    "Meegoda": {
-     "min": 80,
-     "max": 100,
-     "mid": 90
-    },
-    "Norochchole": {
-     "min": 50,
-     "max": 80,
-     "mid": 65
-    },
-    "Thambuththegama": {
-     "min": 50,
-     "max": 60,
-     "mid": 55
-    },
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 90,
-     "max": 100,
-     "mid": 95
+     "min": 100,
+     "max": 110,
+     "mid": 105
     },
     "Veyangoda": {
      "min": 80,
-     "max": 100,
-     "mid": 90
+     "max": 110,
+     "mid": 95
     }
    },
    "series": [
@@ -19914,7 +19952,11 @@
     100,
     80,
     85,
-    85
+    85,
+    70,
+    65,
+    90,
+    70
    ]
   },
   {
@@ -19926,45 +19968,41 @@
    "markets": {
     "Peliyagoda": {
      "min": 400,
-     "max": 450,
-     "mid": 425
+     "max": 500,
+     "mid": 450
     },
     "Kandy": {
-     "min": 400,
-     "max": 450,
+     "min": 420,
+     "max": 430,
      "mid": 425
     },
     "Dambulla": {
-     "min": 400,
+     "min": 370,
      "max": 450,
-     "mid": 425
+     "mid": 410
     },
     "Meegoda": {
-     "min": 440,
-     "max": 500,
-     "mid": 470
+     "min": 430,
+     "max": 460,
+     "mid": 445
     },
-    "Norochchole": {
-     "min": 450,
-     "max": 500,
-     "mid": 475
-    },
+    "Norochchole": null,
     "Thambuththegama": {
-     "min": 400,
-     "max": 450,
-     "mid": 425
+     "min": 360,
+     "max": 430,
+     "mid": 395
     },
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 430,
-     "max": 450,
-     "mid": 440
+     "min": 470,
+     "max": 480,
+     "mid": 475
     },
     "Veyangoda": {
-     "min": 460,
-     "max": 480,
-     "mid": 470
+     "min": 400,
+     "max": 450,
+     "mid": 425
     }
    },
    "series": [
@@ -21248,7 +21286,11 @@
     400,
     450,
     425,
-    425
+    425,
+    425,
+    400,
+    425,
+    450
    ]
   },
   {
@@ -21259,30 +21301,26 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 300,
-     "max": 350,
-     "mid": 325
+     "min": 350,
+     "max": 400,
+     "mid": 375
     },
     "Kandy": {
-     "min": 300,
-     "max": 320,
-     "mid": 310
+     "min": 280,
+     "max": 300,
+     "mid": 290
     },
     "Dambulla": {
-     "min": 200,
+     "min": 230,
      "max": 260,
-     "mid": 230
+     "mid": 245
     },
     "Meegoda": {
-     "min": 300,
-     "max": 320,
-     "mid": 310
+     "min": 340,
+     "max": 360,
+     "mid": 350
     },
-    "Norochchole": {
-     "min": 140,
-     "max": 160,
-     "mid": 150
-    },
+    "Norochchole": null,
     "Thambuththegama": {
      "min": 160,
      "max": 200,
@@ -21291,14 +21329,14 @@
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 250,
-     "max": 270,
-     "mid": 260
+     "min": 320,
+     "max": 330,
+     "mid": 325
     },
     "Veyangoda": {
-     "min": 260,
-     "max": 300,
-     "mid": 280
+     "min": 320,
+     "max": 350,
+     "mid": 335
     }
    },
    "series": [
@@ -22582,7 +22620,11 @@
     280,
     335,
     365,
-    325
+    325,
+    325,
+    350,
+    325,
+    375
    ]
   },
   {
@@ -22593,30 +22635,26 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 230,
-     "max": 280,
-     "mid": 255
+     "min": 200,
+     "max": 250,
+     "mid": 225
     },
     "Kandy": {
-     "min": 200,
-     "max": 230,
-     "mid": 215
+     "min": 220,
+     "max": 240,
+     "mid": 230
     },
     "Dambulla": {
-     "min": 140,
+     "min": 150,
      "max": 180,
-     "mid": 160
+     "mid": 165
     },
     "Meegoda": {
      "min": 200,
      "max": 240,
      "mid": 220
     },
-    "Norochchole": {
-     "min": 150,
-     "max": 180,
-     "mid": 165
-    },
+    "Norochchole": null,
     "Thambuththegama": {
      "min": 130,
      "max": 160,
@@ -22625,13 +22663,13 @@
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 250,
-     "max": 260,
-     "mid": 255
+     "min": 280,
+     "max": 300,
+     "mid": 290
     },
     "Veyangoda": {
-     "min": 210,
-     "max": 230,
+     "min": 200,
+     "max": 240,
      "mid": 220
     }
    },
@@ -23916,7 +23954,11 @@
     225,
     225,
     290,
-    255
+    255,
+    255,
+    225,
+    225,
+    225
    ]
   },
   {
@@ -23932,41 +23974,37 @@
      "mid": 275
     },
     "Kandy": {
-     "min": 280,
+     "min": 250,
      "max": 300,
-     "mid": 290
+     "mid": 275
     },
     "Dambulla": {
-     "min": 200,
-     "max": 300,
-     "mid": 250
+     "min": 180,
+     "max": 260,
+     "mid": 220
     },
     "Meegoda": {
      "min": 250,
      "max": 300,
      "mid": 275
     },
-    "Norochchole": {
-     "min": 200,
-     "max": 220,
-     "mid": 210
-    },
+    "Norochchole": null,
     "Thambuththegama": {
-     "min": 160,
-     "max": 200,
-     "mid": 180
+     "min": 220,
+     "max": 280,
+     "mid": 250
     },
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 260,
-     "max": 280,
-     "mid": 270
+     "min": 300,
+     "max": 320,
+     "mid": 310
     },
     "Veyangoda": {
      "min": 250,
-     "max": 270,
-     "mid": 260
+     "max": 280,
+     "mid": 265
     }
    },
    "series": [
@@ -25250,6 +25288,10 @@
     300,
     300,
     275,
+    275,
+    300,
+    275,
+    300,
     275
    ]
   },
@@ -25262,8 +25304,8 @@
    "markets": {
     "Peliyagoda": {
      "min": 160,
-     "max": 180,
-     "mid": 170
+     "max": 200,
+     "mid": 180
     },
     "Kandy": {
      "min": 140,
@@ -25271,20 +25313,20 @@
      "mid": 150
     },
     "Dambulla": {
-     "min": 140,
-     "max": 160,
-     "mid": 150
+     "min": 110,
+     "max": 130,
+     "mid": 120
     },
     "Meegoda": {
-     "min": 150,
+     "min": 160,
      "max": 170,
-     "mid": 160
+     "mid": 165
     },
     "Norochchole": null,
     "Thambuththegama": {
-     "min": 100,
-     "max": 140,
-     "mid": 120
+     "min": 120,
+     "max": 150,
+     "mid": 135
     },
     "Keppetipola": null,
     "Nuwaraeliya": null,
@@ -25294,9 +25336,9 @@
      "mid": 160
     },
     "Veyangoda": {
-     "min": 150,
+     "min": 160,
      "max": 170,
-     "mid": 160
+     "mid": 165
     }
    },
    "series": [
@@ -26580,7 +26622,11 @@
     150,
     170,
     170,
-    170
+    170,
+    170,
+    165,
+    170,
+    180
    ]
   },
   {
@@ -26596,41 +26642,37 @@
      "mid": 325
     },
     "Kandy": {
-     "min": 330,
-     "max": 350,
-     "mid": 340
+     "min": 400,
+     "max": 450,
+     "mid": 425
     },
     "Dambulla": {
+     "min": 300,
+     "max": 380,
+     "mid": 340
+    },
+    "Meegoda": {
+     "min": 420,
+     "max": 450,
+     "mid": 435
+    },
+    "Norochchole": null,
+    "Thambuththegama": {
      "min": 350,
      "max": 400,
      "mid": 375
     },
-    "Meegoda": {
-     "min": 330,
-     "max": 380,
-     "mid": 355
-    },
-    "Norochchole": {
-     "min": 350,
-     "max": 370,
-     "mid": 360
-    },
-    "Thambuththegama": {
-     "min": 260,
-     "max": 320,
-     "mid": 290
-    },
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 300,
+     "min": 330,
      "max": 350,
-     "mid": 325
+     "mid": 340
     },
     "Veyangoda": {
-     "min": 360,
-     "max": 380,
-     "mid": 370
+     "min": 400,
+     "max": 430,
+     "mid": 415
     }
    },
    "series": [
@@ -27914,6 +27956,10 @@
     325,
     275,
     250,
+    325,
+    375,
+    375,
+    425,
     325
    ]
   },
@@ -27925,9 +27971,9 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 1000,
-     "max": 1100,
-     "mid": 1050
+     "min": 1100,
+     "max": 1200,
+     "mid": 1150
     },
     "Kandy": {
      "min": 1200,
@@ -27936,31 +27982,31 @@
     },
     "Dambulla": {
      "min": 1000,
-     "max": 1100,
-     "mid": 1050
+     "max": 1200,
+     "mid": 1100
     },
     "Meegoda": {
-     "min": 1150,
-     "max": 1250,
-     "mid": 1200
+     "min": 1200,
+     "max": 1500,
+     "mid": 1350
     },
     "Norochchole": null,
     "Thambuththegama": {
-     "min": 750,
-     "max": 850,
-     "mid": 800
+     "min": 1000,
+     "max": 1100,
+     "mid": 1050
     },
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 950,
-     "max": 1000,
-     "mid": 975
+     "min": 1000,
+     "max": 1050,
+     "mid": 1025
     },
     "Veyangoda": {
-     "min": 1200,
-     "max": 1300,
-     "mid": 1250
+     "min": 1300,
+     "max": 1400,
+     "mid": 1350
     }
    },
    "series": [
@@ -29244,7 +29290,11 @@
     950,
     950,
     1050,
-    1050
+    1050,
+    1050,
+    1050,
+    1150,
+    1150
    ]
   },
   {
@@ -29255,24 +29305,24 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 100,
-     "max": 130,
-     "mid": 115
-    },
-    "Kandy": {
      "min": 120,
      "max": 140,
      "mid": 130
     },
+    "Kandy": {
+     "min": 90,
+     "max": 110,
+     "mid": 100
+    },
     "Dambulla": {
-     "min": 60,
-     "max": 80,
-     "mid": 70
+     "min": 70,
+     "max": 90,
+     "mid": 80
     },
     "Meegoda": {
      "min": 100,
-     "max": 120,
-     "mid": 110
+     "max": 110,
+     "mid": 105
     },
     "Norochchole": null,
     "Thambuththegama": {
@@ -29288,9 +29338,9 @@
      "mid": 125
     },
     "Veyangoda": {
-     "min": 120,
-     "max": 140,
-     "mid": 130
+     "min": 110,
+     "max": 130,
+     "mid": 120
     }
    },
    "series": [
@@ -30574,7 +30624,11 @@
     115,
     115,
     115,
-    115
+    115,
+    115,
+    115,
+    115,
+    130
    ]
   },
   {
@@ -30585,19 +30639,19 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 80,
-     "max": 120,
-     "mid": 100
+     "min": 100,
+     "max": 130,
+     "mid": 115
     },
     "Kandy": {
-     "min": 100,
-     "max": 110,
-     "mid": 105
+     "min": 110,
+     "max": 120,
+     "mid": 115
     },
     "Dambulla": {
-     "min": 90,
+     "min": 80,
      "max": 100,
-     "mid": 95
+     "mid": 90
     },
     "Meegoda": {
      "min": 110,
@@ -30606,9 +30660,9 @@
     },
     "Norochchole": null,
     "Thambuththegama": {
-     "min": 70,
-     "max": 100,
-     "mid": 85
+     "min": 60,
+     "max": 80,
+     "mid": 70
     },
     "Keppetipola": null,
     "Nuwaraeliya": null,
@@ -31900,7 +31954,11 @@
     100,
     100,
     100,
-    100
+    100,
+    100,
+    100,
+    100,
+    115
    ]
   },
   {
@@ -31912,33 +31970,33 @@
    "markets": {
     "Peliyagoda": {
      "min": 230,
-     "max": 280,
-     "mid": 255
+     "max": 250,
+     "mid": 240
     },
     "Kandy": {
-     "min": 240,
-     "max": 250,
-     "mid": 245
+     "min": 230,
+     "max": 240,
+     "mid": 235
     },
     "Dambulla": null,
     "Meegoda": {
-     "min": 260,
+     "min": 250,
      "max": 270,
-     "mid": 265
+     "mid": 260
     },
     "Norochchole": null,
     "Thambuththegama": null,
     "Keppetipola": null,
     "Nuwaraeliya": {
-     "min": 240,
-     "max": 250,
-     "mid": 245
+     "min": 220,
+     "max": 230,
+     "mid": 225
     },
     "Bandarawela": null,
     "Veyangoda": {
-     "min": 265,
-     "max": 275,
-     "mid": 270
+     "min": 250,
+     "max": 260,
+     "mid": 255
     }
    },
    "series": [
@@ -33222,7 +33280,11 @@
     260,
     255,
     250,
-    255
+    255,
+    245,
+    255,
+    255,
+    240
    ]
   },
   {
@@ -33232,16 +33294,8 @@
    "unit": "Rs./kg",
    "primaryMarket": "Peliyagoda",
    "markets": {
-    "Peliyagoda": {
-     "min": 150,
-     "max": 180,
-     "mid": 165
-    },
-    "Kandy": {
-     "min": 140,
-     "max": 160,
-     "mid": 150
-    },
+    "Peliyagoda": null,
+    "Kandy": null,
     "Dambulla": null,
     "Meegoda": null,
     "Norochchole": null,
@@ -34532,7 +34586,11 @@
     null,
     165,
     165,
-    165
+    165,
+    160,
+    160,
+    null,
+    null
    ]
   },
   {
@@ -34542,11 +34600,7 @@
    "unit": "Rs./kg",
    "primaryMarket": "Peliyagoda",
    "markets": {
-    "Peliyagoda": {
-     "min": 450,
-     "max": 480,
-     "mid": 465
-    },
+    "Peliyagoda": null,
     "Kandy": null,
     "Dambulla": null,
     "Meegoda": null,
@@ -35838,7 +35892,11 @@
     null,
     485,
     465,
-    465
+    465,
+    475,
+    440,
+    null,
+    null
    ]
   },
   {
@@ -35848,16 +35906,8 @@
    "unit": "Rs./kg",
    "primaryMarket": "Peliyagoda",
    "markets": {
-    "Peliyagoda": {
-     "min": 150,
-     "max": 180,
-     "mid": 165
-    },
-    "Kandy": {
-     "min": 130,
-     "max": 160,
-     "mid": 145
-    },
+    "Peliyagoda": null,
+    "Kandy": null,
     "Dambulla": null,
     "Meegoda": null,
     "Norochchole": null,
@@ -37148,7 +37198,11 @@
     null,
     155,
     165,
-    165
+    165,
+    165,
+    165,
+    null,
+    null
    ]
   },
   {
@@ -37158,16 +37212,8 @@
    "unit": "Rs./kg",
    "primaryMarket": "Peliyagoda",
    "markets": {
-    "Peliyagoda": {
-     "min": 100,
-     "max": 120,
-     "mid": 110
-    },
-    "Kandy": {
-     "min": 120,
-     "max": 130,
-     "mid": 125
-    },
+    "Peliyagoda": null,
+    "Kandy": null,
     "Dambulla": null,
     "Meegoda": null,
     "Norochchole": null,
@@ -38458,7 +38504,11 @@
     null,
     100,
     115,
-    110
+    110,
+    100,
+    100,
+    null,
+    null
    ]
   },
   {
@@ -38468,11 +38518,7 @@
    "unit": "Rs./kg",
    "primaryMarket": "Peliyagoda",
    "markets": {
-    "Peliyagoda": {
-     "min": 350,
-     "max": 380,
-     "mid": 365
-    },
+    "Peliyagoda": null,
     "Kandy": null,
     "Dambulla": null,
     "Meegoda": null,
@@ -39764,7 +39810,11 @@
     null,
     325,
     355,
-    365
+    365,
+    375,
+    375,
+    null,
+    null
    ]
   },
   {
@@ -39774,11 +39824,7 @@
    "unit": "Rs./kg",
    "primaryMarket": "Peliyagoda",
    "markets": {
-    "Peliyagoda": {
-     "min": 100,
-     "max": 170,
-     "mid": 135
-    },
+    "Peliyagoda": null,
     "Kandy": null,
     "Dambulla": null,
     "Meegoda": null,
@@ -41070,7 +41116,11 @@
     null,
     135,
     118,
-    135
+    135,
+    135,
+    135,
+    null,
+    null
    ]
   },
   {
@@ -41081,46 +41131,42 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 230,
-     "max": 280,
-     "mid": 255
+     "min": 300,
+     "max": 350,
+     "mid": 325
     },
     "Kandy": {
-     "min": 250,
-     "max": 300,
-     "mid": 275
+     "min": 280,
+     "max": 320,
+     "mid": 300
     },
     "Dambulla": {
-     "min": 230,
-     "max": 280,
-     "mid": 255
-    },
-    "Meegoda": {
-     "min": 260,
-     "max": 320,
-     "mid": 290
-    },
-    "Norochchole": {
-     "min": 180,
-     "max": 250,
-     "mid": 215
-    },
-    "Thambuththegama": {
-     "min": 180,
-     "max": 230,
-     "mid": 205
-    },
-    "Keppetipola": null,
-    "Nuwaraeliya": null,
-    "Bandarawela": {
      "min": 260,
      "max": 280,
      "mid": 270
     },
-    "Veyangoda": {
+    "Meegoda": {
+     "min": 350,
+     "max": 380,
+     "mid": 365
+    },
+    "Norochchole": null,
+    "Thambuththegama": {
+     "min": 180,
+     "max": 220,
+     "mid": 200
+    },
+    "Keppetipola": null,
+    "Nuwaraeliya": null,
+    "Bandarawela": {
      "min": 280,
-     "max": 310,
-     "mid": 295
+     "max": 300,
+     "mid": 290
+    },
+    "Veyangoda": {
+     "min": 320,
+     "max": 340,
+     "mid": 330
     }
    },
    "series": [
@@ -42404,7 +42450,11 @@
     265,
     255,
     255,
-    255
+    255,
+    275,
+    275,
+    280,
+    325
    ]
   },
   {
@@ -42416,28 +42466,24 @@
    "markets": {
     "Peliyagoda": null,
     "Kandy": {
-     "min": 280,
-     "max": 300,
-     "mid": 290
+     "min": 330,
+     "max": 350,
+     "mid": 340
     },
     "Dambulla": null,
-    "Meegoda": {
-     "min": 280,
-     "max": 350,
-     "mid": 315
-    },
+    "Meegoda": null,
     "Norochchole": null,
     "Thambuththegama": null,
     "Keppetipola": null,
     "Nuwaraeliya": {
-     "min": 290,
-     "max": 310,
-     "mid": 300
+     "min": 330,
+     "max": 350,
+     "mid": 340
     },
     "Bandarawela": {
-     "min": 280,
-     "max": 300,
-     "mid": 290
+     "min": 270,
+     "max": 290,
+     "mid": 280
     },
     "Veyangoda": null
    },
@@ -43722,7 +43768,11 @@
     285,
     285,
     290,
-    290
+    290,
+    325,
+    335,
+    345,
+    340
    ]
   },
   {
@@ -43733,46 +43783,42 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 80,
+     "min": 60,
      "max": 130,
-     "mid": 105
+     "mid": 95
     },
     "Kandy": {
      "min": 120,
-     "max": 120,
-     "mid": 120
+     "max": 130,
+     "mid": 125
     },
     "Dambulla": {
-     "min": 60,
-     "max": 100,
-     "mid": 80
+     "min": 70,
+     "max": 80,
+     "mid": 75
     },
     "Meegoda": {
-     "min": 120,
-     "max": 160,
+     "min": 130,
+     "max": 150,
      "mid": 140
     },
-    "Norochchole": {
-     "min": 100,
-     "max": 140,
-     "mid": 120
-    },
+    "Norochchole": null,
     "Thambuththegama": {
-     "min": 100,
-     "max": 150,
-     "mid": 125
+     "min": 90,
+     "max": 120,
+     "mid": 105
     },
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 140,
+     "min": 150,
      "max": 180,
-     "mid": 160
+     "mid": 165
     },
     "Veyangoda": {
-     "min": 130,
-     "max": 150,
-     "mid": 140
+     "min": 140,
+     "max": 160,
+     "mid": 150
     }
    },
    "series": [
@@ -45056,7 +45102,11 @@
     125,
     125,
     105,
-    105
+    105,
+    90,
+    95,
+    95,
+    95
    ]
   },
   {
@@ -45064,40 +45114,36 @@
    "name": "Potato (Imported)",
    "category": "Potatoes & Onions",
    "unit": "Rs./kg",
-   "primaryMarket": "Peliyagoda",
+   "primaryMarket": "Kandy",
    "markets": {
-    "Peliyagoda": {
-     "min": 140,
-     "max": 200,
-     "mid": 170
-    },
+    "Peliyagoda": null,
     "Kandy": {
-     "min": 145,
-     "max": 150,
-     "mid": 148
+     "min": 135,
+     "max": 140,
+     "mid": 138
     },
     "Dambulla": {
      "min": 130,
-     "max": 150,
-     "mid": 140
+     "max": 140,
+     "mid": 135
     },
     "Meegoda": {
      "min": 145,
-     "max": 215,
-     "mid": 180
+     "max": 205,
+     "mid": 175
     },
     "Norochchole": null,
     "Thambuththegama": {
-     "min": 140,
-     "max": 180,
-     "mid": 160
+     "min": 135,
+     "max": 160,
+     "mid": 148
     },
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
      "min": 170,
-     "max": 180,
-     "mid": 175
+     "max": 175,
+     "mid": 172
     },
     "Veyangoda": {
      "min": 145,
@@ -46298,48 +46344,6 @@
     null,
     null,
     null,
-    190,
-    202,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    175,
-    null,
-    175,
-    175,
-    null,
-    null,
-    null,
-    null,
-    175,
-    null,
-    null,
-    null,
-    null,
-    null,
-    175,
-    null,
-    null,
-    null,
-    null,
-    null,
-    165,
-    null,
-    null,
-    null,
-    null,
-    165,
-    null,
-    190,
-    null,
-    null,
-    195,
     null,
     null,
     null,
@@ -46354,39 +46358,85 @@
     null,
     null,
     null,
-    200,
     null,
     null,
     null,
     null,
     null,
     null,
-    190,
     null,
     null,
     null,
     null,
-    210,
     null,
     null,
     null,
     null,
-    192,
-    192,
-    158,
-    175,
-    208,
-    null,
-    162,
-    195,
-    198,
-    195,
-    185,
     null,
     null,
-    185,
-    170,
-    170
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    145,
+    142,
+    142,
+    138
    ]
   },
   {
@@ -46394,27 +46444,23 @@
    "name": "Big Onion (Imported)",
    "category": "Potatoes & Onions",
    "unit": "Rs./kg",
-   "primaryMarket": "Peliyagoda",
+   "primaryMarket": "Kandy",
    "markets": {
-    "Peliyagoda": {
-     "min": 230,
-     "max": 250,
-     "mid": 240
-    },
+    "Peliyagoda": null,
     "Kandy": {
-     "min": 260,
+     "min": 265,
      "max": 270,
-     "mid": 265
+     "mid": 268
     },
     "Dambulla": {
      "min": 250,
-     "max": 260,
-     "mid": 255
+     "max": 270,
+     "mid": 260
     },
     "Meegoda": {
-     "min": 235,
-     "max": 245,
-     "mid": 240
+     "min": 240,
+     "max": 250,
+     "mid": 245
     },
     "Norochchole": null,
     "Thambuththegama": {
@@ -46425,14 +46471,14 @@
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 250,
-     "max": 260,
-     "mid": 255
+     "min": 240,
+     "max": 245,
+     "mid": 242
     },
     "Veyangoda": {
-     "min": 230,
-     "max": 240,
-     "mid": 235
+     "min": 240,
+     "max": 250,
+     "mid": 245
     }
    },
    "series": [
@@ -47628,48 +47674,6 @@
     null,
     null,
     null,
-    180,
-    170,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    170,
-    null,
-    168,
-    175,
-    null,
-    null,
-    null,
-    null,
-    190,
-    null,
-    null,
-    null,
-    null,
-    null,
-    190,
-    null,
-    null,
-    null,
-    null,
-    null,
-    175,
-    null,
-    null,
-    null,
-    null,
-    210,
-    null,
-    210,
-    null,
-    null,
-    208,
     null,
     null,
     null,
@@ -47684,39 +47688,85 @@
     null,
     null,
     null,
-    260,
     null,
     null,
     null,
     null,
     null,
     null,
-    260,
     null,
     null,
     null,
     null,
-    258,
     null,
     null,
     null,
     null,
-    255,
-    260,
-    275,
-    272,
-    265,
-    null,
-    270,
-    260,
-    260,
-    260,
-    250,
     null,
     null,
-    235,
-    240,
-    240
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    268,
+    268,
+    268,
+    268
    ]
   },
   {
@@ -47726,11 +47776,7 @@
    "unit": "Rs./kg",
    "primaryMarket": "Peliyagoda",
    "markets": {
-    "Peliyagoda": {
-     "min": 34,
-     "max": 40,
-     "mid": 37
-    },
+    "Peliyagoda": null,
     "Kandy": null,
     "Dambulla": null,
     "Meegoda": null,
@@ -49022,7 +49068,11 @@
     null,
     38,
     35,
-    37
+    37,
+    38,
+    37,
+    null,
+    null
    ]
   },
   {
@@ -50324,6 +50374,10 @@
     null,
     45,
     45,
+    null,
+    null,
+    null,
+    null,
     null
    ]
   },
@@ -50334,11 +50388,7 @@
    "unit": "Rs./kg",
    "primaryMarket": "Peliyagoda",
    "markets": {
-    "Peliyagoda": {
-     "min": 260,
-     "max": 290,
-     "mid": 275
-    },
+    "Peliyagoda": null,
     "Kandy": null,
     "Dambulla": null,
     "Meegoda": null,
@@ -51630,7 +51680,11 @@
     null,
     250,
     270,
-    275
+    275,
+    280,
+    280,
+    null,
+    null
    ]
   },
   {
@@ -51640,11 +51694,7 @@
    "unit": "Rs./kg",
    "primaryMarket": "Peliyagoda",
    "markets": {
-    "Peliyagoda": {
-     "min": 200,
-     "max": 230,
-     "mid": 215
-    },
+    "Peliyagoda": null,
     "Kandy": null,
     "Dambulla": null,
     "Meegoda": null,
@@ -52936,7 +52986,11 @@
     null,
     200,
     215,
-    215
+    215,
+    220,
+    220,
+    null,
+    null
    ]
   },
   {
@@ -54238,6 +54292,10 @@
     null,
     null,
     null,
+    null,
+    null,
+    null,
+    null,
     null
    ]
   },
@@ -54248,11 +54306,7 @@
    "unit": "Rs./kg",
    "primaryMarket": "Peliyagoda",
    "markets": {
-    "Peliyagoda": {
-     "min": 200,
-     "max": 270,
-     "mid": 235
-    },
+    "Peliyagoda": null,
     "Kandy": null,
     "Dambulla": null,
     "Meegoda": null,
@@ -55544,7 +55598,11 @@
     null,
     235,
     245,
-    235
+    235,
+    235,
+    235,
+    null,
+    null
    ]
   },
   {
@@ -55554,11 +55612,7 @@
    "unit": "Rs./kg",
    "primaryMarket": "Peliyagoda",
    "markets": {
-    "Peliyagoda": {
-     "min": 16,
-     "max": 24,
-     "mid": 20
-    },
+    "Peliyagoda": null,
     "Kandy": null,
     "Dambulla": null,
     "Meegoda": null,
@@ -56850,7 +56904,11 @@
     null,
     17,
     20,
-    20
+    20,
+    25,
+    31,
+    null,
+    null
    ]
   },
   {
@@ -56860,11 +56918,7 @@
    "unit": "Rs./kg",
    "primaryMarket": "Peliyagoda",
    "markets": {
-    "Peliyagoda": {
-     "min": 35,
-     "max": 42,
-     "mid": 38
-    },
+    "Peliyagoda": null,
     "Kandy": null,
     "Dambulla": null,
     "Meegoda": null,
@@ -58156,7 +58210,11 @@
     null,
     38,
     38,
-    38
+    38,
+    42,
+    38,
+    null,
+    null
    ]
   },
   {
@@ -58167,33 +58225,33 @@
    "primaryMarket": "Peliyagoda",
    "markets": {
     "Peliyagoda": {
-     "min": 180,
-     "max": 200,
-     "mid": 190
+     "min": 200,
+     "max": 230,
+     "mid": 215
     },
     "Kandy": {
      "min": 200,
-     "max": 220,
-     "mid": 210
+     "max": 210,
+     "mid": 205
     },
     "Dambulla": {
-     "min": 170,
-     "max": 190,
-     "mid": 180
+     "min": 160,
+     "max": 180,
+     "mid": 170
     },
     "Meegoda": {
-     "min": 210,
-     "max": 220,
-     "mid": 215
+     "min": 220,
+     "max": 230,
+     "mid": 225
     },
     "Norochchole": null,
     "Thambuththegama": null,
     "Keppetipola": null,
     "Nuwaraeliya": null,
     "Bandarawela": {
-     "min": 180,
+     "min": 185,
      "max": 200,
-     "mid": 190
+     "mid": 192
     },
     "Veyangoda": null
    },
@@ -59478,7 +59536,11 @@
     210,
     200,
     190,
-    190
+    190,
+    200,
+    210,
+    225,
+    215
    ]
   },
   {
@@ -59494,9 +59556,9 @@
      "mid": 335
     },
     "Kandy": {
-     "min": 260,
-     "max": 280,
-     "mid": 270
+     "min": 220,
+     "max": 230,
+     "mid": 225
     },
     "Dambulla": {
      "min": 180,
@@ -60800,6 +60862,10 @@
     365,
     335,
     325,
+    335,
+    335,
+    310,
+    310,
     335
    ]
   }
