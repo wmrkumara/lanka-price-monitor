@@ -474,6 +474,49 @@
     .spice-banner-title{font-size:12px}
   }
 </style>
+<style id="tg-ticker-css">
+/* ══ SPICE PRICE TICKER (DEA weekly) ══ */
+.spice-ticker{flex-basis:100%;order:9;display:flex;align-items:center;gap:10px;
+  background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.12);border-radius:10px;
+  padding:6px 8px 6px 10px;min-width:0}
+.spice-ticker[hidden]{display:none}
+.stk-date{flex-shrink:0;font-size:10.5px;line-height:1.3;color:#9fd4c8;font-weight:700;max-width:150px}
+.stk-date b{display:block;color:#ffd98a;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700}
+.stk-view{flex:1;min-width:0;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
+.stk-track{display:flex;width:max-content;animation:stk-scroll var(--stk-dur,60s) linear infinite}
+.spice-ticker.paused .stk-track{animation-play-state:paused}
+.stk-view:hover .stk-track,.stk-view:focus-within .stk-track{animation-play-state:paused}
+@keyframes stk-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.stk-set{display:flex}
+.stk-item{display:inline-flex;align-items:baseline;gap:6px;padding:2px 16px;white-space:nowrap;
+  color:#fff;text-decoration:none;border-right:1px solid rgba(255,255,255,.14);font-size:12px}
+.stk-item:hover .stk-nm,.stk-item:focus-visible .stk-nm{text-decoration:underline}
+.stk-item:focus-visible{outline:2px solid #ffd98a;outline-offset:-2px;border-radius:4px}
+.stk-nm{font-weight:700}
+.stk-gr{font-size:10px;color:rgba(255,255,255,.6)}
+.stk-pr{font-family:'JetBrains Mono',monospace;font-weight:700;color:#ffd98a}
+.stk-ch{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700}
+.stk-ch.up{color:#ffa597}.stk-ch.down{color:#8fe0b0}.stk-ch.flat{color:#cfc6b0}
+.stk-pause{flex-shrink:0;width:28px;height:28px;border-radius:8px;border:1px solid rgba(255,255,255,.25);
+  background:rgba(255,255,255,.08);color:#fff;font-size:12px;cursor:pointer;line-height:1}
+.stk-pause:hover{background:rgba(255,255,255,.18)}
+.stk-pause:focus-visible{outline:2px solid #ffd98a;outline-offset:2px}
+@media(max-width:600px){
+  .spice-ticker{padding:5px 6px 5px 8px;gap:8px}
+  .stk-date{font-size:9.5px;max-width:92px}
+  .stk-date b{font-size:10px}
+  .stk-h{display:none}
+  .stk-item{padding:2px 12px;font-size:11.5px}
+}
+@media(prefers-reduced-motion:reduce){
+  .stk-track{animation:none}
+  .stk-view{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+  .stk-set+.stk-set{display:none}
+  .stk-pause{display:none}
+}
+</style>
 </head>
 <body>
 <!-- ══ TOP NAV BAR ══ -->
@@ -519,10 +562,10 @@
         <div class="spice-banner-sub" id="sb-sub">DEA · 2023–2026 · සති 185 · ගම්මිරිස්, කුරුඳු, කරාබු සහ තවත්</div>
       </div>
     </div>
-    <div class="spice-banner-prices" id="sb-prices">
-      <div class="spice-price-chip"><span class="sp-icon">🌶️</span><span class="sp-label">ගම්මිරිස්</span><span class="sp-val" id="sb-pepper">...</span></div>
-      <div class="spice-price-chip"><span class="sp-icon">🪵</span><span class="sp-label">කුරුඳු</span><span class="sp-val" id="sb-cinnamon">...</span></div>
-      <div class="spice-price-chip"><span class="sp-icon">🌿</span><span class="sp-label">කරාබු</span><span class="sp-val" id="sb-clove">...</span></div>
+    <div class="spice-ticker" id="sb-ticker" role="region" aria-label="DEA spice farm gate prices" hidden>
+      <div class="stk-date" id="stk-date"></div>
+      <div class="stk-view"><div class="stk-track" id="stk-track"></div></div>
+      <button type="button" class="stk-pause" id="stk-pause" aria-pressed="false" aria-label="Pause">⏸</button>
     </div>
     <a href="spice-report.html" class="spice-banner-btn" id="sb-btn">
       වාර්තාව බලන්න →
@@ -2906,26 +2949,53 @@ window.addEventListener('appinstalled',()=>{
 </script>
 
 <script>
-// ── Load spice prices into banner ──
-(async function loadSpiceBanner(){
-  try{
-    const r = await fetch('dea_data.json',{cache:'no-store'});
-    const d = await r.json();
-    if(!d.weeks||!d.weeks.length) return;
-    const latest = d.weeks[d.weeks.length-1];
-    const pepper = latest.commodities?.pepper?.districts?.National?.['GR-1 (Average Price)'];
-    const cinnamon = latest.commodities?.cinnamon?.districts?.National?.['C-5 (Average Price)'];
-    const clove = latest.commodities?.clove?.districts?.National?.['CLOVE (Average Price)'];
-    const fmt = v => v ? 'රු.' + Math.round(v).toLocaleString() : '—';
-    const pe = document.getElementById('sb-pepper');
-    const ci = document.getElementById('sb-cinnamon');
-    const cl = document.getElementById('sb-clove');
-    if(pe) pe.textContent = fmt(pepper);
-    if(ci) ci.textContent = fmt(cinnamon);
-    if(cl) cl.textContent = fmt(clove);
-  }catch(e){}
+// ── Spice price ticker (reads small dea_ticker_data.json, ~1.4 KB) ──
+(function spiceTicker(){
+  var box=document.getElementById('sb-ticker'),track=document.getElementById('stk-track'),
+      dateEl=document.getElementById('stk-date'),btn=document.getElementById('stk-pause');
+  if(!box||!track||!dateEl)return;
+  var DATA=null;
+  var NAMES={
+    pepper:{si:'ගම්මිරිස්',ta:'மிளகு',en:'Pepper'},cinnamon:{si:'කුරුඳු',ta:'கறுவா',en:'Cinnamon'},
+    clove:{si:'කරාබු',ta:'கராம்பு',en:'Clove'},cardamom:{si:'එනසාල්',ta:'ஏலக்காய்',en:'Cardamom'},
+    nutmeg:{si:'සාදික්කා',ta:'சாதிக்காய்',en:'Nutmeg'},mace:{si:'වසාවාසි',ta:'சாதிபத்திரி',en:'Mace'},
+    coffee:{si:'කෝපි',ta:'கோப்பி',en:'Coffee'},cocoa:{si:'කොකෝවා',ta:'கொக்கோ',en:'Cocoa'},
+    arecanut:{si:'පුවක්',ta:'பாக்கு',en:'Arecanut'},goraka:{si:'ගොරකා',ta:'கொறுக்காய்',en:'Goraka'},
+    ginger:{si:'ඉඟුරු',ta:'இஞ்சி',en:'Ginger'},turmeric:{si:'කහ',ta:'மஞ்சள்',en:'Turmeric'}
+  };
+  var MON={si:['ජන','පෙබ','මාර්','අප්‍රේ','මැයි','ජූනි','ජූලි','අගෝ','සැප්','ඔක්','නොවැ','දෙසැ'],
+           ta:['ஜன','பிப்','மார்','ஏப்','மே','ஜூன்','ஜூலை','ஆக','செப்','அக்','நவ','டிச'],
+           en:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']};
+  var TXT={si:{cur:'රු.',head:'DEA ගොවිපළ දොරටු මිල',vs:'පෙර',pause:'නවත්වන්න',play:'ධාවනය'},
+           ta:{cur:'ரூ.',head:'DEA பண்ணை வாசல் விலை',vs:'முந்தைய',pause:'இடைநிறுத்து',play:'இயக்கு'},
+           en:{cur:'Rs.',head:'DEA farm gate prices',vs:'vs',pause:'Pause',play:'Play'}};
+  function L(){var l=document.documentElement.lang||'si';return TXT[l]?l:'si';}
+  function d(iso,l){if(!iso)return '';var p=iso.split('-');return (+p[2])+' '+MON[l][(+p[1])-1];}
+  function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function render(){
+    if(!DATA)return;
+    var l=L(),t=TXT[l];
+    dateEl.innerHTML='<span class="stk-h">'+esc(t.head)+'</span><b>'+esc(d(DATA.date,l))+'</b>'+(DATA.prev_date?esc(t.vs)+' '+esc(d(DATA.prev_date,l)):'');
+    var html=DATA.items.map(function(it){
+      var gr=String(it.grade||'').replace(/^(CLOVE|NUTMEG|MACE)\s*/i,'').trim(),nm=(NAMES[it.id]&&NAMES[it.id][l])||it.id,en=(NAMES[it.id]&&NAMES[it.id].en)||'',ch='',cls='flat',arrow='■';
+      if(gr.toLowerCase()===en.toLowerCase())gr='';
+      if(it.prev){var pct=(it.price-it.prev)/it.prev*100;
+        cls=Math.abs(pct)<0.5?'flat':(pct>0?'up':'down');arrow=cls==='up'?'▲':cls==='down'?'▼':'■';
+        ch='<span class="stk-ch '+cls+'">'+arrow+' '+(pct>0?'+':'')+pct.toFixed(1)+'%</span>';}
+      return '<a class="stk-item" href="spices.html"><span class="stk-nm">'+esc(nm)+'</span>'+(gr?'<span class="stk-gr">'+esc(gr)+'</span>':'')+
+             '<span class="stk-pr">'+t.cur+' '+Math.round(it.price).toLocaleString('en-US')+'/kg</span>'+ch+'</a>';
+    }).join('');
+    track.innerHTML='<div class="stk-set">'+html+'</div><div class="stk-set" aria-hidden="true">'+html.replace(/<a /g,'<a tabindex="-1" ')+'</div>';
+    var w=track.scrollWidth/2;track.style.setProperty('--stk-dur',Math.max(20,Math.round(w/45))+'s');
+    if(btn){var p=box.classList.contains('paused');btn.setAttribute('aria-label',p?t.play:t.pause);}
+  }
+  if(btn)btn.addEventListener('click',function(){
+    var p=box.classList.toggle('paused');btn.textContent=p?'▶':'⏸';btn.setAttribute('aria-pressed',p?'true':'false');render();});
+  new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+  fetch('dea_ticker_data.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json();})
+    .then(function(j){if(!j||!j.items||!j.items.length)return;DATA=j;box.hidden=false;render();})
+    .catch(function(){/* keep ticker hidden; rest of page unaffected */});
 })();
-
 </script>
 <div id="tg-copy-wrap" style="text-align:center;font-size:12px;line-height:1.6;color:#7a7264;max-width:900px;margin:8px auto 76px;padding:0 16px"><span id="tg-copy">© 2026 TopGoviya.lk · සියලු හිමිකම් ඇවිරිණි / All rights reserved · මිල දත්ත: මහ බැංකුව, HARTI, DEA (නිල මූලාශ්‍ර) / Price data: CBSL, HARTI &amp; DEA · <a href="/contact.html">සම්බන්ධ වන්න / Contact</a> · <a href="/useful-links.html">සබැඳි / Links</a></span></div>
 <script defer src="assistant.js?v=1"></script>
