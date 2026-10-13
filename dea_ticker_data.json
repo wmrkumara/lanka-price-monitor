@@ -1,0 +1,92 @@
+{
+ "source": "Department of Export Agriculture (DEA), Sri Lanka",
+ "type": "National average farm gate price (Rs.)",
+ "date": "2026-09-29",
+ "prev_date": "2026-09-15",
+ "items": [
+  {
+   "id": "pepper",
+   "grade": "GR-1",
+   "price": 1999.43,
+   "prev": 1987.5,
+   "unit": "kg"
+  },
+  {
+   "id": "cinnamon",
+   "grade": "C-5",
+   "price": 5522.88,
+   "prev": 5729.63,
+   "unit": "kg"
+  },
+  {
+   "id": "clove",
+   "grade": "CLOVE",
+   "price": 2462.93,
+   "prev": 2478.86,
+   "unit": "kg"
+  },
+  {
+   "id": "cardamom",
+   "grade": "LG",
+   "price": 15166.0,
+   "prev": 15833.0,
+   "unit": "kg"
+  },
+  {
+   "id": "nutmeg",
+   "grade": "NUTMEG No.1",
+   "price": 1021.2,
+   "prev": 1003.0,
+   "unit": "kg"
+  },
+  {
+   "id": "mace",
+   "grade": "MACE No.1",
+   "price": 5409.0,
+   "prev": 5406.4,
+   "unit": "kg"
+  },
+  {
+   "id": "coffee",
+   "grade": "GR 1",
+   "price": 1366.71,
+   "prev": 1358.86,
+   "unit": "kg"
+  },
+  {
+   "id": "cocoa",
+   "grade": "GR 1",
+   "price": 1016.33,
+   "prev": 1030.0,
+   "unit": "kg"
+  },
+  {
+   "id": "arecanut",
+   "grade": "Dried",
+   "price": 762.64,
+   "prev": 755.36,
+   "unit": "kg"
+  },
+  {
+   "id": "goraka",
+   "grade": "Goraka",
+   "price": 299.21,
+   "prev": 291.64,
+   "unit": "kg"
+  },
+  {
+   "id": "ginger",
+   "grade": "Ginger",
+   "price": 791.09,
+   "prev": 885.91,
+   "unit": "kg"
+  },
+  {
+   "id": "turmeric",
+   "grade": "Turmeric",
+   "price": 259.09,
+   "prev": 263.6,
+   "unit": "kg"
+  }
+ ]
+}
