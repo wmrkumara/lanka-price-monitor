@@ -177,7 +177,7 @@ si:{
 <p>TopGoviya.lk කුළුබඩු මිල පිටුවේ, අපනයන කෘෂිකර්ම දෙපාර්තමේන්තුවේ (DEA) සතිපතා මිල දිස්ත්‍රික්ක සහ ශ්‍රේණි අනුව බලන්න.</p>`,
   ctaH:"🌾 ගම්මිරිස් ගොවීන්ට",
   ctaP:"ඔබ තනිවම අපනයනය නොකළත්, හොඳින් වියළා පිරිසිදු කළ ගම්මිරිස්වලට වැඩි මිලක් ලැබේ. විකුණන්න පෙර, ඔබේ දිස්ත්‍රික්කයේ මේ සතියේ ගම්මිරිස් ගොවිපළ දොරටු මිල TopGoviya.lk හි බලන්න (දත්ත අපනයන කෘෂිකර්ම දෙපාර්තමේන්තුවෙන් - DEA).",
-  ctaB:"🌶️ කුළුබඩු මිල මාර්ගෝපදේශය බලන්න",
+  ctaB:"🌶️ ගම්මිරිස් මිල බලන්න",
   warn:"⚠️ නීති, ලේඛන අවශ්‍යතා සහ බදු අනුපාත වෙනස් විය හැකි නිසා, අපනයනයට පෙර EDB, ශ්‍රී ලංකා රේගුව සහ NPQS සමඟ තහවුරු කරගන්න.",
   disc:"මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.",
   srcH:"📚 මූලාශ්‍ර"
@@ -212,7 +212,7 @@ en:{
 <p>On the TopGoviya.lk spice price pages, which show the Department of Export Agriculture (DEA) weekly prices by district and grade.</p>`,
   ctaH:"🌾 For pepper farmers",
   ctaP:"Even if you don't export yourself, well-dried and clean pepper earns a better price. Before you sell, check this week's pepper farm gate price for your district on TopGoviya.lk (data from the Department of Export Agriculture, DEA).",
-  ctaB:"🌶️ See the spice price guide",
+  ctaB:"🌶️ See black pepper prices",
   warn:"⚠️ Laws, document requirements and tax rates can change, so confirm with the EDB, Sri Lanka Customs and NPQS before you export.",
   disc:"Prices are indicative only. Decisions are your responsibility.",
   srcH:"📚 Sources"
@@ -247,7 +247,7 @@ ta:{
 <p>TopGoviya.lk மசாலா விலைப் பக்கங்களில், ஏற்றுமதி விவசாயத் திணைக்களத்தின் (DEA) வாராந்த விலைகளை மாவட்டம் மற்றும் தரம் வாரியாகப் பாருங்கள்.</p>`,
   ctaH:"🌾 மிளகு விவசாயிகளுக்கு",
   ctaP:"நீங்களே ஏற்றுமதி செய்யாவிட்டாலும், நன்கு உலர்த்திச் சுத்தம் செய்த மிளகுக்கு அதிக விலை கிடைக்கும். விற்கும் முன், உங்கள் மாவட்டத்தின் இந்த வார மிளகு பண்ணை வாசல் விலையை TopGoviya.lk இல் பாருங்கள் (தரவு: ஏற்றுமதி விவசாயத் திணைக்களம் - DEA).",
-  ctaB:"🌶️ மசாலா விலை வழிகாட்டியைப் பாருங்கள்",
+  ctaB:"🌶️ கருமிளகு விலைகளைப் பாருங்கள்",
   warn:"⚠️ சட்டங்கள், ஆவணத் தேவைகள் மற்றும் வரி வீதங்கள் மாறக்கூடும் என்பதால், ஏற்றுமதிக்கு முன் EDB, இலங்கைச் சுங்கம் மற்றும் NPQS உடன் உறுதிப்படுத்துங்கள்.",
   disc:"விலைகள் வழிகாட்டல் மட்டுமே. உங்கள் முடிவுகளுக்கு நீங்களே பொறுப்பாவீர்கள்.",
   srcH:"📚 மூலாதாரங்கள்"
@@ -269,7 +269,7 @@ function L(l){
   document.querySelectorAll('.lang-bar button').forEach(b=>b.classList.toggle('on',b.textContent==={si:'සිංහල',en:'English',ta:'தமிழ்'}[l]));
   const s=(id,v)=>{const e=document.getElementById(id);if(e)e.innerHTML=v;};
   ['nLive','nBlog','nAbout','ctag','h1','dlbl','fLive','fBlog','fAbout'].forEach(k=>s(k,d[k]));
-  const cta=`<div class="cta"><h3>${d.ctaH}</h3><p>${d.ctaP}</p><a href="/spice-price-guide.html">${d.ctaB}</a></div>`;
+  const cta=`<div class="cta"><h3>${d.ctaH}</h3><p>${d.ctaP}</p><a href="/spice/sri-lanka-black-pepper-price.html">${d.ctaB}</a></div>`;
   const src=`<div class="src"><strong>${d.srcH}:</strong><br>${SRC_LINKS.map(x=>`• <a href="${x[1]}" target="_blank" rel="noopener">${x[0]}</a>`).join('<br>')}</div>`;
   document.getElementById('art').innerHTML = d.body + cta + `<div class="warn">${d.warn}</div><p class="disc">${d.disc}</p>` + src;
 }
