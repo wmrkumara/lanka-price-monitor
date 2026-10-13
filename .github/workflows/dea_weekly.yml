@@ -39,10 +39,15 @@ jobs:
       - name: Run DEA weekly update
         run: python3 dea_update.py
 
+      - name: Build small ticker file (dea_ticker_data.json)
+        continue-on-error: true
+        run: python3 make_dea_latest.py
+
       - name: Commit dea_data.json if updated
         run: |
           git config user.name "TopGoviya Bot"
           git config user.email "bot@topgoviya.lk"
           git add dea_data.json
+          git add dea_ticker_data.json || true
           git diff --staged --quiet || git commit -m "DEA spice prices updated $(date +'%d %B %Y')"
           git push
