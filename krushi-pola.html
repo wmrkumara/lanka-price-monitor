@@ -218,7 +218,7 @@ var DISTRICTS = [
 var CATS = {
  seedlings:["Seedlings & plants","පැළ","நாற்றுகள்"], grafted:["Grafted plants","බද්ධ පැළ","ஒட்டு நாற்றுகள்"],
  cuttings:["Cuttings","පැළ දඬු","தண்டுத் துண்டுகள்"], tubers:["Seed tubers & bulbs","අල වර්ග (රෝපණය සඳහා)","நடவுக் கிழங்குகள்"],
- seeds:["Seeds","බීජ","விதைகள்"], fertilizer:["Fertilizer & compost","පොහොර","உரம்"],
+ seeds:["Seeds","බීජ","விதைகள்"],
  tools:["Tools & equipment","උපකරණ","உபகரணங்கள்"], other:["Other","වෙනත්","மற்றவை"]};
 var UNITS = {
  plant:["per plant","පැළයකට","ஒரு நாற்றுக்கு"], kg:["per kg","කිලෝවකට","ஒரு கிலோவுக்கு"],
@@ -232,7 +232,7 @@ var T = {
   h1:"කෘෂි ද්‍රව්‍ය පොළ", sub:"පැළ · බීජ · රෝපණ ද්‍රව්‍ය",
   lead:"පැළ, පැළ දඬු, අල වර්ග, බීජ විකුණන අය සහ සොයන අය මෙතනින් හොයාගෙන WhatsApp එකෙන් කෙලින්ම කතා කරන්න.",
   tabSell:"🌱 විකිණීමට ඇත", tabWant:"🔍 සොයනවා", nAds:"දැන්වීම් %N", addBtn:"＋ දැන්වීමක් දාන්න (නොමිලේ)",
-  allDist:"සියලු දිස්ත්‍රික්ක", allCat:"සියලු වර්ග", q:"පැළ, බීජ, පොහොර හෝ නගරය සොයන්න…", showing:"දැන්වීම් %N ක් පෙන්වයි",
+  allDist:"සියලු දිස්ත්‍රික්ක", allCat:"සියලු වර්ග", q:"පැළ, බීජ, උපකරණ හෝ නගරය සොයන්න…", showing:"දැන්වීම් %N ක් පෙන්වයි",
   loading:"දැන්වීම් ලබා ගනිමින්…", loadErr:"දැන්වීම් ලබා ගන්න බැරි වුණා. අන්තර්ජාල සම්බන්ධතාවය පරීක්ෂා කරලා පිටුව නැවත විවෘත කරන්න.",
   emptySell:"තවම මෙතන විකිණීමට දැන්වීම් නැහැ. ඔබ පැළ හෝ බීජ විකුණනවා නම්, පළමු දැන්වීම ඔබේ වෙන්න පුළුවන්.",
   emptyWant:"තවම \"සොයනවා\" දැන්වීම් නැහැ. ඔබට ඕන දේ මෙතන දාන්න. සැපයුම්කරුවන්ට ඔබට කතා කරන්න පුළුවන්.",
@@ -262,7 +262,7 @@ var T = {
   h1:"விவசாய உள்ளீட்டுச் சந்தை", sub:"நாற்றுகள் · விதைகள் · நடவுப் பொருட்கள்",
   lead:"நாற்றுகள், தண்டுத் துண்டுகள், கிழங்குகள், விதைகள் விற்பவர்களையும் தேடுபவர்களையும் இங்கே கண்டு WhatsApp மூலம் நேரடியாகப் பேசுங்கள்.",
   tabSell:"🌱 விற்பனைக்கு", tabWant:"🔍 தேவை", nAds:"%N விளம்பரங்கள்", addBtn:"＋ விளம்பரம் இடுங்கள் (இலவசம்)",
-  allDist:"அனைத்து மாவட்டங்கள்", allCat:"அனைத்து வகைகள்", q:"நாற்று, விதை, உரம் அல்லது நகரம் தேடுங்கள்…", showing:"%N விளம்பரங்கள் காட்டப்படுகின்றன",
+  allDist:"அனைத்து மாவட்டங்கள்", allCat:"அனைத்து வகைகள்", q:"நாற்று, விதை, உபகரணம் அல்லது நகரம் தேடுங்கள்…", showing:"%N விளம்பரங்கள் காட்டப்படுகின்றன",
   loading:"விளம்பரங்கள் ஏற்றப்படுகின்றன…", loadErr:"விளம்பரங்களை ஏற்ற முடியவில்லை. இணையத்தைச் சரிபார்த்து பக்கத்தைப் புதுப்பிக்கவும்.",
   emptySell:"இங்கு இன்னும் விற்பனை விளம்பரங்கள் இல்லை. நீங்கள் நாற்றுகள் அல்லது விதைகள் விற்றால், முதல் விளம்பரம் உங்களுடையதாக இருக்கலாம்.",
   emptyWant:"இன்னும் தேவை விளம்பரங்கள் இல்லை. உங்களுக்குத் தேவையானதை இங்கே இடுங்கள்; விற்பனையாளர்கள் உங்களைத் தொடர்புகொள்ளலாம்.",
@@ -292,7 +292,7 @@ var T = {
   h1:"Agri Supply Directory", sub:"Seedlings · Seeds · Planting materials",
   lead:"Find people selling or looking for seedlings, cuttings, seed tubers and seeds, and talk to them directly on WhatsApp.",
   tabSell:"🌱 For sale", tabWant:"🔍 Wanted", nAds:"%N listings", addBtn:"＋ Add a listing (free)",
-  allDist:"All districts", allCat:"All types", q:"Search seedlings, seeds, fertilizer or town…", showing:"Showing %N listings",
+  allDist:"All districts", allCat:"All types", q:"Search seedlings, seeds, tools or town…", showing:"Showing %N listings",
   loading:"Loading listings…", loadErr:"Listings could not load. Check your internet and refresh the page.",
   emptySell:"No items for sale yet. If you sell seedlings or seeds, yours can be the first listing.",
   emptyWant:"No requests posted yet. Post what you need, and suppliers can contact you.",
