@@ -105,6 +105,14 @@
   .ok b{display:block;font-size:18px;margin-bottom:4px}
   .ref{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--petrol)}
 
+  .howto{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--petrol);border-radius:12px;padding:0;margin:0 0 14px}
+  .howto summary{cursor:pointer;font-weight:700;color:var(--petrol);padding:12px 16px;list-style:none}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:" ▾"}
+  .howto[open] summary::after{content:" ▴"}
+  .howto ol{margin:0;padding:0 18px 14px 36px;font-size:14.5px;color:var(--soft)}
+  .howto li{padding:3px 0}
+  .howlink{font-size:14px;font-weight:700;color:var(--petrol);text-decoration:underline;white-space:nowrap}
   .foot{margin-top:30px;padding-top:16px;border-top:1px solid var(--line2);font-size:13.5px;color:var(--muted)}
   .foot a{color:var(--petrol)}
   .made{text-align:center;margin-top:14px}
@@ -138,12 +146,24 @@
   <a class="add" href="#add" data-t="addBtn">＋ දැන්වීමක් දාන්න (නොමිලේ)</a>
 </div>
 <p class="micmsg" id="micmsg" aria-live="polite"></p>
+<p style="margin:-4px 0 12px"><a class="howlink" href="#howto" data-t="howLink">❓ දැන්වීමක් දාන්නේ කොහොමද?</a></p>
 <p class="count" id="count" aria-live="polite"></p>
 <div class="grid" id="grid"></div>
 
 <div class="safe"><b data-t="safeH">ගනුදෙනු කිරීමට පෙර</b> <span data-t="safeP">TopGoviya දැන්වීමක් පළ කරන්නේ දුරකථන අංකය පරීක්ෂා කළාට පසුවයි. නමුත් ද්‍රව්‍යවල ගුණාත්මකභාවය හෝ මිල අපි සහතික කරන්නේ නැහැ. ද්‍රව්‍ය බලලා ගන්න, මුදල් කලින් ගෙවන්න එපා.</span></div>
 
 <h2 id="add" data-t="formH">දැන්වීමක් දාන්න</h2>
+<details class="howto" id="howto">
+  <summary data-t="howH">📝 දැන්වීමක් දාන හැටි (විනාඩි 2යි)</summary>
+  <ol>
+    <li data-t="how1">"විකිණීමට ඇත" තෝරන්න. ඔබට යමක් ගන්න ඕන නම් "ගන්න ඕන" තෝරන්න.</li>
+    <li data-t="how2">නම සහ WhatsApp අංකය දාන්න.</li>
+    <li data-t="how3">දිස්ත්‍රික්කය තෝරලා ළඟම නගරය ටයිප් කරන්න (උදා: Gamp → Gampola).</li>
+    <li data-t="how4">වර්ගය සහ ද්‍රව්‍යය දාන්න. මිල දානවා නම් "මිල කුමකටද?" ත් තෝරන්න.</li>
+    <li data-t="how5">දැන්වීම තියාගන්න කාලය තෝරන්න, එකඟතාවය tick කරලා "දැන්වීම යවන්න" ඔබන්න.</li>
+    <li data-t="how6">ලැබෙන KP අංකය සටහන් කරගන්න. අපි ඔබේ අංකයට කතා කළාට පසු දැන්වීම පළ වෙනවා.</li>
+  </ol>
+</details>
 <form id="pf" novalidate>
   <p class="formlead" data-t="formLead">නොමිලේ. ඔබේ WhatsApp අංකය අපි පරීක්ෂා කළාට පසුව දැන්වීම මෙහි පළ වෙනවා.</p>
 
@@ -249,6 +269,8 @@ var T = {
   errReq:"කරුණාකර * ලකුණු කළ කොටස් පුරවන්න.", errWa:"WhatsApp අංකය වැරදියි. 07X XXX XXXX ආකාරයට දාන්න.",
   errConsent:"ප්‍රසිද්ධ කිරීමට එකඟතාවය tick කරන්න.", errLimit:"මෙම අංකයෙන් දැනටමත් දැන්වීම් කිහිපයක් ලැබී ඇත. පැය කිහිපයකට පසු නැවත උත්සාහ කරන්න.",
   errNet:"යවන්න බැරි වුණා. අන්තර්ජාලය පරීක්ෂා කරලා නැවත ඔබන්න.", errUnsure:"දැන්වීම ලැබුණාද කියලා තහවුරු කරගන්න බැරි වුණා. දෙවෙනි පාරක් යවන්න කලින්, පහළ WhatsApp link එකෙන් අපෙන් අහන්න.", errUnit:"මිලක් දැම්මා නම්, \"මිල කුමකටද?\" තෝරන්න.", errPrice:"මිල ඉලක්කම්වලින් පමණක් දාන්න, උදා: 350",
+  howLink:"❓ දැන්වීමක් දාන්නේ කොහොමද?", howH:"📝 දැන්වීමක් දාන හැටි (විනාඩි 2යි)",
+  how1:"\"විකිණීමට ඇත\" තෝරන්න. ඔබට යමක් ගන්න ඕන නම් \"ගන්න ඕන\" තෝරන්න.", how2:"නම සහ WhatsApp අංකය දාන්න.", how3:"දිස්ත්‍රික්කය තෝරලා ළඟම නගරය ටයිප් කරන්න (උදා: Gamp → Gampola).", how4:"වර්ගය සහ ද්‍රව්‍යය දාන්න. මිල දානවා නම් \"මිල කුමකටද?\" ත් තෝරන්න.", how5:"දැන්වීම තියාගන්න කාලය තෝරන්න, එකඟතාවය tick කරලා \"දැන්වීම යවන්න\" ඔබන්න.", how6:"ලැබෙන KP අංකය සටහන් කරගන්න. අපි ඔබේ අංකයට කතා කළාට පසු දැන්වීම පළ වෙනවා.",
   lDays:"දැන්වීම තියාගන්න කාලය", daysHint:"කාලය ඉවර වුණාම දැන්වීම ඉබේම ඉවත් වෙනවා. දිගටම තියාගන්න ඕන නම් KP අංකය සමඟ අපට WhatsApp කරන්න.", until:"දක්වා පෙන්වයි",
   mic:"කතා කරලා සොයන්න", listening:"🎤 අහගෙන ඉන්නවා… දැන් කතා කරන්න", micErr:"ඇහුණේ නැහැ. 🎤 ඔබලා නැවත කතා කරන්න.", micDenied:"Microphone අවසරය දීලා නැහැ. Browser settings එකෙන් අවසර දෙන්න.",
   adminMsg:"ආයුබෝවන් TopGoviya! මගේ කෘෂි ද්‍රව්‍ය පොළ දැන්වීම (%R) වෙනස් කරන්න / ඉවත් කරන්න ඕන.",
@@ -279,6 +301,8 @@ var T = {
   errReq:"* குறியிட்ட பகுதிகளை நிரப்புங்கள்.", errWa:"WhatsApp எண் தவறு. 07X XXX XXXX வடிவில் இடுங்கள்.",
   errConsent:"வெளியிட ஒப்புதலை டிக் செய்யுங்கள்.", errLimit:"இந்த எண்ணிலிருந்து ஏற்கனவே பல விளம்பரங்கள் வந்துள்ளன. சில மணி நேரம் கழித்து மீண்டும் முயலுங்கள்.",
   errNet:"அனுப்ப முடியவில்லை. இணையத்தைச் சரிபார்த்து மீண்டும் அழுத்துங்கள்.", errUnsure:"விளம்பரம் கிடைத்ததா என்று உறுதிப்படுத்த முடியவில்லை. மீண்டும் அனுப்பும் முன் கீழே உள்ள WhatsApp இணைப்பில் எங்களிடம் கேளுங்கள்.", errUnit:"விலை இட்டால், \"விலை எதற்கு?\" என்பதைத் தேர்ந்தெடுக்கவும்.", errPrice:"விலையை எண்களில் மட்டும் இடுங்கள், எ.கா: 350",
+  howLink:"❓ விளம்பரம் இடுவது எப்படி?", howH:"📝 விளம்பரம் இடுவது எப்படி (2 நிமிடம்)",
+  how1:"\"விற்பனைக்கு உள்ளது\" தேர்ந்தெடுக்கவும். ஏதாவது வாங்க வேண்டுமெனில் \"வாங்கத் தேவை\".", how2:"பெயர் மற்றும் WhatsApp எண்ணை இடுங்கள்.", how3:"மாவட்டத்தைத் தேர்ந்தெடுத்து அருகிலுள்ள நகரத்தைத் தட்டச்சு செய்யுங்கள் (எ.கா: Gamp → Gampola).", how4:"வகை மற்றும் பொருளை இடுங்கள். விலை இட்டால் \"விலை எதற்கு?\" என்பதையும் தேர்ந்தெடுக்கவும்.", how5:"காட்டப்படும் காலத்தைத் தேர்ந்தெடுத்து, ஒப்புதலை டிக் செய்து \"விளம்பரத்தை அனுப்புக\" அழுத்தவும்.", how6:"கிடைக்கும் KP எண்ணைக் குறித்துக்கொள்ளுங்கள். உங்கள் எண்ணைச் சரிபார்த்த பின் விளம்பரம் வெளியாகும்.",
   lDays:"விளம்பரம் காட்டப்படும் காலம்", daysHint:"காலம் முடிந்ததும் விளம்பரம் தானாக நீக்கப்படும். தொடர்ந்து வைத்திருக்க KP எண்ணுடன் எங்களுக்கு WhatsApp செய்யுங்கள்.", until:"வரை காட்டப்படும்",
   mic:"பேசித் தேடுங்கள்", listening:"🎤 கேட்கிறது… இப்போது பேசுங்கள்", micErr:"கேட்கவில்லை. 🎤 அழுத்தி மீண்டும் பேசுங்கள்.", micDenied:"மைக்ரோஃபோன் அனுமதி இல்லை. Browser settings இல் அனுமதி வழங்குங்கள்.",
   adminMsg:"வணக்கம் TopGoviya! எனது விளம்பரத்தை (%R) மாற்ற / நீக்க வேண்டும்.",
@@ -309,6 +333,8 @@ var T = {
   errReq:"Please fill in the fields marked *.", errWa:"That WhatsApp number is not valid. Use the format 07X XXX XXXX.",
   errConsent:"Tick the box to agree to publishing.", errLimit:"Several listings have already come from this number. Try again in a few hours.",
   errNet:"Could not send. Check your internet and press the button again.", errUnsure:"We could not confirm your listing arrived. Before sending again, ask us using the WhatsApp link below.", errUnit:"If you add a price, choose what the price is for.", errPrice:"Enter the price in numbers only, e.g. 350",
+  howLink:"❓ How do I add a listing?", howH:"📝 How to add a listing (2 minutes)",
+  how1:"Choose \"For sale\", or \"Wanted\" if you are looking to buy.", how2:"Enter your name and WhatsApp number.", how3:"Choose your district and type your nearest town (e.g. Gamp → Gampola).", how4:"Enter the type and item. If you add a price, also choose what the price is for.", how5:"Choose how long to keep the listing, tick the consent box and tap \"Send listing\".", how6:"Note your KP reference. Your listing goes live after we call to check your number.",
   lDays:"Keep listing for", daysHint:"The listing is removed automatically when the time ends. To keep it longer, WhatsApp us with the KP reference.", until:"shown until",
   mic:"Search by voice", listening:"🎤 Listening… speak now", micErr:"Didn't catch that. Tap 🎤 and speak again.", micDenied:"Microphone permission is off. Allow it in your browser settings.",
   adminMsg:"Hello TopGoviya! I want to change / remove my listing (%R).",
@@ -513,6 +539,8 @@ var T = {
       try { rec.start(); } catch (e) { $("micmsg").textContent = t("micErr"); }
     });
   }
+
+  document.querySelectorAll('a[href="#howto"]').forEach(function (x) { x.addEventListener("click", function () { $("howto").open = true; }); });
 
   applyLang(lang);
   load();
