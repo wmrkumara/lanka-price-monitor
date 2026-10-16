@@ -4,9 +4,10 @@
 /* Updated: 27 Sep 2026 — v14: all HTML pages network-first (daily /price/ pages never go stale) */
 /* Updated: 03 Oct 2026 — v15: spice pages, spice guide, data sources + /price/ hub added to offline cache */
 /* Updated: 07 Oct 2026 — v16: pages + data always re-checked with the server (no 10-minute browser copy); /market/ pages added */
+/* Updated: 16 Oct 2026 — v17: Krushi Pola (Google Apps Script) requests and all POST requests bypass the service worker */
 
-const CACHE_NAME = 'topgoviya-v16';
-const DATA_CACHE = 'topgoviya-data-v16';
+const CACHE_NAME = 'topgoviya-v17';
+const DATA_CACHE = 'topgoviya-data-v17';
 
 /* ── Static files to cache for offline use ── */
 const STATIC_ASSETS = [
@@ -83,6 +84,12 @@ function freshFetch(request) {
 /* ── Fetch strategy ── */
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
+
+  /* Form submissions (POST etc.) — never touch, the browser sends them directly */
+  if (event.request.method !== 'GET') return;
+
+  /* Krushi Pola listings (Google Apps Script) — always live from Google, never cached */
+  if (url.hostname.endsWith('script.google.com') || url.hostname.endsWith('script.googleusercontent.com')) return;
 
   /* data.json & harti_data.json — always network first (fresh prices!) */
   if (url.pathname.includes('data.json') || url.href.includes('data.json') ||
