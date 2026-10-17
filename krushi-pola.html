@@ -37,6 +37,8 @@
   h1{font-family:'Newsreader','Noto Sans Sinhala','Noto Sans Tamil',serif;font-weight:500;font-size:clamp(32px,6vw,46px);line-height:1.12;margin:22px 0 4px}
   .sub{color:var(--gold);font-weight:700;margin:0 0 10px}
   .lead{margin:0;color:var(--soft);max-width:62ch}
+  .neutral{margin:8px 0 0;font-size:14px;color:var(--soft);max-width:62ch}
+  .hint a{color:var(--petrol);font-weight:700}
   h2{font-family:'Newsreader','Noto Sans Sinhala','Noto Sans Tamil',serif;font-weight:500;font-size:28px;margin:34px 0 8px}
 
   /* the two sides of the market */
@@ -133,6 +135,7 @@
 <h1 data-t="h1">කෘෂි ද්‍රව්‍ය පොළ</h1>
 <p class="sub" data-t="sub">පැළ · බීජ · රෝපණ ද්‍රව්‍ය</p>
 <p class="lead" data-t="lead">පැළ, පැළ දඬු, අල වර්ග, බීජ විකුණන අය සහ සොයන අය මෙතනින් හොයාගෙන WhatsApp එකෙන් කෙලින්ම කතා කරන්න.</p>
+<p class="neutral" data-t="neutral">ℹ️ TopGoviya භාණ්ඩ මිලදී ගන්නේ හෝ විකුණන්නේ නැහැ. අපි විකුණන අය සහ ගන්න අය සම්බන්ධ කරනවා විතරයි.</p>
 
 <div class="sides" role="group">
   <button class="side on" aria-pressed="true" data-side="Sell"><span data-t="tabSell">🌱 විකිණීමට ඇත</span><small id="nSell"></small></button>
@@ -185,7 +188,7 @@
   <label for="village"><span data-t="lVillage">ගම</span> <span class="opt" data-t="optional">(අවශ්‍ය නම්)</span></label><input id="village" maxlength="60">
 
   <div class="row">
-    <div><label for="cat"><span data-t="lCat">වර්ගය</span> *</label><select id="cat"></select></div>
+    <div><label for="cat"><span data-t="lCat">වර්ගය</span> *</label><select id="cat"></select><div class="hint"><span data-t="catHint">ගැලපෙන වර්ගයක් නැද්ද? "වෙනත්" තෝරලා දැන්ම දාන්න, නැත්නම් අපට කියන්න. අපි ඉක්මනින් එකතු කරනවා.</span> <a id="catWa" href="#" target="_blank" rel="noopener">WhatsApp</a></div></div>
     <div><label for="item"><span data-t="lItem">ද්‍රව්‍යය</span> *</label><input id="item" maxlength="80" required></div>
   </div>
 
@@ -238,23 +241,34 @@ var DISTRICTS = [
 var CATS = {
  seedlings:["Seedlings & plants","පැළ","நாற்றுகள்"], grafted:["Grafted plants","බද්ධ පැළ","ஒட்டு நாற்றுகள்"],
  cuttings:["Cuttings","පැළ දඬු","தண்டுத் துண்டுகள்"], tubers:["Seed tubers & bulbs","අල වර්ග (රෝපණය සඳහා)","நடவுக் கிழங்குகள்"],
- seeds:["Seeds","බීජ","விதைகள்"],
+ seeds:["Seeds","බීජ","விதைகள்"], flowerplants:["Flower & ornamental plants","මල් / විසිතුරු පැළ","மலர் / அலங்காரச் செடிகள்"],
+ vegetables:["Vegetables","එළවළු","காய்கறிகள்"], fruits:["Fruits","පළතුරු","பழங்கள்"],
+ spices:["Spices (pepper, cinnamon…)","කුළුබඩු (ගම්මිරිස්, කුරුඳු…)","வாசனைப் பொருட்கள் (மிளகு, கறுவா…)"],
+ betel:["Betel","බුලත්","வெற்றிலை"], cutflowers:["Cut flowers","මල් (කපන මල්)","வெட்டு மலர்கள்"],
+ coconut:["Coconut & products","පොල් හා පොල් නිෂ්පාදන","தேங்காய் மற்றும் தயாரிப்புகள்"],
+ grains:["Paddy & grains","වී / ධාන්‍ය","நெல் / தானியங்கள்"], honey:["Honey & treacle","පැණි (මී පැණි, කිතුල්)","தேன் / கித்துள் பாணி"],
  tools:["Tools & equipment","උපකරණ","உபகரணங்கள்"], other:["Other","වෙනත්","மற்றவை"]};
+/* dropdown groups: [label, category keys] — every key above must appear once */
+var CAT_GROUPS = [
+ [["🌱 For planting","🌱 සිටුවීමට","🌱 நடவுக்கு"], ["seedlings","grafted","cuttings","tubers","seeds","flowerplants"]],
+ [["🧺 Harvest","🧺 අස්වැන්න","🧺 அறுவடை"], ["vegetables","fruits","spices","betel","cutflowers","coconut","grains","honey"]],
+ [["🔧 Other","🔧 අනෙකුත්","🔧 மற்றவை"], ["tools","other"]]];
 var UNITS = {
  plant:["per plant","පැළයකට","ஒரு நாற்றுக்கு"], kg:["per kg","කිලෝවකට","ஒரு கிலோவுக்கு"],
- packet:["per packet","පැකට්ටුවකට","ஒரு பாக்கெட்டுக்கு"], hundred:["per 100 plants","පැළ 100කට","100 நாற்றுகளுக்கு"], unit:["each","එකකට","ஒன்றுக்கு"]};
+ packet:["per packet","පැකට්ටුවකට","ஒரு பாக்கெட்டுக்கு"], hundred:["per 100 plants","පැළ 100කට","100 நாற்றுகளுக்கு"], unit:["each","එකකට","ஒன்றுக்கு"],
+ thousand:["per 1,000","1,000කට","1,000க்கு"]};
 var DELIV = {talk:["Ask about delivery","බෙදාහැරීම ගැන කතා කරන්න","விநியோகம் பற்றி கேளுங்கள்"], yes:["Delivery available","බෙදාහැරීම ඇත","விநியோகம் உண்டு"], no:["No delivery","බෙදාහැරීම නැත","விநியோகம் இல்லை"]};
 var DAYS = {"7":["1 week","සතියක්","ஒரு வாரம்"], "30":["1 month","මාසයක්","ஒரு மாதம்"], "90":["3 months","මාස 3ක්","3 மாதங்கள்"]};
 var LI = {en:0, si:1, ta:2};
 
 var T = {
  si:{ title:"පැළ, බීජ, රෝපණ ද්‍රව්‍ය ගන්න තැන් | කෘෂි ද්‍රව්‍ය පොළ | TopGoviya.lk",
-  h1:"කෘෂි ද්‍රව්‍ය පොළ", sub:"පැළ · බීජ · රෝපණ ද්‍රව්‍ය",
-  lead:"පැළ, පැළ දඬු, අල වර්ග, බීජ විකුණන අය සහ සොයන අය මෙතනින් හොයාගෙන WhatsApp එකෙන් කෙලින්ම කතා කරන්න.",
+  h1:"කෘෂි ද්‍රව්‍ය පොළ", sub:"පැළ · බීජ · අස්වැන්න · උපකරණ",
+  lead:"පැළ, බීජ, එළවළු, පළතුරු, කුළුබඩු වගේ කෘෂි ද්‍රව්‍ය විකුණන අය සහ සොයන අය මෙතනින් හොයාගෙන WhatsApp එකෙන් කෙලින්ම කතා කරන්න.",
   tabSell:"🌱 විකිණීමට ඇත", tabWant:"🔍 සොයනවා", nAds:"දැන්වීම් %N", addBtn:"＋ දැන්වීමක් දාන්න (නොමිලේ)",
-  allDist:"සියලු දිස්ත්‍රික්ක", allCat:"සියලු වර්ග", q:"පැළ, බීජ, උපකරණ හෝ නගරය සොයන්න…", showing:"දැන්වීම් %N ක් පෙන්වයි",
+  allDist:"සියලු දිස්ත්‍රික්ක", allCat:"සියලු වර්ග", q:"පැළ, එළවළු, කුළුබඩු හෝ නගරය සොයන්න…", neutral:"ℹ️ TopGoviya භාණ්ඩ මිලදී ගන්නේ හෝ විකුණන්නේ නැහැ. අපි විකුණන අය සහ ගන්න අය සම්බන්ධ කරනවා විතරයි.", catHint:"ගැලපෙන වර්ගයක් නැද්ද? \"වෙනත්\" තෝරලා දැන්ම දාන්න, නැත්නම් අපට කියන්න. අපි ඉක්මනින් එකතු කරනවා.", catMsg:"ආයුබෝවන්! කෘෂි ද්‍රව්‍ය පොළට මේ වර්ගය එකතු කරන්න: ", showing:"දැන්වීම් %N ක් පෙන්වයි",
   loading:"දැන්වීම් ලබා ගනිමින්…", loadErr:"දැන්වීම් ලබා ගන්න බැරි වුණා. අන්තර්ජාල සම්බන්ධතාවය පරීක්ෂා කරලා පිටුව නැවත විවෘත කරන්න.",
-  emptySell:"තවම මෙතන විකිණීමට දැන්වීම් නැහැ. ඔබ පැළ හෝ බීජ විකුණනවා නම්, පළමු දැන්වීම ඔබේ වෙන්න පුළුවන්.",
+  emptySell:"තවම මෙතන විකිණීමට දැන්වීම් නැහැ. ඔබ පැළ, බීජ හෝ අස්වැන්න විකුණනවා නම්, පළමු දැන්වීම ඔබේ වෙන්න පුළුවන්.",
   emptyWant:"තවම \"සොයනවා\" දැන්වීම් නැහැ. ඔබට ඕන දේ මෙතන දාන්න. සැපයුම්කරුවන්ට ඔබට කතා කරන්න පුළුවන්.",
   noMatch:"මෙම තේරීම්වලට ගැලපෙන දැන්වීම් නැහැ. දිස්ත්‍රික්කය හෝ වර්ගය වෙනස් කරලා බලන්න.",
   askPrice:"මිල විමසන්න", qty:"ප්‍රමාණය", posted:"පළ කළේ", wa:"WhatsApp", call:"අමතන්න",
@@ -281,12 +295,12 @@ var T = {
   contactLink:"අප අමතන්න", homeLink:"අද එළවළු මිල", whLink:"තොග මිල",
   disc:"මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.", made:"ගම්පොළදී නිර්මාණය කළා" },
  ta:{ title:"நாற்றுகள், விதைகள் வாங்கும் இடங்கள் | விவசாய உள்ளீட்டுச் சந்தை | TopGoviya.lk",
-  h1:"விவசாய உள்ளீட்டுச் சந்தை", sub:"நாற்றுகள் · விதைகள் · நடவுப் பொருட்கள்",
-  lead:"நாற்றுகள், தண்டுத் துண்டுகள், கிழங்குகள், விதைகள் விற்பவர்களையும் தேடுபவர்களையும் இங்கே கண்டு WhatsApp மூலம் நேரடியாகப் பேசுங்கள்.",
+  h1:"விவசாய உள்ளீட்டுச் சந்தை", sub:"நாற்றுகள் · விதைகள் · அறுவடை · உபகரணங்கள்",
+  lead:"நாற்றுகள், விதைகள், காய்கறிகள், பழங்கள், வாசனைப் பொருட்கள் போன்ற விவசாயப் பொருட்களை விற்பவர்களையும் தேடுபவர்களையும் இங்கே கண்டு WhatsApp மூலம் நேரடியாகப் பேசுங்கள்.",
   tabSell:"🌱 விற்பனைக்கு", tabWant:"🔍 தேவை", nAds:"%N விளம்பரங்கள்", addBtn:"＋ விளம்பரம் இடுங்கள் (இலவசம்)",
-  allDist:"அனைத்து மாவட்டங்கள்", allCat:"அனைத்து வகைகள்", q:"நாற்று, விதை, உபகரணம் அல்லது நகரம் தேடுங்கள்…", showing:"%N விளம்பரங்கள் காட்டப்படுகின்றன",
+  allDist:"அனைத்து மாவட்டங்கள்", allCat:"அனைத்து வகைகள்", q:"நாற்று, காய்கறி, வாசனைப் பொருள் அல்லது நகரம் தேடுங்கள்…", neutral:"ℹ️ TopGoviya பொருட்களை வாங்குவதோ விற்பதோ இல்லை. விற்பவர்களையும் வாங்குபவர்களையும் இணைக்க மட்டுமே செய்கிறோம்.", catHint:"பொருத்தமான வகை இல்லையா? \"மற்றவை\" தேர்ந்தெடுத்து இப்போதே பதிவிடுங்கள், அல்லது எங்களுக்குத் தெரிவியுங்கள். விரைவில் சேர்ப்போம்.", catMsg:"வணக்கம்! விவசாய உள்ளீட்டுச் சந்தையில் இந்த வகையைச் சேர்க்கவும்: ", showing:"%N விளம்பரங்கள் காட்டப்படுகின்றன",
   loading:"விளம்பரங்கள் ஏற்றப்படுகின்றன…", loadErr:"விளம்பரங்களை ஏற்ற முடியவில்லை. இணையத்தைச் சரிபார்த்து பக்கத்தைப் புதுப்பிக்கவும்.",
-  emptySell:"இங்கு இன்னும் விற்பனை விளம்பரங்கள் இல்லை. நீங்கள் நாற்றுகள் அல்லது விதைகள் விற்றால், முதல் விளம்பரம் உங்களுடையதாக இருக்கலாம்.",
+  emptySell:"இங்கு இன்னும் விற்பனை விளம்பரங்கள் இல்லை. நீங்கள் நாற்றுகள், விதைகள் அல்லது அறுவடைப் பொருட்களை விற்றால், முதல் விளம்பரம் உங்களுடையதாக இருக்கலாம்.",
   emptyWant:"இன்னும் தேவை விளம்பரங்கள் இல்லை. உங்களுக்குத் தேவையானதை இங்கே இடுங்கள்; விற்பனையாளர்கள் உங்களைத் தொடர்புகொள்ளலாம்.",
   noMatch:"இந்தத் தேர்வுகளுக்குப் பொருந்தும் விளம்பரங்கள் இல்லை. மாவட்டம் அல்லது வகையை மாற்றிப் பாருங்கள்.",
   askPrice:"விலை கேளுங்கள்", qty:"அளவு", posted:"இடப்பட்டது", wa:"WhatsApp", call:"அழைக்க",
@@ -313,12 +327,12 @@ var T = {
   contactLink:"தொடர்பு கொள்ள", homeLink:"இன்றைய காய்கறி விலை", whLink:"மொத்த விலை",
   disc:"விலைகள் வழிகாட்டல் மட்டுமே. உங்கள் முடிவுகளுக்கு நீங்களே பொறுப்பு.", made:"கம்பளையில் உருவாக்கப்பட்டது" },
  en:{ title:"Seedlings, seeds & planting material | Agri Supply Directory | TopGoviya.lk",
-  h1:"Agri Supply Directory", sub:"Seedlings · Seeds · Planting materials",
-  lead:"Find people selling or looking for seedlings, cuttings, seed tubers and seeds, and talk to them directly on WhatsApp.",
+  h1:"Agri Supply Directory", sub:"Seedlings · Seeds · Harvest · Tools",
+  lead:"Find people selling or looking for seedlings, seeds, vegetables, fruit, spices and more, and talk to them directly on WhatsApp.",
   tabSell:"🌱 For sale", tabWant:"🔍 Wanted", nAds:"%N listings", addBtn:"＋ Add a listing (free)",
-  allDist:"All districts", allCat:"All types", q:"Search seedlings, seeds, tools or town…", showing:"Showing %N listings",
+  allDist:"All districts", allCat:"All types", q:"Search seedlings, vegetables, spices or town…", neutral:"ℹ️ TopGoviya does not buy or sell anything. We only connect sellers and buyers.", catHint:"No matching type? Choose \"Other\" and post now, or tell us. We'll add it soon.", catMsg:"Hello! Please add this type to the Agri Supply Directory: ", showing:"Showing %N listings",
   loading:"Loading listings…", loadErr:"Listings could not load. Check your internet and refresh the page.",
-  emptySell:"No items for sale yet. If you sell seedlings or seeds, yours can be the first listing.",
+  emptySell:"No items for sale yet. If you sell seedlings, seeds or harvest, yours can be the first listing.",
   emptyWant:"No requests posted yet. Post what you need, and suppliers can contact you.",
   noMatch:"No listings match these choices. Try another district or type.",
   askPrice:"Ask for price", qty:"Quantity", posted:"Posted", wa:"WhatsApp", call:"Call",
@@ -366,6 +380,13 @@ var T = {
     if (sel.selectedIndex < 0) sel.selectedIndex = 0;
   }
   function distPairs() { return DISTRICTS.map(function (d) { return [d[0], distName(d[0])]; }).sort(function (a, b) { return a[1].localeCompare(b[1]); }); }
+  function fillCats(sel, firstText) {
+    var v = sel.value;
+    sel.innerHTML = '<option value="">' + esc(firstText) + "</option>" + CAT_GROUPS.map(function (g) {
+      return '<optgroup label="' + esc(nm(g[0])) + '">' + g[1].map(function (k) {
+        return '<option value="' + esc(k) + '">' + esc(nm(CATS[k])) + "</option>"; }).join("") + "</optgroup>"; }).join("");
+    sel.value = v; if (sel.selectedIndex < 0) sel.selectedIndex = 0;
+  }
   function mapPairs(obj) { return Object.keys(obj).map(function (k) { return [k, nm(obj[k])]; }); }
 
   function applyLang(l) {
@@ -374,9 +395,9 @@ var T = {
     document.querySelectorAll(".lang button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-lang") === l); });
     $("fQ").placeholder = t("q"); $("town").placeholder = t("townPh"); $("item").placeholder = t("itemPh"); $("qty").placeholder = t("qtyPh");
     fillSelect($("fDist"), t("allDist"), distPairs(), true);
-    fillSelect($("fCat"), t("allCat"), mapPairs(CATS), true);
+    fillCats($("fCat"), t("allCat"));
     fillSelect($("dist"), t("choose"), distPairs(), true);
-    fillSelect($("cat"), t("choose"), mapPairs(CATS), true);
+    fillCats($("cat"), t("choose"));
     fillSelect($("unit"), t("chooseUnit"), mapPairs(UNITS), true);
     fillSelect($("del"), null, mapPairs(DELIV), true);
     fillSelect($("days"), null, mapPairs(DAYS), true);
@@ -384,6 +405,7 @@ var T = {
     $("mic").title = t("mic"); $("mic").setAttribute("aria-label", t("mic"));
     $("fDist").setAttribute("aria-label", t("lDist")); $("fCat").setAttribute("aria-label", t("lCat")); $("fQ").setAttribute("aria-label", t("q"));
     $("adminWa").href = "https://wa.me/" + TG_WHATSAPP + "?text=" + encodeURIComponent(t("adminMsg").replace("%R", lastRef || "KP-"));
+    $("catWa").href = "https://wa.me/" + TG_WHATSAPP + "?text=" + encodeURIComponent(t("catMsg"));
     if (lastRef) $("okText").textContent = t("okP").replace("%R", lastRef);
     if (lastErr) $("err").textContent = t(lastErr);
     if (sending) $("send").textContent = t("sending");
@@ -439,7 +461,7 @@ var T = {
     var list = mine.filter(function (x) {
       if (d && x.district !== d) return false;
       if (c && x.category !== c) return false;
-      if (q) { var hay = [x.item, x.town, x.village, x.notes, x.name, distName(x.district)].join(" ").toLowerCase(); if (hay.indexOf(q) < 0) return false; }
+      if (q) { var hay = [x.item, x.town, x.village, x.notes, x.name, distName(x.district), (CATS[x.category] || []).join(" ")].join(" ").toLowerCase(); if (hay.indexOf(q) < 0) return false; }
       return true;
     });
     $("count").textContent = list.length ? t("showing").replace("%N", list.length) : "";
