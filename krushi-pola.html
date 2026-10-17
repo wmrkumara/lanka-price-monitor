@@ -41,12 +41,14 @@
   .hint a{color:var(--petrol);font-weight:700}
   .cathint{margin-top:8px;padding:10px 12px;background:#fdf3d9;border:1px solid #e6c97a;border-left:4px solid var(--gold);border-radius:10px;font-size:14.5px;color:var(--ink);line-height:1.5}
   .cathint::before{content:"💡 "}
-  .cathint a{display:inline-block;margin-top:4px;padding:4px 12px;border-radius:999px;background:#25d366;color:#fff;font-weight:700;text-decoration:none}
+  .cathint a{display:inline-block;margin-top:4px;padding:4px 12px;border-radius:999px;background:#128c4a;color:#fff;font-weight:700;text-decoration:none}
   .cathint{animation:hintGlow 1.6s ease-in-out 2}
   @keyframes hintGlow{0%,100%{box-shadow:0 0 0 0 rgba(169,128,42,0)}50%{box-shadow:0 0 0 6px rgba(169,128,42,.28)}}
   @media (prefers-reduced-motion:reduce){.cathint{animation:none}}
   .pricehint{margin-top:8px;padding:9px 12px;background:#e6f1ee;border:1px solid #b9d6cf;border-left:4px solid var(--petrol);border-radius:10px;font-size:14.5px;font-weight:600;color:var(--petrol);line-height:1.5}
   .pricehint::before{content:"💬 "}
+  .helpform{margin:0 0 16px;padding:10px 12px;background:var(--paper);border:1px dashed var(--line,#cdbf9f);border-radius:10px;font-size:14.5px;color:var(--ink);line-height:1.5}
+  .helpform a{display:inline-block;margin-top:4px;padding:4px 12px;border-radius:999px;background:#128c4a;color:#fff;font-weight:700;text-decoration:none}
   h2{font-family:'Newsreader','Noto Sans Sinhala','Noto Sans Tamil',serif;font-weight:500;font-size:28px;margin:34px 0 8px}
 
   /* the two sides of the market */
@@ -106,7 +108,7 @@
   .typepick label:has(input:checked){border-color:var(--petrol);background:#e6efec}
   .hint{font-size:13px;color:var(--muted);margin-top:4px}
   .consent{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:14.5px;margin-top:16px;background:var(--paper);padding:10px 12px;border-radius:10px}
-  .consent input{width:auto;margin-top:4px;accent-color:var(--petrol)}
+  .consent input{width:24px;height:24px;flex-shrink:0;margin-top:2px;accent-color:var(--petrol)}
   .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
   .send{width:100%;margin-top:16px;font:inherit;font-weight:700;font-size:17px;padding:14px;border-radius:12px;border:0;background:var(--petrol);color:#fff;cursor:pointer}
   .send[disabled]{opacity:.6;cursor:wait}
@@ -177,6 +179,7 @@
 </details>
 <form id="pf" novalidate>
   <p class="formlead" data-t="formLead">නොමිලේ. ඔබේ WhatsApp අංකය අපි පරීක්ෂා කළාට පසුව දැන්වීම මෙහි පළ වෙනවා.</p>
+  <div class="helpform"><span data-t="helpForm">📞 පුරවන්න අමාරු නම්, භාණ්ඩය, මිල, ප්‍රමාණය සහ ප්‍රදේශය අපට WhatsApp කරන්න. අපි දාලා දෙන්නම්.</span> <a id="helpWa" href="#" target="_blank" rel="noopener">WhatsApp</a></div>
 
   <label data-t="lType">ඔබට ඕන</label>
   <div class="typepick">
@@ -284,8 +287,8 @@ var T = {
   formH:"දැන්වීමක් දාන්න", formLead:"නොමිලේ. ඔබේ WhatsApp අංකය අපි පරීක්ෂා කළාට පසුව දැන්වීම මෙහි පළ වෙනවා.",
   lType:"ඔබේ දැන්වීම", oSell:"විකිණීමට ඇත", oWant:"ගන්න ඕන (සොයනවා)", lName:"නම හෝ ව්‍යාපාරයේ නම", lWa:"WhatsApp අංකය",
   lDist:"දිස්ත්‍රික්කය", choose:"තෝරන්න", lTown:"ළඟම නගරය", townPh:"ටයිප් කරන්න, උදා: Gampola", lVillage:"ගම", optional:"(අවශ්‍ය නම්)",
-  lCat:"වර්ගය", lItem:"ද්‍රව්‍යය", itemPh:"උදා: අඹ බද්ධ පැළ", lPrice:"මිල (රු.)", priceHint:"හිස්ව තිබ්බොත් \"මිල විමසන්න\" ලෙස පෙන්වයි.",
-  lUnit:"මිල කුමකටද?", chooseUnit:"මිලක් නැත්නම් හිස්ව තියන්න", lQty:"ප්‍රමාණය", qtyPh:"උදා: පැළ 500", lDel:"බෙදාහැරීම", lNotes:"වෙනත් විස්තර",
+  lCat:"වර්ගය", lItem:"ද්‍රව්‍යය", itemPh:"උදා: ගම්මිරිස් / අඹ බද්ධ පැළ", lPrice:"මිල (රු.)", priceHint:"හිස්ව තිබ්බොත් \"මිල විමසන්න\" ලෙස පෙන්වයි.",
+  lUnit:"මිල කුමකටද?", chooseUnit:"මිලක් නැත්නම් හිස්ව තියන්න", lQty:"ප්‍රමාණය", qtyPh:"උදා: කිලෝ 50 / පැළ 500", notesPh:"උදා: වියළි ගම්මිරිස්, සතියකින් දෙන්න පුළුවන්", helpForm:"📞 පුරවන්න අමාරු නම්, භාණ්ඩය, මිල, ප්‍රමාණය සහ ප්‍රදේශය අපට WhatsApp කරන්න. අපි දාලා දෙන්නම්.", helpMsg:"ආයුබෝවන් TopGoviya! කෘෂි ද්‍රව්‍ය පොළට දැන්වීමක් දාන්න උදව් ඕන. භාණ්ඩය: , මිල: , ප්‍රමාණය: , ප්‍රදේශය: ", lDel:"බෙදාහැරීම", lNotes:"වෙනත් විස්තර",
   consent:"මගේ නම, WhatsApp අංකය සහ මෙම විස්තර TopGoviya.lk හි ප්‍රසිද්ධ කිරීමට මම එකඟ වෙමි.",
   send:"දැන්වීම යවන්න", sending:"යවමින්…",
   errReq:"කරුණාකර * ලකුණු කළ කොටස් පුරවන්න.", errWa:"WhatsApp අංකය වැරදියි. 07X XXX XXXX ආකාරයට දාන්න.",
@@ -316,8 +319,8 @@ var T = {
   formH:"விளம்பரம் இடுங்கள்", formLead:"இலவசம். உங்கள் WhatsApp எண்ணைச் சரிபார்த்த பின் விளம்பரம் இங்கே வெளியாகும்.",
   lType:"உங்கள் விளம்பரம்", oSell:"விற்பனைக்கு உள்ளது", oWant:"வாங்கத் தேவை", lName:"பெயர் அல்லது வணிகப் பெயர்", lWa:"WhatsApp எண்",
   lDist:"மாவட்டம்", choose:"தேர்ந்தெடுக்கவும்", lTown:"அருகிலுள்ள நகரம்", townPh:"தட்டச்சு செய்யுங்கள், எ.கா: Gampola", lVillage:"கிராமம்", optional:"(விரும்பினால்)",
-  lCat:"வகை", lItem:"பொருள்", itemPh:"எ.கா: மா ஒட்டு நாற்றுகள்", lPrice:"விலை (ரூ.)", priceHint:"காலியாக விட்டால் \"விலை கேளுங்கள்\" எனக் காட்டப்படும்.",
-  lUnit:"விலை எதற்கு?", chooseUnit:"விலை இல்லையெனில் காலியாக விடவும்", lQty:"அளவு", qtyPh:"எ.கா: 500 நாற்றுகள்", lDel:"விநியோகம்", lNotes:"மேலதிக விவரங்கள்",
+  lCat:"வகை", lItem:"பொருள்", itemPh:"எ.கா: மிளகு / மா ஒட்டு நாற்றுகள்", lPrice:"விலை (ரூ.)", priceHint:"காலியாக விட்டால் \"விலை கேளுங்கள்\" எனக் காட்டப்படும்.",
+  lUnit:"விலை எதற்கு?", chooseUnit:"விலை இல்லையெனில் காலியாக விடவும்", lQty:"அளவு", qtyPh:"எ.கா: 50 கிலோ / 500 நாற்றுகள்", notesPh:"எ.கா: உலர்ந்த மிளகு, ஒரு வாரத்தில் தர முடியும்", helpForm:"📞 நிரப்ப கடினமாக இருந்தால், பொருள், விலை, அளவு மற்றும் இடத்தை எங்களுக்கு WhatsApp செய்யுங்கள். நாங்கள் பதிவிடுகிறோம்.", helpMsg:"வணக்கம் TopGoviya! விளம்பரம் இட உதவி தேவை. பொருள்: , விலை: , அளவு: , இடம்: ", lDel:"விநியோகம்", lNotes:"மேலதிக விவரங்கள்",
   consent:"எனது பெயர், WhatsApp எண் மற்றும் இந்த விவரங்களை TopGoviya.lk இல் வெளியிட நான் ஒப்புக்கொள்கிறேன்.",
   send:"விளம்பரத்தை அனுப்புக", sending:"அனுப்புகிறது…",
   errReq:"* குறியிட்ட பகுதிகளை நிரப்புங்கள்.", errWa:"WhatsApp எண் தவறு. 07X XXX XXXX வடிவில் இடுங்கள்.",
@@ -348,8 +351,8 @@ var T = {
   formH:"Add a listing", formLead:"Free. Your listing appears here after we check your WhatsApp number.",
   lType:"Your listing", oSell:"For sale", oWant:"Wanted (looking to buy)", lName:"Name or business name", lWa:"WhatsApp number",
   lDist:"District", choose:"Choose", lTown:"Nearest town", townPh:"Start typing, e.g. Gampola", lVillage:"Village", optional:"(optional)",
-  lCat:"Type", lItem:"Item", itemPh:"e.g. Grafted mango plants", lPrice:"Price (Rs.)", priceHint:"Leave empty to show \"Ask for price\".",
-  lUnit:"Price is for", chooseUnit:"Leave empty if no price", lQty:"Quantity", qtyPh:"e.g. 500 plants", lDel:"Delivery", lNotes:"Other details",
+  lCat:"Type", lItem:"Item", itemPh:"e.g. Black pepper / Grafted mango plants", lPrice:"Price (Rs.)", priceHint:"Leave empty to show \"Ask for price\".",
+  lUnit:"Price is for", chooseUnit:"Leave empty if no price", lQty:"Quantity", qtyPh:"e.g. 50 kg / 500 plants", notesPh:"e.g. Dried pepper, ready within a week", helpForm:"📞 Finding this hard? WhatsApp us the item, price, quantity and area, and we'll post it for you.", helpMsg:"Hello TopGoviya! I need help posting a listing. Item: , Price: , Quantity: , Area: ", lDel:"Delivery", lNotes:"Other details",
   consent:"I agree to publish my name, WhatsApp number and these details on TopGoviya.lk.",
   send:"Send listing", sending:"Sending…",
   errReq:"Please fill in the fields marked *.", errWa:"That WhatsApp number is not valid. Use the format 07X XXX XXXX.",
@@ -401,7 +404,8 @@ var T = {
     lang = l; document.documentElement.lang = l; document.title = t("title");
     document.querySelectorAll("[data-t]").forEach(function (el) { var k = el.getAttribute("data-t"); if (T[l][k]) el.textContent = T[l][k]; });
     document.querySelectorAll(".lang button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-lang") === l); });
-    $("fQ").placeholder = t("q"); $("town").placeholder = t("townPh"); $("item").placeholder = t("itemPh"); $("qty").placeholder = t("qtyPh");
+    $("fQ").placeholder = t("q"); $("town").placeholder = t("townPh"); $("item").placeholder = t("itemPh"); $("qty").placeholder = t("qtyPh"); $("notes").placeholder = t("notesPh");
+    $("helpWa").href = "https://wa.me/" + TG_WHATSAPP + "?text=" + encodeURIComponent(t("helpMsg"));
     fillSelect($("fDist"), t("allDist"), distPairs(), true);
     fillCats($("fCat"), t("allCat"));
     fillSelect($("dist"), t("choose"), distPairs(), true);
