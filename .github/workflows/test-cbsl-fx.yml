@@ -1,0 +1,46 @@
+name: Test CBSL Exchange Connection
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Test CBSL exchange rate pages
+        run: |
+          mkdir -p out
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36"
+
+          echo "=== 1. Exchange rates main page ==="
+          curl -s -A "$UA" --max-time 60 -o out/1_main.html -w "HTTP %{http_code}, %{size_download} bytes\n" \
+            "https://www.cbsl.gov.lk/en/rates-and-indicators/exchange-rates/daily-buy-and-sell-exchange-rates"
+
+          echo "=== 2. Indicative rates page ==="
+          curl -s -A "$UA" --max-time 60 -o out/2_indicative.html -w "HTTP %{http_code}, %{size_download} bytes\n" \
+            "https://www.cbsl.gov.lk/en/rates-and-indicators/exchange-rates/daily-indicative-us-dollar-spot-exchange-rates"
+
+          echo "=== 3. Rate lookup (USD, EUR, 1-16 Oct 2026) ==="
+          curl -s -A "$UA" --max-time 60 -o out/3_lookup.html -w "HTTP %{http_code}, %{size_download} bytes\n" \
+            -X POST "https://www.cbsl.gov.lk/cbsl_custom/exrates/exrates_resultsT.php" \
+            --data-urlencode "lookupPage=lookup_daily_exchange_rates.php" \
+            --data-urlencode "startRange=2006-11-11" \
+            --data-urlencode "rangeType=dates" \
+            --data-urlencode "txtStart=2026-10-01" \
+            --data-urlencode "txtEnd=2026-10-16" \
+            --data-urlencode "chk_cur[]=USD~United States Dollar" \
+            --data-urlencode "chk_cur[]=EUR~Euro" \
+            --data-urlencode "submit_button=Submit"
+
+          echo "=== Links to rate tools found on the pages ==="
+          grep -ohE '(src|href|action)="[^"]*cbsl_custom[^"]*"' out/*.html | sort -u || echo "none found"
+
+          echo "=== First 40 lines of lookup result ==="
+          head -c 3000 out/3_lookup.html || true
+
+      - name: Save results
+        uses: actions/upload-artifact@v4
+        with:
+          name: cbsl-fx-test
+          path: out/
+          retention-days: 7
