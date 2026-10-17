@@ -7,38 +7,83 @@ jobs:
   test:
     runs-on: ubuntu-24.04
     steps:
-      - name: Test CBSL exchange rate pages
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install Chrome (same as daily robot)
+        run: |
+          pip install -q playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Test CBSL exchange rates with Chrome
         run: |
           mkdir -p out
-          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36"
+          python - <<'EOF'
+          import re
+          from playwright.sync_api import sync_playwright
 
-          echo "=== 1. Exchange rates main page ==="
-          curl -s -A "$UA" --max-time 60 -o out/1_main.html -w "HTTP %{http_code}, %{size_download} bytes\n" \
-            "https://www.cbsl.gov.lk/en/rates-and-indicators/exchange-rates/daily-buy-and-sell-exchange-rates"
+          UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                "(KHTML, like Gecko) Chrome/128.0 Safari/537.36")
+          PAGE = "https://www.cbsl.gov.lk/en/rates-and-indicators/exchange-rates"
+          TOOL = "https://www.cbsl.gov.lk/cbsl_custom/exrates/exrates.php"
+          RESULT = "https://www.cbsl.gov.lk/cbsl_custom/exrates/exrates_resultsT.php"
 
-          echo "=== 2. Indicative rates page ==="
-          curl -s -A "$UA" --max-time 60 -o out/2_indicative.html -w "HTTP %{http_code}, %{size_download} bytes\n" \
-            "https://www.cbsl.gov.lk/en/rates-and-indicators/exchange-rates/daily-indicative-us-dollar-spot-exchange-rates"
+          with sync_playwright() as p:
+              b = p.chromium.launch(args=["--disable-blink-features=AutomationControlled"])
+              ctx = b.new_context(user_agent=UA, locale="en-US", viewport={"width": 1366, "height": 900})
+              page = ctx.new_page()
 
-          echo "=== 3. Rate lookup (USD, EUR, 1-16 Oct 2026) ==="
-          curl -s -A "$UA" --max-time 60 -o out/3_lookup.html -w "HTTP %{http_code}, %{size_download} bytes\n" \
-            -X POST "https://www.cbsl.gov.lk/cbsl_custom/exrates/exrates_resultsT.php" \
-            --data-urlencode "lookupPage=lookup_daily_exchange_rates.php" \
-            --data-urlencode "startRange=2006-11-11" \
-            --data-urlencode "rangeType=dates" \
-            --data-urlencode "txtStart=2026-10-01" \
-            --data-urlencode "txtEnd=2026-10-16" \
-            --data-urlencode "chk_cur[]=USD~United States Dollar" \
-            --data-urlencode "chk_cur[]=EUR~Euro" \
-            --data-urlencode "submit_button=Submit"
+              print("=== A. Open exchange rates page in Chrome ===")
+              r = page.goto(PAGE, wait_until="domcontentloaded", timeout=60000)
+              page.wait_for_timeout(8000)
+              print("HTTP", r.status if r else "?", "| title:", page.title())
+              html = page.content()
+              open("out/A_page.html", "w").write(html)
+              print("Rate tool links:", sorted(set(re.findall(r'cbsl_custom/[^"\' ]+', html))))
 
-          echo "=== Links to rate tools found on the pages ==="
-          grep -ohE '(src|href|action)="[^"]*cbsl_custom[^"]*"' out/*.html | sort -u || echo "none found"
+              print("=== B. Open the rate tool (currency list) ===")
+              r = page.goto(TOOL, wait_until="domcontentloaded", timeout=60000)
+              page.wait_for_timeout(4000)
+              tool = page.content()
+              open("out/B_tool.html", "w").write(tool)
+              print("HTTP", r.status if r else "?")
+              curs = re.findall(r'value="([A-Z]{3}~[^"]+)"', tool)
+              print(len(curs), "currencies found:")
+              for c in curs:
+                  print("  ", c)
 
-          echo "=== First 40 lines of lookup result ==="
-          head -c 3000 out/3_lookup.html || true
+              print("=== C. Ask for USD + KRW + AED, 1-16 Oct 2026 ===")
+              def pick(code, default):
+                  for c in curs:
+                      if c.startswith(code + "~"):
+                          return c
+                  return default
+              parts = [
+                  ("lookupPage", "lookup_daily_exchange_rates.php"),
+                  ("startRange", "2006-11-11"),
+                  ("rangeType", "dates"),
+                  ("txtStart", "2026-10-01"),
+                  ("txtEnd", "2026-10-16"),
+                  ("chk_cur[]", pick("USD", "USD~United States Dollar")),
+                  ("chk_cur[]", pick("KRW", "KRW~South Korean Won")),
+                  ("chk_cur[]", pick("AED", "AED~UAE Dirham")),
+                  ("submit_button", "Submit"),
+              ]
+              from urllib.parse import urlencode
+              res = ctx.request.post(RESULT, data=urlencode(parts),
+                  headers={"Content-Type": "application/x-www-form-urlencoded", "Referer": TOOL},
+                  timeout=60000)
+              body = res.text()
+              open("out/C_result.html", "w").write(body)
+              print("HTTP", res.status, "|", len(body), "characters")
+              text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", body))
+              print(text[:2500])
+              b.close()
+          EOF
 
       - name: Save results
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: cbsl-fx-test
