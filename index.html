@@ -413,6 +413,11 @@
   .navlink.reports:hover{background:rgba(255,255,255,.18);color:#fff}
   .navlink.spices{background:rgba(180,80,40,.25);color:#ffb899;border:1px solid rgba(180,80,40,.35)}
   .navlink.spices:hover{background:rgba(180,80,40,.4);color:#fff}
+.navlink.tea{background:rgba(70,160,95,.22);color:#a9e8ba;border:1px solid rgba(70,160,95,.38)}
+.navlink.tea:hover{background:rgba(70,160,95,.38);color:#fff}
+.navlink.tea .tea-ta,.navlink.tea .tea-en{display:none}
+html[lang="ta"] .navlink.tea .tea-si,html[lang="en"] .navlink.tea .tea-si{display:none}
+html[lang="ta"] .navlink.tea .tea-ta,html[lang="en"] .navlink.tea .tea-en{display:inline}
   .navlink-badge{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.08em;
     background:rgba(255,255,255,.25);padding:2px 5px;border-radius:4px;margin-left:5px;vertical-align:middle}
   @media(max-width:600px){
@@ -531,6 +536,7 @@
       <a href="breakeven.html" class="navlink breakeven" id="navBreakeven">🧮 <span id="navBreakevenLbl">Break-even</span></a>
       <a href="reports.html" class="navlink reports" id="navReports">📄 Reports</a>
       <a href="spices.html" class="navlink spices" id="navSpices">🌶️ <span id="nav-spices-label">Spices</span></a>
+      <a href="tea.html" class="navlink tea" id="navTea">🍃 <span class="tea-si">තේ මිල</span><span class="tea-ta">தேயிலை</span><span class="tea-en">Tea</span></a>
     </div>
   </div>
 </nav>
@@ -743,6 +749,7 @@
             <a href="blog.html" style="color:var(--petrol);font-weight:600;text-decoration:none">📝 ගොවි පුවත් | Blog</a><br>
             <a href="insights.html" style="color:var(--petrol);font-weight:600;text-decoration:none">📊 මිල ප්‍රවණතා | Price Insights 2026</a><br>
             <a href="spice-price-guide.html" style="color:var(--petrol);font-weight:600;text-decoration:none">🌶️ කුළුබඩු මිල මාර්ගෝපදේශය | Spice Price Guide</a><br>
+            <a href="tea.html" style="color:var(--petrol);font-weight:600;text-decoration:none">🍃 තේ මිල — උප දිස්ත්‍රික් අනුව | Tea Prices by Sub-District</a><br>
             <a href="bulletin.html" style="color:var(--petrol);font-weight:600;text-decoration:none">📈 කෘෂිකාර්මික දත්ත වාර්තාව | Monthly Agriculture Data Bulletin</a><br>
             <a href="loan-calculator.html" style="color:var(--petrol);font-weight:600;text-decoration:none">🏦 ණය සහ ලීසින් ගණකය | Loan &amp; Leasing Calculator</a><br>
             <a href="weather.html" style="color:var(--petrol);font-weight:600;text-decoration:none">🌤️ වෙළඳපොළ කාලගුණය | Market Weather</a><br>
