@@ -1,0 +1,31 @@
+name: Get Shorts Music (one time)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  get:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download the 3 tracks
+        run: |
+          mkdir -p music
+          B="https://ai-music-tracks.s3.us-east-1.amazonaws.com/fb1e06be-b76c-480e-86c1-e3fe9c7c199b"
+          curl -fsSL "$B/96dc74a0-6009-4ef5-9fb6-bb3024738fa3.wav" -o music/music-1.wav
+          curl -fsSL "$B/c5bc2e37-303c-4f2e-b803-16a20aa13f64.wav" -o music/music-2.wav
+          curl -fsSL "$B/8e61f963-c1bf-4864-a721-da1002091cb3.wav" -o music/music-4.wav
+          ls -lh music/
+
+      - name: Save them to the repo
+        run: |
+          git config user.name "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add music/*.wav
+          git commit -m "Add Shorts background music (3 tracks)" || echo "Nothing new"
+          git pull --rebase
+          git push
