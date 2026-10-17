@@ -82,6 +82,15 @@
   footer a{color:var(--petrol);font-weight:700;text-decoration:none}
   @media(max-width:560px){.grid{grid-template-columns:1fr}}
 </style>
+<style id="tg-tea-nav">
+.navlink.tea{background:linear-gradient(135deg,#2f9a5c,#1d7a45)!important;color:#fff!important;border:1px solid #6fd39a!important;
+  box-shadow:0 0 0 2px rgba(111,211,154,.18),0 6px 16px -6px rgba(47,154,92,.7)}
+.navlink.tea:hover{background:linear-gradient(135deg,#38ad69,#22894e)!important;color:#fff!important}
+.navlink.tea .tea-badge{background:#ffd98a!important;color:#1d4a2e!important}
+.tealink .tea-ta,.tealink .tea-en{display:none}
+html[lang="ta"] .tealink .tea-si,html[lang="en"] .tealink .tea-si{display:none}
+html[lang="ta"] .tealink .tea-ta,html[lang="en"] .tealink .tea-en{display:inline}
+</style>
 </head>
 <body>
 
@@ -91,6 +100,7 @@
     <div class="navlinks">
       <a href="index.html" class="navlink">📊 Retail Prices <span class="navlink-badge">CBSL</span></a>
       <a href="wholesale.html" class="navlink">📦 Wholesale <span class="navlink-badge">HARTI</span></a>
+      <a href="tea.html" class="navlink tea tealink">🍃 <span class="tea-si">තේ මිල</span><span class="tea-ta">தேயிலை விலை</span><span class="tea-en">Tea Prices</span> <span class="navlink-badge tea-badge">CEYLON</span></a>
       <a href="weather.html" class="navlink on">🌤️ Weather <span class="navlink-badge">10 markets</span></a>
     </div>
   </div>
