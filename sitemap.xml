@@ -15,6 +15,12 @@
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
+  <url>
+    <loc>https://topgoviya.lk/krushi-pola.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <!-- ── SPICE PAGES ── -->
   <url>
@@ -25,6 +31,15 @@
     <xhtml:link rel="alternate" hreflang="si" href="https://topgoviya.lk/spices.html"/>
     <xhtml:link rel="alternate" hreflang="ta" href="https://topgoviya.lk/spices.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://topgoviya.lk/spices.html"/>
+  </url>
+  <url>
+    <loc>https://topgoviya.lk/tea.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="si" href="https://topgoviya.lk/tea.html"/>
+    <xhtml:link rel="alternate" hreflang="ta" href="https://topgoviya.lk/tea.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://topgoviya.lk/tea.html"/>
   </url>
   <url>
     <loc>https://topgoviya.lk/spice-report.html</loc>
