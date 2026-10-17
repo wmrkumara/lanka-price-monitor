@@ -413,8 +413,10 @@
   .navlink.reports:hover{background:rgba(255,255,255,.18);color:#fff}
   .navlink.spices{background:rgba(180,80,40,.25);color:#ffb899;border:1px solid rgba(180,80,40,.35)}
   .navlink.spices:hover{background:rgba(180,80,40,.4);color:#fff}
-.navlink.tea{background:rgba(70,160,95,.22);color:#a9e8ba;border:1px solid rgba(70,160,95,.38)}
-.navlink.tea:hover{background:rgba(70,160,95,.38);color:#fff}
+.navlink.tea{background:linear-gradient(135deg,#2f9a5c,#1d7a45);color:#fff;border:1px solid #6fd39a;
+  box-shadow:0 0 0 2px rgba(111,211,154,.18),0 6px 16px -6px rgba(47,154,92,.7)}
+.navlink.tea:hover{background:linear-gradient(135deg,#38ad69,#22894e);color:#fff;transform:translateY(-1px)}
+.navlink.tea .tea-badge{background:#ffd98a;color:#1d4a2e}
 .navlink.tea .tea-ta,.navlink.tea .tea-en{display:none}
 html[lang="ta"] .navlink.tea .tea-si,html[lang="en"] .navlink.tea .tea-si{display:none}
 html[lang="ta"] .navlink.tea .tea-ta,html[lang="en"] .navlink.tea .tea-en{display:inline}
@@ -532,11 +534,11 @@ html[lang="ta"] .navlink.tea .tea-ta,html[lang="en"] .navlink.tea .tea-en{displa
     <div class="navlinks">
       <a href="index.html" class="navlink retail" id="navRetail">📊 <span class="navlink-badge">CBSL</span></a>
       <a href="wholesale.html" class="navlink wholesale" id="navWholesale">📦 <span class="navlink-badge">HARTI</span></a>
-      <a href="weather.html" class="navlink weather" id="navWeather">🌤️ <span class="navlink-badge" id="navWeatherBadge">Weather</span></a>
+      <a href="tea.html" class="navlink tea" id="navTea">🍃 <span class="tea-si">තේ මිල</span><span class="tea-ta">தேயிலை விலை</span><span class="tea-en">Tea Prices</span> <span class="navlink-badge tea-badge">CEYLON</span></a>
       <a href="breakeven.html" class="navlink breakeven" id="navBreakeven">🧮 <span id="navBreakevenLbl">Break-even</span></a>
       <a href="reports.html" class="navlink reports" id="navReports">📄 Reports</a>
       <a href="spices.html" class="navlink spices" id="navSpices">🌶️ <span id="nav-spices-label">Spices</span></a>
-      <a href="tea.html" class="navlink tea" id="navTea">🍃 <span class="tea-si">තේ මිල</span><span class="tea-ta">தேயிலை</span><span class="tea-en">Tea</span></a>
+      <a href="weather.html" class="navlink weather" id="navWeather">🌤️ <span class="navlink-badge" id="navWeatherBadge">Weather</span></a>
     </div>
   </div>
 </nav>
