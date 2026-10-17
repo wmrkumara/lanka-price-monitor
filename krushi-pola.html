@@ -39,6 +39,14 @@
   .lead{margin:0;color:var(--soft);max-width:62ch}
   .neutral{margin:8px 0 0;font-size:14px;color:var(--soft);max-width:62ch}
   .hint a{color:var(--petrol);font-weight:700}
+  .cathint{margin-top:8px;padding:10px 12px;background:#fdf3d9;border:1px solid #e6c97a;border-left:4px solid var(--gold);border-radius:10px;font-size:14.5px;color:var(--ink);line-height:1.5}
+  .cathint::before{content:"💡 "}
+  .cathint a{display:inline-block;margin-top:4px;padding:4px 12px;border-radius:999px;background:#25d366;color:#fff;font-weight:700;text-decoration:none}
+  .cathint{animation:hintGlow 1.6s ease-in-out 2}
+  @keyframes hintGlow{0%,100%{box-shadow:0 0 0 0 rgba(169,128,42,0)}50%{box-shadow:0 0 0 6px rgba(169,128,42,.28)}}
+  @media (prefers-reduced-motion:reduce){.cathint{animation:none}}
+  .pricehint{margin-top:8px;padding:9px 12px;background:#e6f1ee;border:1px solid #b9d6cf;border-left:4px solid var(--petrol);border-radius:10px;font-size:14.5px;font-weight:600;color:var(--petrol);line-height:1.5}
+  .pricehint::before{content:"💬 "}
   h2{font-family:'Newsreader','Noto Sans Sinhala','Noto Sans Tamil',serif;font-weight:500;font-size:28px;margin:34px 0 8px}
 
   /* the two sides of the market */
@@ -188,12 +196,12 @@
   <label for="village"><span data-t="lVillage">ගම</span> <span class="opt" data-t="optional">(අවශ්‍ය නම්)</span></label><input id="village" maxlength="60">
 
   <div class="row">
-    <div><label for="cat"><span data-t="lCat">වර්ගය</span> *</label><select id="cat"></select><div class="hint"><span data-t="catHint">ගැලපෙන වර්ගයක් නැද්ද? "වෙනත්" තෝරලා දැන්ම දාන්න, නැත්නම් අපට කියන්න. අපි ඉක්මනින් එකතු කරනවා.</span> <a id="catWa" href="#" target="_blank" rel="noopener">WhatsApp</a></div></div>
+    <div><label for="cat"><span data-t="lCat">වර්ගය</span> *</label><select id="cat"></select><div class="cathint"><span data-t="catHint">ගැලපෙන වර්ගයක් නැද්ද? "වෙනත්" තෝරලා දැන්ම දාන්න, නැත්නම් අපට කියන්න. අපි ඉක්මනින් එකතු කරනවා.</span> <a id="catWa" href="#" target="_blank" rel="noopener">WhatsApp</a></div></div>
     <div><label for="item"><span data-t="lItem">ද්‍රව්‍යය</span> *</label><input id="item" maxlength="80" required></div>
   </div>
 
   <div class="row">
-    <div><label for="price"><span data-t="lPrice">මිල (රු.)</span> <span class="opt" data-t="optional">(අවශ්‍ය නම්)</span></label><input id="price" inputmode="decimal" maxlength="20"><div class="hint" data-t="priceHint">හිස්ව තිබ්බොත් "මිල විමසන්න" ලෙස පෙන්වයි.</div></div>
+    <div><label for="price"><span data-t="lPrice">මිල (රු.)</span> <span class="opt" data-t="optional">(අවශ්‍ය නම්)</span></label><input id="price" inputmode="decimal" maxlength="20"><div class="pricehint" data-t="priceHint">හිස්ව තිබ්බොත් "මිල විමසන්න" ලෙස පෙන්වයි.</div></div>
     <div><label for="unit" data-t="lUnit">ඒකකය</label><select id="unit"></select></div>
   </div>
 
@@ -202,7 +210,7 @@
     <div><label for="del" data-t="lDel">බෙදාහැරීම</label><select id="del"></select></div>
   </div>
 
-  <label for="days" data-t="lDays">දැන්වීම තියාගන්න කාලය</label><select id="days"></select><div class="hint" data-t="daysHint">කාලය ඉවර වුණාම දැන්වීම ඉබේම ඉවත් වෙනවා. දිගටම තියාගන්න ඕන නම් KP අංකය සමඟ අපට WhatsApp කරන්න.</div>
+  <label for="days" data-t="lDays">දැන්වීම තියාගන්න කාලය</label><select id="days"></select><div class="hint" data-t="daysHint">කාලය ඉවර වුණාම දැන්වීම ඉබේම ඉවත් වෙනවා. දිගටම තියාගන්න ඕන නම්, දැන්වීම යැව්වාම ලැබෙන KP අංකය සමඟ අපට WhatsApp කරන්න.</div>
 
   <label for="notes"><span data-t="lNotes">වෙනත් විස්තර</span> <span class="opt" data-t="optional">(අවශ්‍ය නම්)</span></label><textarea id="notes" maxlength="300"></textarea>
 
@@ -285,10 +293,10 @@ var T = {
   errNet:"යවන්න බැරි වුණා. අන්තර්ජාලය පරීක්ෂා කරලා නැවත ඔබන්න.", errUnsure:"දැන්වීම ලැබුණාද කියලා තහවුරු කරගන්න බැරි වුණා. දෙවෙනි පාරක් යවන්න කලින්, පහළ WhatsApp link එකෙන් අපෙන් අහන්න.", errUnit:"මිලක් දැම්මා නම්, \"මිල කුමකටද?\" තෝරන්න.", errPrice:"මිල ඉලක්කම්වලින් පමණක් දාන්න, උදා: 350",
   howLink:"❓ දැන්වීමක් දාන්නේ කොහොමද?", howH:"📝 දැන්වීමක් දාන හැටි (විනාඩි 2යි)",
   how1:"\"විකිණීමට ඇත\" තෝරන්න. ඔබට යමක් ගන්න ඕන නම් \"ගන්න ඕන\" තෝරන්න.", how2:"නම සහ WhatsApp අංකය දාන්න.", how3:"දිස්ත්‍රික්කය තෝරලා ළඟම නගරය ටයිප් කරන්න (උදා: Gamp → Gampola).", how4:"වර්ගය සහ ද්‍රව්‍යය දාන්න. මිල දානවා නම් \"මිල කුමකටද?\" ත් තෝරන්න.", how5:"දැන්වීම තියාගන්න කාලය තෝරන්න, එකඟතාවය tick කරලා \"දැන්වීම යවන්න\" ඔබන්න.", how6:"ලැබෙන KP අංකය සටහන් කරගන්න. අපි ඔබේ අංකයට කතා කළාට පසු දැන්වීම පළ වෙනවා.",
-  lDays:"දැන්වීම තියාගන්න කාලය", daysHint:"කාලය ඉවර වුණාම දැන්වීම ඉබේම ඉවත් වෙනවා. දිගටම තියාගන්න ඕන නම් KP අංකය සමඟ අපට WhatsApp කරන්න.", until:"දක්වා පෙන්වයි",
+  lDays:"දැන්වීම තියාගන්න කාලය", daysHint:"කාලය ඉවර වුණාම දැන්වීම ඉබේම ඉවත් වෙනවා. දිගටම තියාගන්න ඕන නම්, දැන්වීම යැව්වාම ලැබෙන KP අංකය සමඟ අපට WhatsApp කරන්න.", until:"දක්වා පෙන්වයි",
   mic:"කතා කරලා සොයන්න", listening:"🎤 අහගෙන ඉන්නවා… දැන් කතා කරන්න", micErr:"ඇහුණේ නැහැ. 🎤 ඔබලා නැවත කතා කරන්න.", micDenied:"Microphone අවසරය දීලා නැහැ. Browser settings එකෙන් අවසර දෙන්න.",
   adminMsg:"ආයුබෝවන් TopGoviya! මගේ කෘෂි ද්‍රව්‍ය පොළ දැන්වීම (%R) වෙනස් කරන්න / ඉවත් කරන්න ඕන.",
-  okH:"ස්තූතියි! ඔබේ දැන්වීම ලැබුණා.", okP:"යොමු අංකය: %R. අපි ඔබේ WhatsApp අංකය පරීක්ෂා කළාට පසුව දැන්වීම මෙහි පළ වෙනවා. වෙනසක් කරන්න හෝ ඉවත් කරන්න මෙම අංකය සමඟ අපට WhatsApp කරන්න.",
+  okH:"ස්තූතියි! ඔබේ දැන්වීම ලැබුණා.", okP:"යොමු අංකය: %R. අපි ඔබේ WhatsApp අංකය පරීක්ෂා කළාට පසුව දැන්වීම මෙහි පළ වෙනවා. වෙනසක් කරන්න හෝ ඉවත් කරන්න මෙම අංකය සමඟ අපට WhatsApp කරන්න. 📸 මෙම අංකය සටහන් කරගන්න, නැත්නම් screenshot එකක් ගන්න.",
   msgSell:"ආයුබෝවන්! TopGoviya.lk කෘෂි ද්‍රව්‍ය පොළේ ඔබේ දැන්වීම දැක්කා (%R – %I). තවම තියෙනවද? මිල සහ විස්තර දැනගන්න කැමතියි.",
   msgWant:"ආයුබෝවන්! TopGoviya.lk කෘෂි ද්‍රව්‍ය පොළේ ඔබ %I සොයන බව දැක්කා (%R). මා ළඟ ඒක තියෙනවා.",
   removeNote:"දැන්වීමක් වෙනස් කරන්න හෝ ඉවත් කරන්න, එහි KP අංකය සමඟ අපට WhatsApp කරන්න.",
@@ -317,10 +325,10 @@ var T = {
   errNet:"அனுப்ப முடியவில்லை. இணையத்தைச் சரிபார்த்து மீண்டும் அழுத்துங்கள்.", errUnsure:"விளம்பரம் கிடைத்ததா என்று உறுதிப்படுத்த முடியவில்லை. மீண்டும் அனுப்பும் முன் கீழே உள்ள WhatsApp இணைப்பில் எங்களிடம் கேளுங்கள்.", errUnit:"விலை இட்டால், \"விலை எதற்கு?\" என்பதைத் தேர்ந்தெடுக்கவும்.", errPrice:"விலையை எண்களில் மட்டும் இடுங்கள், எ.கா: 350",
   howLink:"❓ விளம்பரம் இடுவது எப்படி?", howH:"📝 விளம்பரம் இடுவது எப்படி (2 நிமிடம்)",
   how1:"\"விற்பனைக்கு உள்ளது\" தேர்ந்தெடுக்கவும். ஏதாவது வாங்க வேண்டுமெனில் \"வாங்கத் தேவை\".", how2:"பெயர் மற்றும் WhatsApp எண்ணை இடுங்கள்.", how3:"மாவட்டத்தைத் தேர்ந்தெடுத்து அருகிலுள்ள நகரத்தைத் தட்டச்சு செய்யுங்கள் (எ.கா: Gamp → Gampola).", how4:"வகை மற்றும் பொருளை இடுங்கள். விலை இட்டால் \"விலை எதற்கு?\" என்பதையும் தேர்ந்தெடுக்கவும்.", how5:"காட்டப்படும் காலத்தைத் தேர்ந்தெடுத்து, ஒப்புதலை டிக் செய்து \"விளம்பரத்தை அனுப்புக\" அழுத்தவும்.", how6:"கிடைக்கும் KP எண்ணைக் குறித்துக்கொள்ளுங்கள். உங்கள் எண்ணைச் சரிபார்த்த பின் விளம்பரம் வெளியாகும்.",
-  lDays:"விளம்பரம் காட்டப்படும் காலம்", daysHint:"காலம் முடிந்ததும் விளம்பரம் தானாக நீக்கப்படும். தொடர்ந்து வைத்திருக்க KP எண்ணுடன் எங்களுக்கு WhatsApp செய்யுங்கள்.", until:"வரை காட்டப்படும்",
+  lDays:"விளம்பரம் காட்டப்படும் காலம்", daysHint:"காலம் முடிந்ததும் விளம்பரம் தானாக நீக்கப்படும். தொடர்ந்து வைத்திருக்க, விளம்பரம் அனுப்பியதும் கிடைக்கும் KP எண்ணுடன் எங்களுக்கு WhatsApp செய்யுங்கள்.", until:"வரை காட்டப்படும்",
   mic:"பேசித் தேடுங்கள்", listening:"🎤 கேட்கிறது… இப்போது பேசுங்கள்", micErr:"கேட்கவில்லை. 🎤 அழுத்தி மீண்டும் பேசுங்கள்.", micDenied:"மைக்ரோஃபோன் அனுமதி இல்லை. Browser settings இல் அனுமதி வழங்குங்கள்.",
   adminMsg:"வணக்கம் TopGoviya! எனது விளம்பரத்தை (%R) மாற்ற / நீக்க வேண்டும்.",
-  okH:"நன்றி! உங்கள் விளம்பரம் கிடைத்தது.", okP:"குறிப்பு எண்: %R. உங்கள் WhatsApp எண்ணைச் சரிபார்த்த பின் விளம்பரம் இங்கே வெளியாகும். மாற்ற அல்லது நீக்க இந்த எண்ணுடன் எங்களுக்கு WhatsApp செய்யுங்கள்.",
+  okH:"நன்றி! உங்கள் விளம்பரம் கிடைத்தது.", okP:"குறிப்பு எண்: %R. உங்கள் WhatsApp எண்ணைச் சரிபார்த்த பின் விளம்பரம் இங்கே வெளியாகும். மாற்ற அல்லது நீக்க இந்த எண்ணுடன் எங்களுக்கு WhatsApp செய்யுங்கள். 📸 இந்த எண்ணைக் குறித்துக்கொள்ளுங்கள் அல்லது screenshot எடுங்கள்.",
   msgSell:"வணக்கம்! TopGoviya.lk விவசாய உள்ளீட்டுச் சந்தையில் உங்கள் விளம்பரத்தைப் பார்த்தேன் (%R – %I). இன்னும் கிடைக்குமா? விலை மற்றும் விவரங்களை அறிய விரும்புகிறேன்.",
   msgWant:"வணக்கம்! TopGoviya.lk விவசாய உள்ளீட்டுச் சந்தையில் நீங்கள் %I தேடுவதைப் பார்த்தேன் (%R). என்னிடம் அது உள்ளது.",
   removeNote:"விளம்பரத்தை மாற்ற அல்லது நீக்க, அதன் KP எண்ணுடன் எங்களுக்கு WhatsApp செய்யுங்கள்.",
@@ -349,10 +357,10 @@ var T = {
   errNet:"Could not send. Check your internet and press the button again.", errUnsure:"We could not confirm your listing arrived. Before sending again, ask us using the WhatsApp link below.", errUnit:"If you add a price, choose what the price is for.", errPrice:"Enter the price in numbers only, e.g. 350",
   howLink:"❓ How do I add a listing?", howH:"📝 How to add a listing (2 minutes)",
   how1:"Choose \"For sale\", or \"Wanted\" if you are looking to buy.", how2:"Enter your name and WhatsApp number.", how3:"Choose your district and type your nearest town (e.g. Gamp → Gampola).", how4:"Enter the type and item. If you add a price, also choose what the price is for.", how5:"Choose how long to keep the listing, tick the consent box and tap \"Send listing\".", how6:"Note your KP reference. Your listing goes live after we call to check your number.",
-  lDays:"Keep listing for", daysHint:"The listing is removed automatically when the time ends. To keep it longer, WhatsApp us with the KP reference.", until:"shown until",
+  lDays:"Keep listing for", daysHint:"The listing is removed automatically when the time ends. To keep it longer, WhatsApp us with the KP reference you get after sending.", until:"shown until",
   mic:"Search by voice", listening:"🎤 Listening… speak now", micErr:"Didn't catch that. Tap 🎤 and speak again.", micDenied:"Microphone permission is off. Allow it in your browser settings.",
   adminMsg:"Hello TopGoviya! I want to change / remove my listing (%R).",
-  okH:"Thank you! Your listing was received.", okP:"Reference: %R. Your listing appears here after we check your WhatsApp number. To change or remove it, WhatsApp us with this reference.",
+  okH:"Thank you! Your listing was received.", okP:"Reference: %R. Your listing appears here after we check your WhatsApp number. To change or remove it, WhatsApp us with this reference. 📸 Note this number or take a screenshot.",
   msgSell:"Hello! I saw your listing on the TopGoviya.lk Agri Supply Directory (%R – %I). Is it still available? I'd like to know the price and details.",
   msgWant:"Hello! I saw on the TopGoviya.lk Agri Supply Directory that you are looking for %I (%R). I have it.",
   removeNote:"To change or remove a listing, WhatsApp us with its KP reference.",
