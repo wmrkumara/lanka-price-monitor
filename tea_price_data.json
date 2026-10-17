@@ -1,0 +1,8652 @@
+{
+ "generated": "2026-10-17T08:00:24Z",
+ "source": "Sri Lanka Tea Board - Tea Statistics (Sub District Price)",
+ "sourceUrl": "https://srilankateaboard.lk/tea-statistics/",
+ "description": "Made tea auction price by sub-district, Rs./kg. Not green leaf price.",
+ "unit": "Rs./kg",
+ "latestMonth": "2026-09",
+ "monthCount": 45,
+ "months": {
+  "2023-01": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1367.5,
+    "cumAvg": 1367.5
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1403.48,
+    "cumAvg": 1403.48
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1297.52,
+    "cumAvg": 1297.52
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1444.59,
+    "cumAvg": 1444.59
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1556.06,
+    "cumAvg": 1556.06
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1467.05,
+    "cumAvg": 1467.05
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1387.06,
+    "cumAvg": 1387.06
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1492.59,
+    "cumAvg": 1492.59
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1534.5,
+    "cumAvg": 1534.5
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1125.42,
+    "cumAvg": 1125.42
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1397.44,
+    "cumAvg": 1397.44
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1343.74,
+    "cumAvg": 1343.74
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1246.37,
+    "cumAvg": 1246.37
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1348.38,
+    "cumAvg": 1348.38
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1169.6,
+    "cumAvg": 1169.6
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1198.7,
+    "cumAvg": 1198.7
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 1028.94,
+    "cumAvg": 1028.94
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1304.48,
+    "cumAvg": 1304.48
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1143.95,
+    "cumAvg": 1143.95
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 1151.27,
+    "cumAvg": 1151.27
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1605.39,
+    "cumAvg": 1605.39
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1335.97,
+    "cumAvg": 1335.97
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1238.91,
+    "cumAvg": 1238.91
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1148.78,
+    "cumAvg": 1148.78
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1287.05,
+    "cumAvg": 1287.05
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1154.32,
+    "cumAvg": 1154.32
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1275.01,
+    "cumAvg": 1275.01
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 1104.39,
+    "cumAvg": 1104.39
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1738.02,
+    "cumAvg": 1738.02
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1617.39,
+    "cumAvg": 1617.39
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1396.47,
+    "cumAvg": 1396.47
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1368.1,
+    "cumAvg": 1368.1
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1537.24,
+    "cumAvg": 1537.24
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 1154.89,
+    "cumAvg": 1154.89
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1721.38,
+    "cumAvg": 1721.38
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1604.62,
+    "cumAvg": 1604.62
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1547.92,
+    "cumAvg": 1547.92
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1364.78,
+    "cumAvg": 1364.78
+   }
+  ],
+  "2023-02": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1354.89,
+    "cumAvg": 1361.91
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1359.01,
+    "cumAvg": 1384.6
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1295.74,
+    "cumAvg": 1296.75
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1432.53,
+    "cumAvg": 1439.81
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1589.42,
+    "cumAvg": 1571.44
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1424.66,
+    "cumAvg": 1449.51
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1416.21,
+    "cumAvg": 1398.58
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1500.01,
+    "cumAvg": 1495.41
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1508.47,
+    "cumAvg": 1524.26
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1147.47,
+    "cumAvg": 1134.7
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1391.19,
+    "cumAvg": 1394.97
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1382.75,
+    "cumAvg": 1366.29
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1286.36,
+    "cumAvg": 1262.55
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1298.01,
+    "cumAvg": 1325.59
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1130.66,
+    "cumAvg": 1153.86
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1081.69,
+    "cumAvg": 1149.74
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 1020.03,
+    "cumAvg": 1025.21
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1331.15,
+    "cumAvg": 1315.84
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1135.16,
+    "cumAvg": 1140.29
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 1167.55,
+    "cumAvg": 1157.29
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1628.26,
+    "cumAvg": 1615.32
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1389.51,
+    "cumAvg": 1359.11
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1329.45,
+    "cumAvg": 1277.79
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1138.57,
+    "cumAvg": 1145.74
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1254.69,
+    "cumAvg": 1274.74
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1193.25,
+    "cumAvg": 1170.17
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1266.32,
+    "cumAvg": 1271.58
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 1106.85,
+    "cumAvg": 1105.4
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1669.43,
+    "cumAvg": 1709.94
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1557.7,
+    "cumAvg": 1591.78
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1382.52,
+    "cumAvg": 1390.38
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1300.5,
+    "cumAvg": 1339.96
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1443.86,
+    "cumAvg": 1499.54
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 1031.81,
+    "cumAvg": 1095.87
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1636.65,
+    "cumAvg": 1687.39
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1591.94,
+    "cumAvg": 1599.16
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1503.15,
+    "cumAvg": 1529.26
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1362.92,
+    "cumAvg": 1364.05
+   }
+  ],
+  "2023-03": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1267.71,
+    "cumAvg": 1329.66
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1269.7,
+    "cumAvg": 1351.19
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1248.5,
+    "cumAvg": 1280.9
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1308.66,
+    "cumAvg": 1398.74
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1499.7,
+    "cumAvg": 1547.12
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1317.1,
+    "cumAvg": 1405.9
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1285.32,
+    "cumAvg": 1360.08
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1381.41,
+    "cumAvg": 1457.97
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1374.16,
+    "cumAvg": 1469.59
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 992.14,
+    "cumAvg": 1112.96
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1334.07,
+    "cumAvg": 1376.16
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1181.47,
+    "cumAvg": 1279.59
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1125.98,
+    "cumAvg": 1222.18
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1079.21,
+    "cumAvg": 1250.68
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1013.94,
+    "cumAvg": 1111.54
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1063.5,
+    "cumAvg": 1123.65
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 1025.23,
+    "cumAvg": 1025.22
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1139.27,
+    "cumAvg": 1253.72
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1123.1,
+    "cumAvg": 1134.44
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 1112.9,
+    "cumAvg": 1144.32
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1332.84,
+    "cumAvg": 1527.19
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1236.1,
+    "cumAvg": 1317.62
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1190.33,
+    "cumAvg": 1249.62
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1068.31,
+    "cumAvg": 1124.95
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1163.33,
+    "cumAvg": 1236.83
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1128.41,
+    "cumAvg": 1154.16
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1112.9,
+    "cumAvg": 1215.48
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 1029.95,
+    "cumAvg": 1079.85
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1421.05,
+    "cumAvg": 1623.81
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1346.11,
+    "cumAvg": 1519.96
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1210.5,
+    "cumAvg": 1337.79
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1142.96,
+    "cumAvg": 1280.32
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1237.27,
+    "cumAvg": 1424.09
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 1033.9,
+    "cumAvg": 1075.36
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1402.02,
+    "cumAvg": 1605.49
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1337.07,
+    "cumAvg": 1518.63
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1268.26,
+    "cumAvg": null,
+    "note": "source cumulative value 14449.69 removed (unusual)"
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1163.74,
+    "cumAvg": 1299.42
+   }
+  ],
+  "2023-04": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1226.28,
+    "cumAvg": 1307.48
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1144.79,
+    "cumAvg": 1313.88
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1174.97,
+    "cumAvg": 1263.83
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1217.3,
+    "cumAvg": 1368.0
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1406.67,
+    "cumAvg": 1521.23
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1255.44,
+    "cumAvg": 1377.36
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1228.47,
+    "cumAvg": 1334.38
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1300.25,
+    "cumAvg": 1422.69
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1323.79,
+    "cumAvg": 1440.48
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1052.15,
+    "cumAvg": 1106.12
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1227.8,
+    "cumAvg": 1346.44
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1119.83,
+    "cumAvg": 1240.91
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1058.92,
+    "cumAvg": 1193.07
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1045.61,
+    "cumAvg": 1211.54
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 988.84,
+    "cumAvg": 1088.42
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1016.05,
+    "cumAvg": 1100.44
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 928.06,
+    "cumAvg": 1008.23
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1164.97,
+    "cumAvg": 1236.03
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1107.53,
+    "cumAvg": 1128.88
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 1065.79,
+    "cumAvg": 1129.05
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1340.31,
+    "cumAvg": 1488.52
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1236.11,
+    "cumAvg": 1296.16
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1119.67,
+    "cumAvg": 1223.36
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1034.83,
+    "cumAvg": 1105.23
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1172.82,
+    "cumAvg": 1222.71
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1071.97,
+    "cumAvg": 1136.72
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1158.4,
+    "cumAvg": 1203.01
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 1022.52,
+    "cumAvg": 1068.05
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1407.66,
+    "cumAvg": 1582.51
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1355.46,
+    "cumAvg": 1488.4
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1203.53,
+    "cumAvg": 1311.92
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1182.26,
+    "cumAvg": 1262.4
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1285.11,
+    "cumAvg": 1399.92
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 1013.9,
+    "cumAvg": 1062.48
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1416.12,
+    "cumAvg": 1570.36
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1366.84,
+    "cumAvg": 1489.81
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1300.34,
+    "cumAvg": 1421.35
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1202.48,
+    "cumAvg": 1281.59
+   }
+  ],
+  "2023-05": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 981.42,
+    "cumAvg": 1208.34
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 943.91,
+    "cumAvg": 1223.23
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 938.46,
+    "cumAvg": 1185.03
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 975.01,
+    "cumAvg": 1261.13
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1121.86,
+    "cumAvg": 1402.81
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 990.87,
+    "cumAvg": 1265.93
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 960.97,
+    "cumAvg": 1225.36
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1022.76,
+    "cumAvg": 1307.71
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1065.08,
+    "cumAvg": 1329.07
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 787.59,
+    "cumAvg": 986.21
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 945.39,
+    "cumAvg": 1227.92
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 974.96,
+    "cumAvg": 1154.9
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 932.39,
+    "cumAvg": 1124.17
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 911.58,
+    "cumAvg": 1140.61
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 931.76,
+    "cumAvg": 1055.53
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 875.8,
+    "cumAvg": 1043.86
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 821.78,
+    "cumAvg": 948.33
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 988.53,
+    "cumAvg": 1163.74
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 891.64,
+    "cumAvg": 1046.86
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 883.52,
+    "cumAvg": 1054.08
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1123.12,
+    "cumAvg": 1381.68
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 992.95,
+    "cumAvg": 1195.25
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 923.25,
+    "cumAvg": 1141.43
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 920.05,
+    "cumAvg": 1044.52
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 984.21,
+    "cumAvg": 1144.81
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1005.81,
+    "cumAvg": 1087.58
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 930.7,
+    "cumAvg": 1105.36
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 879.91,
+    "cumAvg": 998.08
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1234.71,
+    "cumAvg": 1491.42
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1173.91,
+    "cumAvg": 1410.65
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1069.63,
+    "cumAvg": 1252.82
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1031.56,
+    "cumAvg": 1203.4
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1078.81,
+    "cumAvg": 1321.86
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 879.68,
+    "cumAvg": 1011.8
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1233.2,
+    "cumAvg": 1489.12
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1165.87,
+    "cumAvg": 1406.79
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1109.86,
+    "cumAvg": 1339.76
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 997.19,
+    "cumAvg": 1198.33
+   }
+  ],
+  "2023-06": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 842.02,
+    "cumAvg": 1139.68
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 814.54,
+    "cumAvg": 1150.0
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 805.39,
+    "cumAvg": 1116.03
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 818.99,
+    "cumAvg": 1160.0
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 944.8,
+    "cumAvg": 1313.49
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 839.59,
+    "cumAvg": 1181.41
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 818.61,
+    "cumAvg": 1147.78
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 839.16,
+    "cumAvg": 1205.29
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 868.65,
+    "cumAvg": 1235.95
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 717.66,
+    "cumAvg": 913.26
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 864.32,
+    "cumAvg": 1154.26
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 899.96,
+    "cumAvg": 1105.22
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 863.25,
+    "cumAvg": 1079.82
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 854.87,
+    "cumAvg": 1090.23
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 911.68,
+    "cumAvg": 1029.31
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 819.39,
+    "cumAvg": 998.84
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 802.55,
+    "cumAvg": 920.65
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 930.61,
+    "cumAvg": 1118.87
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 755.26,
+    "cumAvg": 976.51
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 780.21,
+    "cumAvg": 992.07
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1081.32,
+    "cumAvg": 1335.94
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 916.22,
+    "cumAvg": 1130.63
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 892.33,
+    "cumAvg": 1090.69
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 848.7,
+    "cumAvg": 991.14
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 903.12,
+    "cumAvg": 1096.5
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 803.25,
+    "cumAvg": 1027.65
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 875.94,
+    "cumAvg": 1053.1
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 827.29,
+    "cumAvg": 958.07
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1182.7,
+    "cumAvg": 1437.62
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1114.61,
+    "cumAvg": 1360.28
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1025.62,
+    "cumAvg": 1212.64
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 976.4,
+    "cumAvg": 1165.89
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1057.04,
+    "cumAvg": 1276.49
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 824.87,
+    "cumAvg": 972.86
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1176.82,
+    "cumAvg": 1435.5
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1125.93,
+    "cumAvg": 1360.9
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1051.65,
+    "cumAvg": 1289.67
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 947.18,
+    "cumAvg": 1151.54
+   }
+  ],
+  "2023-07": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 830.48,
+    "cumAvg": 1095.89
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 805.41,
+    "cumAvg": 1106.81
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 808.66,
+    "cumAvg": 1065.75
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 823.88,
+    "cumAvg": 1112.28
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 966.68,
+    "cumAvg": 1264.22
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 832.16,
+    "cumAvg": 1132.45
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 816.98,
+    "cumAvg": 1099.07
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 856.1,
+    "cumAvg": 1155.85
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 884.56,
+    "cumAvg": 1168.62
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 701.04,
+    "cumAvg": 884.21
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 853.63,
+    "cumAvg": 1111.57
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 935.03,
+    "cumAvg": 1079.51
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 901.65,
+    "cumAvg": 1055.19
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 944.32,
+    "cumAvg": 1064.83
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 919.81,
+    "cumAvg": 1013.6
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 858.04,
+    "cumAvg": 975.59
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 786.62,
+    "cumAvg": 901.87
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 986.73,
+    "cumAvg": 1098.49
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 763.62,
+    "cumAvg": 937.61
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 793.15,
+    "cumAvg": 957.36
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1063.95,
+    "cumAvg": 1287.51
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 970.06,
+    "cumAvg": 1101.63
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 929.84,
+    "cumAvg": 1064.89
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 927.31,
+    "cumAvg": 977.25
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 968.21,
+    "cumAvg": 1076.36
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 811.35,
+    "cumAvg": 992.87
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 943.04,
+    "cumAvg": 1035.1
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 882.16,
+    "cumAvg": 944.83
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1227.7,
+    "cumAvg": 1407.54
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1157.65,
+    "cumAvg": 1332.34
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1040.74,
+    "cumAvg": 1187.21
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1006.51,
+    "cumAvg": 1143.35
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1099.41,
+    "cumAvg": 1252.03
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 818.23,
+    "cumAvg": 947.28
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1231.24,
+    "cumAvg": 1407.16
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1178.52,
+    "cumAvg": 1336.1
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1096.87,
+    "cumAvg": 1261.94
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 998.53,
+    "cumAvg": 1129.66
+   }
+  ],
+  "2023-08": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 890.24,
+    "cumAvg": 1063.17
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 925.49,
+    "cumAvg": 1087.37
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 886.42,
+    "cumAvg": 1034.39
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 910.39,
+    "cumAvg": 1087.97
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1048.48,
+    "cumAvg": 1235.04
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 941.25,
+    "cumAvg": 1111.5
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 883.83,
+    "cumAvg": 1071.22
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 959.48,
+    "cumAvg": 1130.88
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 994.36,
+    "cumAvg": 1143.02
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 782.1,
+    "cumAvg": 877.16
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 998.7,
+    "cumAvg": 1096.11
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1046.01,
+    "cumAvg": 1075.78
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 952.48,
+    "cumAvg": 1040.27
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 971.12,
+    "cumAvg": 1048.48
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 974.95,
+    "cumAvg": 1007.66
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 921.05,
+    "cumAvg": 967.39
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 824.67,
+    "cumAvg": 888.28
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1040.25,
+    "cumAvg": 1090.05
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 776.26,
+    "cumAvg": 912.18
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 810.05,
+    "cumAvg": 933.18
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1180.28,
+    "cumAvg": 1268.95
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 993.51,
+    "cumAvg": 1084.75
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 952.0,
+    "cumAvg": 1047.04
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1142.48,
+    "cumAvg": 1009.37
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1041.0,
+    "cumAvg": 1071.44
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 885.98,
+    "cumAvg": 976.51
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 989.5,
+    "cumAvg": 1028.35
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 895.91,
+    "cumAvg": 935.73
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1335.89,
+    "cumAvg": 1397.13
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1256.18,
+    "cumAvg": 1320.64
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1174.25,
+    "cumAvg": 1185.27
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1059.75,
+    "cumAvg": 1129.63
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1235.42,
+    "cumAvg": 1249.59
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 886.23,
+    "cumAvg": 938.37
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1335.56,
+    "cumAvg": 1396.38
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1235.47,
+    "cumAvg": 1319.97
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1211.74,
+    "cumAvg": 1254.44
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1020.12,
+    "cumAvg": 1115.49
+   }
+  ],
+  "2023-09": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 959.96,
+    "cumAvg": 1054.16
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1052.35,
+    "cumAvg": 1084.28
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 964.93,
+    "cumAvg": 1027.47
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1042.33,
+    "cumAvg": 1084.15
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1159.03,
+    "cumAvg": 1227.14
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1088.32,
+    "cumAvg": 1109.38
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1036.94,
+    "cumAvg": 1068.0
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1111.89,
+    "cumAvg": 1129.09
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1081.92,
+    "cumAvg": 1136.78
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 918.41,
+    "cumAvg": 878.71
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1102.81,
+    "cumAvg": 1096.67
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1135.58,
+    "cumAvg": 1082.66
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1028.19,
+    "cumAvg": 1038.96
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1096.66,
+    "cumAvg": 1054.52
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1040.2,
+    "cumAvg": 1011.48
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 981.88,
+    "cumAvg": 968.48
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 822.82,
+    "cumAvg": 880.59
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1059.53,
+    "cumAvg": 1087.81
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 866.47,
+    "cumAvg": 909.47
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 897.18,
+    "cumAvg": 930.44
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1078.56,
+    "cumAvg": 1244.08
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1029.6,
+    "cumAvg": 1080.38
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1003.4,
+    "cumAvg": 1043.13
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1029.56,
+    "cumAvg": 1010.95
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1044.22,
+    "cumAvg": 1069.04
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 925.98,
+    "cumAvg": 971.86
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1031.54,
+    "cumAvg": 1028.59
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 851.71,
+    "cumAvg": 929.19
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1353.44,
+    "cumAvg": 1393.46
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1310.18,
+    "cumAvg": 1319.59
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1188.29,
+    "cumAvg": 1185.54
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1099.21,
+    "cumAvg": 1126.21
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1265.27,
+    "cumAvg": 1251.01
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 913.53,
+    "cumAvg": 935.49
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1385.72,
+    "cumAvg": 1395.42
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1347.77,
+    "cumAvg": 1322.33
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1255.12,
+    "cumAvg": 1254.5
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1064.43,
+    "cumAvg": 1112.35
+   }
+  ],
+  "2023-10": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1005.3,
+    "cumAvg": 1049.63
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 958.66,
+    "cumAvg": 1071.88
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 927.12,
+    "cumAvg": 1015.43
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 995.9,
+    "cumAvg": 1074.89
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1116.08,
+    "cumAvg": 1215.33
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 990.21,
+    "cumAvg": 1098.45
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 991.59,
+    "cumAvg": 1061.49
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1042.66,
+    "cumAvg": 1120.27
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1027.84,
+    "cumAvg": 1125.79
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 913.63,
+    "cumAvg": 880.44
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1055.95,
+    "cumAvg": 1092.81
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1027.67,
+    "cumAvg": 1077.58
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 974.36,
+    "cumAvg": 1031.68
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1030.86,
+    "cumAvg": 1051.91
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 952.28,
+    "cumAvg": 1004.36
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 960.22,
+    "cumAvg": 967.74
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 876.34,
+    "cumAvg": 880.15
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1067.79,
+    "cumAvg": 1086.13
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 851.31,
+    "cumAvg": 905.23
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 943.0,
+    "cumAvg": 931.52
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1149.2,
+    "cumAvg": 1231.33
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 995.62,
+    "cumAvg": 1072.16
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 980.7,
+    "cumAvg": 1037.61
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 979.13,
+    "cumAvg": 1007.37
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1001.77,
+    "cumAvg": 1060.62
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 907.61,
+    "cumAvg": 965.32
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1016.07,
+    "cumAvg": 1027.39
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 857.43,
+    "cumAvg": 922.04
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1378.95,
+    "cumAvg": 1392.1
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1260.85,
+    "cumAvg": 1313.45
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1190.07,
+    "cumAvg": 1185.95
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1047.58,
+    "cumAvg": 1117.68
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1216.71,
+    "cumAvg": 1247.79
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 984.82,
+    "cumAvg": 931.25
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1357.86,
+    "cumAvg": 1391.71
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1216.0,
+    "cumAvg": 1310.61
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1223.62,
+    "cumAvg": 1251.44
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1051.61,
+    "cumAvg": 1107.63
+   }
+  ],
+  "2023-11": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1030.73,
+    "cumAvg": 1048.03
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 944.06,
+    "cumAvg": 1063.66
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 968.73,
+    "cumAvg": 1011.86
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 961.72,
+    "cumAvg": 1065.44
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1146.82,
+    "cumAvg": 1210.06
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 998.69,
+    "cumAvg": 1091.59
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 994.94,
+    "cumAvg": 1057.04
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1046.58,
+    "cumAvg": 1114.57
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1004.96,
+    "cumAvg": 1115.15
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 914.32,
+    "cumAvg": 881.99
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1066.1,
+    "cumAvg": 1090.75
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1083.43,
+    "cumAvg": 1078.11
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 964.88,
+    "cumAvg": 1025.52
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1014.38,
+    "cumAvg": 1048.41
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 958.43,
+    "cumAvg": 1000.07
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 962.24,
+    "cumAvg": 967.23
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 930.08,
+    "cumAvg": 884.77
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1047.88,
+    "cumAvg": 1082.02
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 877.46,
+    "cumAvg": 903.18
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 945.65,
+    "cumAvg": 932.49
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1174.04,
+    "cumAvg": 1226.37
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1003.98,
+    "cumAvg": 1067.4
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 966.13,
+    "cumAvg": 1033.12
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 916.47,
+    "cumAvg": 1000.72
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1028.87,
+    "cumAvg": 1058.02
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 912.09,
+    "cumAvg": 960.81
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 992.94,
+    "cumAvg": 1024.36
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 903.5,
+    "cumAvg": 920.64
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1344.97,
+    "cumAvg": 1387.84
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1230.8,
+    "cumAvg": 1306.76
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1153.44,
+    "cumAvg": 1183.46
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1046.17,
+    "cumAvg": 1111.44
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1194.69,
+    "cumAvg": 1243.18
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 932.15,
+    "cumAvg": 931.33
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1359.5,
+    "cumAvg": 1389.21
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1262.66,
+    "cumAvg": 1306.94
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1175.82,
+    "cumAvg": 1244.78
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1049.84,
+    "cumAvg": 1102.41
+   }
+  ],
+  "2023-12": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1095.12,
+    "cumAvg": 1050.46
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1026.32,
+    "cumAvg": 1061.59
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 967.89,
+    "cumAvg": 1009.07
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1035.05,
+    "cumAvg": 1063.63
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1234.67,
+    "cumAvg": 1211.59
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1046.27,
+    "cumAvg": 1089.25
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1057.0,
+    "cumAvg": 1057.04
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1087.58,
+    "cumAvg": 1113.08
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1078.17,
+    "cumAvg": 1112.72
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1020.01,
+    "cumAvg": 885.34
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1115.16,
+    "cumAvg": 1091.93
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1115.53,
+    "cumAvg": 1079.75
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1020.11,
+    "cumAvg": 1025.52
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1030.04,
+    "cumAvg": 1047.04
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 966.55,
+    "cumAvg": 997.99
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 939.53,
+    "cumAvg": 965.33
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 853.11,
+    "cumAvg": 882.36
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1071.05,
+    "cumAvg": 1081.44
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 901.29,
+    "cumAvg": 903.07
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 973.97,
+    "cumAvg": 935.39
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1310.26,
+    "cumAvg": 1229.49
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1066.52,
+    "cumAvg": 1067.35
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1067.85,
+    "cumAvg": 1034.78
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 996.95,
+    "cumAvg": 1000.5
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1111.26,
+    "cumAvg": 1061.42
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1011.89,
+    "cumAvg": 963.05
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1048.2,
+    "cumAvg": 1025.73
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 1027.61,
+    "cumAvg": 927.12
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1450.83,
+    "cumAvg": 1391.48
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1325.54,
+    "cumAvg": 1307.84
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1175.23,
+    "cumAvg": 1182.97
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1127.85,
+    "cumAvg": 1112.22
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1336.45,
+    "cumAvg": 1247.86
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 956.37,
+    "cumAvg": 932.6
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1448.28,
+    "cumAvg": 1392.37
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1264.96,
+    "cumAvg": 1304.58
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1288.44,
+    "cumAvg": 1247.05
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1083.52,
+    "cumAvg": 1101.51
+   }
+  ],
+  "2024-01": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1112.07,
+    "cumAvg": 1112.07
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1096.67,
+    "cumAvg": 1096.97
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1003.85,
+    "cumAvg": 1003.85
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1054.43,
+    "cumAvg": 1054.43
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1203.05,
+    "cumAvg": 1203.05
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1067.98,
+    "cumAvg": 1067.98
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1104.47,
+    "cumAvg": 1104.47
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1112.59,
+    "cumAvg": 1112.59
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1115.75,
+    "cumAvg": 1115.75
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1038.87,
+    "cumAvg": 1038.87
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1187.85,
+    "cumAvg": 1187.85
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1265.29,
+    "cumAvg": 1265.29
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1107.28,
+    "cumAvg": 1107.28
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1180.63,
+    "cumAvg": 1180.63
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1080.89,
+    "cumAvg": 1080.89
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1060.16,
+    "cumAvg": 1060.16
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 853.53,
+    "cumAvg": 853.53
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1193.99,
+    "cumAvg": 1193.99
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 927.83,
+    "cumAvg": 927.83
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 968.69,
+    "cumAvg": 968.69
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1460.26,
+    "cumAvg": 1460.26
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1034.18,
+    "cumAvg": 1034.18
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1105.74,
+    "cumAvg": 1105.74
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1057.31,
+    "cumAvg": 1057.31
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1099.05,
+    "cumAvg": 1099.05
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 998.43,
+    "cumAvg": 998.43
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1067.42,
+    "cumAvg": 1067.42
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 953.72,
+    "cumAvg": 953.72
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1591.4,
+    "cumAvg": 1591.4
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1432.77,
+    "cumAvg": 1432.77
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1372.52,
+    "cumAvg": 1372.52
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1233.78,
+    "cumAvg": 1233.78
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1427.46,
+    "cumAvg": 1427.46
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 982.12,
+    "cumAvg": 982.12
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1552.01,
+    "cumAvg": 1552.01
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1387.66,
+    "cumAvg": 1387.66
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1387.76,
+    "cumAvg": 1387.76
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1209.79,
+    "cumAvg": 1209.79
+   }
+  ],
+  "2024-02": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1200.09,
+    "cumAvg": 1148.24
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1167.13,
+    "cumAvg": 1123.62
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1037.27,
+    "cumAvg": 1019.41
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1110.05,
+    "cumAvg": 1076.64
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1296.55,
+    "cumAvg": 1242.95
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1153.9,
+    "cumAvg": 1106.25
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1139.45,
+    "cumAvg": 1120.51
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1206.69,
+    "cumAvg": 1150.46
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1184.07,
+    "cumAvg": 1144.42
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1090.14,
+    "cumAvg": 1054.93
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1284.91,
+    "cumAvg": 1226.8
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1390.7,
+    "cumAvg": 1316.26
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1145.33,
+    "cumAvg": 1123.02
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1211.73,
+    "cumAvg": 1191.0
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1014.58,
+    "cumAvg": 1053.97
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1136.75,
+    "cumAvg": 1087.05
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 1038.3,
+    "cumAvg": 907.15
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1251.56,
+    "cumAvg": 1215.59
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 909.08,
+    "cumAvg": 922.6
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 949.69,
+    "cumAvg": 963.79
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1467.55,
+    "cumAvg": 1463.13
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1178.47,
+    "cumAvg": 1081.48
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1206.09,
+    "cumAvg": 1143.08
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1148.13,
+    "cumAvg": 1082.75
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1201.72,
+    "cumAvg": 1133.64
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1076.95,
+    "cumAvg": 1036.41
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1151.22,
+    "cumAvg": 1100.45
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 975.75,
+    "cumAvg": 959.63
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1588.74,
+    "cumAvg": 1590.31
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1447.23,
+    "cumAvg": 1438.94
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1351.1,
+    "cumAvg": 1363.25
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1268.16,
+    "cumAvg": 1248.2
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1464.15,
+    "cumAvg": 1442.63
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 1013.53,
+    "cumAvg": 994.57
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1557.5,
+    "cumAvg": 1554.28
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1468.13,
+    "cumAvg": 1420.89
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1410.46,
+    "cumAvg": 1397.06
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1322.41,
+    "cumAvg": 1248.02
+   }
+  ],
+  "2024-03": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1261.5,
+    "cumAvg": 1150.83
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1224.37,
+    "cumAvg": 1152.86
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1092.11,
+    "cumAvg": 1045.33
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1086.42,
+    "cumAvg": 1051.9
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1387.51,
+    "cumAvg": 1287.55
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1234.32,
+    "cumAvg": 1144.45
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1188.87,
+    "cumAvg": 1143.39
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1338.34,
+    "cumAvg": 1205.34
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1295.36,
+    "cumAvg": 1188.63
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1177.72,
+    "cumAvg": 1095.17
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1301.78,
+    "cumAvg": 1250.66
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1343.83,
+    "cumAvg": 1325.79
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1161.49,
+    "cumAvg": 1135.83
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1180.98,
+    "cumAvg": 1187.7
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1065.22,
+    "cumAvg": 1057.21
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1136.05,
+    "cumAvg": 1102.11
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 1037.08,
+    "cumAvg": 953.13
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1267.52,
+    "cumAvg": 1232.49
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1147.52,
+    "cumAvg": 989.01
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 1147.26,
+    "cumAvg": 1019.68
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1411.3,
+    "cumAvg": 1449.17
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1228.21,
+    "cumAvg": 1141.12
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1237.18,
+    "cumAvg": 1174.32
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1203.72,
+    "cumAvg": 1130.21
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1284.82,
+    "cumAvg": 1189.07
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1089.23,
+    "cumAvg": 1054.3
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1211.46,
+    "cumAvg": 1144.48
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 1176.97,
+    "cumAvg": 1035.39
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1576.32,
+    "cumAvg": 1585.88
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1379.06,
+    "cumAvg": 1420.11
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1245.58,
+    "cumAvg": 1325.42
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1287.93,
+    "cumAvg": 1260.14
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1413.27,
+    "cumAvg": 1433.62
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 1021.35,
+    "cumAvg": 1003.35
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1546.13,
+    "cumAvg": 1552.12
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1433.36,
+    "cumAvg": 1424.25
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1381.96,
+    "cumAvg": 1387.61
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1299.05,
+    "cumAvg": 1265.27
+   }
+  ],
+  "2024-04": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1138.95,
+    "cumAvg": 1147.71
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1132.23,
+    "cumAvg": 1148.29
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1035.09,
+    "cumAvg": 1043.18
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1094.73,
+    "cumAvg": 1059.82
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1271.19,
+    "cumAvg": 1284.32
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1117.84,
+    "cumAvg": 1139.33
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1170.4,
+    "cumAvg": 1147.61
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1240.05,
+    "cumAvg": 1212.41
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1222.36,
+    "cumAvg": 1196.07
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1127.11,
+    "cumAvg": 1103.06
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1178.21,
+    "cumAvg": 1232.98
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1162.02,
+    "cumAvg": 1288.63
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1062.43,
+    "cumAvg": 1117.83
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1018.1,
+    "cumAvg": 1137.47
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 984.7,
+    "cumAvg": 1043.49
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1017.41,
+    "cumAvg": 1079.6
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 940.06,
+    "cumAvg": 949.61
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1203.26,
+    "cumAvg": 1224.51
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1082.3,
+    "cumAvg": 1021.55
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 1082.95,
+    "cumAvg": 1042.78
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1300.42,
+    "cumAvg": 1418.74
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1088.95,
+    "cumAvg": 1124.14
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1138.62,
+    "cumAvg": 1163.62
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1092.63,
+    "cumAvg": 1117.89
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1189.01,
+    "cumAvg": 1189.05
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 944.12,
+    "cumAvg": 1023.21
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1124.7,
+    "cumAvg": 1138.28
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 1048.56,
+    "cumAvg": 1039.58
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1536.59,
+    "cumAvg": 1575.34
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1339.75,
+    "cumAvg": 1404.33
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1205.22,
+    "cumAvg": 1300.98
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1179.52,
+    "cumAvg": 1241.69
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1276.24,
+    "cumAvg": 1398.92
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 968.16,
+    "cumAvg": 994.98
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1466.99,
+    "cumAvg": 1535.92
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1365.8,
+    "cumAvg": 1413.15
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1313.08,
+    "cumAvg": 1371.02
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1217.39,
+    "cumAvg": 1252.55
+   }
+  ],
+  "2024-05": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1103.72,
+    "cumAvg": 1137.52
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1088.22,
+    "cumAvg": 1137.47
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1056.9,
+    "cumAvg": 1045.76
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1161.54,
+    "cumAvg": 1077.25
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1305.83,
+    "cumAvg": 1287.05
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1109.26,
+    "cumAvg": 1133.39
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1156.19,
+    "cumAvg": 1149.31
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1222.11,
+    "cumAvg": 1214.43
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1208.0,
+    "cumAvg": 1198.39
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1079.12,
+    "cumAvg": 1097.78
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1170.66,
+    "cumAvg": 1221.37
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1168.15,
+    "cumAvg": 1266.99
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1040.47,
+    "cumAvg": 1102.5
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1024.56,
+    "cumAvg": 1119.07
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1031.12,
+    "cumAvg": 1041.56
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 984.55,
+    "cumAvg": 1060.0
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 957.47,
+    "cumAvg": 951.14
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1166.87,
+    "cumAvg": 1210.59
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1073.77,
+    "cumAvg": 1034.61
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 1065.11,
+    "cumAvg": 1048.59
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1446.25,
+    "cumAvg": 1425.08
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1149.15,
+    "cumAvg": 1130.59
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1178.68,
+    "cumAvg": 1168.04
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1128.95,
+    "cumAvg": 1120.62
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1190.32,
+    "cumAvg": 1189.39
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1002.6,
+    "cumAvg": 1019.93
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1097.29,
+    "cumAvg": 1126.81
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 1107.12,
+    "cumAvg": 1058.29
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1607.89,
+    "cumAvg": 1582.44
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1447.25,
+    "cumAvg": 1412.58
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1322.87,
+    "cumAvg": 1305.25
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1232.04,
+    "cumAvg": 1239.78
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1348.67,
+    "cumAvg": 1388.81
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 960.93,
+    "cumAvg": 987.99
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1530.61,
+    "cumAvg": 1534.78
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1461.68,
+    "cumAvg": 1422.59
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1357.04,
+    "cumAvg": 1368.18
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1215.58,
+    "cumAvg": 1243.11
+   }
+  ],
+  "2024-06": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1073.02,
+    "cumAvg": 1127.45
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1081.17,
+    "cumAvg": 1129.35
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1057.46,
+    "cumAvg": 1047.45
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1122.0,
+    "cumAvg": 1084.2
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1292.27,
+    "cumAvg": 1287.71
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1108.84,
+    "cumAvg": 1129.6
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1138.6,
+    "cumAvg": 1147.45
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1162.84,
+    "cumAvg": 1205.08
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1145.98,
+    "cumAvg": 1187.3
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1088.01,
+    "cumAvg": 1096.19
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1205.61,
+    "cumAvg": 1218.55
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1193.55,
+    "cumAvg": 1254.49
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1048.22,
+    "cumAvg": 1093.35
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1061.78,
+    "cumAvg": 1110.91
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1008.58,
+    "cumAvg": 1036.67
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1005.32,
+    "cumAvg": 1050.34
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 1023.47,
+    "cumAvg": 962.78
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1150.36,
+    "cumAvg": 1198.79
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1045.38,
+    "cumAvg": 1036.77
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 1068.06,
+    "cumAvg": 1052.49
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1331.66,
+    "cumAvg": 1407.88
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1115.34,
+    "cumAvg": 1127.76
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1189.93,
+    "cumAvg": 1172.87
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1108.06,
+    "cumAvg": 1118.04
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1176.64,
+    "cumAvg": 1186.9
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1048.28,
+    "cumAvg": 1024.91
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1098.87,
+    "cumAvg": 1121.48
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 1043.74,
+    "cumAvg": 1055.29
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1572.12,
+    "cumAvg": 1580.6
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1415.27,
+    "cumAvg": 1413.02
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1271.74,
+    "cumAvg": 1299.73
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1168.29,
+    "cumAvg": 1227.11
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1339.76,
+    "cumAvg": 1380.35
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 984.22,
+    "cumAvg": 987.34
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1510.78,
+    "cumAvg": 1530.5
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1436.8,
+    "cumAvg": 1424.79
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1319.88,
+    "cumAvg": 1360.14
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1206.68,
+    "cumAvg": 1236.61
+   }
+  ],
+  "2024-07": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1128.09,
+    "cumAvg": 1127.53
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1120.4,
+    "cumAvg": 1127.84
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1046.85,
+    "cumAvg": 1047.34
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1160.7,
+    "cumAvg": 1096.71
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1281.91,
+    "cumAvg": 1286.67
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1112.72,
+    "cumAvg": 1126.83
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1135.13,
+    "cumAvg": 1145.5
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1218.56,
+    "cumAvg": 1207.08
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1167.17,
+    "cumAvg": 1184.42
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1039.91,
+    "cumAvg": 1088.37
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1171.25,
+    "cumAvg": 1209.93
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1156.78,
+    "cumAvg": 1236.19
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1045.77,
+    "cumAvg": 1085.53
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1102.68,
+    "cumAvg": 1109.45
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1003.9,
+    "cumAvg": 1031.85
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 970.39,
+    "cumAvg": 1035.74
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 952.12,
+    "cumAvg": 960.88
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1131.01,
+    "cumAvg": 1186.62
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1041.79,
+    "cumAvg": 1037.71
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 1022.41,
+    "cumAvg": 1047.74
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1408.3,
+    "cumAvg": 1407.95
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1119.83,
+    "cumAvg": 1126.52
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1167.91,
+    "cumAvg": 1171.83
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1129.06,
+    "cumAvg": 1120.1
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1161.38,
+    "cumAvg": 1182.04
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1002.96,
+    "cumAvg": 1021.63
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1100.24,
+    "cumAvg": 1117.73
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 1062.01,
+    "cumAvg": 1056.57
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1500.03,
+    "cumAvg": 1566.52
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1374.15,
+    "cumAvg": 1406.31
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1193.57,
+    "cumAvg": 1280.91
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1189.9,
+    "cumAvg": 1221.2
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1287.48,
+    "cumAvg": 1364.5
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 965.41,
+    "cumAvg": 983.14
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1450.67,
+    "cumAvg": 1516.2
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1389.64,
+    "cumAvg": 1419.03
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1296.35,
+    "cumAvg": 1349.74
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1194.8,
+    "cumAvg": 1229.98
+   }
+  ],
+  "2024-08": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1097.17,
+    "cumAvg": 1124.2
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1092.29,
+    "cumAvg": 1122.77
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1025.72,
+    "cumAvg": 1044.9
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1131.14,
+    "cumAvg": 1100.69
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1232.33,
+    "cumAvg": 1280.28
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1052.24,
+    "cumAvg": 1117.77
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1098.46,
+    "cumAvg": 1140.02
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1213.73,
+    "cumAvg": 1207.83
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1166.61,
+    "cumAvg": 1182.3
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1067.41,
+    "cumAvg": 1086.51
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1113.9,
+    "cumAvg": 1197.94
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1151.52,
+    "cumAvg": 1226.46
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1021.22,
+    "cumAvg": 1077.66
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1026.43,
+    "cumAvg": 1097.76
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 960.36,
+    "cumAvg": 1022.7
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 962.74,
+    "cumAvg": 1025.62
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 926.53,
+    "cumAvg": 956.34
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1105.15,
+    "cumAvg": 1176.71
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1031.43,
+    "cumAvg": 1036.95
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 1005.07,
+    "cumAvg": 1041.16
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1171.79,
+    "cumAvg": 1367.37
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1128.22,
+    "cumAvg": 1126.74
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1135.94,
+    "cumAvg": 1166.38
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1386.5,
+    "cumAvg": 1153.49
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1134.36,
+    "cumAvg": 1176.26
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1005.66,
+    "cumAvg": 1019.81
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1052.18,
+    "cumAvg": 1110.06
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 993.07,
+    "cumAvg": 1048.77
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1463.02,
+    "cumAvg": 1553.66
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1314.82,
+    "cumAvg": 1395.0
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1103.77,
+    "cumAvg": 1257.66
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1152.57,
+    "cumAvg": 1213.04
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1278.43,
+    "cumAvg": 1353.34
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 916.67,
+    "cumAvg": 973.47
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1422.31,
+    "cumAvg": 1504.53
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1339.43,
+    "cumAvg": 1409.79
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1279.76,
+    "cumAvg": 1341.67
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1181.89,
+    "cumAvg": 1224.66
+   }
+  ],
+  "2024-09": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1055.4,
+    "cumAvg": 1117.93
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1044.74,
+    "cumAvg": 1115.58
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1037.74,
+    "cumAvg": 1044.18
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1119.3,
+    "cumAvg": 1102.2
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1277.67,
+    "cumAvg": 1280.07
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1084.6,
+    "cumAvg": 1114.59
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1101.13,
+    "cumAvg": 1136.81
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1218.59,
+    "cumAvg": 1208.66
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1170.14,
+    "cumAvg": 1181.15
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1064.16,
+    "cumAvg": 1085.27
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1123.73,
+    "cumAvg": 1189.89
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1198.6,
+    "cumAvg": 1223.93
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1040.18,
+    "cumAvg": 1073.62
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1060.73,
+    "cumAvg": 1093.36
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 991.32,
+    "cumAvg": 1019.43
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1014.08,
+    "cumAvg": 1024.57
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 918.23,
+    "cumAvg": 951.26
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1136.87,
+    "cumAvg": 1172.7
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1045.42,
+    "cumAvg": 1037.64
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 968.47,
+    "cumAvg": 1031.67
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1210.35,
+    "cumAvg": 1345.95
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1101.78,
+    "cumAvg": 1124.51
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1163.14,
+    "cumAvg": 1165.99
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1165.24,
+    "cumAvg": 1154.44
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1063.63,
+    "cumAvg": 1165.42
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 988.22,
+    "cumAvg": 1017.14
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1082.63,
+    "cumAvg": 1107.48
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 966.24,
+    "cumAvg": 1042.24
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1475.53,
+    "cumAvg": 1545.02
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1331.67,
+    "cumAvg": 1387.95
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1194.09,
+    "cumAvg": 1250.61
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1153.94,
+    "cumAvg": 1206.26
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1270.03,
+    "cumAvg": 1343.49
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 942.37,
+    "cumAvg": 969.65
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1422.06,
+    "cumAvg": 1495.16
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1379.69,
+    "cumAvg": 1406.76
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1304.52,
+    "cumAvg": 1337.88
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1187.87,
+    "cumAvg": 1221.05
+   }
+  ],
+  "2024-10": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1116.83,
+    "cumAvg": 1117.81
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1061.61,
+    "cumAvg": 1109.29
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1026.91,
+    "cumAvg": 1042.22
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1129.03,
+    "cumAvg": 1105.29
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1268.12,
+    "cumAvg": 1278.69
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1068.26,
+    "cumAvg": 1109.4
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1120.43,
+    "cumAvg": 1134.93
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1216.8,
+    "cumAvg": 1209.63
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1175.09,
+    "cumAvg": 1180.5
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1066.48,
+    "cumAvg": 1083.72
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1137.8,
+    "cumAvg": 1183.77
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1146.05,
+    "cumAvg": 1215.28
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1015.82,
+    "cumAvg": 1066.96
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 947.75,
+    "cumAvg": 1075.77
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 951.66,
+    "cumAvg": 1011.06
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 988.25,
+    "cumAvg": 1020.29
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 919.7,
+    "cumAvg": 946.93
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1077.85,
+    "cumAvg": 1160.22
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1024.34,
+    "cumAvg": 1036.27
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 922.77,
+    "cumAvg": 1017.08
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1192.95,
+    "cumAvg": 1324.14
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1099.97,
+    "cumAvg": 1121.91
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1137.04,
+    "cumAvg": 1162.55
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1091.43,
+    "cumAvg": 1148.17
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1065.55,
+    "cumAvg": 1153.75
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 971.98,
+    "cumAvg": 1013.37
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1070.04,
+    "cumAvg": 1103.04
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 982.79,
+    "cumAvg": 1035.82
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1450.1,
+    "cumAvg": 1533.16
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1265.15,
+    "cumAvg": 1372.72
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1135.08,
+    "cumAvg": 1236.64
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1135.43,
+    "cumAvg": 1198.0
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1219.86,
+    "cumAvg": 1327.68
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 939.56,
+    "cumAvg": 965.83
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1388.96,
+    "cumAvg": 1481.84
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1330.21,
+    "cumAvg": 1398.06
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1251.73,
+    "cumAvg": 1327.93
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1142.78,
+    "cumAvg": 1210.92
+   }
+  ],
+  "2024-11": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1132.66,
+    "cumAvg": 1118.87
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1023.05,
+    "cumAvg": 1102.45
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1023.96,
+    "cumAvg": 1040.67
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1091.58,
+    "cumAvg": 1104.29
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1245.91,
+    "cumAvg": 1276.19
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1003.66,
+    "cumAvg": 1100.39
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1088.94,
+    "cumAvg": 1130.84
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1180.82,
+    "cumAvg": 1207.57
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1149.05,
+    "cumAvg": 1177.88
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 996.12,
+    "cumAvg": 1076.45
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1129.81,
+    "cumAvg": 1179.59
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1102.01,
+    "cumAvg": 1206.29
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 997.19,
+    "cumAvg": 1060.75
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 952.2,
+    "cumAvg": 1064.39
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 917.14,
+    "cumAvg": 1001.54
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 955.51,
+    "cumAvg": 1015.33
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 895.9,
+    "cumAvg": 941.93
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1026.84,
+    "cumAvg": 1148.06
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 971.79,
+    "cumAvg": 1032.56
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 809.03,
+    "cumAvg": 997.71
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1136.1,
+    "cumAvg": 1300.32
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1034.07,
+    "cumAvg": 1115.72
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1148.66,
+    "cumAvg": 1161.34
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1006.25,
+    "cumAvg": 1141.54
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1045.71,
+    "cumAvg": 1146.72
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 903.13,
+    "cumAvg": 1006.62
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1022.63,
+    "cumAvg": 1097.76
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 919.0,
+    "cumAvg": 1027.5
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1399.84,
+    "cumAvg": 1520.69
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1240.64,
+    "cumAvg": 1361.12
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1084.08,
+    "cumAvg": 1222.93
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1086.94,
+    "cumAvg": 1187.93
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1185.26,
+    "cumAvg": 1313.98
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 905.23,
+    "cumAvg": 960.27
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1345.02,
+    "cumAvg": 1469.09
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1268.57,
+    "cumAvg": 1386.13
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1212.15,
+    "cumAvg": 1318.37
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1099.01,
+    "cumAvg": 1200.83
+   }
+  ],
+  "2024-12": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1094.88,
+    "cumAvg": 1117.57
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1109.18,
+    "cumAvg": 1102.9
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1013.5,
+    "cumAvg": 1038.4
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1123.48,
+    "cumAvg": 1105.68
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1254.95,
+    "cumAvg": 1274.6
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1032.82,
+    "cumAvg": 1095.09
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1107.39,
+    "cumAvg": 1128.98
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1191.8,
+    "cumAvg": 1206.5
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1160.13,
+    "cumAvg": 1176.52
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 963.06,
+    "cumAvg": 1068.36
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1149.47,
+    "cumAvg": 1177.06
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1109.78,
+    "cumAvg": 1198.42
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1046.8,
+    "cumAvg": 1059.67
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1008.89,
+    "cumAvg": 1060.25
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1012.93,
+    "cumAvg": 1002.44
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1000.95,
+    "cumAvg": 1014.25
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 869.13,
+    "cumAvg": 935.59
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1097.2,
+    "cumAvg": 1144.07
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1030.26,
+    "cumAvg": 1032.4
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 966.26,
+    "cumAvg": 995.35
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1209.88,
+    "cumAvg": 1290.84
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1152.64,
+    "cumAvg": 1118.07
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1169.37,
+    "cumAvg": 1162.08
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1076.18,
+    "cumAvg": 1136.72
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1098.56,
+    "cumAvg": 1142.87
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1022.24,
+    "cumAvg": 1007.62
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1063.91,
+    "cumAvg": 1094.99
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 1032.28,
+    "cumAvg": 1027.88
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1428.79,
+    "cumAvg": 1513.69
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1299.35,
+    "cumAvg": 1356.47
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1170.37,
+    "cumAvg": 1219.07
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1137.5,
+    "cumAvg": 1184.14
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1241.24,
+    "cumAvg": 1308.2
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 946.83,
+    "cumAvg": 959.19
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1387.61,
+    "cumAvg": 1462.91
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1338.47,
+    "cumAvg": 1382.54
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1278.53,
+    "cumAvg": 1315.53
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1147.31,
+    "cumAvg": 1196.54
+   }
+  ],
+  "2025-01": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 977.68,
+    "cumAvg": 977.68
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1082.49,
+    "cumAvg": 1082.49
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1022.26,
+    "cumAvg": 1022.26
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1088.11,
+    "cumAvg": 1088.11
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1257.49,
+    "cumAvg": 1257.49
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1039.54,
+    "cumAvg": 1039.54
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1122.63,
+    "cumAvg": 1122.63
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1188.73,
+    "cumAvg": 1188.73
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1136.03,
+    "cumAvg": 1136.03
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1041.89,
+    "cumAvg": 1041.89
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1153.68,
+    "cumAvg": 1153.68
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1165.16,
+    "cumAvg": 1165.16
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1037.23,
+    "cumAvg": 1037.23
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1011.8,
+    "cumAvg": 1011.8
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1028.97,
+    "cumAvg": 1028.97
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1019.4,
+    "cumAvg": 1019.4
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 933.3,
+    "cumAvg": 933.3
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1115.41,
+    "cumAvg": 1115.41
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1011.44,
+    "cumAvg": 1011.44
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 923.45,
+    "cumAvg": 923.45
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1158.77,
+    "cumAvg": 1158.77
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1093.58,
+    "cumAvg": 1093.58
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1126.27,
+    "cumAvg": 1126.27
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1090.96,
+    "cumAvg": 1090.96
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1089.36,
+    "cumAvg": 1089.36
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1031.44,
+    "cumAvg": 1031.44
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1057.52,
+    "cumAvg": 1057.52
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 989.89,
+    "cumAvg": 989.89
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1441.61,
+    "cumAvg": 1441.61
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1295.63,
+    "cumAvg": 1295.63
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1196.72,
+    "cumAvg": 1196.72
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1152.74,
+    "cumAvg": 1152.74
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1228.03,
+    "cumAvg": 1228.03
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 939.16,
+    "cumAvg": 939.16
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1395.1,
+    "cumAvg": 1395.1
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1333.69,
+    "cumAvg": 1333.69
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1271.65,
+    "cumAvg": 1271.65
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1157.14,
+    "cumAvg": 1157.14
+   }
+  ],
+  "2025-02": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1148.48,
+    "cumAvg": 1062.19
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1067.04,
+    "cumAvg": 1075.83
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1005.98,
+    "cumAvg": 1015.09
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1042.14,
+    "cumAvg": 1064.67
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1240.74,
+    "cumAvg": 1248.36
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1012.71,
+    "cumAvg": 1026.64
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1101.75,
+    "cumAvg": 1111.99
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1209.2,
+    "cumAvg": 1199.1
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1127.83,
+    "cumAvg": 1131.82
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1011.22,
+    "cumAvg": 1026.26
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1129.24,
+    "cumAvg": 1141.16
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1122.89,
+    "cumAvg": 1141.96
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1038.61,
+    "cumAvg": 1037.92
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1041.56,
+    "cumAvg": 1026.11
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 986.14,
+    "cumAvg": 1006.28
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1018.55,
+    "cumAvg": 1019.02
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 896.3,
+    "cumAvg": 918.41
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1108.31,
+    "cumAvg": 1111.92
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 966.61,
+    "cumAvg": 991.66
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 990.03,
+    "cumAvg": 950.5
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1162.54,
+    "cumAvg": 1160.52
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1050.34,
+    "cumAvg": 1074.9
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1108.0,
+    "cumAvg": 1118.82
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1009.96,
+    "cumAvg": 1053.25
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1058.34,
+    "cumAvg": 1076.66
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1028.88,
+    "cumAvg": 1030.33
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1040.54,
+    "cumAvg": 1050.65
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 961.82,
+    "cumAvg": 978.86
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1369.83,
+    "cumAvg": 1405.81
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1259.57,
+    "cumAvg": 1277.61
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1174.12,
+    "cumAvg": 1185.45
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1132.97,
+    "cumAvg": 1142.64
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1233.58,
+    "cumAvg": 1230.59
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 997.3,
+    "cumAvg": 962.59
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1344.65,
+    "cumAvg": 1369.38
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1287.43,
+    "cumAvg": 1309.9
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1239.89,
+    "cumAvg": 1256.01
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1126.76,
+    "cumAvg": 1143.06
+   }
+  ],
+  "2025-03": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1128.57,
+    "cumAvg": 1084.36
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1075.08,
+    "cumAvg": 1075.58
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1036.07,
+    "cumAvg": 1023.92
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1081.48,
+    "cumAvg": 1070.68
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1273.18,
+    "cumAvg": 1257.31
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1051.84,
+    "cumAvg": 1033.8
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1087.34,
+    "cumAvg": 1101.72
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1252.81,
+    "cumAvg": 1216.87
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1162.19,
+    "cumAvg": 1141.88
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1023.14,
+    "cumAvg": 1025.36
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1140.63,
+    "cumAvg": 1140.99
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1156.37,
+    "cumAvg": 1146.95
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1072.61,
+    "cumAvg": 1048.91
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1094.91,
+    "cumAvg": 1048.49
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 977.59,
+    "cumAvg": 997.27
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1065.28,
+    "cumAvg": 1032.07
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 935.37,
+    "cumAvg": 923.93
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1142.54,
+    "cumAvg": 1120.33
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1013.16,
+    "cumAvg": 996.96
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 981.06,
+    "cumAvg": 958.67
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1209.57,
+    "cumAvg": 1172.05
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1122.64,
+    "cumAvg": 1088.11
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1154.92,
+    "cumAvg": 1127.87
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1132.12,
+    "cumAvg": 1069.2
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1158.86,
+    "cumAvg": 1098.49
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1074.46,
+    "cumAvg": 1042.27
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1135.47,
+    "cumAvg": 1072.14
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 1044.21,
+    "cumAvg": 997.31
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1415.14,
+    "cumAvg": 1408.54
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1263.79,
+    "cumAvg": 1273.28
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1151.85,
+    "cumAvg": 1175.23
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1153.19,
+    "cumAvg": 1145.62
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1224.9,
+    "cumAvg": 1229.05
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 1027.06,
+    "cumAvg": 980.86
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1348.55,
+    "cumAvg": 1362.85
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1312.14,
+    "cumAvg": 1310.56
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1260.25,
+    "cumAvg": 1257.21
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1136.1,
+    "cumAvg": 1141.1
+   }
+  ],
+  "2025-04": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1040.1,
+    "cumAvg": 1073.41
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1034.26,
+    "cumAvg": 1065.02
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1026.89,
+    "cumAvg": 1024.6
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1050.61,
+    "cumAvg": 1066.22
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1223.06,
+    "cumAvg": 1248.89
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1012.16,
+    "cumAvg": 1027.83
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1081.2,
+    "cumAvg": 1097.61
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1146.3,
+    "cumAvg": 1198.35
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1127.34,
+    "cumAvg": 1138.0
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1017.33,
+    "cumAvg": 1023.27
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1087.7,
+    "cumAvg": 1126.24
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1122.14,
+    "cumAvg": 1139.56
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1049.24,
+    "cumAvg": 1049.0
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1055.98,
+    "cumAvg": 1050.75
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1031.42,
+    "cumAvg": 1006.87
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1027.47,
+    "cumAvg": 1030.58
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 996.96,
+    "cumAvg": 943.08
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1138.8,
+    "cumAvg": 1125.17
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1017.27,
+    "cumAvg": 1002.94
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 955.92,
+    "cumAvg": 958.09
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1173.67,
+    "cumAvg": 1172.5
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1111.06,
+    "cumAvg": 1095.66
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1125.55,
+    "cumAvg": 1127.23
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1139.58,
+    "cumAvg": 1091.49
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1142.4,
+    "cumAvg": 1113.27
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1064.8,
+    "cumAvg": 1048.79
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1115.61,
+    "cumAvg": 1086.23
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 1091.15,
+    "cumAvg": 1028.22
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1397.46,
+    "cumAvg": 1405.83
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1248.53,
+    "cumAvg": 1267.31
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1158.7,
+    "cumAvg": 1171.57
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1146.62,
+    "cumAvg": 1145.86
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1239.46,
+    "cumAvg": 1231.54
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 1001.76,
+    "cumAvg": 986.29
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1342.94,
+    "cumAvg": 1357.94
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1308.29,
+    "cumAvg": 1310.01
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1242.41,
+    "cumAvg": 1253.43
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1150.38,
+    "cumAvg": 1143.6
+   }
+  ],
+  "2025-05": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1052.58,
+    "cumAvg": 1068.92
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 956.38,
+    "cumAvg": 1041.75
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 938.45,
+    "cumAvg": 1008.03
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 967.47,
+    "cumAvg": 1044.21
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1155.58,
+    "cumAvg": 1228.8
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 963.5,
+    "cumAvg": 1012.7
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1016.59,
+    "cumAvg": 1081.14
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1052.12,
+    "cumAvg": 1166.82
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1015.78,
+    "cumAvg": 1110.5
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 997.82,
+    "cumAvg": 1016.33
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1031.84,
+    "cumAvg": 1104.73
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1077.72,
+    "cumAvg": 1122.41
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1022.65,
+    "cumAvg": 1043.09
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1030.68,
+    "cumAvg": 1046.57
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1012.83,
+    "cumAvg": 1008.13
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1015.73,
+    "cumAvg": 1027.21
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 930.35,
+    "cumAvg": 939.9
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1131.53,
+    "cumAvg": 1126.56
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 936.07,
+    "cumAvg": 984.23
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 1025.77,
+    "cumAvg": 975.25
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1171.76,
+    "cumAvg": 1172.34
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1067.14,
+    "cumAvg": 1087.98
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1084.15,
+    "cumAvg": 1117.59
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1084.58,
+    "cumAvg": 1089.66
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1104.84,
+    "cumAvg": 1111.11
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1058.75,
+    "cumAvg": 1051.2
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1063.07,
+    "cumAvg": 1080.22
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 1059.12,
+    "cumAvg": 1036.36
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1394.39,
+    "cumAvg": 1403.46
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1284.16,
+    "cumAvg": 1270.63
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1185.44,
+    "cumAvg": 1174.3
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1132.15,
+    "cumAvg": 1142.94
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1249.29,
+    "cumAvg": 1235.1
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 975.79,
+    "cumAvg": 984.0
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1356.29,
+    "cumAvg": 1357.59
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1305.58,
+    "cumAvg": 1309.0
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1247.3,
+    "cumAvg": 1252.11
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1132.21,
+    "cumAvg": 1141.02
+   }
+  ],
+  "2025-06": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 963.1,
+    "cumAvg": 1053.14
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 896.14,
+    "cumAvg": 1012.83
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 966.95,
+    "cumAvg": 1001.64
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 908.52,
+    "cumAvg": 1016.13
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1104.17,
+    "cumAvg": 1206.96
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 903.28,
+    "cumAvg": 990.12
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 988.19,
+    "cumAvg": 1064.47
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1041.2,
+    "cumAvg": 1143.72
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 996.69,
+    "cumAvg": 1089.0
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 926.45,
+    "cumAvg": 991.6
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 969.6,
+    "cumAvg": 1077.99
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1040.83,
+    "cumAvg": 1108.34
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 999.34,
+    "cumAvg": 1035.05
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1008.38,
+    "cumAvg": 1040.26
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 939.11,
+    "cumAvg": 994.53
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 935.27,
+    "cumAvg": 1009.05
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 900.1,
+    "cumAvg": 932.75
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1089.3,
+    "cumAvg": 1119.85
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 925.66,
+    "cumAvg": 973.05
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 964.29,
+    "cumAvg": 973.41
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1108.81,
+    "cumAvg": 1159.15
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1019.36,
+    "cumAvg": 1073.63
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1066.91,
+    "cumAvg": 1107.52
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1038.84,
+    "cumAvg": 1078.81
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1056.75,
+    "cumAvg": 1099.4
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1036.14,
+    "cumAvg": 1048.1
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1017.19,
+    "cumAvg": 1067.25
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 981.2,
+    "cumAvg": 1023.47
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1366.3,
+    "cumAvg": 1396.88
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1225.03,
+    "cumAvg": 1262.87
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1133.69,
+    "cumAvg": 1167.58
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1087.75,
+    "cumAvg": 1133.52
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1166.14,
+    "cumAvg": 1222.62
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 954.01,
+    "cumAvg": 978.48
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1309.99,
+    "cumAvg": 1349.5
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1246.83,
+    "cumAvg": 1297.71
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1189.61,
+    "cumAvg": 1241.2
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1108.91,
+    "cumAvg": 1135.09
+   }
+  ],
+  "2025-07": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 948.56,
+    "cumAvg": 1036.62
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 961.53,
+    "cumAvg": 1006.46
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 959.48,
+    "cumAvg": 994.11
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 950.17,
+    "cumAvg": 1004.98
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1175.16,
+    "cumAvg": 1202.2
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 951.71,
+    "cumAvg": 984.53
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1022.35,
+    "cumAvg": 1057.74
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1101.08,
+    "cumAvg": 1137.21
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1077.52,
+    "cumAvg": 1086.99
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 960.22,
+    "cumAvg": 983.5
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1048.73,
+    "cumAvg": 1073.48
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1025.07,
+    "cumAvg": 1097.48
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 988.13,
+    "cumAvg": 1027.2
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1029.87,
+    "cumAvg": 1038.52
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 934.24,
+    "cumAvg": 983.12
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 974.45,
+    "cumAvg": 1002.97
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 860.9,
+    "cumAvg": 920.42
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1087.15,
+    "cumAvg": 1114.21
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 925.95,
+    "cumAvg": 963.93
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 942.97,
+    "cumAvg": 967.18
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1115.86,
+    "cumAvg": 1150.94
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1042.86,
+    "cumAvg": 1067.16
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1080.11,
+    "cumAvg": 1102.33
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1067.93,
+    "cumAvg": 1076.28
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1058.53,
+    "cumAvg": 1091.22
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1023.21,
+    "cumAvg": 1043.27
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1036.59,
+    "cumAvg": 1061.0
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 976.45,
+    "cumAvg": 1013.72
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1356.39,
+    "cumAvg": 1389.68
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1239.0,
+    "cumAvg": 1258.49
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1162.65,
+    "cumAvg": 1166.73
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1106.08,
+    "cumAvg": 1128.4
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1219.4,
+    "cumAvg": 1222.06
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 955.12,
+    "cumAvg": 974.16
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1334.59,
+    "cumAvg": 1346.82
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1278.4,
+    "cumAvg": 1294.11
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1221.01,
+    "cumAvg": 1237.73
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1085.63,
+    "cumAvg": 1126.51
+   }
+  ],
+  "2025-08": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 970.43,
+    "cumAvg": 1028.11
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1107.88,
+    "cumAvg": 1014.59
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 981.69,
+    "cumAvg": 992.58
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1048.23,
+    "cumAvg": 1008.82
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1229.48,
+    "cumAvg": 1204.67
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1016.74,
+    "cumAvg": 988.21
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1059.12,
+    "cumAvg": 1057.88
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1164.94,
+    "cumAvg": 1139.84
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1115.96,
+    "cumAvg": 1090.29
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 987.94,
+    "cumAvg": 984.33
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1120.0,
+    "cumAvg": 1078.38
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1064.6,
+    "cumAvg": 1093.71
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1058.6,
+    "cumAvg": 1030.73
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1069.4,
+    "cumAvg": 1041.52
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 967.31,
+    "cumAvg": 981.54
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1012.88,
+    "cumAvg": 1003.96
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 908.65,
+    "cumAvg": 919.3
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1118.84,
+    "cumAvg": 1114.68
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 954.11,
+    "cumAvg": 962.87
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 1013.5,
+    "cumAvg": 972.43
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1168.97,
+    "cumAvg": 1153.16
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1070.69,
+    "cumAvg": 1067.53
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1115.65,
+    "cumAvg": 1103.85
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1656.38,
+    "cumAvg": 1133.6
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1132.39,
+    "cumAvg": 1095.76
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 994.65,
+    "cumAvg": 1038.75
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1062.05,
+    "cumAvg": 1061.11
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 921.4,
+    "cumAvg": 1004.73
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1416.25,
+    "cumAvg": 1392.8
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1276.02,
+    "cumAvg": 1260.64
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1201.96,
+    "cumAvg": 1170.73
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1137.69,
+    "cumAvg": 1129.59
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1264.63,
+    "cumAvg": 1227.13
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 990.23,
+    "cumAvg": 976.11
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1366.55,
+    "cumAvg": 1349.09
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1320.26,
+    "cumAvg": 1297.27
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1273.88,
+    "cumAvg": 1241.91
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1133.71,
+    "cumAvg": 1127.28
+   }
+  ],
+  "2025-09": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1029.05,
+    "cumAvg": 1028.53
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1185.06,
+    "cumAvg": 1032.67
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1000.93,
+    "cumAvg": 994.06
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1182.4,
+    "cumAvg": 1026.51
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1275.08,
+    "cumAvg": 1213.43
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1107.12,
+    "cumAvg": 1001.71
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1153.53,
+    "cumAvg": 1068.88
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1260.45,
+    "cumAvg": 1154.63
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1209.05,
+    "cumAvg": 1105.3
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1058.31,
+    "cumAvg": 998.95
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1163.36,
+    "cumAvg": 1089.84
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1103.46,
+    "cumAvg": 1094.88
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1024.38,
+    "cumAvg": 1029.95
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1112.49,
+    "cumAvg": 1048.25
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1044.64,
+    "cumAvg": 987.02
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1087.95,
+    "cumAvg": 1012.77
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 905.99,
+    "cumAvg": 917.42
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1124.16,
+    "cumAvg": 1115.68
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1024.73,
+    "cumAvg": 969.39
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 990.63,
+    "cumAvg": 974.49
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1215.52,
+    "cumAvg": 1161.01
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1112.01,
+    "cumAvg": 1071.5
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1144.95,
+    "cumAvg": 1108.76
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1135.47,
+    "cumAvg": 1133.79
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1075.64,
+    "cumAvg": 1093.67
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1065.97,
+    "cumAvg": 1041.52
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1089.43,
+    "cumAvg": 1064.08
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 941.59,
+    "cumAvg": 999.28
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1428.55,
+    "cumAvg": 1396.98
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1269.01,
+    "cumAvg": 1261.69
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1201.89,
+    "cumAvg": 1174.49
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1161.02,
+    "cumAvg": 1133.85
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1217.92,
+    "cumAvg": 1225.93
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 959.78,
+    "cumAvg": 973.95
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1359.17,
+    "cumAvg": 1350.23
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1321.74,
+    "cumAvg": 1300.3
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1289.58,
+    "cumAvg": 1247.79
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1146.68,
+    "cumAvg": 1129.47
+   }
+  ],
+  "2025-10": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1051.21,
+    "cumAvg": 1030.11
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1096.1,
+    "cumAvg": 1039.22
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1008.57,
+    "cumAvg": 995.36
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1112.37,
+    "cumAvg": 1034.34
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1267.72,
+    "cumAvg": 1217.81
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1107.61,
+    "cumAvg": 1012.13
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1170.88,
+    "cumAvg": 1076.95
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1239.86,
+    "cumAvg": 1164.3
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1193.31,
+    "cumAvg": 1113.72
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1097.78,
+    "cumAvg": 1016.19
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1125.43,
+    "cumAvg": 1093.48
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1096.67,
+    "cumAvg": 1095.09
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1043.06,
+    "cumAvg": 1031.15
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1033.81,
+    "cumAvg": 1047.14
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1028.92,
+    "cumAvg": 989.56
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1030.38,
+    "cumAvg": 1014.37
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 904.7,
+    "cumAvg": 916.35
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1132.39,
+    "cumAvg": 1117.0
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1039.28,
+    "cumAvg": 973.76
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 971.73,
+    "cumAvg": 974.28
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1239.67,
+    "cumAvg": 1167.78
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1090.88,
+    "cumAvg": 1072.72
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1107.01,
+    "cumAvg": 1108.61
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1061.87,
+    "cumAvg": 1130.45
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1083.05,
+    "cumAvg": 1092.9
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1021.82,
+    "cumAvg": 1039.96
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1077.78,
+    "cumAvg": 1065.16
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 997.08,
+    "cumAvg": 999.15
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1384.89,
+    "cumAvg": 1395.97
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1255.67,
+    "cumAvg": 1261.18
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1191.74,
+    "cumAvg": 1176.04
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1152.24,
+    "cumAvg": 1135.64
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1245.49,
+    "cumAvg": 1227.65
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 966.47,
+    "cumAvg": 973.21
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1291.62,
+    "cumAvg": 1345.57
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1308.09,
+    "cumAvg": 1300.99
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1267.47,
+    "cumAvg": 1249.55
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1135.23,
+    "cumAvg": 1129.96
+   }
+  ],
+  "2025-11": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1033.27,
+    "cumAvg": 1030.32
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1108.51,
+    "cumAvg": 1046.29
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 992.4,
+    "cumAvg": 995.11
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1144.46,
+    "cumAvg": 1042.12
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1283.18,
+    "cumAvg": 1222.76
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1121.39,
+    "cumAvg": 1020.6
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1175.41,
+    "cumAvg": 1084.54
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1236.25,
+    "cumAvg": 1170.53
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1177.39,
+    "cumAvg": 1118.61
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1057.29,
+    "cumAvg": 1021.34
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1132.8,
+    "cumAvg": 1096.59
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1085.16,
+    "cumAvg": 1094.28
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1056.83,
+    "cumAvg": 1033.31
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1030.51,
+    "cumAvg": 1045.91
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1004.79,
+    "cumAvg": 990.42
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1060.62,
+    "cumAvg": 1017.75
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 881.29,
+    "cumAvg": 912.57
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1143.38,
+    "cumAvg": 1119.19
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1106.93,
+    "cumAvg": 980.74
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 986.56,
+    "cumAvg": 975.05
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1197.16,
+    "cumAvg": 1170.25
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1109.18,
+    "cumAvg": 1074.77
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1105.02,
+    "cumAvg": 1108.33
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1112.86,
+    "cumAvg": 1129.32
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1104.14,
+    "cumAvg": 1093.75
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1005.81,
+    "cumAvg": 1037.81
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1072.31,
+    "cumAvg": 1065.7
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 991.01,
+    "cumAvg": 998.66
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1428.72,
+    "cumAvg": 1398.86
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1291.83,
+    "cumAvg": 1263.76
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1193.79,
+    "cumAvg": 1177.61
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1133.02,
+    "cumAvg": 1135.39
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1257.03,
+    "cumAvg": 1230.17
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 960.81,
+    "cumAvg": 972.2
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1375.87,
+    "cumAvg": 1348.21
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1342.72,
+    "cumAvg": 1304.65
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1283.94,
+    "cumAvg": 1252.45
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1149.95,
+    "cumAvg": 1131.8
+   }
+  ],
+  "2025-12": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1059.07,
+    "cumAvg": 1032.18
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1163.46,
+    "cumAvg": 1052.71
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1056.03,
+    "cumAvg": 999.48
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1203.98,
+    "cumAvg": 1053.34
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1279.49,
+    "cumAvg": 1227.33
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1126.35,
+    "cumAvg": 1028.15
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1198.31,
+    "cumAvg": 1093.95
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1240.77,
+    "cumAvg": 1176.57
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1196.25,
+    "cumAvg": 1125.07
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1108.64,
+    "cumAvg": 1031.47
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1177.91,
+    "cumAvg": 1102.64
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1115.04,
+    "cumAvg": 1095.98
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1020.8,
+    "cumAvg": 1032.52
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 1043.05,
+    "cumAvg": 1045.78
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1018.3,
+    "cumAvg": 991.27
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1063.78,
+    "cumAvg": 1020.97
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 926.03,
+    "cumAvg": 913.56
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1125.32,
+    "cumAvg": 1118.67
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1151.43,
+    "cumAvg": 993.19
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 1013.25,
+    "cumAvg": 977.05
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1206.6,
+    "cumAvg": 1172.89
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1140.52,
+    "cumAvg": 1079.22
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1130.4,
+    "cumAvg": 1110.2
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1121.33,
+    "cumAvg": 1128.51
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1101.2,
+    "cumAvg": 1094.55
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1067.08,
+    "cumAvg": 1040.21
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1111.66,
+    "cumAvg": 1069.73
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 989.62,
+    "cumAvg": 998.02
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1440.11,
+    "cumAvg": 1402.19
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1279.94,
+    "cumAvg": 1264.96
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1168.41,
+    "cumAvg": 1176.89
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1150.5,
+    "cumAvg": 1136.55
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1261.93,
+    "cumAvg": 1232.29
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 991.95,
+    "cumAvg": 973.48
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1387.67,
+    "cumAvg": 1351.09
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1307.54,
+    "cumAvg": 1304.88
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1287.04,
+    "cumAvg": 1254.99
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1159.12,
+    "cumAvg": 1134.52
+   }
+  ],
+  "2026-01": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1051.55,
+    "cumAvg": 1051.55
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1134.36,
+    "cumAvg": 1134.36
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1019.19,
+    "cumAvg": 1019.19
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1134.29,
+    "cumAvg": 1134.29
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1279.82,
+    "cumAvg": 1279.82
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1105.64,
+    "cumAvg": 1105.64
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1172.91,
+    "cumAvg": 1172.91
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1215.72,
+    "cumAvg": 1215.72
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1199.99,
+    "cumAvg": 1199.99
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1081.41,
+    "cumAvg": 1081.41
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1140.79,
+    "cumAvg": 1140.79
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1048.17,
+    "cumAvg": 1048.17
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 994.51,
+    "cumAvg": 994.51
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 978.9,
+    "cumAvg": 978.9
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 948.44,
+    "cumAvg": 948.44
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1000.25,
+    "cumAvg": 1000.25
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 872.7,
+    "cumAvg": 872.7
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1075.76,
+    "cumAvg": 1075.76
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1057.98,
+    "cumAvg": 1057.98
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 908.5,
+    "cumAvg": 908.5
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1155.95,
+    "cumAvg": 1155.95
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1063.76,
+    "cumAvg": 1063.76
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1027.71,
+    "cumAvg": 1027.71
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1015.86,
+    "cumAvg": 1015.86
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1018.05,
+    "cumAvg": 1018.05
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 961.77,
+    "cumAvg": 961.77
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 989.07,
+    "cumAvg": 989.07
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 864.42,
+    "cumAvg": 864.42
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1373.12,
+    "cumAvg": 1373.12
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1245.86,
+    "cumAvg": 1245.86
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1153.36,
+    "cumAvg": 1153.36
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1124.92,
+    "cumAvg": 1124.92
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1233.26,
+    "cumAvg": 1233.26
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 943.74,
+    "cumAvg": 943.74
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1332.29,
+    "cumAvg": 1332.29
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1262.5,
+    "cumAvg": 1262.5
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1245.4,
+    "cumAvg": 1245.4
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1086.69,
+    "cumAvg": 1086.69
+   }
+  ],
+  "2026-02": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1168.84,
+    "cumAvg": 1116.58
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1077.55,
+    "cumAvg": 1105.86
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1022.44,
+    "cumAvg": 1020.91
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1123.78,
+    "cumAvg": 1128.93
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1322.63,
+    "cumAvg": 1301.78
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1085.86,
+    "cumAvg": 1095.69
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1169.97,
+    "cumAvg": 1171.37
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1272.0,
+    "cumAvg": 1243.83
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1212.79,
+    "cumAvg": 1206.72
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1062.2,
+    "cumAvg": 1071.24
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1084.82,
+    "cumAvg": 1112.72
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1036.45,
+    "cumAvg": 1042.31
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 984.27,
+    "cumAvg": 989.19
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 907.08,
+    "cumAvg": 946.45
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 977.45,
+    "cumAvg": 963.95
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 963.69,
+    "cumAvg": 984.19
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 861.1,
+    "cumAvg": 867.53
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1067.81,
+    "cumAvg": 1071.89
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1016.01,
+    "cumAvg": 1037.82
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 922.92,
+    "cumAvg": 915.4
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1109.44,
+    "cumAvg": 1133.06
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1062.69,
+    "cumAvg": 1063.3
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1059.26,
+    "cumAvg": 1042.82
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1006.63,
+    "cumAvg": 1011.16
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1045.27,
+    "cumAvg": 1030.74
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 987.21,
+    "cumAvg": 972.83
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 968.02,
+    "cumAvg": 978.83
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 887.06,
+    "cumAvg": 874.96
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1345.44,
+    "cumAvg": 1359.27
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1213.87,
+    "cumAvg": 1229.58
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1134.16,
+    "cumAvg": 1144.01
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1128.55,
+    "cumAvg": 1126.81
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1202.11,
+    "cumAvg": 1217.6
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 938.81,
+    "cumAvg": 941.24
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1306.88,
+    "cumAvg": 1319.43
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1224.73,
+    "cumAvg": 1242.6
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1224.09,
+    "cumAvg": 1234.84
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1056.9,
+    "cumAvg": 1071.95
+   }
+  ],
+  "2026-03": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1119.94,
+    "cumAvg": 1117.93
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1109.9,
+    "cumAvg": 1107.09
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1042.11,
+    "cumAvg": 1028.77
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1120.42,
+    "cumAvg": 1125.62
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1283.95,
+    "cumAvg": 1295.1
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1045.81,
+    "cumAvg": 1078.58
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1161.11,
+    "cumAvg": 1167.67
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1258.73,
+    "cumAvg": 1249.19
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1193.31,
+    "cumAvg": 1201.97
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1019.5,
+    "cumAvg": 1052.0
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1045.56,
+    "cumAvg": 1086.96
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1012.9,
+    "cumAvg": 1032.21
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1002.51,
+    "cumAvg": 993.83
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 917.88,
+    "cumAvg": 937.67
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 952.28,
+    "cumAvg": 960.01
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 997.25,
+    "cumAvg": 988.4
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 866.78,
+    "cumAvg": 867.19
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1055.66,
+    "cumAvg": 1065.95
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1016.44,
+    "cumAvg": 1030.66
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 851.28,
+    "cumAvg": 895.79
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1176.43,
+    "cumAvg": 1147.07
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1089.66,
+    "cumAvg": 1072.43
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1068.33,
+    "cumAvg": 1051.25
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1057.28,
+    "cumAvg": 1025.16
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1081.44,
+    "cumAvg": 1044.98
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 952.74,
+    "cumAvg": 966.26
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 977.64,
+    "cumAvg": 978.45
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 804.97,
+    "cumAvg": 856.3
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1362.5,
+    "cumAvg": 1360.45
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1191.28,
+    "cumAvg": 1215.52
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1070.72,
+    "cumAvg": 1115.71
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1103.21,
+    "cumAvg": 1118.93
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1159.6,
+    "cumAvg": 1198.15
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 947.71,
+    "cumAvg": 943.42
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1285.88,
+    "cumAvg": 1307.36
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1264.35,
+    "cumAvg": 1250.38
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1216.63,
+    "cumAvg": 1228.13
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1071.99,
+    "cumAvg": 1071.96
+   }
+  ],
+  "2026-04": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1072.49,
+    "cumAvg": 1109.28
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1126.33,
+    "cumAvg": 1111.22
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 991.26,
+    "cumAvg": 1021.32
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1106.85,
+    "cumAvg": 1121.86
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1308.91,
+    "cumAvg": 1297.5
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1070.07,
+    "cumAvg": 1077.17
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1160.47,
+    "cumAvg": 1166.38
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1254.72,
+    "cumAvg": 1250.37
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1186.88,
+    "cumAvg": 1199.14
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 1014.18,
+    "cumAvg": 1045.95
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1108.31,
+    "cumAvg": 1090.85
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1056.03,
+    "cumAvg": 1037.34
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 997.23,
+    "cumAvg": 994.51
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 962.36,
+    "cumAvg": 940.89
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 992.58,
+    "cumAvg": 966.47
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1049.54,
+    "cumAvg": 1000.41
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 857.09,
+    "cumAvg": 864.17
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1132.99,
+    "cumAvg": 1080.07
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1084.07,
+    "cumAvg": 1041.12
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 991.93,
+    "cumAvg": 913.86
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1204.04,
+    "cumAvg": 1154.63
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1133.0,
+    "cumAvg": 1084.68
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1140.64,
+    "cumAvg": 1070.27
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1124.93,
+    "cumAvg": 1047.99
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1162.88,
+    "cumAvg": 1074.25
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1069.85,
+    "cumAvg": 991.0
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1075.73,
+    "cumAvg": 1002.47
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 1004.91,
+    "cumAvg": 892.63
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1420.4,
+    "cumAvg": 1371.72
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1244.54,
+    "cumAvg": 1220.55
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1127.47,
+    "cumAvg": 1117.82
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1106.95,
+    "cumAvg": 1116.76
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1212.42,
+    "cumAvg": 1200.77
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 942.32,
+    "cumAvg": 943.18
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1379.17,
+    "cumAvg": 1320.13
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1314.53,
+    "cumAvg": 1262.17
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1269.83,
+    "cumAvg": 1236.34
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1100.68,
+    "cumAvg": 1078.25
+   }
+  ],
+  "2026-05": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1114.51,
+    "cumAvg": 1110.13
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1060.75,
+    "cumAvg": 1099.24
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 970.21,
+    "cumAvg": 1012.46
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 1079.11,
+    "cumAvg": 1111.81
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1257.06,
+    "cumAvg": 1288.8
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1033.99,
+    "cumAvg": 1069.83
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1092.89,
+    "cumAvg": 1151.56
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1202.01,
+    "cumAvg": 1239.95
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1132.17,
+    "cumAvg": 1184.41
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 979.24,
+    "cumAvg": 1029.51
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1035.06,
+    "cumAvg": 1080.12
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1006.33,
+    "cumAvg": 1029.73
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 1005.76,
+    "cumAvg": 996.93
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 974.06,
+    "cumAvg": 948.69
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 1004.33,
+    "cumAvg": 974.8
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1021.83,
+    "cumAvg": 1005.89
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 921.7,
+    "cumAvg": 878.54
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1138.65,
+    "cumAvg": 1093.46
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 1006.13,
+    "cumAvg": 1032.25
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 912.9,
+    "cumAvg": 913.6
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1325.69,
+    "cumAvg": 1179.45
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1084.53,
+    "cumAvg": 1084.64
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1082.21,
+    "cumAvg": 1073.13
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1115.22,
+    "cumAvg": 1068.53
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1091.86,
+    "cumAvg": 1079.77
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1010.22,
+    "cumAvg": 996.31
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 1011.26,
+    "cumAvg": 1004.76
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 968.03,
+    "cumAvg": 920.0
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1453.45,
+    "cumAvg": 1389.06
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1294.33,
+    "cumAvg": 1233.84
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1184.7,
+    "cumAvg": 1129.78
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1127.58,
+    "cumAvg": 1119.2
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1305.91,
+    "cumAvg": 1225.25
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 964.78,
+    "cumAvg": 947.91
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1418.2,
+    "cumAvg": 1338.95
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1367.49,
+    "cumAvg": 1283.66
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1305.9,
+    "cumAvg": 1251.25
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1126.39,
+    "cumAvg": 1089.37
+   }
+  ],
+  "2026-06": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1029.63,
+    "cumAvg": 1096.62
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 953.64,
+    "cumAvg": 1073.99
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1038.12,
+    "cumAvg": 1016.01
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 995.65,
+    "cumAvg": 1091.57
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1222.92,
+    "cumAvg": 1277.95
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1007.07,
+    "cumAvg": 1059.49
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1047.92,
+    "cumAvg": 1134.63
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1158.44,
+    "cumAvg": 1227.87
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1102.68,
+    "cumAvg": 1168.68
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 891.03,
+    "cumAvg": 1009.9
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 950.84,
+    "cumAvg": 1055.46
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 949.23,
+    "cumAvg": 1012.64
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 942.96,
+    "cumAvg": 987.32
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 920.0,
+    "cumAvg": 943.22
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 920.17,
+    "cumAvg": 965.08
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 974.56,
+    "cumAvg": 999.02
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 806.12,
+    "cumAvg": 862.51
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1097.79,
+    "cumAvg": 1094.25
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 916.66,
+    "cumAvg": 1008.05
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 743.48,
+    "cumAvg": 873.86
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1265.79,
+    "cumAvg": 1189.81
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 953.44,
+    "cumAvg": 1055.38
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1047.64,
+    "cumAvg": 1068.13
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1069.79,
+    "cumAvg": 1068.78
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1074.8,
+    "cumAvg": 1078.71
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 988.3,
+    "cumAvg": 994.67
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 969.1,
+    "cumAvg": 996.41
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 894.2,
+    "cumAvg": 913.15
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1445.44,
+    "cumAvg": 1398.63
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1299.75,
+    "cumAvg": 1244.89
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1203.48,
+    "cumAvg": 1140.97
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1152.32,
+    "cumAvg": 1124.74
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1226.03,
+    "cumAvg": 1225.39
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 864.01,
+    "cumAvg": 933.17
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1435.02,
+    "cumAvg": 1354.74
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1353.4,
+    "cumAvg": 1295.28
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1280.36,
+    "cumAvg": 1256.31
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1054.04,
+    "cumAvg": 1082.67
+   }
+  ],
+  "2026-07": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1018.24,
+    "cumAvg": 1082.58
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 919.53,
+    "cumAvg": 1046.14
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 1003.66,
+    "cumAvg": 1013.81
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 968.22,
+    "cumAvg": 1070.37
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1211.41,
+    "cumAvg": 1267.94
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1007.41,
+    "cumAvg": 1051.24
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1038.31,
+    "cumAvg": 1119.82
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1162.65,
+    "cumAvg": 1218.64
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1088.39,
+    "cumAvg": 1155.79
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 860.7,
+    "cumAvg": 985.03
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 968.75,
+    "cumAvg": 1041.48
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 923.72,
+    "cumAvg": 999.24
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 922.51,
+    "cumAvg": 975.37
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 867.69,
+    "cumAvg": 929.25
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 949.28,
+    "cumAvg": 962.57
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 951.3,
+    "cumAvg": 989.95
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 779.35,
+    "cumAvg": 845.05
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1116.33,
+    "cumAvg": 1097.76
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 911.94,
+    "cumAvg": 989.4
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 795.08,
+    "cumAvg": 857.73
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1255.64,
+    "cumAvg": 1199.56
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1078.81,
+    "cumAvg": 1059.97
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1074.35,
+    "cumAvg": 1069.32
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1248.75,
+    "cumAvg": 1107.25
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1118.42,
+    "cumAvg": 1086.72
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1031.59,
+    "cumAvg": 1003.43
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 983.06,
+    "cumAvg": 993.54
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 964.67,
+    "cumAvg": 925.28
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1488.52,
+    "cumAvg": 1413.96
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1337.41,
+    "cumAvg": 1260.42
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1247.83,
+    "cumAvg": 1157.82
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1151.43,
+    "cumAvg": 1129.58
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1297.73,
+    "cumAvg": 1238.6
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 861.47,
+    "cumAvg": 918.94
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1462.61,
+    "cumAvg": 1373.17
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1377.74,
+    "cumAvg": 1309.01
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1318.02,
+    "cumAvg": 1266.57
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1080.74,
+    "cumAvg": 1082.34
+   }
+  ],
+  "2026-08": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 958.74,
+    "cumAvg": 1071.34
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 984.58,
+    "cumAvg": 1040.56
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 960.59,
+    "cumAvg": 996.8
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 989.7,
+    "cumAvg": 1061.67
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1244.46,
+    "cumAvg": 1265.53
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 935.34,
+    "cumAvg": 1039.09
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1083.31,
+    "cumAvg": 1116.17
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1126.21,
+    "cumAvg": 1208.34
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1088.4,
+    "cumAvg": 1148.41
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 822.82,
+    "cumAvg": 968.54
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1000.05,
+    "cumAvg": 1036.39
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1058.92,
+    "cumAvg": 1004.57
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 967.1,
+    "cumAvg": 974.31
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 889.26,
+    "cumAvg": 924.46
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 914.14,
+    "cumAvg": 957.45
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 1003.45,
+    "cumAvg": 991.52
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 794.0,
+    "cumAvg": 839.18
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1094.46,
+    "cumAvg": 1097.42
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 879.16,
+    "cumAvg": 977.41
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 661.71,
+    "cumAvg": 832.44
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1169.8,
+    "cumAvg": 1195.65
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1039.9,
+    "cumAvg": 1057.59
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1022.49,
+    "cumAvg": 1064.21
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1376.09,
+    "cumAvg": 1134.72
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1073.37,
+    "cumAvg": 1085.32
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 943.2,
+    "cumAvg": 995.54
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 982.04,
+    "cumAvg": 992.21
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 855.91,
+    "cumAvg": 915.84
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1453.28,
+    "cumAvg": 1418.38
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1334.24,
+    "cumAvg": 1269.32
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1202.5,
+    "cumAvg": 1162.82
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1139.39,
+    "cumAvg": 1130.89
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1297.69,
+    "cumAvg": 1245.77
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 841.32,
+    "cumAvg": 908.93
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1449.55,
+    "cumAvg": 1382.06
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1352.96,
+    "cumAvg": 1313.85
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1312.22,
+    "cumAvg": 1272.02
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1084.07,
+    "cumAvg": 1082.53
+   }
+  ],
+  "2026-09": [
+   {
+    "subDistrict": "Nuwara Eliya",
+    "monthlyAvg": 1069.71,
+    "cumAvg": 1071.13
+   },
+   {
+    "subDistrict": "Ramboda",
+    "monthlyAvg": 1099.26,
+    "cumAvg": 1046.72
+   },
+   {
+    "subDistrict": "Pundaluoya",
+    "monthlyAvg": 949.87,
+    "cumAvg": 990.97
+   },
+   {
+    "subDistrict": "Agarapatana",
+    "monthlyAvg": 997.51,
+    "cumAvg": 1055.33
+   },
+   {
+    "subDistrict": "Nanuoya-Lindula-Talawakele",
+    "monthlyAvg": 1248.0,
+    "cumAvg": 1263.63
+   },
+   {
+    "subDistrict": "Patana-Kotagala",
+    "monthlyAvg": 1003.73,
+    "cumAvg": 1035.15
+   },
+   {
+    "subDistrict": "Hatton-Dickoya",
+    "monthlyAvg": 1067.69,
+    "cumAvg": 1110.38
+   },
+   {
+    "subDistrict": "Bogawantalawa",
+    "monthlyAvg": 1109.54,
+    "cumAvg": 1196.37
+   },
+   {
+    "subDistrict": "Upcot-Maskeliya",
+    "monthlyAvg": 1101.18,
+    "cumAvg": 1142.8
+   },
+   {
+    "subDistrict": "Watawala-Ginigathena-Norton",
+    "monthlyAvg": 853.43,
+    "cumAvg": 957.37
+   },
+   {
+    "subDistrict": "Pussellawa-Hewaheta",
+    "monthlyAvg": 1048.79,
+    "cumAvg": 1037.92
+   },
+   {
+    "subDistrict": "Kotmale",
+    "monthlyAvg": 1039.04,
+    "cumAvg": 1007.84
+   },
+   {
+    "subDistrict": "Gampola-Nawalapitiya-Dolosbage",
+    "monthlyAvg": 961.85,
+    "cumAvg": 972.58
+   },
+   {
+    "subDistrict": "Nilambe-Hantane-Galaha",
+    "monthlyAvg": 923.2,
+    "cumAvg": 924.31
+   },
+   {
+    "subDistrict": "Kadugannawa",
+    "monthlyAvg": 949.17,
+    "cumAvg": 956.62
+   },
+   {
+    "subDistrict": "Madulkelle-Knuckles-Rangala",
+    "monthlyAvg": 959.28,
+    "cumAvg": 987.11
+   },
+   {
+    "subDistrict": "Hunasgiriya-Matale-Yakdessa",
+    "monthlyAvg": 736.13,
+    "cumAvg": 823.98
+   },
+   {
+    "subDistrict": "Balangoda-Rakwana",
+    "monthlyAvg": 1154.96,
+    "cumAvg": 1103.27
+   },
+   {
+    "subDistrict": "Udapussellawa-Halgranoya",
+    "monthlyAvg": 866.57,
+    "cumAvg": 965.9
+   },
+   {
+    "subDistrict": "Maturata",
+    "monthlyAvg": 846.89,
+    "cumAvg": 833.85
+   },
+   {
+    "subDistrict": "Koslanda-Haldumulla",
+    "monthlyAvg": 1250.85,
+    "cumAvg": 1202.93
+   },
+   {
+    "subDistrict": "Haputale",
+    "monthlyAvg": 1052.79,
+    "cumAvg": 1057.09
+   },
+   {
+    "subDistrict": "Bandarawela-Poonagalla",
+    "monthlyAvg": 1045.94,
+    "cumAvg": 1062.22
+   },
+   {
+    "subDistrict": "Malwatte-Welimada",
+    "monthlyAvg": 1137.9,
+    "cumAvg": 1135.08
+   },
+   {
+    "subDistrict": "Demodara-Haliella-Badulla",
+    "monthlyAvg": 1094.69,
+    "cumAvg": 1086.23
+   },
+   {
+    "subDistrict": "Ella-Namunukula",
+    "monthlyAvg": 1030.91,
+    "cumAvg": 999.34
+   },
+   {
+    "subDistrict": "Passara-Lunugalla",
+    "monthlyAvg": 996.02,
+    "cumAvg": 992.51
+   },
+   {
+    "subDistrict": "Madulsima",
+    "monthlyAvg": 851.14,
+    "cumAvg": 909.6
+   },
+   {
+    "subDistrict": "Deniyaya",
+    "monthlyAvg": 1524.09,
+    "cumAvg": 1430.32
+   },
+   {
+    "subDistrict": "Galle",
+    "monthlyAvg": 1343.3,
+    "cumAvg": 1279.21
+   },
+   {
+    "subDistrict": "Kalutara",
+    "monthlyAvg": 1242.86,
+    "cumAvg": 1172.93
+   },
+   {
+    "subDistrict": "Kegalle",
+    "monthlyAvg": 1159.78,
+    "cumAvg": 1135.04
+   },
+   {
+    "subDistrict": "Kelani Valley",
+    "monthlyAvg": 1354.17,
+    "cumAvg": 1258.98
+   },
+   {
+    "subDistrict": "Kandy-Matale-Kurunegala",
+    "monthlyAvg": 899.48,
+    "cumAvg": 907.72
+   },
+   {
+    "subDistrict": "Matara",
+    "monthlyAvg": 1473.8,
+    "cumAvg": 1393.56
+   },
+   {
+    "subDistrict": "Morawaka",
+    "monthlyAvg": 1398.25,
+    "cumAvg": 1324.24
+   },
+   {
+    "subDistrict": "Ratnapura",
+    "monthlyAvg": 1338.84,
+    "cumAvg": 1280.83
+   },
+   {
+    "subDistrict": "Balangoda",
+    "monthlyAvg": 1153.09,
+    "cumAvg": 1089.98
+   }
+  ]
+ }
+}
