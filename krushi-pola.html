@@ -443,7 +443,7 @@ var T = {
       return true;
     });
     $("count").textContent = list.length ? t("showing").replace("%N", list.length) : "";
-    if (!mine.length) { g.innerHTML = '<div class="state"><p>' + esc(t(side === "Sell" ? "emptySell" : "emptyWant")) + '</p><a class="add" href="#add">' + esc(t("addBtn")) + "</a></div>"; return; }
+    if (!mine.length) { g.innerHTML = '<div class="state"><p>' + esc(t(side === "Sell" ? "emptySell" : "emptyWant")) + '</p></div>"; return; }
     if (!list.length) { g.innerHTML = '<div class="state"><p>' + esc(t("noMatch")) + "</p></div>"; return; }
     g.innerHTML = list.map(card).join("");
   }
