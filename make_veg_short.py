@@ -127,7 +127,18 @@ def calc_example(crop_si, rows, unit_si, url_text, kg=500):
 <div class="warn">⚠️ ප්‍රවාහන වියදම අඩු කළ පසු සැබෑ ලාභය වෙනස් වේ</div>
 <div class="go">🧮 ගොවියාගේ ලාභය | වෙළෙන්දාගේ ලාභය ගණනය කරගන්න<br><span style="color:#e7d3a3;font-size:36px">{url_text} · ඔබේ ප්‍රවාහන වියදම ඇතුළත් කරන්න</span></div>"""
 
-CSS = CSS + CALC_CSS
+CSS = CSS + CALC_CSS + """
+.cta{margin-top:44px;background:#fffdf7;border:3px solid #0e4f4a;border-radius:26px;padding:8px 30px}
+.ct{display:flex;align-items:center;gap:22px;padding:18px 0;font-size:40px;font-weight:700;color:#0e4f4a}
+.ct+.ct{border-top:1px solid #e3d9c4}.ci{font-size:50px;width:66px;text-align:center}"""
+
+
+def cta(mode):
+    """Like / comment / share / follow box for the last slide (wording fits each audience)."""
+    share = "පවුලේ අයට හා මිතුරන්ට ෂෙයාර් කරන්න" if mode == "retail" else "ගොවි හා වෙළෙන්දා මිතුරන්ට ෂෙයාර් කරන්න"
+    items = [("👍", "ලයික් කරන්න"), ("💬", "ඔබේ ප්‍රදේශයේ එළවළු මිල කමෙන්ට් කරන්න"),
+             ("📤", share), ("🔔", "සෑම සතියකම මිල සඳහා ෆලෝ කරන්න")]
+    return '<div class="cta">' + "".join(f'<div class="ct"><span class="ci">{i}</span><span>{t}</span></div>' for i, t in items) + '</div>'
 def build(mode):
     M = MODES[mode]
     items = {}
@@ -195,10 +206,10 @@ def build(mode):
                                             "CBSL තොග මිල · " + DATE_NOW, "topgoviya.lk")))
     slides.append(page(f"""<div class="big" style="font-size:96px">එළවළු 40+<br>{T} සහ සිල්ලර මිල</div>
 <div class="url">👉 topgoviya.lk</div>
-<div class="note">නොමිලේ · සිංහල · தமிழ் · English<br>මිල ගණන් මඟපෙන්වීමක් පමණි.<br>ඔබේ තීරණ ඔබේ වගකීම වේ.</div>""" if mode == "wholesale" else
+<div class="note">නොමිලේ · සිංහල · தமிழ் · English<br>මිල ගණන් මඟපෙන්වීමක් පමණි.<br>ඔබේ තීරණ ඔබේ වගකීම වේ.</div>""" + cta(mode) if mode == "wholesale" else
     """<div class="big" style="font-size:96px">එළවළු 40+<br>අද මිල</div>
 <div class="url">👉 topgoviya.lk</div>
-<div class="note">නොමිලේ · සිංහල · தமிழ் · English<br>මිල ගණන් මඟපෙන්වීමක් පමණි.<br>ඔබේ තීරණ ඔබේ වගකීම වේ.</div>"""))
+<div class="note">නොමිලේ · සිංහල · தமிழ் · English<br>මිල ගණන් මඟපෙන්වීමක් පමණි.<br>ඔබේ තීරණ ඔබේ වගකීම වේ.</div>""" + cta(mode)))
 
     pngs = []
     with sync_playwright() as pw:
