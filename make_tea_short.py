@@ -61,9 +61,24 @@ all_now, all_ly = avg(cur), avg({k: v for k, v in ly.items() if k in cur})
 ly_pct = (all_now - all_ly) / all_ly * 100 if all_ly else None
 
 # optional picture for the first slide (e.g. a cup of tea); the slide works without it too
-HERO = next((f for f in ("video-assets/tea-cup.png", "video-assets/tea-cup.jpg") if os.path.exists(f)), None)
-hero = ("data:image/" + ("png" if HERO.endswith(".png") else "jpeg") + ";base64," +
-        base64.b64encode(open(HERO, "rb").read()).decode()) if HERO else ""
+def find_hero():
+    """Any picture in video-assets/ whose name starts with 'tea' (tea-cup.jpg, tea-cup.png.png, Tea Valley.png ...)."""
+    import glob
+    pics = [f for f in glob.glob("video-assets/*") if re.search(r"\.(png|jpe?g|webp)$", f, re.I)]
+    tea = sorted(f for f in pics if os.path.basename(f).lower().startswith("tea"))
+    return (tea or sorted(pics) or [None])[0]
+
+
+HERO = find_hero()
+if HERO:
+    with open(HERO, "rb") as fh:
+        raw = fh.read()
+    kind = "png" if raw[:4] == b"\x89PNG" else ("webp" if raw[8:12] == b"WEBP" else "jpeg")   # by content, not by name
+    hero = f"data:image/{kind};base64," + base64.b64encode(raw).decode()
+    print("Picture for slide 1:", HERO)
+else:
+    hero = ""
+    print("No picture in video-assets/ - slide 1 without picture")
 logo = "data:image/png;base64," + base64.b64encode(open(LOGO, "rb").read()).decode() if os.path.exists(LOGO) else ""
 CSS = """*{box-sizing:border-box;margin:0;padding:0}
 body{width:1080px;height:1920px;background:#0e4f4a;font-family:'Noto Sans Sinhala',sans-serif;color:#fff;overflow:hidden;position:relative}
