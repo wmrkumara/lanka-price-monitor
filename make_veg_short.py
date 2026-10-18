@@ -3,7 +3,10 @@ TopGoviya.lk — weekly VEGETABLE price YouTube Shorts (CBSL daily report)
 Usage: python3 make_veg_short.py data.json icon-512x512.png [retail|wholesale|both]
   retail    -> for shoppers  : cheapest market highlighted
   wholesale -> for farmers   : highest market highlighted (best place to sell)
-Output: short/topgoviya-veg-DATE.mp4, short/topgoviya-veg-wholesale-DATE.mp4 (+ YouTube .txt files)
+Output: short/topgoviya-veg-DATE.mp4, short/topgoviya-veg-wholesale-DATE.mp4 (with background music)
+        + the same videos without music (...-silent.mp4) + YouTube .txt files
+        + one ready-to-post folder per video (01-veg-retail-DATE/, 02-veg-wholesale-DATE/) with
+          video-with-music.mp4, video-silent.mp4, youtube.txt, tiktok.txt, facebook.txt
 """
 import json, base64, os, subprocess, sys
 from collections import Counter
@@ -14,6 +17,25 @@ DATA = sys.argv[1] if len(sys.argv) > 1 else "data.json"
 LOGO = sys.argv[2] if len(sys.argv) > 2 else "icon-512x512.png"
 WHICH = sys.argv[3] if len(sys.argv) > 3 else "both"
 OUT = "short"; SLIDE_SEC = 4.0; FADE = 0.5
+# background music (original royalty-free tracks in music/, made for TopGoviya with vidIQ)
+MUSIC = {"retail": "music/music-1.wav", "wholesale": "music/music-2.wav"}
+MUSIC_VOL = 0.8
+
+
+def add_music(mp4, track, seconds):
+    """Mix a background track into the finished video (fade in/out, cut to length).
+    The original silent video is kept as ...-silent.mp4."""
+    if not os.path.exists(track):
+        print("No music file", track, "- video stays silent"); return
+    silent = mp4.replace(".mp4", "-silent.mp4")
+    os.replace(mp4, silent)
+    fade_out = max(seconds - 2.0, 0)
+    af = (f"[1:a]atrim=0:{seconds:.2f},asetpts=PTS-STARTPTS,volume={MUSIC_VOL},"
+          f"afade=t=in:st=0:d=1,afade=t=out:st={fade_out:.2f}:d=2[a]")
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", silent, "-stream_loop", "-1", "-i", track,
+                    "-filter_complex", af, "-map", "0:v", "-map", "[a]", "-c:v", "copy",
+                    "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", mp4], check=True)
+    print("Music added:", os.path.basename(track), "->", mp4)
 os.makedirs(OUT, exist_ok=True)
 
 SI_MONTHS = ['ජන','පෙබ','මාර්','අප්‍ර','මැයි','ජූනි','ජූලි','අගෝ','සැප්','ඔක්','නොව','දෙස්']
@@ -195,6 +217,7 @@ def build(mode):
     mp4 = f"{OUT}/{M['file']}-{TAG}.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", *inputs, "-filter_complex", ";".join(chain),
                     "-map", "[outv]", "-c:v", "libx264", "-preset", "medium", "-crf", "20", mp4], check=True)
+    add_music(mp4, MUSIC.get(mode, ""), n * SLIDE_SEC - (n - 1) * FADE)
 
     title = f"එළවළු {T} මිල අද {YEAR} | මේ සතියේ එළවළු {T} මිල {DATE_NOW} | {MAIN} | CBSL #shorts"
     up = [f"📈 {r['si']} ({mk_si(r)}): රු. {rs(r['prev'])} → {rs(r['now'])} ({r['pct']:+.0f}%)" for r in rises]
@@ -215,8 +238,45 @@ def build(mode):
             "⚠️ මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.\n\n"
             f"{M['tags']} #TopGoviyaLK #SriLanka #shorts")
     open(f"{OUT}/{M['txt']}-{TAG}.txt", "w", encoding="utf-8").write(f"TITLE:\n{title}\n\nDESCRIPTION:\n{desc}\n")
+    make_package(mode, M, T, mp4, title, desc, rises, falls, MAIN)
     for f in pngs: os.remove(f)
     print("Video:", mp4, f"({n} slides, ~{n*SLIDE_SEC-(n-1)*FADE:.0f}s)")
+
+def make_package(mode, M, T, mp4, title, desc, rises, falls, MAIN):
+    """Ready-to-post folder: video with music, silent copy, and captions for YouTube, TikTok and Facebook."""
+    import shutil
+    num = "01" if mode == "retail" else "02"
+    folder = f"{OUT}/{num}-veg-{'retail' if mode == 'retail' else 'wholesale'}-{TAG}"
+    os.makedirs(folder, exist_ok=True)
+    shutil.copy(mp4, f"{folder}/video-with-music.mp4")
+    silent = mp4.replace(".mp4", "-silent.mp4")
+    shutil.copy(silent if os.path.exists(silent) else mp4, f"{folder}/video-silent.mp4")
+    tags = f"{M['tags']} #TopGoviyaLK #SriLanka"
+    mover = lambda r, a: f"{a} {r['si']}: රු. {rs(r['prev'])} → {rs(r['now'])} ({r['pct']:+.0f}%)"
+    moves = [mover(r, "📈") for r in rises[:2]] + [mover(r, "📉") for r in falls[:2]]
+    # YouTube: same title + description as before
+    open(f"{folder}/youtube.txt", "w", encoding="utf-8").write(
+        f"TITLE:\n{title}\n\nDESCRIPTION:\n{desc}\n")
+    # TikTok: short caption (links are not clickable there, so the address is written out)
+    tiktok = (f"මේ සතියේ එළවළු {T} මිල 🥕 {DATE_PREV} → {DATE_NOW} {YEAR} · {MAIN}\n"
+              + "\n".join(moves) + "\n"
+              f"සියලු මිල 👉 topgoviya.lk · දත්ත: ශ්‍රී ලංකා මහ බැංකුව\n"
+              f"මිල ගණන් මඟපෙන්වීමක් පමණි.\n\n{tags} #එළවළු #fyp")
+    open(f"{folder}/tiktok.txt", "w", encoding="utf-8").write(tiktok + "\n")
+    # Facebook Reels / page post: clickable link, a little more detail
+    fb = (f"🥕 මේ සතියේ එළවළු {T} මිල — {DATE_PREV} → {DATE_NOW} {YEAR}\n"
+          f"📍 {MAIN} · {M['who']}\n\n"
+          + "\n".join(moves) + "\n\n"
+          f"👉 එළවළු 40+ සිල්ලර හා තොග මිල, වෙළඳපොළ 10ක මිල: https://topgoviya.lk/?d={TAG}\n"
+          f"📊 මූලාශ්‍රය: ශ්‍රී ලංකා මහ බැංකුව (CBSL) දෛනික මිල වාර්තාව\n"
+          f"⚠️ මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.\n\n{tags} #ගොවිමිල")
+    open(f"{folder}/facebook.txt", "w", encoding="utf-8").write(fb + "\n")
+    # the folder now holds everything; remove the loose copies so the download stays tidy
+    for f in (mp4, silent, f"{OUT}/{M['txt']}-{TAG}.txt"):
+        if os.path.exists(f):
+            os.remove(f)
+    print("Ready-to-post folder:", folder)
+
 
 for mode in (["retail", "wholesale"] if WHICH == "both" else [WHICH]):
     build(mode)
