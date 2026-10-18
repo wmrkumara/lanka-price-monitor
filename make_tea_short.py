@@ -60,6 +60,10 @@ up_now = avg(cur, lambda k: k not in LOW_GROWN); low_now = avg(cur, lambda k: k 
 all_now, all_ly = avg(cur), avg({k: v for k, v in ly.items() if k in cur})
 ly_pct = (all_now - all_ly) / all_ly * 100 if all_ly else None
 
+# optional picture for the first slide (e.g. a cup of tea); the slide works without it too
+HERO = next((f for f in ("video-assets/tea-cup.png", "video-assets/tea-cup.jpg") if os.path.exists(f)), None)
+hero = ("data:image/" + ("png" if HERO.endswith(".png") else "jpeg") + ";base64," +
+        base64.b64encode(open(HERO, "rb").read()).decode()) if HERO else ""
 logo = "data:image/png;base64," + base64.b64encode(open(LOGO, "rb").read()).decode() if os.path.exists(LOGO) else ""
 CSS = """*{box-sizing:border-box;margin:0;padding:0}
 body{width:1080px;height:1920px;background:#0e4f4a;font-family:'Noto Sans Sinhala',sans-serif;color:#fff;overflow:hidden;position:relative}
@@ -74,6 +78,9 @@ h1{font-size:92px;line-height:1.12;margin:40px 0 14px}h2{font-size:58px;line-hei
 .row:first-child{border-top:0}.n{font-family:'JetBrains Mono',monospace}.rk{color:#a9802a;margin-right:14px}
 .up{color:#2c7a52}.dn{color:#b23a2e}.small{font-size:28px;color:#7a7264;font-weight:400;display:block}
 .note{margin-top:auto;font-size:28px;color:#e7d3a3;line-height:1.5}
+.hero{flex:1;margin:30px -60px 0;background-size:cover;background-position:center 82%;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 22%,#000 78%,transparent 100%);
+  mask-image:linear-gradient(to bottom,transparent 0%,#000 22%,#000 78%,transparent 100%)}
 .cta{margin-top:56px;background:rgba(255,255,255,.08);border:2px solid rgba(231,211,163,.45);border-radius:26px;padding:14px 30px}
 .ct{display:flex;align-items:center;gap:22px;padding:20px 0;font-size:40px;font-weight:700}
 .ct+.ct{border-top:1px solid rgba(231,211,163,.3)}.ci{font-size:54px;width:70px;text-align:center}
@@ -90,6 +97,7 @@ slides = []
 slides.append(page(f'<h1>🍃 තේ වෙන්දේසි මිල</h1><div class="pill">{MONTH_SI}</div>'
                    f'<div class="big">රු. {rs(all_now)}</div><div class="sub" style="margin-top:0">උප දිස්ත්‍රික්ක {len(cur)} සාමාන්‍යය · කි.ග්‍රෑ. එකකට</div>'
                    f'<div class="sub">සැකසූ තේ (Made tea) වෙන්දේසි මිල · ශ්‍රී ලංකා තේ මණ්ඩලය</div>'
+                   + (f'<div class="hero" style="background-image:url({hero})"></div>' if hero else '') +
                    f'<div class="note">⚠️ මෙය දළු (කොළ) මිල නොවේ — සැකසූ තේ වෙන්දේසි මාසික සාමාන්‍යය.</div>'))
 slides.append(page('<h2>🥇 ඉහළම මිල ලැබුණු ප්‍රදේශ 5</h2><div class="card">' +
                    "".join(f'<div class="row"><span><span class="rk">{n}</span>{nm(k)}</span><span class="n">රු. {rs(v)}</span></div>'
