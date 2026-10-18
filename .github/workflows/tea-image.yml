@@ -1,0 +1,64 @@
+# TopGoviya.lk — monthly tea price images + Facebook caption
+# Runs after "Tea Board Monthly Prices", and only when a new month has arrived.
+# Files: https://topgoviya.lk/share/tea.png, tea-upcountry.png, tea-story.png, tea-caption.txt
+
+name: Tea price image
+
+on:
+  workflow_run:
+    workflows: ["Tea Board Monthly Prices"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Make the images again even if this month is done"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  image:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - name: Is there a new month?
+        id: check
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.force }}" = "true" ]; then
+            echo "need=yes" >> "$GITHUB_OUTPUT"
+          else
+            python3 make_tea_image.py --check >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install fonts
+        if: steps.check.outputs.need == 'yes'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libraqm0 libfribidi0 libharfbuzz0b
+          mkdir -p ~/.fonts
+          curl -sL -o ~/.fonts/NotoSansSinhala.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssinhala/NotoSansSinhala%5Bwdth,wght%5D.ttf"
+          curl -sL -o ~/.fonts/JetBrainsMono.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf"
+          pip install -q pillow
+
+      - name: Make the images
+        if: steps.check.outputs.need == 'yes'
+        run: python3 make_tea_image.py --force
+
+      - name: Save the images
+        if: steps.check.outputs.need == 'yes'
+        run: |
+          git config user.name  "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add share/ || true
+          if git diff --staged --quiet; then
+            echo "No new image."
+          else
+            git commit -m "Tea price image ($(date +%Y-%m-%d))"
+            git pull --rebase origin main
+            git push origin main
+          fi
