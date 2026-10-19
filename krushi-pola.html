@@ -131,6 +131,17 @@
   @media(max-width:600px){.row,.typepick{grid-template-columns:1fr}.side{font-size:16px;padding:13px 8px}.tools select{flex:1 1 45%}.add{width:100%;justify-content:center}}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
   html{scroll-behavior:smooth}
+  .phbox{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+  .phbtn{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border:1.5px dashed var(--petrol);border-radius:12px;color:var(--petrol);font-weight:700;cursor:pointer;background:var(--card);margin:0}
+  .phprev{display:flex;gap:8px;flex-wrap:wrap}
+  .phprev img{width:64px;height:64px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+  .phclear{font:inherit;font-size:12.5px;border:0;background:none;color:#b23a2e;text-decoration:underline;cursor:pointer;padding:4px}
+  .itph{position:relative;display:block;width:calc(100% + 32px);margin:-16px -16px 4px;padding:0;border:0;background:#efe8d8;border-radius:14px 14px 0 0;overflow:hidden;cursor:zoom-in;aspect-ratio:4/3}
+  .itph img{width:100%;height:100%;object-fit:cover;display:block}
+  .itph .n{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:99px}
+  .lbox{position:fixed;inset:0;z-index:999;background:rgba(10,20,18,.92);overflow-y:auto;padding:56px 12px 24px;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .lbox img{max-width:min(100%,900px);border-radius:10px;background:#222}
+  .lbox .x{position:fixed;top:10px;right:12px;width:42px;height:42px;border-radius:50%;border:0;background:#fff;font-size:20px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -213,9 +224,13 @@
     <div><label for="del" data-t="lDel">බෙදාහැරීම</label><select id="del"></select></div>
   </div>
 
-  <label for="days" data-t="lDays">දැන්වීම තියාගන්න කාලය</label><select id="days"></select><div class="hint" data-t="daysHint">කාලය ඉවර වුණාම දැන්වීම ඉබේම ඉවත් වෙනවා. දිගටම තියාගන්න ඕන නම්, දැන්වීම යැව්වාම ලැබෙන KP අංකය සමඟ අපට WhatsApp කරන්න.</div>
+  <label for="days" data-t="lDays">දැන්වීම තියාගන්න කාලය</label><select id="days"></select><div class="hint" data-t="daysHint">කාලය ඉවර වුණාම දැන්වීම පිටුවේ පෙන්වීම නවතිනවා. දිගටම තියාගන්න "අවසන් දිනයක් නැත" තෝරන්න. විකිණුණාම KP අංකය සමඟ අපට WhatsApp කරන්න, අපි ඉවත් කරනවා.</div>
 
   <label for="notes"><span data-t="lNotes">වෙනත් විස්තර</span> <span class="opt" data-t="optional">(අවශ්‍ය නම්)</span></label><textarea id="notes" maxlength="300"></textarea>
+
+  <label for="photos"><span data-t="lPhotos">ඡායාරූප</span> <span class="opt" data-t="optional">(අවශ්‍ය නම්)</span></label>
+  <div class="phbox"><label class="phbtn" for="photos" data-t="photoBtn">📷 ඡායාරූප එකතු කරන්න</label><input id="photos" type="file" accept="image/*" multiple hidden><div class="phprev" id="phprev"></div><button type="button" class="phclear" id="phclear" hidden data-t="photoClear">ඡායාරූප ඉවත් කරන්න</button></div>
+  <div class="hint" id="phhint" data-t="photoHint">උපරිම 3ක්. පැහැදිලි ඡායාරූප තිබුණොත් ගැනුම්කරුවන් ඉක්මනින් අමතනවා.</div>
 
   <div class="hp" aria-hidden="true"><label for="website">Website</label><input id="website" tabindex="-1" autocomplete="off"></div>
 
@@ -269,7 +284,10 @@ var UNITS = {
  packet:["per packet","පැකට්ටුවකට","ஒரு பாக்கெட்டுக்கு"], hundred:["per 100 plants","පැළ 100කට","100 நாற்றுகளுக்கு"], unit:["each","එකකට","ஒன்றுக்கு"],
  thousand:["per 1,000","1,000කට","1,000க்கு"]};
 var DELIV = {talk:["Ask about delivery","බෙදාහැරීම ගැන කතා කරන්න","விநியோகம் பற்றி கேளுங்கள்"], yes:["Delivery available","බෙදාහැරීම ඇත","விநியோகம் உண்டு"], no:["No delivery","බෙදාහැරීම නැත","விநியோகம் இல்லை"]};
-var DAYS = {"7":["1 week","සතියක්","ஒரு வாரம்"], "30":["1 month","මාසයක්","ஒரு மாதம்"], "90":["3 months","මාස 3ක්","3 மாதங்கள்"]};
+var DAYS = {"7":["1 week","සතියක්","ஒரு வாரம்"], "30":["1 month","මාසයක්","ஒரு மாதம்"], "90":["3 months","මාස 3ක්","3 மாதங்கள்"],
+ "180":["6 months","මාස 6ක්","6 மாதங்கள்"], "365":["1 year","අවුරුද්දක්","ஒரு வருடம்"],
+ "0":["No end date (until removed)","අවසන් දිනයක් නැත (ඉවත් කරන තුරු)","முடிவு தேதி இல்லை (நீக்கும் வரை)"]};
+var DAYS_ORDER = ["7","30","90","180","365","0"];
 var LI = {en:0, si:1, ta:2};
 
 var T = {
@@ -288,7 +306,7 @@ var T = {
   lType:"ඔබේ දැන්වීම", oSell:"විකිණීමට ඇත", oWant:"ගන්න ඕන (සොයනවා)", lName:"නම හෝ ව්‍යාපාරයේ නම", lWa:"WhatsApp අංකය",
   lDist:"දිස්ත්‍රික්කය", choose:"තෝරන්න", lTown:"ළඟම නගරය", townPh:"ටයිප් කරන්න, උදා: Gampola", lVillage:"ගම", optional:"(අවශ්‍ය නම්)",
   lCat:"වර්ගය", lItem:"ද්‍රව්‍යය", itemPh:"උදා: ගම්මිරිස් / අඹ බද්ධ පැළ", lPrice:"මිල (රු.)", priceHint:"හිස්ව තිබ්බොත් \"මිල විමසන්න\" ලෙස පෙන්වයි.",
-  lUnit:"මිල කුමකටද?", chooseUnit:"මිලක් නැත්නම් හිස්ව තියන්න", lQty:"ප්‍රමාණය", qtyPh:"උදා: කිලෝ 50 / පැළ 500", notesPh:"උදා: වියළි ගම්මිරිස්, සතියකින් දෙන්න පුළුවන්", helpForm:"📞 පුරවන්න අමාරු නම්, භාණ්ඩය, මිල, ප්‍රමාණය සහ ප්‍රදේශය අපට WhatsApp කරන්න. අපි දාලා දෙන්නම්.", helpMsg:"ආයුබෝවන් TopGoviya! කෘෂි ද්‍රව්‍ය පොළට දැන්වීමක් දාන්න උදව් ඕන. භාණ්ඩය: , මිල: , ප්‍රමාණය: , ප්‍රදේශය: ", lDel:"බෙදාහැරීම", lNotes:"වෙනත් විස්තර",
+  lUnit:"මිල කුමකටද?", chooseUnit:"මිලක් නැත්නම් හිස්ව තියන්න", lQty:"ප්‍රමාණය", qtyPh:"උදා: කිලෝ 50 / පැළ 500", notesPh:"උදා: වියළි ගම්මිරිස්, සතියකින් දෙන්න පුළුවන්", helpForm:"📞 පුරවන්න අමාරු නම්, භාණ්ඩය, මිල, ප්‍රමාණය සහ ප්‍රදේශය අපට WhatsApp කරන්න. අපි දාලා දෙන්නම්.", helpMsg:"ආයුබෝවන් TopGoviya! කෘෂි ද්‍රව්‍ය පොළට දැන්වීමක් දාන්න උදව් ඕන. භාණ්ඩය: , මිල: , ප්‍රමාණය: , ප්‍රදේශය: ", lDel:"බෙදාහැරීම", lNotes:"වෙනත් විස්තර", lPhotos:"ඡායාරූප", photoBtn:"📷 ඡායාරූප එකතු කරන්න", photoHint:"උපරිම 3ක්. පැහැදිලි ඡායාරූප තිබුණොත් ගැනුම්කරුවන් ඉක්මනින් අමතනවා.", photoClear:"ඡායාරූප ඉවත් කරන්න", photoErr:"ඡායාරූපය කියවන්න බැරි වුණා. වෙනත් එකක් තෝරන්න.", photoMore:"ඡායාරූප 3ක් පමණයි. පළමු 3 ගත්තා.", photoView:"ඡායාරූප බලන්න",
   consent:"මගේ නම, WhatsApp අංකය සහ මෙම විස්තර TopGoviya.lk හි ප්‍රසිද්ධ කිරීමට මම එකඟ වෙමි.",
   send:"දැන්වීම යවන්න", sending:"යවමින්…",
   errReq:"කරුණාකර * ලකුණු කළ කොටස් පුරවන්න.", errWa:"WhatsApp අංකය වැරදියි. 07X XXX XXXX ආකාරයට දාන්න.",
@@ -296,7 +314,7 @@ var T = {
   errNet:"යවන්න බැරි වුණා. අන්තර්ජාලය පරීක්ෂා කරලා නැවත ඔබන්න.", errUnsure:"දැන්වීම ලැබුණාද කියලා තහවුරු කරගන්න බැරි වුණා. දෙවෙනි පාරක් යවන්න කලින්, පහළ WhatsApp link එකෙන් අපෙන් අහන්න.", errUnit:"මිලක් දැම්මා නම්, \"මිල කුමකටද?\" තෝරන්න.", errPrice:"මිල ඉලක්කම්වලින් පමණක් දාන්න, උදා: 350",
   howLink:"❓ දැන්වීමක් දාන්නේ කොහොමද?", howH:"📝 දැන්වීමක් දාන හැටි (විනාඩි 2යි)",
   how1:"\"විකිණීමට ඇත\" තෝරන්න. ඔබට යමක් ගන්න ඕන නම් \"ගන්න ඕන\" තෝරන්න.", how2:"නම සහ WhatsApp අංකය දාන්න.", how3:"දිස්ත්‍රික්කය තෝරලා ළඟම නගරය ටයිප් කරන්න (උදා: Gamp → Gampola).", how4:"වර්ගය සහ ද්‍රව්‍යය දාන්න. මිල දානවා නම් \"මිල කුමකටද?\" ත් තෝරන්න.", how5:"දැන්වීම තියාගන්න කාලය තෝරන්න, එකඟතාවය tick කරලා \"දැන්වීම යවන්න\" ඔබන්න.", how6:"ලැබෙන KP අංකය සටහන් කරගන්න. අපි ඔබේ අංකයට කතා කළාට පසු දැන්වීම පළ වෙනවා.",
-  lDays:"දැන්වීම තියාගන්න කාලය", daysHint:"කාලය ඉවර වුණාම දැන්වීම ඉබේම ඉවත් වෙනවා. දිගටම තියාගන්න ඕන නම්, දැන්වීම යැව්වාම ලැබෙන KP අංකය සමඟ අපට WhatsApp කරන්න.", until:"දක්වා පෙන්වයි",
+  lDays:"දැන්වීම තියාගන්න කාලය", daysHint:"කාලය ඉවර වුණාම දැන්වීම පිටුවේ පෙන්වීම නවතිනවා. දිගටම තියාගන්න \"අවසන් දිනයක් නැත\" තෝරන්න. විකිණුණාම KP අංකය සමඟ අපට WhatsApp කරන්න, අපි ඉවත් කරනවා.", until:"දක්වා පෙන්වයි",
   mic:"කතා කරලා සොයන්න", listening:"🎤 අහගෙන ඉන්නවා… දැන් කතා කරන්න", micErr:"ඇහුණේ නැහැ. 🎤 ඔබලා නැවත කතා කරන්න.", micDenied:"Microphone අවසරය දීලා නැහැ. Browser settings එකෙන් අවසර දෙන්න.",
   adminMsg:"ආයුබෝවන් TopGoviya! මගේ කෘෂි ද්‍රව්‍ය පොළ දැන්වීම (%R) වෙනස් කරන්න / ඉවත් කරන්න ඕන.",
   okH:"ස්තූතියි! ඔබේ දැන්වීම ලැබුණා.", okP:"යොමු අංකය: %R. අපි ඔබේ WhatsApp අංකය පරීක්ෂා කළාට පසුව දැන්වීම මෙහි පළ වෙනවා. වෙනසක් කරන්න හෝ ඉවත් කරන්න මෙම අංකය සමඟ අපට WhatsApp කරන්න. 📸 මෙම අංකය සටහන් කරගන්න, නැත්නම් screenshot එකක් ගන්න.",
@@ -320,7 +338,7 @@ var T = {
   lType:"உங்கள் விளம்பரம்", oSell:"விற்பனைக்கு உள்ளது", oWant:"வாங்கத் தேவை", lName:"பெயர் அல்லது வணிகப் பெயர்", lWa:"WhatsApp எண்",
   lDist:"மாவட்டம்", choose:"தேர்ந்தெடுக்கவும்", lTown:"அருகிலுள்ள நகரம்", townPh:"தட்டச்சு செய்யுங்கள், எ.கா: Gampola", lVillage:"கிராமம்", optional:"(விரும்பினால்)",
   lCat:"வகை", lItem:"பொருள்", itemPh:"எ.கா: மிளகு / மா ஒட்டு நாற்றுகள்", lPrice:"விலை (ரூ.)", priceHint:"காலியாக விட்டால் \"விலை கேளுங்கள்\" எனக் காட்டப்படும்.",
-  lUnit:"விலை எதற்கு?", chooseUnit:"விலை இல்லையெனில் காலியாக விடவும்", lQty:"அளவு", qtyPh:"எ.கா: 50 கிலோ / 500 நாற்றுகள்", notesPh:"எ.கா: உலர்ந்த மிளகு, ஒரு வாரத்தில் தர முடியும்", helpForm:"📞 நிரப்ப கடினமாக இருந்தால், பொருள், விலை, அளவு மற்றும் இடத்தை எங்களுக்கு WhatsApp செய்யுங்கள். நாங்கள் பதிவிடுகிறோம்.", helpMsg:"வணக்கம் TopGoviya! விளம்பரம் இட உதவி தேவை. பொருள்: , விலை: , அளவு: , இடம்: ", lDel:"விநியோகம்", lNotes:"மேலதிக விவரங்கள்",
+  lUnit:"விலை எதற்கு?", chooseUnit:"விலை இல்லையெனில் காலியாக விடவும்", lQty:"அளவு", qtyPh:"எ.கா: 50 கிலோ / 500 நாற்றுகள்", notesPh:"எ.கா: உலர்ந்த மிளகு, ஒரு வாரத்தில் தர முடியும்", helpForm:"📞 நிரப்ப கடினமாக இருந்தால், பொருள், விலை, அளவு மற்றும் இடத்தை எங்களுக்கு WhatsApp செய்யுங்கள். நாங்கள் பதிவிடுகிறோம்.", helpMsg:"வணக்கம் TopGoviya! விளம்பரம் இட உதவி தேவை. பொருள்: , விலை: , அளவு: , இடம்: ", lDel:"விநியோகம்", lNotes:"மேலதிக விவரங்கள்", lPhotos:"புகைப்படங்கள்", photoBtn:"📷 புகைப்படங்கள் சேர்க்க", photoHint:"அதிகபட்சம் 3. தெளிவான புகைப்படங்கள் இருந்தால் வாங்குபவர்கள் விரைவில் தொடர்பு கொள்வார்கள்.", photoClear:"புகைப்படங்களை நீக்கு", photoErr:"புகைப்படத்தைப் படிக்க முடியவில்லை. வேறொன்றைத் தேர்ந்தெடுக்கவும்.", photoMore:"3 புகைப்படங்கள் மட்டுமே. முதல் 3 எடுக்கப்பட்டன.", photoView:"புகைப்படங்களைப் பாருங்கள்",
   consent:"எனது பெயர், WhatsApp எண் மற்றும் இந்த விவரங்களை TopGoviya.lk இல் வெளியிட நான் ஒப்புக்கொள்கிறேன்.",
   send:"விளம்பரத்தை அனுப்புக", sending:"அனுப்புகிறது…",
   errReq:"* குறியிட்ட பகுதிகளை நிரப்புங்கள்.", errWa:"WhatsApp எண் தவறு. 07X XXX XXXX வடிவில் இடுங்கள்.",
@@ -328,7 +346,7 @@ var T = {
   errNet:"அனுப்ப முடியவில்லை. இணையத்தைச் சரிபார்த்து மீண்டும் அழுத்துங்கள்.", errUnsure:"விளம்பரம் கிடைத்ததா என்று உறுதிப்படுத்த முடியவில்லை. மீண்டும் அனுப்பும் முன் கீழே உள்ள WhatsApp இணைப்பில் எங்களிடம் கேளுங்கள்.", errUnit:"விலை இட்டால், \"விலை எதற்கு?\" என்பதைத் தேர்ந்தெடுக்கவும்.", errPrice:"விலையை எண்களில் மட்டும் இடுங்கள், எ.கா: 350",
   howLink:"❓ விளம்பரம் இடுவது எப்படி?", howH:"📝 விளம்பரம் இடுவது எப்படி (2 நிமிடம்)",
   how1:"\"விற்பனைக்கு உள்ளது\" தேர்ந்தெடுக்கவும். ஏதாவது வாங்க வேண்டுமெனில் \"வாங்கத் தேவை\".", how2:"பெயர் மற்றும் WhatsApp எண்ணை இடுங்கள்.", how3:"மாவட்டத்தைத் தேர்ந்தெடுத்து அருகிலுள்ள நகரத்தைத் தட்டச்சு செய்யுங்கள் (எ.கா: Gamp → Gampola).", how4:"வகை மற்றும் பொருளை இடுங்கள். விலை இட்டால் \"விலை எதற்கு?\" என்பதையும் தேர்ந்தெடுக்கவும்.", how5:"காட்டப்படும் காலத்தைத் தேர்ந்தெடுத்து, ஒப்புதலை டிக் செய்து \"விளம்பரத்தை அனுப்புக\" அழுத்தவும்.", how6:"கிடைக்கும் KP எண்ணைக் குறித்துக்கொள்ளுங்கள். உங்கள் எண்ணைச் சரிபார்த்த பின் விளம்பரம் வெளியாகும்.",
-  lDays:"விளம்பரம் காட்டப்படும் காலம்", daysHint:"காலம் முடிந்ததும் விளம்பரம் தானாக நீக்கப்படும். தொடர்ந்து வைத்திருக்க, விளம்பரம் அனுப்பியதும் கிடைக்கும் KP எண்ணுடன் எங்களுக்கு WhatsApp செய்யுங்கள்.", until:"வரை காட்டப்படும்",
+  lDays:"விளம்பரம் காட்டப்படும் காலம்", daysHint:"காலம் முடிந்ததும் விளம்பரம் பக்கத்தில் காட்டப்படாது. தொடர்ந்து வைத்திருக்க \"முடிவு தேதி இல்லை\" என்பதைத் தேர்ந்தெடுங்கள். விற்ற பின் KP எண்ணுடன் எங்களுக்கு WhatsApp செய்யுங்கள், நாங்கள் நீக்குவோம்.", until:"வரை காட்டப்படும்",
   mic:"பேசித் தேடுங்கள்", listening:"🎤 கேட்கிறது… இப்போது பேசுங்கள்", micErr:"கேட்கவில்லை. 🎤 அழுத்தி மீண்டும் பேசுங்கள்.", micDenied:"மைக்ரோஃபோன் அனுமதி இல்லை. Browser settings இல் அனுமதி வழங்குங்கள்.",
   adminMsg:"வணக்கம் TopGoviya! எனது விளம்பரத்தை (%R) மாற்ற / நீக்க வேண்டும்.",
   okH:"நன்றி! உங்கள் விளம்பரம் கிடைத்தது.", okP:"குறிப்பு எண்: %R. உங்கள் WhatsApp எண்ணைச் சரிபார்த்த பின் விளம்பரம் இங்கே வெளியாகும். மாற்ற அல்லது நீக்க இந்த எண்ணுடன் எங்களுக்கு WhatsApp செய்யுங்கள். 📸 இந்த எண்ணைக் குறித்துக்கொள்ளுங்கள் அல்லது screenshot எடுங்கள்.",
@@ -352,7 +370,7 @@ var T = {
   lType:"Your listing", oSell:"For sale", oWant:"Wanted (looking to buy)", lName:"Name or business name", lWa:"WhatsApp number",
   lDist:"District", choose:"Choose", lTown:"Nearest town", townPh:"Start typing, e.g. Gampola", lVillage:"Village", optional:"(optional)",
   lCat:"Type", lItem:"Item", itemPh:"e.g. Black pepper / Grafted mango plants", lPrice:"Price (Rs.)", priceHint:"Leave empty to show \"Ask for price\".",
-  lUnit:"Price is for", chooseUnit:"Leave empty if no price", lQty:"Quantity", qtyPh:"e.g. 50 kg / 500 plants", notesPh:"e.g. Dried pepper, ready within a week", helpForm:"📞 Finding this hard? WhatsApp us the item, price, quantity and area, and we'll post it for you.", helpMsg:"Hello TopGoviya! I need help posting a listing. Item: , Price: , Quantity: , Area: ", lDel:"Delivery", lNotes:"Other details",
+  lUnit:"Price is for", chooseUnit:"Leave empty if no price", lQty:"Quantity", qtyPh:"e.g. 50 kg / 500 plants", notesPh:"e.g. Dried pepper, ready within a week", helpForm:"📞 Finding this hard? WhatsApp us the item, price, quantity and area, and we'll post it for you.", helpMsg:"Hello TopGoviya! I need help posting a listing. Item: , Price: , Quantity: , Area: ", lDel:"Delivery", lNotes:"Other details", lPhotos:"Photos", photoBtn:"📷 Add photos", photoHint:"Up to 3. Clear photos get buyers calling faster.", photoClear:"Remove photos", photoErr:"Couldn't read that photo. Please choose another one.", photoMore:"Only 3 photos. The first 3 were taken.", photoView:"View photos",
   consent:"I agree to publish my name, WhatsApp number and these details on TopGoviya.lk.",
   send:"Send listing", sending:"Sending…",
   errReq:"Please fill in the fields marked *.", errWa:"That WhatsApp number is not valid. Use the format 07X XXX XXXX.",
@@ -360,7 +378,7 @@ var T = {
   errNet:"Could not send. Check your internet and press the button again.", errUnsure:"We could not confirm your listing arrived. Before sending again, ask us using the WhatsApp link below.", errUnit:"If you add a price, choose what the price is for.", errPrice:"Enter the price in numbers only, e.g. 350",
   howLink:"❓ How do I add a listing?", howH:"📝 How to add a listing (2 minutes)",
   how1:"Choose \"For sale\", or \"Wanted\" if you are looking to buy.", how2:"Enter your name and WhatsApp number.", how3:"Choose your district and type your nearest town (e.g. Gamp → Gampola).", how4:"Enter the type and item. If you add a price, also choose what the price is for.", how5:"Choose how long to keep the listing, tick the consent box and tap \"Send listing\".", how6:"Note your KP reference. Your listing goes live after we call to check your number.",
-  lDays:"Keep listing for", daysHint:"The listing is removed automatically when the time ends. To keep it longer, WhatsApp us with the KP reference you get after sending.", until:"shown until",
+  lDays:"Keep listing for", daysHint:"When the time ends, the listing stops showing on the page. To keep it, choose \"No end date\". When it's sold, WhatsApp us with the KP reference and we'll remove it.", until:"shown until",
   mic:"Search by voice", listening:"🎤 Listening… speak now", micErr:"Didn't catch that. Tap 🎤 and speak again.", micDenied:"Microphone permission is off. Allow it in your browser settings.",
   adminMsg:"Hello TopGoviya! I want to change / remove my listing (%R).",
   okH:"Thank you! Your listing was received.", okP:"Reference: %R. Your listing appears here after we check your WhatsApp number. To change or remove it, WhatsApp us with this reference. 📸 Note this number or take a screenshot.",
@@ -412,7 +430,7 @@ var T = {
     fillCats($("cat"), t("choose"));
     fillSelect($("unit"), t("chooseUnit"), mapPairs(UNITS), true);
     fillSelect($("del"), null, mapPairs(DELIV), true);
-    fillSelect($("days"), null, mapPairs(DAYS), true);
+    fillSelect($("days"), null, DAYS_ORDER.map(function (k) { return [k, nm(DAYS[k])]; }), true);
     if (!$("days").dataset.set) { $("days").value = "30"; $("days").dataset.set = "1"; }
     $("mic").title = t("mic"); $("mic").setAttribute("aria-label", t("mic"));
     $("fDist").setAttribute("aria-label", t("lDist")); $("fCat").setAttribute("aria-label", t("lCat")); $("fQ").setAttribute("aria-label", t("q"));
@@ -451,7 +469,11 @@ var T = {
     if (x.expires) facts.push("⏳ " + (lang === "en" ? esc(t("until")) + " " + esc(x.expires) : esc(x.expires) + " " + esc(t("until"))));
     var msg = t(x.type === "Want" ? "msgWant" : "msgSell").replace("%R", x.ref).replace("%I", x.item);
     var phone = String(x.whatsapp || "").replace(/\D/g, "");
-    return '<article class="item">' +
+    var ph = Array.isArray(x.photos) ? x.photos : [];
+    var phHtml = ph.length ? '<button type="button" class="itph" data-photos="' + esc(ph.join(",")) + '" aria-label="' + esc(t("photoView")) + '">' +
+      '<img loading="lazy" alt="' + esc(x.item) + '" src="' + phUrl(ph[0], 640) + '" data-id="' + esc(ph[0]) + '">' +
+      (ph.length > 1 ? '<span class="n">📷 ' + ph.length + '</span>' : "") + "</button>" : "";
+    return '<article class="item">' + phHtml +
       '<div class="cat">' + esc(CATS[x.category] ? nm(CATS[x.category]) : x.category) + "</div>" +
       "<h3>" + esc(x.item) + "</h3>" + priceHtml +
       '<ul class="facts"><li>' + facts.join("</li><li>") + "</li></ul>" +
@@ -460,6 +482,23 @@ var T = {
       '<div class="acts"><a class="wa" target="_blank" rel="noopener" data-ref="' + esc(x.ref) + '" href="https://wa.me/' + phone + "?text=" + encodeURIComponent(msg) + '">' + esc(t("wa")) + "</a>" +
       '<a class="call" data-ref="' + esc(x.ref) + '" href="tel:+' + phone + '">' + esc(t("call")) + "</a></div>" +
       "</article>";
+  }
+
+  function phUrl(id, w) { return "https://drive.google.com/thumbnail?id=" + encodeURIComponent(id) + "&sz=w" + w; }
+  /* if Drive's thumbnail link fails, try the other Google image link once */
+  document.addEventListener("error", function (e) {
+    var im = e.target; if (!im || im.tagName !== "IMG" || !im.dataset.id || im.dataset.alt) return;
+    im.dataset.alt = "1"; im.src = "https://lh3.googleusercontent.com/d/" + encodeURIComponent(im.dataset.id) + "=w" + (im.dataset.w || 640);
+  }, true);
+  function openPhotos(ids) {
+    var box = document.createElement("div"); box.className = "lbox";
+    box.innerHTML = '<button type="button" class="x" aria-label="Close">✕</button>' + ids.map(function (id) {
+      return '<img alt="" src="' + phUrl(id, 1200) + '" data-id="' + esc(id) + '" data-w="1200">'; }).join("");
+    function close() { box.remove(); document.removeEventListener("keydown", onKey); }
+    function onKey(ev) { if (ev.key === "Escape") close(); }
+    box.addEventListener("click", function (ev) { if (ev.target === box || ev.target.classList.contains("x")) close(); });
+    document.addEventListener("keydown", onKey);
+    document.body.appendChild(box);
   }
 
   function render() {
@@ -482,6 +521,8 @@ var T = {
     g.innerHTML = list.map(card).join("");
   }
   $("grid").addEventListener("click", function (e) {
+    var p = e.target.closest(".itph");
+    if (p) { openPhotos(p.getAttribute("data-photos").split(",")); track("pola_photo", { language: lang }); return; }
     var a = e.target.closest("a[data-ref]"); if (!a) return;
     track(a.classList.contains("wa") ? "pola_whatsapp" : "pola_call", { ref: a.getAttribute("data-ref"), language: lang });
   });
@@ -503,6 +544,38 @@ var T = {
   }
   $("dist").addEventListener("change", function () { $("town").value = ""; fillTowns(); });
 
+  /* ---------- photos for the form: made small on the phone before sending ---------- */
+  var pics = [];
+  function shrink(file) {
+    return new Promise(function (ok, bad) {
+      var url = URL.createObjectURL(file), im = new Image();
+      im.onload = function () {
+        var max = 1200, w = im.naturalWidth, h = im.naturalHeight, s = Math.min(1, max / Math.max(w, h));
+        var c = document.createElement("canvas"); c.width = Math.round(w * s); c.height = Math.round(h * s);
+        var cx = c.getContext("2d"); cx.fillStyle = "#fff"; cx.fillRect(0, 0, c.width, c.height); cx.drawImage(im, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url); ok(c.toDataURL("image/jpeg", 0.72));
+      };
+      im.onerror = function () { URL.revokeObjectURL(url); bad(); };
+      im.src = url;
+    });
+  }
+  function showPics() {
+    $("phprev").innerHTML = pics.map(function (s) { return '<img alt="" src="' + s + '">'; }).join("");
+    $("phclear").hidden = !pics.length;
+  }
+  $("photos").addEventListener("change", function () {
+    var files = Array.prototype.slice.call(this.files || []).filter(function (f) { return /^image\//.test(f.type) || !f.type; });
+    var more = files.length > 3; files = files.slice(0, 3);
+    lastErr = ""; $("err").style.display = "none";
+    Promise.all(files.map(function (f) { return shrink(f).catch(function () { return null; }); })).then(function (out) {
+      pics = out.filter(Boolean);
+      if (out.length && pics.length < out.length) showErr("photoErr"); else if (more) showErr("photoMore");
+      showPics();
+    });
+    this.value = "";
+  });
+  $("phclear").addEventListener("click", function () { pics = []; showPics(); });
+
   /* ---------- send a listing ---------- */
   function normPhone(v) {
     var p = String(v || "").replace(/\D/g, "");
@@ -522,7 +595,8 @@ var T = {
       type: type, name: $("name").value.trim(), whatsapp: $("wa").value.trim(), district: $("dist").value,
       town: $("town").value.trim(), village: $("village").value.trim(), category: $("cat").value, item: $("item").value.trim(),
       price: $("price").value.trim(), unit: $("unit").value, quantity: $("qty").value.trim(), delivery: $("del").value,
-      notes: $("notes").value.trim(), days: $("days").value, consent: $("consent").checked, lang: lang, website: $("website").value
+      notes: $("notes").value.trim(), days: $("days").value, consent: $("consent").checked, lang: lang, website: $("website").value,
+      photos: pics.map(function (s) { return s.split(",")[1]; })
     };
     if (!data.name || !data.whatsapp || !data.district || !data.category || !data.item) return showErr("errReq");
     if (!normPhone(data.whatsapp)) { $("wa").focus(); return showErr("errWa"); }
