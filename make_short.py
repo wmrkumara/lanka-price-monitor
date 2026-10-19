@@ -2,9 +2,11 @@
 TopGoviya.lk — weekly spice price YouTube Short maker
 Reads dea_data.json -> builds 1080x1920 slides (HTML, rendered by Chromium so
 Sinhala shapes correctly) -> joins them into an MP4 with ffmpeg.
-Output: short/topgoviya-spices-YYYY-MM-DD.mp4 (+ title/description .txt)
+Output: short/01-spice-roundup-YYYY-MM-DD/  (ready to post: video-with-music.mp4, video-silent.mp4,
+        youtube.txt, tiktok.txt, facebook.txt)  - background music: music/music-5.wav ("Spice garden")
 """
 import json, base64, os, subprocess, sys
+import short_kit
 from datetime import date
 from playwright.sync_api import sync_playwright
 
@@ -81,6 +83,9 @@ body{width:1080px;height:1920px;background:#f4efe4;font-family:'Noto Sans Sinhal
 .url{font-size:88px;font-weight:800;color:#0e4f4a;margin-top:30px}
 .note{font-size:40px;color:#7a7264;margin-top:60px;line-height:1.6}
 """
+CSS += short_kit.CTA_CSS
+
+
 def page(inner):
     return f"""<html><head><meta charset="utf-8"><style>{CSS}</style></head><body>
 <div class="top"><img src="{logo}"><div><div class="b">TopGoviya.lk</div><div class="s">සතිපතා කුළුබඩු මිල · DEA</div></div></div>
@@ -107,7 +112,9 @@ ranks = "".join(f'<div class="rank"><div class="n mono">{i}</div><div class="d">
 slides.append(page(f'<div class="lbl">🏆 ගම්මිරිස් GR-1 ඉහළම මිල දිස්ත්‍රික්ක</div>{ranks}<div class="note">රු./කි.ග්‍රෑ. · සාමාන්‍ය මිල</div>'))
 slides.append(page(f"""<div class="big" style="font-size:96px">දිස්ත්‍රික්ක 14ක<br>සම්පූර්ණ මිල</div>
 <div class="url">👉 topgoviya.lk</div>
-<div class="note">නොමිලේ · සිංහල · தமிழ் · English<br>මිල ගණන් මඟපෙන්වීමක් පමණි.<br>ඔබේ තීරණ ඔබේ වගකීම වේ.</div>"""))
+<div class="note">නොමිලේ · සිංහල · தமிழ் · English<br>මිල ගණන් මඟපෙන්වීමක් පමණි.<br>ඔබේ තීරණ ඔබේ වගකීම වේ.</div>"""
+    + short_kit.cta("ඔබේ ප්‍රදේශයේ කුළුබඩු මිල කමෙන්ට් කරන්න", "කුළුබඩු වවන මිතුරන්ට ෂෙයාර් කරන්න",
+                    "සෑම සතියකම කුළුබඩු මිල සඳහා ෆලෝ කරන්න")))
 
 # ---- render slides ----
 pngs = []
@@ -145,4 +152,23 @@ desc = (f"මේ සතියේ කුළුබඩු ගොවිපළ දො
         "⚠️ මිල ගණන් මඟපෙන්වීමක් පමණි.\n\n#ගම්මිරිස්මිල #කුළුබඩුමිල #TopGoviyaLK #SriLanka #shorts")
 open(f"{OUT}/youtube-{last['date']}.txt", "w", encoding="utf-8").write(f"TITLE:\n{title}\n\nDESCRIPTION:\n{desc}\n")
 for f in pngs: os.remove(f)
-print("Video:", mp4, f"({n} slides, ~{n*SLIDE_SEC-(n-1)*FADE:.0f}s)")
+
+# ---- ready-to-post folder (music + captions for YouTube, TikTok, Facebook) ----
+seconds = n * SLIDE_SEC - (n - 1) * FADE
+spice_lines = "\n".join(f"{r['emo']} {r['name']} ({r['glabel']}): රු. {rs(r['avg'])}" for r in rows)
+best = f"🏆 ගම්මිරිස් ඉහළම මිල: {DIST_SI.get(top3[0][0], top3[0][0])} — රු. {rs(top3[0][1])}"
+tags = "#කුළුබඩුමිල #ගම්මිරිස්මිල #කුරුඳුමිල #SpicePrices #TopGoviyaLK #SriLanka"
+tiktok = (f"🌶️ මේ සතියේ කුළුබඩු ගොවිපළ මිල — DEA {DATE_SI}\n{spice_lines}\n"
+          "සියලු දිස්ත්‍රික්ක 👉 topgoviya.lk/spices · දත්ත: DEA\nමිල ගණන් මඟපෙන්වීමක් පමණි.\n\n" + tags + " #fyp")
+facebook = (f"🌶️ මේ සතියේ කුළුබඩු ගොවිපළ දොරටු මිල — DEA වාර්තාව {DATE_SI}\n\n{spice_lines}\n\n{best}\n\n"
+            f"👉 කුළුබඩු 11ක මිල, දිස්ත්‍රික්ක 14ක් අනුව: https://topgoviya.lk/spices.html?d={last['date']}\n"
+            "📊 මූලාශ්‍රය: අපනයන කෘෂිකර්ම දෙපාර්තමේන්තුව (DEA) · ගොවිපළ දොරටු මිල (රු./කි.ග්‍රෑ.)\n"
+            "⚠️ මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.\n\n" + tags + " #කුළුබඩු")
+short_kit.package(f"{OUT}/01-spice-roundup-{last['date']}", mp4, short_kit.pick_track("music-5.wav", "music-4.wav"),
+                  seconds, title, desc, tiktok, facebook,
+                  tags=["කුළුබඩු මිල", "කුළුබඩු මිල අද", "ගම්මිරිස් මිල", "ගම්මිරිස් මිල අද", "කුරුඳු මිල", "කරාබු මිල",
+                        "එනසාල් මිල", f"ගම්මිරිස් මිල {y}", "gammiris mila", "kurundu mila", "spice prices sri lanka",
+                        "pepper price sri lanka", "cinnamon price sri lanka", "DEA spice prices", "farm gate price", "TopGoviya"],
+                  playlist="🌶️ කුළුබඩු මිල — සතිපතා | Sri Lanka Spice Prices")
+os.remove(mp4); os.remove(f"{OUT}/youtube-{last['date']}.txt")       # everything is in the folder now
+print(f"Spice roundup: {n} slides, ~{seconds:.0f}s")

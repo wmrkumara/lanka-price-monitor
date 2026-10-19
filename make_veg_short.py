@@ -266,8 +266,14 @@ def make_package(mode, M, T, mp4, title, desc, rises, falls, MAIN):
     mover = lambda r, a: f"{a} {r['si']}: රු. {rs(r['prev'])} → {rs(r['now'])} ({r['pct']:+.0f}%)"
     moves = [mover(r, "📈") for r in rises[:2]] + [mover(r, "📉") for r in falls[:2]]
     # YouTube: same title + description as before
+    import short_kit
+    kind = (["සිල්ලර මිල", "එළවළු සිල්ලර මිල", "vegetable prices today"] if mode == "retail" else
+            ["තොග මිල", "එළවළු තොග මිල", "thoga mila", "wholesale vegetable price sri lanka"])
+    vtags = ["එළවළු මිල", "එලවලු මිල", "අද එළවළු මිල", "දඹුල්ල එළවළු මිල", "දබුල්ල එලවලු මිල", *kind,
+             f"එළවළු මිල {YEAR}", "elawalu mila", "elawalu mila ada", "vegetable price sri lanka",
+             "dambulla vegetable price", "dambulla market price today", "CBSL price report", "TopGoviya"]
     open(f"{folder}/youtube.txt", "w", encoding="utf-8").write(
-        f"TITLE:\n{title}\n\nDESCRIPTION:\n{desc}\n")
+        short_kit.youtube_text(title, desc, vtags, "🥬 සතිපතා එළවළු මිල | Sri Lanka Vegetable Prices Weekly"))
     # TikTok: short caption (links are not clickable there, so the address is written out)
     tiktok = (f"මේ සතියේ එළවළු {T} මිල 🥕 {DATE_PREV} → {DATE_NOW} {YEAR} · {MAIN}\n"
               + "\n".join(moves) + "\n"

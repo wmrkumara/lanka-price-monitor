@@ -189,7 +189,12 @@ desc = (f"🍃 තේ වෙන්දේසි මිල — {MONTH_SI}\n\nඉ�
         (f"\n{lyline}" if lyline else "") + f"\n\n{note}\n\n👉 ඔබේ ප්‍රදේශයේ මිල: {link}\n"
         "📊 දත්ත: ශ්‍රී ලංකා තේ මණ්ඩලය (Sri Lanka Tea Board)\n⚠️ මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.\n\n"
         f"{tags} #shorts")
-open(f"{folder}/youtube.txt", "w", encoding="utf-8").write(f"TITLE:\n{title}\n\nDESCRIPTION:\n{desc}\n")
+import short_kit
+open(f"{folder}/youtube.txt", "w", encoding="utf-8").write(short_kit.youtube_text(title, desc,
+    ["තේ මිල", "තේ වෙන්දේසි මිල", "තේ මිල අද", f"තේ මිල {y}", "දළු මිල", "තේ දළු මිල", "the mila", "tea mila",
+     "tea price sri lanka", "sri lanka tea auction", "tea auction prices", "ceylon tea price", "tea board sri lanka",
+     "made tea price", "deniyaya tea", "matara tea", "nuwara eliya tea", "uva tea", "low grown tea", "TopGoviya"],
+    "තේ මිල — මාසික තේ වෙන්දේසි මිල | Sri Lanka Tea Prices Monthly"))
 open(f"{folder}/tiktok.txt", "w", encoding="utf-8").write(
     f"🍃 තේ වෙන්දේසි මිල — {MONTH_SI}\n{tops}\n" + "\n".join(mv) +
     f"\nසියලු ප්‍රදේශ 👉 topgoviya.lk/tea · දත්ත: ශ්‍රී ලංකා තේ මණ්ඩලය\nසැකසූ තේ මිල — දළු මිල නොවේ.\n\n{tags} #තේ #fyp\n")

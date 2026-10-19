@@ -1,9 +1,11 @@
 """
 TopGoviya.lk — one YouTube/TikTok/Facebook Short per spice (14 videos) from dea_data.json
 Usage: python3 make_spice_cards.py dea_data.json icon-512x512.png
-Output: short/spices/NN-key-DATE.mp4 + NN-key-DATE.txt  (title + description)
+Output: short/spices/NN-key-DATE/  one ready-to-post folder per spice (video-with-music.mp4,
+        video-silent.mp4, youtube.txt, tiktok.txt, facebook.txt) - music: music/music-5.wav ("Spice garden")
 """
 import json, base64, os, subprocess, sys
+import short_kit
 from datetime import date, timedelta
 from playwright.sync_api import sync_playwright
 
@@ -92,6 +94,21 @@ body{width:1080px;height:1920px;background:#f4efe4;font-family:'Noto Sans Sinhal
 .url{font-size:62px;font-weight:800;color:#0e4f4a;margin-top:30px;line-height:1.3}
 .note{font-size:38px;color:#7a7264;margin-top:36px;line-height:1.6}
 """
+CSS += short_kit.CTA_CSS
+# each spice's own page on the website (others use the spice guide)
+SPICE_PAGE = {k: f"https://topgoviya.lk/spice/{k}.html" for k in
+              ["pepper", "cinnamon", "cardamom", "clove", "nutmeg", "coffee", "cocoa", "arecanut", "goraka", "ginger", "turmeric"]}
+GUIDE = "https://topgoviya.lk/spice-price-guide.html"
+# Singlish + English search words per spice (for YouTube tags)
+SEARCH = {"pepper": ("gammiris mila", "pepper price sri lanka"), "cinnamon": ("kurundu mila", "cinnamon price sri lanka"),
+          "cardamom": ("enasal mila", "cardamom price sri lanka"), "clove": ("karabu mila", "clove price sri lanka"),
+          "nutmeg": ("sadikka mila", "nutmeg price sri lanka"), "coffee": ("kopi mila", "coffee price sri lanka"),
+          "cocoa": ("cocoa mila", "cocoa price sri lanka"), "arecanut": ("puwak mila", "arecanut price sri lanka"),
+          "betel": ("bulath mila", "betel leaf price sri lanka"), "goraka": ("goraka mila", "goraka price sri lanka"),
+          "ginger": ("inguru mila", "ginger price sri lanka"), "turmeric": ("kaha mila", "turmeric price sri lanka"),
+          "kithul": ("kithul hakuru mila", "kithul jaggery price"), "leafoil": ("kurundu kola thel mila", "cinnamon leaf oil price")}
+
+
 def page(inner):
     return f"""<html><head><meta charset="utf-8"><style>{CSS}</style></head><body>
 <div class="top"><img src="{logo}"><div><div class="b">TopGoviya.lk</div><div class="s">සතිපතා කුළුබඩු මිල · DEA</div></div></div>
@@ -188,8 +205,10 @@ def build(v):
     slides.append(page(f'<div class="lbl">💡 මේ සතියේ නිරීක්ෂණය</div><div class="ins">{ins}<div class="s">{sub}<br>{glbl} · {unit}</div></div>'))
     # 8 CTA
     slides.append(page(f"""<div class="emo">{icon}</div><div class="h1" style="font-size:86px">{name} — දිස්ත්‍රික්ක 14ක<br>සම්පූර්ණ මිල</div>
-<div class="url">👉 topgoviya.lk/<br>spice-price-guide.html</div>
-<div class="note">නොමිලේ · සිංහල · தமிழ் · English<br>මිල ගණන් මඟපෙන්වීමක් පමණි.<br>ඔබේ තීරණ ඔබේ වගකීම වේ.</div>"""))
+<div class="url">👉 {"topgoviya.lk/<br>spice/" + key + ".html" if key in SPICE_PAGE else "topgoviya.lk/<br>spice-price-guide.html"}</div>
+<div class="note">නොමිලේ · සිංහල · தமிழ் · English · මිල ගණන් මඟපෙන්වීමක් පමණි.</div>"""
+    + short_kit.cta(f"ඔබේ ප්‍රදේශයේ {name} මිල කමෙන්ට් කරන්න", f"{name} වවන මිතුරන්ට ෂෙයාර් කරන්න",
+                    "සෑම සතියකම කුළුබඩු මිල සඳහා ෆලෝ කරන්න")))
 
     # render
     pngs = []
@@ -217,12 +236,30 @@ def build(v):
     lines.append(f"📊 {hist[0][0].year} සිට: අඩුම රු. {rs(lo[1])} · ඉහළම රු. {rs(hi[1])}")
     lines.append(f"💡 {ins}")
     desc = (f"{name} ගොවිපළ දොරටු මිල — DEA වාර්තාව {DATE_SI}\n\n" + "\n".join(lines) +
-            "\n\n👉 දිස්ත්‍රික්ක 14ක සම්පූර්ණ මිල: https://topgoviya.lk/spice-price-guide.html\n"
+            f"\n\n👉 දිස්ත්‍රික්ක 14ක සම්පූර්ණ මිල: {SPICE_PAGE.get(key, GUIDE)}\n"
             "📊 මූලාශ්‍රය: අපනයන කෘෂිකර්ම දෙපාර්තමේන්තුව (DEA)\n"
             "⚠️ මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.\n\n"
             f"#{name.replace(' ', '')}මිල #කුළුබඩුමිල #TopGoviyaLK #SriLanka #shorts")
     open(f"{OUT}/{num}-{key}-{TAG}.txt", "w", encoding="utf-8").write(f"TITLE:\n{title}\n\nDESCRIPTION:\n{desc}\n")
-    print("Video:", mp4, f"({n} slides, ~{n*SLIDE_SEC-(n-1)*FADE:.0f}s)")
+    # ready-to-post folder (music + captions for YouTube, TikTok, Facebook)
+    seconds = n * SLIDE_SEC - (n - 1) * FADE
+    link = SPICE_PAGE.get(key, GUIDE)
+    tags = f"#{name.replace(' ', '')}මිල #කුළුබඩුමිල #SpicePrices #TopGoviyaLK #SriLanka"
+    head = f"{icon} {name} මිල — DEA {DATE_SI}"
+    main_line = f"{glbl}: රු. {rs(now)} {unit}" + (f" ({pct:+.1f}%)" if pct is not None else "")
+    extra = [l for l in lines[1:] if l.startswith(("📍", "📅"))]
+    tiktok = (f"{head}\n{main_line}\n" + "\n".join(extra) +
+              f"\nසියලු දිස්ත්‍රික්ක 👉 {link.replace('https://', '')}\nදත්ත: DEA · මිල ගණන් මඟපෙන්වීමක් පමණි.\n\n{tags} #fyp")
+    facebook = (f"{head}\n\n" + "\n".join(lines) + f"\n\n👉 දිස්ත්‍රික්ක 14ක සම්පූර්ණ මිල: {link}?d={TAG}\n"
+                "📊 මූලාශ්‍රය: අපනයන කෘෂිකර්ම දෙපාර්තමේන්තුව (DEA) · ගොවිපළ දොරටු මිල\n"
+                f"⚠️ මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.\n\n{tags} #කුළුබඩු")
+    short_kit.package(f"{OUT}/{num}-{key}-{TAG}", mp4, short_kit.pick_track("music-5.wav", "music-4.wav"),
+                      seconds, title, desc, tiktok, facebook,
+                      tags=[f"{name} මිල", f"{name} මිල අද", f"{name} මිල {NOW.year}", *SEARCH.get(key, ()),
+                            "කුළුබඩු මිල", "spice prices sri lanka", "DEA spice prices", "farm gate price", "TopGoviya"],
+                      playlist="🌶️ කුළුබඩු මිල — සතිපතා | Sri Lanka Spice Prices")
+    os.remove(mp4); os.remove(f"{OUT}/{num}-{key}-{TAG}.txt")          # everything is in the folder now
+    print(f"  {num}-{key}: {n} slides, ~{seconds:.0f}s")
     return mp4
 
 only = sys.argv[3].split(",") if len(sys.argv) > 3 else None
