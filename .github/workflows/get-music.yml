@@ -1,5 +1,8 @@
 name: Get Shorts Music (one time)
 
+# Downloads the original background tracks (made with vidIQ) into the music/ folder.
+# Run by hand (Run workflow) whenever a new track is added below. Tracks already saved are skipped.
+
 on:
   workflow_dispatch:
 
@@ -12,13 +15,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download the 3 tracks
+      - name: Download the tracks
         run: |
           mkdir -p music
           B="https://ai-music-tracks.s3.us-east-1.amazonaws.com/fb1e06be-b76c-480e-86c1-e3fe9c7c199b"
-          curl -fsSL "$B/96dc74a0-6009-4ef5-9fb6-bb3024738fa3.wav" -o music/music-1.wav
-          curl -fsSL "$B/c5bc2e37-303c-4f2e-b803-16a20aa13f64.wav" -o music/music-2.wav
-          curl -fsSL "$B/8e61f963-c1bf-4864-a721-da1002091cb3.wav" -o music/music-4.wav
+          get() { [ -f "music/$2" ] && echo "have $2" || curl -fsSL "$B/$1.wav" -o "music/$2"; }
+          get 96dc74a0-6009-4ef5-9fb6-bb3024738fa3 music-1.wav   # Hopeful morning  - vegetable retail, HARTI
+          get c5bc2e37-303c-4f2e-b803-16a20aa13f64 music-2.wav   # Calm market      - vegetable wholesale
+          get 8e61f963-c1bf-4864-a721-da1002091cb3 music-4.wav   # Green hill garden - tea
+          get 2425a6f8-3b78-49f2-a32b-5fd07da74c2e music-5.wav   # Spice garden     - spice roundup, spice cards
           ls -lh music/
 
       - name: Save them to the repo
@@ -26,6 +31,6 @@ jobs:
           git config user.name "price-bot"
           git config user.email "price-bot@users.noreply.github.com"
           git add music/*.wav
-          git commit -m "Add Shorts background music (3 tracks)" || echo "Nothing new"
+          git commit -m "Add Shorts background music" || echo "Nothing new"
           git pull --rebase
           git push
