@@ -928,10 +928,32 @@ function applyLang(){
     dt.style.display=lang==="ta"?"inline":"none";
   }
 }
+function hartiDelay(){
+  /* Yellow notice when no new HARTI report for more than 3 working days */
+  try{
+    var box=document.getElementById("hartiDelay");
+    if(!box){box=document.createElement("div");box.id="hartiDelay";
+      box.style.cssText="display:none;background:#fff3d6;border:1px solid #e6c46a;border-left:5px solid #a9802a;border-radius:10px;padding:10px 14px;margin:12px 0 0;color:#5a4a1a;font-size:14px;line-height:1.6";
+      var anchor=document.getElementById("disclaimer");if(!anchor)return;anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    if(!DB||!DB.dates||!DB.dates.length){box.style.display="none";return;}
+    var last=DB.dates[DB.dates.length-1],ld=new Date(last+"T00:00:00");
+    var now=new Date(Date.now()+(330+new Date().getTimezoneOffset())*60000),today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+    var d=new Date(ld),n=0;while(d<today){d.setDate(d.getDate()+1);var wd=d.getDay();if(wd>0&&wd<6)n++;}
+    if(n<=3){box.style.display="none";return;}
+    var MS={si:["ජනවාරි","පෙබරවාරි","මාර්තු","අප්‍රේල්","මැයි","ජූනි","ජූලි","අගෝස්තු","සැප්තැම්බර්","ඔක්තෝබර්","නොවැම්බර්","දෙසැම්බර්"],
+      ta:["ஜனவரி","பெப்ரவரி","மார்ச்","ஏப்ரல்","மே","ஜூன்","ஜூலை","ஆகஸ்ட்","செப்டம்பர்","அக்டோபர்","நவம்பர்","டிசம்பர்"],
+      en:["January","February","March","April","May","June","July","August","September","October","November","December"]};
+    var y=ld.getFullYear(),m=ld.getMonth(),dd=ld.getDate();
+    var txt={si:"⚠️ HARTI වෙතින් "+y+" "+MS.si[m]+" "+dd+" න් පසු නව තොග මිල වාර්තාවක් ලැබී නැත. මෙහි පෙන්වන්නේ අවසන් වරට ලැබුණු මිලයි.",
+      ta:"⚠️ "+dd+" "+MS.ta[m]+" "+y+" முதல் HARTI புதிய மொத்த விலை அறிக்கை கிடைக்கவில்லை. காட்டப்படுவது கடைசி அறிக்கையின் விலைகள்.",
+      en:"⚠️ No new HARTI wholesale price report since "+dd+" "+MS.en[m]+" "+y+". The prices shown are from the last report."};
+    box.textContent=txt[lang]||txt.en;box.style.display="block";
+  }catch(e){}
+}
 function setLang(l){
   lang=l;
   document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.lang===l));
-  applyLang();
+  applyLang(); hartiDelay();
   if(DATA.length){buildCats();renderMovers();renderGrid();renderBestCrop();}
   renderFAQ(l);
   renderWeather();
@@ -2233,6 +2255,7 @@ function init(){
   const dt=new Date(last+"T00:00:00");
   const opt={day:"numeric",month:"long",year:"numeric"};
   const el=document.getElementById("stampDate"); if(el) el.textContent=dt.toLocaleDateString("en-GB",opt);
+  hartiDelay();
   applyLang(); buildCats(); renderMovers(); renderGrid(); renderBestCrop(); renderFAQ("si");
   fetchWeather();
   setInterval(fetchWeather, 3600000); /* Update every hour */

@@ -557,6 +557,29 @@ def chg_badge(now, old):
     return f'<span class="chg {cls}" style="font-size:12px;padding:2px 7px">{arrow} {"+" if pct > 0 else ""}{pct:.0f}%</span>'
 
 # ---------------------------------------------------------------- one market page
+def harti_delay_notice(latest_all):
+    """Yellow notice when no new HARTI report for more than 3 working days (Sri Lanka time)."""
+    if not latest_all:
+        return ""
+    today = (datetime.utcnow() + timedelta(hours=5, minutes=30)).date()
+    d, n = d_(latest_all), 0
+    while d < today:
+        d += timedelta(days=1)
+        if d.weekday() < 5:
+            n += 1
+    if n <= 3:
+        return ""
+    ld = d_(latest_all)
+    return (f'<div style="background:#fff3d6;border:1px solid #e6c46a;border-left:5px solid #a9802a;border-radius:10px;'
+            f'padding:10px 14px;margin:12px 0;color:#5a4a1a;font-size:14px;line-height:1.6">'
+            f'<b>⚠️ HARTI වෙතින් {fdate(ld, "si")} න් පසු නව තොග මිල වාර්තාවක් ලැබී නැත.</b> '
+            f'මෙහි පෙන්වන්නේ අවසන් වරට ලැබුණු මිලයි. නව වාර්තාව ලැබුණු විට මෙම පිටුව යාවත්කාලීන වේ.<br>'
+            f'<span lang="en">No new HARTI wholesale price report since {fdate(ld, "en")}. The prices below are from the last report. '
+            f'This page updates when a new report is published.</span><br>'
+            f'<span lang="ta">{fdate(ld, "ta")} முதல் HARTI புதிய மொத்த விலை அறிக்கை கிடைக்கவில்லை. '
+            f'கீழே உள்ள விலைகள் கடைசி அறிக்கையிலிருந்து. புதிய அறிக்கை வந்ததும் இந்தப் பக்கம் புதுப்பிக்கப்படும்.</span></div>')
+
+
 def market_page(market, hm, harti, cats, cbsl):
     info = MKT[market]
     si, ta, en = info["si"], info["ta"], men(market)
@@ -725,6 +748,7 @@ def market_page(market, hm, harti, cats, cbsl):
 {cbsl_html if cbsl_first else ''}
 {harti_h2 if cbsl_first else ''}
 <p class="asof" style="margin-top:14px"><b>📦 තොග මිල / Wholesale</b> · 📍 {e(si)} ({e(en)}) · {fdate(d_(last),'si') if last else '—'} · HARTI</p>
+{harti_delay_notice(latest_all)}
 {download_bar(market, rows, last, latest_all, url, in_latest_report(harti, market))}
 {duo}
 {stale}
@@ -772,6 +796,7 @@ def hub_page(summary, latest_all, harti=None):
             f'<h1>🧺 වෙළඳපොළ එළවළු මිල අද</h1>'
             f'<p class="alt">Today\'s vegetable market prices in Sri Lanka – 10 wholesale markets<br>இன்றைய சந்தை விலைகள் – 10 சந்தைகள்</p>'
             f'<p class="asof" style="margin-top:14px">HARTI නවතම වාර්තාව / Latest HARTI report: {fdate(d_(latest_all),"si")}</p>'
+            + harti_delay_notice(latest_all) +
             f'<div class="story" style="font-size:14.5px"><p>දඹුල්ල, පෑලියගොඩ, කෑප්පෙටිපොළ ඇතුළු ආර්ථික මධ්‍යස්ථාන 10ක HARTI තොග මිල. '
             f'වෙළඳපොළක් තට්ටු කර එදින භාණ්ඩ මිල, සතියකට පෙර මිල හා වැඩි මිලක් ලැබුණු වෙළඳපොළ බලන්න.</p>'
             f'<p lang="en">HARTI wholesale prices for 10 markets including Dambulla, Peliyagoda and Keppetipola. '
