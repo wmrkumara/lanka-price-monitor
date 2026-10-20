@@ -1,0 +1,39 @@
+name: Rubber auction images
+
+on:
+  workflow_dispatch:
+    inputs:
+      year_from:
+        description: "Download auctions from this year onward"
+        default: "2026"
+
+permissions:
+  contents: write
+
+jobs:
+  download:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Download RRISL auction images
+        env:
+          YEAR_FROM: ${{ github.event.inputs.year_from }}
+        run: python rubber_images.py
+
+      - name: Save images to the repo
+        run: |
+          git config user.name "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add rubber_imgs
+          if git diff --cached --quiet; then
+            echo "No new images"
+          else
+            git commit -m "Rubber auction images"
+            git pull --rebase
+            git push
+          fi
