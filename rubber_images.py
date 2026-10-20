@@ -1,5 +1,7 @@
 # TopGoviya.lk - download Colombo rubber auction price images from RRISL
-# Saves each auction image as rubber_imgs/YYYY-MM-DD.<ext>  (images already saved are skipped)
+# Each auction has a number (nid). We count down from the newest one,
+# read the auction date and save the image as rubber_imgs/YYYY-MM-DD.<ext>
+# Images already saved are skipped. Stops when auctions are older than YEAR_FROM.
 import os, re, ssl, time, urllib.request
 
 BASE = "https://www.rrisl.gov.lk/"
@@ -21,48 +23,67 @@ def get(url):
             time.sleep(5)
     return None
 
-saved, skipped, failed = 0, 0, []
-for page in range(1, 200):
-    raw = get(f"{BASE}price_e.php?id={page}")
-    if raw is None:
-        print("Could not open list page", page); break
+# 1) find the newest auction number from the first list page
+start = 519
+raw = get(BASE + "price_e.php?id=1")
+if raw:
     html = raw.decode("utf-8", "ignore")
-    links = re.findall(r'nid=(\d+)[^>]*>\s*(\d{2})-(\d{2})-(\d{4})', html)
-    if not links:
-        print("No auctions found on page", page); break
-    print(f"Page {page}: " + ", ".join(f"{d}-{m}-{y}" for _, d, m, y in links))
+    nids = [int(n) for n in re.findall(r"nid=(\d+)", html)]
+    if nids:
+        start = max(nids)
+    else:
+        print("No auction numbers on list page - using", start)
+        print("Page sample:", re.sub(r"\s+", " ", html)[:1500])
+print("Newest auction number:", start)
+
+# 2) count down, auction by auction
+saved, skipped, failed, older, misses = 0, 0, [], 0, 0
+for nid in range(start + 3, 0, -1):
+    raw = get(f"{BASE}price_e.php?nid={nid}&id=1")
+    if not raw:
+        misses += 1
+        if misses >= 15: break
+        continue
+    html = raw.decode("utf-8", "ignore")
+    img = re.search(r"content/images/prices/([^\"'\s>]+)", html)
+    date = None
+    if img:
+        m = re.search(r"(\d{4})-(\d{2})-(\d{2})", img.group(1))
+        if m:
+            date = "-".join(m.groups())
+    if not date:
+        txt = re.sub(r"<[^>]+>", " ", html)
+        m = re.search(r"Date of Auction\s*:?\s*(\d{2})[-./](\d{2})[-./](\d{4})", txt)
+        if m:
+            date = f"{m.group(3)}-{m.group(2)}-{m.group(1)}"
+    if not img or not date:
+        misses += 1
+        print(f"nid {nid}: no auction found")
+        if misses == 1:
+            print("Page sample:", re.sub(r"\s+", " ", html)[:800])
+        if misses >= 15: break
+        continue
+    misses = 0
+    if int(date[:4]) < YEAR_FROM:
+        older += 1
+        print(f"nid {nid}: {date} (older, skip)")
+        if older >= 3: break
+        continue
     older = 0
-    for nid, d, m, y in links:
-        if int(y) < YEAR_FROM:
-            older += 1
-            continue
-        date = f"{y}-{m}-{d}"
-        if any(f.startswith(date) for f in os.listdir(OUT)):
-            skipped += 1
-            continue
-        img = None
-        detail = get(f"{BASE}price_e.php?nid={nid}&id=1")
-        if detail:
-            mm = re.search(r'content/images/prices/([^"\'\s>]+)', detail.decode("utf-8", "ignore"))
-            if mm:
-                img = "content/images/prices/" + mm.group(1)
-        tries = [img] if img else []
-        tries += [f"content/images/prices/{date}.JPG", f"content/images/prices/{date}.jpg"]
-        ok = False
-        for path in tries:
-            data = get(BASE + path)
-            if data and len(data) > 2000:
-                ext = os.path.splitext(path)[1].lower() or ".jpg"
-                open(os.path.join(OUT, date + ext), "wb").write(data)
-                print("  saved", date + ext, len(data), "bytes")
-                saved += 1
-                ok = True
-                break
-        if not ok:
-            failed.append(date)
-        time.sleep(1)
-    if older == len(links):
-        break
+    if any(f.startswith(date) for f in os.listdir(OUT)):
+        skipped += 1
+        continue
+    path = "content/images/prices/" + img.group(1)
+    data = get(BASE + path)
+    if data and len(data) > 2000:
+        ext = os.path.splitext(path)[1].lower() or ".jpg"
+        open(os.path.join(OUT, date + ext), "wb").write(data)
+        print(f"nid {nid}: saved {date}{ext} ({len(data)} bytes)")
+        saved += 1
+    else:
+        print(f"nid {nid}: {date} image download failed")
+        failed.append(date)
+    time.sleep(1)
 
 print(f"\nDone. Saved {saved}, already had {skipped}, failed {len(failed)}")
 if failed:
