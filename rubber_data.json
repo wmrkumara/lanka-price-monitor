@@ -1,0 +1,699 @@
+{
+ "source": "Rubber Research Institute of Sri Lanka (RRISL) - Colombo rubber auction prices",
+ "source_url": "https://www.rrisl.gov.lk/price_e.php?last=3",
+ "unit": "Rs./kg",
+ "format": "prices[grade] = [low, high, average]; high may be 'Flat' (all lots same price) or 'Nom' (nominal, one price); null = Unq (not sold / unquoted)",
+ "updated": "2026-10-20",
+ "grades": [
+  {
+   "code": "LC1X",
+   "group": "Latex Crepe",
+   "en": "Latex Crepe 1X",
+   "si": "ලැටෙක්ස් ක්‍රේප් 1X"
+  },
+  {
+   "code": "LC1",
+   "group": "Latex Crepe",
+   "en": "Latex Crepe 1",
+   "si": "ලැටෙක්ස් ක්‍රේප් 1"
+  },
+  {
+   "code": "LC2",
+   "group": "Latex Crepe",
+   "en": "Latex Crepe 2",
+   "si": "ලැටෙක්ස් ක්‍රේප් 2"
+  },
+  {
+   "code": "LC3",
+   "group": "Latex Crepe",
+   "en": "Latex Crepe 3",
+   "si": "ලැටෙක්ස් ක්‍රේප් 3"
+  },
+  {
+   "code": "LC4",
+   "group": "Latex Crepe",
+   "en": "Latex Crepe 4",
+   "si": "ලැටෙක්ස් ක්‍රේප් 4"
+  },
+  {
+   "code": "SC1X",
+   "group": "Scrap Crepe",
+   "en": "Scrap Crepe 1X (BR)",
+   "si": "ස්ක්‍රැප් ක්‍රේප් 1X"
+  },
+  {
+   "code": "SC2X",
+   "group": "Scrap Crepe",
+   "en": "Scrap Crepe 2X (BR)",
+   "si": "ස්ක්‍රැප් ක්‍රේප් 2X"
+  },
+  {
+   "code": "SC3X",
+   "group": "Scrap Crepe",
+   "en": "Scrap Crepe 3X (BR)",
+   "si": "ස්ක්‍රැප් ක්‍රේප් 3X"
+  },
+  {
+   "code": "SC4X",
+   "group": "Scrap Crepe",
+   "en": "Scrap Crepe 4X (BR)",
+   "si": "ස්ක්‍රැප් ක්‍රේප් 4X"
+  },
+  {
+   "code": "FB",
+   "group": "Scrap Crepe",
+   "en": "Flat Bark",
+   "si": "ෆ්ලැට් බාක්"
+  },
+  {
+   "code": "SKIM",
+   "group": "Scrap Crepe",
+   "en": "Skim Crepe",
+   "si": "ස්කිම් ක්‍රේප්"
+  },
+  {
+   "code": "RSS1",
+   "group": "RSS",
+   "en": "Ribbed Smoked Sheet 1",
+   "si": "දුම් ගැසූ රබර් තහඩු (RSS) 1"
+  },
+  {
+   "code": "RSS2",
+   "group": "RSS",
+   "en": "Ribbed Smoked Sheet 2",
+   "si": "දුම් ගැසූ රබර් තහඩු (RSS) 2"
+  },
+  {
+   "code": "RSS3",
+   "group": "RSS",
+   "en": "Ribbed Smoked Sheet 3",
+   "si": "දුම් ගැසූ රබර් තහඩු (RSS) 3"
+  },
+  {
+   "code": "RSS4",
+   "group": "RSS",
+   "en": "Ribbed Smoked Sheet 4",
+   "si": "දුම් ගැසූ රබර් තහඩු (RSS) 4"
+  },
+  {
+   "code": "RSS5",
+   "group": "RSS",
+   "en": "Ribbed Smoked Sheet 5",
+   "si": "දුම් ගැසූ රබර් තහඩු (RSS) 5"
+  }
+ ],
+ "sales": [
+  {
+   "date": "2026-08-04",
+   "prices": {
+    "LC1X": [
+     1175,
+     "Flat",
+     1175
+    ],
+    "LC1": [
+     1100,
+     1150,
+     1125
+    ],
+    "LC2": [
+     925,
+     980,
+     950
+    ],
+    "LC3": [
+     900,
+     917,
+     910
+    ],
+    "LC4": [
+     880,
+     900,
+     888
+    ],
+    "SC1X": [
+     875,
+     880,
+     878
+    ],
+    "SC2X": [
+     875,
+     "Nom",
+     875
+    ],
+    "SC3X": [
+     876,
+     878,
+     877
+    ],
+    "SC4X": null,
+    "FB": null,
+    "SKIM": null,
+    "RSS1": [
+     935,
+     "Nom",
+     935
+    ],
+    "RSS2": null,
+    "RSS3": null,
+    "RSS4": null,
+    "RSS5": null
+   },
+   "kg": {
+    "crepe": 78600,
+    "sccr": 2175,
+    "skim": 8425,
+    "rss": 3344
+   },
+   "lots": {
+    "crepe_sccr_skim": 159,
+    "rss": 8
+   }
+  },
+  {
+   "date": "2026-08-11",
+   "prices": {
+    "LC1X": null,
+    "LC1": [
+     1125,
+     "Flat",
+     1125
+    ],
+    "LC2": [
+     998,
+     1025,
+     1010
+    ],
+    "LC3": [
+     910,
+     950,
+     920
+    ],
+    "LC4": [
+     890,
+     921,
+     900
+    ],
+    "SC1X": [
+     880,
+     895,
+     885
+    ],
+    "SC2X": [
+     875,
+     880,
+     878
+    ],
+    "SC3X": [
+     885,
+     "Flat",
+     885
+    ],
+    "SC4X": [
+     870,
+     879,
+     875
+    ],
+    "FB": null,
+    "SKIM": null,
+    "RSS1": null,
+    "RSS2": null,
+    "RSS3": null,
+    "RSS4": null,
+    "RSS5": null
+   },
+   "kg": {
+    "crepe": 65100,
+    "sccr": 6525,
+    "skim": 3000,
+    "rss": 0
+   },
+   "lots": {
+    "crepe_sccr_skim": 140,
+    "rss": 0
+   }
+  },
+  {
+   "date": "2026-08-18",
+   "prices": {
+    "LC1X": [
+     1175,
+     "Flat",
+     1175
+    ],
+    "LC1": [
+     1175,
+     "Flat",
+     1175
+    ],
+    "LC2": [
+     975,
+     1100,
+     1000
+    ],
+    "LC3": [
+     920,
+     940,
+     930
+    ],
+    "LC4": [
+     910,
+     918,
+     915
+    ],
+    "SC1X": [
+     885,
+     890,
+     888
+    ],
+    "SC2X": [
+     885,
+     "Nom",
+     885
+    ],
+    "SC3X": [
+     880,
+     887,
+     885
+    ],
+    "SC4X": [
+     872,
+     875,
+     874
+    ],
+    "FB": [
+     870,
+     "Nom",
+     870
+    ],
+    "SKIM": [
+     880,
+     "Nom",
+     880
+    ],
+    "RSS1": null,
+    "RSS2": null,
+    "RSS3": null,
+    "RSS4": null,
+    "RSS5": null
+   },
+   "kg": {
+    "crepe": 45350,
+    "sccr": 12025,
+    "skim": 21225,
+    "rss": 0
+   },
+   "lots": {
+    "crepe_sccr_skim": 131,
+    "rss": 0
+   }
+  },
+  {
+   "date": "2026-08-25",
+   "prices": {
+    "LC1X": null,
+    "LC1": [
+     1150,
+     "Flat",
+     1150
+    ],
+    "LC2": [
+     1000,
+     1100,
+     1050
+    ],
+    "LC3": [
+     935,
+     960,
+     945
+    ],
+    "LC4": [
+     920,
+     940,
+     930
+    ],
+    "SC1X": [
+     915,
+     920,
+     918
+    ],
+    "SC2X": [
+     900,
+     910,
+     905
+    ],
+    "SC3X": [
+     890,
+     918,
+     916
+    ],
+    "SC4X": [
+     905,
+     "Nom",
+     905
+    ],
+    "FB": [
+     886,
+     895,
+     890
+    ],
+    "SKIM": [
+     892,
+     895,
+     893
+    ],
+    "RSS1": null,
+    "RSS2": null,
+    "RSS3": null,
+    "RSS4": null,
+    "RSS5": null
+   },
+   "kg": {
+    "crepe": 68475,
+    "sccr": 8325,
+    "skim": 6500,
+    "rss": 0
+   },
+   "lots": {
+    "crepe_sccr_skim": 190,
+    "rss": 0
+   }
+  },
+  {
+   "date": "2026-09-01",
+   "prices": {
+    "LC1X": null,
+    "LC1": null,
+    "LC2": [
+     1050,
+     1075,
+     1060
+    ],
+    "LC3": [
+     940,
+     950,
+     945
+    ],
+    "LC4": [
+     930,
+     940,
+     935
+    ],
+    "SC1X": [
+     920,
+     930,
+     925
+    ],
+    "SC2X": null,
+    "SC3X": [
+     920,
+     931,
+     925
+    ],
+    "SC4X": [
+     915,
+     "Nom",
+     915
+    ],
+    "FB": null,
+    "SKIM": [
+     922,
+     "Nom",
+     922
+    ],
+    "RSS1": [
+     952,
+     "Nom",
+     952
+    ],
+    "RSS2": null,
+    "RSS3": null,
+    "RSS4": null,
+    "RSS5": null
+   },
+   "kg": {
+    "crepe": 58275,
+    "sccr": 8875,
+    "skim": 11700,
+    "rss": 2675
+   },
+   "lots": {
+    "crepe_sccr_skim": 151,
+    "rss": 5
+   }
+  },
+  {
+   "date": "2026-09-08",
+   "prices": {
+    "LC1X": null,
+    "LC1": [
+     1125,
+     1150,
+     1135
+    ],
+    "LC2": [
+     1000,
+     1050,
+     1025
+    ],
+    "LC3": [
+     950,
+     960,
+     952
+    ],
+    "LC4": [
+     931,
+     950,
+     948
+    ],
+    "SC1X": [
+     935,
+     945,
+     940
+    ],
+    "SC2X": null,
+    "SC3X": [
+     925,
+     "Flat",
+     925
+    ],
+    "SC4X": null,
+    "FB": null,
+    "SKIM": null,
+    "RSS1": [
+     960,
+     970,
+     965
+    ],
+    "RSS2": null,
+    "RSS3": null,
+    "RSS4": null,
+    "RSS5": null
+   },
+   "kg": {
+    "crepe": 56175,
+    "sccr": 6050,
+    "skim": 19050,
+    "rss": 2724
+   },
+   "lots": {
+    "crepe_sccr_skim": 154,
+    "rss": 8
+   }
+  },
+  {
+   "date": "2026-09-15",
+   "prices": {
+    "LC1X": null,
+    "LC1": [
+     1185,
+     "Flat",
+     1185
+    ],
+    "LC2": [
+     1075,
+     1150,
+     1120
+    ],
+    "LC3": [
+     975,
+     1050,
+     1025
+    ],
+    "LC4": [
+     960,
+     1050,
+     1005
+    ],
+    "SC1X": [
+     950,
+     "Flat",
+     950
+    ],
+    "SC2X": [
+     940,
+     "Nom",
+     940
+    ],
+    "SC3X": [
+     960,
+     "Flat",
+     960
+    ],
+    "SC4X": [
+     950,
+     955,
+     953
+    ],
+    "FB": null,
+    "SKIM": [
+     950,
+     "Flat",
+     950
+    ],
+    "RSS1": null,
+    "RSS2": null,
+    "RSS3": null,
+    "RSS4": null,
+    "RSS5": null
+   },
+   "kg": {
+    "crepe": 59200,
+    "sccr": 10250,
+    "skim": 5500,
+    "rss": 875
+   },
+   "lots": {
+    "crepe_sccr_skim": 143,
+    "rss": 1
+   },
+   "note": "Original sheet shows RSS '1 kgs, lots 875' - kg and lots swapped; corrected to 875 kg, 1 lot."
+  },
+  {
+   "date": "2026-09-22",
+   "prices": {
+    "LC1X": [
+     1185,
+     "Nom",
+     1185
+    ],
+    "LC1": [
+     1170,
+     1185,
+     1175
+    ],
+    "LC2": [
+     1070,
+     1075,
+     1073
+    ],
+    "LC3": [
+     1030,
+     1070,
+     1055
+    ],
+    "LC4": [
+     1040,
+     1075,
+     1053
+    ],
+    "SC1X": [
+     950,
+     975,
+     960
+    ],
+    "SC2X": null,
+    "SC3X": [
+     945,
+     950,
+     948
+    ],
+    "SC4X": [
+     945,
+     "Nom",
+     945
+    ],
+    "FB": null,
+    "SKIM": null,
+    "RSS1": [
+     975,
+     "Nom",
+     975
+    ],
+    "RSS2": null,
+    "RSS3": null,
+    "RSS4": null,
+    "RSS5": null
+   },
+   "kg": {
+    "crepe": 68375,
+    "sccr": 12650,
+    "skim": 19400,
+    "rss": 3150
+   },
+   "lots": {
+    "crepe_sccr_skim": 178,
+    "rss": 3
+   }
+  },
+  {
+   "date": "2026-10-06",
+   "prices": {
+    "LC1X": null,
+    "LC1": null,
+    "LC2": [
+     1080,
+     1090,
+     1085
+    ],
+    "LC3": [
+     1060,
+     1080,
+     1065
+    ],
+    "LC4": [
+     1040,
+     1065,
+     1055
+    ],
+    "SC1X": null,
+    "SC2X": null,
+    "SC3X": [
+     926,
+     "Nom",
+     926
+    ],
+    "SC4X": [
+     925,
+     "Nom",
+     925
+    ],
+    "FB": [
+     925,
+     "Nom",
+     925
+    ],
+    "SKIM": null,
+    "RSS1": [
+     985,
+     "Nom",
+     985
+    ],
+    "RSS2": null,
+    "RSS3": null,
+    "RSS4": null,
+    "RSS5": null
+   },
+   "kg": {
+    "crepe": 30675,
+    "sccr": 7800,
+    "skim": 12800,
+    "rss": 1250
+   },
+   "lots": {
+    "crepe_sccr_skim": 111,
+    "rss": 1
+   }
+  }
+ ]
+}
