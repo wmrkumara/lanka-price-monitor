@@ -35,7 +35,7 @@
   "description": "Weekly Colombo rubber auction prices (Rs./kg) by grade: Latex Crepe, Scrap Crepe, Flat Bark, Skim Crepe and Ribbed Smoked Sheet (RSS), with low, high and average price and quantity sold.",
   "url": "https://topgoviya.lk/rubber.html",
   "inLanguage": ["si", "ta", "en"],
-  "temporalCoverage": "2026-08/..",
+  "temporalCoverage": "2026-01/..",
   "spatialCoverage": {"@type": "Country", "name": "Sri Lanka"},
   "creator": {"@type": "Organization", "name": "TopGoviya.lk", "url": "https://topgoviya.lk/"},
   "isBasedOn": "https://www.rrisl.gov.lk/price_e.php?last=3",
@@ -265,6 +265,8 @@ footer{margin:46px 0 30px;padding-top:22px;border-top:1px solid var(--line-stron
     <div id="leaf-note"></div>
   </div>
 
+  <div class="leafnote" id="stale" role="status" style="display:none;border-left-color:var(--up)"></div>
+
   <div class="topline" id="topline"></div>
 
   <div class="section-h">
@@ -333,6 +335,7 @@ const T = {
   foot:'රබර් පර්යේෂණ ආයතන දත්ත · නිල ප්‍රකාශනයක් නොවේ', sources:'🔎 දත්ත මූලාශ්‍ර', credit:'නිර්මාණය හා සංවර්ධනය:',
   months:['ජනවාරි','පෙබරවාරි','මාර්තු','අප්‍රේල්','මැයි','ජූනි','ජූලි','අගෝස්තු','සැප්තැම්බර්','ඔක්තෝබර්','නොවැම්බර්','දෙසැම්බර්'],
   mshort:['ජන','පෙබ','මාර්','අප්‍රේ','මැයි','ජූනි','ජූලි','අගෝ','සැප්','ඔක්','නොවැ','දෙසැ'],
+  stale:(d,n)=>'<span class="ic" aria-hidden="true">⚠️</span><div><b>නවතම වෙන්දේසි මිල ලැයිස්තුව '+d+' දිනයි (දින '+n+'කට පෙර).</b> රබර් පර්යේෂණ ආයතනය නව ලැයිස්තුවක් පළ කළ පසු මෙම පිටුව යාවත්කාලීන වේ.</div>',
   rs:'රු.', perkg:'රු./කි.ග්‍රෑ.', err:'දත්ත පූරණය කළ නොහැකි විය. අන්තර්ජාල සම්බන්ධතාව පරීක්ෂා කර පිටුව නැවත පූරණය කරන්න (F5).'
  },
  ta:{
@@ -363,6 +366,7 @@ const T = {
   foot:'இறப்பர் ஆராய்ச்சி நிறுவன தரவு · அதிகாரப்பூர்வ வெளியீடு அல்ல', sources:'🔎 தரவு மூலங்கள்', credit:'வடிவமைப்பு & உருவாக்கம்:',
   months:['ஜனவரி','பிப்ரவரி','மார்ச்','ஏப்ரல்','மே','ஜூன்','ஜூலை','ஆகஸ்ட்','செப்டம்பர்','அக்டோபர்','நவம்பர்','டிசம்பர்'],
   mshort:['ஜன','பிப்','மார்','ஏப்','மே','ஜூன்','ஜூலை','ஆக','செப்','அக்','நவ','டிச'],
+  stale:(d,n)=>'<span class="ic" aria-hidden="true">⚠️</span><div><b>சமீபத்திய ஏல விலைப் பட்டியல் '+d+' தேதியது ('+n+' நாட்களுக்கு முன்).</b> இறப்பர் ஆராய்ச்சி நிறுவனம் புதிய பட்டியலை வெளியிட்டதும் இப்பக்கம் புதுப்பிக்கப்படும்.</div>',
   rs:'ரூ.', perkg:'ரூ./கிலோ', err:'தரவை ஏற்ற முடியவில்லை. இணைய இணைப்பைச் சரிபார்த்து பக்கத்தை மீண்டும் ஏற்றுங்கள் (F5).'
  },
  en:{
@@ -393,6 +397,7 @@ const T = {
   foot:'RRISL weekly data · Not an official publication', sources:'🔎 Data sources', credit:'Design & development by',
   months:['January','February','March','April','May','June','July','August','September','October','November','December'],
   mshort:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+  stale:(d,n)=>'<span class="ic" aria-hidden="true">⚠️</span><div><b>The latest auction price list is from '+d+' ('+n+' days ago).</b> This page is updated after the Rubber Research Institute publishes a new list.</div>',
   rs:'Rs.', perkg:'Rs./kg', err:'Could not load the data. Check your internet connection and reload the page (F5).'
  }
 };
@@ -417,7 +422,7 @@ function chgBadge(p){
   return '<span class="chg '+d+'">'+a+' '+(p>0?'+':'')+p.toFixed(1)+'%</span>';
 }
 function rangeTxt(p){
-  if(!p) return '<span class="unqtxt">'+T[lang].unq+'</span>';
+  if(!p) return '<span class="unqtxt">Unq</span>';
   const hi = p[1];
   if(hi==='Flat') return fmt(p[0])+'<span class="tag">'+T[lang].flat+'</span>';
   if(hi==='Nom')  return fmt(p[0])+'<span class="tag">'+T[lang].nom+'</span>';
@@ -448,7 +453,7 @@ function renderRank(){
     h += '<button type="button" class="grow'+(p?'':' unq')+(g.code===SEL?' sel':'')+'" data-c="'+g.code+'">'+
       '<span class="nm">'+esc(nm(g.code))+en+'</span>'+
       '<span class="rg">'+rangeTxt(p)+'</span>'+
-      '<span class="av">'+(p?fmt(p[2]):'<span class="unqtxt">Unq</span>')+'</span>'+
+      '<span class="av">'+(p?fmt(p[2]):'<span class="unqtxt">'+T[lang].unq+'</span>')+'</span>'+
       '<span style="text-align:right">'+(p?chgBadge(pct(p[2],avgAt(L-1,g.code))):'<span class="chg na">—</span>')+'</span></button>';
   });
   document.getElementById('rank').innerHTML = h;
@@ -535,6 +540,13 @@ function selectGrade(code, scroll){
   try{ gtag('event','view_rubber_grade',{grade:code}); }catch(e){}
 }
 
+function renderStale(){
+  const last = SALES[SALES.length-1].date, box = document.getElementById('stale');
+  const days = Math.floor((Date.now() - new Date(last+'T00:00:00')) / 864e5);
+  if(days > 15){ box.innerHTML = T[lang].stale(dateLbl(last,false), days); box.style.display = 'grid'; }
+  else { box.style.display = 'none'; }
+}
+
 function renderFaq(){
   document.getElementById('faq').innerHTML = T[lang].faq.map((f,i)=>'<details'+(i===0?' open':'')+'><summary>'+f[0]+'</summary><p>'+f[1]+'</p></details>').join('');
 }
@@ -551,25 +563,40 @@ function applyLang(l){
   set('h-rank',t.hRank); set('h-trend',t.hTrend); set('trend-hint',t.trendHint); set('h-faq',t.hFaq);
   set('src-note',t.src); set('foot-note',t.foot); set('fl-sources',t.sources);
   renderFaq();
-  if(DB){ set('lbl-date', dateLbl(SALES[SALES.length-1].date,false)); renderTop(); renderRank(); renderTrend(); }
+  if(DB){ set('lbl-date', dateLbl(SALES[SALES.length-1].date,false)); renderStale(); renderTop(); renderRank(); renderTrend(); }
 }
 
 document.querySelector('.lang').addEventListener('click',e=>{const b=e.target.closest('button[data-lang]'); if(b) applyLang(b.dataset.lang);});
 document.getElementById('rank').addEventListener('click',e=>{const r=e.target.closest('.grow'); if(r) selectGrade(r.dataset.c, true);});
 
+/* a data file is used only if it has grades and dated sales */
+function validData(d){
+  return d && Array.isArray(d.grades) && d.grades.length && Array.isArray(d.sales) && d.sales.length &&
+    d.sales.every(s => s && /^\d{4}-\d{2}-\d{2}$/.test(s.date) && s.prices && s.kg);
+}
 async function load(){
   const urls = ['rubber_data.json', 'https://raw.githubusercontent.com/wmrkumara/lanka-price-monitor/main/rubber_data.json'];
   for(const u of urls){
-    try{ const r = await fetch(u,{cache:'no-store'}); if(r.ok) return await r.json(); }catch(e){}
+    const ctl = new AbortController(), timer = setTimeout(()=>ctl.abort(), 8000);
+    try{
+      const r = await fetch(u,{cache:'no-store', signal:ctl.signal});
+      if(r.ok){ const d = await r.json(); if(validData(d)){ clearTimeout(timer); return d; } }
+    }catch(e){}
+    clearTimeout(timer);
   }
   return null;
+}
+function showError(){
+  const msg = '<div class="empty">'+T[lang].err+'</div>';
+  document.getElementById('lbl-date').textContent = '—';
+  document.getElementById('rank').innerHTML = msg;
+  document.getElementById('topline').innerHTML = '';
+  document.getElementById('trend').innerHTML = msg;
 }
 
 applyLang('si');
 load().then(d=>{
-  if(!d || !d.sales || !d.sales.length){
-    document.getElementById('rank').innerHTML='<div class="empty">'+T[lang].err+'</div>'; return;
-  }
+  if(!d){ showError(); return; }
   DB = d; SALES = d.sales.slice().sort((a,b)=>a.date.localeCompare(b.date));
   applyLang(lang);
 });
