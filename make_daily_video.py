@@ -7,7 +7,7 @@
 import json, os, subprocess, sys
 from datetime import date
 from PIL import Image, ImageDraw, ImageFont, ImageOps, features
-from build_pages import n_si, fdate, sl
+from build_pages import n_si, fdate, sl, MONTHS
 
 OUT = "daily_video"
 CROPS = "video-assets/crops"
@@ -19,7 +19,7 @@ ITEMS = [  # (data.json name, photo file name)
     ("Green Chilli", "green-chilli"), ("Lime", "lime"), ("Big Onion (Local)", "big-onion"),
     ("Red Onion (Local)", "red-onion"), ("Potato (Local)", "potato"),
 ]
-SEC_TITLE, SEC_ITEM, SEC_SUM, SEC_END = 5, 8, 8, 6
+SEC_TITLE, SEC_ITEM, SEC_SUM, SEC_END = 7, 8, 8, 10
 DAYS_SI = ["සඳුදා", "අඟහරුවාදා", "බදාදා", "බ්‍රහස්පතින්දා", "සිකුරාදා", "සෙනසුරාදා", "ඉරිදා"]
 
 PET = (14, 79, 74); PETD = (10, 58, 54); GOLD = (169, 128, 42); LG = (255, 217, 138)
@@ -265,6 +265,37 @@ def text_file(rep, rows):
     return "\n".join(lines) + "\n"
 
 
+def script_file(rep, rows):
+    """Reading script for the voice: one block per slide, same order and timing as the video."""
+    up, dn = movers(rows)
+    day = f"{MONTHS['si'][rep.month - 1]} {rep.day} {DAYS_SI[rep.weekday()]}"
+    money_ = lambda v: f"{v:,.0f}"
+    L = ["TopGoviya — කියවීමේ පිටපත (Reading script)", f"වාර්තා දිනය: {fdate(rep, 'si')}", "",
+         f"[මාතෘකා පිටුව · තත්පර {SEC_TITLE}]",
+         f"ආයුබෝවන්! TopGoviya අද එළවළු මිල. {day}, මහ බැංකු වාර්තාව අනුව, දඹුල්ල වෙළඳපොළ.", ""]
+    for i, r in enumerate(rows, 1):
+        parts = []
+        if r["w"] is not None:
+            parts.append(f"තොග රුපියල් {money_(r['w'])}")
+        if r["r"] is not None:
+            parts.append(f"සිල්ලර රුපියල් {money_(r['r'])}")
+        line = f"{r['si']}. " + ", ".join(parts) + "."
+        if r["pct"] is not None and abs(r["pct"]) >= 10:
+            line += f" කලින් වාර්තාවට වඩා {abs(r['pct']):.0f}%කින් {'ඉහළයි' if r['pct'] > 0 else 'අඩුයි'}."
+        L += [f"[{i} / {len(rows)} · තත්පර {SEC_ITEM}]", line, ""]
+    L.append(f"[වැඩිම වෙනස්වීම් · තත්පර {SEC_SUM}]")
+    t = []
+    if up:
+        t.append(f"අද වැඩියෙන්ම ඉහළ ගියේ {up['si']}, {abs(up['pct']):.0f}%යි.")
+    if dn:
+        t.append(f"වැඩියෙන්ම අඩු වුණේ {dn['si']}, {abs(dn['pct']):.0f}%යි.")
+    L += [" ".join(t) or "අද විශාල මිල වෙනසක් නැහැ.", "",
+          f"[අවසාන පිටුව · තත්පර {SEC_END}]",
+          "සියලු මිල ගණන්, වෙළඳපොළ 10ක තොග මිල, topgoviya.lk වෙබ් අඩවියෙන් නොමිලේ බලන්න. "
+          "මිල ගණන් මඟපෙන්වීමක් පමණි. Subscribe කරන්න, හෙට නැවත හමුවෙමු!"]
+    return "\n".join(L) + "\n"
+
+
 def main():
     if not features.check("raqm"):
         sys.exit("Sinhala text support (raqm) is missing. Stopping.")
@@ -289,6 +320,7 @@ def main():
                     "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-movflags", "+faststart", mp4], check=True)
     thumbnail(rep, rows).save(os.path.join(OUT, f"thumbnail-{iso}.png"))
     open(os.path.join(OUT, f"youtube-{iso}.txt"), "w", encoding="utf-8").write(text_file(rep, rows))
+    open(os.path.join(OUT, f"script-{iso}.txt"), "w", encoding="utf-8").write(script_file(rep, rows))
     total = SEC_TITLE + SEC_ITEM * len(rows) + SEC_SUM + SEC_END
     print(f"Made {mp4} ({total} seconds, {len(rows)} vegetables) for report {iso}")
 
