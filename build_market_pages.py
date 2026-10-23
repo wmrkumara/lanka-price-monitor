@@ -36,7 +36,15 @@ DEC_SRC = {
 def is_dec(market, day):
     return bool(day) and day in DEC_DAYS.get(market, ())
 def dec_name(market, lang):
-    return (DEC_SRC.get(market) or {}).get(lang) or f"{market} Dedicated Economic Centre"
+    """Full name of a market's Dedicated Economic Centre (works for all 10 markets)."""
+    if (DEC_SRC.get(market) or {}).get(lang):
+        return DEC_SRC[market][lang]
+    info = MKT.get(market) or {}
+    if lang == "si" and info.get("si"):
+        return f"{info['si']} විශේෂිත ආර්ථික මධ්‍යස්ථානය"
+    if lang == "ta" and info.get("ta"):
+        return f"{info['ta']} விசேட பொருளாதார மத்திய நிலையம்"
+    return f"{MKT_EN.get(market, market)} Dedicated Economic Centre"
 HARTI_URL = "https://www.harti.gov.lk/daily-price.php"
 CBSL_URL = "https://www.cbsl.gov.lk/en/statistics/economic-indicators/price-report"
 
