@@ -20,6 +20,23 @@ from build_pages import CSS, GA_ID, SITE, COPYRIGHT, e, money, fdate, slug, MONT
 OUT_DIR = "market"
 HIST_FILE = "harti_market_history.json"
 KEEP_DAYS = 120
+
+# ---- Manual Dedicated Economic Centre (DEC) price lists -------------------------
+# Used only while the HARTI site is down. apply_dec_prices.py writes these prices
+# into harti_market_history.json and lists their dates under "decSource".
+# Those dates are labelled "DEC" on the pages, never "HARTI". A real HARTI price
+# for the same market and day always replaces the DEC price.
+DEC_DAYS = {}
+DEC_SRC = {
+    "Dambulla":    {"si": "දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය", "en": "Dambulla Dedicated Economic Centre",
+                    "ta": "தம்புள்ள விசேட பொருளாதார மத்திய நிலையம்"},
+    "Keppetipola": {"si": "කෑප්පෙටිපොළ විශේෂිත ආර්ථික මධ්‍යස්ථානය", "en": "Keppetipola Dedicated Economic Centre",
+                    "ta": "கெப்பெட்டிபொல விசேட பொருளாதார மத்திய நிலையம்"},
+}
+def is_dec(market, day):
+    return bool(day) and day in DEC_DAYS.get(market, ())
+def dec_name(market, lang):
+    return (DEC_SRC.get(market) or {}).get(lang) or f"{market} Dedicated Economic Centre"
 HARTI_URL = "https://www.harti.gov.lk/daily-price.php"
 CBSL_URL = "https://www.cbsl.gov.lk/en/statistics/economic-indicators/price-report"
 
@@ -165,17 +182,29 @@ def update_history(harti):
                 hm[m][n] = {(d_(k) - timedelta(days=lag)).isoformat(): x for k, x in hm[m][n].items()}
         hist["marketDatesFixed"] = True
     mdates = harti.get("marketDates") or {}
+    dec = hist.setdefault("decSource", {})
+    harti_put = {}
     for c in harti["commodities"]:
         for m, v in (c.get("markets") or {}).items():
             if isinstance(v, dict) and v.get("mid") is not None:
                 day = mdates.get(m) or (d_(today) - timedelta(days=LAG_DAYS.get(m, 0))).isoformat()
                 hm.setdefault(m, {}).setdefault(c["name"], {})[day] = [v.get("min"), v.get("max"), v["mid"]]
+                harti_put.setdefault((m, day), set()).add(c["name"])
+    # A real HARTI report for a market + day fully replaces that day's DEC prices.
+    for (m, day), names in harti_put.items():
+        if day in dec.get(m, []):
+            for n in list(hm.get(m, {})):
+                if n not in names:
+                    hm[m][n].pop(day, None)
+            dec[m].remove(day)
     cutoff = (d_(today) - timedelta(days=KEEP_DAYS)).isoformat()
     for m in hm:
         for n in list(hm[m]):
             hm[m][n] = {k: x for k, x in sorted(hm[m][n].items()) if k >= cutoff}
             if not hm[m][n]:
                 del hm[m][n]
+    DEC_DAYS.clear()
+    DEC_DAYS.update({m: set(v) for m, v in dec.items()})
     hist["note"] = "Per-market HARTI wholesale history (min, max, mid) kept by build_market_pages.py"
     hist["updated"] = today
     json.dump(hist, open(HIST_FILE, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
@@ -439,7 +468,7 @@ def main_wk_date(rows):
     return c.most_common(1)[0][0] if c else None
 
 
-def download_bar(market, rows, last, latest_all, url, lagged=False):
+def download_bar(market, rows, last, latest_all, url, lagged=False, dec=False):
     """HARTI wholesale price list (min / max / mid / last week) for one market."""
     if not rows or not last:
         return ""
@@ -465,7 +494,11 @@ def download_bar(market, rows, last, latest_all, url, lagged=False):
             "sub": "එළවළු තොග මිල ලැයිස්තුව", "subEn": men(market) + " wholesale price list",
             "src": "HARTI වාර්තාව", "date": date_si, "iso": last, "url": url, "logo": "../icon-192x192.png",
             "stale": stale, "foot": foot, "lines": lines, "wkd": short_si(wkd) if wkd else "", "nowd": short_si(last),
-            "msg": f"{info['si']} වෙළඳපොළ තොග මිල ({date_si}, HARTI) {url}"}
+            "msg": f"{info['si']} වෙළඳපොළ තොග මිල ({date_si}, {'DEC' if dec else 'HARTI'}) {url}"}
+    if dec:
+        data["src"] = dec_name(market, "si")
+        foot[0] = f"දත්ත: {dec_name(market, 'si')} නිල දෛනික තොග මිල ලැයිස්තුව (HARTI වෙබ් අඩවිය නොමැති කාලයේ)."
+        data["foot"] = foot
     return dl_buttons("h", data)
 
 
@@ -580,11 +613,31 @@ def harti_delay_notice(latest_all):
             f'கீழே உள்ள விலைகள் கடைசி அறிக்கையிலிருந்து. புதிய அறிக்கை வந்ததும் இந்தப் பக்கம் புதுப்பிக்கப்படும்.</span></div>')
 
 
+def dec_notice(market, last, latest_all):
+    """Notice on days that show a manual economic-centre (DEC) price list."""
+    d, ld = d_(last), d_(latest_all)
+    return (f'<div style="background:#e3efe6;border:1px solid #9cc5aa;border-left:5px solid #2c7a52;border-radius:10px;'
+            f'padding:10px 14px;margin:12px 0;color:#1f4a33;font-size:14px;line-height:1.6">'
+            f'<b>ℹ️ HARTI වෙබ් අඩවියෙන් {fdate(ld, "si")} න් පසු වාර්තා ලැබී නැත.</b> '
+            f'පහත මිල {e(dec_name(market, "si"))} නිල දෛනික මිල ලැයිස්තුවෙනි ({fdate(d, "si")}).<br>'
+            f'<span lang="en">No HARTI report since {fdate(ld, "en")} (HARTI site unavailable). The prices below are from the official '
+            f'daily price list of the {e(dec_name(market, "en"))}, {fdate(d, "en")}.</span><br>'
+            f'<span lang="ta">{fdate(ld, "ta")} முதல் HARTI அறிக்கை இல்லை. கீழே உள்ள விலைகள் {e(dec_name(market, "ta"))} '
+            f'அதிகாரப்பூர்வ தினசரி விலைப் பட்டியலிலிருந்து ({fdate(d, "ta")}).</span></div>')
+
+def dec_link(market, last):
+    """Source line for a DEC price list day."""
+    return (f'<p class="asof" style="margin-top:6px">📑 මූලාශ්‍රය: {e(dec_name(market, "si"))} දෛනික මිල ලැයිස්තුව — '
+            f'{fdate(d_(last), "si")} · Source: {e(dec_name(market, "en"))} daily price list. '
+            f'මිලක් වැරදි යැයි සිතේද? <a href="../contact.html?t=price">අපට දන්වන්න</a> / Spotted a wrong price? Tell us.</p>')
+
+
 def market_page(market, hm, harti, cats, cbsl):
     info = MKT[market]
     si, ta, en = info["si"], info["ta"], men(market)
     last, snap = market_snapshot(hm, market)
     latest_all = harti["dates"][-1]
+    dec_day = is_dec(market, last)
     url = f"{SITE}/{OUT_DIR}/{info['slug']}.html"
 
     # rows with weekly change
@@ -621,9 +674,14 @@ def market_page(market, hm, harti, cats, cbsl):
     # ---- story in 3 languages
     if last:
         d = d_(last)
-        s_si = f"{fdate(d,'si')} HARTI තොග මිල වාර්තාව අනුව {si} වෙළඳපොළේ භාණ්ඩ {len(rows)}ක තොග මිල පහත දැක්වේ (රු./කි.ග්‍රෑ.)."
-        s_en = f"On {fdate(d,'en')}, the HARTI daily report listed wholesale prices for {len(rows)} items at {en} market (Rs. per kg)."
-        s_ta = f"{fdate(d,'ta')} HARTI அறிக்கையின்படி {ta} சந்தையில் {len(rows)} பொருட்களின் மொத்த விலை (ரூ./கி.)."
+        if dec_day:
+            s_si = f"{fdate(d,'si')} {dec_name(market,'si')} නිල දෛනික මිල ලැයිස්තුව අනුව භාණ්ඩ {len(rows)}ක තොග මිල පහත දැක්වේ (රු./කි.ග්‍රෑ.)."
+            s_en = f"On {fdate(d,'en')}, the official daily price list of the {dec_name(market,'en')} gave wholesale prices for {len(rows)} items (Rs. per kg)."
+            s_ta = f"{fdate(d,'ta')} {dec_name(market,'ta')} அதிகாரப்பூர்வ தினசரி விலைப் பட்டியலின்படி {len(rows)} பொருட்களின் மொத்த விலை (ரூ./கி.)."
+        else:
+            s_si = f"{fdate(d,'si')} HARTI තොග මිල වාර්තාව අනුව {si} වෙළඳපොළේ භාණ්ඩ {len(rows)}ක තොග මිල පහත දැක්වේ (රු./කි.ග්‍රෑ.)."
+            s_en = f"On {fdate(d,'en')}, the HARTI daily report listed wholesale prices for {len(rows)} items at {en} market (Rs. per kg)."
+            s_ta = f"{fdate(d,'ta')} HARTI அறிக்கையின்படி {ta} சந்தையில் {len(rows)} பொருட்களின் மொத்த விலை (ரூ./கி.)."
         if up:
             r = up[0]
             s_si += f" සතියකට පෙර සිට වැඩිම ඉහළ යාම: {hsi(r['name'])} (රු. {money(r['wk'])} → රු. {money(r['mid'])})."
@@ -675,7 +733,7 @@ def market_page(market, hm, harti, cats, cbsl):
         table += "</tbody></table></div>"
     wk_dates = [wkd_main] if wkd_main else []
     has_other = any(r.get("wkdate") and r["wkdate"] != wkd_main for r in rows)
-    table_note = ('<p class="asof" style="margin-top:10px">රුපියල් / කි.ග්‍රෑ. · Rs. per kg · HARTI තොග මිල මධ්‍යගතය = (අවම + උපරිම) ÷ 2'
+    table_note = ('<p class="asof" style="margin-top:10px">රුපියල් / කි.ග්‍රෑ. · Rs. per kg · ' + ('' if dec_day else 'HARTI ') + 'තොග මිල මධ්‍යගතය = (අවම + උපරිම) ÷ 2'
                   + (f' · සතියකට පෙර = {fdate(d_(wk_dates[-1]),"si")} වාර්තාව (තනි දිනයක මිල, සාමාන්‍යයක් නොවේ / a single day, not an average)' if wk_dates else "")
                   + (' · * = එම භාණ්ඩය එදින වාර්තාවේ නොතිබූ නිසා ළඟම දිනයේ (දවස් 5–9 පෙර) මිල' if has_other else "") + '</p>')
 
@@ -733,12 +791,12 @@ def market_page(market, hm, harti, cats, cbsl):
     duo = ""
     if last:
         duo = (f'<div class="duo">'
-               f'<div class="r"><b>{len(rows)}</b><span>භාණ්ඩ / items · HARTI</span></div>'
+               f'<div class="r"><b>{len(rows)}</b><span>භාණ්ඩ / items · {"DEC" if dec_day else "HARTI"}</span></div>'
                f'<div class="w"><b>▲ {len(up)} · ▼ {len(dn)}</b><span>සතියකට පෙරට වඩා / vs 1 week ago</span></div>'
                + (f'<div class="g"><b>{cbsl_count}</b><span>CBSL තොග හා සිල්ලර / retail items</span></div>' if cbsl_count else "")
                + '</div>')
 
-    harti_h2 = (f'<h2>HARTI {e(si)} තොග මිල<span>HARTI wholesale report, {fdate(d_(last),"en") if last else "—"}</span></h2>')
+    harti_h2 = (f'<h2>{"" if dec_day else "HARTI "}{e(si)} තොග මිල<span>{"Economic centre price list" if dec_day else "HARTI wholesale report"}, {fdate(d_(last),"en") if last else "—"}</span></h2>')
     others = "".join(f'<a href="{MKT[m]["slug"]}.html">📍 {e(MKT[m]["si"])} / {e(men(m))}</a>' for m in MKT if m != market)
 
     body = f"""
@@ -747,9 +805,9 @@ def market_page(market, hm, harti, cats, cbsl):
 <p class="alt">{e(en)} market price today – vegetable wholesale prices · {e(si)}{" (දබුල්ල)" if market == "Dambulla" else ""} එලවලු මිල<br>{e(en.lower())} elawalu mila ada · {e(en.lower())} market rate today<br>{e(ta)} சந்தை விலை இன்று</p>
 {cbsl_html if cbsl_first else ''}
 {harti_h2 if cbsl_first else ''}
-<p class="asof" style="margin-top:14px"><b>📦 තොග මිල / Wholesale</b> · 📍 {e(si)} ({e(en)}) · {fdate(d_(last),'si') if last else '—'} · HARTI</p>
-{harti_delay_notice(latest_all)}
-{download_bar(market, rows, last, latest_all, url, in_latest_report(harti, market))}
+<p class="asof" style="margin-top:14px"><b>📦 තොග මිල / Wholesale</b> · 📍 {e(si)} ({e(en)}) · {fdate(d_(last),'si') if last else '—'} · {"DEC" if dec_day else "HARTI"}</p>
+{dec_notice(market, last, latest_all) if dec_day else harti_delay_notice(latest_all)}
+{download_bar(market, rows, last, latest_all, url, in_latest_report(harti, market), dec_day)}
 {duo}
 {stale}
 <div class="story">
@@ -759,7 +817,7 @@ def market_page(market, hm, harti, cats, cbsl):
 </div>
 {table}
 {table_note if rows else ''}
-{official_harti_link(harti, market, last)}
+{dec_link(market, last) if dec_day else official_harti_link(harti, market, last)}
 {better_html}
 {'' if cbsl_first else cbsl_html}
 <a class="cta" href="../wholesale.html">වෙළඳපොළ 10ක ප්‍රස්ථාර හා ලාභ ගණකය බලන්න / Charts &amp; calculator →</a>
@@ -773,9 +831,10 @@ def market_page(market, hm, harti, cats, cbsl):
         top3 = ", ".join(f"{c['name']} Rs. {money(r)} retail" for c, w, r in crow[:3] if r is not None)
     if cbsl_first:
         desc = (f"{en} market price today ({fdate(cd,'en')}): CBSL wholesale and retail prices for {cbsl_count} items, "
-                f"plus HARTI wholesale prices for {len(rows)} vegetables ({dtxt})")
+                f"plus {'economic centre' if dec_day else 'HARTI'} wholesale prices for {len(rows)} vegetables ({dtxt})")
     else:
-        desc = (f"{en} market price today ({dtxt}): wholesale prices for {len(rows)} vegetables from the HARTI report"
+        desc = (f"{en} market price today ({dtxt}): wholesale prices for {len(rows)} vegetables from the "
+                + (f"official {dec_name(market,'en')} daily price list" if dec_day else "HARTI report")
                 + (", plus CBSL Dambulla retail and wholesale" if cbsl_count else ""))
     desc = (desc
             + f". {top3}. {si} එලවලු මිල අද{' (දබුල්ල)' if market == 'Dambulla' else ''} · {en.lower()} elawalu mila.")
@@ -790,7 +849,8 @@ def hub_page(summary, latest_all, harti=None):
     rows = "".join(
         f'<tr><td><a href="{MKT[m]["slug"]}.html">📍 {e(MKT[m]["si"])}</a> <span style="color:var(--muted)">/ {e(men(m))}</span></td>'
         f'<td class="n">{n}</td><td class="n">{fdate(d_(last),"si") if last else "—"}'
-        f'{" ⚠" if last and last < latest_all and not (harti and in_latest_report(harti, m)) else ""}</td></tr>'
+        f'{" ⚠" if last and last < latest_all and not (harti and in_latest_report(harti, m)) else ""}'
+        f'{" · DEC" if is_dec(m, last) else ""}</td></tr>'
         for m, (last, n) in summary.items())
     body = (f'<p class="crumb"><a href="../index.html">TopGoviya.lk</a> / වෙළඳපොළ මිල</p>'
             f'<h1>🧺 වෙළඳපොළ එළවළු මිල අද</h1>'
@@ -803,7 +863,10 @@ def hub_page(summary, latest_all, harti=None):
             f'Tap a market for its price list, last week\'s prices and where the same crop sold higher.</p></div>'
             f'<div class="scroll"><table><thead><tr><th>වෙළඳපොළ / Market</th><th class="n">භාණ්ඩ<br>Items</th>'
             f'<th class="n">වාර්තා දිනය<br>Report date</th></tr></thead><tbody>{rows}</tbody></table></div>'
-            f'<p class="asof" style="margin-top:10px">⚠ = HARTI නවතම වාර්තාවේ නොතිබුණි / not in the latest report (showing its last report)</p>'
+            f'<p class="asof" style="margin-top:10px">⚠ = HARTI නවතම වාර්තාවේ නොතිබුණි / not in the latest report (showing its last report)'
+            + (' · DEC = විශේෂිත ආර්ථික මධ්‍යස්ථානයේ නිල දෛනික මිල ලැයිස්තුව (HARTI වෙබ් අඩවිය නොමැති කාලයේ) / '
+               'official economic-centre price list, used while the HARTI site is unavailable' if any(DEC_DAYS.values()) else '')
+            + '</p>'
             f'<a class="cta" href="../price/index.html">සිල්ලර මිල (CBSL) බලන්න / Retail prices →</a>')
     url = f"{SITE}/{OUT_DIR}/"
     title = "වෙළඳපොළ එළවළු මිල අද | Sri Lanka Market Prices Today – Dambulla, Peliyagoda | TopGoviya"
@@ -841,7 +904,7 @@ def main():
         made.append(MKT[m]["slug"])
     latest_all = harti["dates"][-1]
     open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8").write(hub_page(summary, latest_all, harti))
-    update_sitemap(made, latest_all)
+    update_sitemap(made, max([latest_all] + [l for l, _ in summary.values() if l]))
     print(f"Built {len(made)} market pages + hub page, sitemap updated.")
     for m, (last, n) in summary.items():
         print(f"  {m:16} {n:3} items  {last}")
