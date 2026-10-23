@@ -1,6 +1,7 @@
 # TopGoviya.lk — daily Dambulla price video (Phase 1: 12 vegetables, silent, ~2 minutes)
 # Reads data.json (CBSL daily report, Dambulla wholesale + retail) and makes, in folder daily_video/:
 #   topgoviya-daily-YYYY-MM-DD.mp4   1920x1080 silent video (add your voice in CapCut)
+#   topgoviya-daily-YYYY-MM-DD-music.mp4  same video with the spice music track (music/music-5.wav)
 #   thumbnail-YYYY-MM-DD.png         1280x720 YouTube thumbnail
 #   youtube-YYYY-MM-DD.txt           ready title + description
 # Crop photos (optional): video-assets/crops/<name>.jpg, e.g. cabbage.jpg. Missing photo = name box.
@@ -8,6 +9,7 @@ import json, os, subprocess, sys
 from datetime import date
 from PIL import Image, ImageDraw, ImageFont, ImageOps, features
 from build_pages import n_si, fdate, sl, MONTHS
+import short_kit
 
 OUT = "daily_video"
 CROPS = "video-assets/crops"
@@ -296,6 +298,30 @@ def script_file(rep, rows):
     return "\n".join(L) + "\n"
 
 
+MUSIC_KEEP = 54   # seconds of the track to use (the track fades out after this)
+MUSIC_XF = 3      # seconds of smooth overlap where the track repeats
+
+
+def add_music_loop(silent, out, track, seconds):
+    """Music for the full video: repeat the track with a smooth overlap, no quiet gap."""
+    n = 1
+    while n * MUSIC_KEEP - (n - 1) * MUSIC_XF < seconds:
+        n += 1
+    cmd = ["ffmpeg", "-y", "-loglevel", "error", "-i", silent]
+    for _ in range(n):
+        cmd += ["-i", track]
+    parts = [f"[{k + 1}:a]atrim=0:{MUSIC_KEEP},asetpts=PTS-STARTPTS[m{k}]" for k in range(n)]
+    last = "m0"
+    for k in range(1, n):
+        parts.append(f"[{last}][m{k}]acrossfade=d={MUSIC_XF}[x{k}]")
+        last = f"x{k}"
+    parts.append(f"[{last}]atrim=0:{seconds:.2f},asetpts=PTS-STARTPTS,volume={short_kit.MUSIC_VOL},"
+                 f"afade=t=in:st=0:d=1,afade=t=out:st={max(seconds - 3.0, 0):.2f}:d=3[a]")
+    cmd += ["-filter_complex", ";".join(parts), "-map", "0:v", "-map", "[a]", "-c:v", "copy",
+            "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", out]
+    subprocess.run(cmd, check=True)
+
+
 def main():
     if not features.check("raqm"):
         sys.exit("Sinhala text support (raqm) is missing. Stopping.")
@@ -318,6 +344,14 @@ def main():
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0",
                     "-i", os.path.join(tmp, "list.txt"), "-vf", "fps=30,format=yuv420p",
                     "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-movflags", "+faststart", mp4], check=True)
+    total = SEC_TITLE + SEC_ITEM * len(rows) + SEC_SUM + SEC_END
+    try:  # music version (the silent one stays for your voice)
+        track = short_kit.pick_track("music-5.wav", "music-4.wav")
+        if track:
+            add_music_loop(mp4, os.path.join(OUT, f"topgoviya-daily-{iso}-music.mp4"), track, total)
+            print("Music added:", track)
+    except Exception as e:
+        print("Music step skipped:", e)
     thumbnail(rep, rows).save(os.path.join(OUT, f"thumbnail-{iso}.png"))
     open(os.path.join(OUT, f"youtube-{iso}.txt"), "w", encoding="utf-8").write(text_file(rep, rows))
     open(os.path.join(OUT, f"script-{iso}.txt"), "w", encoding="utf-8").write(script_file(rep, rows))
