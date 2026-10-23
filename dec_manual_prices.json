@@ -1,0 +1,27 @@
+{
+ "note": "Manual wholesale prices (Rs./kg, [min, max]) copied from the official daily price lists of the Dedicated Economic Centres, used while the HARTI site is unavailable. One block per date. apply_dec_prices.py adds them to harti_market_history.json. A real HARTI price for the same market and day always wins.",
+ "days": {
+  "2026-10-22": {
+   "Dambulla": {
+    "Beans": [400, 450], "Carrot": [230, 240], "Leeks": [130, 140],
+    "Beetroot": [240, 250], "Beetroot (N.Eliya)": [250, 260], "Knolkhol": [180, 200],
+    "Raddish": [80, 100], "Cabbage (Kandy)": [300, 380], "Tomato": [400, 500],
+    "Ladies Fingers": [130, 140], "Brinjals": [280, 310], "Capsicum": [300, 450],
+    "Pumpkin": [240, 250], "Cucumber": [80, 100], "Bitter Gourd": [380, 430],
+    "Snake Gourd": [240, 260], "Drumstick": [25, 30], "Luffa": [230, 280],
+    "Long Beans": [140, 250], "Ash Plantains": [150, 160], "Green Chillies": [200, 250],
+    "Lime": [950, 1000], "Sweet Potato": [60, 80], "Manioc": [80, 110],
+    "Eggplant": [280, 310], "Potato (Welimada)": [220, 230], "Potato (Imported)": [140, 150],
+    "Big Onion (Imported)": [240, 270]
+   },
+   "Keppetipola": {
+    "Beans": [380, 420], "Carrot": [200, 230], "Leeks": [120, 140],
+    "Beetroot (N.Eliya)": [220, 250], "Knolkhol": [210, 250], "Raddish": [70, 90],
+    "Cabbage (N.Eliya)": [300, 350], "Tomato": [550, 600], "Brinjals": [250, 300],
+    "Capsicum": [600, 600], "Pumpkin": [230, 230], "Cucumber": [100, 100],
+    "Drumstick": [150, 150], "Green Chillies": [400, 400], "Sweet Potato": [140, 160],
+    "Manioc": [120, 150], "Potato (Welimada)": [180, 210]
+   }
+  }
+ }
+}
