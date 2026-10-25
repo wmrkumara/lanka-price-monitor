@@ -671,7 +671,24 @@ try{speechSynthesis.onvoiceschanged=()=>{};}catch(e){}
 
 loadFav();loadBasket();lang=(store("tg_lang")||"si");if(!T[lang])lang="si";
 build();renderAll();
-(async()=>{for(const u of LIVE){try{const r=await fetch(u,{cache:"no-store"});if(r.ok){const j=await r.json();if(j&&j.days&&Object.keys(j.days).length){DB=j;build();renderAll();break;}}}catch(e){}}})();
+// Early prices: entered from the DEC's official daily price list before the DEC website updates.
+// Used only for a day the robot has not collected yet; the robot's data always wins.
+const EARLY=["https://raw.githubusercontent.com/wmrkumara/lanka-price-monitor/main/dambulla_early.json","dambulla_early.json"];
+function mergeEarly(e){
+  if(!e||!e.date||!e.prices||DB.days[e.date])return false;
+  const last=Object.keys(DB.days).sort().pop();if(last&&e.date<last)return false;
+  DB.days[e.date]=e.prices;
+  for(const pid of Object.keys(e.prices)){if(!DB.products[pid]){const m=MASTER[pid];DB.products[pid]={name:m?m.en:pid,type:""};}}
+  return true;
+}
+async function getJSON(list){for(const u of list){try{const r=await fetch(u,{cache:"no-store"});if(r.ok)return await r.json();}catch(e){}}return null;}
+(async()=>{
+  const j=await getJSON(LIVE);
+  if(j&&j.days&&Object.keys(j.days).length)DB=j;
+  const e=await getJSON(EARLY);
+  mergeEarly(e);
+  build();renderAll();
+})();
 </script>
 </body>
 </html>
