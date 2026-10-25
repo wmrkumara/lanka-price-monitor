@@ -1,18 +1,642 @@
 {
- "tested_at_utc": "2026-10-25 12:46",
- "date": "2026-08-27",
- "url": "https://api.dambulladec.com/api/prices/by-date/2026-08-27?page=1&limit=100",
+ "tested_at_utc": "2026-10-25 12:49",
+ "date": "2026-07-27",
+ "url": "https://api.dambulladec.com/api/prices/by-date/2026-07-27?page=1&limit=100",
  "http_status": 200,
- "size_kb": 0,
+ "size_kb": 3169,
  "pagination": {
   "currentPage": 1,
   "pageSize": 100,
-  "totalItems": 0,
-  "totalPages": 0,
+  "totalItems": 89,
+  "totalPages": 1,
   "hasPreviousPage": false,
   "hasNextPage": false
  },
- "count": 0,
- "ok": false,
- "items": []
+ "count": 89,
+ "ok": true,
+ "items": [
+  {
+   "pid": 91,
+   "name": "Athugowa",
+   "type": "Leaf Vegetable",
+   "min": 120,
+   "max": 130
+  },
+  {
+   "pid": 92,
+   "name": "Curry Leaves",
+   "type": "Leaf Vegetable",
+   "min": 100,
+   "max": 120
+  },
+  {
+   "pid": 32,
+   "name": "Gotukola",
+   "type": "Leaf Vegetable",
+   "min": 25,
+   "max": 30
+  },
+  {
+   "pid": 93,
+   "name": "Lettuce",
+   "type": "Leaf Vegetable",
+   "min": 200,
+   "max": 210
+  },
+  {
+   "pid": 94,
+   "name": "Mukunuwenna",
+   "type": "Leaf Vegetable",
+   "min": 25,
+   "max": 30
+  },
+  {
+   "pid": 95,
+   "name": "Onion Leaves",
+   "type": "Leaf Vegetable",
+   "min": 200,
+   "max": 210
+  },
+  {
+   "pid": 89,
+   "name": "Water Spinach",
+   "type": "Leaf Vegetable",
+   "min": 25,
+   "max": 30
+  },
+  {
+   "pid": 33,
+   "name": "Avacado",
+   "type": "fruit",
+   "min": 250,
+   "max": 260
+  },
+  {
+   "pid": 44,
+   "name": "Banana - Abul",
+   "type": "fruit",
+   "min": 80,
+   "max": 130
+  },
+  {
+   "pid": 40,
+   "name": "Banana - Ambun",
+   "type": "fruit",
+   "min": 210,
+   "max": 220
+  },
+  {
+   "pid": 71,
+   "name": "Banana - Kolikuttu",
+   "type": "fruit",
+   "min": 340,
+   "max": 350
+  },
+  {
+   "pid": 41,
+   "name": "Banana - Sini",
+   "type": "fruit",
+   "min": 80,
+   "max": 120
+  },
+  {
+   "pid": 46,
+   "name": "Coconut",
+   "type": "fruit",
+   "min": 100,
+   "max": 105
+  },
+  {
+   "pid": 77,
+   "name": "Gooseberry",
+   "type": "fruit",
+   "min": 1500,
+   "max": 1600
+  },
+  {
+   "pid": 34,
+   "name": "Guava",
+   "type": "fruit",
+   "min": 150,
+   "max": 160
+  },
+  {
+   "pid": 78,
+   "name": "Indian bael",
+   "type": "fruit",
+   "min": 150,
+   "max": 160
+  },
+  {
+   "pid": 79,
+   "name": "King Coconut",
+   "type": "fruit",
+   "min": 170,
+   "max": 180
+  },
+  {
+   "pid": 42,
+   "name": "Mango - Karatha Kolomban",
+   "type": "fruit",
+   "min": 700,
+   "max": 710
+  },
+  {
+   "pid": 73,
+   "name": "Mango - Malu",
+   "type": "fruit",
+   "min": 120,
+   "max": 130
+  },
+  {
+   "pid": 75,
+   "name": "Mango- Other",
+   "type": "fruit",
+   "min": 200,
+   "max": 210
+  },
+  {
+   "pid": 74,
+   "name": "Mango- TJC",
+   "type": "fruit",
+   "min": 350,
+   "max": 360
+  },
+  {
+   "pid": 36,
+   "name": "Papaya",
+   "type": "fruit",
+   "min": 80,
+   "max": 100
+  },
+  {
+   "pid": 43,
+   "name": "Passion",
+   "type": "fruit",
+   "min": 350,
+   "max": 360
+  },
+  {
+   "pid": 76,
+   "name": "Passion",
+   "type": "fruit",
+   "min": 350,
+   "max": 360
+  },
+  {
+   "pid": 45,
+   "name": "Peanuts",
+   "type": "fruit",
+   "min": 350,
+   "max": 360
+  },
+  {
+   "pid": 38,
+   "name": "Pineapple",
+   "type": "fruit",
+   "min": 360,
+   "max": 370
+  },
+  {
+   "pid": 72,
+   "name": "Red Banana",
+   "type": "fruit",
+   "min": 250,
+   "max": 260
+  },
+  {
+   "pid": 37,
+   "name": "Soursop",
+   "type": "fruit",
+   "min": 200,
+   "max": 210
+  },
+  {
+   "pid": 35,
+   "name": "Watermelon",
+   "type": "fruit",
+   "min": 80,
+   "max": 100
+  },
+  {
+   "pid": 39,
+   "name": "Woodapple",
+   "type": "fruit",
+   "min": 400,
+   "max": 410
+  },
+  {
+   "pid": 99,
+   "name": "Kiriala",
+   "type": "potatoes",
+   "min": 300,
+   "max": 350
+  },
+  {
+   "pid": 100,
+   "name": "Kohila",
+   "type": "potatoes",
+   "min": 100,
+   "max": 110
+  },
+  {
+   "pid": 101,
+   "name": "Lotus Roots",
+   "type": "potatoes",
+   "min": 450,
+   "max": 500
+  },
+  {
+   "pid": 98,
+   "name": "Manioc",
+   "type": "potatoes",
+   "min": 130,
+   "max": 140
+  },
+  {
+   "pid": 20,
+   "name": "Potatoes - Import",
+   "type": "potatoes",
+   "min": 140,
+   "max": 180
+  },
+  {
+   "pid": 15,
+   "name": "Potatoes - Nuwaraeliya",
+   "type": "potatoes",
+   "min": 280,
+   "max": 300
+  },
+  {
+   "pid": 18,
+   "name": "Potatoes - Walimada",
+   "type": "potatoes",
+   "min": 250,
+   "max": 260
+  },
+  {
+   "pid": 97,
+   "name": "Sweet Potato",
+   "type": "potatoes",
+   "min": 90,
+   "max": 130
+  },
+  {
+   "pid": 87,
+   "name": "Corns",
+   "type": "rice",
+   "min": 130,
+   "max": 140
+  },
+  {
+   "pid": 82,
+   "name": "Cowpea",
+   "type": "rice",
+   "min": 500,
+   "max": 510
+  },
+  {
+   "pid": 81,
+   "name": "Finger Millet",
+   "type": "rice",
+   "min": 400,
+   "max": 410
+  },
+  {
+   "pid": 80,
+   "name": "Gram",
+   "type": "rice",
+   "min": 335,
+   "max": 340
+  },
+  {
+   "pid": 83,
+   "name": "Green Gram",
+   "type": "rice",
+   "min": 600,
+   "max": 610
+  },
+  {
+   "pid": 84,
+   "name": "Sesame",
+   "type": "rice",
+   "min": 350,
+   "max": 400
+  },
+  {
+   "pid": 86,
+   "name": "Soya Bean",
+   "type": "rice",
+   "min": 380,
+   "max": 400
+  },
+  {
+   "pid": 85,
+   "name": "Tamarind",
+   "type": "rice",
+   "min": 400,
+   "max": 410
+  },
+  {
+   "pid": 64,
+   "name": "Ambarella",
+   "type": "vegetable",
+   "min": 170,
+   "max": 180
+  },
+  {
+   "pid": 62,
+   "name": "Ash Plantain",
+   "type": "vegetable",
+   "min": 150,
+   "max": 160
+  },
+  {
+   "pid": 4,
+   "name": "Beans",
+   "type": "vegetable",
+   "min": 300,
+   "max": 450
+  },
+  {
+   "pid": 8,
+   "name": "Beetroot - Nuwaraeliya",
+   "type": "vegetable",
+   "min": 250,
+   "max": 260
+  },
+  {
+   "pid": 9,
+   "name": "Beetroot Cut - Malsiripura",
+   "type": "vegetable",
+   "min": 300,
+   "max": 320
+  },
+  {
+   "pid": 10,
+   "name": "Beetroot Cut - Puththalama",
+   "type": "vegetable",
+   "min": 260,
+   "max": 270
+  },
+  {
+   "pid": 70,
+   "name": "Big Onion Import",
+   "type": "vegetable",
+   "min": 140,
+   "max": 190
+  },
+  {
+   "pid": 24,
+   "name": "Bitter Gourd",
+   "type": "vegetable",
+   "min": 230,
+   "max": 350
+  },
+  {
+   "pid": 26,
+   "name": "Brinjal",
+   "type": "vegetable",
+   "min": 300,
+   "max": 350
+  },
+  {
+   "pid": 55,
+   "name": "Butternut Squash",
+   "type": "vegetable",
+   "min": 90,
+   "max": 100
+  },
+  {
+   "pid": 1,
+   "name": "Cabbage",
+   "type": "vegetable",
+   "min": 120,
+   "max": 150
+  },
+  {
+   "pid": 66,
+   "name": "Capsicum",
+   "type": "vegetable",
+   "min": 500,
+   "max": 600
+  },
+  {
+   "pid": 2,
+   "name": "Cauliflower",
+   "type": "vegetable",
+   "min": 150,
+   "max": 200
+  },
+  {
+   "pid": 65,
+   "name": "Chaw - Chaw",
+   "type": "vegetable",
+   "min": 70,
+   "max": 80
+  },
+  {
+   "pid": 53,
+   "name": "Cooking Melon",
+   "type": "vegetable",
+   "min": 45,
+   "max": 50
+  },
+  {
+   "pid": 14,
+   "name": "Cucumber",
+   "type": "vegetable",
+   "min": 30,
+   "max": 50
+  },
+  {
+   "pid": 61,
+   "name": "Drumsticks",
+   "type": "vegetable",
+   "min": 150,
+   "max": 260
+  },
+  {
+   "pid": 49,
+   "name": "Dry Chillies",
+   "type": "vegetable",
+   "min": 1050,
+   "max": 1100
+  },
+  {
+   "pid": 58,
+   "name": "Eggplant",
+   "type": "vegetable",
+   "min": 270,
+   "max": 280
+  },
+  {
+   "pid": 47,
+   "name": "Garlic",
+   "type": "vegetable",
+   "min": 330,
+   "max": 340
+  },
+  {
+   "pid": 28,
+   "name": "Ginger",
+   "type": "vegetable",
+   "min": 850,
+   "max": 900
+  },
+  {
+   "pid": 67,
+   "name": "Green Chili",
+   "type": "vegetable",
+   "min": 900,
+   "max": 1200
+  },
+  {
+   "pid": 30,
+   "name": "Jackfruit",
+   "type": "vegetable",
+   "min": 80,
+   "max": 100
+  },
+  {
+   "pid": 22,
+   "name": "Lady's Fingers",
+   "type": "vegetable",
+   "min": 60,
+   "max": 80
+  },
+  {
+   "pid": 19,
+   "name": "Leeks",
+   "type": "vegetable",
+   "min": 150,
+   "max": 180
+  },
+  {
+   "pid": 27,
+   "name": "Lime",
+   "type": "vegetable",
+   "min": 250,
+   "max": 270
+  },
+  {
+   "pid": 68,
+   "name": "Nai Miris",
+   "type": "vegetable",
+   "min": 1000,
+   "max": 1200
+  },
+  {
+   "pid": 51,
+   "name": "Nnolkhol",
+   "type": "vegetable",
+   "min": 100,
+   "max": 130
+  },
+  {
+   "pid": 6,
+   "name": "Nuwaraeliya Carrot",
+   "type": "vegetable",
+   "min": 250,
+   "max": 280
+  },
+  {
+   "pid": 63,
+   "name": "Plantain Flower",
+   "type": "vegetable",
+   "min": 100,
+   "max": 110
+  },
+  {
+   "pid": 25,
+   "name": "Pumpkin - Malashian",
+   "type": "vegetable",
+   "min": 80,
+   "max": 90
+  },
+  {
+   "pid": 13,
+   "name": "Raddish",
+   "type": "vegetable",
+   "min": 60,
+   "max": 80
+  },
+  {
+   "pid": 31,
+   "name": "Red Onion Import",
+   "type": "vegetable",
+   "min": 250,
+   "max": 260
+  },
+  {
+   "pid": 69,
+   "name": "Red Onion- Lanka",
+   "type": "vegetable",
+   "min": 200,
+   "max": 300
+  },
+  {
+   "pid": 21,
+   "name": "Ridge Gourd",
+   "type": "vegetable",
+   "min": 160,
+   "max": 200
+  },
+  {
+   "pid": 23,
+   "name": "Snake Gourd",
+   "type": "vegetable",
+   "min": 120,
+   "max": 130
+  },
+  {
+   "pid": 57,
+   "name": "Thai Eggplant",
+   "type": "vegetable",
+   "min": 150,
+   "max": 250
+  },
+  {
+   "pid": 56,
+   "name": "Thithbatu",
+   "type": "vegetable",
+   "min": 350,
+   "max": 400
+  },
+  {
+   "pid": 54,
+   "name": "Thumbakarawila",
+   "type": "vegetable",
+   "min": 500,
+   "max": 600
+  },
+  {
+   "pid": 11,
+   "name": "Tomato",
+   "type": "vegetable",
+   "min": 250,
+   "max": 330
+  },
+  {
+   "pid": 29,
+   "name": "Turmeric",
+   "type": "vegetable",
+   "min": 180,
+   "max": 200
+  },
+  {
+   "pid": 59,
+   "name": "Winged Bean",
+   "type": "vegetable",
+   "min": 260,
+   "max": 300
+  },
+  {
+   "pid": 60,
+   "name": "Yard - Long Beans",
+   "type": "vegetable",
+   "min": 120,
+   "max": 180
+  }
+ ]
 }
