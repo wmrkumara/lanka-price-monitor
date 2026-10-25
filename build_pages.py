@@ -544,7 +544,7 @@ def shell(title, desc, canonical, body, jsonld, lang="si"):
 </head>
 <body>
 <div class="wrap">
-<header class="top"><a class="brand" href="../index.html">TopGoviya.lk</a><span><a href="index.html">සියලු මිල ගණන් / All prices</a><a class="tgc-top" href="../contact.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="#25D366" aria-hidden="true" style="flex-shrink:0;vertical-align:-2px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> අමතන්න</a></span></header>
+<header class="top"><a class="brand" href="/">TopGoviya.lk</a><span><a href="/price/">සියලු මිල ගණන් / All prices</a><a class="tgc-top" href="../contact.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="#25D366" aria-hidden="true" style="flex-shrink:0;vertical-align:-2px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> අමතන්න</a></span></header>
 {body}
 <p class="note">මිල ගණන් මඟ පෙන්වීමක් පමණි. ඔබගේ තීරණ ඔබගේ වගකීම වේ.<br>
 Prices are indicative only. Decisions are your responsibility. Source: Central Bank of Sri Lanka daily price reports (not an official publication).<br>
@@ -666,9 +666,15 @@ def commodity_page(c, dates, latest_idx, all_items):
                  f'<tbody>{hist}</tbody></table></div>')
 
     # related links (same category first)
-    same = [x for x in all_items if x["category"] == c["category"] and x["name"] != name]
-    rel = "".join(f'<a href="{slug(x["name"])}.html">{emoji(x["name"])} {e(n_si(x["name"]))}</a>' for x in same[:12])
+    # Links to EVERY other price page, so Google can reach all of them (not only via the sitemap)
+    same = [x for x in all_items if x["category"] == c["category"] and x["name"] != name and valid(x["series"])]
+    rel = "".join(f'<a href="/price/{slug(x["name"])}.html">{emoji(x["name"])} {e(n_si(x["name"]))}</a>' for x in same)
     rel_html = f'<h2>{e(c_tr(c["category"],"si"))} මිල<span>Other {e(c["category"].lower())} prices</span></h2><div class="rel">{rel}</div>' if rel else ""
+    others = [x for x in all_items if x["category"] != c["category"] and valid(x["series"])]
+    if others:
+        more = " · ".join(f'<a href="/price/{slug(x["name"])}.html">{e(n_si(x["name"]))}</a>' for x in others)
+        rel_html += (f'<h2>තවත් මිල ගණන්<span>More prices</span></h2>'
+                     f'<p class="asof" style="line-height:2">{more}</p>')
 
     if wl:
         gap = price - wprice
@@ -681,6 +687,9 @@ def commodity_page(c, dates, latest_idx, all_items):
                     f'<a href="../wholesale.html">HARTI වෙළඳපොළ 10ක තොග මිල →</a></p>')
     else:
         duo_html = '<p class="asof" style="margin-top:6px"><a href="../wholesale.html">HARTI තොග මිල බලන්න / See HARTI wholesale prices →</a></p>'
+    if mkt == "Dambulla" or (wl and wmkt == "Dambulla"):
+        duo_html += ('<p class="asof" style="margin-top:6px">📍 <a href="/market/dambulla.html">දඹුල්ල වෙළඳපොළ අද මිල ගණන් '
+                     '/ Dambulla market prices today →</a></p>')
 
     # ---- FAQ: short factual answers built from the same numbers (Sinhala + English)
     faq = []   # (question_si, question_en, answer_si, answer_en)
@@ -726,7 +735,7 @@ def commodity_page(c, dates, latest_idx, all_items):
                   + 'මිලක් වැරදි යැයි සිතේද? <a href="../contact.html?t=price">අපට දන්වන්න</a> / Spotted a wrong price? Tell us.</p>')
 
     body = f"""
-<p class="crumb"><a href="../index.html">TopGoviya.lk</a> / <a href="index.html">මිල ගණන්</a> / {e(n_si(name))}</p>
+<p class="crumb"><a href="/">TopGoviya.lk</a> / <a href="/price/">මිල ගණන්</a> / {e(n_si(name))}</p>
 <h1>{emoji(name)} {e(n_si(name))} මිල අද</h1>
 <p class="alt">{e(name)} price today in Sri Lanka{(" · " + e(sl(name)) + " mila ada · " + e(sl(name)) + " rate today") if sl(name) else ""}<br>{e(n_ta(name))} விலை இன்று</p>
 <div class="hero">
@@ -747,7 +756,7 @@ def commodity_page(c, dates, latest_idx, all_items):
 {hist_html}
 {faq_html}
 {trust_html}
-<a class="cta" href="../index.html">සම්පූර්ණ ප්‍රස්ථාර, වසර 4ක ඉතිහාසය හා ලාභ ගණකය බලන්න</a>
+<a class="cta" href="/">සම්පූර්ණ ප්‍රස්ථාර, වසර 4ක ඉතිහාසය හා ලාභ ගණකය බලන්න</a>
 {rel_html}
 """
     url = f"{SITE}/{OUT_DIR}/{slug(name)}.html"
@@ -780,7 +789,7 @@ def commodity_page(c, dates, latest_idx, all_items):
 def hub_page(items, dates, latest_idx):
     order = ["Vegetables", "Fruits", "Other", "Rice", "Fish"]
     cats = sorted({c["category"] for c in items}, key=lambda x: order.index(x) if x in order else 99)
-    body = (f'<p class="crumb"><a href="../index.html">TopGoviya.lk</a> / මිල ගණන්</p>'
+    body = (f'<p class="crumb"><a href="/">TopGoviya.lk</a> / මිල ගණන්</p>'
             f'<h1>අද එළවළු, පළතුරු හා ආහාර මිල</h1>'
             f'<p class="alt">Today\'s wholesale and retail prices in Sri Lanka · elawalu mila ada · elawalu rate today<br>இன்றைய மொத்த மற்றும் சில்லறை விலைகள்</p>'
             f'<p class="asof" style="margin-top:14px"><b>🏷️ තොග හා සිල්ලර මිල / Wholesale &amp; retail / மொத்த &amp; சில்லறை</b><br>'
@@ -812,7 +821,7 @@ def hub_page(items, dates, latest_idx):
                  f'<thead><tr><th>භාණ්ඩය / Item</th><th class="n">තොග<br>Wholesale</th><th class="n">සිල්ලර<br>Retail</th></tr></thead>'
                  f'<tbody>{rows}</tbody></table></div>')
     body += '<p class="asof" style="margin-top:10px">මිල රුපියල් වලින් / Prices in Rs. · — = එදින වාර්තා නොවීය / not reported that day</p>'
-    body += '<a class="cta" href="../index.html">සම්පූර්ණ ප්‍රස්ථාර හා ගණක බලන්න</a>'
+    body += '<a class="cta" href="/">සම්පූර්ණ ප්‍රස්ථාර හා ගණක බලන්න</a>'
     url = f"{SITE}/{OUT_DIR}/"
     title = "අද එළවළු මිල (Elawalu Mila Ada) – තොග හා සිල්ලර | Vegetable Prices Today Sri Lanka – TopGoviya.lk"
     desc = (f"Today's wholesale and retail prices for {len(items)} vegetables, fruits, rice and fish in Sri Lanka "
