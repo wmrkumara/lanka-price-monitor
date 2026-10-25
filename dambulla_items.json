@@ -1,0 +1,975 @@
+{
+"note": "TopGoviya names for Dambulla DEC products (key = DEC product id, or n:name for items the DEC website has not listed yet). pop = popularity rank, used by the page and the Short robot.",
+"items": {
+"1": {
+"si": "ගෝවා",
+"en": "Cabbage",
+"ta": "முட்டைக்கோஸ்",
+"e": "🥬",
+"cat": "v",
+"pop": 11,
+"pop_cat": 7,
+"unit": "kg"
+},
+"2": {
+"si": "මල්ගෝවා",
+"en": "Cauliflower",
+"ta": "காலிஃபிளவர்",
+"e": "🥬",
+"cat": "v",
+"pop": 61,
+"pop_cat": 31,
+"unit": "kg"
+},
+"3": {
+"si": "රතු ගෝවා",
+"en": "Red cabbage",
+"ta": "சிவப்பு முட்டைக்கோஸ்",
+"e": "🥬",
+"cat": "v",
+"pop": 93,
+"pop_cat": 49,
+"unit": "kg"
+},
+"4": {
+"si": "බෝංචි",
+"en": "Beans",
+"ta": "பீன்ஸ்",
+"e": "🫛",
+"cat": "v",
+"pop": 6,
+"pop_cat": 6,
+"unit": "kg"
+},
+"19": {
+"si": "ලීක්ස්",
+"en": "Leeks",
+"ta": "லீக்ஸ்",
+"e": "🥬",
+"cat": "v",
+"pop": 25,
+"pop_cat": 12,
+"unit": "kg"
+},
+"6": {
+"si": "කැරට් (නුවරඑළිය)",
+"en": "Carrot (Nuwara Eliya)",
+"ta": "கேரட் (நுவரெலியா)",
+"e": "🥕",
+"cat": "v",
+"pop": 7,
+"pop_cat": 5,
+"unit": "kg"
+},
+"n:carrotjaffna": {
+"si": "කැරට් (යාපනය)",
+"en": "Carrot (Jaffna)",
+"ta": "கேரட் (யாழ்ப்பாணம்)",
+"e": "🥕",
+"cat": "v",
+"pop": 69,
+"pop_cat": 36,
+"unit": "kg"
+},
+"8": {
+"si": "බීට්රූට් (නුවරඑළිය)",
+"en": "Beetroot (Nuwara Eliya)",
+"ta": "பீட்ரூட் (நுவரெலியா)",
+"e": "🥬",
+"cat": "v",
+"pop": 54,
+"pop_cat": 28,
+"unit": "kg"
+},
+"9": {
+"si": "කට් බීට් (මැල්සිරිපුර)",
+"en": "Beetroot cut (Melsiripura)",
+"ta": "பீட்ரூட் வெட்டு (மெல்சிறிபுர)",
+"e": "🥬",
+"cat": "v",
+"pop": 65,
+"pop_cat": 34,
+"unit": "kg"
+},
+"n:beetrootcutd": {
+"si": "කට් බීට් (දඹුල්ල)",
+"en": "Beetroot cut (Dambulla)",
+"ta": "பீட்ரூட் வெட்டு (தம்புள்ள)",
+"e": "🥬",
+"cat": "v",
+"pop": 78,
+"pop_cat": 40,
+"unit": "kg"
+},
+"n:beetrootcutj": {
+"si": "කට් බීට් (යාපනය)",
+"en": "Beetroot cut (Jaffna)",
+"ta": "பீட்ரூட் வெட்டு (யாழ்ப்பாணம்)",
+"e": "🥬",
+"cat": "v",
+"pop": 88,
+"pop_cat": 45,
+"unit": "kg"
+},
+"10": {
+"si": "කට් බීට් (පුත්තලම)",
+"en": "Beetroot cut (Puttalam)",
+"ta": "பீட்ரூட் வெட்டு (புத்தளம்)",
+"e": "🥬",
+"cat": "v",
+"pop": 73,
+"pop_cat": 38,
+"unit": "kg"
+},
+"11": {
+"si": "තක්කාලි",
+"en": "Tomato",
+"ta": "தக்காளி",
+"e": "🍅",
+"cat": "v",
+"pop": 1,
+"pop_cat": 1,
+"unit": "kg"
+},
+"13": {
+"si": "රාබු",
+"en": "Radish",
+"ta": "முள்ளங்கி",
+"e": "🥬",
+"cat": "v",
+"pop": 56,
+"pop_cat": 29,
+"unit": "kg"
+},
+"51": {
+"si": "නෝකෝල්",
+"en": "Knol-khol",
+"ta": "நூல்கோல்",
+"e": "🥬",
+"cat": "v",
+"pop": 58,
+"pop_cat": 30,
+"unit": "kg"
+},
+"53": {
+"si": "කැකිරි",
+"en": "Cooking melon",
+"ta": "கக்கரிக்காய்",
+"e": "🍈",
+"cat": "v",
+"pop": 51,
+"pop_cat": 26,
+"unit": "kg"
+},
+"14": {
+"si": "පිපිඤ්ඤා",
+"en": "Cucumber",
+"ta": "வெள்ளரிக்காய்",
+"e": "🥒",
+"cat": "v",
+"pop": 27,
+"pop_cat": 13,
+"unit": "kg"
+},
+"21": {
+"si": "වැටකොළු",
+"en": "Ridge gourd",
+"ta": "பீர்க்கங்காய்",
+"e": "🥬",
+"cat": "v",
+"pop": 42,
+"pop_cat": 21,
+"unit": "kg"
+},
+"22": {
+"si": "බණ්ඩක්කා",
+"en": "Okra (Lady's fingers)",
+"ta": "வெண்டைக்காய்",
+"e": "🥬",
+"cat": "v",
+"pop": 12,
+"pop_cat": 8,
+"unit": "kg"
+},
+"23": {
+"si": "පතෝල",
+"en": "Snake gourd",
+"ta": "புடலங்காய்",
+"e": "🥬",
+"cat": "v",
+"pop": 36,
+"pop_cat": 18,
+"unit": "kg"
+},
+"24": {
+"si": "කරවිල",
+"en": "Bitter gourd",
+"ta": "பாகற்காய்",
+"e": "🥬",
+"cat": "v",
+"pop": 28,
+"pop_cat": 14,
+"unit": "kg"
+},
+"54": {
+"si": "තුඹ කරවිල",
+"en": "Spine gourd (Thumba karawila)",
+"ta": "பழுபாகற்காய்",
+"e": "🥬",
+"cat": "v",
+"pop": 89,
+"pop_cat": 46,
+"unit": "kg"
+},
+"25": {
+"si": "වට්ටක්කා (මැලේසියන්)",
+"en": "Pumpkin (Malaysian)",
+"ta": "பூசணிக்காய் (மலேசியன்)",
+"e": "🎃",
+"cat": "v",
+"pop": 18,
+"pop_cat": 32,
+"unit": "kg"
+},
+"52": {
+"si": "වට්ටක්කා (ලොකු)",
+"en": "Pumpkin (big)",
+"ta": "பூசணிக்காய் (பெரியது)",
+"e": "🎃",
+"cat": "v",
+"pop": 41,
+"pop_cat": 20,
+"unit": "kg"
+},
+"55": {
+"si": "බටර්නට්",
+"en": "Butternut squash",
+"ta": "பட்டர்நட் பூசணி",
+"e": "🎃",
+"cat": "v",
+"pop": 71,
+"pop_cat": 37,
+"unit": "kg"
+},
+"26": {
+"si": "වම්බටු",
+"en": "Brinjal",
+"ta": "கத்தரிக்காய்",
+"e": "🍆",
+"cat": "v",
+"pop": 5,
+"pop_cat": 4,
+"unit": "kg"
+},
+"56": {
+"si": "තිත්බටු",
+"en": "Thithbatu",
+"ta": "தித்பட்டு",
+"e": "🍆",
+"cat": "v",
+"pop": 83,
+"pop_cat": 43,
+"unit": "kg"
+},
+"57": {
+"si": "තායි වම්බටු",
+"en": "Thai eggplant",
+"ta": "தாய் கத்தரிக்காய்",
+"e": "🍆",
+"cat": "v",
+"pop": 75,
+"pop_cat": 39,
+"unit": "kg"
+},
+"58": {
+"si": "බෝල වම්බටු",
+"en": "Eggplant (round)",
+"ta": "உருண்டைக் கத்தரிக்காய்",
+"e": "🍆",
+"cat": "v",
+"pop": 79,
+"pop_cat": 41,
+"unit": "kg"
+},
+"59": {
+"si": "දඹල",
+"en": "Winged bean",
+"ta": "சிறகவரைக்காய்",
+"e": "🫛",
+"cat": "v",
+"pop": 64,
+"pop_cat": 33,
+"unit": "kg"
+},
+"60": {
+"si": "මෑකරල්",
+"en": "Long beans",
+"ta": "பயிற்றங்காய்",
+"e": "🫛",
+"cat": "v",
+"pop": 35,
+"pop_cat": 17,
+"unit": "kg"
+},
+"61": {
+"si": "මුරුංගා",
+"en": "Drumsticks",
+"ta": "முருங்கைக்காய்",
+"e": "🥬",
+"cat": "v",
+"pop": 45,
+"pop_cat": 22,
+"unit": "kg"
+},
+"62": {
+"si": "අළු කෙසෙල්",
+"en": "Ash plantain",
+"ta": "வாழைக்காய்",
+"e": "🍌",
+"cat": "v",
+"pop": 46,
+"pop_cat": 23,
+"unit": "kg"
+},
+"63": {
+"si": "කෙසෙල් මුව",
+"en": "Banana flower",
+"ta": "வாழைப்பூ",
+"e": "🍌",
+"cat": "v",
+"pop": 91,
+"pop_cat": 47,
+"unit": "kg"
+},
+"64": {
+"si": "ඇඹරැල්ල",
+"en": "Ambarella",
+"ta": "அம்பரெல்லா",
+"e": "🥬",
+"cat": "v",
+"pop": 80,
+"pop_cat": 42,
+"unit": "kg"
+},
+"65": {
+"si": "චව් චව්",
+"en": "Chow chow",
+"ta": "சௌ சௌ",
+"e": "🥬",
+"cat": "v",
+"pop": 85,
+"pop_cat": 44,
+"unit": "kg"
+},
+"27": {
+"si": "දෙහි",
+"en": "Lime",
+"ta": "எலுமிச்சை",
+"e": "🍋",
+"cat": "v",
+"pop": 15,
+"pop_cat": 11,
+"unit": "kg"
+},
+"66": {
+"si": "මාළු මිරිස්",
+"en": "Capsicum",
+"ta": "குடைமிளகாய்",
+"e": "🫑",
+"cat": "v",
+"pop": 31,
+"pop_cat": 15,
+"unit": "kg"
+},
+"67": {
+"si": "අමු මිරිස්",
+"en": "Green chilli",
+"ta": "பச்சை மிளகாய்",
+"e": "🌶️",
+"cat": "v",
+"pop": 4,
+"pop_cat": 3,
+"unit": "kg"
+},
+"49": {
+"si": "වියළි මිරිස්",
+"en": "Dried chilli",
+"ta": "காய்ந்த மிளகாய்",
+"e": "🌶️",
+"cat": "v",
+"pop": 32,
+"pop_cat": 16,
+"unit": "kg"
+},
+"68": {
+"si": "නයි මිරිස්",
+"en": "Nai miris",
+"ta": "நாய் மிளகாய்",
+"e": "🌶️",
+"cat": "v",
+"pop": 92,
+"pop_cat": 48,
+"unit": "kg"
+},
+"28": {
+"si": "ඉඟුරු",
+"en": "Ginger",
+"ta": "இஞ்சி",
+"e": "🫚",
+"cat": "v",
+"pop": 39,
+"pop_cat": 19,
+"unit": "kg"
+},
+"29": {
+"si": "කහ",
+"en": "Turmeric",
+"ta": "மஞ்சள்",
+"e": "🥬",
+"cat": "v",
+"pop": 67,
+"pop_cat": 35,
+"unit": "kg"
+},
+"30": {
+"si": "පොළොස්",
+"en": "Young jackfruit (polos)",
+"ta": "பலாக்காய் (பிஞ்சு)",
+"e": "🥬",
+"cat": "v",
+"pop": 49,
+"pop_cat": 25,
+"unit": "kg"
+},
+"31": {
+"si": "රතු ළූණු (ආනයනික)",
+"en": "Red onion (imported)",
+"ta": "சின்ன வெங்காயம் (இறக்குமதி)",
+"e": "🧅",
+"cat": "v",
+"pop": 52,
+"pop_cat": 27,
+"unit": "kg"
+},
+"69": {
+"si": "රතු ළූණු (දේශීය)",
+"en": "Red onion (local)",
+"ta": "சின்ன வெங்காயம் (உள்ளூர்)",
+"e": "🧅",
+"cat": "v",
+"pop": 8,
+"pop_cat": 9,
+"unit": "kg"
+},
+"70": {
+"si": "ලොකු ළූණු (ආනයනික)",
+"en": "Big onion (imported)",
+"ta": "பெரிய வெங்காயம் (இறக்குமதி)",
+"e": "🧅",
+"cat": "v",
+"pop": 2,
+"pop_cat": 2,
+"unit": "kg"
+},
+"48": {
+"si": "ලොකු ළූණු (දේශීය)",
+"en": "Big onion (local)",
+"ta": "பெரிய வெங்காயம் (உள்ளூர்)",
+"e": "🧅",
+"cat": "v",
+"pop": 17,
+"pop_cat": 24,
+"unit": "kg"
+},
+"47": {
+"si": "සුදු ළූණු",
+"en": "Garlic",
+"ta": "உள்ளி (பூண்டு)",
+"e": "🧄",
+"cat": "v",
+"pop": 14,
+"pop_cat": 10,
+"unit": "kg"
+},
+"15": {
+"si": "අර්තාපල් (නුවරඑළිය)",
+"en": "Potato (Nuwara Eliya)",
+"ta": "உருளைக்கிழங்கு (நுவரெலியா)",
+"e": "🥔",
+"cat": "r",
+"pop": 9,
+"pop_cat": 1,
+"unit": "kg"
+},
+"16": {
+"si": "අර්තාපල් (යාපනය)",
+"en": "Potato (Jaffna)",
+"ta": "உருளைக்கிழங்கு (யாழ்ப்பாணம்)",
+"e": "🥔",
+"cat": "r",
+"pop": 76,
+"pop_cat": 8,
+"unit": "kg"
+},
+"18": {
+"si": "අර්තාපල් (වැලිමඩ)",
+"en": "Potato (Welimada)",
+"ta": "உருளைக்கிழங்கு (வெலிமடை)",
+"e": "🥔",
+"cat": "r",
+"pop": 48,
+"pop_cat": 5,
+"unit": "kg"
+},
+"20": {
+"si": "අර්තාපල් (ආනයනික)",
+"en": "Potato (imported)",
+"ta": "உருளைக்கிழங்கு (இறக்குமதி)",
+"e": "🥔",
+"cat": "r",
+"pop": 10,
+"pop_cat": 2,
+"unit": "kg"
+},
+"101": {
+"si": "නෙළුම් අල",
+"en": "Lotus root",
+"ta": "தாமரைக் கிழங்கு",
+"e": "🥔",
+"cat": "r",
+"pop": 94,
+"pop_cat": 10,
+"unit": "kg"
+},
+"100": {
+"si": "කොහිල",
+"en": "Kohila",
+"ta": "கொகில",
+"e": "🥔",
+"cat": "r",
+"pop": 66,
+"pop_cat": 7,
+"unit": "kg"
+},
+"99": {
+"si": "කිරි අල",
+"en": "Kiri ala",
+"ta": "கிரி அல (சேப்பங்கிழங்கு)",
+"e": "🥔",
+"cat": "r",
+"pop": 57,
+"pop_cat": 6,
+"unit": "kg"
+},
+"98": {
+"si": "මඤ්ඤොක්කා",
+"en": "Cassava (manioc)",
+"ta": "மரவள்ளிக்கிழங்கு",
+"e": "🍠",
+"cat": "r",
+"pop": 30,
+"pop_cat": 3,
+"unit": "kg"
+},
+"97": {
+"si": "බතල",
+"en": "Sweet potato",
+"ta": "வற்றாளைக் கிழங்கு",
+"e": "🥔",
+"cat": "r",
+"pop": 40,
+"pop_cat": 4,
+"unit": "kg"
+},
+"96": {
+"si": "ඉන්නල",
+"en": "Innala",
+"ta": "சிறுகிழங்கு",
+"e": "🥔",
+"cat": "r",
+"pop": 86,
+"pop_cat": 9,
+"unit": "kg"
+},
+"95": {
+"si": "ළූණු කොළ",
+"en": "Spring onion leaves",
+"ta": "வெங்காயத் தாள்",
+"e": "🧅",
+"cat": "l",
+"pop": 70,
+"pop_cat": 6,
+"unit": "kg"
+},
+"94": {
+"si": "මුකුණුවැන්න",
+"en": "Mukunuwenna",
+"ta": "பொன்னாங்கண்ணி",
+"e": "🌿",
+"cat": "l",
+"pop": 26,
+"pop_cat": 2,
+"unit": "bundle?"
+},
+"93": {
+"si": "සලාද",
+"en": "Lettuce",
+"ta": "லெட்டூஸ் (சலாது)",
+"e": "🥬",
+"cat": "l",
+"pop": 95,
+"pop_cat": 8,
+"unit": "kg"
+},
+"32": {
+"si": "ගොටුකොළ",
+"en": "Gotukola",
+"ta": "வல்லாரை",
+"e": "🌿",
+"cat": "l",
+"pop": 20,
+"pop_cat": 4,
+"unit": "bundle?"
+},
+"92": {
+"si": "කරපිංචා",
+"en": "Curry leaves",
+"ta": "கறிவேப்பிலை",
+"e": "🌿",
+"cat": "l",
+"pop": 22,
+"pop_cat": 1,
+"unit": "kg"
+},
+"91": {
+"si": "අතුගෝවා",
+"en": "Athugowa (leafy cabbage)",
+"ta": "அத்துகோவா",
+"e": "🥬",
+"cat": "l",
+"pop": 82,
+"pop_cat": 7,
+"unit": "kg"
+},
+"n:spinach": {
+"si": "නිවිති",
+"en": "Spinach",
+"ta": "பசளிக்கீரை",
+"e": "🌿",
+"cat": "l",
+"pop": 60,
+"pop_cat": 5,
+"unit": "kg"
+},
+"89": {
+"si": "කංකුං",
+"en": "Kangkung (water spinach)",
+"ta": "கங்குன் கீரை",
+"e": "🌿",
+"cat": "l",
+"pop": 37,
+"pop_cat": 3,
+"unit": "bundle?"
+},
+"87": {
+"si": "බඩ ඉරිඟු",
+"en": "Maize (corn)",
+"ta": "சோளம்",
+"e": "🌽",
+"cat": "g",
+"pop": 62,
+"pop_cat": 6,
+"unit": "kg"
+},
+"86": {
+"si": "සෝයා බෝංචි",
+"en": "Soya bean",
+"ta": "சோயா அவரை",
+"e": "🫛",
+"cat": "g",
+"pop": 74,
+"pop_cat": 7,
+"unit": "kg"
+},
+"85": {
+"si": "සියඹලා",
+"en": "Tamarind",
+"ta": "புளி",
+"e": "🌾",
+"cat": "g",
+"pop": 53,
+"pop_cat": 5,
+"unit": "kg"
+},
+"84": {
+"si": "තල",
+"en": "Sesame",
+"ta": "எள்ளு",
+"e": "🌾",
+"cat": "g",
+"pop": 96,
+"pop_cat": 9,
+"unit": "kg"
+},
+"83": {
+"si": "මුං ඇට",
+"en": "Green gram (mung)",
+"ta": "பயறு",
+"e": "🌾",
+"cat": "g",
+"pop": 21,
+"pop_cat": 1,
+"unit": "kg"
+},
+"82": {
+"si": "කව්පි",
+"en": "Cowpea",
+"ta": "காராமணி (தட்டைப்பயறு)",
+"e": "🌾",
+"cat": "g",
+"pop": 33,
+"pop_cat": 3,
+"unit": "kg"
+},
+"81": {
+"si": "කුරක්කන්",
+"en": "Finger millet (kurakkan)",
+"ta": "குரக்கன்",
+"e": "🌾",
+"cat": "g",
+"pop": 84,
+"pop_cat": 8,
+"unit": "kg"
+},
+"80": {
+"si": "කඩල",
+"en": "Chickpea (gram)",
+"ta": "கடலை",
+"e": "🌾",
+"cat": "g",
+"pop": 23,
+"pop_cat": 2,
+"unit": "kg"
+},
+"45": {
+"si": "රටකජු",
+"en": "Peanuts",
+"ta": "கச்சான் (நிலக்கடலை)",
+"e": "🥜",
+"cat": "g",
+"pop": 44,
+"pop_cat": 4,
+"unit": "kg"
+},
+"41": {
+"si": "සීනි කෙසෙල්",
+"en": "Banana (Seeni)",
+"ta": "சீனி வாழைப்பழம்",
+"e": "🍌",
+"cat": "f",
+"pop": 16,
+"pop_cat": 2,
+"unit": "kg"
+},
+"44": {
+"si": "ඇඹුල් කෙසෙල්",
+"en": "Banana (Ambul)",
+"ta": "அம்புல் வாழைப்பழம்",
+"e": "🍌",
+"cat": "f",
+"pop": 13,
+"pop_cat": 3,
+"unit": "kg"
+},
+"71": {
+"si": "කොලිකුට්ටු",
+"en": "Banana (Kolikuttu)",
+"ta": "கொலிக்குட்டு வாழைப்பழம்",
+"e": "🍌",
+"cat": "f",
+"pop": 43,
+"pop_cat": 9,
+"unit": "kg"
+},
+"40": {
+"si": "ආඹුන් කෙසෙල්",
+"en": "Banana (Ambun)",
+"ta": "அம்பன் வாழைப்பழம்",
+"e": "🍌",
+"cat": "f",
+"pop": 47,
+"pop_cat": 10,
+"unit": "kg"
+},
+"72": {
+"si": "රතඹලා කෙසෙල්",
+"en": "Red banana (Rathambala)",
+"ta": "செவ்வாழைப்பழம்",
+"e": "🍌",
+"cat": "f",
+"pop": 72,
+"pop_cat": 16,
+"unit": "kg"
+},
+"34": {
+"si": "පේර",
+"en": "Guava",
+"ta": "கொய்யா",
+"e": "🍐",
+"cat": "f",
+"pop": 38,
+"pop_cat": 8,
+"unit": "kg"
+},
+"36": {
+"si": "පැපොල්",
+"en": "Papaya",
+"ta": "பப்பாளி",
+"e": "🍈",
+"cat": "f",
+"pop": 19,
+"pop_cat": 4,
+"unit": "kg"
+},
+"35": {
+"si": "කොමඩු",
+"en": "Watermelon",
+"ta": "வத்தகப்பழம் (தர்பூசணி)",
+"e": "🍉",
+"cat": "f",
+"pop": 29,
+"pop_cat": 6,
+"unit": "kg"
+},
+"38": {
+"si": "අන්නාසි",
+"en": "Pineapple",
+"ta": "அன்னாசி",
+"e": "🍍",
+"cat": "f",
+"pop": 34,
+"pop_cat": 7,
+"unit": "kg"
+},
+"73": {
+"si": "මාළු අඹ",
+"en": "Mango (Malu)",
+"ta": "மாங்காய் (மாலு)",
+"e": "🥭",
+"cat": "f",
+"pop": 50,
+"pop_cat": 11,
+"unit": "kg"
+},
+"42": {
+"si": "කර්තකොළඹ අඹ",
+"en": "Mango (Karthakolomban)",
+"ta": "கறுத்தக்கொழும்பான் மாம்பழம்",
+"e": "🥭",
+"cat": "f",
+"pop": 59,
+"pop_cat": 13,
+"unit": "kg"
+},
+"74": {
+"si": "TJC අඹ",
+"en": "Mango (TJC)",
+"ta": "TJC மாம்பழம்",
+"e": "🥭",
+"cat": "f",
+"pop": 68,
+"pop_cat": 15,
+"unit": "kg"
+},
+"75": {
+"si": "වෙනත් අඹ",
+"en": "Mango (other)",
+"ta": "மாம்பழம் (ஏனையவை)",
+"e": "🥭",
+"cat": "f",
+"pop": 55,
+"pop_cat": 12,
+"unit": "kg"
+},
+"43": {
+"si": "පැෂන් ෆෲට්",
+"en": "Passion fruit",
+"ta": "பசன் பழம்",
+"e": "🍎",
+"cat": "f",
+"pop": 77,
+"pop_cat": 17,
+"unit": "kg"
+},
+"33": {
+"si": "අලිගැට පේර",
+"en": "Avocado",
+"ta": "அவகாடோ (பட்டர் பழம்)",
+"e": "🥑",
+"cat": "f",
+"pop": 63,
+"pop_cat": 14,
+"unit": "kg"
+},
+"37": {
+"si": "කටු අනෝදා",
+"en": "Soursop",
+"ta": "முள் சீதா",
+"e": "🍎",
+"cat": "f",
+"pop": 87,
+"pop_cat": 19,
+"unit": "kg"
+},
+"77": {
+"si": "බෙහෙත් නෙල්ලි",
+"en": "Gooseberry (nelli)",
+"ta": "நெல்லிக்காய்",
+"e": "🍎",
+"cat": "f",
+"pop": 97,
+"pop_cat": 21,
+"unit": "kg"
+},
+"39": {
+"si": "දිවුල්",
+"en": "Wood apple",
+"ta": "விளாம்பழம்",
+"e": "🍎",
+"cat": "f",
+"pop": 81,
+"pop_cat": 18,
+"unit": "kg"
+},
+"78": {
+"si": "බෙලි",
+"en": "Bael fruit",
+"ta": "வில்வம் பழம்",
+"e": "🍎",
+"cat": "f",
+"pop": 90,
+"pop_cat": 20,
+"unit": "kg"
+},
+"79": {
+"si": "තැඹිලි",
+"en": "King coconut",
+"ta": "செவ்விளநீர்",
+"e": "🥥",
+"cat": "f",
+"pop": 24,
+"pop_cat": 5,
+"unit": "nut?"
+},
+"46": {
+"si": "පොල්",
+"en": "Coconut",
+"ta": "தேங்காய்",
+"e": "🥥",
+"cat": "f",
+"pop": 3,
+"pop_cat": 1,
+"unit": "nut?"
+}
+}
+}
