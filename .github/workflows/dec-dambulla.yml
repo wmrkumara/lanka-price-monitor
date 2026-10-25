@@ -1,0 +1,56 @@
+name: Dambulla DEC prices
+
+on:
+  schedule:
+    - cron: "0 12 * * *"    # 5:30 PM Sri Lanka - normal website update
+    - cron: "30 15 * * *"   # 9:00 PM Sri Lanka - if the website was late
+    - cron: "30 3 * * *"    # 9:00 AM Sri Lanka - catches next-day updates
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "daily = last 7 days | backfill = older history"
+        type: choice
+        options:
+          - daily
+          - backfill
+        default: daily
+      backfill_days:
+        description: "Backfill only: how many older days this run (max 60)"
+        required: false
+        default: "30"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dambulla-dec
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Collect Dambulla DEC prices
+        env:
+          MODE: ${{ github.event.inputs.mode || 'daily' }}
+          BACKFILL_DAYS: ${{ github.event.inputs.backfill_days || '30' }}
+        run: python3 dec_dambulla_update.py
+
+      - name: Save to repo
+        if: always()
+        run: |
+          git config user.name "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add dambulla_dec.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No changes to save"
+            exit 0
+          fi
+          git commit -m "Dambulla DEC prices $(TZ=Asia/Colombo date +%Y-%m-%d)"
+          for i in 1 2 3; do
+            git pull --rebase && git push && break
+            sleep 10
+          done
