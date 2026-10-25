@@ -12,7 +12,8 @@ import json, os, sys, time, urllib.request, urllib.error
 from datetime import datetime, timedelta, timezone
 
 FILE = "dambulla_dec.json"
-API = "https://api.dambulladec.com/api/prices/by-date/{d}?page=1&limit=150"
+API = "https://api.dambulladec.com/api/prices/by-date/{d}?page={p}&limit=100"
+LAST_ERROR = {}
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (TopGoviya.lk price page; contact: wmrkumara.info@gmail.com)",
     "Accept": "application/json",
@@ -50,25 +51,44 @@ def num(v):
     return int(f) if f.is_integer() else round(f, 2)
 
 
+def get_json(url):
+    req = urllib.request.Request(url, headers=HEADERS)
+    with urllib.request.urlopen(req, timeout=120) as r:
+        return json.loads(r.read())
+
+
 def fetch(day):
     """Returns a list of rows, [] when the day has no prices, None on failure."""
-    url = API.format(d=day)
-    err = ""
-    for attempt in range(3):
-        try:
-            req = urllib.request.Request(url, headers=HEADERS)
-            with urllib.request.urlopen(req, timeout=120) as r:
-                raw = r.read()
-            return (json.loads(raw).get("data") or [])
-        except urllib.error.HTTPError as e:
-            if e.code == 404:
-                return []
-            err = f"HTTP {e.code}"
-        except Exception as e:
-            err = f"{type(e).__name__}: {e}"
-        print(f"  {day}: attempt {attempt + 1} failed ({err})")
-        time.sleep(15 * (attempt + 1))
-    return None
+    rows, page = [], 1
+    while page <= 5:
+        url = API.format(d=day, p=page)
+        js, err = None, ""
+        for attempt in range(3):
+            try:
+                js = get_json(url)
+                break
+            except urllib.error.HTTPError as e:
+                if e.code == 404:
+                    return rows
+                body = ""
+                try:
+                    body = e.read()[:150].decode("utf-8", "ignore")
+                except Exception:
+                    pass
+                err = f"HTTP {e.code} {body}".strip()
+            except Exception as e:
+                err = f"{type(e).__name__}: {e}"
+            print(f"  {day}: attempt {attempt + 1} failed ({err})")
+            time.sleep(15 * (attempt + 1))
+        if js is None:
+            LAST_ERROR[day] = err[:200]
+            return None
+        rows += js.get("data") or []
+        if not (js.get("pagination") or {}).get("hasNextPage"):
+            break
+        page += 1
+        time.sleep(PAUSE)
+    return rows
 
 
 def store(db, day, rows, how):
@@ -124,7 +144,7 @@ def main():
             rows = fetch(d)
             asked += 1
             if rows is None:
-                failed.append(d)
+                failed.append(f"{d} ({LAST_ERROR.get(d, '')})")
             else:
                 n = store(db, d, rows, "backfill")
                 fetched.append(f"{d}:{n}")
@@ -143,7 +163,7 @@ def main():
                 continue
             rows = fetch(d)
             if rows is None:
-                failed.append(d)
+                failed.append(f"{d} ({LAST_ERROR.get(d, '')})")
             else:
                 n = store(db, d, rows, f"robot {STAMP}")
                 fetched.append(f"{d}:{n}")
