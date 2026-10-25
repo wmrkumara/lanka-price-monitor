@@ -1,0 +1,33 @@
+name: DEC API test (Dambulla)
+
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Date to test (YYYY-MM-DD)"
+        required: true
+        default: "2026-10-23"
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch one day from Dambulla DEC
+        env:
+          TEST_DATE: ${{ github.event.inputs.date }}
+        run: python3 dec_api_test.py
+
+      - name: Save result to repo
+        if: always()
+        run: |
+          git config user.name "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add dec_api_test.json || true
+          git commit -m "DEC API test ${{ github.event.inputs.date }}" || echo "nothing to commit"
+          git pull --rebase || true
+          git push || true
