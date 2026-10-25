@@ -8,8 +8,9 @@ Run once by the "Switch home page" robot. It:
      sets the home address, sets the home page title,
   3. turns dambulla.html into a short page that sends visitors to the home page,
   4. points every "📊 CBSL" menu button on the site to retail.html,
-  5. tells the robots: update_index.py now updates retail.html, backfill.yml saves retail.html,
-     make_dec_image.py refreshes the preview address in index.html,
+  5. tells the robots: update_index.py now updates retail.html,
+     make_dec_image.py refreshes the preview address in index.html
+     (backfill.yml is a workflow file, so that one line is changed by hand),
   6. adds retail.html to sitemap.xml.
 Everything can be undone from GitHub history.
 """
@@ -88,13 +89,8 @@ def main():
         if s2 != s:
             wr("update_index.py", s2)
             log.append("update_index.py now updates retail.html")
-    wf = ".github/workflows/backfill.yml"
-    if os.path.exists(wf):
-        s = rd(wf)
-        s2 = s.replace("harti_market_history.json index.html ||", "harti_market_history.json index.html retail.html ||")
-        if s2 != s:
-            wr(wf, s2)
-            log.append("backfill.yml now also saves retail.html")
+    # NOTE: .github/workflows/backfill.yml is NOT changed here - robots are not allowed to
+    # edit workflow files. Add "retail.html" to its "git add" line by hand (one small edit).
     if os.path.exists("make_dec_image.py"):
         s = rd("make_dec_image.py")
         s2 = s.replace('PAGES = ["dambulla.html"]', 'PAGES = ["index.html"]')
