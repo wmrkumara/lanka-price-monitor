@@ -1,0 +1,23 @@
+# TopGoviya.lk — Sinhala voice-over TEST (free). Run by hand, then download "sinhala-voice-test" from Artifacts.
+name: Sinhala voice test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  voice:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+      - name: Make the voice files
+        run: |
+          pip install -q edge-tts
+          python3 voice_test.py
+      - name: Save for download
+        uses: actions/upload-artifact@v4
+        with:
+          name: sinhala-voice-test
+          path: voice_test/
+          retention-days: 14
