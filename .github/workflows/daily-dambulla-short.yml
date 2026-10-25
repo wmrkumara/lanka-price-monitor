@@ -1,0 +1,79 @@
+# TopGoviya.lk — DAILY Dambulla Short (DEC wholesale prices)
+# Makes one video for each new day: after the Dambulla DEC robot finds a new day,
+# or as soon as you upload dambulla_early.json (from the price list photo).
+# Download: Actions → Daily Dambulla Short → latest green run → F5 → Artifacts.
+
+name: Daily Dambulla Short
+
+on:
+  workflow_run:
+    workflows: ["Dambulla DEC prices"]
+    types: [completed]
+  push:
+    branches: [main]
+    paths: ["dambulla_early.json"]
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Make the video again even if today's is done (yes/no)"
+        default: "no"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dambulla-short
+  cancel-in-progress: false
+
+jobs:
+  dambulla-short:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - name: Is there a new day?
+        id: check
+        run: |
+          if [ "${{ github.event.inputs.force }}" = "yes" ]; then echo "need=yes" >> "$GITHUB_OUTPUT"; else python3 make_dambulla_short.py --check >> "$GITHUB_OUTPUT"; fi
+
+      - name: Install video tools and fonts
+        if: steps.check.outputs.need == 'yes'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-noto-core fonts-noto-color-emoji
+          mkdir -p ~/.fonts
+          curl -sL -o ~/.fonts/NotoSansSinhala.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssinhala/NotoSansSinhala%5Bwdth,wght%5D.ttf"
+          curl -sL -o ~/.fonts/JetBrainsMono.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf"
+          fc-cache -f
+          pip install -q playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Make the video
+        if: steps.check.outputs.need == 'yes'
+        run: python3 make_dambulla_short.py --force
+
+      - name: Find the date
+        if: steps.check.outputs.need == 'yes'
+        id: tag
+        run: echo "date=$(cat .dambulla_short_last)" >> "$GITHUB_OUTPUT"
+
+      - name: Save video for download
+        if: steps.check.outputs.need == 'yes'
+        uses: actions/upload-artifact@v4
+        with:
+          name: topgoviya-dambulla-short-${{ steps.tag.outputs.date }}
+          path: short/
+          retention-days: 30
+
+      - name: Remember the day is done
+        if: steps.check.outputs.need == 'yes'
+        run: |
+          git config user.name  "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add .dambulla_short_last
+          if git diff --staged --quiet; then echo "Nothing to save."; else
+            git commit -m "Dambulla Short made ($(cat .dambulla_short_last))"
+            for i in 1 2 3; do git pull --rebase origin main && git push origin main && break; sleep 10; done
+          fi
