@@ -14,7 +14,6 @@ changes with the weekday (so YouTube does not see look-alike videos).
 """
 import json, base64, os, subprocess, sys
 from datetime import date
-from playwright.sync_api import sync_playwright
 import short_kit
 
 OUT = "short"; SLIDE_SEC = 4.0; FADE = 0.5
@@ -179,6 +178,7 @@ body{width:1080px;height:1920px;background:#f4efe4;font-family:'Noto Sans Sinhal
                        + short_kit.cta("ඔබේ ප්‍රදේශයේ මිල කමෙන්ට් කරන්න", "ගොවි හා වෙළෙන්දා මිතුරන්ට ෂෙයාර් කරන්න",
                                        "සෑම දිනකම දඹුල්ල මිල සඳහා ෆලෝ කරන්න")))
 
+    from playwright.sync_api import sync_playwright   # only needed when a video is made
     os.makedirs(OUT, exist_ok=True)
     pngs = []
     with sync_playwright() as pw:
