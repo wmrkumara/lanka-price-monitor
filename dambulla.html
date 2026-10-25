@@ -345,7 +345,7 @@ function grid(){
       <div class="meta"><span class="chg ${dir(i.dy)}">${arr(dir(i.dy))} ${pct(i.dy)} ${t("vsPrev")}</span><span class="calcb">${t("calc")}</span></div>
     </div></button>`;}).join("");
 }
-const SITE="https://topgoviya.lk/";
+const SITE=(location.protocol.startsWith("http")&&location.hostname.endsWith("topgoviya.lk"))?location.origin+location.pathname:"https://topgoviya.lk/";
 let MOODTXT="";
 function mood(){
   const L=ITEMS.filter(i=>i.today&&i.dy!=null);
