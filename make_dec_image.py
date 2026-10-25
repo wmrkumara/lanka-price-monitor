@@ -20,7 +20,7 @@ DATA = "dambulla_dec.json"
 OUT_DIR = "share"
 WIDE = os.path.join(OUT_DIR, "dambulla-wide.png")
 STATE = os.path.join(OUT_DIR, "dambulla-wide.json")
-PAGES = ["dambulla.html"]          # pages whose og:image is refreshed
+PAGES = ["index.html"]          # pages whose og:image is refreshed
 STYLE_VERSION = "4"                # change to force a redraw after a design change
 ROWS = 8
 

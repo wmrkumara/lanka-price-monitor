@@ -19,7 +19,7 @@ from build_pages import NAMES, MARKETS, EMOJIS, slug, fdate, money
 from datetime import datetime
 
 KEEP_DAYS = 60
-INDEX = "index.html"
+INDEX = "retail.html"
 START, END = "<!-- TG-TODAY-START -->", "<!-- TG-TODAY-END -->"
 
 
