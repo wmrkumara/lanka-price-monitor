@@ -108,7 +108,7 @@ body{width:1080px;height:1920px;background:#f4efe4;font-family:'Noto Sans Sinhal
 .main{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 64px}
 .foot{background:#0b0b0b;color:#e7d3a3;text-align:center;padding:40px;font-size:32px;font-weight:600}
 .mono{font-family:'JetBrains Mono',monospace}
-.big{font-size:118px;font-weight:800;line-height:1.12;color:#0e4f4a}
+.big{font-size:112px;font-weight:800;line-height:1.38;color:#0e4f4a}
 .date{display:inline-block;margin-top:44px;font-size:48px;font-weight:700;background:#0e4f4a;color:#fff;border-radius:999px;padding:18px 44px}
 .note{font-size:38px;color:#7a7264;margin-top:44px;line-height:1.6}
 .lbl{font-size:66px;font-weight:800;margin-bottom:38px}
