@@ -1,0 +1,27 @@
+# ONE-TIME: same main menu on every page with a top menu bar (see menu_update.py).
+name: Menu update (one time)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  menu:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+      - name: Update menus
+        run: python3 menu_update.py
+      - name: Save
+        run: |
+          git config user.name  "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add *.html
+          if git diff --staged --quiet; then echo "No changes."; exit 0; fi
+          git commit -m "Same main menu on all pages (Dambulla first, Krushi Pola, HARTI last)"
+          git pull --rebase origin main
+          git push origin main
