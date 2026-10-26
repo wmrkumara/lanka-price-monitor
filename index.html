@@ -396,6 +396,8 @@ function grid(){
     </div></button>`;}).join("");
 }
 const SITE=(location.protocol.startsWith("http")&&location.hostname.endsWith("topgoviya.lk"))?location.origin+location.pathname:"https://topgoviya.lk/";
+// Link with the report date (e.g. ?d=2026-10-26): a new address each day, so Facebook/WhatsApp fetch today's preview picture
+const shareURL=()=>SITE+(LATEST?"?d="+LATEST:"");
 let MOODTXT="";
 function mood(){
   const L=ITEMS.filter(i=>i.today&&i.dy!=null);
@@ -412,7 +414,7 @@ function mood(){
   $("#moodText").textContent=txt;
   const tops=ITEMS.filter(i=>i.today).sort((a,b)=>(a.m.p||999)-(b.m.p||999)).slice(0,10);
   const lines=tops.map(i=>{const d=dir(i.dy);return i.m.e+" "+nameOf(i.m)+": Rs. "+fmt(i.today.min)+"–"+fmt(i.today.max)+(i.dy==null?"":"  "+(d==="flat"?"■":arr(d)+Math.abs(i.dy).toFixed(0)+"%"));});
-  MOODTXT="🥬 "+t("shareHead").replace("%D",dateLabel(LATEST))+"\n\n"+lines.join("\n")+"\n\n"+txt+"\n\n👉 "+t("moreAt").replace("%N",ITEMS.filter(i=>i.today).length)+"\n"+SITE+"\n\n#TopGoviyaLK #දඹුල්ල #DambullaPrice #එළවළුමිල";
+  MOODTXT="🥬 "+t("shareHead").replace("%D",dateLabel(LATEST))+"\n\n"+lines.join("\n")+"\n\n"+txt+"\n\n👉 "+t("moreAt").replace("%N",ITEMS.filter(i=>i.today).length)+"\n"+shareURL()+"\n\n#TopGoviyaLK #දඹුල්ල #DambullaPrice #එළවළුමිල";
   $("#copyMood").textContent=t("copy");$("#waShare").textContent=t("shareWA");$("#fbShare").textContent=t("shareFB");$("#sheetBtn").textContent=t("sheetBtn");
   $("#mood").hidden=false;
 }
@@ -424,7 +426,7 @@ $("#waShare").onclick=()=>{window.open("https://wa.me/?text="+encodeURIComponent
 $("#fbShare").onclick=async()=>{
   // Facebook does not accept ready text, so copy it first; the person pastes it into the post
   await copyText();alert(t("fbTip"));
-  window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(SITE),"_blank","noopener");
+  window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(shareURL()),"_blank","noopener");
 };
 
 /* ---------- price list image ---------- */
@@ -535,7 +537,7 @@ function renderBasket(){
     const lines=rows.map(r=>`${r.it.m.e} ${nameOf(r.it.m)} ${qtyTxt(r.q,r.it.m)}: ${r.line!=null?rs(r.line):t("bkNoP")}`);
     let msg=t("bkMsgH")+" — "+dateLabel(LATEST)+"\n\n"+lines.join("\n")+"\n\n"+t("bkMsgT")+": "+rs(tot);
     if(totW!=null){const d=tot-totW;msg+="\n"+t("bkWeek")+": "+rs(totW)+" ("+(d>=0?"+":"−")+rs(Math.abs(d))+")";}
-    msg+="\n\n👉 "+SITE;window.open("https://wa.me/?text="+encodeURIComponent(msg),"_blank","noopener");};
+    msg+="\n\n👉 "+shareURL();window.open("https://wa.me/?text="+encodeURIComponent(msg),"_blank","noopener");};
 }
 function renderAll(){applyLang();chips();mood();renderBasket();movers();grid();if(cur&&$("#scrim").classList.contains("open"))openItem(cur.pid,true);}
 
