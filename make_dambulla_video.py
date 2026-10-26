@@ -8,15 +8,39 @@
 #   dambulla-youtube-YYYY-MM-DD.txt       title + description + tags
 #   dambulla-script-YYYY-MM-DD.txt        reading script for your voice, slide by slide
 # Crop photos: video-assets/crops/<name>.png (same photos as the CBSL video). Missing photo = name box.
-import json, os, subprocess, sys
+import json, os, subprocess, sys, hashlib
 from datetime import date
+
+OUT = "dambulla_video"
+STATE = ".dambulla_video_last"
+
+
+def _quick_check():
+    """--check: runs BEFORE the robot installs Pillow, so it uses only built-in Python."""
+    days = json.load(open("dambulla_dec.json", encoding="utf-8")).get("days", {})
+    if os.path.exists("dambulla_early.json"):
+        try:
+            e = json.load(open("dambulla_early.json", encoding="utf-8"))
+            if e.get("date") and e.get("prices") and e["date"] not in days and (not days or e["date"] > max(days)):
+                days[e["date"]] = e["prices"]
+        except Exception:
+            pass
+    if not days:
+        print("need=no"); return
+    last = max(days)
+    st = f"{last}_" + hashlib.sha1(json.dumps(days[last], sort_keys=True).encode()).hexdigest()[:8]
+    done = os.path.exists(STATE) and open(STATE).read().strip() == st
+    print("need=" + ("no" if done else "yes"))
+
+
+if __name__ == "__main__" and "--check" in sys.argv:
+    _quick_check()
+    sys.exit(0)
+
 from PIL import Image, ImageDraw, features
 from build_pages import fdate, MONTHS
 import make_daily_video as V      # reuse fonts, colours, logo, photo box, music loop
 import short_kit
-
-OUT = "dambulla_video"
-STATE = ".dambulla_video_last"
 ITEMS = [  # (DEC product id, crop photo name)
     ("11", "tomato"), ("70", "big-onion"), ("67", "green-chilli"), ("26", "brinjal"),
     ("4", "beans"), ("6", "carrot"), ("69", "red-onion"), ("15", "potato"),
