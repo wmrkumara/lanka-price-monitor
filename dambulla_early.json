@@ -1,6 +1,6 @@
 {
  "note": "Early Dambulla DEC wholesale prices (Rs., [min, max]) copied from the DEC's official daily price list. Used by topgoviya.lk only until the robot collects the same day from the DEC website.",
- "date": "2026-10-23",
+ "date": "2026-10-26",
  "prices": {
   "1": [
    300,
@@ -215,7 +215,7 @@
    260
   ],
   "61": [
-   20,
+   30,
    40
   ],
   "62": [
