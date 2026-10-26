@@ -807,9 +807,20 @@ def market_page(market, hm, harti, cats, cbsl):
     harti_h2 = (f'<h2>{"" if dec_day else "HARTI "}{e(si)} තොග මිල<span>{"Economic centre price list" if dec_day else "HARTI wholesale report"}, {fdate(d_(last),"en") if last else "—"}</span></h2>')
     others = "".join(f'<a href="{MKT[m]["slug"]}.html">📍 {e(MKT[m]["si"])} / {e(men(m))}</a>' for m in MKT if m != market)
 
+    if market == "Dambulla":
+        h1 = '<h1>🧺 දඹුල්ල — HARTI සහ CBSL තොග මිල</h1>'
+        home_box = ('<p class="tip" style="margin:10px 0 14px;background:var(--goodbg,#e3efe6);font-size:15px">'
+                    '🥬 <b>දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානයේ භාණ්ඩ 90+ ක අද මිල</b> — ඊයේට වෙනස, ප්‍රස්ථාර, '
+                    '🛒 බාස්කට් එක හා 🧮 ලාභ ගණකය: <a href="../"><b>TopGoviya.lk මුල් පිටුව →</b></a><br>'
+                    '<span lang="en">Today\'s Dambulla DEC prices for 90+ items, with charts and calculators, are on the '
+                    '<a href="../">TopGoviya.lk home page</a>. This page shows the HARTI and CBSL Dambulla reports.</span></p>')
+    else:
+        h1 = f'<h1>🧺 {e(si)} එළවළු මිල අද</h1>'
+        home_box = ""
     body = f"""
 <p class="crumb"><a href="../index.html">TopGoviya.lk</a> / <a href="index.html">වෙළඳපොළ මිල</a> / {e(si)}</p>
-<h1>🧺 {e(si)} එළවළු මිල අද</h1>
+{h1}
+{home_box}
 <p class="alt">{e(en)} market price today – vegetable wholesale prices · {e(si)}{" (දබුල්ල)" if market == "Dambulla" else ""} එලවලු මිල<br>{e(en.lower())} elawalu mila ada · {e(en.lower())} market rate today<br>{e(ta)} சந்தை விலை இன்று</p>
 {cbsl_html if cbsl_first else ''}
 {harti_h2 if cbsl_first else ''}
@@ -834,6 +845,8 @@ def market_page(market, hm, harti, cats, cbsl):
 """
     dtxt = fdate(d_(last), "en") if last else ""
     title = f"{si} එළවළු මිල අද | {en} Market Price Today Sri Lanka – TopGoviya"
+    if market == "Dambulla":
+        title = "දඹුල්ල HARTI සහ CBSL තොග මිල | Dambulla HARTI & CBSL Wholesale Report – TopGoviya"
     top3 = ", ".join(f"{r['name']} Rs. {money(r['mid'])}" for r in rows[:3])
     if cbsl_first:
         top3 = ", ".join(f"{c['name']} Rs. {money(r)} retail" for c, w, r in crow[:3] if r is not None)
