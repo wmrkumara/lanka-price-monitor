@@ -609,7 +609,7 @@
 "cat": "l",
 "pop": 26,
 "pop_cat": 2,
-"unit": "bundle?"
+"unit": "bundle"
 },
 "93": {
 "si": "සලාද",
@@ -629,7 +629,7 @@
 "cat": "l",
 "pop": 20,
 "pop_cat": 4,
-"unit": "bundle?"
+"unit": "bundle"
 },
 "92": {
 "si": "කරපිංචා",
@@ -669,7 +669,7 @@
 "cat": "l",
 "pop": 37,
 "pop_cat": 3,
-"unit": "bundle?"
+"unit": "bundle"
 },
 "87": {
 "si": "බඩ ඉරිඟු",
@@ -959,7 +959,7 @@
 "cat": "f",
 "pop": 24,
 "pop_cat": 5,
-"unit": "nut?"
+"unit": "nut"
 },
 "46": {
 "si": "පොල්",
@@ -969,7 +969,7 @@
 "cat": "f",
 "pop": 3,
 "pop_cat": 1,
-"unit": "nut?"
+"unit": "nut"
 }
 }
 }

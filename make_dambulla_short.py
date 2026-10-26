@@ -78,7 +78,7 @@ def main():
             p = days[prev][pid]; pm = (p[0] + p[1]) / 2
             chg = (mid - pm) / pm * 100 if pm else None
         items.append(dict(pid=pid, si=m["si"], e=m["e"], cat=m["cat"], pop=m["pop"], pop_cat=m["pop_cat"],
-                          kg=(m["unit"] == "kg"), lo=v[0], hi=v[1], mid=mid, chg=chg))
+                          kg=(m["unit"] == "kg"), unit=m["unit"], lo=v[0], hi=v[1], mid=mid, chg=chg))
     if len(items) < 10:
         print("Too few items for", last); return
     by = {i["pid"]: i for i in items}
@@ -141,7 +141,7 @@ body{width:1080px;height:1920px;background:#f4efe4;font-family:'Noto Sans Sinhal
         k = "flat" if abs(c) < 0.5 else ("up" if c > 0 else "down")
         return f'<span class="chip mono {k}">{ {"up":"▲","down":"▼","flat":"■"}[k]} {abs(c):.0f}%</span>'
 
-    def unit(i): return "" if i["kg"] else "*"
+    def unit(i): return "" if i["kg"] else {"nut": " /ගෙඩිය", "bundle": " /මිටිය"}.get(i["unit"], "")
 
     def rows(lst):
         out = ""
