@@ -1,0 +1,74 @@
+# TopGoviya.lk — DAILY Dambulla DEC video (~2 minutes, 16:9) + thumbnail + YouTube text + reading script
+# Runs after each new Dambulla day (robot or early entry). Only one video per day.
+# Download: Actions → Daily Dambulla video → top green run → F5 → Artifacts.
+name: Daily Dambulla video
+
+on:
+  workflow_run:
+    workflows: ["Dambulla DEC prices"]
+    types: [completed]
+  push:
+    branches: [main]
+    paths: ["dambulla_early.json"]
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Make the video again even if today's is done (yes/no)"
+        default: "no"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dambulla-video
+  cancel-in-progress: false
+
+jobs:
+  video:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - name: Is there a new day?
+        id: check
+        run: |
+          if [ "${{ github.event.inputs.force }}" = "yes" ]; then echo "need=yes" >> "$GITHUB_OUTPUT"; else python3 make_dambulla_video.py --check >> "$GITHUB_OUTPUT"; fi
+
+      - name: Install tools and fonts
+        if: steps.check.outputs.need == 'yes'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg libraqm0 libfribidi0 libharfbuzz0b
+          mkdir -p ~/.fonts
+          curl -sL -o ~/.fonts/NotoSansSinhala.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssinhala/NotoSansSinhala%5Bwdth,wght%5D.ttf"
+          curl -sL -o ~/.fonts/JetBrainsMono.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf"
+          pip install -q pillow
+
+      - name: Make the video
+        if: steps.check.outputs.need == 'yes'
+        id: make
+        run: |
+          python3 make_dambulla_video.py --force
+          echo "day=$(cat .dambulla_video_last)" >> "$GITHUB_OUTPUT"
+
+      - name: Save for download
+        if: steps.check.outputs.need == 'yes'
+        uses: actions/upload-artifact@v4
+        with:
+          name: topgoviya-dambulla-video-${{ steps.make.outputs.day }}
+          path: dambulla_video/
+          retention-days: 14
+
+      - name: Remember the day is done
+        if: steps.check.outputs.need == 'yes'
+        run: |
+          git config user.name  "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add .dambulla_video_last
+          if git diff --staged --quiet; then echo "Nothing to save."; else
+            git commit -m "Dambulla video made ($(cat .dambulla_video_last))"
+            for i in 1 2 3; do git pull --rebase origin main && git push origin main && break; sleep 10; done
+          fi
