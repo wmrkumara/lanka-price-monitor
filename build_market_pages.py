@@ -910,6 +910,15 @@ def update_sitemap(slugs, lastmod):
     xml = xml.replace("</urlset>", new + "</urlset>")
     open(path, "w", encoding="utf-8").write(xml)
 
+DAMBULLA_FORWARD = """<!DOCTYPE html><html lang="si"><head><meta charset="UTF-8">
+<title>දඹුල්ල එළවළු මිල අද | TopGoviya</title>
+<link rel="canonical" href="https://topgoviya.lk/">
+<meta http-equiv="refresh" content="0; url=/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head><body><p><a href="/">දඹුල්ල එළවළු මිල අද → TopGoviya.lk</a></p>
+<script>location.replace("/")</script></body></html>
+"""
+
 # ---------------------------------------------------------------- main
 def main():
     harti = json.load(open("harti_data.json", encoding="utf-8"))
@@ -920,9 +929,14 @@ def main():
     summary, made = {}, []
     for m in MKT:
         page, last, n = market_page(m, hm, harti, cats, cbsl)
-        open(os.path.join(OUT_DIR, MKT[m]["slug"] + ".html"), "w", encoding="utf-8").write(page)
         summary[m] = (last, n)
-        made.append(MKT[m]["slug"])
+        if m == "Dambulla":
+            # The TopGoviya.lk home page is now the Dambulla page (official DEC prices, 90+ items),
+            # so this address only forwards visitors and Google there (and is left out of the sitemap).
+            page = DAMBULLA_FORWARD
+        else:
+            made.append(MKT[m]["slug"])
+        open(os.path.join(OUT_DIR, MKT[m]["slug"] + ".html"), "w", encoding="utf-8").write(page)
     latest_all = harti["dates"][-1]
     open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8").write(hub_page(summary, latest_all, harti))
     update_sitemap(made, max([latest_all] + [l for l, _ in summary.values() if l]))
