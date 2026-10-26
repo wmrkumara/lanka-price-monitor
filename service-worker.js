@@ -2,12 +2,13 @@
 /* Version: 2.7 | topgoviya.lk | Built in Gampola 🇱🇰 */
 /* Updated: 24 Aug 2026 — v13: added economics.html + dei_data.json network-first */
 /* Updated: 27 Sep 2026 — v14: all HTML pages network-first (daily /price/ pages never go stale) */
+/* Updated: 26 Oct 2026 — v18: ALL .json data files network-first (dambulla_dec.json, dambulla_early.json …) */
 /* Updated: 03 Oct 2026 — v15: spice pages, spice guide, data sources + /price/ hub added to offline cache */
 /* Updated: 07 Oct 2026 — v16: pages + data always re-checked with the server (no 10-minute browser copy); /market/ pages added */
 /* Updated: 16 Oct 2026 — v17: Krushi Pola (Google Apps Script) requests and all POST requests bypass the service worker */
 
-const CACHE_NAME = 'topgoviya-v17';
-const DATA_CACHE = 'topgoviya-data-v17';
+const CACHE_NAME = 'topgoviya-v18';
+const DATA_CACHE = 'topgoviya-data-v18';
 
 /* ── Static files to cache for offline use ── */
 const STATIC_ASSETS = [
@@ -92,7 +93,8 @@ self.addEventListener('fetch', event => {
   if (url.hostname.endsWith('script.google.com') || url.hostname.endsWith('script.googleusercontent.com')) return;
 
   /* data.json & harti_data.json — always network first (fresh prices!) */
-  if (url.pathname.includes('data.json') || url.href.includes('data.json') ||
+  if (url.pathname.endsWith('.json') ||
+      url.pathname.includes('data.json') || url.href.includes('data.json') ||
       url.pathname.includes('harti_data.json') || url.href.includes('harti_data.json') ||
       url.pathname.includes('bulletin_data.json') || url.href.includes('bulletin_data.json') ||
       url.pathname.includes('dei_data.json') || url.href.includes('dei_data.json')) {
