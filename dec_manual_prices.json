@@ -608,6 +608,124 @@
    }
   },
   "2026-10-26": {
+   "Dambulla": {
+    "Ash Plantains": [
+     100,
+     170
+    ],
+    "Beans": [
+     350,
+     400
+    ],
+    "Beetroot": [
+     220,
+     230
+    ],
+    "Beetroot (N.Eliya)": [
+     220,
+     230
+    ],
+    "Big Onion (Imported)": [
+     240,
+     280
+    ],
+    "Bitter Gourd": [
+     320,
+     400
+    ],
+    "Brinjals": [
+     250,
+     300
+    ],
+    "Cabbage (Kandy)": [
+     300,
+     350
+    ],
+    "Capsicum": [
+     280,
+     350
+    ],
+    "Carrot": [
+     260,
+     270
+    ],
+    "Cucumber": [
+     80,
+     100
+    ],
+    "Drumstick": [
+     180,
+     250
+    ],
+    "Eggplant": [
+     280,
+     320
+    ],
+    "Green Chillies": [
+     180,
+     250
+    ],
+    "Knolkhol": [
+     150,
+     220
+    ],
+    "Ladies Fingers": [
+     100,
+     150
+    ],
+    "Leeks": [
+     110,
+     120
+    ],
+    "Lime": [
+     1000,
+     1200
+    ],
+    "Long Beans": [
+     180,
+     260
+    ],
+    "Luffa": [
+     200,
+     240
+    ],
+    "Manioc": [
+     80,
+     110
+    ],
+    "Potato (Imported)": [
+     130,
+     160
+    ],
+    "Potato (N.Eliya)": [
+     210,
+     220
+    ],
+    "Potato (Welimada)": [
+     180,
+     200
+    ],
+    "Pumpkin": [
+     220,
+     260
+    ],
+    "Raddish": [
+     80,
+     100
+    ],
+    "Snake Gourd": [
+     200,
+     260
+    ],
+    "Sweet Potato": [
+     95,
+     100
+    ],
+    "Tomato": [
+     330,
+     400
+    ]
+   },
    "Keppetipola": {
     "Beans": [
      400,
