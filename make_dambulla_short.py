@@ -43,8 +43,16 @@ def load():
     return days, names
 
 
-def done_before(day):
-    return os.path.exists(STATE) and open(STATE).read().strip() == day
+def stamp(day, prices):
+    """Day + short fingerprint of that day's prices, e.g. 2026-10-26_3fa2c1d0.
+    If the prices are corrected later, the fingerprint changes and a new video is made."""
+    import hashlib
+    fp = hashlib.sha1(json.dumps(prices, sort_keys=True).encode()).hexdigest()[:8]
+    return f"{day}_{fp}"
+
+
+def done_before(st):
+    return os.path.exists(STATE) and open(STATE).read().strip() == st
 
 
 def si_date(iso):
@@ -62,9 +70,10 @@ def main():
     order = sorted(days)
     last = order[-1]
     prev = order[-2] if len(order) > 1 else None
+    st = stamp(last, days[last])
     if "--check" in sys.argv:
-        print("need=" + ("no" if done_before(last) else "yes")); return
-    if done_before(last) and "--force" not in sys.argv:
+        print("need=" + ("no" if done_before(st) else "yes")); return
+    if done_before(st) and "--force" not in sys.argv:
         print("Video for", last, "already made."); return
 
     items = []
@@ -226,7 +235,7 @@ body{width:1080px;height:1920px;background:#f4efe4;font-family:'Noto Sans Sinhal
                       tags, "🥬 අද දඹුල්ල එළවළු මිල | Dambulla Market Price Daily")
     for f in pngs + [silent]:
         if os.path.exists(f): os.remove(f)
-    open(STATE, "w").write(last)
+    open(STATE, "w").write(st)
     print(f"Video for {last}: {n} slides, ~{seconds:.0f}s")
 
 

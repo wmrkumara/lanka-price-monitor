@@ -278,7 +278,9 @@ def main():
     if not days:
         print("need=no" if "--check" in sys.argv else "No data."); return
     last = max(days)
-    done = os.path.exists(STATE) and open(STATE).read().strip() == last
+    import hashlib
+    st = f"{last}_" + hashlib.sha1(json.dumps(days[last], sort_keys=True).encode()).hexdigest()[:8]
+    done = os.path.exists(STATE) and open(STATE).read().strip() == st   # changes if prices are corrected
     if "--check" in sys.argv:
         print("need=" + ("no" if done else "yes")); return
     if done and "--force" not in sys.argv:
@@ -316,7 +318,7 @@ def main():
     open(os.path.join(OUT, f"dambulla-script-{iso}.txt"), "w", encoding="utf-8").write(script_file(rep, rows, allr))
     for f in os.listdir(tmp): os.remove(os.path.join(tmp, f))
     os.rmdir(tmp)
-    open(STATE, "w").write(last)
+    open(STATE, "w").write(st)
     print(f"Made {mp4} ({total} seconds, {len(rows)} items) for {iso}")
 
 
