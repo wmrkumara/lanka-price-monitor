@@ -71,6 +71,22 @@ jobs:
           path: short/
           retention-days: 30
 
+      - name: Publish the latest Short for direct download
+        if: steps.check.outputs.need == 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          D=$(ls -d short/*/ | head -1)
+          mkdir -p latest
+          cp "$D/video-with-music.mp4" latest/dambulla-short-latest.mp4
+          cp "$D/video-silent.mp4"     latest/dambulla-short-latest-silent.mp4
+          cp "$D/youtube.txt"          latest/dambulla-short-youtube.txt
+          cp "$D/tiktok.txt"           latest/dambulla-short-tiktok.txt
+          cp "$D/facebook.txt"         latest/dambulla-short-facebook.txt
+          gh release view dambulla-short >/dev/null 2>&1 || gh release create dambulla-short --title "Latest Dambulla Short" --notes "Newest daily Dambulla Short. Files are replaced every day."
+          gh release edit dambulla-short --notes "Latest Dambulla Short: $(cat .dambulla_short_last)"
+          gh release upload dambulla-short latest/* --clobber
+
       - name: Remember the day is done
         if: steps.check.outputs.need == 'yes'
         run: |
