@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>දඹුල්ල පෝස්ට් ස්ටුඩියෝ — TopGoviya (private)</title>
+<link rel="icon" href="icon-192x192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700;800&family=Hanken+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--petrol:#0e4f4a;--petrol-d:#0a3a36;--gold:#a9802a;--cream:#f4efe4;--card:#fffdf7;--ink:#191d1a;--muted:#6f675a;--line:#e3d9c4;--up:#b23a2e;--dn:#2c7a52}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'Noto Sans Sinhala','Hanken Grotesk',system-ui,sans-serif;line-height:1.5}
+header{background:var(--petrol);color:#fff;padding:14px 18px;position:sticky;top:0;z-index:5;border-bottom:3px solid var(--gold)}
+header h1{margin:0;font-size:20px}header p{margin:2px 0 0;font-size:13px;color:#e7d3a3}
+.w{max-width:1180px;margin:0 auto;padding:16px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}
+.btn{font:inherit;font-size:14px;font-weight:700;border:1px solid var(--line);background:var(--card);color:var(--petrol);padding:8px 13px;border-radius:10px;cursor:pointer;text-decoration:none;display:inline-flex;gap:6px;align-items:center}
+.btn.solid{background:var(--petrol);color:#fff;border-color:var(--petrol)}.btn.gold{background:var(--gold);color:#fff;border-color:var(--gold)}
+.btn:disabled{opacity:.5}
+.info{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:14px;margin:0 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+.post{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.post.done{opacity:.55}
+.post .head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line);gap:8px}
+.post .head b{font-size:15px}.num{font-family:'JetBrains Mono',monospace;color:var(--gold);font-weight:800;margin-right:6px}
+.post img{width:100%;display:block;background:#eee;aspect-ratio:4/5;object-fit:cover}
+.post .body{padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.post textarea{width:100%;font:inherit;font-size:13px;border:1px solid var(--line);border-radius:10px;padding:8px;background:#fff;min-height:150px;resize:vertical}
+.row{display:flex;flex-wrap:wrap;gap:6px}
+.lbl{font-size:12px;color:var(--muted);font-weight:700}
+.chk{font-size:13px;display:flex;align-items:center;gap:6px;color:var(--muted)}
+dialog{border:1px solid var(--line);border-radius:16px;max-width:640px;width:94vw;padding:0;background:var(--card)}
+dialog .dh{padding:12px 14px;background:var(--petrol);color:#fff;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+dialog .dl{padding:12px 14px;max-height:60vh;overflow:auto;columns:2;column-gap:18px}
+dialog label{display:block;break-inside:avoid;padding:4px 0;font-size:14px}
+dialog .df{padding:10px 14px;border-top:1px solid var(--line);display:flex;gap:8px;justify-content:flex-end;align-items:center}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:9px 16px;border-radius:999px;font-size:14px;opacity:0;transition:.25s;pointer-events:none;z-index:20}
+.toast.on{opacity:1}
+@media(max-width:560px){dialog .dl{columns:1}}
+</style>
+</head>
+<body>
+<header><h1>📣 දඹුල්ල පෝස්ට් ස්ටුඩියෝ</h1><p id="hd">පෞද්ගලික පිටුව · දත්ත පූරණය වෙමින්…</p></header>
+<main class="w">
+  <div class="info" id="info">අද දඹුල්ල මිලෙන් ෆේස්බුක් පෝස්ට් 12ක් ස්වයංක්‍රීයව හැදේ. ⬇️ පින්තූරය ඩවුන්ලෝඩ් කර, 📋 කැප්ශන් කොපි කර ෆේස්බුක් එකට දාන්න. 🔄 එබුවොත් භාණ්ඩ ඔබම තෝරාගත හැක. 💡 දවසට හොඳම 3–5ක්, පැය කිහිපයකින් වෙන් කර දාන්න.</div>
+  <div class="bar">
+    <button class="btn solid" id="reload" type="button">🔄 නවතම මිල නැවත ගන්න</button>
+    <button class="btn" id="shuffle" type="button">🎲 Spotlight භාණ්ඩ වෙනස් කරන්න</button>
+    <span class="chk" id="dateInfo"></span>
+  </div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<dialog id="pick">
+  <div class="dh"><span id="pickTitle">භාණ්ඩ තෝරන්න</span><button class="btn" id="pickX" type="button">✕</button></div>
+  <div class="dl" id="pickList"></div>
+  <div class="df"><span class="chk" id="pickCount"></span><button class="btn" id="pickAll" type="button">ප්‍රවර්ගයේ සියල්ල</button><button class="btn solid" id="pickOk" type="button">✔ පින්තූරය හදන්න</button></div>
+</dialog>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- data ---------- */
+const RAW="https://raw.githubusercontent.com/wmrkumara/lanka-price-monitor/main/";
+async function getJSON(name){
+  for(const u of [RAW+name+"?t="+Date.now(), name+"?t="+Date.now()]){
+    try{const r=await fetch(u,{cache:"no-store"});if(r.ok)return await r.json();}catch(e){}
+  }
+  return null;
+}
+let NAMES={},DAYS={},LATEST=null,PREV=null,ITEMS=[],POSTS=[],shuffleSeed=0;
+const MONTHS=["ජනවාරි","පෙබරවාරි","මාර්තු","අප්‍රේල්","මැයි","ජූනි","ජූලි","අගෝස්තු","සැප්තැම්බර්","ඔක්තෝබර්","නොවැම්බර්","දෙසැම්බර්"];
+const DAYS_SI=["ඉරිදා","සඳුදා","අඟහරුවාදා","බදාදා","බ්‍රහස්පතින්දා","සිකුරාදා","සෙනසුරාදා"];
+const dLabel=s=>{const[y,m,d]=s.split("-").map(Number);return y+" "+MONTHS[m-1]+" "+d;};
+const dDay=s=>{const[y,m,d]=s.split("-").map(Number);return DAYS_SI[new Date(y,m-1,d).getDay()];};
+const money=n=>Math.round(n).toLocaleString("en-US");
+const UNIT={kg:"කි.ග්‍රෑ.",nut:"ගෙඩිය",bundle:"මිටිය"};
+const CAT={v:"🥬 එළවළු",l:"🌿 පලා වර්ග",r:"🥔 අල වර්ග",f:"🍍 පලතුරු",g:"🌾 ධාන්‍ය"};
+const CATTAG={v:"#එළවළුමිල",l:"#පලාමිල",r:"#අලමිල",f:"#පලතුරුමිල",g:"#ධාන්‍යමිල"};
+
+async function load(){
+  $("hd").textContent="පෞද්ගලික පිටුව · දත්ත පූරණය වෙමින්…";
+  const [db,early,items]=await Promise.all([getJSON("dambulla_dec.json"),getJSON("dambulla_early.json"),getJSON("dambulla_items.json")]);
+  if(!db||!items){$("hd").textContent="⚠️ දත්ත ලබාගත නොහැක. Internet පරීක්ෂා කර 🔄 ඔබන්න.";return;}
+  NAMES=items.items;DAYS=Object.assign({},db.days||{});
+  if(early&&early.date&&early.prices&&!DAYS[early.date]){const ks=Object.keys(DAYS).sort();if(!ks.length||early.date>ks[ks.length-1])DAYS[early.date]=early.prices;}
+  const ks=Object.keys(DAYS).sort();LATEST=ks[ks.length-1];PREV=ks.length>1?ks[ks.length-2]:null;
+  ITEMS=[];
+  for(const[pid,m]of Object.entries(NAMES)){
+    const v=DAYS[LATEST][pid];if(!v)continue;
+    const mid=(v[0]+v[1])/2;let pc=null;const p=PREV&&DAYS[PREV][pid];
+    if(p){const pm=(p[0]+p[1])/2;if(pm)pc=(mid-pm)/pm*100;}
+    ITEMS.push({pid,m,lo:v[0],hi:v[1],mid,pc,prev:p});
+  }
+  ITEMS.sort((a,b)=>a.m.pop-b.m.pop);
+  $("hd").textContent="පෞද්ගලික පිටුව · "+dLabel(LATEST)+" ("+dDay(LATEST)+") · භාණ්ඩ "+ITEMS.length;
+  $("dateInfo").textContent="පෙර වාර්තාව: "+(PREV?dLabel(PREV):"—");
+  buildPosts();
+}
+
+/* ---------- the 12 posts ---------- */
+const byCat=c=>ITEMS.filter(i=>i.m.cat===c);
+const moved=()=>ITEMS.filter(i=>i.pc!=null);
+function spotlightPicks(){
+  const pool=ITEMS.slice(0,30);if(!pool.length)return[];
+  const day=Math.floor(Date.parse(LATEST)/864e5)+shuffleSeed*7;
+  const out=[];for(let k=0;k<3&&k<pool.length;k++)out.push(pool[(day*3+k)%pool.length]);
+  return [...new Set(out)];
+}
+function buildPosts(){
+  const mv=moved();
+  const ups=mv.filter(i=>i.pc>=0.5).sort((a,b)=>b.pc-a.pc).slice(0,5);
+  const dns=mv.filter(i=>i.pc<=-0.5).sort((a,b)=>a.pc-b.pc).slice(0,5);
+  const P=[{id:"mood",kind:"mood",title:"🟡 අද වෙළඳපොළ තත්ත්වය"},
+    {id:"pop",kind:"list",title:"⭐ ජනප්‍රිය එළවළු මිල",items:ITEMS.slice(0,8),tag:"#ජනප්‍රියමිල"},
+    {id:"up",kind:"list",title:"📈 අද වැඩිම මිල ඉහළ ගිය",items:ups,tag:"#මිලඉහළ"},
+    {id:"dn",kind:"list",title:"📉 අද වැඩිම මිල පහළ ගිය",items:dns,tag:"#මිලපහළ"}];
+  const popIds=new Set(ITEMS.slice(0,8).map(i=>i.pid));
+  for(const c of["v","l","r","f","g"]){const pool=byCat(c),rest=pool.filter(i=>!popIds.has(i.pid));
+    P.push({id:"c"+c,kind:"list",cat:c,title:CAT[c]+" මිල",items:(rest.length>=5?rest:pool).slice(0,9),tag:CATTAG[c]});}
+  spotlightPicks().forEach((it,k)=>P.push({id:"s"+k,kind:"spot",title:"🔦 "+it.m.si+" මිල",items:[it]}));
+  POSTS=P.filter(p=>p.kind!=="list"||p.items.length);
+  render();
+}
+
+/* ---------- drawing (1080 x 1350) ---------- */
+const W=1080,H=1350,PAD=64;
+let LOGO=null;const logoP=new Promise(r=>{const i=new Image();i.onload=()=>{LOGO=i;r();};i.onerror=()=>r();i.src="icon-512x512.png";});
+function fitFont(g,txt,max,size,w,fam){let s=size;g.font=w+" "+s+"px "+fam;while(g.measureText(txt).width>max&&s>18){s-=2;g.font=w+" "+s+"px "+fam;}return s;}
+const SI="'Noto Sans Sinhala'",MONO="'JetBrains Mono',monospace";
+function chg(pc){if(pc==null)return{t:"නව",c:"#8a8170",bg:"#efeada"};if(Math.abs(pc)<0.5)return{t:"■ 0%",c:"#8a8170",bg:"#efeada"};return pc>0?{t:"▲ "+Math.round(pc)+"%",c:"#b23a2e",bg:"#f7e6e2"}:{t:"▼ "+Math.abs(Math.round(pc))+"%",c:"#2c7a52",bg:"#e3efe6"};}
+function frame(g,title){
+  g.fillStyle="#f4efe4";g.fillRect(0,0,W,H);
+  g.fillStyle="#0e4f4a";g.fillRect(0,0,W,210);g.fillStyle="#a9802a";g.fillRect(0,210,W,8);
+  if(LOGO){g.save();g.beginPath();g.arc(PAD+55,105,55,0,7);g.clip();g.drawImage(LOGO,PAD,50,110,110);g.restore();}
+  g.fillStyle="#a9802a";const dl=dLabel(LATEST);g.font="800 32px "+SI;const dw=g.measureText(dl).width+40;
+  g.fillStyle="#fff";fitFont(g,"දඹුල්ල තොග මිල",W-PAD-dw-30-(PAD+135),46,"800",SI);g.fillText("දඹුල්ල තොග මිල",PAD+135,98);
+  g.fillStyle="#e7d3a3";g.font="700 32px 'Hanken Grotesk',sans-serif";g.fillText("TopGoviya.lk",PAD+137,148);
+  g.fillStyle="#a9802a";g.font="800 32px "+SI;
+  g.beginPath();g.roundRect(W-PAD-dw,72,dw,64,32);g.fill();g.fillStyle="#fff";g.textAlign="center";g.fillText(dl,W-PAD-dw/2,116);g.textAlign="left";
+  g.fillStyle="#0e4f4a";fitFont(g,title,W-PAD*2,68,"800",SI);g.fillText(title,PAD,318);
+  g.fillStyle="#0a3a36";g.fillRect(0,H-150,W,150);
+  g.fillStyle="#d4ad55";g.font="800 44px 'Hanken Grotesk',sans-serif";g.fillText("🌐 topgoviya.lk",PAD,H-88);
+  g.fillStyle="#fff";g.font="400 24px "+SI;g.fillText("මූලාශ්‍රය: දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය · තොග මිල",PAD,H-48);
+  g.fillStyle="#e7d3a3";g.font="400 22px "+SI;g.fillText("මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.",PAD,H-16);
+}
+function drawList(g,p){
+  frame(g,p.title);
+  const items=p.items.slice(0,9),top=370,avail=H-150-top-30,rh=Math.min(110,Math.floor(avail/Math.max(items.length,1)));
+  g.fillStyle="#6f675a";g.font="600 24px "+SI;g.fillText("රු. / කි.ග්‍රෑ. · අවම – උපරිම · පෙර වාර්තාවට ("+(PREV?dLabel(PREV):"—")+") වෙනස",PAD,top-14);
+  items.forEach((it,k)=>{
+    const y=top+k*rh;
+    g.fillStyle=k%2?"#fbf7ee":"#fffdf7";g.beginPath();g.roundRect(PAD,y+6,W-PAD*2,rh-12,18);g.fill();
+    g.font=Math.min(54,rh*.5)+"px 'Noto Color Emoji','Apple Color Emoji','Segoe UI Emoji',sans-serif";g.fillText(it.m.e||"🌿",PAD+18,y+rh*.66);
+    g.fillStyle="#191d1a";fitFont(g,it.m.si,430,Math.min(46,rh*.42),"700",SI);g.fillText(it.m.si,PAD+96,y+rh*.62);
+    const pr=money(it.lo)+"–"+money(it.hi)+(it.m.unit!=="kg"?" /"+UNIT[it.m.unit]:"");
+    g.fillStyle="#0e4f4a";fitFont(g,pr,330,Math.min(44,rh*.4),"800",MONO);g.textAlign="right";g.fillText(pr,W-PAD-190,y+rh*.62);
+    const c=chg(it.pc);g.font="800 30px "+MONO;const cw=150;g.fillStyle=c.bg;g.beginPath();g.roundRect(W-PAD-170,y+rh/2-26,cw,52,14);g.fill();
+    g.fillStyle=c.c;g.textAlign="center";g.fillText(c.t,W-PAD-170+cw/2,y+rh/2+11);g.textAlign="left";
+  });
+}
+function drawMood(g){
+  frame(g,"අද වෙළඳපොළ තත්ත්වය");
+  const mv=moved(),up=mv.filter(i=>i.pc>=0.5).length,dn=mv.filter(i=>i.pc<=-0.5).length,same=mv.length-up-dn,none=ITEMS.length-mv.length;
+  const avg=mv.length?mv.reduce((s,i)=>s+Math.max(-100,Math.min(100,i.pc)),0)/mv.length:0;
+  const [word,col]=avg>=3?["අද මිල වැඩි දිනයක්","#b23a2e"]:avg<=-3?["අද මිල අඩු දිනයක්","#2c7a52"]:["අද සාමාන්‍ය දිනයක්","#a9802a"];
+  g.fillStyle=col;g.beginPath();g.arc(PAD+40,470,36,0,7);g.fill();g.fillStyle="#0e4f4a";fitFont(g,word,W-PAD*2-110,72,"800",SI);g.fillText(word,PAD+100,496);
+  const tot=Math.max(up+dn+same,1);let x=PAD;[[up,"#b23a2e"],[same,"#cdbf9f"],[dn,"#2c7a52"]].forEach(([n,c])=>{const w=(W-PAD*2)*n/tot;g.fillStyle=c;g.fillRect(x,560,w,56);x+=w;});
+  const cols=[[up,"▲ ඉහළ","#b23a2e"],[same,"■ වෙනසක් නැත","#6f675a"],[dn,"▼ පහළ","#2c7a52"]];if(none)cols.push([none,"– පෙර මිල නැත","#6f675a"]);
+  const step=(W-PAD*2)/cols.length;cols.forEach(([n,l,c],k)=>{g.fillStyle=c;g.font="800 96px "+MONO;g.fillText(n,PAD+k*step,740);g.font="600 28px "+SI;g.fillText(l,PAD+k*step,790);});
+  const ups=mv.filter(i=>i.pc>=0.5).sort((a,b)=>b.pc-a.pc).slice(0,3),dns=mv.filter(i=>i.pc<=-0.5).sort((a,b)=>a.pc-b.pc).slice(0,3);
+  g.font="700 34px "+SI;g.fillStyle="#b23a2e";g.fillText("📈 වැඩිම ඉහළ",PAD,880);g.fillStyle="#2c7a52";g.fillText("📉 වැඩිම පහළ",W/2+10,880);
+  [[ups,PAD,"#b23a2e"],[dns,W/2+10,"#2c7a52"]].forEach(([l,x0,c])=>l.forEach((it,k)=>{const y=940+k*70;g.fillStyle="#191d1a";fitFont(g,it.m.si,270,36,"700",SI);g.fillText(it.m.si,x0,y);g.fillStyle=c;g.font="800 34px "+MONO;g.textAlign="right";g.fillText((it.pc>0?"+":"")+Math.round(it.pc)+"%",x0+W/2-PAD-30,y);g.textAlign="left";}));
+  g.fillStyle="#6f675a";g.font="400 26px "+SI;g.fillText("භාණ්ඩ "+ITEMS.length+"ක · පෙර වාර්තාවට ("+(PREV?dLabel(PREV):"—")+") සාපේක්ෂව",PAD,1170);
+}
+function drawSpot(g,p){
+  const it=p.items[0];frame(g,it.m.si+" මිල අද");
+  g.font="150px 'Noto Color Emoji','Apple Color Emoji','Segoe UI Emoji',sans-serif";g.fillText(it.m.e||"🌿",PAD,520);
+  g.fillStyle="#6f675a";g.font="600 34px 'Hanken Grotesk',sans-serif";g.fillText(it.m.en,PAD+190,420);
+  g.font="600 30px "+SI;g.fillText("දඹුල්ල තොග මිල පරාසය · රු. / "+UNIT[it.m.unit],PAD+190,470);
+  g.fillStyle="#0e4f4a";const pr="රු. "+money(it.lo)+" – "+money(it.hi);fitFont(g,pr,W-PAD*2,104,"800",MONO);g.fillText(pr,PAD,660);
+  const c=chg(it.pc);g.fillStyle=c.bg;g.beginPath();g.roundRect(PAD,700,W-PAD*2,90,20);g.fill();g.fillStyle=c.c;g.font="800 40px "+MONO;
+  g.fillText(c.t,PAD+28,758);g.fillStyle="#3a403a";
+  {const t=it.prev?("පෙර වාර්තාවට ("+dLabel(PREV)+") රු. "+money(it.prev[0])+"–"+money(it.prev[1])):"පෙර මිලක් නැත";fitFont(g,t,W-PAD*2-260,30,"600",SI);g.fillText(t,PAD+230,756);}
+  // 30-report chart
+  const ks=Object.keys(DAYS).sort().filter(d=>DAYS[d][it.pid]).slice(-30);
+  if(ks.length>1){const X0=PAD,X1=W-PAD,Y0=850,Y1=1130,v=ks.map(d=>DAYS[d][it.pid]),lo=Math.min(...v.map(a=>a[0])),hi=Math.max(...v.map(a=>a[1])),pd=(hi-lo)*.1||10;
+    const X=k=>X0+k*(X1-X0)/(ks.length-1),Y=n=>Y1-(n-(lo-pd))/((hi+pd)-(lo-pd))*(Y1-Y0);
+    g.fillStyle="rgba(14,79,74,.15)";g.beginPath();v.forEach((a,k)=>k?g.lineTo(X(k),Y(a[1])):g.moveTo(X(k),Y(a[1])));for(let k=v.length-1;k>=0;k--)g.lineTo(X(k),Y(v[k][0]));g.fill();
+    g.strokeStyle="#0e4f4a";g.lineWidth=6;g.lineJoin="round";g.beginPath();v.forEach((a,k)=>{const m=(a[0]+a[1])/2;k?g.lineTo(X(k),Y(m)):g.moveTo(X(k),Y(m));});g.stroke();
+    g.fillStyle="#a9802a";const lm=(v[v.length-1][0]+v[v.length-1][1])/2;g.beginPath();g.arc(X(v.length-1),Y(lm),12,0,7);g.fill();
+    g.fillStyle="#6f675a";g.font="500 24px "+MONO;g.fillText(ks[0].slice(5),X0,Y1+38);g.textAlign="right";g.fillText(ks[ks.length-1].slice(5),X1,Y1+38);g.textAlign="left";
+    g.font="600 24px "+SI;g.fillText("පසුගිය වාර්තා "+ks.length+" · සාමාන්‍ය මිල",X0,Y0-14);}
+}
+async function draw(p){
+  await logoP;try{await Promise.all([document.fonts.load("800 60px 'Noto Sans Sinhala'"),document.fonts.load("800 60px 'JetBrains Mono'"),document.fonts.load("800 40px 'Hanken Grotesk'")]);}catch(e){}
+  const cv=document.createElement("canvas");cv.width=W;cv.height=H;const g=cv.getContext("2d");
+  if(p.kind==="mood")drawMood(g);else if(p.kind==="spot")drawSpot(g,p);else drawList(g,p);
+  return cv;
+}
+
+/* ---------- captions ---------- */
+const LINK=()=>"https://topgoviya.lk/?d="+LATEST;
+const BASE_TAGS="#දඹුල්ල #දඹුල්ලඑලවලුමිලඅද #තොගමිල #TopGoviyaLK #DambullaPrice #SriLanka";
+const line=it=>`${it.m.e||"🌿"} ${it.m.si}: රු. ${money(it.lo)}–${money(it.hi)}${it.m.unit!=="kg"?" / "+UNIT[it.m.unit]:""}${it.pc==null?"":" ("+(it.pc>=0.5?"▲ +":it.pc<=-0.5?"▼ ":"■ ")+Math.round(it.pc)+"%)"}`;
+function caption(p){
+  const D=dLabel(LATEST)+" ("+dDay(LATEST)+")";
+  let head,body;
+  if(p.kind==="mood"){
+    const mv=moved(),up=mv.filter(i=>i.pc>=0.5).length,dn=mv.filter(i=>i.pc<=-0.5).length,same=mv.length-up-dn,none=ITEMS.length-mv.length;
+    const avg=mv.length?mv.reduce((s,i)=>s+Math.max(-100,Math.min(100,i.pc)),0)/mv.length:0;
+    const word=avg>=3?"🔴 අද මිල වැඩි දිනයක්":avg<=-3?"🟢 අද මිල අඩු දිනයක්":"🟡 අද සාමාන්‍ය දිනයක්";
+    const t=mv.filter(i=>i.pc>=0.5).sort((a,b)=>b.pc-a.pc)[0],b=mv.filter(i=>i.pc<=-0.5).sort((a,b)=>a.pc-b.pc)[0];
+    head=`${word} — දඹුල්ල තොග මිල ${D}`;
+    body=`භාණ්ඩ ${ITEMS.length}කින් ${up}ක මිල ඉහළ ගියා, ${dn}ක පහළ ගියා, ${same}ක වෙනසක් නැහැ${none?", "+none+"ක පෙර මිල නැත":""} (පෙර වාර්තාවට සාපේක්ෂව).`+
+      (t?`\n📈 වැඩිම ඉහළ: ${t.m.si} රු. ${money(t.lo)}–${money(t.hi)} (+${Math.round(t.pc)}%)`:"")+(b?`\n📉 වැඩිම පහළ: ${b.m.si} රු. ${money(b.lo)}–${money(b.hi)} (${Math.round(b.pc)}%)`:"");
+  }else if(p.kind==="spot"){
+    const it=p.items[0];head=`${it.m.e||"🌿"} අද දඹුල්ල ${it.m.si} මිල — ${D}`;
+    body=`දඹුල්ල තොග මිල: රු. ${money(it.lo)} – ${money(it.hi)} / ${UNIT[it.m.unit]}`+(it.prev?`\nපෙර වාර්තාවට (${dLabel(PREV)}): රු. ${money(it.prev[0])} – ${money(it.prev[1])}${it.pc!=null?" ("+(it.pc>0?"+":"")+Math.round(it.pc)+"%)":""}`:"")+
+      `\n\n🧮 ගොවි / වෙළෙන්දා ලාභ ගණකය හා මිල ප්‍රස්ථාරය topgoviya.lk හි.`;
+  }else{
+    head=`${p.title} — දඹුල්ල ${D}`;
+    body=p.items.map(line).join("\n")+`\n\n(රු. / කි.ග්‍රෑ. · අවම–උපරිම · වෙනස පෙර වාර්තාවට${PREV?" ("+dLabel(PREV)+")":""} සාපේක්ෂව)`;
+  }
+  const tail=`\n\n👉 භාණ්ඩ 90+ ක අද මිල: ${LINK()}\n📊 මූලාශ්‍රය: දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය\n⚠️ මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.`;
+  const tags=(p.tag?p.tag+" ":"")+(p.kind==="spot"?"#"+p.items[0].m.si.replace(/[\s()]/g,"")+"මිල ":"")+BASE_TAGS;
+  return {head,body:body+tail,tags};
+}
+
+/* ---------- UI ---------- */
+const $=id=>document.getElementById(id);
+function toast(t){const e=$("toast");e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),1600);}
+async function copy(t){try{await navigator.clipboard.writeText(t);toast("📋 කොපි විය");}catch(e){prompt("Copy:",t);}}
+const DONE_KEY="studio-done-"+(new Date().toISOString().slice(0,10));
+function doneSet(){try{return new Set(JSON.parse(localStorage.getItem(DONE_KEY)||"[]"));}catch(e){return new Set();}}
+function markDone(id,on){const s=doneSet();on?s.add(id):s.delete(id);try{localStorage.setItem(DONE_KEY,JSON.stringify([...s]));}catch(e){}}
+function render(){
+  const grid=$("grid");grid.innerHTML="";const done=doneSet();
+  POSTS.forEach((p,i)=>{
+    const c=caption(p),full=c.head+"\n\n"+c.body+"\n\n"+c.tags;
+    const el=document.createElement("div");el.className="post"+(done.has(p.id)?" done":"");
+    el.innerHTML=`<div class="head"><b><span class="num">${String(i+1).padStart(2,"0")}</span>${p.title}</b>${p.kind!=="mood"?'<button class="btn" data-a="pick" type="button">🔄</button>':""}</div>
+      <img alt="${p.title}">
+      <div class="body">
+        <div class="row"><button class="btn gold" data-a="dl" type="button">⬇️ පින්තූරය</button><button class="btn solid" data-a="all" type="button">📋 සියල්ල කොපි</button></div>
+        <span class="lbl">කැප්ශන් + විස්තරය + හෑෂ්ටැග් (සංස්කරණය කළ හැක)</span>
+        <textarea>${full.replace(/</g,"&lt;")}</textarea>
+        <div class="row"><button class="btn" data-a="head" type="button">📋 කැප්ශන්</button><button class="btn" data-a="body" type="button">📋 විස්තරය</button><button class="btn" data-a="tags" type="button">📋 හෑෂ්ටැග්</button></div>
+        <label class="chk"><input type="checkbox" data-a="done" ${done.has(p.id)?"checked":""}> අද පළ කළා</label>
+      </div>`;
+    grid.appendChild(el);
+    draw(p).then(cv=>{el.querySelector("img").src=cv.toDataURL("image/png");el._cv=cv;});
+    el.addEventListener("click",ev=>{const a=ev.target.closest("[data-a]");if(!a)return;const act=a.dataset.a;
+      if(act==="dl"){if(!el._cv)return;el._cv.toBlob(b=>{const u=URL.createObjectURL(b),x=document.createElement("a");x.href=u;x.download=`topgoviya-${LATEST}-${String(i+1).padStart(2,"0")}-${p.id}.png`;x.click();setTimeout(()=>URL.revokeObjectURL(u),2000);});}
+      if(act==="all")copy(el.querySelector("textarea").value);
+      if(act==="head")copy(c.head);if(act==="body")copy(c.body);if(act==="tags")copy(c.tags);
+      if(act==="pick")openPick(i);});
+    el.querySelector('[data-a="done"]').addEventListener("change",e=>{markDone(p.id,e.target.checked);el.classList.toggle("done",e.target.checked);});
+  });
+}
+let pickIdx=-1;
+function openPick(i){
+  pickIdx=i;const p=POSTS[i],multi=p.kind!=="spot";
+  const pool=p.cat?byCat(p.cat):ITEMS;const sel=new Set(p.items.map(x=>x.pid));
+  $("pickTitle").textContent=(multi?"භාණ්ඩ 9ක් දක්වා තෝරන්න — ":"එක් භාණ්ඩයක් තෝරන්න — ")+p.title;
+  $("pickList").innerHTML=pool.map(it=>`<label><input type="${multi?"checkbox":"radio"}" name="pk" value="${it.pid}" ${sel.has(it.pid)?"checked":""}> ${it.m.e||"🌿"} ${it.m.si} <small style="color:var(--muted)">${money(it.lo)}–${money(it.hi)}</small></label>`).join("");
+  $("pickAll").hidden=!multi||!p.cat;
+  const upd=()=>{$("pickCount").textContent=multi?$("pickList").querySelectorAll("input:checked").length+" / 9":"";};
+  $("pickList").onchange=upd;upd();$("pick").showModal();
+}
+$("pickX").onclick=()=>$("pick").close();
+$("pickAll").onclick=()=>{$("pickList").querySelectorAll("input").forEach((x,k)=>x.checked=k<9);$("pickCount").textContent="9 / 9";};
+$("pickOk").onclick=()=>{
+  const p=POSTS[pickIdx],ids=[...$("pickList").querySelectorAll("input:checked")].map(x=>x.value).slice(0,9);
+  if(!ids.length){toast("භාණ්ඩයක් තෝරන්න");return;}
+  p.items=ids.map(id=>ITEMS.find(x=>x.pid===id));if(p.kind==="spot")p.title="🔦 "+p.items[0].m.si+" මිල";
+  $("pick").close();render();
+};
+$("reload").onclick=load;
+$("shuffle").onclick=()=>{shuffleSeed++;buildPosts();toast("🎲 Spotlight වෙනස් විය");};
+load();
+</script>
+</body>
+</html>
