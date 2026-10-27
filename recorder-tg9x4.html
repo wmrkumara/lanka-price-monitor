@@ -49,6 +49,7 @@ video.hid{position:absolute;left:-9999px;width:2px;height:2px}
       <button class="btn red" id="recBtn" type="button">🔴 Record පටන් ගන්න</button>
       <button class="btn" id="stopBtn" type="button" disabled>⏹ නවත්වන්න</button>
       <label class="btn" style="cursor:pointer">📂 වීඩියෝ ගොනුවක් විවෘත කරන්න<input type="file" id="fileIn" accept="video/*" hidden></label>
+      <button class="btn" id="saveRaw" type="button" hidden>💾 මුල් Recording එක Save කරන්න</button>
       <span id="recInfo" class="time"></span>
     </div>
     <div class="stage"><canvas id="cv" width="1280" height="720"></canvas></div>
@@ -102,7 +103,7 @@ video.hid{position:absolute;left:-9999px;width:2px;height:2px}
 <script>
 const $=id=>document.getElementById(id);
 const cv=$("cv"),g=cv.getContext("2d"),vS=$("vScreen"),vC=$("vCam");
-let screenURL=null,camURL=null,zooms=[],trimA=0,trimB=0,dur=0,exporting=false,camOffset=0;
+let lastRaw=null,recSeconds=0,screenURL=null,camURL=null,zooms=[],trimA=0,trimB=0,dur=0,exporting=false,camOffset=0;
 const LOGO=new Image();LOGO.src="icon-512x512.png";
 const fmt=s=>{s=Math.max(0,s);return Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0");};
 const status=t=>$("status").textContent=t;
@@ -129,7 +130,7 @@ $("recBtn").onclick=async()=>{
     $("recBtn").disabled=true;$("stopBtn").disabled=false;status("● Recording");
     recTimer=setInterval(()=>{$("recInfo").innerHTML='<span class="rec-dot"></span> '+fmt((Date.now()-recT0)/1000);},500);
     done.then(async()=>{
-      clearInterval(recTimer);$("recInfo").textContent="";streams.forEach(s=>s.getTracks().forEach(t=>t.stop()));ac.close();
+      clearInterval(recTimer);recSeconds=(Date.now()-recT0)/1000;$("recInfo").textContent="";streams.forEach(s=>s.getTracks().forEach(t=>t.stop()));ac.close();
       await loadScreen(new Blob(chunksS,{type:chunksS[0]?.type||"video/webm"}),recC?new Blob(chunksC,{type:"video/webm"}):null);
       $("recBtn").disabled=false;$("stopBtn").disabled=true;
     });
@@ -137,18 +138,29 @@ $("recBtn").onclick=async()=>{
 };
 function stopRec(){if(recS&&recS.state!=="inactive")recS.stop();if(recC&&recC.state!=="inactive")recC.stop();}
 $("stopBtn").onclick=stopRec;
-$("fileIn").onchange=e=>{const f=e.target.files[0];if(f)loadScreen(f,null);};
+$("saveRaw").onclick=()=>{if(!lastRaw)return;const u=URL.createObjectURL(lastRaw),x=document.createElement("a");x.href=u;x.download="topgoviya-recording-"+new Date().toISOString().slice(0,16).replace(/[:T]/g,"-")+".webm";x.click();setTimeout(()=>URL.revokeObjectURL(u),3000);status("💾 මුල් recording එක Save විය");};
+window.addEventListener("beforeunload",e=>{if(lastRaw){e.preventDefault();e.returnValue="";}});
+$("fileIn").onchange=e=>{const f=e.target.files[0];if(f){recSeconds=0;loadScreen(f,null);}};
 
-/* webm from MediaRecorder has no duration: force it */
-function fixDuration(v){return new Promise(res=>{
+/* wait for a video's metadata, even if it already loaded */
+function meta(v){return new Promise(res=>{if(v.readyState>=1)return res();const f=()=>{v.removeEventListener("loadedmetadata",f);res();};v.addEventListener("loadedmetadata",f);setTimeout(res,8000);});}
+/* webm from MediaRecorder has no duration: force it (with a safety timeout) */
+function fixDuration(v,fallback){return new Promise(res=>{
   if(isFinite(v.duration)&&v.duration>0)return res(v.duration);
-  v.currentTime=1e9;v.ontimeupdate=()=>{v.ontimeupdate=null;const d=v.duration;v.currentTime=0;res(d);};
+  let doneF=false;const fin=d=>{if(doneF)return;doneF=true;v.ontimeupdate=null;try{v.currentTime=0;}catch(e){}res(d);};
+  v.ontimeupdate=()=>{if(isFinite(v.duration)&&v.duration>0)fin(v.duration);};
+  try{v.currentTime=1e9;}catch(e){}
+  setTimeout(()=>fin(isFinite(v.duration)&&v.duration>0?v.duration:(fallback||0)),6000);
 });}
 async function loadScreen(blob,camBlob){
   if(screenURL)URL.revokeObjectURL(screenURL);if(camURL)URL.revokeObjectURL(camURL);
-  screenURL=URL.createObjectURL(blob);vS.src=screenURL;camURL=camBlob?URL.createObjectURL(camBlob):null;vC.src=camURL||"";
-  await new Promise(r=>vS.onloadedmetadata=r);dur=await fixDuration(vS);
-  if(camURL){await new Promise(r=>vC.onloadedmetadata=r);await fixDuration(vC);}
+  screenURL=URL.createObjectURL(blob);camURL=camBlob?URL.createObjectURL(camBlob):null;lastRaw=blob;
+  vS.src=screenURL;if(camURL)vC.src=camURL;else vC.removeAttribute("src");
+  status("⏳ වීඩියෝව සකසමින්…");
+  await meta(vS);dur=await fixDuration(vS,recSeconds);
+  if(camURL){await meta(vC);await fixDuration(vC,recSeconds);}
+  if(!dur)dur=recSeconds||1;
+  $("saveRaw").hidden=false;
   trimA=0;trimB=dur;zooms=[];renderZooms();
   ["playBtn","tStart","tEnd","expBtn"].forEach(id=>$(id).disabled=false);
   status("✔ වීඩියෝව සූදානම් · "+fmt(dur));vS.currentTime=0;drawPreview();
