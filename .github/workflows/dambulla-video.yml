@@ -66,6 +66,21 @@ jobs:
           path: dambulla_video/
           retention-days: 14
 
+      - name: Publish the latest video for direct download
+        if: steps.check.outputs.need == 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p latest
+          cp dambulla_video/dambulla-daily-*-music.mp4 latest/dambulla-video-latest.mp4
+          cp "$(ls dambulla_video/dambulla-daily-*.mp4 | grep -v music)" latest/dambulla-video-latest-silent.mp4
+          cp dambulla_video/dambulla-thumbnail-*.png latest/dambulla-video-thumbnail.png
+          cp dambulla_video/dambulla-youtube-*.txt   latest/dambulla-video-youtube.txt
+          cp dambulla_video/dambulla-script-*.txt    latest/dambulla-video-script.txt
+          gh release view dambulla-video >/dev/null 2>&1 || gh release create dambulla-video --title "Latest Dambulla 2-minute video" --notes "Newest daily Dambulla video. Files are replaced every day."
+          gh release edit dambulla-video --notes "Latest Dambulla video: $(cat .dambulla_video_last)"
+          gh release upload dambulla-video latest/* --clobber
+
       - name: Remember the day is done
         if: steps.check.outputs.need == 'yes'
         run: |
