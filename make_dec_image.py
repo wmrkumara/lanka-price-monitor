@@ -21,7 +21,7 @@ OUT_DIR = "share"
 WIDE = os.path.join(OUT_DIR, "dambulla-wide.png")
 STATE = os.path.join(OUT_DIR, "dambulla-wide.json")
 PAGES = ["index.html"]          # pages whose og:image is refreshed
-STYLE_VERSION = "4"                # change to force a redraw after a design change
+STYLE_VERSION = "5"                # change to force a redraw after a design change
 ROWS = 8
 
 # DEC product id -> (Sinhala name, emoji), in popular order. Coconut is left out
@@ -125,12 +125,34 @@ h1{{font-size:62px;line-height:1.12;margin-top:34px;font-weight:800}}
 </body></html>"""
 
 
-def refresh_pages(last):
+def seo_today_html(db, last):
+    """Plain-text list of today's popular prices for search engines (and readers) — between
+    <!--SEO-TODAY--> markers in index.html."""
+    try:
+        names = json.load(open("dambulla_items.json", encoding="utf-8"))["items"]
+    except Exception:
+        return None
+    unit = {"kg": "කි.ග්‍රෑ.", "nut": "ගෙඩිය", "bundle": "මිටිය"}
+    day = db["days"][last]
+    rows = sorted((v["pop"], k) for k, v in names.items() if k in day and day[k])
+    parts = []
+    for _, k in rows[:30]:
+        lo, hi = day[k]
+        parts.append(f"{names[k]['si']} රු. {money(lo)}–{money(hi)} / {unit.get(names[k]['unit'], 'කි.ග්‍රෑ.')}")
+    return ("<p><b>දඹුල්ල එලවලු මිල අද — " + si_date(last) + "</b> (දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය, තොග මිල, අවම–උපරිම): "
+            + " · ".join(parts) + ". භාණ්ඩ " + str(len(day)) + " ක සම්පූර්ණ ලැයිස්තුව ඉහත.</p>")
+
+
+def refresh_pages(last, db=None):
     for p in PAGES:
         if not os.path.exists(p):
             continue
         s = open(p, encoding="utf-8").read()
         s2 = re.sub(r"(share/dambulla-wide\.png\?v=)[0-9-]+", r"\g<1>" + last, s)
+        if db is not None:
+            seo = seo_today_html(db, last)
+            if seo:
+                s2 = re.sub(r"<!--SEO-TODAY-->.*?<!--/SEO-TODAY-->", lambda m: "<!--SEO-TODAY-->" + seo + "<!--/SEO-TODAY-->", s2, flags=re.S)
         if s2 != s:
             open(p, "w", encoding="utf-8").write(s2)
             print(f"Updated preview address in {p}")
@@ -154,7 +176,7 @@ def main():
         pg.wait_for_timeout(400)
         pg.screenshot(path=WIDE)
         b.close()
-    refresh_pages(last)
+    refresh_pages(last, db)
     with open(STATE, "w", encoding="utf-8") as f:
         json.dump(state_now(db), f)
     print(f"Made {WIDE} for {last} ({len(rows)} items).")
