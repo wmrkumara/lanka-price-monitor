@@ -21,7 +21,7 @@ OUT_DIR = "share"
 WIDE = os.path.join(OUT_DIR, "dambulla-wide.png")
 STATE = os.path.join(OUT_DIR, "dambulla-wide.json")
 PAGES = ["index.html"]          # pages whose og:image is refreshed
-STYLE_VERSION = "7"                # change to force a redraw after a design change
+STYLE_VERSION = "8"                # change to force a redraw after a design change
 ROWS = 8
 
 # DEC product id -> (Sinhala name, emoji), in popular order. Coconut is left out
@@ -140,7 +140,8 @@ def seo_today_html(db, last):
         lo, hi = day[k]
         parts.append(f"{names[k]['si']} රු. {money(lo)}–{money(hi)} / {unit.get(names[k]['unit'], 'කි.ග්‍රෑ.')}")
     return ("<p><b>දඹුල්ල එලවලු මිල අද — " + si_date(last) + "</b> (දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය, තොග මිල, අවම–උපරිම): "
-            + " · ".join(parts) + " — භාණ්ඩ " + str(len(day)) + " ක සම්පූර්ණ ලැයිස්තුව ඉහත.</p>")
+            + " · ".join(parts) + " — භාණ්ඩ " + str(len(day)) + " ක සම්පූර්ණ ලැයිස්තුව ඉහත.</p>"
+            + '<p>🍍 <a href="dambulla-fruit-price.html">දඹුල්ල පලතුරු මිල අද</a> (Dambulla fruit price today)</p>')
 
 
 def refresh_pages(last, db=None):
@@ -159,6 +160,102 @@ def refresh_pages(last, db=None):
         if s2 != s:
             open(p, "w", encoding="utf-8").write(s2)
             print(f"Updated preview address in {p}")
+
+
+# ---------------------------------------------------------------- category pages (plain HTML, for Google)
+CAT_PAGES = [
+    {"cat": "f", "file": "dambulla-fruit-price.html", "emoji": "🍍",
+     "si": "පලතුරු", "en": "Fruit", "h1": "දඹුල්ල පලතුරු මිල අද",
+     "words": "දඹුල්ල පලතුරු මිල today · අන්නාසි, පැපොල්, කෙසෙල්, අඹ, දොඩම් මිල"},
+]
+UNIT_SI = {"kg": "කි.ග්‍රෑ.", "nut": "ගෙඩිය", "bundle": "මිටිය"}
+
+
+def cat_page_html(cfg, db, names, last):
+    order = sorted(db["days"])
+    prev = order[order.index(last) - 1] if order.index(last) > 0 else None
+    day, pday = db["days"][last], (db["days"][prev] if prev else {})
+    rows = []
+    for k, m in sorted(names.items(), key=lambda kv: kv[1]["pop"]):
+        if m.get("cat") != cfg["cat"] or not day.get(k):
+            continue
+        lo, hi = day[k]
+        mid = (lo + hi) / 2
+        ch = ""
+        if pday.get(k):
+            pm = sum(pday[k]) / 2
+            if pm:
+                pc = (mid - pm) / pm * 100
+                cls = "up" if pc >= 0.5 else "dn" if pc <= -0.5 else "fl"
+                ch = f'<span class="{cls}">{"▲" if cls == "up" else "▼" if cls == "dn" else "■"} {pc:+.0f}%</span>'
+        u = "" if m["unit"] == "kg" else f' <small>/ {UNIT_SI.get(m["unit"], "")}</small>'
+        rows.append(f'<tr><td>{m["si"]} <small>{m["en"]}</small></td><td class="n">{money(lo)} – {money(hi)}{u}</td>'
+                    f'<td class="n">{money(mid)}</td><td class="n">{ch or "—"}</td></tr>')
+    d = date.fromisoformat(last)
+    ds = f"{d.year}.{d.month:02d}.{d.day:02d}"
+    title = f'{cfg["h1"]} {ds} | Dambulla {cfg["en"]} Price Today | TopGoviya'
+    desc = (f'{cfg["h1"]} — දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානයේ {si_date(last)} {cfg["si"]} {len(rows)} ක තොග මිල (අවම–උපරිම) හා පෙර දිනට වෙනස. '
+            f'Dambulla {cfg["en"].lower()} wholesale prices today, Sri Lanka.')
+    url = "https://topgoviya.lk/" + cfg["file"]
+    return f"""<!DOCTYPE html>
+<html lang="si"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content="{desc}">
+<link rel="canonical" href="{url}">
+<meta property="og:title" content="{title}"><meta property="og:description" content="{desc}">
+<meta property="og:url" content="{url}"><meta property="og:type" content="website">
+<meta property="og:image" content="https://topgoviya.lk/share/dambulla-wide.png?v={last}">
+<link rel="icon" href="icon-192x192.png"><meta name="theme-color" content="#0e4f4a">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZBN8Z32S4J"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-ZBN8Z32S4J');</script>
+<style>
+body{{margin:0;background:#f4efe4;color:#191d1a;font-family:'Noto Sans Sinhala','Hanken Grotesk',system-ui,sans-serif;line-height:1.55}}
+.top{{background:#0e4f4a;padding:12px 18px}}.top a{{color:#fff;text-decoration:none;font-weight:700;margin-right:14px}}
+.w{{max-width:860px;margin:0 auto;padding:18px}}h1{{color:#0e4f4a;font-size:30px;margin:10px 0 2px}}
+.sub{{color:#6f675a;margin:0 0 14px}}.pill{{display:inline-block;background:#fffdf7;border:1px solid #e3d9c4;border-radius:999px;padding:5px 12px;margin:0 6px 6px 0;font-size:14px}}
+table{{width:100%;border-collapse:collapse;background:#fffdf7;border:1px solid #e3d9c4;border-radius:12px;overflow:hidden}}
+th,td{{padding:10px 12px;border-bottom:1px solid #eee5d3;text-align:left;font-size:15px}}th{{background:#efe8d8;font-size:13px}}
+td small{{color:#6f675a}}.n{{text-align:right;font-family:'JetBrains Mono',monospace;white-space:nowrap}}
+.up{{color:#b23a2e}}.dn{{color:#2c7a52}}.fl{{color:#8a8170}}
+.cta{{display:inline-block;margin:16px 0;background:#0e4f4a;color:#fff;padding:11px 16px;border-radius:10px;text-decoration:none;font-weight:700}}
+.note{{font-size:13px;color:#6f675a}}a{{color:#0e4f4a}}
+@media(max-width:520px){{th:nth-child(3),td:nth-child(3){{display:none}}th,td{{padding:9px 8px;font-size:14px}}h1{{font-size:26px}}}}
+</style></head><body>
+<div class="top"><a href="./">🥬 TopGoviya.lk</a><a href="./">දඹුල්ල මිල</a><a href="retail.html">📊 CBSL</a></div>
+<main class="w">
+<h1>{cfg["emoji"]} {cfg["h1"]}</h1>
+<p class="sub">Dambulla {cfg["en"].lower()} price today · {cfg["words"]}</p>
+<span class="pill">නවතම මිල: <b>{si_date(last)}</b></span><span class="pill">{len(rows)} භාණ්ඩ</span>
+<p>දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානයේ {si_date(last)} දින {cfg["si"]} තොග මිල (රු. / කි.ග්‍රෑ.; පොල් හා තැඹිලි ගෙඩියට). සාමාන්‍ය = (අවම + උපරිම) ÷ 2. වෙනස පෙර වාර්තාවට ({si_date(prev) if prev else "—"}) සාපේක්ෂව.</p>
+<div style="overflow-x:auto"><table><thead><tr><th>භාණ්ඩය</th><th class="n">අවම – උපරිම</th><th class="n">සාමාන්‍ය</th><th class="n">පෙර දිනට</th></tr></thead>
+<tbody>{"".join(rows)}</tbody></table></div>
+<a class="cta" href="./">🥬 සියලු භාණ්ඩ 90+ ක අද මිල, ප්‍රස්ථාර හා ලාභ ගණකය →</a>
+<p class="note">මූලාශ්‍රය: දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය (Dambulla DEC) · <a href="data-sources.html">මිල ලබාගන්නා ආකාරය</a><br>
+මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ. · © TopGoviya.lk</p>
+</main></body></html>
+"""
+
+
+def write_cat_pages(db, last):
+    try:
+        names = json.load(open("dambulla_items.json", encoding="utf-8"))["items"]
+    except Exception as ex:
+        print("Category pages skipped:", ex)
+        return
+    for cfg in CAT_PAGES:
+        with open(cfg["file"], "w", encoding="utf-8") as f:
+            f.write(cat_page_html(cfg, db, names, last))
+        print("Wrote", cfg["file"])
+    # make sure the pages are in the sitemap (other entries are left as they are)
+    if os.path.exists("sitemap.xml"):
+        sm = open("sitemap.xml", encoding="utf-8").read()
+        for cfg in CAT_PAGES:
+            loc = "https://topgoviya.lk/" + cfg["file"]
+            if loc in sm:
+                sm = re.sub(r"(<loc>" + re.escape(loc) + r"</loc>\s*<lastmod>)[^<]*", r"\g<1>" + last, sm)
+            else:
+                sm = sm.replace("</urlset>", f"  <url><loc>{loc}</loc><lastmod>{last}</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>\n</urlset>")
+        open("sitemap.xml", "w", encoding="utf-8").write(sm)
 
 
 def main():
@@ -180,6 +277,7 @@ def main():
         pg.screenshot(path=WIDE)
         b.close()
     refresh_pages(last, db)
+    write_cat_pages(db, last)
     with open(STATE, "w", encoding="utf-8") as f:
         json.dump(state_now(db), f)
     print(f"Made {WIDE} for {last} ({len(rows)} items).")
