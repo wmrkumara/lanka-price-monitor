@@ -13,7 +13,11 @@ on:
   workflow_dispatch:
     inputs:
       force:
-        description: "Make the video again even if today's is done (yes/no)"
+        description: "Make the video again even if today's is done"
+        type: choice
+        options:
+          - "no"
+          - "yes"
         default: "no"
 
 permissions:
@@ -35,7 +39,7 @@ jobs:
       - name: Is there a new day?
         id: check
         run: |
-          if [ "${{ github.event.inputs.force }}" = "yes" ]; then echo "need=yes" >> "$GITHUB_OUTPUT"; else python3 make_dambulla_video.py --check >> "$GITHUB_OUTPUT"; fi
+          if [ "$(echo "${{ github.event.inputs.force }}" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')" = "yes" ]; then echo "need=yes" >> "$GITHUB_OUTPUT"; else python3 make_dambulla_video.py --check >> "$GITHUB_OUTPUT"; fi
 
       - name: Install tools and fonts
         if: steps.check.outputs.need == 'yes'
