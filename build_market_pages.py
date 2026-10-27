@@ -259,6 +259,11 @@ def cbsl_peliyagoda(cbsl):
     dates = cbsl["dates"]
     fish, pettah = [], []
     for c in cbsl["commodities"]:
+        # skip items that were not in the latest report (old prices stay in the file)
+        s_last = (c.get("series") or [None])[-1]
+        w_last = (c.get("wholesaleSeries") or [None])[-1]
+        if s_last is None and w_last is None:
+            continue
         wm = c.get("wholesaleMarkets") or {}
         rm = c.get("markets") or {}
         if c.get("category") == "Fish":
