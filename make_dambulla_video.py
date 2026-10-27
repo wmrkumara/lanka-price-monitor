@@ -41,10 +41,10 @@ from PIL import Image, ImageDraw, features
 from build_pages import fdate, MONTHS
 import make_daily_video as V      # reuse fonts, colours, logo, photo box, music loop
 import short_kit
-ITEMS = [  # (DEC product id, crop photo name)
-    ("11", "tomato"), ("70", "big-onion"), ("67", "green-chilli"), ("26", "brinjal"),
-    ("4", "beans"), ("6", "carrot"), ("69", "red-onion"), ("15", "potato"),
-    ("1", "cabbage"), ("25", "pumpkin"), ("27", "lime"), ("23", "snake-gourd"),
+ITEMS = [  # (DEC product id, crop photo name) — in the site's popular order
+    ("11", "tomato"), ("70", "big-onion"), ("69", "red-onion"), ("67", "green-chilli"),
+    ("15", "potato"), ("26", "brinjal"), ("1", "cabbage"), ("6", "carrot"),
+    ("4", "beans"), ("25", "pumpkin"), ("27", "lime"), ("23", "snake-gourd"),
 ]
 SEC_TITLE, SEC_MOOD, SEC_ITEM, SEC_MOVE, SEC_END = 7, 9, 8, 10, 10
 si, mono = V.si, V.mono
@@ -229,19 +229,23 @@ def thumbnail(rep, allr):
     im = Image.new("RGB", (1280, 720), PET); dr = ImageDraw.Draw(im)
     dr.rectangle((0, 0, 1280, 120), fill=GOLD)
     dr.text((640, 60), f"{fdate(rep, 'si')} · {DAYS_SI[rep.weekday()]}", font=si(64), fill=W, anchor="mm")
-    dr.text((640, 250), "අද දඹුල්ල", font=si(120), fill=W, anchor="mm")
-    dr.text((640, 400), "තොග මිල", font=si(120), fill=LG, anchor="mm")
+    dr.text((640, 230), "අද දඹුල්ල", font=si(110), fill=W, anchor="mm")
+    dr.text((640, 365), "තොග මිල", font=si(110), fill=LG, anchor="mm")
     ups, dns = movers(allr, 1)
-    r = (ups or dns or [None])[0]
-    if r:
+    picks = [r for r in (ups[:1] + dns[:1]) if r]
+    if not picks:
+        picks = []
+    y0 = 470 if len(picks) == 2 else 520
+    for k, r in enumerate(picks):
         ar, col, bg = V.change_style(r["pct"])
-        dr.rounded_rectangle((140, 500, 1140, 670), radius=30, fill=bg)
-        nf = si(80)
-        while dr.textlength(r["si"], font=nf) > 560 and nf.size > 44:
-            nf = si(nf.size - 4)
-        dr.text((200, 585), r["si"], font=nf, fill=INK, anchor="lm")
-        t = f"{ar} {abs(r['pct']):.0f}%"
-        V.segs(dr, 1080 - dr.textlength(t, font=mono(90)), 585, [(t, mono(90), col)])
+        y = y0 + k * 120
+        dr.rounded_rectangle((120, y, 1160, y + 105), radius=26, fill=bg)
+        nf = si(64)
+        while dr.textlength(r["si"], font=nf) > 640 and nf.size > 36:
+            nf = si(nf.size - 3)
+        dr.text((160, y + 52), r["si"], font=nf, fill=INK, anchor="lm")
+        tt = f"{ar} {abs(r['pct']):.0f}%"
+        dr.text((1120, y + 52), tt, font=mono(72), fill=col, anchor="rm")
     b = V.logo_badge(110); im.paste(b, (20, 140), b)
     return im
 
@@ -282,15 +286,17 @@ def script_file(rep, rows, allr):
          f"ආයුබෝවන්! TopGoviya අද දඹුල්ල එළවළු මිල. {day}, දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානයේ තොග මිල.", "",
          f"[අද තත්ත්වය · තත්පර {SEC_MOOD}]",
          f"{title_m.split(' ', 1)[1]}. භාණ්ඩ {up}ක මිල ඉහළ ගියා, {dn}ක පහළ ගියා, {same}ක වෙනසක් නැහැ.", ""]
+    t = []
+    if ups: t.append("අද වැඩියෙන්ම ඉහළ ගියේ " + " සහ ".join(f"{r['si']} {abs(r['pct']):.0f}%" for r in ups) + ".")
+    if dns: t.append("වැඩියෙන්ම අඩු වුණේ " + " සහ ".join(f"{r['si']} {abs(r['pct']):.0f}%" for r in dns) + ".")
+    L += [f"[වැඩිම වෙනස්වීම් · තත්පර {SEC_MOVE}]", " ".join(t) or "අද විශාල මිල වෙනසක් නැහැ.", "",
+          "දැන් ජනප්‍රිය එළවළු මිල බලමු.", ""]
     for i, r in enumerate(rows, 1):
         line = f"{r['si']}. රුපියල් {r['lo']:,.0f} සිට {r['hi']:,.0f} දක්වා."
         if r["pct"] is not None and abs(r["pct"]) >= 10:
             line += f" ඊයේට වඩා {abs(r['pct']):.0f}%කින් {'ඉහළයි' if r['pct'] > 0 else 'අඩුයි'}."
         L += [f"[{i} / {len(rows)} · තත්පර {SEC_ITEM}]", line, ""]
-    t = []
-    if ups: t.append("අද වැඩියෙන්ම ඉහළ ගියේ " + " සහ ".join(f"{r['si']} {abs(r['pct']):.0f}%" for r in ups) + ".")
-    if dns: t.append("වැඩියෙන්ම අඩු වුණේ " + " සහ ".join(f"{r['si']} {abs(r['pct']):.0f}%" for r in dns) + ".")
-    L += [f"[වැඩිම වෙනස්වීම් · තත්පර {SEC_MOVE}]", " ".join(t) or "අද විශාල මිල වෙනසක් නැහැ.", "",
+    L += [
           f"[අවසාන පිටුව · තත්පර {SEC_END}]",
           "දඹුල්ල භාණ්ඩ අනූවකට වැඩි ගණනක අද මිල, බාස්කට් එක හා ලාභ ගණකය topgoviya.lk වෙබ් අඩවියෙන් නොමිලේ බලන්න. "
           "මිල ගණන් මඟපෙන්වීමක් පමණි. Subscribe කරන්න, හෙට නැවත හමුවෙමු!"]
@@ -316,9 +322,9 @@ def main():
         sys.exit("Too few items for the video.")
     os.makedirs(OUT, exist_ok=True)
     tmp = os.path.join(OUT, "frames"); os.makedirs(tmp, exist_ok=True)
-    slides = [(title_slide(rep), SEC_TITLE), (mood_slide(rep, allr), SEC_MOOD)]
+    slides = [(title_slide(rep), SEC_TITLE), (mood_slide(rep, allr), SEC_MOOD), (movers_slide(rep, allr), SEC_MOVE)]
     slides += [(item_slide(rep, r, i + 1, len(rows)), SEC_ITEM) for i, r in enumerate(rows)]
-    slides += [(movers_slide(rep, allr), SEC_MOVE), (end_slide(rep), SEC_END)]
+    slides += [(end_slide(rep), SEC_END)]
     lst = []
     for k, (im, sec) in enumerate(slides):
         p = os.path.join(tmp, f"s{k:02d}.png"); im.save(p)
