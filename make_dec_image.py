@@ -21,7 +21,7 @@ OUT_DIR = "share"
 WIDE = os.path.join(OUT_DIR, "dambulla-wide.png")
 STATE = os.path.join(OUT_DIR, "dambulla-wide.json")
 PAGES = ["index.html"]          # pages whose og:image is refreshed
-STYLE_VERSION = "6"                # change to force a redraw after a design change
+STYLE_VERSION = "7"                # change to force a redraw after a design change
 ROWS = 8
 
 # DEC product id -> (Sinhala name, emoji), in popular order. Coconut is left out
@@ -149,6 +149,9 @@ def refresh_pages(last, db=None):
             continue
         s = open(p, encoding="utf-8").read()
         s2 = re.sub(r"(share/dambulla-wide\.png\?v=)[0-9-]+", r"\g<1>" + last, s)
+        d = date.fromisoformat(last)
+        new_title = f"දඹුල්ල එලවලු මිල අද {d.year}.{d.month:02d}.{d.day:02d} | Dambulla Market Price Today | TopGoviya"
+        s2 = re.sub(r"<title>[^<]*</title>", "<title>" + new_title + "</title>", s2, count=1)
         if db is not None:
             seo = seo_today_html(db, last)
             if seo:

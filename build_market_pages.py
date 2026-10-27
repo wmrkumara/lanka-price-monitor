@@ -844,7 +844,7 @@ def market_page(market, hm, harti, cats, cbsl):
 <div class="rel">{others}</div>
 """
     dtxt = fdate(d_(last), "en") if last else ""
-    title = f"{si} එළවළු මිල අද | {en} Market Price Today Sri Lanka – TopGoviya"
+    title = f"{si} එලවලු මිල අද | {en} Market Price Today Sri Lanka – TopGoviya"
     if market == "Dambulla":
         title = "දඹුල්ල HARTI සහ CBSL තොග මිල | Dambulla HARTI & CBSL Wholesale Report – TopGoviya"
     top3 = ", ".join(f"{r['name']} Rs. {money(r['mid'])}" for r in rows[:3])
