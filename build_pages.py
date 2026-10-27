@@ -688,9 +688,10 @@ def commodity_page(c, dates, latest_idx, all_items):
     else:
         duo_html = '<p class="asof" style="margin-top:6px"><a href="../wholesale.html">HARTI තොග මිල බලන්න / See HARTI wholesale prices →</a></p>'
     if mkt == "Dambulla" or (wl and wmkt == "Dambulla"):
-        duo_html += ('<p class="asof" style="margin-top:6px">📍 <a href="/market/dambulla.html">දඹුල්ල වෙළඳපොළ අද මිල ගණන් '
+        duo_html += ('<p class="asof" style="margin-top:6px">📍 <a href="/">දඹුල්ල වෙළඳපොළ අද මිල ගණන් '
                      '/ Dambulla market prices today →</a></p>')
 
+    dec_html, dec = dec_block(name, unit)
     # ---- FAQ: short factual answers built from the same numbers (Sinhala + English)
     faq = []   # (question_si, question_en, answer_si, answer_en)
     a_si = f"{fdate(d,'si')} දින {m_tr(mkt,'si')} වෙළඳපොළේ සිල්ලර මිල {per['si']} රු. {money(price)}."
@@ -699,6 +700,10 @@ def commodity_page(c, dates, latest_idx, all_items):
         a_si += f" {m_tr(wmkt,'si')} තොග මිල රු. {money(wprice)}."
         a_en += f" The wholesale price at {wmkt} was Rs. {money(wprice)}."
     faq.append((f"{n_si(name)} මිල අද කීයද?", f"What is the {name} price today in Sri Lanka?", a_si, a_en))
+    if dec:
+        faq.append((f"දඹුල්ල {n_si(name)} මිල අද කීයද?", f"What is the {name} price at Dambulla today?",
+                    f"{fdate(dec[0],'si')} දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානයේ තොග මිල රු. {money(dec[1])} – {money(dec[2])}.",
+                    f"On {fdate(dec[0],'en')}, the Dambulla Dedicated Economic Centre wholesale price was Rs. {money(dec[1])} – {money(dec[2])}."))
     if prev:
         faq.append((f"{n_si(name)} මිල ඉහළ ගියාද, පහළ ගියාද?", f"Did the {name} price go up or down?", ch_si, ch_en))
     if li == latest_idx:
@@ -720,8 +725,8 @@ def commodity_page(c, dates, latest_idx, all_items):
                      f"{fdate(dates[ya_[0]],'si')} දින {m_tr(mkt,'si')} සිල්ලර මිල රු. {money(ya_[1])} විය (අද රු. {money(price)}).",
                      f"On {fdate(dates[ya_[0]],'en')} it was Rs. {money(ya_[1])} at {mkt} (today Rs. {money(price)})."))
     faq.append((f"මෙම මිල ගණන් කොහෙන්ද?", f"Where do these {name} prices come from?",
-                 "ශ්‍රී ලංකා මහ බැංකුවේ දෛනික මිල වාර්තාවෙන් (සතියේ දින) ස්වයංක්‍රීයව ලබා ගනී. මිල ගණන් මඟපෙන්වීමක් පමණි.",
-                 "From the Central Bank of Sri Lanka daily price report (weekdays), collected automatically. Prices are indicative only."))
+                 "ශ්‍රී ලංකා මහ බැංකුවේ දෛනික මිල වාර්තාවෙන් (සතියේ දින)" + (" හා දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානයේ දෛනික තොග මිල ලැයිස්තුවෙන්" if dec else "") + ". මිල ගණන් මඟපෙන්වීමක් පමණි.",
+                 "From the Central Bank of Sri Lanka daily price report (weekdays)" + (" and the Dambulla Dedicated Economic Centre daily wholesale price list" if dec else "") + ". Prices are indicative only."))
     faq_html = ('<h2>නිතර අසන ප්‍රශ්න<span>Frequently asked questions</span></h2><div class="story" style="font-size:14.5px">'
                 + "".join(f'<h3 style="font-size:15.5px;margin:12px 0 4px">{e(qs)} <span style="color:var(--muted);font-weight:500">/ {e(qe)}</span></h3>'
                           f'<p style="margin:0">{e(as_)}</p><p lang="en" style="margin:2px 0 0;color:var(--soft)">{e(ae)}</p>'
@@ -737,13 +742,14 @@ def commodity_page(c, dates, latest_idx, all_items):
     body = f"""
 <p class="crumb"><a href="/">TopGoviya.lk</a> / <a href="/price/">මිල ගණන්</a> / {e(n_si(name))}</p>
 <h1>{emoji(name)} {e(n_si(name))} මිල අද</h1>
-<p class="alt">{e(name)} price today in Sri Lanka{(" · " + e(sl(name)) + " mila ada · " + e(sl(name)) + " rate today") if sl(name) else ""}<br>{e(n_ta(name))} விலை இன்று</p>
+<p class="alt">{("දඹුල්ල " + e(n_si(name)) + " මිල අද · ") if dec else ""}{e(name)} price today in Sri Lanka{(" · " + e(sl(name)) + " mila ada · " + e(sl(name)) + " rate today") if sl(name) else ""}<br>{e(n_ta(name))} விலை இன்று</p>
 <div class="hero">
   <div class="big"><span class="rs">රු.</span>{money(price)}<small>{e(u_tr(unit,'si'))}</small></div>
   <span class="chg {direction}">{arrow} {sign}{pct:.1f}%</span>
 </div>
 <p class="asof"><b>🏷️ සිල්ලර මිල / Retail price</b> · 📍 {e(m_tr(mkt,'si'))} ({e(mkt)}) · {fdate(d,'si')}</p>
 {duo_html}
+{dec_html}
 {stale}
 <div class="story">
   <p>{e(p_si)}</p>
@@ -763,7 +769,8 @@ def commodity_page(c, dates, latest_idx, all_items):
     title = (f"{n_si(name)} මිල අද" + (f" ({sl(name).title()} Mila)" if sl(name) else "")
              + f" – තොග හා සිල්ලර | {name} Price Today Sri Lanka – TopGoviya.lk")
     wtxt = f"Wholesale Rs. {money(wprice)} at {wmkt}, retail Rs. {money(price)} at {mkt}" if wl else f"Retail Rs. {money(price)} at {mkt}"
-    desc = (f"{name} price today ({fdate(d,'en')}): {wtxt} {per['en']}. "
+    dtxt = (f"දඹුල්ල {n_si(name)} මිල අද රු. {money(dec[1])}–{money(dec[2])} ({fdate(dec[0],'en')}). ") if dec else ""
+    desc = (dtxt + f"{name} price today ({fdate(d,'en')}): {wtxt} {per['en']}. "
             f"Compare markets and the 30-day trend. {n_si(name)} තොග හා සිල්ලර මිල."
             + (f" {n_si(name).replace('ළ', 'ල')} මිල." if 'ළ' in n_si(name) else "")
             + (f" {sl(name)} mila ada, {sl(name)} rate." if sl(name) else ""))
@@ -784,6 +791,66 @@ def commodity_page(c, dates, latest_idx, all_items):
         {"@type": "FAQPage", "mainEntity": [
             {"@type": "Question", "name": qe, "acceptedAnswer": {"@type": "Answer", "text": ae}} for qs, qe, as_, ae in faq]}]}
     return shell(title, desc, url, body, jsonld)
+
+
+# ---------------------------------------------------------------- Dambulla DEC prices (home page data)
+DEC_FILE = "dambulla_dec.json"
+DEC_ID = {"Beans": "4", "Carrot": "6", "Cabbage": "1", "Tomato": "11", "Brinjal": "26", "Pumpkin": "25",
+          "Snake gourd": "23", "Green Chilli": "67", "Lime": "27", "Red Onion (Local)": "69",
+          "Red Onion (lmp)": "31", "Big Onion (Local)": "48", "Big Onion (Imp)": "70",
+          "Potato (Local)": "15", "Potato (Imp)": "20", "Coconut (Avg.)": "46",
+          "Banana (Sour)": "44", "Papaw": "36", "Pineapple": "38"}
+_DEC = None
+
+
+def dec_db():
+    global _DEC
+    if _DEC is None:
+        try:
+            _DEC = json.load(open(DEC_FILE, encoding="utf-8")).get("days", {})
+        except Exception:
+            _DEC = {}
+    return _DEC
+
+
+def dec_latest(name):
+    """(date, lo, hi, prev_date, prev_mid) of the newest Dambulla DEC report for this item, or None."""
+    pid = DEC_ID.get(name)
+    days = dec_db()
+    if not pid or not days:
+        return None
+    have = [d for d in sorted(days) if days[d].get(pid)]
+    if not have:
+        return None
+    last = have[-1]
+    lo, hi = days[last][pid]
+    prev = have[-2] if len(have) > 1 else None
+    pm = sum(days[prev][pid]) / 2 if prev else None
+    return datetime.strptime(last, "%Y-%m-%d").date(), lo, hi, (datetime.strptime(prev, "%Y-%m-%d").date() if prev else None), pm
+
+
+def dec_block(name, unit):
+    x = dec_latest(name)
+    if not x:
+        return "", None
+    d, lo, hi, pd, pm = x
+    mid = (lo + hi) / 2
+    ch = ""
+    if pm:
+        pc = (mid - pm) / pm * 100
+        cls = "up" if pc >= 0.5 else "down" if pc <= -0.5 else "flat"
+        ch = (f'<span class="chg {cls}" style="font-size:14px">{"▲" if cls == "up" else "▼" if cls == "down" else "■"} '
+              f'{pc:+.1f}%</span> <span style="color:var(--muted);font-size:13px">පෙර වාර්තාවට ({fdate(pd,"si")}) සාපේක්ෂව</span>')
+    per = "ගෙඩියට" if unit == "Rs./Nut" else "කි.ග්‍රෑ.යට"
+    html_ = (f'<div style="margin:14px 0;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--card,#fffdf7)">'
+             f'<p style="margin:0 0 4px;font-weight:700;color:var(--petrol,#0e4f4a)">🥬 දඹුල්ල {e(n_si(name))} මිල අද — තොග මිල පරාසය '
+             f'<span style="color:var(--muted);font-weight:500">/ Dambulla wholesale</span></p>'
+             f'<p style="margin:0;font-family:\'JetBrains Mono\',monospace;font-size:26px;font-weight:700">රු. {money(lo)} – {money(hi)} '
+             f'<small style="font-size:13px;color:var(--muted)">{per}</small></p>'
+             f'<p style="margin:4px 0 0">{ch}</p>'
+             f'<p class="asof" style="margin:6px 0 0">📍 දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය · {fdate(d,"si")} · '
+             f'<a href="/">දඹුල්ල භාණ්ඩ 90+ ක අද මිල →</a></p></div>')
+    return html_, (d, lo, hi)
 
 # ---------------------------------------------------------------- hub page
 def hub_page(items, dates, latest_idx):
