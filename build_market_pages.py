@@ -253,6 +253,24 @@ def cbsl_dambulla(cbsl):
             rows.append((c, w if w_ok else None, r if r_ok else None))
     return d_(dates[li]), rows
 
+def cbsl_peliyagoda(cbsl):
+    """CBSL daily report: fish wholesale at Peliyagoda (named so by CBSL) and the
+    vegetable/other wholesale + retail prices CBSL lists under "Pettah"."""
+    dates = cbsl["dates"]
+    fish, pettah = [], []
+    for c in cbsl["commodities"]:
+        wm = c.get("wholesaleMarkets") or {}
+        rm = c.get("markets") or {}
+        if c.get("category") == "Fish":
+            w = wm.get("Peliyagoda")
+            if w is not None:
+                fish.append((c, w))
+        else:
+            w, r = wm.get("Pettah"), rm.get("Pettah")
+            if w is not None or r is not None:
+                pettah.append((c, w, r))
+    return d_(dates[-1]), fish, pettah
+
 # ---------------------------------------------------------------- download / share buttons
 # The phone makes the image and PDF from this page's prices (nothing is stored on GitHub).
 DL_JS = r'''<script>
@@ -794,6 +812,38 @@ def market_page(market, hm, harti, cats, cbsl):
                          f'<div class="scroll"><table><thead><tr><th>භාණ්ඩය / Item</th><th class="n">තොග<br>Wholesale</th>'
                          f'<th class="n">සිල්ලර<br>Retail</th></tr></thead><tbody>{trs}</tbody></table></div>'
                          + official_cbsl_link(cd))
+
+    if market == "Peliyagoda" and cbsl:
+        cd, fish, pettah = cbsl_peliyagoda(cbsl)
+        crow = pettah + [(c, w, None) for c, w in fish]
+        cbsl_first = bool(fish or pettah) and (not last or cd > d_(last))
+        cbsl_count = len(fish) + len(pettah)
+        nm = lambda c: (f'{EMOJIS.get(c["name"], "🐟" if c.get("category") == "Fish" else "🌿")} '
+                        f'{e((CBSL_NAMES.get(c["name"]) or {}).get("si", c["name"]))} '
+                        f'<span style="color:var(--muted)">/ {e(c["name"])}</span>')
+        parts = []
+        if cbsl_first:
+            parts.append(f'<p class="tip" style="margin:0 0 12px;background:var(--goodbg,#e3efe6)">🟢 <b>නවතම මිල — {fdate(cd,"si")}</b> (මහ බැංකු දෛනික මිල වාර්තාව). '
+                         f'HARTI පෑලියගොඩ මිල ({fdate(d_(last),"si") if last else "—"}) පහළින් ඇත. '
+                         f'<span lang="en">Newest prices: CBSL daily price report, {fdate(cd,"en")}. '
+                         f'HARTI Peliyagoda prices from {fdate(d_(last),"en") if last else "—"} are below.</span></p>')
+        if fish:
+            trs = "".join(f'<tr><td>{nm(c)}</td><td class="n w">{money(w)}</td></tr>' for c, w in fish)
+            parts.append(f'<h2 id="cbsl">🐟 පෑලියගොඩ මාළු තොග මිල<span>Peliyagoda fish wholesale · CBSL, {fdate(cd,"en")}</span></h2>'
+                         f'<p class="asof" style="margin:0 0 10px">මහ බැංකුවේ දෛනික මිල වාර්තාවේ පෑලියගොඩ මාළු තොග මිල (රු. / කි.ග්‍රෑ.) · '
+                         f'Central Bank of Sri Lanka daily price report, Peliyagoda fish market.</p>'
+                         f'<div class="scroll"><table><thead><tr><th>මාළු / Fish</th><th class="n">තොග<br>Wholesale</th></tr></thead>'
+                         f'<tbody>{trs}</tbody></table></div>')
+        if pettah:
+            trs = "".join(f'<tr><td>{nm(c)}</td><td class="n w">{money(w) if w is not None else "—"}</td>'
+                          f'<td class="n">{money(r) if r is not None else "—"}</td></tr>' for c, w, r in pettah)
+            parts.append(f'<h2>🥬 කොළඹ (පිටකොටුව) තොග හා සිල්ලර මිල<span>CBSL "Pettah" market, {fdate(cd,"en")}</span></h2>'
+                         f'<p class="asof" style="margin:0 0 10px">මහ බැංකු වාර්තාවේ “පිටකොටුව” (Pettah) ලෙස දැක්වෙන තොග හා සිල්ලර මිල (රු.) · '
+                         f'Prices the Central Bank report lists under “Pettah”.</p>'
+                         f'<div class="scroll"><table><thead><tr><th>භාණ්ඩය / Item</th><th class="n">තොග<br>Wholesale</th>'
+                         f'<th class="n">සිල්ලර<br>Retail</th></tr></thead><tbody>{trs}</tbody></table></div>')
+        if parts:
+            cbsl_html = "".join(parts) + official_cbsl_link(cd)
 
     # ---- summary cards
     duo = ""
