@@ -21,7 +21,7 @@ OUT_DIR = "share"
 WIDE = os.path.join(OUT_DIR, "dambulla-wide.png")
 STATE = os.path.join(OUT_DIR, "dambulla-wide.json")
 PAGES = ["index.html"]          # pages whose og:image is refreshed
-STYLE_VERSION = "8"                # change to force a redraw after a design change
+STYLE_VERSION = "10"                # change to force a redraw after a design change
 ROWS = 8
 
 # DEC product id -> (Sinhala name, emoji), in popular order. Coconut is left out
@@ -166,22 +166,25 @@ def refresh_pages(last, db=None):
 CAT_PAGES = [
     {"cat": "f", "file": "dambulla-fruit-price.html", "emoji": "🍍",
      "si": "පලතුරු", "en": "Fruit", "h1": "දඹුල්ල පලතුරු මිල අද",
-     "words": "දඹුල්ල පලතුරු මිල today · අන්නාසි, පැපොල්, කෙසෙල්, අඹ, දොඩම් මිල"},
+     "words": "දඹුල්ල පලතුරු මිල today · දඹුල්ලේ පලතුරු තොග මිල ගණන් · අන්නාසි, පැපොල්, කෙසෙල්, අඹ, දොඩම් මිල"},
 ]
 UNIT_SI = {"kg": "කි.ග්‍රෑ.", "nut": "ගෙඩිය", "bundle": "මිටිය"}
+# DEC item (English name) -> existing CBSL retail/wholesale page with a longer history
+PRICE_PAGES = {"Coconut": "price/coconut-avg.html", "Papaya": "price/papaw.html", "Pineapple": "price/pineapple.html",
+               "Banana (Ambul)": "price/banana-sour.html"}
 
 
 def cat_page_html(cfg, db, names, last):
     order = sorted(db["days"])
     prev = order[order.index(last) - 1] if order.index(last) > 0 else None
     day, pday = db["days"][last], (db["days"][prev] if prev else {})
-    rows = []
+    rows, movers = [], []
     for k, m in sorted(names.items(), key=lambda kv: kv[1]["pop"]):
         if m.get("cat") != cfg["cat"] or not day.get(k):
             continue
         lo, hi = day[k]
         mid = (lo + hi) / 2
-        ch = ""
+        ch, pc = "", None
         if pday.get(k):
             pm = sum(pday[k]) / 2
             if pm:
@@ -189,8 +192,25 @@ def cat_page_html(cfg, db, names, last):
                 cls = "up" if pc >= 0.5 else "dn" if pc <= -0.5 else "fl"
                 ch = f'<span class="{cls}">{"▲" if cls == "up" else "▼" if cls == "dn" else "■"} {pc:+.0f}%</span>'
         u = "" if m["unit"] == "kg" else f' <small>/ {UNIT_SI.get(m["unit"], "")}</small>'
-        rows.append(f'<tr><td>{m["si"]} <small>{m["en"]}</small></td><td class="n">{money(lo)} – {money(hi)}{u}</td>'
+        nm = f'{m["si"]} <small>{m["en"]}</small>'
+        if m["en"] in PRICE_PAGES:
+            nm = f'<a href="{PRICE_PAGES[m["en"]]}">{m["si"]}</a> <small>{m["en"]}</small>'
+        movers.append((pc if pday.get(k) and sum(pday[k]) else None, m, lo, hi, pday.get(k)))
+        rows.append(f'<tr><td>{nm}</td><td class="n">{money(lo)} – {money(hi)}{u}</td>'
                     f'<td class="n">{money(mid)}</td><td class="n">{ch or "—"}</td></tr>')
+    mv = [x for x in movers if x[0] is not None]
+    up = max(mv, key=lambda x: x[0]) if mv else None
+    dn = min(mv, key=lambda x: x[0]) if mv else None
+    same = sum(1 for x in mv if abs(x[0]) < 0.5)
+    def mvtxt(x, word):
+        pc, m, lo, hi, p = x
+        return (f'{word}: <b>{m["si"]}</b> රු. {money(p[0])}–{money(p[1])} → <b>රු. {money(lo)}–{money(hi)}</b> '
+                f'({pc:+.0f}%)')
+    summ = []
+    if up and up[0] >= 0.5: summ.append("📈 " + mvtxt(up, "වැඩිම ඉහළ යාම"))
+    if dn and dn[0] <= -0.5: summ.append("📉 " + mvtxt(dn, "වැඩිම පහළ යාම"))
+    summ.append(f"■ වෙනසක් නැති පලතුරු: {same}")
+    summary_html = '<div class="sum">' + "<br>".join(summ) + "</div>"
     d = date.fromisoformat(last)
     ds = f"{d.year}.{d.month:02d}.{d.day:02d}"
     title = f'{cfg["h1"]} {ds} | Dambulla {cfg["en"]} Price Today | TopGoviya'
@@ -219,6 +239,7 @@ td small{{color:#6f675a}}.n{{text-align:right;font-family:'JetBrains Mono',monos
 .up{{color:#b23a2e}}.dn{{color:#2c7a52}}.fl{{color:#8a8170}}
 .cta{{display:inline-block;margin:16px 0;background:#0e4f4a;color:#fff;padding:11px 16px;border-radius:10px;text-decoration:none;font-weight:700}}
 .note{{font-size:13px;color:#6f675a}}a{{color:#0e4f4a}}
+.sum{{background:#fffdf7;border:1px solid #e3d9c4;border-radius:12px;padding:12px 14px;margin:0 0 14px;font-size:15px;line-height:1.8}}.src{{font-size:13px;color:#6f675a;margin:0 0 8px}}h2{{color:#0e4f4a;font-size:19px;margin:22px 0 6px}}
 @media(max-width:520px){{th:nth-child(3),td:nth-child(3){{display:none}}th,td{{padding:9px 8px;font-size:14px}}h1{{font-size:26px}}}}
 </style></head><body>
 <div class="top"><a href="./">🥬 TopGoviya.lk</a><a href="./">දඹුල්ල මිල</a><a href="retail.html">📊 CBSL</a></div>
@@ -227,9 +248,19 @@ td small{{color:#6f675a}}.n{{text-align:right;font-family:'JetBrains Mono',monos
 <p class="sub">Dambulla {cfg["en"].lower()} price today · {cfg["words"]}</p>
 <span class="pill">නවතම මිල: <b>{si_date(last)}</b></span><span class="pill">{len(rows)} භාණ්ඩ</span>
 <p>දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානයේ {si_date(last)} දින {cfg["si"]} තොග මිල (රු. / කි.ග්‍රෑ.; පොල් හා තැඹිලි ගෙඩියට). සාමාන්‍ය = (අවම + උපරිම) ÷ 2. වෙනස පෙර වාර්තාවට ({si_date(prev) if prev else "—"}) සාපේක්ෂව.</p>
-<div style="overflow-x:auto"><table><thead><tr><th>භාණ්ඩය</th><th class="n">අවම – උපරිම</th><th class="n">සාමාන්‍ය</th><th class="n">පෙර දිනට</th></tr></thead>
+{summary_html}
+<p class="src">මූලාශ්‍රය: දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය · වාර්තා දිනය: {si_date(last)} · ඒකකය: රු. / කි.ග්‍රෑ. (පොල්, තැඹිලි: ගෙඩියට) · තොග මිල; ප්‍රභේදය, ශ්‍රේණිය හා ප්‍රමාණය අනුව සැබෑ මිල වෙනස් විය හැක.</p>
+<div style="overflow-x:auto"><table><thead><tr><th>භාණ්ඩය</th><th class="n">අවම – උපරිම</th><th class="n">සාමාන්‍ය</th><th class="n">පෙර වාර්තාවට<br><small>({si_date(prev) if prev else "—"})</small></th></tr></thead>
 <tbody>{"".join(rows)}</tbody></table></div>
 <a class="cta" href="./">🥬 සියලු භාණ්ඩ 90+ ක අද මිල, ප්‍රස්ථාර හා ලාභ ගණකය →</a>
+<h2>නිතර අසන ප්‍රශ්න</h2>
+<p><b>මේවා සිල්ලර මිලද?</b> නැත — දඹුල්ල වෙළඳපොළේ තොග මිල (අවම – උපරිම). කඩවල සිල්ලර මිල ප්‍රවාහන හා වෙනත් වියදම් නිසා වැඩි විය හැක. සිල්ලර මිල සඳහා <a href="retail.html">CBSL සිල්ලර මිල</a> බලන්න.</p>
+<p><b>පොල් හා තැඹිලි මිල කිලෝවටද?</b> නැත — ගෙඩියකට.</p>
+<p><b>මෙම මිල යාවත්කාලීන වන්නේ කවදාද?</b> සති අන්ත ඇතුළුව දිනපතා. ඉහත දැක්වෙන්නේ නවතම වාර්තාවේ දිනයයි.</p>
+<h2 lang="en">Dambulla fruit prices today</h2>
+<p lang="en">Official wholesale minimum and maximum fruit prices from the Dambulla Dedicated Economic Centre, Sri Lanka, in rupees per kilogram (coconut and king coconut per nut), with the change since the previous report. Prices are indicative and differ from shop retail prices.</p>
+<p lang="ta">தம்புள்ள பழ விலை இன்று — தம்புள்ள விசேட பொருளாதார மையத்தின் மொத்த விலைகள் (குறைந்த – அதிக), ரூ./கி.கி; தேங்காய், செவ்விளநீர் காய்க்கு.</p>
+<p>🥬 <a href="./">දඹුල්ල එලවලු මිල අද</a> · 📊 <a href="retail.html">CBSL සිල්ලර මිල</a> · 🧺 <a href="market/peliyagoda.html">පෑලියගොඩ මිල</a></p>
 <p class="note">මූලාශ්‍රය: දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය (Dambulla DEC) · <a href="data-sources.html">මිල ලබාගන්නා ආකාරය</a><br>
 මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ. · © TopGoviya.lk</p>
 </main></body></html>
