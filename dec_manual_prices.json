@@ -867,6 +867,100 @@
      180,
      210
     ]
+   },
+   "Thambuththegama": {
+    "Beans": [
+     400,
+     600
+    ],
+    "Cabbage (N.Eliya)": [
+     450,
+     450
+    ],
+    "Carrot": [
+     350,
+     380
+    ],
+    "Leeks": [
+     220,
+     270
+    ],
+    "Raddish": [
+     180,
+     180
+    ],
+    "Bitter Gourd": [
+     480,
+     500
+    ],
+    "Brinjals": [
+     300,
+     300
+    ],
+    "Cucumber": [
+     100,
+     100
+    ],
+    "Green Chillies": [
+     450,
+     500
+    ],
+    "Eggplant": [
+     250,
+     250
+    ],
+    "Capsicum": [
+     450,
+     450
+    ],
+    "Ladies Fingers": [
+     120,
+     130
+    ],
+    "Lime": [
+     1400,
+     1400
+    ],
+    "Long Beans": [
+     300,
+     300
+    ],
+    "Luffa": [
+     250,
+     280
+    ],
+    "Snake Gourd": [
+     250,
+     250
+    ],
+    "Tomato": [
+     500,
+     500
+    ],
+    "Pumpkin": [
+     150,
+     200
+    ],
+    "Ash Plantains": [
+     150,
+     150
+    ],
+    "Sweet Potato": [
+     130,
+     130
+    ],
+    "Manioc": [
+     100,
+     100
+    ],
+    "Potato (Imported)": [
+     150,
+     180
+    ],
+    "Big Onion (Imported)": [
+     275,
+     300
+    ]
    }
   }
  }
