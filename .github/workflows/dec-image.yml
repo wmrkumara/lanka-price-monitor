@@ -50,10 +50,11 @@ jobs:
         run: |
           git config user.name  "price-bot"
           git config user.email "price-bot@users.noreply.github.com"
-          git add share/ index.html dambulla.html || true
+          git add share/ index.html dambulla.html dambulla-fruit-price.html sitemap.xml || true
           if git diff --staged --quiet; then
             echo "No new image."
           else
             git commit -m "Dambulla preview image ($(TZ=Asia/Colombo date +%Y-%m-%d))"
             for i in 1 2 3; do git pull --rebase origin main && git push origin main && break; sleep 10; done
           fi
+          
