@@ -253,7 +253,7 @@ def thumbnail(rep, allr):
 def text_file(rep, rows, allr):
     ups, dns = movers(allr)
     title_m, up, dn, same, n = mood_of(allr)
-    t = f"අද දඹුල්ල එළවළු මිල {rep.strftime('%Y.%m.%d')} {DAYS_SI[rep.weekday()]} | Dambulla Market Price Today | තොග මිල"
+    t = f"දඹුල්ල එලවලු මිල අද {rep.strftime('%Y.%m.%d')} {DAYS_SI[rep.weekday()]} | දඹුල්ල ආර්ථික මධ්‍යස්ථානයේ තොග මිල | Dambulla Market Price"
     L = [f"TITLE:\n{t[:100]}", "", "DESCRIPTION:",
          f"අද දඹුල්ල එළවළු තොග මිල — {fdate(rep, 'si')} ({DAYS_SI[rep.weekday()]}).",
          f"{title_m.split(' ', 1)[1]}: භාණ්ඩ {up}ක් ඉහළ, {dn}ක් පහළ, {same}ක් වෙනසක් නැත.",
@@ -270,6 +270,7 @@ def text_file(rep, rows, allr):
           "⚠️ මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.", "",
           "#දඹුල්ල #එළවළුමිල #තොගමිල #DambullaPrice #TopGoviyaLK #SriLanka", "",
           "TAGS (paste into the Tags box):",
+          "දඹුල්ල එලවලු මිල අද, දඹුල්ල ආර්ථික මධ්‍යස්ථානයේ එළවළු මිල, දඹුල්ලේ එලවලු මිල, එලවලු මිල අද, "
           "දඹුල්ල එළවළු මිල, අද දඹුල්ල එළවළු මිල, දබුල්ල එලවලු මිල, dambulla market price today, dambulla vegetable price, "
           "dambulla price today, එළවළු මිල, අද එළවළු මිල, තොග මිල, elawalu mila, elawalu mila ada, vegetable price sri lanka, TopGoviya",
           "", "PLAYLIST:", "🥬 අද දඹුල්ල එළවළු මිල | Dambulla Market Price Daily",

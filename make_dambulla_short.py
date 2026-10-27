@@ -209,8 +209,10 @@ body{width:1080px;height:1920px;background:#f4efe4;font-family:'Noto Sans Sinhal
     seconds = n * SLIDE_SEC - (n - 1) * FADE
 
     mv = lambda i, a: f"{a} {i['si']}: රු. {rs(i['lo'])}–{rs(i['hi'])} ({'+' if i['chg']>0 else '−'}{abs(i['chg']):.0f}%)"
-    title = f"අද දඹුල්ල එළවළු මිල {D} | Dambulla Market Price Today | තොග මිල #shorts"
-    desc = (f"🥬 අද දඹුල්ල එළවළු තොග මිල — {D} ({DAYS_SI[wd]})\n{mood.split(' ',1)[1]}: භාණ්ඩ {up}ක් ඉහළ, {dn}ක් පහළ, {same}ක් වෙනසක් නැත.\n"
+    title = f"දඹුල්ල එලවලු මිල අද {D} | දඹුල්ල ආර්ථික මධ්‍යස්ථානයේ තොග මිල | Dambulla Price #shorts"
+    if len(title) > 100:   # YouTube limit (long month names)
+        title = title.replace(" | Dambulla Price", "")
+    desc = (f"🥬 අද දඹුල්ල එළවළු තොග මිල (දඹුල්ල එලවලු මිල අද) — {D} ({DAYS_SI[wd]})\nදඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානයේ නිල තොග මිල.\n{mood.split(' ',1)[1]}: භාණ්ඩ {up}ක් ඉහළ, {dn}ක් පහළ, {same}ක් වෙනසක් නැත.\n"
             + ("\nමිල ඉහළ ගිය:\n" + "\n".join(mv(i, "📈") for i in rises) + "\n" if rises else "")
             + ("\nමිල පහළ ගිය:\n" + "\n".join(mv(i, "📉") for i in falls) + "\n" if falls else "")
             + "\nජනප්‍රිය එළවළු (රු./කි.ග්‍රෑ., අවම – උපරිම):\n"
@@ -227,7 +229,8 @@ body{width:1080px;height:1920px;background:#f4efe4;font-family:'Noto Sans Sinhal
                 "\n\n👉 භාණ්ඩ 90+ ක මිල, 🛒 බාස්කට් එක, 🧮 ලාභ ගණකය: https://topgoviya.lk\n"
                 "📊 මූලාශ්‍රය: දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය\n⚠️ මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.\n\n"
                 "#දඹුල්ල #එළවළුමිල #TopGoviyaLK")
-    tags = ["දඹුල්ල එළවළු මිල", "අද දඹුල්ල එළවළු මිල", "දබුල්ල එලවලු මිල", "dambulla market price today",
+    tags = ["දඹුල්ල එලවලු මිල අද", "දඹුල්ල ආර්ථික මධ්‍යස්ථානයේ එළවළු මිල", "දඹුල්ලේ එලවලු මිල", "එලවලු මිල අද",
+            "දඹුල්ල එළවළු මිල", "අද දඹුල්ල එළවළු මිල", "දබුල්ල එලවලු මිල", "dambulla market price today",
             "dambulla vegetable price", "dambulla price today", "එළවළු මිල", "අද එළවළු මිල", "තොග මිල",
             "elawalu mila", "elawalu mila ada", "vegetable price sri lanka", f"එළවළු මිල {date.fromisoformat(last).year}", "TopGoviya"]
     track = short_kit.pick_track("music-5.wav", "music-2.wav", "music-1.wav")
