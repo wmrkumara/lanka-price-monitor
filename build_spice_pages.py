@@ -359,7 +359,7 @@ def spice_page(dea, sp):
 <h2>අනෙක් කුළුබඩු<span>Other spice prices</span></h2>
 <div class="rel">{others}</div>
 """
-    title = f"{si} මිල අද ({sl.title()} Mila) | {en} Price Sri Lanka Today – TopGoviya"
+    title = f"{si} මිල අද රු. {money(g1)} | {sl.title()} Mila Today | {en} Price Sri Lanka – TopGoviya"
     desc = (f"{si} මිල අද: {main_si} {U_si} එකක ගොවිපළ මිල රු. {money(g1)} ({fdate(d,'si')} සතිය, DEA). "
             f"{en} price in Sri Lanka today — farm gate Rs. {money(g1)}/{U_en}, by district, weekly trend since 2023. "
             f"{sl} mila today, {en.lower()} price sri lanka.")

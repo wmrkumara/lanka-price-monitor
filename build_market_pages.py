@@ -276,6 +276,9 @@ def cbsl_peliyagoda(cbsl):
                 pettah.append((c, w, r))
     return d_(dates[-1]), fish, pettah
 
+# How most people type some market names in Google (used in the title; the page keeps the official name)
+SEARCH_SI = {"Keppetipola": "කැප්පෙටිපොල"}
+
 # ---------------------------------------------------------------- download / share buttons
 # The phone makes the image and PDF from this page's prices (nothing is stored on GitHub).
 DL_JS = r'''<script>
@@ -876,7 +879,7 @@ def market_page(market, hm, harti, cats, cbsl):
 <p class="crumb"><a href="../index.html">TopGoviya.lk</a> / <a href="index.html">වෙළඳපොළ මිල</a> / {e(si)}</p>
 {h1}
 {home_box}
-<p class="alt">{e(en)} market price today – vegetable wholesale prices · {e(si)}{" (දබුල්ල)" if market == "Dambulla" else ""} එලවලු මිල<br>{e(en.lower())} elawalu mila ada · {e(en.lower())} market rate today<br>{e(ta)} சந்தை விலை இன்று</p>
+<p class="alt">{e(en)} market price today – vegetable wholesale prices · {e(si)}{" (දබුල්ල)" if market == "Dambulla" else ""}{(" · " + SEARCH_SI[market]) if market in SEARCH_SI else ""} එලවලු මිල<br>{e(en.lower())} elawalu mila ada · {e(en.lower())} market rate today<br>{e(ta)} சந்தை விலை இன்று</p>
 {cbsl_html if cbsl_first else ''}
 {harti_h2 if cbsl_first else ''}
 <p class="asof" style="margin-top:14px"><b>📦 තොග මිල / Wholesale</b> · 📍 {e(si)} ({e(en)}) · {fdate(d_(last),'si') if last else '—'} · {"DEC" if dec_day else "HARTI"}</p>
@@ -899,7 +902,7 @@ def market_page(market, hm, harti, cats, cbsl):
 <div class="rel">{others}</div>
 """
     dtxt = fdate(d_(last), "en") if last else ""
-    title = f"{si} එලවලු මිල අද | {en} Market Price Today Sri Lanka – TopGoviya"
+    title = f"{SEARCH_SI.get(market, si)} එලවලු මිල අද | {en} Market Price Today Sri Lanka – TopGoviya"
     if market == "Dambulla":
         title = "දඹුල්ල HARTI සහ CBSL තොග මිල | Dambulla HARTI & CBSL Wholesale Report – TopGoviya"
     top3 = ", ".join(f"{r['name']} Rs. {money(r['mid'])}" for r in rows[:3])
