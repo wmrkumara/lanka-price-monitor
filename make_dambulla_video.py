@@ -142,11 +142,16 @@ def mood_slide(rep, allr):
         w = int(1320 * cnt / tot)
         if w: dr.rectangle((x, 450, x + w, 520), fill=c)
         x += w
-    for k, (lbl, cnt, c) in enumerate((("▲ ඉහළ ගියා", up, UP), ("■ වෙනසක් නැත", same, MUT), ("▼ පහළ ගියා", dn, DN))):
-        cx = 300 + k * 520
+    nonew = n - (up + dn + same)
+    cols = [("▲ ඉහළ ගියා", up, UP), ("■ වෙනසක් නැත", same, MUT), ("▼ පහළ ගියා", dn, DN)]
+    if nonew:
+        cols.append(("– පෙර මිල නැත", nonew, MUT))
+    step = 520 if len(cols) == 3 else 400
+    for k, (lbl, cnt, c) in enumerate(cols):
+        cx = 300 + k * step
         dr.text((cx, 600), f"{cnt}", font=mono(110), fill=c, anchor="lm")
         V.segs(dr, cx, 700, [(lbl[0] + " ", mono(40), c), (lbl[2:], si(42, "SemiBold"), MUT)])
-    dr.text((960, 860), f"භාණ්ඩ {n}ක දඹුල්ල තොග මිල · පෙර දිනට සාපේක්ෂව", font=si(40, "Medium"), fill=MUT, anchor="mm")
+    dr.text((960, 860), f"භාණ්ඩ {n}ක දඹුල්ල තොග මිල · පෙර වාර්තාවට සාපේක්ෂව", font=si(40, "Medium"), fill=MUT, anchor="mm")
     return im
 
 
@@ -177,7 +182,7 @@ def item_slide(rep, r, i, n):
     else:
         V.segs(dr, 1400, 845, [
             (ar + " ", mono(36), col),
-            ("සාමාන්‍ය මිල පෙර දිනට ", si(34, "SemiBold"), col),
+            ("සාමාන්‍ය මිල පෙර වාර්තාවට ", si(34, "SemiBold"), col),
             (f"{r['pct']:+.0f}%  ", mono(36), col),
             (f"({r['prev']:,.0f} → {r['mid']:,.0f})", mono(32, "Medium"), col)], True)
     return im
@@ -256,7 +261,8 @@ def text_file(rep, rows, allr):
     t = f"දඹුල්ල එලවලු මිල අද {rep.strftime('%Y.%m.%d')} {DAYS_SI[rep.weekday()]} | දඹුල්ල ආර්ථික මධ්‍යස්ථානයේ තොග මිල | Dambulla Market Price"
     L = [f"TITLE:\n{t[:100]}", "", "DESCRIPTION:",
          f"අද දඹුල්ල එළවළු තොග මිල — {fdate(rep, 'si')} ({DAYS_SI[rep.weekday()]}).",
-         f"{title_m.split(' ', 1)[1]}: භාණ්ඩ {up}ක් ඉහළ, {dn}ක් පහළ, {same}ක් වෙනසක් නැත.",
+         f"{title_m.split(' ', 1)[1]}: භාණ්ඩ {up}ක් ඉහළ, {dn}ක් පහළ, {same}ක් වෙනසක් නැත"
+         + (f", {n - up - dn - same}ක පෙර මිල නැත" if n - up - dn - same else "") + " (පෙර වාර්තාවට සාපේක්ෂව).",
          "දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානයේ තොග මිල පරාසය (අවම – උපරිම), රු.", ""]
     for r in rows:
         L.append(f"• {r['si']} — රු. {r['lo']:,.0f} – {r['hi']:,.0f}" + ("" if r["unit"] == "kg" else " (" + {"nut": "ගෙඩිය", "bundle": "මිටිය"}.get(r["unit"], "") + ")"))
@@ -295,7 +301,7 @@ def script_file(rep, rows, allr):
     for i, r in enumerate(rows, 1):
         line = f"{r['si']}. රුපියල් {r['lo']:,.0f} සිට {r['hi']:,.0f} දක්වා."
         if r["pct"] is not None and abs(r["pct"]) >= 10:
-            line += f" ඊයේට වඩා {abs(r['pct']):.0f}%කින් {'ඉහළයි' if r['pct'] > 0 else 'අඩුයි'}."
+            line += f" පෙර වාර්තාවට වඩා {abs(r['pct']):.0f}%කින් {'ඉහළයි' if r['pct'] > 0 else 'අඩුයි'}."
         L += [f"[{i} / {len(rows)} · තත්පර {SEC_ITEM}]", line, ""]
     L += [
           f"[අවසාන පිටුව · තත්පර {SEC_END}]",

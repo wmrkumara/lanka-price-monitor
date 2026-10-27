@@ -96,6 +96,7 @@ def main():
     falls = sorted([i for i in moved if i["chg"] <= -0.5], key=lambda i: i["chg"])[:3]
     up, dn = sum(i["chg"] >= 0.5 for i in moved), sum(i["chg"] <= -0.5 for i in moved)
     same = len(moved) - up - dn
+    nonew = len(items) - len(moved)          # no previous price to compare
     avg = sum(max(-100, min(100, i["chg"])) for i in moved) / len(moved) if moved else 0
     mood = "🔴 අද මිල වැඩි දිනයක්" if avg >= 3 else "🟢 අද මිල අඩු දිනයක්" if avg <= -3 else "🟡 අද සාමාන්‍ය දිනයක්"
     wd = date.fromisoformat(last).weekday()
@@ -124,7 +125,7 @@ body{width:1080px;height:1920px;background:#f4efe4;font-family:'Noto Sans Sinhal
 .mood{font-size:62px;font-weight:800;margin-top:60px}
 .bar{display:flex;height:44px;border-radius:22px;overflow:hidden;margin-top:28px}
 .bar span{display:block;height:100%}
-.leg{display:flex;gap:34px;font-size:38px;color:#3a403a;margin-top:18px}
+.leg{display:flex;flex-wrap:wrap;gap:14px 34px;font-size:38px;color:#3a403a;margin-top:18px}.leg span{white-space:nowrap}
 .row{display:flex;align-items:center;gap:24px;background:#fffdf7;border:4px solid #e3d9c4;border-radius:30px;padding:34px 40px;margin-bottom:26px}
 .row .nm{font-size:58px;font-weight:800;line-height:1.2}
 .row .pr{font-size:42px;color:#3a403a;margin-top:8px}
@@ -171,8 +172,9 @@ body{width:1080px;height:1920px;background:#f4efe4;font-family:'Noto Sans Sinhal
     tot = max(len(moved), 1)
     bar = (f'<div class="bar"><span style="width:{up/tot*100:.1f}%;background:#b23a2e"></span>'
            f'<span style="width:{same/tot*100:.1f}%;background:#cdbf9f"></span><span style="width:{dn/tot*100:.1f}%;background:#2c7a52"></span></div>'
-           f'<div class="leg"><span>🔴 ඉහළ {up}</span><span>⚪ වෙනසක් නැත {same}</span><span>🟢 පහළ {dn}</span></div>')
-    note = '<div class="note">රු. / කි.ග්‍රෑ. · අවම – උපරිම · ▲▼ පෙර දිනට සාපේක්ෂව</div>'
+           f'<div class="leg"><span>🔴 ඉහළ {up}</span><span>⚪ වෙනසක් නැත {same}</span><span>🟢 පහළ {dn}</span>'
+           + (f'<span>➖ පෙර මිල නැත {nonew}</span>' if nonew else '') + '</div>')
+    note = '<div class="note">රු. / කි.ග්‍රෑ. · අවම – උපරිම · ▲▼ පෙර වාර්තාවට සාපේක්ෂව</div>'
     slides = [page(f'<div class="big">අද දඹුල්ල<br>එළවළු<br><span style="color:#a9802a">තොග</span> මිල</div>'
                    f'<div><span class="date">{D}</span></div><div class="mood">{mood}</div>{bar}')]
     if rises: slides.append(page(f'<div class="lbl" style="color:#b23a2e">📈 අද වැඩිම ඉහළ යාම</div>{rows(rises)}{note}'))
@@ -212,7 +214,7 @@ body{width:1080px;height:1920px;background:#f4efe4;font-family:'Noto Sans Sinhal
     title = f"දඹුල්ල එලවලු මිල අද {D} | දඹුල්ල ආර්ථික මධ්‍යස්ථානයේ තොග මිල | Dambulla Price #shorts"
     if len(title) > 100:   # YouTube limit (long month names)
         title = title.replace(" | Dambulla Price", "")
-    desc = (f"🥬 අද දඹුල්ල එළවළු තොග මිල (දඹුල්ල එලවලු මිල අද) — {D} ({DAYS_SI[wd]})\nදඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානයේ නිල තොග මිල.\n{mood.split(' ',1)[1]}: භාණ්ඩ {up}ක් ඉහළ, {dn}ක් පහළ, {same}ක් වෙනසක් නැත.\n"
+    desc = (f"🥬 අද දඹුල්ල එළවළු තොග මිල (දඹුල්ල එලවලු මිල අද) — {D} ({DAYS_SI[wd]})\nදඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානයේ නිල තොග මිල.\n{mood.split(' ',1)[1]}: භාණ්ඩ {up}ක් ඉහළ, {dn}ක් පහළ, {same}ක් වෙනසක් නැත" + (f", {nonew}ක පෙර මිල නැත" if nonew else "") + " (පෙර වාර්තාවට සාපේක්ෂව).\n"
             + ("\nමිල ඉහළ ගිය:\n" + "\n".join(mv(i, "📈") for i in rises) + "\n" if rises else "")
             + ("\nමිල පහළ ගිය:\n" + "\n".join(mv(i, "📉") for i in falls) + "\n" if falls else "")
             + "\nජනප්‍රිය එළවළු (රු./කි.ග්‍රෑ., අවම – උපරිම):\n"
