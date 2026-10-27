@@ -21,7 +21,7 @@ OUT_DIR = "share"
 WIDE = os.path.join(OUT_DIR, "dambulla-wide.png")
 STATE = os.path.join(OUT_DIR, "dambulla-wide.json")
 PAGES = ["index.html"]          # pages whose og:image is refreshed
-STYLE_VERSION = "5"                # change to force a redraw after a design change
+STYLE_VERSION = "6"                # change to force a redraw after a design change
 ROWS = 8
 
 # DEC product id -> (Sinhala name, emoji), in popular order. Coconut is left out
@@ -140,7 +140,7 @@ def seo_today_html(db, last):
         lo, hi = day[k]
         parts.append(f"{names[k]['si']} රු. {money(lo)}–{money(hi)} / {unit.get(names[k]['unit'], 'කි.ග්‍රෑ.')}")
     return ("<p><b>දඹුල්ල එලවලු මිල අද — " + si_date(last) + "</b> (දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය, තොග මිල, අවම–උපරිම): "
-            + " · ".join(parts) + ". භාණ්ඩ " + str(len(day)) + " ක සම්පූර්ණ ලැයිස්තුව ඉහත.</p>")
+            + " · ".join(parts) + " — භාණ්ඩ " + str(len(day)) + " ක සම්පූර්ණ ලැයිස්තුව ඉහත.</p>")
 
 
 def refresh_pages(last, db=None):
