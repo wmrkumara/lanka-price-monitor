@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>TopGoviya Screen Studio (private)</title>
+<link rel="icon" href="icon-192x192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600;700;800&family=Hanken+Grotesk:wght@500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--petrol:#0e4f4a;--petrol-d:#0a3a36;--gold:#a9802a;--cream:#f4efe4;--card:#fffdf7;--ink:#191d1a;--muted:#6f675a;--line:#e3d9c4;--red:#b23a2e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'Noto Sans Sinhala','Hanken Grotesk',system-ui,sans-serif;line-height:1.5}
+header{background:var(--petrol);color:#fff;padding:12px 18px;border-bottom:3px solid var(--gold);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+header h1{margin:0;font-size:19px}header small{color:#e7d3a3}
+.w{max-width:1200px;margin:0 auto;padding:16px;display:grid;grid-template-columns:1fr 340px;gap:16px}
+.w>section,.w>aside{min-width:0}
+@media(max-width:960px){.w{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
+h2{font-size:16px;margin:0 0 10px;color:var(--petrol)}
+.btn{font:inherit;font-size:14px;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--petrol);padding:8px 13px;border-radius:10px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.btn.solid{background:var(--petrol);color:#fff;border-color:var(--petrol)}.btn.red{background:var(--red);color:#fff;border-color:var(--red)}.btn.gold{background:var(--gold);color:#fff;border-color:var(--gold)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 10px}
+label.opt{display:flex;align-items:center;gap:8px;font-size:14px;margin:6px 0}
+select,input[type=text]{font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:#fff}
+.stage{position:relative;background:#111;border-radius:12px;overflow:hidden}
+.stage canvas{width:100%;display:block;cursor:crosshair}
+.hint{font-size:13px;color:var(--muted);margin:6px 0 0}
+.tl{position:relative;height:46px;background:#efe8d8;border-radius:10px;margin:10px 0 4px;cursor:pointer;user-select:none}
+.tl .trim{position:absolute;top:0;bottom:0;background:rgba(14,79,74,.14);border-left:4px solid var(--petrol);border-right:4px solid var(--petrol)}
+.tl .ph{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--red)}
+.tl .zm{position:absolute;top:8px;height:30px;background:var(--gold);border-radius:6px;opacity:.85;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.time{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted)}
+.zl{list-style:none;margin:0;padding:0;font-size:13px}.zl li{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:5px 0;border-bottom:1px dashed var(--line)}
+.rec-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--red);animation:bl 1s infinite}@keyframes bl{50%{opacity:.2}}
+.steps{font-size:13px;color:var(--muted);margin:0;padding-left:18px}
+.prog{height:8px;background:#efe8d8;border-radius:8px;overflow:hidden;margin:8px 0}.prog i{display:block;height:100%;width:0;background:var(--gold)}
+video.hid{position:absolute;left:-9999px;width:2px;height:2px}
+</style>
+</head>
+<body>
+<header><h1>🎬 TopGoviya Screen Studio <small>· private</small></h1><span id="status" class="time">සූදානම්</span></header>
+<div class="w">
+<section>
+  <div class="card">
+    <div class="row">
+      <button class="btn red" id="recBtn" type="button">🔴 Record පටන් ගන්න</button>
+      <button class="btn" id="stopBtn" type="button" disabled>⏹ නවත්වන්න</button>
+      <label class="btn" style="cursor:pointer">📂 වීඩියෝ ගොනුවක් විවෘත කරන්න<input type="file" id="fileIn" accept="video/*" hidden></label>
+      <span id="recInfo" class="time"></span>
+    </div>
+    <div class="stage"><canvas id="cv" width="1280" height="720"></canvas></div>
+    <p class="hint">🔍 <b>Zoom එකක් දාන්න:</b> වීඩියෝව නවත්වා, zoom කරන්න ඕන තැන <b>ක්ලික්</b> කරන්න (එම මොහොතේ සිට තත්පර කිහිපයක්). ⏯ Space = play/pause.</p>
+    <div class="tl" id="tl"><div class="trim" id="trim"></div><div class="ph" id="ph"></div></div>
+    <div class="row" style="justify-content:space-between">
+      <div class="row" style="margin:0">
+        <button class="btn" id="playBtn" type="button" disabled>▶ Play</button>
+        <button class="btn" id="tStart" type="button" disabled>⟦ මෙතැනින් පටන් ගන්න</button>
+        <button class="btn" id="tEnd" type="button" disabled>මෙතැනින් අවසන් ⟧</button>
+      </div>
+      <span class="time" id="clock">0:00 / 0:00</span>
+    </div>
+  </div>
+</section>
+
+<aside>
+  <div class="card" style="margin-bottom:14px">
+    <h2>1️⃣ Record සැකසුම්</h2>
+    <label class="opt"><input type="checkbox" id="optMic" checked> 🎙️ මයික් එකේ කටහඬ</label>
+    <label class="opt"><input type="checkbox" id="optSys"> 🔊 පරිගණකයේ / ටැබ් එකේ ශබ්දය</label>
+    <label class="opt"><input type="checkbox" id="optCam"> 🙂 මගේ මුහුණ (webcam රවුම)</label>
+    <div class="row" style="margin:6px 0 0">
+      <select id="camPos"><option value="br">↘ පහළ දකුණ</option><option value="bl">↙ පහළ වම</option><option value="tr">↗ ඉහළ දකුණ</option><option value="tl">↖ ඉහළ වම</option></select>
+      <select id="camSize"><option value="0.18">පොඩි</option><option value="0.24" selected>මධ්‍යම</option><option value="0.32">ලොකු</option></select>
+    </div>
+    <ol class="steps"><li>Record ඔබා <b>ටැබ් එක / ස්ක්‍රීන් එක</b> තෝරන්න (topgoviya.lk ටැබ් එක හොඳයි)</li><li>කතා කරමින් සයිට් එක පෙන්වන්න</li><li>⏹ නවත්වන්න</li></ol>
+  </div>
+  <div class="card" style="margin-bottom:14px">
+    <h2>2️⃣ Zoom</h2>
+    <div class="row"><span style="font-size:13px">Zoom ප්‍රමාණය</span><select id="zScale"><option value="1.6">1.6×</option><option value="2" selected>2×</option><option value="2.6">2.6×</option></select>
+      <span style="font-size:13px">කාලය</span><select id="zDur"><option value="2.5">2.5 s</option><option value="4" selected>4 s</option><option value="6">6 s</option></select></div>
+    <ul class="zl" id="zList"><li style="color:var(--muted)">තවම zoom නැත</li></ul>
+  </div>
+  <div class="card">
+    <h2>3️⃣ Export</h2>
+    <label class="opt"><input type="radio" name="fmt" value="16:9" checked> 📺 YouTube (16:9 · 1920×1080)</label>
+    <label class="opt"><input type="radio" name="fmt" value="9:16"> 📱 Shorts / Reels / TikTok (9:16 · 1080×1920)</label>
+    <label class="opt"><input type="checkbox" id="optIntro" checked> TopGoviya මාතෘකා පිටුව (තත්පර 3)</label>
+    <input type="text" id="introTxt" value="topgoviya.lk භාවිතා කරන හැටි" style="width:100%;margin:0 0 6px">
+    <label class="opt"><input type="checkbox" id="optOutro" checked> අවසාන පිටුව: topgoviya.lk + Subscribe (තත්පර 3)</label>
+    <button class="btn gold" id="expBtn" type="button" disabled style="width:100%;justify-content:center;margin-top:6px">⬇️ වීඩියෝව හදන්න (MP4)</button>
+    <div class="prog"><i id="prog"></i></div>
+    <p class="hint" id="expInfo">Export එකට වීඩියෝවේ දිගට සමාන කාලයක් යයි. ටැබ් එක විවෘතව තබන්න.</p>
+  </div>
+</aside>
+</div>
+<video id="vScreen" class="hid" playsinline></video>
+<video id="vCam" class="hid" playsinline muted></video>
+
+<script>
+const $=id=>document.getElementById(id);
+const cv=$("cv"),g=cv.getContext("2d"),vS=$("vScreen"),vC=$("vCam");
+let screenURL=null,camURL=null,zooms=[],trimA=0,trimB=0,dur=0,exporting=false,camOffset=0;
+const LOGO=new Image();LOGO.src="icon-512x512.png";
+const fmt=s=>{s=Math.max(0,s);return Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0");};
+const status=t=>$("status").textContent=t;
+
+/* ---------------- recording ---------------- */
+let recS=null,recC=null,chunksS=[],chunksC=[],streams=[],recT0=0,recTimer=null;
+function pickMime(cands){for(const m of cands)if(window.MediaRecorder&&MediaRecorder.isTypeSupported(m))return m;return "";}
+$("recBtn").onclick=async()=>{
+  try{
+    const disp=await navigator.mediaDevices.getDisplayMedia({video:{frameRate:30,width:{ideal:1920},height:{ideal:1080}},audio:$("optSys").checked});
+    streams=[disp];
+    const ac=new AudioContext(),dest=ac.createMediaStreamDestination();let hasAudio=false;
+    if(disp.getAudioTracks().length){ac.createMediaStreamSource(new MediaStream(disp.getAudioTracks())).connect(dest);hasAudio=true;}
+    if($("optMic").checked){const mic=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true}});streams.push(mic);ac.createMediaStreamSource(mic).connect(dest);hasAudio=true;}
+    const mix=new MediaStream([...disp.getVideoTracks(),...(hasAudio?dest.stream.getAudioTracks():[])]);
+    chunksS=[];recS=new MediaRecorder(mix,{mimeType:pickMime(["video/webm;codecs=vp9,opus","video/webm;codecs=vp8,opus","video/webm"]),videoBitsPerSecond:8e6});
+    recS.ondataavailable=e=>e.data.size&&chunksS.push(e.data);
+    recC=null;chunksC=[];
+    if($("optCam").checked){const cam=await navigator.mediaDevices.getUserMedia({video:{width:640,height:640,facingMode:"user"}});streams.push(cam);
+      recC=new MediaRecorder(cam,{mimeType:pickMime(["video/webm;codecs=vp9","video/webm;codecs=vp8","video/webm"])});recC.ondataavailable=e=>e.data.size&&chunksC.push(e.data);}
+    const done=Promise.all([new Promise(r=>recS.onstop=r),recC?new Promise(r=>recC.onstop=r):Promise.resolve()]);
+    disp.getVideoTracks()[0].onended=()=>stopRec();
+    recS.start(1000);if(recC)recC.start(1000);recT0=Date.now();
+    $("recBtn").disabled=true;$("stopBtn").disabled=false;status("● Recording");
+    recTimer=setInterval(()=>{$("recInfo").innerHTML='<span class="rec-dot"></span> '+fmt((Date.now()-recT0)/1000);},500);
+    done.then(async()=>{
+      clearInterval(recTimer);$("recInfo").textContent="";streams.forEach(s=>s.getTracks().forEach(t=>t.stop()));ac.close();
+      await loadScreen(new Blob(chunksS,{type:chunksS[0]?.type||"video/webm"}),recC?new Blob(chunksC,{type:"video/webm"}):null);
+      $("recBtn").disabled=false;$("stopBtn").disabled=true;
+    });
+  }catch(e){status("⚠️ "+e.message);alert("Record කරන්න බැරි වුණා: "+e.message+"\n(Chrome / Edge පරිගණකයේ, https පිටුවකින් පමණයි)");}
+};
+function stopRec(){if(recS&&recS.state!=="inactive")recS.stop();if(recC&&recC.state!=="inactive")recC.stop();}
+$("stopBtn").onclick=stopRec;
+$("fileIn").onchange=e=>{const f=e.target.files[0];if(f)loadScreen(f,null);};
+
+/* webm from MediaRecorder has no duration: force it */
+function fixDuration(v){return new Promise(res=>{
+  if(isFinite(v.duration)&&v.duration>0)return res(v.duration);
+  v.currentTime=1e9;v.ontimeupdate=()=>{v.ontimeupdate=null;const d=v.duration;v.currentTime=0;res(d);};
+});}
+async function loadScreen(blob,camBlob){
+  if(screenURL)URL.revokeObjectURL(screenURL);if(camURL)URL.revokeObjectURL(camURL);
+  screenURL=URL.createObjectURL(blob);vS.src=screenURL;camURL=camBlob?URL.createObjectURL(camBlob):null;vC.src=camURL||"";
+  await new Promise(r=>vS.onloadedmetadata=r);dur=await fixDuration(vS);
+  if(camURL){await new Promise(r=>vC.onloadedmetadata=r);await fixDuration(vC);}
+  trimA=0;trimB=dur;zooms=[];renderZooms();
+  ["playBtn","tStart","tEnd","expBtn"].forEach(id=>$(id).disabled=false);
+  status("✔ වීඩියෝව සූදානම් · "+fmt(dur));vS.currentTime=0;drawPreview();
+}
+
+/* ---------------- zoom maths ---------------- */
+const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
+function zoomAt(t){ // -> {s,cx,cy} in 0..1 screen coords
+  let best={s:1,cx:.5,cy:.5};
+  for(const z of zooms){const a=z.t,b=z.t+z.d,ramp=Math.min(.6,z.d/3);
+    if(t<a||t>b)continue;let k=1;if(t<a+ramp)k=ease((t-a)/ramp);else if(t>b-ramp)k=ease((b-t)/ramp);
+    const s=1+(z.s-1)*k;if(s>best.s)best={s,cx:.5+(z.x-.5)*k,cy:.5+(z.y-.5)*k};}
+  return best;
+}
+/* source rectangle of the screen video for a frame of aspect `outAR` */
+function srcRect(t,outAR){
+  const W=vS.videoWidth||1280,H=vS.videoHeight||720,{s,cx,cy}=zoomAt(t);
+  let sw,sh;
+  if(outAR>=W/H){sw=W/s;sh=sw/outAR;}else{sh=H/s;sw=sh*outAR;}
+  if(outAR<1&&s===1){sh=H;sw=H*outAR;} // 9:16 without zoom: full height strip
+  let x=cx*W-sw/2,y=cy*H-sh/2;x=Math.max(0,Math.min(W-sw,x));y=Math.max(0,Math.min(H-sh,y));
+  return [x,y,sw,sh];
+}
+
+/* ---------------- drawing ---------------- */
+function drawFrame(ctx,CW,CH,t){
+  ctx.fillStyle="#0a3a36";ctx.fillRect(0,0,CW,CH);
+  const outAR=CW/CH,[sx,sy,sw,sh]=srcRect(t,outAR);
+  try{ctx.drawImage(vS,sx,sy,sw,sh,0,0,CW,CH);}catch(e){}
+  if(camURL&&vC.readyState>=2){
+    const d=Math.round(Math.min(CW,CH)*parseFloat($("camSize").value)),m=Math.round(Math.min(CW,CH)*.035),p=$("camPos").value;
+    const x=p.includes("r")?CW-d-m:m,y=p.includes("b")?CH-d-m:m;
+    ctx.save();ctx.beginPath();ctx.arc(x+d/2,y+d/2,d/2,0,7);ctx.closePath();ctx.clip();
+    const vw=vC.videoWidth,vh=vC.videoHeight,c=Math.min(vw,vh);ctx.drawImage(vC,(vw-c)/2,(vh-c)/2,c,c,x,y,d,d);ctx.restore();
+    ctx.lineWidth=Math.max(4,d*.035);ctx.strokeStyle="#a9802a";ctx.beginPath();ctx.arc(x+d/2,y+d/2,d/2,0,7);ctx.stroke();
+  }
+}
+function card(ctx,CW,CH,kind,a){
+  ctx.globalAlpha=1;ctx.fillStyle="#0e4f4a";ctx.fillRect(0,0,CW,CH);
+  ctx.fillStyle="#a9802a";ctx.fillRect(0,CH*.62,CW,Math.max(6,CH*.008));
+  const u=Math.min(CW,CH);ctx.textAlign="center";
+  if(LOGO.complete&&LOGO.naturalWidth){const L=u*.26;ctx.save();ctx.beginPath();ctx.arc(CW/2,CH*.3,L/2,0,7);ctx.clip();ctx.drawImage(LOGO,CW/2-L/2,CH*.3-L/2,L,L);ctx.restore();}
+  ctx.fillStyle="#fff";
+  if(kind==="intro"){let fs=u*.075;const txt=$("introTxt").value||"TopGoviya.lk";ctx.font="800 "+fs+"px 'Noto Sans Sinhala'";
+    while(ctx.measureText(txt).width>CW*.88&&fs>14){fs-=2;ctx.font="800 "+fs+"px 'Noto Sans Sinhala'";}
+    ctx.fillText(txt,CW/2,CH*.53);ctx.fillStyle="#e7d3a3";ctx.font="700 "+u*.05+"px 'Hanken Grotesk'";ctx.fillText("TopGoviya.lk",CW/2,CH*.72);}
+  else{ctx.font="800 "+u*.085+"px 'Hanken Grotesk'";ctx.fillStyle="#e7d3a3";ctx.fillText("topgoviya.lk",CW/2,CH*.53);
+    const fitT=(t,w,sz,y,col)=>{let f=sz;ctx.font=w+" "+f+"px 'Noto Sans Sinhala'";while(ctx.measureText(t).width>CW*.9&&f>12){f-=1;ctx.font=w+" "+f+"px 'Noto Sans Sinhala'";}ctx.fillStyle=col;ctx.fillText(t,CW/2,y);};
+    fitT("👍 Like · 🔔 Subscribe · 📤 Share","700",u*.045,CH*.72,"#fff");
+    fitT("මිල ගණන් මඟපෙන්වීමක් පමණි.","400",u*.034,CH*.8,"#e7d3a3");
+    fitT("ඔබේ තීරණ ඔබේ වගකීම වේ.","400",u*.034,CH*.85,"#e7d3a3");}
+  ctx.textAlign="left";
+  if(a<1){ctx.globalAlpha=1-a;ctx.fillStyle="#000";ctx.fillRect(0,0,CW,CH);ctx.globalAlpha=1;}
+}
+function drawPreview(){
+  const t=vS.currentTime||0;
+  g.fillStyle="#111";g.fillRect(0,0,1280,720);
+  const W=vS.videoWidth||16,H=vS.videoHeight||9,sc=Math.min(1280/W,720/H),dw=W*sc,dh=H*sc,ox=(1280-dw)/2,oy=(720-dh)/2;
+  try{g.drawImage(vS,ox,oy,dw,dh);}catch(e){}
+  // show the output frame as a box
+  const outAR=document.querySelector('input[name=fmt]:checked').value==="9:16"?9/16:16/9,[sx,sy,sw,sh]=srcRect(t,outAR);
+  g.strokeStyle="#d4ad55";g.lineWidth=3;g.setLineDash([10,6]);g.strokeRect(ox+sx*sc,oy+sy*sc,sw*sc,sh*sc);g.setLineDash([]);
+  if(camURL){if(Math.abs(vC.currentTime-t-camOffset)>.3&&vS.paused)vC.currentTime=Math.max(0,t+camOffset);
+    const d=Math.round(sh*sc*.24),x=ox+(sx+sw)*sc-d-10,y=oy+(sy+sh)*sc-d-10;g.save();g.beginPath();g.arc(x+d/2,y+d/2,d/2,0,7);g.clip();try{const c=Math.min(vC.videoWidth,vC.videoHeight);g.drawImage(vC,(vC.videoWidth-c)/2,(vC.videoHeight-c)/2,c,c,x,y,d,d);}catch(e){}g.restore();}
+  $("ph").style.left=(dur?t/dur*100:0)+"%";$("clock").textContent=fmt(t)+" / "+fmt(dur);
+  $("trim").style.left=(dur?trimA/dur*100:0)+"%";$("trim").style.width=(dur?(trimB-trimA)/dur*100:0)+"%";
+}
+function loop(){if(!exporting)drawPreview();requestAnimationFrame(loop);}loop();
+
+/* ---------------- editor controls ---------------- */
+$("playBtn").onclick=togglePlay;
+function togglePlay(){if(!dur)return;if(vS.paused){if(vS.currentTime>=trimB-.05)vS.currentTime=trimA;vS.play();if(camURL){vC.currentTime=vS.currentTime+camOffset;vC.play();}$("playBtn").textContent="⏸ Pause";}else{vS.pause();vC.pause();$("playBtn").textContent="▶ Play";}}
+vS.onended=()=>{vC.pause();$("playBtn").textContent="▶ Play";};
+document.addEventListener("keydown",e=>{if(e.code==="Space"&&e.target.tagName!=="INPUT"){e.preventDefault();togglePlay();}});
+$("tl").onclick=e=>{if(!dur)return;const r=$("tl").getBoundingClientRect();vS.currentTime=Math.max(0,Math.min(dur,(e.clientX-r.left)/r.width*dur));if(camURL)vC.currentTime=vS.currentTime+camOffset;};
+$("tStart").onclick=()=>{trimA=Math.min(vS.currentTime,trimB-1);};
+$("tEnd").onclick=()=>{trimB=Math.max(vS.currentTime,trimA+1);};
+cv.onclick=e=>{if(!dur)return;const r=cv.getBoundingClientRect(),px=(e.clientX-r.left)/r.width*1280,py=(e.clientY-r.top)/r.height*720;
+  const W=vS.videoWidth,H=vS.videoHeight,sc=Math.min(1280/W,720/H),ox=(1280-W*sc)/2,oy=(720-H*sc)/2;
+  const x=(px-ox)/(W*sc),y=(py-oy)/(H*sc);if(x<0||x>1||y<0||y>1)return;
+  zooms.push({t:+vS.currentTime.toFixed(2),d:parseFloat($("zDur").value),s:parseFloat($("zScale").value),x,y});zooms.sort((a,b)=>a.t-b.t);renderZooms();status("🔍 Zoom එකක් එකතු විය");};
+function renderZooms(){
+  $("tl").querySelectorAll(".zm").forEach(e=>e.remove());
+  $("zList").innerHTML=zooms.length?zooms.map((z,i)=>`<li><span>🔍 ${fmt(z.t)} · ${z.s}× · ${z.d}s</span><span><button class="btn" data-go="${i}" type="button">▶</button> <button class="btn" data-del="${i}" type="button">✕</button></span></li>`).join(""):'<li style="color:var(--muted)">තවම zoom නැත</li>';
+  zooms.forEach(z=>{const d=document.createElement("div");d.className="zm";d.style.left=(z.t/dur*100)+"%";d.style.width=(z.d/dur*100)+"%";d.textContent="🔍";$("tl").appendChild(d);});
+}
+$("zList").onclick=e=>{const d=e.target.dataset;if(d.del!=null){zooms.splice(+d.del,1);renderZooms();}if(d.go!=null){vS.currentTime=Math.max(0,zooms[+d.go].t-.5);}};
+
+/* ---------------- export ---------------- */
+let audioCtx=null,srcNode=null,expDest=null;
+$("expBtn").onclick=async()=>{
+  if(!dur||exporting)return;
+  const nine=document.querySelector('input[name=fmt]:checked').value==="9:16",CW=nine?1080:1920,CH=nine?1920:1080;
+  const oc=document.createElement("canvas");oc.width=CW;oc.height=CH;const ox=oc.getContext("2d");
+  if(!audioCtx){audioCtx=new AudioContext();srcNode=audioCtx.createMediaElementSource(vS);expDest=audioCtx.createMediaStreamDestination();srcNode.connect(expDest);srcNode.connect(audioCtx.destination);}
+  await audioCtx.resume();
+  const stream=new MediaStream([...oc.captureStream(30).getVideoTracks(),...expDest.stream.getAudioTracks()]);
+  const mime=pickMime(["video/mp4;codecs=avc1.42E01E,mp4a.40.2","video/mp4;codecs=avc1,mp4a","video/mp4","video/webm;codecs=vp9,opus","video/webm"]);
+  const ext=mime.startsWith("video/mp4")?"mp4":"webm",chunks=[];
+  const rec=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:nine?9e6:10e6});rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);
+  exporting=true;$("expBtn").disabled=true;status("⏳ Export වෙමින්…");
+  const intro=$("optIntro").checked?3:0,outro=$("optOutro").checked?3:0,body=trimB-trimA,total=intro+body+outro;
+  try{await document.fonts.load("800 60px 'Noto Sans Sinhala'");await document.fonts.load("800 60px 'Hanken Grotesk'");}catch(e){}
+  vS.pause();vC.pause();vS.currentTime=trimA;if(camURL)vC.currentTime=trimA+camOffset;
+  await new Promise(r=>setTimeout(r,300));
+  rec.start(500);const t0=performance.now();let phase="intro",bodyStarted=false;
+  await new Promise(done=>{
+    function tick(){
+      const el=(performance.now()-t0)/1000;$("prog").style.width=Math.min(100,el/total*100)+"%";
+      if(el<intro){card(ox,CW,CH,"intro",Math.min(1,el/.4,(intro-el)/.4));}
+      else if(el<intro+body){
+        if(!bodyStarted){bodyStarted=true;vS.play();if(camURL)vC.play();}
+        if(vS.currentTime>=trimB||vS.ended){vS.pause();vC.pause();}
+        drawFrame(ox,CW,CH,vS.currentTime);
+      }else if(el<total){vS.pause();vC.pause();card(ox,CW,CH,"outro",Math.min(1,(el-intro-body)/.4,(total-el)/.4));}
+      else{rec.stop();return;}
+      requestAnimationFrame(tick);
+    }
+    rec.onstop=done;tick();
+  });
+  exporting=false;$("expBtn").disabled=false;$("prog").style.width="100%";
+  const blob=new Blob(chunks,{type:mime.split(";")[0]}),url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=`topgoviya-${nine?"short":"video"}-${new Date().toISOString().slice(0,10)}.${ext}`;a.click();
+  status("✔ ඩවුන්ලෝඩ් විය ("+ext.toUpperCase()+")");$("expInfo").textContent="✔ "+a.download+(ext==="webm"?" — මෙම browser එක MP4 සහාය නොදක්වයි; WebM ද YouTube එකට දැමිය හැක.":"");
+};
+document.querySelectorAll('input[name=fmt]').forEach(r=>r.onchange=drawPreview);
+</script>
+</body>
+</html>
