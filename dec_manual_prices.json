@@ -996,6 +996,82 @@
      500
     ]
    }
+  },
+  "2026-10-28": {
+   "Thambuththegama": {
+    "Beans": [
+     400,
+     450
+    ],
+    "Cabbage (N.Eliya)": [
+     500,
+     550
+    ],
+    "Carrot": [
+     430,
+     450
+    ],
+    "Leeks": [
+     220,
+     250
+    ],
+    "Raddish": [
+     180,
+     180
+    ],
+    "Bitter Gourd": [
+     450,
+     497
+    ],
+    "Brinjals": [
+     300,
+     320
+    ],
+    "Cucumber": [
+     100,
+     110
+    ],
+    "Green Chillies": [
+     250,
+     300
+    ],
+    "Eggplant": [
+     200,
+     250
+    ],
+    "Capsicum": [
+     350,
+     400
+    ],
+    "Ladies Fingers": [
+     120,
+     130
+    ],
+    "Lime": [
+     1300,
+     1300
+    ],
+    "Long Beans": [
+     250,
+     300
+    ],
+    "Luffa": [
+     180,
+     200
+    ],
+    "Snake Gourd": [
+     180,
+     260
+    ],
+    "Sweet Potato": [
+     100,
+     170
+    ],
+    "Manioc": [
+     100,
+     100
+    ]
+   }
   }
  }
 }
