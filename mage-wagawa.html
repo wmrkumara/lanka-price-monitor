@@ -51,6 +51,8 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:7px 6px;b
 .note{font-size:13px;color:var(--muted)}
 .tabs{display:flex;gap:6px;margin:0 0 10px}.tabs button{flex:1;justify-content:center}
 .hide{display:none!important}
+.tight{font-size:12.5px}.tight th,.tight td{padding:6px 3px}.tight td:first-child{max-width:110px}
+.grow{color:var(--muted);font-weight:700;font-size:14px}
 .banner{background:#fbf1d6;border:1px solid #e8cf8c;border-radius:14px;padding:11px 13px;margin:0 0 14px;font-size:14px}
 .banner .row{margin-top:8px}
 .banner.red{background:#f7e6e2;border-color:#e6b9b1}
@@ -207,7 +209,7 @@ si:{
  bNever:"💾 තවම Backup එකක් ගත්තේ නැත",bDays:d=>`💾 දින ${d}ක් Backup එකක් ගත්තේ නැත`,
  bD:"ෆෝන් එක නැති වුණොත් දත්තත් නැති වෙනවා. Backup ගොනුව Google Drive හෝ WhatsApp එකට යවා තබාගන්න.",bNow:"💾 දැන් Backup ගන්න",
  imported:n=>`✔ වගා ${n}ක් ඇතුළත් විය`,badFile:"මෙය වලංගු Backup ගොනුවක් නොවේ",saveErr:"සුරැකීමට නොහැකි විය. Backup එකක් බාගන්න: ",
- listCost:"වියදම",listInc:"ආදායම",
+ listCost:"වියදම",listInc:"ආදායම",growing:"🌱 වගාව යමින් පවතී",growNote:"තවම විකුණුම් නැත — ලාභය විකුණුම් පටන් ගත් පසු පෙන්වයි.",profitShort:"ලාභය",shareBtn:"📤 Backup එක WhatsApp / Drive එකට යවන්න",bkHow:"මෙම ගොනුව විවෘත කරන්න අවශ්‍ය නැත — WhatsApp / Drive එකේ තබාගන්න පමණයි. අලුත් ෆෝන් එකේ \"📂 Backup එකක් ඇතුළත් කරන්න\" ඔබන්න.",fMine:"මගේ වගා",fDemo:"උදාහරණ",
  newT:"➕ අලුත් වගාවක්",editT:"✏️ වගාව සංස්කරණය",fItem:"බෝගය (දඹුල්ල ලැයිස්තුවෙන්)",pick:"— තෝරන්න —",
  fName:"හෝ වෙනත් නමක්",fNamePh:"උදා: තක්කාලි – පිටිය 2",fStart:"වගා කළ දිනය",fArea:"ඉඩම (අක්කර, අවශ්‍ය නම්)",fAreaPh:"උදා: 1 (පර්චස් 40 = 0.25)",
  fSeason:"කන්නය",fOwnRate:"මගේ / පවුලේ වැඩ පැයක වටිනාකම (රු., අවශ්‍ය නම්)",fOwnRatePh:"උදා: 250 — හිස්ව තැබිය හැක",
@@ -293,7 +295,7 @@ en:{
  bNever:"💾 You haven't saved a backup yet",bDays:d=>`💾 No backup for ${d} days`,
  bD:"If the phone is lost, the data is lost too. Send the backup file to Google Drive or WhatsApp to keep it safe.",bNow:"💾 Back up now",
  imported:n=>`✔ ${n} crops restored`,badFile:"This is not a valid backup file",saveErr:"Could not save. Download a backup now: ",
- listCost:"Cost",listInc:"Income",
+ listCost:"Cost",listInc:"Income",growing:"🌱 Crop growing",growNote:"No sales yet — profit shows once you start selling.",profitShort:"Profit",shareBtn:"📤 Send backup to WhatsApp / Drive",bkHow:"You don't need to open this file — just keep it in WhatsApp or Drive. On a new phone tap \"📂 Restore a backup\".",fMine:"My crops",fDemo:"Examples",
  newT:"➕ New crop",editT:"✏️ Edit crop",fItem:"Crop (from Dambulla list)",pick:"— Choose —",
  fName:"Or another name",fNamePh:"e.g. Tomato – field 2",fStart:"Planting date",fArea:"Land (acres, optional)",fAreaPh:"e.g. 1 (40 perches = 0.25)",
  fSeason:"Season",fOwnRate:"Value of 1 hour of my / family work (Rs., optional)",fOwnRatePh:"e.g. 250 — can leave empty",
@@ -378,7 +380,7 @@ ta:{
  bNever:"💾 இன்னும் Backup எடுக்கவில்லை",bDays:d=>`💾 ${d} நாட்களாக Backup இல்லை`,
  bD:"தொலைபேசி தொலைந்தால் தரவும் தொலையும். Backup கோப்பை Google Drive அல்லது WhatsApp-க்கு அனுப்பி வையுங்கள்.",bNow:"💾 இப்போது Backup எடு",
  imported:n=>`✔ ${n} பயிர்கள் மீட்டெடுக்கப்பட்டன`,badFile:"இது சரியான Backup கோப்பு அல்ல",saveErr:"சேமிக்க முடியவில்லை. இப்போது Backup பதிவிறக்கவும்: ",
- listCost:"செலவு",listInc:"வருமானம்",
+ listCost:"செலவு",listInc:"வருமானம்",growing:"🌱 பயிர் வளர்கிறது",growNote:"இன்னும் விற்பனை இல்லை — விற்கத் தொடங்கியதும் இலாபம் காட்டும்.",profitShort:"இலாபம்",shareBtn:"📤 Backup-ஐ WhatsApp / Drive-க்கு அனுப்பு",bkHow:"இந்தக் கோப்பைத் திறக்கத் தேவையில்லை — WhatsApp அல்லது Drive-இல் வைத்திருங்கள். புதிய தொலைபேசியில் \"📂 Backup-ஐ மீட்டெடு\" அழுத்துங்கள்.",fMine:"என் பயிர்கள்",fDemo:"உதாரணங்கள்",
  newT:"➕ புதிய பயிர்",editT:"✏️ பயிரைத் திருத்து",fItem:"பயிர் (தம்புள்ளை பட்டியலிலிருந்து)",pick:"— தேர்ந்தெடுக்கவும் —",
  fName:"அல்லது வேறு பெயர்",fNamePh:"உ.ம்: தக்காளி – வயல் 2",fStart:"நடவு செய்த தேதி",fArea:"நிலம் (ஏக்கர், தேவையெனில்)",fAreaPh:"உ.ம்: 1 (40 பேர்ச் = 0.25)",
  fSeason:"போகம்",fOwnRate:"என் / குடும்ப வேலை ஒரு மணி நேர மதிப்பு (ரூ., தேவையெனில்)",fOwnRatePh:"உ.ம்: 250 — காலியாக விடலாம்",
@@ -474,7 +476,7 @@ const KW={
  comm:["කොමිස්","ගාස්තු","commission","fee","கமிஷன்","கட்டணம்"],
  pack:["ඇසුරුම්","පෙට්ටි","ගෝනි","කූඩ","pack","crate","box","sack","bag","பொதி","பெட்டி","சாக்கு"]
 };
-const PIE=["#0e4f4a","#a9802a","#2c7a52","#b23a2e","#4f7f9e","#8a8170"];
+const PIE=["#0e4f4a","#a9802a","#2c7a52","#b23a2e","#4f7f9e","#7a5c8e","#c7773a","#8a8170"];
 
 /* ================= HELPERS ================= */
 const money=n=>T("rs")+Math.round(n||0).toLocaleString("en-US");
@@ -580,24 +582,24 @@ function backupBanner(){
   const real=realCrops();if(!real.some(c=>c.exp.length||c.inc.length))return"";
   const d=DB.lastBackup?Math.floor((new Date(today())-new Date(DB.lastBackup))/864e5):null;
   if(d!=null&&d<30)return"";
-  return `<div class="banner red noprint"><b>${d==null?T("bNever"):T("bDays",d)}</b><br>${T("bD")}<div class="row"><button class="btn" type="button" data-act="backup">${T("bNow")}</button></div></div>`;
+  return `<div class="banner red noprint"><b>${d==null?T("bNever"):T("bDays",d)}</b><br>${T("bD")}<div class="row"><button class="btn" type="button" data-act="${navigator.share?"share":"backup"}">${T("bNow")}</button></div></div>`;
 }
 function renderList(){
   let h=backupBanner();
   h+=`<div class="card"><div class="row" style="justify-content:space-between"><h2 style="margin:0">${T("myCrops")}</h2><button class="btn solid" type="button" data-act="new">${T("newCrop")}</button></div><div class="crops" style="margin-top:12px">`;
   if(!DB.crops.length)h+=`<div class="crop" style="cursor:default"><div class="nm">${T("emptyT")}</div><p class="note" style="margin:4px 0 10px">${T("emptyD")}</p><button class="btn gold big" type="button" data-act="demo">${T("seeDemo")}</button></div>`;
-  else h+=DB.crops.map((c,i)=>{const t=totals(c);return `<div class="crop" data-i="${i}"><div class="row" style="justify-content:space-between"><span class="nm">${esc(c.e||"🌿")} ${esc(displayName(c))}</span><span class="big ${t.prof>=0?"pos":"neg"}" style="font-size:18px">${money(t.prof)}</span></div>
+  else h+=DB.crops.map((c,i)=>{const t=totals(c);return `<div class="crop" data-i="${i}"><div class="row" style="justify-content:space-between"><span class="nm">${esc(c.e||"🌿")} ${esc(displayName(c))}</span>${t.inc>0||!t.cost?`<span class="big ${t.prof>=0?"pos":"neg"}" style="font-size:18px">${money(t.prof)}</span>`:`<span class="grow">${T("growing")}</span>`}</div>
     <div class="mt">📅 ${esc(c.start||"—")}${c.season?" · "+T("seasons")[c.season]:""} · ${T("listCost")} ${money(t.cost)} · ${T("listInc")} ${money(t.inc)}</div></div>`;}).join("");
   h+=`</div></div>`;
   h+=`<div class="row noprint" style="margin:0 0 14px">${DB.crops.length>=2?`<button class="btn" type="button" data-act="all">${T("allBtn")}</button>`:""}<button class="btn" type="button" data-act="guide">${T("guideBtn")}</button>${DB.crops.length&&!hasDemo()?`<button class="btn" type="button" data-act="demo">${T("seeDemo")}</button>`:""}</div>`;
-  h+=`<div class="card noprint"><h2>${T("backupH")}</h2><p class="note">${T("backupNote")}</p><div class="row"><button class="btn" type="button" data-act="backup">${T("expBtn")}</button>
-    <label class="btn" style="margin:0;cursor:pointer;color:var(--petrol)">${T("impBtn")}<input type="file" id="impIn" accept=".json,application/json" hidden></label></div></div>`;
+  h+=`<div class="card noprint"><h2>${T("backupH")}</h2><p class="note">${T("backupNote")}</p><div class="row">${navigator.share?`<button class="btn solid" type="button" data-act="share">${T("shareBtn")}</button>`:""}<button class="btn" type="button" data-act="backup">${T("expBtn")}</button>
+    <label class="btn" style="margin:0;cursor:pointer;color:var(--petrol)">${T("impBtn")}<input type="file" id="impIn" accept=".json,application/json" hidden></label></div><p class="note" style="margin:10px 0 0">${T("bkHow")}</p></div>`;
   $("vList").innerHTML=h;
   $("vList").querySelectorAll(".crop[data-i]").forEach(el=>el.onclick=()=>openCrop(+el.dataset.i));
   $("impIn").onchange=importFile;
 }
 document.addEventListener("click",e=>{const b=e.target.closest("[data-act]");if(!b)return;const a=b.dataset.act;
-  if(a==="new")newCrop();else if(a==="demo")addDemo();else if(a==="all")show("all");else if(a==="guide")show("guide");else if(a==="backup")exportFile();
+  if(a==="new")newCrop();else if(a==="demo")addDemo();else if(a==="all")show("all");else if(a==="guide")show("guide");else if(a==="backup")exportFile();else if(a==="share")shareFile();
   else if(a==="list"){CUR=null;show("list");}else if(a==="crop")show("crop");else if(a==="print")window.print();});
 
 /* ---- form ---- */
@@ -619,7 +621,7 @@ function renderCrop(){
   $("cTitle").textContent=(c.e||"🌿")+" "+displayName(c);
   $("cMeta").textContent=T("planted")+(c.start||"—")+(c.season?" · "+T("seasonW",T("seasons")[c.season]):"")+(c.area?" · "+T("landAc",c.area):"")+(c.expQty?" · "+T("expHv")+num(c.expQty)+" "+u:"");
   $("sCost").textContent=money(t.cost);$("sInc").textContent=money(t.inc);
-  $("sProf").textContent=money(t.prof);$("sProf").className=t.prof>=0?"pos":"neg";
+  if(t.inc>0||!t.cost){$("sProf").textContent=money(t.prof);$("sProf").className=t.prof>=0?"pos":"neg";}else{$("sProf").textContent=T("growing");$("sProf").className="grow";}
   $("sOwnH").textContent=num(t.ownH)+" "+T("hrs");
   $("sPerKg").textContent=t.qty?money(t.prof/t.qty):"—";$("sPerAc").textContent=t.ac?money(t.prof/t.ac):"—";
   $("sQty").textContent=num(t.qty)+" "+u;$("sBe").textContent=t.be!=null?money(t.be):"—";$("sLeft").textContent=t.left!=null?num(t.left)+" "+u:"—";
@@ -676,7 +678,7 @@ $("printBtn").onclick=()=>window.print();
 /* ================= REPORT PIECES ================= */
 function donut(entries,total){
   const sorted=entries.filter(e=>e[1]>0).sort((a,b)=>b[1]-a[1]);
-  const sl=sorted.slice(0,5).map(([id,v])=>({n:catName(id),v}));const rest=sorted.slice(5).reduce((a,[,v])=>a+v,0);if(rest>0)sl.push({n:T("otherSlice"),v:rest});
+  const top=sorted.length<=8?8:7;const sl=sorted.slice(0,top).map(([id,v])=>({n:catName(id),v}));const rest=sorted.slice(top).reduce((a,[,v])=>a+v,0);if(rest>0)sl.push({n:T("otherSlice"),v:rest});
   const R=70,C=2*Math.PI*R;let acc=0;
   const arcs=sl.map((s,i)=>{const len=s.v/total*C,a=`<circle r="${R}" cx="100" cy="100" fill="none" stroke="${PIE[i]}" stroke-width="34" stroke-dasharray="${len} ${C-len}" stroke-dashoffset="${-acc}" transform="rotate(-90 100 100)"/>`;acc+=len;return a;}).join("");
   return `<div class="donutWrap"><svg viewBox="0 0 200 200" role="img" aria-label="${esc(T("catH"))}">${arcs}<text x="100" y="94" text-anchor="middle" font-size="12" fill="#6f675a">${esc(T("total"))}</text><text x="100" y="116" text-anchor="middle" font-size="15" font-weight="800" fill="#191d1a" font-family="JetBrains Mono,monospace">${money(total)}</text></svg>
@@ -698,7 +700,7 @@ function renderReport(){
   /* key points */
   const kp=[];const cats=Object.entries(t.byCat).sort((a,b)=>b[1]-a[1]);
   if(cats.length&&t.cost)kp.push(T("kpBig",catName(cats[0][0]),money(cats[0][1]),pct(cats[0][1],t.cost)));
-  if(t.inc>0)kp.push(t.prof>=0?T("kpProfit",money(t.prof)):T("kpLoss",money(-t.prof)));
+  if(t.inc>0)kp.push(t.prof>=0?T("kpProfit",money(t.prof)):T("kpLoss",money(-t.prof)));else if(t.cost)kp.push(T("growing")+" — "+T("growNote"));
   let dq=0,dm=0,mq=0,mv=0;c.inc.forEach(x=>{const p=priceOn(c.item,x.date);if(p){dq+=+x.qty||0;dm+=(+x.qty||0)*(p.lo+p.hi)/2;mv+=(+x.qty||0)*(+x.price||0);}});
   if(dq){const my=mv/dq,da=dm/dq,d=Math.round((my-da)/da*100);if(Math.abs(d)>=1)kp.push(d<0?T("kpPriceLow",money(my),money(da),-d):T("kpPriceHigh",money(my),money(da),d));}
   const r=todayRange(c);if(r&&t.be!=null)kp.push(T("kpBe",money(t.be),money(r.lo),money(r.hi)));
@@ -709,7 +711,7 @@ function renderReport(){
 
   /* cost / income / profit */
   const mx=Math.max(t.cost,t.inc,Math.abs(t.prof))||1;
-  h+=`<div class="card"><h2>${T("sumH")}</h2>${hbar(T("thCost"),t.cost,mx,"#b23a2e")}${hbar(T("thInc"),t.inc,mx,"#2c7a52")}${hbar(T("sProf"),t.prof,mx,t.prof>=0?"#0e4f4a":"#b23a2e")}</div>`;
+  h+=`<div class="card"><h2>${T("sumH")}</h2>${hbar(T("thCost"),t.cost,mx,"#b23a2e")}${hbar(T("thInc"),t.inc,mx,"#2c7a52")}${hbar(T("profitShort"),t.prof,mx,t.prof>=0?"#0e4f4a":"#b23a2e")}</div>`;
 
   /* where money went */
   if(t.cost>0)h+=`<div class="card"><h2>${T("catH")}</h2>${donut(Object.entries(t.byCat),t.cost)}</div>`;
@@ -764,21 +766,23 @@ function renderReport(){
 }
 
 /* ---- all crops ---- */
-let ALLF="all";
+let ALLF="all",ALLD=null;
 function renderAll(){
-  const list=DB.crops.filter(c=>ALLF==="all"||c.season===ALLF);
+  const both=realCrops().length&&hasDemo();if(!both)ALLD=null;else if(ALLD===null)ALLD="mine";
+  const list=DB.crops.filter(c=>(ALLF==="all"||c.season===ALLF)&&(!both||(ALLD==="demo")===!!c.demo));
   let h=`<div class="card"><div class="row noprint" style="justify-content:space-between"><button class="btn" type="button" data-act="list">${T("listBack")}</button><button class="btn solid" type="button" data-act="print">${T("rPrint")}</button></div>
-   <h2 style="font-size:22px;margin:12px 0 8px">${T("allT")}</h2><div class="row noprint">${["all","yala","maha","other"].map(s=>`<button class="btn ${ALLF===s?"solid":""}" type="button" data-f="${s}">${s==="all"?T("fAll"):T("seasons")[s]}</button>`).join("")}</div></div>`;
+   <h2 style="font-size:22px;margin:12px 0 8px">${T("allT")}</h2><div class="row noprint">${["all","yala","maha","other"].map(s=>`<button class="btn ${ALLF===s?"solid":""}" type="button" data-f="${s}">${s==="all"?T("fAll"):T("seasons")[s]}</button>`).join("")}</div>${both?`<div class="row noprint" style="margin-top:8px">${[["mine",T("fMine")],["demo",T("fDemo")]].map(([k,l])=>`<button class="btn ${ALLD===k?"gold":""}" type="button" data-d="${k}">${l}</button>`).join("")}</div>`:""}</div>`;
   let C=0,I=0;const byCat={};
   const rows=list.map(c=>{const t=totals(c);C+=t.cost;I+=t.inc;for(const k in t.byCat)byCat[k]=(byCat[k]||0)+t.byCat[k];
-    return `<tr><td>${esc(c.e||"🌿")} ${esc(displayName(c))}<div class="note">${esc(c.start||"")}${c.season?" · "+T("seasons")[c.season]:""}</div></td><td class="n neg">${nf(t.cost)}</td><td class="n pos">${nf(t.inc)}</td><td class="n ${t.prof>=0?"pos":"neg"}"><b>${nf(t.prof)}</b></td></tr>`;}).join("");
-  h+=`<div class="card"><div class="tw"><table><thead><tr><th>${T("thCrop")}</th><th class="n">${T("thCost")}</th><th class="n">${T("thInc")}</th><th class="n">${T("sProf")}</th></tr></thead><tbody>${rows}
+    return `<tr><td>${esc(c.e||"🌿")} ${esc(displayName(c))}<div class="note">${esc(c.start||"")}${c.season?" · "+T("seasons")[c.season]:""}</div></td><td class="n neg">${nf(t.cost)}</td><td class="n pos">${nf(t.inc)}</td><td class="n">${t.inc>0||!t.cost?`<b class="${t.prof>=0?"pos":"neg"}">${nf(t.prof)}</b>`:`<span class="grow">🌱</span>`}</td></tr>`;}).join("");
+  h+=`<div class="card"><div class="tw"><table class="tight"><thead><tr><th>${T("thCrop")}</th><th class="n">${T("thCost")}</th><th class="n">${T("thInc")}</th><th class="n">${T("profitShort")}</th></tr></thead><tbody>${rows}
    <tr><td><b>${T("total")}</b></td><td class="n"><b>${nf(C)}</b></td><td class="n"><b>${nf(I)}</b></td><td class="n ${I-C>=0?"pos":"neg"}"><b>${nf(I-C)}</b></td></tr></tbody></table></div></div>`;
   const mx=Math.max(C,I,Math.abs(I-C))||1;
-  if(C||I)h+=`<div class="card"><h2>${T("sumH")}</h2>${hbar(T("thCost"),C,mx,"#b23a2e")}${hbar(T("thInc"),I,mx,"#2c7a52")}${hbar(T("sProf"),I-C,mx,I-C>=0?"#0e4f4a":"#b23a2e")}</div>`;
+  if(C||I)h+=`<div class="card"><h2>${T("sumH")}</h2>${hbar(T("thCost"),C,mx,"#b23a2e")}${hbar(T("thInc"),I,mx,"#2c7a52")}${hbar(T("profitShort"),I-C,mx,I-C>=0?"#0e4f4a":"#b23a2e")}</div>`;
   if(C>0)h+=`<div class="card"><h2>${T("allCatH")}</h2>${donut(Object.entries(byCat),C)}</div>`;
   $("vAll").innerHTML=h;
   $("vAll").querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{ALLF=b.dataset.f;renderAll();});
+  $("vAll").querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{ALLD=b.dataset.d;renderAll();});
 }
 
 /* ---- guide ---- */
@@ -829,6 +833,11 @@ function addDemo(){
 $("demoDel").onclick=()=>{DB.crops=DB.crops.filter(c=>!c.demo);CUR=null;save();show("list");};
 
 /* ================= BACKUP ================= */
+function backupBlob(){return new Blob([JSON.stringify({crops:realCrops(),customCats:customCats()},null,1)],{type:"application/json"});}
+async function shareFile(){const name="mage-wagawa-backup-"+today()+".json";
+  try{const f=new File([backupBlob()],name,{type:"application/json"});
+    if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:name});DB.lastBackup=today();save();render();return;}}catch(e){if(e&&e.name==="AbortError")return;}
+  exportFile();}
 function exportFile(){const out={crops:realCrops(),customCats:customCats()},b=new Blob([JSON.stringify(out,null,1)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");
   a.href=u;a.download="mage-wagawa-backup-"+today()+".json";a.click();setTimeout(()=>URL.revokeObjectURL(u),2000);DB.lastBackup=today();save();render();}
 function importFile(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!Array.isArray(d.crops))throw new Error("format");
@@ -839,7 +848,5 @@ function importFile(e){const f=e.target.files[0];if(!f)return;const r=new FileRe
 load();save();applyLang();show("list");loadPrices();
 if(FIRST)$("langModal").classList.remove("hide");
 </script>
-<div id="tg-copy-wrap" style="text-align:center;font-size:12px;line-height:1.6;color:#7a7264;max-width:900px;margin:8px auto 76px;padding:0 16px"><span id="tg-copy">© 2026 TopGoviya.lk · සියලු හිමිකම් ඇවිරිණි / All rights reserved · මිල දත්ත: මහ බැංකුව, HARTI, DEA (නිල මූලාශ්‍ර) / Price data: CBSL, HARTI &amp; DEA · <a href="/contact.html">සම්බන්ධ වන්න / Contact</a> · <a href="/useful-links.html">සබැඳි / Links</a></span></div>
-<script defer src="/events.js?v=1"></script>
 </body>
 </html>
