@@ -4,7 +4,7 @@ Source: Dambulla Dedicated Economic Centre (dambulladec.com) - official daily
 wholesale price list. Saves only date, product id, name, category and min/max
 price to dambulla_dec.json. Photos inside the source data are thrown away.
 
-MODE=daily    : fill any missing day in the last 7 days (scheduled runs)
+MODE=daily    : fill any missing day in the last 7 days, re-check the newest 3 days for DEC corrections
 MODE=backfill : collect older history slowly, BACKFILL_DAYS requests per run,
                 with a pause between requests so the DEC server is not loaded
 """
@@ -25,6 +25,7 @@ BACKFILL_DAYS = max(1, min(60, int(os.environ.get("BACKFILL_DAYS") or 30)))
 FLOOR = os.environ.get("FLOOR_DATE") or "2025-01-01"
 PAUSE = 5            # seconds between requests
 RECENT = 7           # days that are re-checked every run
+REFRESH = 3          # newest saved days fetched again every run, to pick up corrections by the DEC
 STOP_AFTER_EMPTY = 45  # backfill stops after this many empty days in a row
 
 NOW_SL = datetime.now(SL)
@@ -157,18 +158,44 @@ def main():
                     break
             time.sleep(PAUSE)
     else:
+        suspect = db.setdefault("suspect", {})
         for i in range(RECENT + 1):
             d = (today - timedelta(days=i)).isoformat()
-            if d in db["days"]:
+            saved = db["days"].get(d)
+            if saved and i >= REFRESH and d not in suspect:
                 continue
             rows = fetch(d)
             if rows is None:
                 failed.append(f"{d} ({LAST_ERROR.get(d, '')})")
+            elif saved:
+                # already saved: replace only if the DEC has changed (corrected) that day's prices
+                old = dict(saved)
+                n = store(db, d, rows, f"robot {STAMP}")
+                if n and db["days"][d] != old:
+                    fetched.append(f"{d}:{n}:corrected")
+                    new_days += 1
+                    print(f"  {d}: corrected by the DEC ({n} items)")
+                else:
+                    db["days"][d] = old            # nothing new (or empty now): keep what we had
+                    db["arrived"][d] = db["arrived"].get(d) or f"robot {STAMP}"
+                    db["empty_days"].pop(d, None)
             else:
                 n = store(db, d, rows, f"robot {STAMP}")
                 fetched.append(f"{d}:{n}")
                 new_days += 1 if n else 0
                 print(f"  {d}: {n} items")
+            # a day that is an exact copy of the previous report is probably a DEC posting mistake:
+            # keep checking it every run (for the whole week) until it changes
+            if db["days"].get(d):
+                prev = [k for k in sorted(db["days"]) if k < d]
+                pdays = db["days"][prev[-1]] if prev else {}
+                cur = db["days"][d]
+                same = sum(1 for k, v in cur.items() if pdays.get(k) == v)
+                if len(cur) >= 30 and same >= 0.95 * len(cur):
+                    suspect[d] = STAMP
+                    print(f"  {d}: looks like a copy of {prev[-1]} — will re-check")
+                else:
+                    suspect.pop(d, None)
             time.sleep(PAUSE)
 
     db["days"] = dict(sorted(db["days"].items()))
