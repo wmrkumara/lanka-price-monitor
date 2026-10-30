@@ -51,6 +51,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:7px 6px;b
 .note{font-size:13px;color:var(--muted)}
 .tabs{display:flex;gap:6px;margin:0 0 10px}.tabs button{flex:1;justify-content:center}
 .hide{display:none!important}
+#vCrop{padding-bottom:76px}
 .tight{font-size:12.5px}.tight th,.tight td{padding:6px 3px}.tight td:first-child{max-width:110px}
 .grow{color:var(--muted);font-weight:700;font-size:14px}
 .banner{background:#fbf1d6;border:1px solid #e8cf8c;border-radius:14px;padding:11px 13px;margin:0 0 14px;font-size:14px}
@@ -245,7 +246,7 @@ si:{
  bNever:"💾 තවම Backup එකක් ගත්තේ නැත",bDays:d=>`💾 දින ${d}ක් Backup එකක් ගත්තේ නැත`,
  bD:"ෆෝන් එක නැති වුණොත් දත්තත් නැති වෙනවා. Backup ගොනුව Google Drive හෝ WhatsApp එකට යවා තබාගන්න.",bNow:"💾 දැන් Backup ගන්න",
  imported:n=>`✔ වගා ${n}ක් ඇතුළත් විය`,badFile:"මෙය වලංගු Backup ගොනුවක් නොවේ",saveErr:"සුරැකීමට නොහැකි විය. Backup එකක් බාගන්න: ",
- listCost:"වියදම",listInc:"ආදායම",growing:"🌱 වගාව යමින් පවතී",growNote:"තවම විකුණුම් නැත — ලාභය විකුණුම් පටන් ගත් පසු පෙන්වයි.",profitShort:"ලාභය",shareBtn:"📤 Backup එක WhatsApp / Drive එකට යවන්න",bkHow:"මෙම ගොනුව විවෘත කරන්න අවශ්‍ය නැත — WhatsApp / Drive එකේ තබාගන්න පමණයි. අලුත් ෆෝන් එකේ \"📂 Backup එකක් ඇතුළත් කරන්න\" ඔබන්න.",fMine:"මගේ වගා",fDemo:"උදාහරණ",navCrops:"මගේ වගා",navAll:"සියල්ල",navBk:"Backup",navGuide:"උදව්",addT:"එකතු කරන්න",added:"✔ එකතු විය",more:"📋 වැඩි විස්තර",costShare:p=>`ආදායමෙන් ${p}%ක් වියදමට ගියා`,noSalesYet:"තවම විකුණුම් නැත",
+ listCost:"වියදම",listInc:"ආදායම",growing:"🌱 වගාව යමින් පවතී",growNote:"තවම විකුණුම් නැත — ලාභය විකුණුම් පටන් ගත් පසු පෙන්වයි.",profitShort:"ලාභය",shareBtn:"📤 Backup එක WhatsApp / Drive එකට යවන්න",bkHow:"මෙම ගොනුව විවෘත කරන්න අවශ්‍ය නැත — WhatsApp / Drive එකේ තබාගන්න පමණයි. අලුත් ෆෝන් එකේ \"📂 Backup එකක් ඇතුළත් කරන්න\" ඔබන්න.",fMine:"මගේ වගා",fDemo:"උදාහරණ",navCrops:"මගේ වගා",sharePdf:"📤 WhatsApp එකට යවන්න (PDF)",pdfMaking:"⏳ PDF සකසමින්…",pdfFail:"PDF සෑදීමට නොහැකි විය. අන්තර්ජාලය තිබේදැයි බලා නැවත උත්සාහ කරන්න, නැත්නම් 🖨️ මුද්‍රණය භාවිතා කරන්න.",pdfSaved:"✔ PDF බාගත විය",pdfBy:"TopGoviya.lk · මගේ වගාව · සකස් කළේ",navAll:"සියල්ල",navBk:"Backup",navGuide:"උදව්",addT:"එකතු කරන්න",added:"✔ එකතු විය",more:"📋 වැඩි විස්තර",costShare:p=>`ආදායමෙන් ${p}%ක් වියදමට ගියා`,noSalesYet:"තවම විකුණුම් නැත",
  newT:"➕ අලුත් වගාවක්",editT:"✏️ වගාව සංස්කරණය",fItem:"බෝගය (දඹුල්ල ලැයිස්තුවෙන්)",pick:"— තෝරන්න —",
  fName:"හෝ වෙනත් නමක්",fNamePh:"උදා: තක්කාලි – පිටිය 2",fStart:"වගා කළ දිනය",fArea:"ඉඩම (අක්කර, අවශ්‍ය නම්)",fAreaPh:"උදා: 1 (පර්චස් 40 = 0.25)",
  fSeason:"කන්නය",fOwnRate:"මගේ / පවුලේ වැඩ පැයක වටිනාකම (රු., අවශ්‍ය නම්)",fOwnRatePh:"උදා: 250 — හිස්ව තැබිය හැක",
@@ -282,7 +283,7 @@ si:{
  tasks:{land:"බිම් සකස් කිරීම",plant:"සිටුවීම / වැපිරීම",weed:"වල් නෙළීම",fert:"පොහොර යෙදීම",spray:"ඖෂධ / පළිබෝධ",water:"වතුර දැමීම",harvest:"අස්වනු නෙළීම",pack:"ඇසුරුම් / ප්‍රවාහනය",other:"වෙනත්"},
  months:["ජන","පෙබ","මාර්","අප්‍රේ","මැයි","ජූනි","ජූලි","අගෝ","සැප්","ඔක්","නොවැ","දෙසැ"],
  /* report */
- rBack:"← වගාවට",rPrint:"🖨️ මුද්‍රණය / PDF",rHint:"මුද්‍රණ තිරයේ \"Save as PDF\" තෝරලා ෆෝන් එකට සුරකින්න, නැත්නම් WhatsApp කරන්න.",
+ rBack:"← වගාවට",rPrint:"🖨️ මුද්‍රණය / PDF",rHint:"📤 ඔබලා කෙළින්ම WhatsApp එකට යවන්න. නැත්නම් 🖨️ මුද්‍රණය ඔබලා \"Save as PDF\" තෝරන්න.",
  rTitle:"📊 වාර්තාව",kpH:"ප්‍රධාන කරුණු",
  kpBig:(c,a,p)=>`<b>${c}</b> ඔබේ විශාලතම වියදම: ${a} (මුළු වියදමෙන් ${p}%).`,
  kpProfit:x=>`මේ දක්වා ලාභය <b class="pos">${x}</b>.`,kpLoss:x=>`මේ දක්වා වියදම ආදායමට වඩා <b class="neg">${x}</b>කින් වැඩියි.`,
@@ -331,7 +332,7 @@ en:{
  bNever:"💾 You haven't saved a backup yet",bDays:d=>`💾 No backup for ${d} days`,
  bD:"If the phone is lost, the data is lost too. Send the backup file to Google Drive or WhatsApp to keep it safe.",bNow:"💾 Back up now",
  imported:n=>`✔ ${n} crops restored`,badFile:"This is not a valid backup file",saveErr:"Could not save. Download a backup now: ",
- listCost:"Cost",listInc:"Income",growing:"🌱 Crop growing",growNote:"No sales yet — profit shows once you start selling.",profitShort:"Profit",shareBtn:"📤 Send backup to WhatsApp / Drive",bkHow:"You don't need to open this file — just keep it in WhatsApp or Drive. On a new phone tap \"📂 Restore a backup\".",fMine:"My crops",fDemo:"Examples",navCrops:"My crops",navAll:"All",navBk:"Backup",navGuide:"Guide",addT:"Add",added:"✔ Added",more:"📋 More details",costShare:p=>`${p}% of income went on costs`,noSalesYet:"No sales yet",
+ listCost:"Cost",listInc:"Income",growing:"🌱 Crop growing",growNote:"No sales yet — profit shows once you start selling.",profitShort:"Profit",shareBtn:"📤 Send backup to WhatsApp / Drive",bkHow:"You don't need to open this file — just keep it in WhatsApp or Drive. On a new phone tap \"📂 Restore a backup\".",fMine:"My crops",fDemo:"Examples",navCrops:"My crops",sharePdf:"📤 Send on WhatsApp (PDF)",pdfMaking:"⏳ Making PDF…",pdfFail:"Could not make the PDF. Check your internet and try again, or use 🖨️ Print.",pdfSaved:"✔ PDF downloaded",pdfBy:"TopGoviya.lk · My Crop · made on",navAll:"All",navBk:"Backup",navGuide:"Guide",addT:"Add",added:"✔ Added",more:"📋 More details",costShare:p=>`${p}% of income went on costs`,noSalesYet:"No sales yet",
  newT:"➕ New crop",editT:"✏️ Edit crop",fItem:"Crop (from Dambulla list)",pick:"— Choose —",
  fName:"Or another name",fNamePh:"e.g. Tomato – field 2",fStart:"Planting date",fArea:"Land (acres, optional)",fAreaPh:"e.g. 1 (40 perches = 0.25)",
  fSeason:"Season",fOwnRate:"Value of 1 hour of my / family work (Rs., optional)",fOwnRatePh:"e.g. 250 — can leave empty",
@@ -367,7 +368,7 @@ en:{
  cats:{seed:"Seeds / plants",fert:"Fertilizer",chem:"Pesticides / chemicals",labour:"Labour",mach:"Machinery / ploughing",water:"Water / electricity",trans:"Transport",comm:"Commission / fees",pack:"Packing",other:"Other"},
  tasks:{land:"Land preparation",plant:"Planting / sowing",weed:"Weeding",fert:"Applying fertilizer",spray:"Spraying",water:"Watering",harvest:"Harvesting",pack:"Packing / transport",other:"Other"},
  months:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
- rBack:"← Back to crop",rPrint:"🖨️ Print / PDF",rHint:"On the print screen choose \"Save as PDF\" to keep it on your phone or send it on WhatsApp.",
+ rBack:"← Back to crop",rPrint:"🖨️ Print / PDF",rHint:"Tap 📤 to send it straight to WhatsApp. Or tap 🖨️ Print and choose \"Save as PDF\".",
  rTitle:"📊 Report",kpH:"Key points",
  kpBig:(c,a,p)=>`<b>${c}</b> was your biggest cost: ${a} (${p}% of all costs).`,
  kpProfit:x=>`Profit so far: <b class="pos">${x}</b>.`,kpLoss:x=>`So far, costs are <b class="neg">${x}</b> more than income.`,
@@ -416,7 +417,7 @@ ta:{
  bNever:"💾 இன்னும் Backup எடுக்கவில்லை",bDays:d=>`💾 ${d} நாட்களாக Backup இல்லை`,
  bD:"தொலைபேசி தொலைந்தால் தரவும் தொலையும். Backup கோப்பை Google Drive அல்லது WhatsApp-க்கு அனுப்பி வையுங்கள்.",bNow:"💾 இப்போது Backup எடு",
  imported:n=>`✔ ${n} பயிர்கள் மீட்டெடுக்கப்பட்டன`,badFile:"இது சரியான Backup கோப்பு அல்ல",saveErr:"சேமிக்க முடியவில்லை. இப்போது Backup பதிவிறக்கவும்: ",
- listCost:"செலவு",listInc:"வருமானம்",growing:"🌱 பயிர் வளர்கிறது",growNote:"இன்னும் விற்பனை இல்லை — விற்கத் தொடங்கியதும் இலாபம் காட்டும்.",profitShort:"இலாபம்",shareBtn:"📤 Backup-ஐ WhatsApp / Drive-க்கு அனுப்பு",bkHow:"இந்தக் கோப்பைத் திறக்கத் தேவையில்லை — WhatsApp அல்லது Drive-இல் வைத்திருங்கள். புதிய தொலைபேசியில் \"📂 Backup-ஐ மீட்டெடு\" அழுத்துங்கள்.",fMine:"என் பயிர்கள்",fDemo:"உதாரணங்கள்",navCrops:"என் பயிர்கள்",navAll:"எல்லாம்",navBk:"Backup",navGuide:"உதவி",addT:"சேர்",added:"✔ சேர்க்கப்பட்டது",more:"📋 மேலும் விவரம்",costShare:p=>`வருமானத்தில் ${p}% செலவுக்குப் போனது`,noSalesYet:"இன்னும் விற்பனை இல்லை",
+ listCost:"செலவு",listInc:"வருமானம்",growing:"🌱 பயிர் வளர்கிறது",growNote:"இன்னும் விற்பனை இல்லை — விற்கத் தொடங்கியதும் இலாபம் காட்டும்.",profitShort:"இலாபம்",shareBtn:"📤 Backup-ஐ WhatsApp / Drive-க்கு அனுப்பு",bkHow:"இந்தக் கோப்பைத் திறக்கத் தேவையில்லை — WhatsApp அல்லது Drive-இல் வைத்திருங்கள். புதிய தொலைபேசியில் \"📂 Backup-ஐ மீட்டெடு\" அழுத்துங்கள்.",fMine:"என் பயிர்கள்",fDemo:"உதாரணங்கள்",navCrops:"என் பயிர்கள்",sharePdf:"📤 WhatsApp-இல் அனுப்பு (PDF)",pdfMaking:"⏳ PDF தயாராகிறது…",pdfFail:"PDF உருவாக்க முடியவில்லை. இணையத்தைச் சரிபார்த்து மீண்டும் முயலுங்கள், அல்லது 🖨️ அச்சு பயன்படுத்துங்கள்.",pdfSaved:"✔ PDF பதிவிறக்கப்பட்டது",pdfBy:"TopGoviya.lk · என் பயிர் · உருவாக்கியது",navAll:"எல்லாம்",navBk:"Backup",navGuide:"உதவி",addT:"சேர்",added:"✔ சேர்க்கப்பட்டது",more:"📋 மேலும் விவரம்",costShare:p=>`வருமானத்தில் ${p}% செலவுக்குப் போனது`,noSalesYet:"இன்னும் விற்பனை இல்லை",
  newT:"➕ புதிய பயிர்",editT:"✏️ பயிரைத் திருத்து",fItem:"பயிர் (தம்புள்ளை பட்டியலிலிருந்து)",pick:"— தேர்ந்தெடுக்கவும் —",
  fName:"அல்லது வேறு பெயர்",fNamePh:"உ.ம்: தக்காளி – வயல் 2",fStart:"நடவு செய்த தேதி",fArea:"நிலம் (ஏக்கர், தேவையெனில்)",fAreaPh:"உ.ம்: 1 (40 பேர்ச் = 0.25)",
  fSeason:"போகம்",fOwnRate:"என் / குடும்ப வேலை ஒரு மணி நேர மதிப்பு (ரூ., தேவையெனில்)",fOwnRatePh:"உ.ம்: 250 — காலியாக விடலாம்",
@@ -452,7 +453,7 @@ ta:{
  cats:{seed:"விதை / நாற்று",fert:"உரம்",chem:"பூச்சிக்கொல்லி / இரசாயனம்",labour:"கூலி",mach:"இயந்திரம் / உழவு",water:"நீர் / மின்சாரம்",trans:"போக்குவரத்து",comm:"கமிஷன் / கட்டணம்",pack:"பொதி",other:"மற்றவை"},
  tasks:{land:"நிலம் தயாரித்தல்",plant:"நடவு / விதைப்பு",weed:"களை எடுத்தல்",fert:"உரமிடல்",spray:"மருந்து தெளித்தல்",water:"நீர் பாய்ச்சல்",harvest:"அறுவடை",pack:"பொதி / போக்குவரத்து",other:"மற்றவை"},
  months:["ஜன","பிப்","மார்","ஏப்","மே","ஜூன்","ஜூலை","ஆக","செப்","அக்","நவ","டிச"],
- rBack:"← பயிருக்கு",rPrint:"🖨️ அச்சு / PDF",rHint:"அச்சுத் திரையில் \"Save as PDF\" தேர்ந்தெடுத்துத் தொலைபேசியில் சேமிக்கவும் அல்லது WhatsApp செய்யவும்.",
+ rBack:"← பயிருக்கு",rPrint:"🖨️ அச்சு / PDF",rHint:"📤 அழுத்தி நேரடியாக WhatsApp-க்கு அனுப்புங்கள். அல்லது 🖨️ அச்சு அழுத்தி \"Save as PDF\" தேர்ந்தெடுங்கள்.",
  rTitle:"📊 அறிக்கை",kpH:"முக்கியக் குறிப்புகள்",
  kpBig:(c,a,p)=>`<b>${c}</b> உங்கள் பெரிய செலவு: ${a} (மொத்தச் செலவில் ${p}%).`,
  kpProfit:x=>`இதுவரை இலாபம் <b class="pos">${x}</b>.`,kpLoss:x=>`இதுவரை செலவு வருமானத்தை விட <b class="neg">${x}</b> அதிகம்.`,
@@ -544,7 +545,7 @@ function migrateCrop(c){
   if(!c.id)c.id=Date.now()+Math.random();
   return c;
 }
-function load(){try{DB=JSON.parse(localStorage.getItem(KEY))||{crops:[]};}catch(e){DB={crops:[]};}
+function load(){try{DB=JSON.parse(localStorage.getItem(KEY))||{crops:[]};}catch(e){try{localStorage.setItem(KEY+"_broken_"+today(),localStorage.getItem(KEY));}catch(x){}DB={crops:[]};}
   if(!Array.isArray(DB.crops))DB.crops=[];if(!Array.isArray(DB.customCats))DB.customCats=[];DB.crops.forEach(migrateCrop);}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){alert(T("saveErr")+e.message);}}
 const realCrops=()=>DB.crops.filter(c=>!c.demo);
@@ -613,6 +614,7 @@ function show(v){VIEW=v;closeSheet();["list","form","crop","report","all","guide
 document.querySelectorAll("[data-nav]").forEach(b=>b.onclick=()=>{if(b.dataset.nav==="list")CUR=null;show(b.dataset.nav);});
 function openSheet(tabId){["eDate","iDate","wDate"].forEach(i=>{if(!$(i).value)$(i).value=today();});$("addCard").classList.add("open");$("sheetBg").classList.remove("hide");$("fab").classList.add("hide");if(tabId)$(tabId).click();}
 function closeSheet(){$("addCard").classList.remove("open");$("sheetBg").classList.add("hide");if(VIEW==="crop")$("fab").classList.remove("hide");}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSheet();});
 function toast(m){const d=document.createElement("div");d.className="toast";d.textContent=m;document.body.appendChild(d);setTimeout(()=>d.remove(),1600);}
 function render(){
   $("demoBar").classList.toggle("hide",!hasDemo()||VIEW==="form");
@@ -646,7 +648,7 @@ function renderBackup(){
 }
 document.addEventListener("click",e=>{const b=e.target.closest("[data-act]");if(!b)return;const a=b.dataset.act;
   if(a==="new")newCrop();else if(a==="demo")addDemo();else if(a==="all")show("all");else if(a==="guide")show("guide");else if(a==="backup")exportFile();else if(a==="share")shareFile();
-  else if(a==="list"){CUR=null;show("list");}else if(a==="crop")show("crop");else if(a==="print")window.print();});
+  else if(a==="list"){CUR=null;show("list");}else if(a==="crop")show("crop");else if(a==="print")window.print();else if(a==="pdf")sharePdf(b.dataset.src,b);});
 
 /* ---- form ---- */
 function newCrop(){EDIT=null;$("formTitle").textContent=T("newT");$("fItem").value="";$("fName").value="";$("fStart").value=today();$("fArea").value="";$("fSeason").value="";$("fOwnRate").value="";$("fExp").value="";$("fUnit").value="kg";show("form");}
@@ -697,12 +699,12 @@ function renderCrop(){
 function confirmTwice(b){if(b.dataset.armed)return true;b.dataset.armed=1;b.textContent="✔?";setTimeout(()=>{delete b.dataset.armed;b.textContent="✕";},3000);return false;}
 function tab(n){[["tExp","formExp"],["tWork","formWork"],["tInc","formInc"]].forEach(([b,f])=>{$(b).classList.toggle("solid",b===n);$(f).classList.toggle("hide",b!==n);});}
 $("tExp").onclick=()=>tab("tExp");
-$("fab").onclick=()=>openSheet();$("sheetClose").onclick=closeSheet;$("sheetBg").onclick=closeSheet;
+$("fab").onclick=()=>openSheet("tExp");$("sheetClose").onclick=closeSheet;$("sheetBg").onclick=closeSheet;
 $("tWork").onclick=()=>{tab("tWork");whoHint();};
 function whoHint(){const own=$("wWho").value==="own";$("wRateLbl").textContent=own?T("rateOwn"):T("rateHired");
   $("wRate").disabled=own;if(own)$("wRate").value="";$("wHint").textContent=own?T("hintOwn"):T("hintHired");}
 $("wWho").onchange=whoHint;
-$("addWork").onclick=()=>{const h=parseFloat($("wHours").value),pp=parseFloat($("wPeople").value)||1,own=$("wWho").value==="own",r=parseFloat($("wRate").value)||0;
+$("addWork").onclick=()=>{const h=parseFloat($("wHours").value),pp=Math.max(1,parseFloat($("wPeople").value)||1),own=$("wWho").value==="own",r=parseFloat($("wRate").value)||0;
   if(!(h>0)){alert(T("needHours"));return;}if(!own&&!(r>0)){alert(T("needRate"));return;}
   DB.crops[CUR].work.push({date:$("wDate").value||today(),task:$("wTask").value,who:own?"own":"hired",people:pp,hours:h,rate:own?0:r});
   $("wHours").value="";save();render();closeSheet();toast(T("added"));};
@@ -712,7 +714,8 @@ $("iDate").onchange=salePh;
 /* pick the cost type from the note while typing */
 $("eNote").oninput=()=>{if(CAT_TOUCHED)return;const g=guessCat($("eNote").value);if(g){$("eCat").value=g;$("catHint").textContent=T("catHint");}else $("catHint").textContent="";};
 $("eCat").onchange=()=>{const sel=$("eCat");
-  if(sel.value==="__new"){const n=(prompt(T("newCatQ"))||"").trim();
+  if(sel.value==="__new"){let n=(prompt(T("newCatQ"))||"").trim();
+    if(n)n=n.replace(/[<>&"]/g,"").trim();
     if(!n){sel.value=sel.dataset.prev||"seed";return;}
     const ex=customCats().find(c=>c.name.toLowerCase()===n.toLowerCase());let id;
     if(ex)id=ex.id;else{id="c"+Date.now();DB.customCats.push({id,name:n.slice(0,40)});save();}
@@ -748,7 +751,8 @@ function prevCrop(c){
 
 function renderReport(){
   const c=DB.crops[CUR];if(!c){show("list");return;}const t=totals(c),u=unitName(c.unit);
-  let h=`<div class="card"><div class="row noprint" style="justify-content:space-between"><button class="btn" type="button" data-act="crop">${T("rBack")}</button><button class="btn solid" type="button" data-act="print">${T("rPrint")}</button></div>
+  let h=`<div class="card"><div class="row noprint" style="justify-content:space-between"><button class="btn" type="button" data-act="crop">${T("rBack")}</button><button class="btn" type="button" data-act="print">${T("rPrint")}</button></div>
+    <button class="btn big noprint" type="button" data-act="pdf" data-src="vReport" style="width:100%;justify-content:center;margin-top:10px;background:#25D366;border-color:#25D366;color:#fff">${T("sharePdf")}</button>
     <p class="note noprint" style="margin:8px 0 0">${T("rHint")}</p>
     <h2 style="font-size:22px;margin:12px 0 0">${T("rTitle")}: ${esc(c.e||"🌿")} ${esc(displayName(c))}</h2>
     <p class="note" style="margin:2px 0 0">${T("planted")}${esc(c.start||"—")}${c.season?" · "+T("seasonW",T("seasons")[c.season]):""}${c.area?" · "+T("landAc",esc(c.area)):""}</p></div>`;
@@ -827,7 +831,8 @@ let ALLF="all",ALLD=null;
 function renderAll(){
   const both=realCrops().length&&hasDemo();if(!both)ALLD=null;else if(ALLD===null)ALLD="mine";
   const list=DB.crops.filter(c=>(ALLF==="all"||c.season===ALLF)&&(!both||(ALLD==="demo")===!!c.demo));
-  let h=`<div class="card"><div class="row noprint" style="justify-content:space-between"><button class="btn" type="button" data-act="list">${T("listBack")}</button><button class="btn solid" type="button" data-act="print">${T("rPrint")}</button></div>
+  let h=`<div class="card"><div class="row noprint" style="justify-content:space-between"><button class="btn" type="button" data-act="list">${T("listBack")}</button><button class="btn" type="button" data-act="print">${T("rPrint")}</button></div>
+   <button class="btn big noprint" type="button" data-act="pdf" data-src="vAll" style="width:100%;justify-content:center;margin-top:10px;background:#25D366;border-color:#25D366;color:#fff">${T("sharePdf")}</button>
    <h2 style="font-size:22px;margin:12px 0 8px">${T("allT")}</h2><div class="row noprint">${["all","yala","maha","other"].map(s=>`<button class="btn ${ALLF===s?"solid":""}" type="button" data-f="${s}">${s==="all"?T("fAll"):T("seasons")[s]}</button>`).join("")}</div>${both?`<div class="row noprint" style="margin-top:8px">${[["mine",T("fMine")],["demo",T("fDemo")]].map(([k,l])=>`<button class="btn ${ALLD===k?"gold":""}" type="button" data-d="${k}">${l}</button>`).join("")}</div>`:""}</div>`;
   let C=0,I=0;const byCat={};
   const rows=list.map(c=>{const t=totals(c);C+=t.cost;I+=t.inc;for(const k in t.byCat)byCat[k]=(byCat[k]||0)+t.byCat[k];
@@ -848,6 +853,46 @@ function renderGuide(){
    +T("guide").map((s,i)=>`<div class="card gstep"><span class="gnum">${i+1}</span><div><h3>${esc(s[0])}</h3><p>${esc(s[1])}</p></div></div>`).join("")
    +`<div class="row noprint" style="margin:0 0 14px"><button class="btn gold big" type="button" data-act="demo">${T("seeDemo")}</button><button class="btn solid big" type="button" data-act="new">${T("gStart")}</button></div>
    <p class="note">${T("guideNote")}</p>`;
+}
+
+/* ================= PDF SHARE ================= */
+function loadScript(u){return new Promise((ok,no)=>{if(document.querySelector(`script[src="${u}"]`))return ok();const s=document.createElement("script");s.src=u;s.onload=ok;s.onerror=no;document.head.appendChild(s);});}
+async function sharePdf(src,btn){
+  if(btn.disabled)return;const old=btn.innerHTML;btn.disabled=true;btn.innerHTML=T("pdfMaking");
+  let wrap;
+  try{
+    await loadScript("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js");
+    await loadScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");
+    if(document.fonts&&document.fonts.ready)await document.fonts.ready;
+    /* build a clean A4-width copy off screen */
+    wrap=document.createElement("div");
+    wrap.style.cssText="position:fixed;left:-10000px;top:0;width:560px;background:#f4efe4;padding:18px;font-family:'Noto Sans Sinhala','Noto Sans Tamil',sans-serif";
+    const head=document.createElement("div");head.className="card";
+    head.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><b style="font-size:20px;color:#0e4f4a">🌾 ${esc(T("title").replace("🌾","").trim())} — TopGoviya.lk</b><span class="note">${today()}</span></div>`;
+    wrap.appendChild(head);
+    const body=$(src).cloneNode(true);body.removeAttribute("id");body.classList.remove("hide");
+    body.querySelectorAll(".noprint").forEach(e=>e.remove());
+    body.querySelectorAll("input.pin").forEach(i=>{const sp=document.createElement("span");sp.textContent=i.value?nf(+i.value):"—";sp.style.fontFamily="JetBrains Mono,monospace";i.replaceWith(sp);});
+    while(body.firstChild)wrap.appendChild(body.firstChild);
+    const foot=document.createElement("p");foot.className="note";foot.innerHTML=T("disc")+"<br>"+T("pdfBy")+" "+today()+" · topgoviya.lk/mage-wagawa.html";wrap.appendChild(foot);
+    document.body.appendChild(wrap);
+    const scale=2.5,canvas=await html2canvas(wrap,{scale,backgroundColor:"#f4efe4",useCORS:true,logging:false});
+    /* split pages between cards, never through the middle of one if it fits */
+    const W=canvas.width,pageH=Math.floor(W*297/210),blocks=[...wrap.children].map(el=>({top:el.offsetTop*scale,bottom:(el.offsetTop+el.offsetHeight)*scale}));
+    const cuts=[0];let start=0;
+    for(const bl of blocks){if(bl.bottom-start>pageH){if(bl.top>start){start=bl.top-8*scale;cuts.push(start);}while(bl.bottom-start>pageH){start+=pageH;cuts.push(start);}}}
+    cuts.push(canvas.height);
+    const {jsPDF}=window.jspdf,pdf=new jsPDF({unit:"mm",format:"a4"});
+    for(let i=0;i<cuts.length-1;i++){const h=Math.min(cuts[i+1],canvas.height)-cuts[i];if(h<=4)continue;
+      const pc=document.createElement("canvas");pc.width=W;pc.height=h;const cx=pc.getContext("2d");cx.fillStyle="#f4efe4";cx.fillRect(0,0,W,h);cx.drawImage(canvas,0,cuts[i],W,h,0,0,W,h);
+      if(i>0)pdf.addPage();pdf.setFillColor(244,239,228);pdf.rect(0,0,210,297,"F");pdf.addImage(pc.toDataURL("image/jpeg",0.85),"JPEG",0,0,210,h*210/W);}
+    const c=DB.crops[CUR],nm=(src==="vReport"&&c?displayName(c):"all-crops").replace(/[^\p{L}\p{M}\p{N}]+/gu,"-").replace(/^-|-$/g,"");
+    const file=new File([pdf.output("blob")],`TopGoviya-${nm}-${today()}.pdf`,{type:"application/pdf"});
+    let shared=false;
+    if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:file.name});shared=true;}catch(e){if(e&&e.name==="AbortError")shared=true;}}
+    if(!shared){const u=URL.createObjectURL(file),a=document.createElement("a");a.href=u;a.download=file.name;a.click();setTimeout(()=>URL.revokeObjectURL(u),3000);toast(T("pdfSaved"));}
+  }catch(e){console.error(e);alert(T("pdfFail"));}
+  finally{if(wrap)wrap.remove();btn.disabled=false;btn.innerHTML=old;}
 }
 
 /* ================= EXAMPLE DATA ================= */
@@ -898,7 +943,7 @@ async function shareFile(){const name="mage-wagawa-backup-"+today()+".json";
 function exportFile(){const out={crops:realCrops(),customCats:customCats()},b=new Blob([JSON.stringify(out,null,1)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");
   a.href=u;a.download="mage-wagawa-backup-"+today()+".json";a.click();setTimeout(()=>URL.revokeObjectURL(u),2000);DB.lastBackup=today();save();render();}
 function importFile(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!Array.isArray(d.crops))throw new Error("format");
-  if(Array.isArray(d.customCats))d.customCats.forEach(cc=>{if(cc&&cc.id&&!isCat(cc.id))DB.customCats.push({id:cc.id,name:String(cc.name||"").slice(0,40)});});fillCats();
+  if(Array.isArray(d.customCats))d.customCats.forEach(cc=>{if(cc&&cc.id&&!isCat(cc.id))DB.customCats.push({id:cc.id,name:String(cc.name||"").replace(/[<>&"]/g,"").slice(0,40)});});fillCats();
   const ids=new Set(DB.crops.map(c=>c.id));let n=0;d.crops.forEach(c=>{if(!ids.has(c.id)){DB.crops.push(migrateCrop(c));n++;}});save();render();alert(T("imported",n));}catch(err){alert(T("badFile"));}};r.readAsText(f);e.target.value="";}
 
 /* ================= START ================= */
