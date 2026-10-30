@@ -76,7 +76,7 @@ h1{font-weight:700;font-size:clamp(28px,6vw,48px);line-height:1.12;margin:12px 0
 .dstrip .dd.on{background:var(--petrol);color:#fff;border-color:var(--petrol)}.dstrip .dd.on small{color:#e7d3a3}
 .dstrip .dd:disabled{opacity:.45;cursor:default}
 .dstrip .cal{flex:0 0 auto;position:relative;display:flex;align-items:center;justify-content:center;min-width:52px;border:1px solid var(--line2);background:var(--card);border-radius:12px;font-size:22px;cursor:pointer}
-.dstrip .cal input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.dstrip .cal{font:inherit;font-size:22px;color:inherit;padding:0}.dstrip .cal input{position:absolute;left:0;bottom:0;width:100%;height:100%;opacity:0;pointer-events:none;border:0;padding:0}
 .dsback{font:inherit;font-size:13px;font-weight:700;margin-left:8px;border:1px solid var(--line2);background:var(--card);color:var(--petrol);border-radius:8px;padding:3px 9px;cursor:pointer}
 .stale{margin:10px 0 0;padding:8px 12px;border-radius:10px;background:var(--warnbg);color:var(--soft);font-size:14px;max-width:70ch}
 .mood{margin-top:16px;background:var(--card);border:1px solid var(--line2);border-radius:14px;padding:14px 16px}
@@ -703,9 +703,13 @@ function dateStrip(){
   const DN={si:["ඉරිදා","සඳුදා","අඟහ","බදාදා","බ්‍රහස්","සිකු","සෙන"],ta:["ஞாயி","திங்","செவ்","புத","வியா","வெள்","சனி"],en:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]}[lang]||[];
   const MN={si:["ජන","පෙබ","මාර්","අප්‍රේ","මැයි","ජූනි","ජූලි","අගෝ","සැප්","ඔක්","නොවැ","දෙසැ"],ta:["ஜன","பிப்","மார்","ஏப்","மே","ஜூன்","ஜூலை","ஆக","செப்","அக்","நவ","டிச"],en:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]}[lang]||[];
   box.innerHTML=days.map(([iso,d])=>`<button class="dd${iso===shown?" on":""}" type="button" data-d="${iso}" ${have.has(iso)?"":"disabled"}><small>${DN[d.getDay()]}</small><b>${MN[d.getMonth()]} ${d.getDate()}</b>${have.has(iso)?"":`<small>${esc(t("dsNo"))}</small>`}</button>`).join("")
-    +`<label class="cal" title="${esc(t("pickDate"))}">📅<input type="date" id="dpick" min="${ALLDATES[0]}" max="${newest}" value="${shown}" aria-label="${esc(t("pickDate"))}"></label>`;
+    +`<button class="cal" id="dcal" type="button" title="${esc(t("pickDate"))}" aria-label="${esc(t("pickDate"))}">📅<input type="date" id="dpick" tabindex="-1" aria-hidden="true" min="${ALLDATES[0]}" max="${newest}" value="${shown}"></button>`;
   box.querySelectorAll(".dd").forEach(b=>b.onclick=()=>setView(b.dataset.d));
-  const ip=$("#dpick");if(ip)ip.onchange=()=>{let v=ip.value;if(!v)return;if(!have.has(v)){const e=ALLDATES.filter(x=>x<=v).pop();if(!e)return;v=e;try{alert(t("noDay"));}catch(_){}}setView(v);};
+  const cb=$("#dcal"),ip=$("#dpick");
+  if(cb&&ip)cb.onclick=e=>{e.preventDefault();e.stopPropagation();
+    try{if(ip.showPicker){ip.showPicker();return;}}catch(_){}
+    ip.style.pointerEvents="auto";ip.focus();ip.click();setTimeout(()=>ip.style.pointerEvents="none",1500);};
+  if(ip)ip.onchange=()=>{let v=ip.value;if(!v)return;if(!have.has(v)){const e=ALLDATES.filter(x=>x<=v).pop();if(!e)return;v=e;try{alert(t("noDay"));}catch(_){}}setView(v);};
   const on=box.querySelector(".dd.on");if(on)on.scrollIntoView({block:"nearest",inline:"center"});
 }
 function renderAll(){applyLang();chips();mood();renderBasket();movers();grid();if(cur&&$("#scrim").classList.contains("open"))openItem(cur.pid,true);}
