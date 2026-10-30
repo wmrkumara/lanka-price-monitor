@@ -126,7 +126,7 @@ def head(title, desc, url, img, extra=""):
 <script async src="https://www.googletagmanager.com/gtag/js?id={GA}"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','{GA}');</script>
 <style>{CSS}</style>{extra}</head><body>
-<div class="top"><a href="../">🥬 TopGoviya.lk</a><a href="./">සියලු භාණ්ඩ</a><a href="../retail.html">📊 CBSL</a></div>
+<div class="top"><a href="../">🥬 TopGoviya.lk</a><a href="./">සියලු භාණ්ඩ</a><a href="../">🧺 දඹුල්ල වෙළඳපොළ</a></div>
 """
 
 
