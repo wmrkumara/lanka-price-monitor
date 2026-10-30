@@ -21,7 +21,7 @@ OUT_DIR = "share"
 WIDE = os.path.join(OUT_DIR, "dambulla-wide.png")
 STATE = os.path.join(OUT_DIR, "dambulla-wide.json")
 PAGES = ["index.html"]          # pages whose og:image is refreshed
-STYLE_VERSION = "10"                # change to force a redraw after a design change
+STYLE_VERSION = "11"                # change to force a redraw after a design change
 ROWS = 8
 
 # DEC product id -> (Sinhala name, emoji), in popular order. Coconut is left out
