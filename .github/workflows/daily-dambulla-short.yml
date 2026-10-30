@@ -1,9 +1,7 @@
-# TopGoviya.lk — DAILY Dambulla Short (DEC wholesale prices)
-# Makes one video for each new day: after the Dambulla DEC robot finds a new day,
-# or as soon as you upload dambulla_early.json (from the price list photo).
-# Download: Actions → Daily Dambulla Short → latest green run → F5 → Artifacts.
-
-name: Daily Dambulla Short
+# TopGoviya.lk — DAILY Dambulla DEC video (~2 minutes, 16:9) + thumbnail + YouTube text + reading script
+# Runs after each new Dambulla day (robot or early entry). Only one video per day.
+# Download: Actions → Daily Dambulla video → top green run → F5 → Artifacts.
+name: Daily Dambulla video
 
 on:
   workflow_run:
@@ -26,12 +24,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: dambulla-short
+  group: dambulla-video
   cancel-in-progress: false
 
 jobs:
-  dambulla-short:
+  video:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v5
         with:
@@ -40,61 +39,57 @@ jobs:
       - name: Is there a new day?
         id: check
         run: |
-          if [ "$(echo "${{ github.event.inputs.force }}" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')" = "yes" ]; then echo "need=yes" >> "$GITHUB_OUTPUT"; else python3 make_dambulla_short.py --check >> "$GITHUB_OUTPUT"; fi
+          if [ "$(echo "${{ github.event.inputs.force }}" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')" = "yes" ]; then echo "need=yes" >> "$GITHUB_OUTPUT"; else python3 make_dambulla_video.py --check >> "$GITHUB_OUTPUT"; fi
 
-      - name: Install video tools and fonts
+      - name: Install tools and fonts
         if: steps.check.outputs.need == 'yes'
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg fonts-noto-core fonts-noto-color-emoji
+          sudo apt-get install -y -qq ffmpeg libraqm0 libfribidi0 libharfbuzz0b
           mkdir -p ~/.fonts
           curl -sL -o ~/.fonts/NotoSansSinhala.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssinhala/NotoSansSinhala%5Bwdth,wght%5D.ttf"
           curl -sL -o ~/.fonts/JetBrainsMono.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf"
-          fc-cache -f
-          pip install -q playwright
-          python -m playwright install --with-deps chromium
+          pip install -q pillow
 
       - name: Make the video
         if: steps.check.outputs.need == 'yes'
-        run: python3 make_dambulla_short.py --force
+        id: make
+        run: |
+          python3 make_dambulla_video.py --force
+          echo "day=$(cat .dambulla_video_last)" >> "$GITHUB_OUTPUT"
 
-      - name: Find the date
-        if: steps.check.outputs.need == 'yes'
-        id: tag
-        run: echo "date=$(cat .dambulla_short_last)" >> "$GITHUB_OUTPUT"
-
-      - name: Save video for download
+      - name: Save for download
         if: steps.check.outputs.need == 'yes'
         uses: actions/upload-artifact@v4
         with:
-          name: topgoviya-dambulla-short-${{ steps.tag.outputs.date }}
-          path: short/
-          retention-days: 30
+          name: topgoviya-dambulla-video-${{ steps.make.outputs.day }}
+          path: dambulla_video/
+          retention-days: 14
 
-      - name: Publish the latest Short for direct download
+      - name: Publish the latest video for direct download
         if: steps.check.outputs.need == 'yes'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          D=$(ls -d short/*/ | head -1)
           mkdir -p latest
-          cp "$D/video-with-music.mp4" latest/dambulla-short-latest.mp4
-          cp "$D/video-silent.mp4"     latest/dambulla-short-latest-silent.mp4
-          cp "$D/youtube.txt"          latest/dambulla-short-youtube.txt
-          cp "$D/tiktok.txt"           latest/dambulla-short-tiktok.txt
-          cp "$D/facebook.txt"         latest/dambulla-short-facebook.txt
-          (cd "$D" && zip -q -r "$GITHUB_WORKSPACE/latest/dambulla-short-all.zip" .)
-          gh release view dambulla-short >/dev/null 2>&1 || gh release create dambulla-short --title "Latest Dambulla Short" --notes "Newest daily Dambulla Short. Files are replaced every day."
-          gh release edit dambulla-short --notes "Latest Dambulla Short: $(cat .dambulla_short_last)"
-          gh release upload dambulla-short latest/* --clobber
+          cp dambulla_video/dambulla-daily-*-music.mp4 latest/dambulla-video-latest.mp4
+          cp "$(ls dambulla_video/dambulla-daily-*.mp4 | grep -v music)" latest/dambulla-video-latest-silent.mp4
+          cp dambulla_video/dambulla-thumbnail-*.png latest/dambulla-video-thumbnail.png
+          cp dambulla_video/dambulla-youtube-*.txt   latest/dambulla-video-youtube.txt
+          cp dambulla_video/dambulla-script-*.txt    latest/dambulla-video-script.txt
+          cp dambulla_video/dambulla-pin-comment-*.txt latest/dambulla-video-pin-comment.txt
+          (cd dambulla_video && zip -q ../latest/dambulla-video-all.zip *)
+          gh release view dambulla-video >/dev/null 2>&1 || gh release create dambulla-video --title "Latest Dambulla 2-minute video" --notes "Newest daily Dambulla video. Files are replaced every day."
+          gh release edit dambulla-video --notes "Latest Dambulla video: $(cat .dambulla_video_last)"
+          gh release upload dambulla-video latest/* --clobber
 
       - name: Remember the day is done
         if: steps.check.outputs.need == 'yes'
         run: |
           git config user.name  "price-bot"
           git config user.email "price-bot@users.noreply.github.com"
-          git add .dambulla_short_last
+          git add .dambulla_video_last
           if git diff --staged --quiet; then echo "Nothing to save."; else
-            git commit -m "Dambulla Short made ($(cat .dambulla_short_last))"
+            git commit -m "Dambulla video made ($(cat .dambulla_video_last))"
             for i in 1 2 3; do git pull --rebase origin main && git push origin main && break; sleep 10; done
           fi
