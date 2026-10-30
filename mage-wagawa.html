@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>🌾 මගේ වගාව — වගා වියදම හා ලාභය | TopGoviya.lk</title>
+<meta name="description" content="ඔබේ වගාවේ වියදම්, අස්වැන්න හා ලාභය සටහන් කරන්න. අද දඹුල්ල මිලට විකුණුවොත් ලාභය බලන්න. නොමිලේ.">
+<link rel="icon" href="icon-192x192.png"><meta name="theme-color" content="#0e4f4a">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700;800&family=Hanken+Grotesk:wght@600;800&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZBN8Z32S4J"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZBN8Z32S4J');</script>
+<style>
+:root{--petrol:#0e4f4a;--gold:#a9802a;--cream:#f4efe4;--card:#fffdf7;--ink:#191d1a;--muted:#6f675a;--line:#e3d9c4;--up:#b23a2e;--dn:#2c7a52}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'Noto Sans Sinhala','Hanken Grotesk',system-ui,sans-serif;line-height:1.5}
+.top{background:var(--petrol);padding:12px 16px;border-bottom:3px solid var(--gold)}.top a{color:#fff;text-decoration:none;font-weight:700;margin-right:14px;font-size:15px}
+.w{max-width:820px;margin:0 auto;padding:14px}
+h1{color:var(--petrol);font-size:28px;margin:6px 0 2px}.sub{color:var(--muted);margin:0 0 14px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:0 0 14px}
+h2{font-size:18px;color:var(--petrol);margin:0 0 10px}
+.btn{font:inherit;font-size:14px;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--petrol);padding:9px 13px;border-radius:10px;cursor:pointer;display:inline-flex;gap:6px;align-items:center;text-decoration:none}
+.btn.solid{background:var(--petrol);color:#fff;border-color:var(--petrol)}.btn.gold{background:var(--gold);color:#fff;border-color:var(--gold)}.btn.red{color:var(--up)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+label{display:block;font-size:13px;color:var(--muted);font-weight:600;margin:0 0 3px}
+input,select{font:inherit;font-size:15px;width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:560px){.grid3{grid-template-columns:1fr 1fr}}
+.crops{display:grid;gap:10px}
+.crop{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;cursor:pointer}
+.crop:hover{border-color:var(--petrol)}.crop .nm{font-weight:800;font-size:17px}.crop .mt{font-size:13px;color:var(--muted)}
+.big{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:26px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+.st{background:var(--cream);border:1px solid var(--line);border-radius:12px;padding:8px 10px}.st span{font-size:12px;color:var(--muted);display:block}.st b{font-family:'JetBrains Mono',monospace;font-size:17px}
+@media(max-width:560px){.stats{grid-template-columns:1fr 1fr}}
+.pos{color:var(--dn)}.neg{color:var(--up)}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:7px 6px;border-bottom:1px solid #eee5d3;text-align:left}th{font-size:12px;color:var(--muted)}
+.n{text-align:right;font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.x{border:0;background:none;color:var(--up);cursor:pointer;font-size:16px}
+.today{background:#e3efe6;border:1px solid #b9d6c3;border-radius:12px;padding:10px 12px;margin:10px 0;font-size:14px}
+.note{font-size:13px;color:var(--muted)}
+.tabs{display:flex;gap:6px;margin:0 0 10px}.tabs button{flex:1}
+.hide{display:none}
+@media print{.top,.noprint,.btn{display:none!important}body{background:#fff}.card{border:0;padding:0}}
+</style>
+</head>
+<body>
+<div class="top noprint"><a href="./">🥬 TopGoviya.lk</a><a href="./">🧺 දඹුල්ල මිල</a><a href="breakeven.html">🧮 Break-even</a></div>
+<main class="w">
+<h1>🌾 මගේ වගාව</h1>
+<p class="sub">වගාවේ වියදම්, අස්වැන්න හා ලාභය සටහන් කරන්න · <b>අද දඹුල්ල මිලට විකුණුවොත් ලාභය</b> බලන්න · නොමිලේ · ඔබේ දත්ත ඔබේ ෆෝන් එකේ පමණයි</p>
+
+<!-- LIST -->
+<section id="vList">
+  <div class="card">
+    <div class="row" style="justify-content:space-between"><h2 style="margin:0">මගේ වගා</h2><button class="btn solid" id="newBtn" type="button">➕ අලුත් වගාවක්</button></div>
+    <div class="crops" id="crops" style="margin-top:12px"></div>
+  </div>
+  <div class="card noprint">
+    <h2>💾 ආරක්ෂිත පිටපත (Backup)</h2>
+    <p class="note">ඔබේ දත්ත මෙම ෆෝන් එකේ / browser එකේ පමණයි. ෆෝන් එක මාරු කරන්න කලින් හෝ මාසයකට වරක් Backup එකක් ගන්න.</p>
+    <div class="row"><button class="btn" id="expBtn" type="button">💾 Backup ගොනුවක් බාගන්න</button>
+      <label class="btn" style="margin:0;cursor:pointer;color:var(--petrol)">📂 Backup එකක් ඇතුළත් කරන්න<input type="file" id="impIn" accept=".json,application/json" hidden></label></div>
+  </div>
+</section>
+
+<!-- NEW / EDIT CROP -->
+<section id="vForm" class="hide">
+  <div class="card">
+    <h2 id="formTitle">➕ අලුත් වගාවක්</h2>
+    <div class="grid2">
+      <div><label>බෝගය (දඹුල්ල ලැයිස්තුවෙන්)</label><select id="fItem"></select></div>
+      <div><label>හෝ වෙනත් නමක්</label><input id="fName" placeholder="උදා: තක්කාලි – පිටිය 2"></div>
+      <div><label>වගා කළ දිනය</label><input id="fStart" type="date"></div>
+      <div><label>ඉඩම (අක්කර, අවශ්‍ය නම්)</label><input id="fArea" type="number" inputmode="decimal" min="0" step="0.01" placeholder="උදා: 1 (පර්චස් 40 = 0.25)"></div>
+      <div><label>කන්නය</label><select id="fSeason"><option value="">—</option><option>යල</option><option>මහ</option><option>වෙනත්</option></select></div>
+      <div><label>මගේ / පවුලේ වැඩ පැයක වටිනාකම (රු., අවශ්‍ය නම්)</label><input id="fOwnRate" type="number" inputmode="decimal" min="0" placeholder="උදා: 250 — හිස්ව තැබිය හැක"></div>
+      <div><label>බලාපොරොත්තු අස්වැන්න</label><input id="fExp" type="number" inputmode="decimal" min="0" placeholder="උදා: 3000"></div>
+      <div><label>ඒකකය</label><select id="fUnit"><option value="kg">කි.ග්‍රෑ.</option><option value="nut">ගෙඩි</option><option value="bundle">මිටි</option></select></div>
+    </div>
+    <div class="row" style="margin-top:12px"><button class="btn solid" id="saveCrop" type="button">✔ සුරකින්න</button><button class="btn" id="cancelForm" type="button">අවලංගු කරන්න</button></div>
+  </div>
+</section>
+
+<!-- CROP DETAIL -->
+<section id="vCrop" class="hide">
+  <div class="card">
+    <div class="row noprint" style="justify-content:space-between"><button class="btn" id="backBtn" type="button">← මගේ වගා</button>
+      <div class="row"><button class="btn" id="editBtn" type="button">✏️</button><button class="btn" id="printBtn" type="button">📄 PDF / මුද්‍රණය</button></div></div>
+    <h2 id="cTitle" style="font-size:22px;margin:10px 0 0"></h2>
+    <p class="note" id="cMeta"></p>
+    <div class="stats">
+      <div class="st"><span>මුළු වියදම</span><b id="sCost">0</b></div>
+      <div class="st"><span>ලැබුණු ආදායම</span><b id="sInc">0</b></div>
+      <div class="st"><span>මේ දක්වා ලාභය</span><b id="sProf">0</b></div>
+      <div class="st"><span>විකුණූ ප්‍රමාණය</span><b id="sQty">0</b></div>
+      <div class="st"><span>පාඩු නොවන මිල (ඒකකයට)</span><b id="sBe">—</b></div>
+      <div class="st"><span>ඉතිරි අස්වැන්න (බලාපොරොත්තු)</span><b id="sLeft">—</b></div>
+      <div class="st"><span>⏱️ මගේ / පවුලේ වැඩ පැය</span><b id="sOwnH">0</b></div>
+      <div class="st"><span>ඒකකයකට ලාභය</span><b id="sPerKg">—</b></div>
+      <div class="st"><span>අක්කරයකට ලාභය</span><b id="sPerAc">—</b></div>
+    </div>
+    <div class="today" id="ownBox" style="background:#f7f1e3;border-color:#e3d9c4"></div>
+    <div class="today" id="todayBox"></div>
+  </div>
+  <div class="card noprint">
+    <div class="tabs"><button class="btn solid" id="tExp" type="button">➖ වියදමක්</button><button class="btn" id="tWork" type="button">⏱️ වැඩ පැය</button><button class="btn" id="tInc" type="button">➕ විකුණුමක්</button></div>
+    <div id="formWork" class="hide">
+      <div class="grid3">
+        <div><label>දිනය</label><input id="wDate" type="date"></div>
+        <div><label>වැඩේ</label><select id="wTask"></select></div>
+        <div><label>කවුද</label><select id="wWho"><option value="own">🙋 මම / පවුල</option><option value="hired">👷 කුලී කම්කරුවන්</option></select></div>
+        <div><label>පුද්ගලයන් ගණන</label><input id="wPeople" type="number" inputmode="numeric" min="1" value="1"></div>
+        <div><label>පැය ගණන (එක් අයෙකුට)</label><input id="wHours" type="number" inputmode="decimal" min="0" step="0.5"></div>
+        <div><label id="wRateLbl">පැයකට රු. (කුලිය)</label><input id="wRate" type="number" inputmode="decimal" min="0"></div>
+      </div>
+      <p class="note" id="wHint"></p>
+      <button class="btn solid" id="addWork" type="button" style="margin-top:6px">✔ වැඩ පැය එකතු කරන්න</button>
+    </div>
+    <div id="formExp">
+      <div class="grid3">
+        <div><label>දිනය</label><input id="eDate" type="date"></div>
+        <div><label>වර්ගය</label><select id="eCat"></select></div>
+        <div><label>මුදල (රු.)</label><input id="eAmt" type="number" inputmode="decimal" min="0"></div>
+      </div>
+      <div style="margin-top:8px"><label>සටහන</label><input id="eNote" placeholder="උදා: යූරියා කිලෝ 50"></div>
+      <button class="btn solid" id="addExp" type="button" style="margin-top:10px">✔ වියදම එකතු කරන්න</button>
+    </div>
+    <div id="formInc" class="hide">
+      <div class="grid3">
+        <div><label>දිනය</label><input id="iDate" type="date"></div>
+        <div><label>ප්‍රමාණය</label><input id="iQty" type="number" inputmode="decimal" min="0"></div>
+        <div><label>ඒකකයක මිල (රු.)</label><input id="iPrice" type="number" inputmode="decimal" min="0"></div>
+      </div>
+      <div style="margin-top:8px"><label>විකුණුවේ කොහෙද / කාටද</label><input id="iWhere" placeholder="උදා: දඹුල්ල, මුදලාලි"></div>
+      <button class="btn solid" id="addInc" type="button" style="margin-top:10px">✔ විකුණුම එකතු කරන්න</button>
+    </div>
+  </div>
+  <div class="card">
+    <h2>🧾 සටහන්</h2>
+    <div style="overflow-x:auto"><table><thead><tr><th>දිනය</th><th>විස්තරය</th><th class="n">රු.</th><th class="noprint"></th></tr></thead><tbody id="ledger"></tbody></table></div>
+    <div class="row noprint" style="margin-top:12px;justify-content:flex-end"><button class="btn red" id="delCrop" type="button">🗑️ මෙම වගාව මකන්න</button></div>
+  </div>
+</section>
+
+<p class="note">මූලාශ්‍රය (අද මිල): දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය · තොග මිල. ලාභ ගණනය ඇස්තමේන්තුවක් පමණි — ප්‍රවාහනය, කොමිස් හා ගුණාත්මකභාවය අනුව සැබෑ මිල වෙනස් වේ. මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.</p>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+const KEY="tg_mage_wagawa_v1";
+const CATS=["🌱 බීජ / පැළ","🧪 පොහොර","💧 පළිබෝධ / රසායන","👷 කම්කරු","🚜 යන්ත්‍ර / සීසෑම","💦 ජලය / විදුලිය","🚚 ප්‍රවාහනය","🏷️ කොමිස් / ගාස්තු","📦 ඇසුරුම්","🔧 වෙනත්"];
+const UNIT={kg:"කි.ග්‍රෑ.",nut:"ගෙඩි",bundle:"මිටි"};
+const TASKS=["🚜 බිම් සකස් කිරීම","🌱 සිටුවීම / වැපිරීම","🌿 වල් නෙළීම","🧪 පොහොර යෙදීම","💧 ඖෂධ / පළිබෝධ","💦 වතුර දැමීම","🧺 අස්වනු නෙළීම","📦 ඇසුරුම් / ප්‍රවාහනය","🔧 වෙනත්"];
+const money=n=>"රු. "+Math.round(n||0).toLocaleString("en-US");
+const num=n=>Math.round((n||0)*10)/10;
+const today=()=>new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let DB={crops:[]},CUR=null,EDIT=null,NAMES={},PRICES={},PDATE=null;
+function load(){try{DB=JSON.parse(localStorage.getItem(KEY))||{crops:[]};}catch(e){DB={crops:[]};}if(!Array.isArray(DB.crops))DB.crops=[];}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){alert("සුරැකීමට නොහැකි විය: "+e.message);}}
+function show(v){["vList","vForm","vCrop"].forEach(x=>$(x).classList.toggle("hide",x!==v));window.scrollTo({top:0});}
+
+/* ---- today's Dambulla prices ---- */
+async function getJSON(n){for(const u of["https://raw.githubusercontent.com/wmrkumara/lanka-price-monitor/main/"+n+"?t="+Date.now(),n+"?t="+Date.now()]){try{const r=await fetch(u,{cache:"no-store"});if(r.ok)return await r.json();}catch(e){}}return null;}
+async function loadPrices(){
+  const [db,early,items]=await Promise.all([getJSON("dambulla_dec.json"),getJSON("dambulla_early.json"),getJSON("dambulla_items.json")]);
+  if(items)NAMES=items.items||{};
+  const days=Object.assign({},(db&&db.days)||{});
+  if(early&&early.date&&early.prices&&!days[early.date]){const k=Object.keys(days).sort();if(!k.length||early.date>k[k.length-1])days[early.date]=early.prices;}
+  const ks=Object.keys(days).sort();if(ks.length){PDATE=ks[ks.length-1];PRICES=days[PDATE];}
+  fillItems();render();
+}
+function fillItems(){
+  const opts=Object.entries(NAMES).sort((a,b)=>a[1].pop-b[1].pop).map(([k,m])=>`<option value="${k}">${m.e||"🌿"} ${esc(m.si)}</option>`).join("");
+  $("fItem").innerHTML='<option value="">— තෝරන්න —</option>'+opts;
+}
+
+/* ---- maths ---- */
+function totals(c){
+  const W=c.work||[],hired=W.filter(w=>w.who==="hired").reduce((s,w)=>s+(+w.people||1)*(+w.hours||0)*(+w.rate||0),0);
+  const ownH=W.filter(w=>w.who!=="hired").reduce((s,w)=>s+(+w.people||1)*(+w.hours||0),0),ownV=ownH*(+c.ownRate||0);
+  const cost=c.exp.reduce((s,x)=>s+(+x.amt||0),0)+hired,inc=c.inc.reduce((s,x)=>s+(+x.qty||0)*(+x.price||0),0),qty=c.inc.reduce((s,x)=>s+(+x.qty||0),0);
+  const left=c.expQty?Math.max(0,c.expQty-qty):null,be=c.expQty?cost/c.expQty:null;
+  const ac=parseFloat(c.area)||0;
+  return {cost,inc,qty,left,be,prof:inc-cost,hired,ownH,ownV,ac};
+}
+function todayRange(c){const v=c.item&&PRICES[c.item];return v?{lo:v[0],hi:v[1]}:null;}
+
+/* ---- list ---- */
+function render(){
+  const box=$("crops");
+  if(!DB.crops.length){box.innerHTML='<p class="note">තවම වගාවක් නැත. <b>➕ අලුත් වගාවක්</b> ඔබා පටන් ගන්න — උදා: තක්කාලි, අක්කර 1, බලාපොරොත්තු අස්වැන්න කිලෝ 3000.</p>';}
+  else box.innerHTML=DB.crops.map((c,i)=>{const t=totals(c);return `<div class="crop" data-i="${i}"><div class="row" style="justify-content:space-between"><span class="nm">${esc(c.e||"🌿")} ${esc(c.name)}</span><span class="big ${t.prof>=0?"pos":"neg"}" style="font-size:18px">${money(t.prof)}</span></div>
+    <div class="mt">📅 ${esc(c.start||"—")} · වියදම ${money(t.cost)} · ආදායම ${money(t.inc)}</div></div>`;}).join("");
+  box.querySelectorAll(".crop").forEach(el=>el.onclick=()=>openCrop(+el.dataset.i));
+  if(CUR!=null&&!$("vCrop").classList.contains("hide"))renderCrop();
+}
+$("newBtn").onclick=()=>{EDIT=null;$("formTitle").textContent="➕ අලුත් වගාවක්";$("fItem").value="";$("fName").value="";$("fStart").value=today();$("fArea").value="";$("fSeason").value="";$("fOwnRate").value="";$("fExp").value="";$("fUnit").value="kg";show("vForm");};
+$("fItem").onchange=()=>{const m=NAMES[$("fItem").value];if(m){if(!$("fName").value)$("fName").value=m.si;$("fUnit").value=m.unit||"kg";}};
+$("cancelForm").onclick=()=>show(EDIT!=null?"vCrop":"vList");
+$("saveCrop").onclick=()=>{
+  const item=$("fItem").value,m=NAMES[item],name=($("fName").value||"").trim()||(m&&m.si);
+  if(!name){alert("බෝගයක් තෝරන්න හෝ නමක් ලියන්න");return;}
+  const data={item:item||null,e:m?m.e:"🌿",name,start:$("fStart").value,area:$("fArea").value.trim(),season:$("fSeason").value,ownRate:parseFloat($("fOwnRate").value)||0,expQty:parseFloat($("fExp").value)||0,unit:$("fUnit").value};
+  if(EDIT!=null){Object.assign(DB.crops[EDIT],data);CUR=EDIT;}else{DB.crops.unshift(Object.assign(data,{exp:[],inc:[],work:[],id:Date.now()}));CUR=0;}
+  save();render();openCrop(CUR);
+};
+
+/* ---- crop detail ---- */
+function openCrop(i){CUR=i;show("vCrop");$("eDate").value=$("iDate").value=$("wDate").value=today();renderCrop();}
+function renderCrop(){
+  const c=DB.crops[CUR];if(!c){show("vList");return;}const t=totals(c),u=UNIT[c.unit]||"";
+  $("cTitle").textContent=(c.e||"🌿")+" "+c.name;
+  $("cMeta").textContent="📅 වගා කළේ: "+(c.start||"—")+(c.season?" · "+c.season+" කන්නය":"")+(c.area?" · ඉඩම: අක්කර "+c.area:"")+(c.expQty?" · බලාපොරොත්තු අස්වැන්න: "+num(c.expQty)+" "+u:"");
+  $("sCost").textContent=money(t.cost);$("sInc").textContent=money(t.inc);
+  $("sProf").textContent=money(t.prof);$("sProf").className=t.prof>=0?"pos":"neg";
+  $("sOwnH").textContent=num(t.ownH)+" පැය";
+  $("sPerKg").textContent=t.qty?money(t.prof/t.qty):"—";$("sPerAc").textContent=t.ac?money(t.prof/t.ac):"—";
+  $("ownBox").innerHTML=t.ownH?(`⏱️ ඔබ / ඔබේ පවුල මෙම වගාවට <b>පැය ${num(t.ownH)}</b>ක් වැඩ කර ඇත.`+(c.ownRate?`<br>පැයකට ${money(c.ownRate)} ලෙස ගත්තොත් ඔබේ කාලයේ වටිනාකම <b>${money(t.ownV)}</b> · ඒ ද වියදමක් ලෙස ගත් විට ලාභය <b class="${t.prof-t.ownV>=0?"pos":"neg"}">${money(t.prof-t.ownV)}</b>`:`<br><span class="note">✏️ "මගේ වැඩ පැයක වටිනාකම" දැම්මොත් ඔබේ කාලයත් ගණන් ගත් සැබෑ ලාභය පෙන්වයි.</span>`)):'<span class="note">⏱️ ඔබේ / පවුලේ වැඩ පැය සටහන් කිරීම අවශ්‍ය නම් පමණයි — "⏱️ වැඩ පැය" ටැබ් එකෙන්.</span>';
+  $("sQty").textContent=num(t.qty)+" "+u;$("sBe").textContent=t.be!=null?money(t.be):"—";$("sLeft").textContent=t.left!=null?num(t.left)+" "+u:"—";
+  const r=todayRange(c),tb=$("todayBox");
+  if(r&&t.left){const lo=t.inc+t.left*r.lo-t.cost,hi=t.inc+t.left*r.hi-t.cost;
+    tb.innerHTML=`📊 <b>අද දඹුල්ල මිල</b> (${esc(PDATE)}): ${money(r.lo)} – ${money(r.hi)} / ${u}<br>👉 ඉතිරි ${num(t.left)} ${u} අද මිලට විකුණුවොත් <b>මුළු ලාභය: <span class="${lo>=0?"pos":"neg"}">${money(lo)}</span> – <span class="${hi>=0?"pos":"neg"}">${money(hi)}</span></b>`+(t.be!=null?`<br>⚖️ පාඩු නොවන මිල ${money(t.be)} — අද මිල ${r.lo>=t.be?"<b class='pos'>ඊට වැඩියි ✔</b>":r.hi<t.be?"<b class='neg'>ඊට අඩුයි</b>":"ඊට ආසන්නයි"}`:"")+`<br><span class="note">ප්‍රවාහනය හා කොමිස් වියදම් ලෙස එකතු කරන්න — සැබෑ ලාභය ඒ අනුව වෙනස් වේ.</span>`;}
+  else if(r)tb.innerHTML=`📊 <b>අද දඹුල්ල මිල</b> (${esc(PDATE)}): ${money(r.lo)} – ${money(r.hi)} / ${u}`+(c.expQty?"":`<br><span class="note">✏️ බලාපොරොත්තු අස්වැන්න ඇතුළත් කළොත් අද මිලට ලාභය ගණනය කර පෙන්වයි.</span>`);
+  else tb.innerHTML=c.item?'<span class="note">අද දඹුල්ල මිලක් නැත.</span>':'<span class="note">💡 දඹුල්ල ලැයිස්තුවෙන් බෝගය තේරුවොත් (✏️) අද මිලට ලාභය පෙන්වයි.</span>';
+  const rows=[...c.exp.map((x,k)=>({d:x.date,t:`➖ ${esc(x.cat)}${x.note?" · "+esc(x.note):""}`,a:-(+x.amt||0),k,ty:"exp"})),
+              ...(c.work||[]).map((x,k)=>({d:x.date,t:`⏱️ ${esc(x.task)} · ${x.who==="hired"?"👷 කුලී":"🙋 මම/පවුල"} ${num(+x.people||1)} × පැය ${num(x.hours)}${x.who==="hired"?" × "+money(x.rate):""}`,a:x.who==="hired"?-((+x.people||1)*(+x.hours||0)*(+x.rate||0)):0,k,ty:"work",own:x.who!=="hired"})),
+              ...c.inc.map((x,k)=>({d:x.date,t:`➕ විකුණුම: ${num(x.qty)} ${u} × ${money(x.price)}${x.where?" · "+esc(x.where):""}`,a:(+x.qty||0)*(+x.price||0),k,ty:"inc"}))].sort((a,b)=>(b.d||"").localeCompare(a.d||""));
+  $("ledger").innerHTML=rows.length?rows.map(r=>`<tr><td>${esc(r.d||"")}</td><td>${r.t}</td><td class="n ${r.a<0?"neg":"pos"}">${r.own?"—":(r.a<0?"−":"+")+Math.abs(Math.round(r.a)).toLocaleString("en-US")}</td><td class="noprint"><button class="x" data-ty="${r.ty}" data-k="${r.k}" type="button" title="මකන්න">✕</button></td></tr>`).join(""):'<tr><td colspan="4" class="note">තවම සටහන් නැත.</td></tr>';
+  $("ledger").querySelectorAll(".x").forEach(b=>b.onclick=()=>{if(!confirmTwice(b))return;c[b.dataset.ty].splice(+b.dataset.k,1);save();render();});
+}
+function confirmTwice(b){if(b.dataset.armed){return true;}b.dataset.armed=1;b.textContent="✔?";setTimeout(()=>{delete b.dataset.armed;b.textContent="✕";},3000);return false;}
+$("eCat").innerHTML=CATS.map(c=>`<option>${c}</option>`).join("");
+function tab(n){[["tExp","formExp"],["tWork","formWork"],["tInc","formInc"]].forEach(([b,f])=>{$(b).classList.toggle("solid",b===n);$(f).classList.toggle("hide",b!==n);});}
+$("tExp").onclick=()=>tab("tExp");
+$("tWork").onclick=()=>{tab("tWork");whoHint();};
+$("wTask").innerHTML=TASKS.map(x=>`<option>${x}</option>`).join("");
+function whoHint(){const own=$("wWho").value==="own",c=DB.crops[CUR];$("wRateLbl").textContent=own?"පැයකට වටිනාකම (අවශ්‍ය නැත)":"පැයකට රු. (කුලිය)";
+  $("wRate").disabled=own;$("wRate").value=own?"":$("wRate").value;
+  $("wHint").textContent=own?"🙋 ඔබේ / පවුලේ පැය වියදමට එකතු නොවේ — වෙනම ගණන් ගනී. වටිනාකම වගාවේ ✏️ සැකසුමෙන් දාන්න.":"👷 කුලී කම්කරු: පුද්ගලයන් × පැය × පැයකට කුලිය වියදමට එකතු වේ. (දවසක කුලිය නම්: පැය 8 × රු. 3,000 ÷ 8 වගේ)";}
+$("wWho").onchange=whoHint;
+$("addWork").onclick=()=>{const h=parseFloat($("wHours").value),pp=parseFloat($("wPeople").value)||1,own=$("wWho").value==="own",r=parseFloat($("wRate").value)||0;
+  if(!(h>0)){alert("පැය ගණන ඇතුළත් කරන්න");return;}if(!own&&!(r>0)){alert("කුලී කම්කරුවන්ට පැයකට කුලිය ඇතුළත් කරන්න");return;}
+  const c=DB.crops[CUR];c.work=c.work||[];c.work.push({date:$("wDate").value||today(),task:$("wTask").value,who:own?"own":"hired",people:pp,hours:h,rate:own?0:r});
+  $("wHours").value="";save();render();};
+$("tInc").onclick=()=>{tab("tInc");
+  const c=DB.crops[CUR],r=c&&todayRange(c);if(r&&!$("iPrice").value)$("iPrice").placeholder="අද දඹුල්ල "+Math.round((r.lo+r.hi)/2);};
+$("addExp").onclick=()=>{const a=parseFloat($("eAmt").value);if(!(a>0)){alert("මුදල ඇතුළත් කරන්න");return;}
+  DB.crops[CUR].exp.push({date:$("eDate").value||today(),cat:$("eCat").value,amt:a,note:$("eNote").value.trim()});$("eAmt").value="";$("eNote").value="";save();render();};
+$("addInc").onclick=()=>{const q=parseFloat($("iQty").value),p=parseFloat($("iPrice").value);if(!(q>0)||!(p>=0)){alert("ප්‍රමාණය හා මිල ඇතුළත් කරන්න");return;}
+  DB.crops[CUR].inc.push({date:$("iDate").value||today(),qty:q,price:p,where:$("iWhere").value.trim()});$("iQty").value="";$("iPrice").value="";$("iWhere").value="";save();render();};
+$("backBtn").onclick=()=>{CUR=null;show("vList");render();};
+$("editBtn").onclick=()=>{const c=DB.crops[CUR];EDIT=CUR;$("formTitle").textContent="✏️ වගාව සංස්කරණය";$("fItem").value=c.item||"";$("fName").value=c.name;$("fStart").value=c.start||"";$("fArea").value=parseFloat(c.area)||"";$("fSeason").value=c.season||"";$("fOwnRate").value=c.ownRate||"";$("fExp").value=c.expQty||"";$("fUnit").value=c.unit||"kg";show("vForm");};
+$("delCrop").onclick=function(){if(!this.dataset.armed){this.dataset.armed=1;this.textContent="✔ ඔව්, මකන්න";setTimeout(()=>{delete this.dataset.armed;this.textContent="🗑️ මෙම වගාව මකන්න";},4000);return;}
+  DB.crops.splice(CUR,1);CUR=null;save();show("vList");render();};
+$("printBtn").onclick=()=>window.print();
+
+/* ---- backup ---- */
+$("expBtn").onclick=()=>{const b=new Blob([JSON.stringify(DB,null,1)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="mage-wagawa-backup-"+today()+".json";a.click();setTimeout(()=>URL.revokeObjectURL(u),2000);};
+$("impIn").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!Array.isArray(d.crops))throw new Error("format");
+  const ids=new Set(DB.crops.map(c=>c.id));let n=0;d.crops.forEach(c=>{if(!ids.has(c.id)){DB.crops.push(c);n++;}});save();render();alert("✔ වගා "+n+"ක් ඇතුළත් විය");}catch(err){alert("මෙය වලංගු Backup ගොනුවක් නොවේ");}};r.readAsText(f);e.target.value="";};
+
+load();render();loadPrices();
+</script>
+</body>
+</html>
