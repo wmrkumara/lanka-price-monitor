@@ -63,6 +63,19 @@ def si_date(iso):
 def rs(v): return f"{v:,.0f}"
 
 
+
+def pin_comment(rises, falls, last):
+    """Comment to post and pin under the YouTube video: subscribe ask + site link + a question."""
+    d = date.fromisoformat(last)
+    q = ""
+    if rises:
+        q = f"\n💬 අද {rises[0]['si']} මිල ඉහළ ගියා. ඔබේ ප්‍රදේශයේ {rises[0]['si']} කීයද? කමෙන්ට් කරන්න 👇"
+    elif falls:
+        q = f"\n💬 අද {falls[0]['si']} මිල පහළ ගියා. ඔබේ ප්‍රදේශයේ කීයද? කමෙන්ට් කරන්න 👇"
+    return ("📌 සෑම දිනකම දඹුල්ල එලවලු මිල සඳහා Subscribe කරන්න 🔔\n"
+            "👉 භාණ්ඩ 90+ ක අද මිල, 🛒 බාස්කට් එක හා 🧮 ලාභ ගණකය: https://topgoviya.lk/?d=" + last + q +
+            "\n📊 මූලාශ්‍රය: දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය · " + f"{d.year}.{d.month:02d}.{d.day:02d}")
+
 def main():
     days, names = load()
     if not days:
@@ -238,6 +251,11 @@ body{width:1080px;height:1920px;background:#f4efe4;font-family:'Noto Sans Sinhal
     track = short_kit.pick_track("music-5.wav", "music-2.wav", "music-1.wav")
     short_kit.package(f"{OUT}/03-dambulla-{TAG}", silent, track, seconds, title, desc, tiktok, facebook,
                       tags, "🥬 අද දඹුල්ල එළවළු මිල | Dambulla Market Price Daily")
+    pin = pin_comment(rises, falls, last)
+    folder = f"{OUT}/03-dambulla-{TAG}"
+    open(f"{folder}/pin-comment.txt", "w", encoding="utf-8").write(pin + "\n")
+    with open(f"{folder}/youtube.txt", "a", encoding="utf-8") as f:
+        f.write("\nPINNED COMMENT (post it, then ⋮ → Pin):\n" + pin + "\n")
     for f in pngs + [silent]:
         if os.path.exists(f): os.remove(f)
     open(STATE, "w").write(st)

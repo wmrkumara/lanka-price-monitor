@@ -351,7 +351,15 @@ def main():
     except Exception as e:
         print("Music step skipped:", e)
     thumbnail(rep, allr).save(os.path.join(OUT, f"dambulla-thumbnail-{iso}.png"))
-    open(os.path.join(OUT, f"dambulla-youtube-{iso}.txt"), "w", encoding="utf-8").write(text_file(rep, rows, allr))
+    ups, dns = movers(allr, 1)
+    q = (f"\n💬 අද {ups[0]['si']} මිල ඉහළ ගියා. ඔබේ ප්‍රදේශයේ {ups[0]['si']} කීයද? කමෙන්ට් කරන්න 👇" if ups else
+         f"\n💬 අද {dns[0]['si']} මිල පහළ ගියා. ඔබේ ප්‍රදේශයේ කීයද? කමෙන්ට් කරන්න 👇" if dns else "")
+    pin = ("📌 සෑම දිනකම දඹුල්ල එලවලු මිල සඳහා Subscribe කරන්න 🔔\n"
+           f"👉 භාණ්ඩ 90+ ක අද මිල, 🛒 බාස්කට් එක හා 🧮 ලාභ ගණකය: https://topgoviya.lk/?d={iso}" + q +
+           f"\n📊 මූලාශ්‍රය: දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය · {rep.strftime('%Y.%m.%d')}")
+    open(os.path.join(OUT, f"dambulla-pin-comment-{iso}.txt"), "w", encoding="utf-8").write(pin + "\n")
+    open(os.path.join(OUT, f"dambulla-youtube-{iso}.txt"), "w", encoding="utf-8").write(
+        text_file(rep, rows, allr) + "\nPINNED COMMENT (post it, then ⋮ → Pin):\n" + pin + "\n")
     open(os.path.join(OUT, f"dambulla-script-{iso}.txt"), "w", encoding="utf-8").write(script_file(rep, rows, allr))
     for f in os.listdir(tmp): os.remove(os.path.join(tmp, f))
     os.rmdir(tmp)
