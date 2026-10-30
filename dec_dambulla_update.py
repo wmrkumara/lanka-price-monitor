@@ -169,7 +169,7 @@ def main():
                 failed.append(f"{d} ({LAST_ERROR.get(d, '')})")
             elif saved:
                 # already saved: replace only if the DEC has changed (corrected) that day's prices
-                old = dict(saved)
+                old, old_arr = dict(saved), db["arrived"].get(d)
                 n = store(db, d, rows, f"robot {STAMP}")
                 if n and db["days"][d] != old:
                     fetched.append(f"{d}:{n}:corrected")
@@ -177,7 +177,8 @@ def main():
                     print(f"  {d}: corrected by the DEC ({n} items)")
                 else:
                     db["days"][d] = old            # nothing new (or empty now): keep what we had
-                    db["arrived"][d] = db["arrived"].get(d) or f"robot {STAMP}"
+                    if old_arr:
+                        db["arrived"][d] = old_arr   # keep the original "saved at" time
                     db["empty_days"].pop(d, None)
             else:
                 n = store(db, d, rows, f"robot {STAMP}")
