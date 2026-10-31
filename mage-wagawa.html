@@ -147,7 +147,7 @@ details.more summary::-webkit-details-marker{display:none}
     <div class="sum"><div><span id="lInc"></span><b id="mInc" class="pos">0</b></div><div><span id="lCost"></span><b id="mCost">0</b></div><div><span id="lProf"></span><b id="mProf">0</b></div></div>
     <div class="sbar"><i id="mBar" style="width:0%"></i></div><p class="note" id="mBarTxt" style="margin:5px 0 12px"></p>
     <div class="row noprint" style="margin:0 0 10px;gap:10px"><button class="btn big" id="qExp" type="button" data-t="addCostBig" style="flex:1;justify-content:center;color:var(--up);border-color:#e6b9b1"></button><button class="btn big" id="qInc" type="button" data-t="addSaleBig" style="flex:1;justify-content:center;color:var(--dn);border-color:#b9d6c3"></button></div>
-    <button class="btn gold big noprint" id="reportBtn" type="button" data-t="reportBtn" style="width:100%;justify-content:center;margin:0 0 6px"></button>
+    <div class="row noprint" style="gap:10px;margin:0 0 6px"><button class="btn big" id="budgetBtn" type="button" data-t="budgetBtn" style="flex:1;justify-content:center"></button><button class="btn gold big" id="reportBtn" type="button" data-t="reportBtn" style="flex:1.4;justify-content:center"></button></div>
   </div>
   <div id="alerts"></div>
   <div class="card">
@@ -174,6 +174,7 @@ details.more summary::-webkit-details-marker{display:none}
 </section>
 
 <section id="vReport" class="hide"></section>
+<section id="vBudget" class="hide"></section>
 <section id="vBackup" class="hide"></section>
 <section id="vAll" class="hide"></section>
 <section id="vGuide" class="hide"></section>
@@ -253,7 +254,7 @@ si:{
  bNever:"💾 තවම Backup එකක් ගත්තේ නැත",bDays:d=>`💾 දින ${d}ක් Backup එකක් ගත්තේ නැත`,
  bD:"ෆෝන් එක නැති වුණොත් දත්තත් නැති වෙනවා. Backup ගොනුව Google Drive හෝ WhatsApp එකට යවා තබාගන්න.",bNow:"💾 දැන් Backup ගන්න",
  imported:n=>`✔ වගා ${n}ක් ඇතුළත් විය`,badFile:"මෙය වලංගු Backup ගොනුවක් නොවේ",saveErr:"සුරැකීමට නොහැකි විය. Backup එකක් බාගන්න: ",
- listCost:"වියදම",listInc:"ආදායම",growing:"🌱 වගාව යමින් පවතී",growNote:"තවම විකුණුම් නැත — ලාභය විකුණුම් පටන් ගත් පසු පෙන්වයි.",profitShort:"ලාභය",shareBtn:"📤 Backup එක WhatsApp / Drive එකට යවන්න",bkHow:"මෙම ගොනුව විවෘත කරන්න අවශ්‍ය නැත — WhatsApp / Drive එකේ තබාගන්න පමණයි. අලුත් ෆෝන් එකේ \"📂 Backup එකක් ඇතුළත් කරන්න\" ඔබන්න.",fMine:"මගේ වගා",fDemo:"උදාහරණ",navCrops:"මගේ වගා",fabTxt:"වියදම / විකුණුම",whichCrop:"කුමන වගාවටද?",whatAdd:"ඔබ එකතු කරන්නේ මොකක්ද?",addCostBig:"➖ වියදමක් දාන්න",addSaleBig:"➕ විකුණුමක් දාන්න",tExpD:"පොහොර, පැළ, ප්‍රවාහනය…",tIncD:"අස්වැන්න විකුණුවා",tWorkD:"කුලී / පවුලේ වැඩ",staleP:d=>`⚠️ දඹුල්ල මිල දින ${d}ක් පරණයි — අලුත් මිල තවම ලැබී නැත.`,privNote:"🔒 ඔබේ වගා දත්ත කිසිවෙකුටත් යවන්නේ නැත — ඒවා මෙම ෆෝන් එකේ පමණයි. පිටුව කී දෙනෙක් භාවිතා කරනවාද කියා ගණන් කිරීමට පමණක් නම් නොදැක්වෙන Google Analytics භාවිතා වේ.",sharePdf:"📤 WhatsApp එකට යවන්න (PDF)",pdfMaking:"⏳ PDF සකසමින්…",pdfFail:"PDF සෑදීමට නොහැකි විය. අන්තර්ජාලය තිබේදැයි බලා නැවත උත්සාහ කරන්න, නැත්නම් 🖨️ මුද්‍රණය භාවිතා කරන්න.",pdfSaved:"✔ PDF බාගත විය",pdfBy:"TopGoviya.lk · මගේ වගාව · සකස් කළේ",navAll:"සියල්ල",navBk:"Backup",navGuide:"උදව්",addT:"එකතු කරන්න",added:"✔ එකතු විය",more:"📋 වැඩි විස්තර",costShare:p=>`ආදායමෙන් ${p}%ක් වියදමට ගියා`,noSalesYet:"තවම විකුණුම් නැත",
+ listCost:"වියදම",listInc:"ආදායම",growing:"🌱 වගාව යමින් පවතී",growNote:"තවම විකුණුම් නැත — ලාභය විකුණුම් පටන් ගත් පසු පෙන්වයි.",profitShort:"ලාභය",shareBtn:"📤 Backup එක WhatsApp / Drive එකට යවන්න",bkHow:"මෙම ගොනුව විවෘත කරන්න අවශ්‍ය නැත — WhatsApp / Drive එකේ තබාගන්න පමණයි. අලුත් ෆෝන් එකේ \"📂 Backup එකක් ඇතුළත් කරන්න\" ඔබන්න.",fMine:"මගේ වගා",fDemo:"උදාහරණ",navCrops:"මගේ වගා",budgetBtn:"🎯 අයවැය",bTitle:"🎯 අයවැය (වගා සැලසුම)",bIntro:"වගා කරන්න කලින් හෝ මුලදීම, එක් එක් වියදමට කීයක් යයිද කියා සැලසුම් කරන්න. අස්වැන්න විකුණන්න කලින්ම ලාභය කීයද දැනගන්න.",bPlanned:"සැලසුම් කළ වියදම",bExpInc:"බලාපොරොත්තු ආදායම",bExpProf:"බලාපොරොත්තු ලාභය",bPriceL:"බලාපොරොත්තු විකුණුම් මිල (ඒකකයට, රු.)",bPricePh:p=>`අද දඹුල්ල ${p}`,bByToday:"(අද දඹුල්ල මිල අනුව)",bNeedExp:"✏️ වගාවේ බලාපොරොත්තු අස්වැන්න දැම්මොත් බලාපොරොත්තු ආදායම හා ලාභය පෙන්වයි.",bLimitsH:"එක් එක් වියදමට සීමාව",bLimitsNote:"සීමාව ලියන්න. වියදම සීමාව ඉක්මවුවොත් රතු පාටින් පෙන්වයි.",bSpent:x=>`වියදම් කළා: ${x}`,bSpentAll:p=>`සැලසුමෙන් ${p}%ක් දැනටමත් වියදම් කර ඇත`,bBack:"← වගාවට",fabTxt:"වියදම / විකුණුම",whichCrop:"කුමන වගාවටද?",whatAdd:"ඔබ එකතු කරන්නේ මොකක්ද?",addCostBig:"➖ වියදමක් දාන්න",addSaleBig:"➕ විකුණුමක් දාන්න",tExpD:"පොහොර, පැළ, ප්‍රවාහනය…",tIncD:"අස්වැන්න විකුණුවා",tWorkD:"කුලී / පවුලේ වැඩ",staleP:d=>`⚠️ දඹුල්ල මිල දින ${d}ක් පරණයි — අලුත් මිල තවම ලැබී නැත.`,privNote:"🔒 ඔබේ වගා දත්ත කිසිවෙකුටත් යවන්නේ නැත — ඒවා මෙම ෆෝන් එකේ පමණයි. පිටුව කී දෙනෙක් භාවිතා කරනවාද කියා ගණන් කිරීමට පමණක් නම් නොදැක්වෙන Google Analytics භාවිතා වේ.",sharePdf:"📤 WhatsApp එකට යවන්න (PDF)",pdfMaking:"⏳ PDF සකසමින්…",pdfFail:"PDF සෑදීමට නොහැකි විය. අන්තර්ජාලය තිබේදැයි බලා නැවත උත්සාහ කරන්න, නැත්නම් 🖨️ මුද්‍රණය භාවිතා කරන්න.",pdfSaved:"✔ PDF බාගත විය",pdfBy:"TopGoviya.lk · මගේ වගාව · සකස් කළේ",navAll:"වාර්තා",navBk:"Backup",navGuide:"උදව්",addT:"එකතු කරන්න",added:"✔ එකතු විය",more:"📋 වැඩි විස්තර",costShare:p=>`ආදායමෙන් ${p}%ක් වියදමට ගියා`,noSalesYet:"තවම විකුණුම් නැත",
  newT:"➕ අලුත් වගාවක්",editT:"✏️ වගාව සංස්කරණය",fItem:"බෝගය (දඹුල්ල ලැයිස්තුවෙන්)",pick:"— තෝරන්න —",
  fName:"හෝ වෙනත් නමක්",fNamePh:"උදා: තක්කාලි – පිටිය 2",fStart:"වගා කළ දිනය",fArea:"ඉඩම (අක්කර, අවශ්‍ය නම්)",fAreaPh:"උදා: 1 (පර්චස් 40 = 0.25)",
  fSeason:"කන්නය",fOwnRate:"මගේ / පවුලේ වැඩ පැයක වටිනාකම (රු., අවශ්‍ය නම්)",fOwnRatePh:"උදා: 250 — හිස්ව තැබිය හැක",
@@ -316,7 +317,7 @@ si:{
  gStart:"➕ මගේ වගාව පටන් ගන්න",
  guide:[
   ["මුලින්ම උදාහරණය බලන්න","\"👀 උදාහරණය බලන්න\" ඔබන්න. තක්කාලි වගා දෙකක් හා මිරිස් වගාවක් සැබෑ වගේ දත්ත සමඟ පෙන්වයි. වාර්තාව බලලා, පස්සේ \"🗑️ උදාහරණ මකන්න\" ඔබන්න."],
-  ["ඔබේ වගාව එකතු කරන්න","\"➕ අලුත් වගාවක්\" ඔබලා දඹුල්ල ලැයිස්තුවෙන් බෝගය තෝරන්න. වගා කළ දිනය, අක්කර ගණන හා බලාපොරොත්තු අස්වැන්න දාන්න. සමහර ඒවා නැතත් පටන් ගන්න පුළුවන්."],
+  ["ඔබේ වගාව එකතු කරන්න","\"➕ අලුත් වගාවක්\" ඔබලා දඹුල්ල ලැයිස්තුවෙන් බෝගය තෝරන්න. වගා කළ දිනය, අක්කර ගණන හා බලාපොරොත්තු අස්වැන්න දාන්න. සමහර ඒවා නැතත් පටන් ගන්න පුළුවන්. \"🎯 අයවැය\" ඔබලා වියදම් සැලසුම් කර බලාපොරොත්තු ලාභය කලින්ම බලන්න."],
   ["හැම වියදමක්ම එදාම ලියන්න","\"➖ වියදමක්\" ඔබලා මුදල හා සටහන ලියන්න. සටහනේ 'පොහොර', 'පැළ', 'ලොරිය' වගේ වචනයක් තිබුණොත් වර්ගය තේරෙනවා. වැරදි නම් වෙනස් කරන්න. ඔබට ඕන වර්ගය ලැයිස්තුවේ නැත්නම් \"➕ අලුත් වර්ගයක් එකතු කරන්න\" තෝරන්න."],
   ["වැඩ පැය","\"⏱️ වැඩ පැය\" ඔබන්න. කුලී කම්කරුවන්: පුද්ගලයන් × පැය × පැයකට කුලිය වියදමට එකතු වෙනවා. ඔබේ / පවුලේ පැය වෙනම ගණන් ගන්නවා, වියදමට එකතු වෙන්නේ නැහැ."],
   ["විකුණන හැම වතාවකම","\"➕ විකුණුමක්\" ඔබලා ප්‍රමාණය, මිල හා කාටද කියලා ලියන්න. එදා දඹුල්ල මිල උදව්වට පෙන්වයි."],
@@ -339,7 +340,7 @@ en:{
  bNever:"💾 You haven't saved a backup yet",bDays:d=>`💾 No backup for ${d} days`,
  bD:"If the phone is lost, the data is lost too. Send the backup file to Google Drive or WhatsApp to keep it safe.",bNow:"💾 Back up now",
  imported:n=>`✔ ${n} crops restored`,badFile:"This is not a valid backup file",saveErr:"Could not save. Download a backup now: ",
- listCost:"Cost",listInc:"Income",growing:"🌱 Crop growing",growNote:"No sales yet — profit shows once you start selling.",profitShort:"Profit",shareBtn:"📤 Send backup to WhatsApp / Drive",bkHow:"You don't need to open this file — just keep it in WhatsApp or Drive. On a new phone tap \"📂 Restore a backup\".",fMine:"My crops",fDemo:"Examples",navCrops:"My crops",fabTxt:"Cost / Sale",whichCrop:"Which crop?",whatAdd:"What do you want to add?",addCostBig:"➖ Add a cost",addSaleBig:"➕ Add a sale",tExpD:"fertilizer, seeds, transport…",tIncD:"harvest sold",tWorkD:"hired / family work",staleP:d=>`⚠️ The Dambulla price is ${d} days old — no newer price yet.`,privNote:"🔒 Your crop records are never sent anywhere — they stay on this phone only. Anonymous Google Analytics is used only to count how many people use the page.",sharePdf:"📤 Send on WhatsApp (PDF)",pdfMaking:"⏳ Making PDF…",pdfFail:"Could not make the PDF. Check your internet and try again, or use 🖨️ Print.",pdfSaved:"✔ PDF downloaded",pdfBy:"TopGoviya.lk · My Crop · made on",navAll:"All",navBk:"Backup",navGuide:"Guide",addT:"Add",added:"✔ Added",more:"📋 More details",costShare:p=>`${p}% of income went on costs`,noSalesYet:"No sales yet",
+ listCost:"Cost",listInc:"Income",growing:"🌱 Crop growing",growNote:"No sales yet — profit shows once you start selling.",profitShort:"Profit",shareBtn:"📤 Send backup to WhatsApp / Drive",bkHow:"You don't need to open this file — just keep it in WhatsApp or Drive. On a new phone tap \"📂 Restore a backup\".",fMine:"My crops",fDemo:"Examples",navCrops:"My crops",budgetBtn:"🎯 Budget",bTitle:"🎯 Budget (crop plan)",bIntro:"Before planting or early on, plan how much each cost will be. See your expected profit before you sell the harvest.",bPlanned:"Planned cost",bExpInc:"Expected income",bExpProf:"Expected profit",bPriceL:"Expected selling price (per unit, Rs.)",bPricePh:p=>`Dambulla today ${p}`,bByToday:"(at today's Dambulla price)",bNeedExp:"✏️ Add the expected harvest to the crop to see expected income and profit.",bLimitsH:"Limit for each cost type",bLimitsNote:"Type a limit. It turns red if spending goes over.",bSpent:x=>`Spent: ${x}`,bSpentAll:p=>`${p}% of the plan already spent`,bBack:"← Back to crop",fabTxt:"Cost / Sale",whichCrop:"Which crop?",whatAdd:"What do you want to add?",addCostBig:"➖ Add a cost",addSaleBig:"➕ Add a sale",tExpD:"fertilizer, seeds, transport…",tIncD:"harvest sold",tWorkD:"hired / family work",staleP:d=>`⚠️ The Dambulla price is ${d} days old — no newer price yet.`,privNote:"🔒 Your crop records are never sent anywhere — they stay on this phone only. Anonymous Google Analytics is used only to count how many people use the page.",sharePdf:"📤 Send on WhatsApp (PDF)",pdfMaking:"⏳ Making PDF…",pdfFail:"Could not make the PDF. Check your internet and try again, or use 🖨️ Print.",pdfSaved:"✔ PDF downloaded",pdfBy:"TopGoviya.lk · My Crop · made on",navAll:"Reports",navBk:"Backup",navGuide:"Guide",addT:"Add",added:"✔ Added",more:"📋 More details",costShare:p=>`${p}% of income went on costs`,noSalesYet:"No sales yet",
  newT:"➕ New crop",editT:"✏️ Edit crop",fItem:"Crop (from Dambulla list)",pick:"— Choose —",
  fName:"Or another name",fNamePh:"e.g. Tomato – field 2",fStart:"Planting date",fArea:"Land (acres, optional)",fAreaPh:"e.g. 1 (40 perches = 0.25)",
  fSeason:"Season",fOwnRate:"Value of 1 hour of my / family work (Rs., optional)",fOwnRatePh:"e.g. 250 — can leave empty",
@@ -401,7 +402,7 @@ en:{
  gStart:"➕ Start my crop",
  guide:[
   ["Look at the example first","Tap \"👀 See an example\". It shows two tomato crops and a chilli crop with real-style numbers. Look at the report, then tap \"🗑️ Delete example\"."],
-  ["Add your crop","Tap \"➕ New crop\" and choose the crop from the Dambulla list. Add the planting date, acres and expected harvest. You can start even if some are unknown."],
+  ["Add your crop","Tap \"➕ New crop\" and choose the crop from the Dambulla list. Add the planting date, acres and expected harvest. You can start even if some are unknown. Tap \"🎯 Budget\" to plan your costs and see the expected profit in advance."],
   ["Write every cost on the same day","Tap \"➖ Cost\", type the amount and a note. If the note has a word like 'fertilizer', 'seeds' or 'lorry', the type is picked for you. Change it if wrong. If the type you need is not in the list, choose \"➕ Add a new type…\"."],
   ["Work hours","Tap \"⏱️ Work hours\". Hired workers: people × hours × wage is added to cost. Your own / family hours are counted separately and not added to cost."],
   ["Every time you sell","Tap \"➕ Sale\" and write the quantity, price and buyer. The Dambulla price for that day is shown to help you."],
@@ -424,7 +425,7 @@ ta:{
  bNever:"💾 இன்னும் Backup எடுக்கவில்லை",bDays:d=>`💾 ${d} நாட்களாக Backup இல்லை`,
  bD:"தொலைபேசி தொலைந்தால் தரவும் தொலையும். Backup கோப்பை Google Drive அல்லது WhatsApp-க்கு அனுப்பி வையுங்கள்.",bNow:"💾 இப்போது Backup எடு",
  imported:n=>`✔ ${n} பயிர்கள் மீட்டெடுக்கப்பட்டன`,badFile:"இது சரியான Backup கோப்பு அல்ல",saveErr:"சேமிக்க முடியவில்லை. இப்போது Backup பதிவிறக்கவும்: ",
- listCost:"செலவு",listInc:"வருமானம்",growing:"🌱 பயிர் வளர்கிறது",growNote:"இன்னும் விற்பனை இல்லை — விற்கத் தொடங்கியதும் இலாபம் காட்டும்.",profitShort:"இலாபம்",shareBtn:"📤 Backup-ஐ WhatsApp / Drive-க்கு அனுப்பு",bkHow:"இந்தக் கோப்பைத் திறக்கத் தேவையில்லை — WhatsApp அல்லது Drive-இல் வைத்திருங்கள். புதிய தொலைபேசியில் \"📂 Backup-ஐ மீட்டெடு\" அழுத்துங்கள்.",fMine:"என் பயிர்கள்",fDemo:"உதாரணங்கள்",navCrops:"என் பயிர்கள்",fabTxt:"செலவு / விற்பனை",whichCrop:"எந்தப் பயிருக்கு?",whatAdd:"எதைச் சேர்க்கிறீர்கள்?",addCostBig:"➖ செலவைச் சேர்",addSaleBig:"➕ விற்பனையைச் சேர்",tExpD:"உரம், விதை, போக்குவரத்து…",tIncD:"அறுவடை விற்றது",tWorkD:"கூலி / குடும்ப வேலை",staleP:d=>`⚠️ தம்புள்ளை விலை ${d} நாட்கள் பழையது — புதிய விலை இன்னும் வரவில்லை.`,privNote:"🔒 உங்கள் பயிர்ப் பதிவுகள் எங்கும் அனுப்பப்படுவதில்லை — இந்தத் தொலைபேசியில் மட்டுமே. பக்கத்தை எத்தனை பேர் பயன்படுத்துகிறார்கள் என்று எண்ண மட்டும் பெயரற்ற Google Analytics பயன்படுகிறது.",sharePdf:"📤 WhatsApp-இல் அனுப்பு (PDF)",pdfMaking:"⏳ PDF தயாராகிறது…",pdfFail:"PDF உருவாக்க முடியவில்லை. இணையத்தைச் சரிபார்த்து மீண்டும் முயலுங்கள், அல்லது 🖨️ அச்சு பயன்படுத்துங்கள்.",pdfSaved:"✔ PDF பதிவிறக்கப்பட்டது",pdfBy:"TopGoviya.lk · என் பயிர் · உருவாக்கியது",navAll:"எல்லாம்",navBk:"Backup",navGuide:"உதவி",addT:"சேர்",added:"✔ சேர்க்கப்பட்டது",more:"📋 மேலும் விவரம்",costShare:p=>`வருமானத்தில் ${p}% செலவுக்குப் போனது`,noSalesYet:"இன்னும் விற்பனை இல்லை",
+ listCost:"செலவு",listInc:"வருமானம்",growing:"🌱 பயிர் வளர்கிறது",growNote:"இன்னும் விற்பனை இல்லை — விற்கத் தொடங்கியதும் இலாபம் காட்டும்.",profitShort:"இலாபம்",shareBtn:"📤 Backup-ஐ WhatsApp / Drive-க்கு அனுப்பு",bkHow:"இந்தக் கோப்பைத் திறக்கத் தேவையில்லை — WhatsApp அல்லது Drive-இல் வைத்திருங்கள். புதிய தொலைபேசியில் \"📂 Backup-ஐ மீட்டெடு\" அழுத்துங்கள்.",fMine:"என் பயிர்கள்",fDemo:"உதாரணங்கள்",navCrops:"என் பயிர்கள்",budgetBtn:"🎯 வரவுசெலவு",bTitle:"🎯 வரவுசெலவு (பயிர்த் திட்டம்)",bIntro:"நடவுக்கு முன் அல்லது தொடக்கத்திலேயே, ஒவ்வொரு செலவும் எவ்வளவு என்று திட்டமிடுங்கள். அறுவடையை விற்கும் முன்பே எதிர்பார்க்கும் இலாபத்தைப் பாருங்கள்.",bPlanned:"திட்டமிட்ட செலவு",bExpInc:"எதிர்பார்க்கும் வருமானம்",bExpProf:"எதிர்பார்க்கும் இலாபம்",bPriceL:"எதிர்பார்க்கும் விற்பனை விலை (அலகுக்கு, ரூ.)",bPricePh:p=>`இன்று தம்புள்ளை ${p}`,bByToday:"(இன்றைய தம்புள்ளை விலைப்படி)",bNeedExp:"✏️ பயிரில் எதிர்பார்க்கும் அறுவடையைச் சேர்த்தால் எதிர்பார்க்கும் வருமானமும் இலாபமும் காட்டும்.",bLimitsH:"ஒவ்வொரு செலவுக்கும் வரம்பு",bLimitsNote:"வரம்பை எழுதுங்கள். செலவு மீறினால் சிவப்பில் காட்டும்.",bSpent:x=>`செலவு: ${x}`,bSpentAll:p=>`திட்டத்தில் ${p}% ஏற்கனவே செலவானது`,bBack:"← பயிருக்கு",fabTxt:"செலவு / விற்பனை",whichCrop:"எந்தப் பயிருக்கு?",whatAdd:"எதைச் சேர்க்கிறீர்கள்?",addCostBig:"➖ செலவைச் சேர்",addSaleBig:"➕ விற்பனையைச் சேர்",tExpD:"உரம், விதை, போக்குவரத்து…",tIncD:"அறுவடை விற்றது",tWorkD:"கூலி / குடும்ப வேலை",staleP:d=>`⚠️ தம்புள்ளை விலை ${d} நாட்கள் பழையது — புதிய விலை இன்னும் வரவில்லை.`,privNote:"🔒 உங்கள் பயிர்ப் பதிவுகள் எங்கும் அனுப்பப்படுவதில்லை — இந்தத் தொலைபேசியில் மட்டுமே. பக்கத்தை எத்தனை பேர் பயன்படுத்துகிறார்கள் என்று எண்ண மட்டும் பெயரற்ற Google Analytics பயன்படுகிறது.",sharePdf:"📤 WhatsApp-இல் அனுப்பு (PDF)",pdfMaking:"⏳ PDF தயாராகிறது…",pdfFail:"PDF உருவாக்க முடியவில்லை. இணையத்தைச் சரிபார்த்து மீண்டும் முயலுங்கள், அல்லது 🖨️ அச்சு பயன்படுத்துங்கள்.",pdfSaved:"✔ PDF பதிவிறக்கப்பட்டது",pdfBy:"TopGoviya.lk · என் பயிர் · உருவாக்கியது",navAll:"அறிக்கைகள்",navBk:"Backup",navGuide:"உதவி",addT:"சேர்",added:"✔ சேர்க்கப்பட்டது",more:"📋 மேலும் விவரம்",costShare:p=>`வருமானத்தில் ${p}% செலவுக்குப் போனது`,noSalesYet:"இன்னும் விற்பனை இல்லை",
  newT:"➕ புதிய பயிர்",editT:"✏️ பயிரைத் திருத்து",fItem:"பயிர் (தம்புள்ளை பட்டியலிலிருந்து)",pick:"— தேர்ந்தெடுக்கவும் —",
  fName:"அல்லது வேறு பெயர்",fNamePh:"உ.ம்: தக்காளி – வயல் 2",fStart:"நடவு செய்த தேதி",fArea:"நிலம் (ஏக்கர், தேவையெனில்)",fAreaPh:"உ.ம்: 1 (40 பேர்ச் = 0.25)",
  fSeason:"போகம்",fOwnRate:"என் / குடும்ப வேலை ஒரு மணி நேர மதிப்பு (ரூ., தேவையெனில்)",fOwnRatePh:"உ.ம்: 250 — காலியாக விடலாம்",
@@ -486,7 +487,7 @@ ta:{
  gStart:"➕ என் பயிரைத் தொடங்கு",
  guide:[
   ["முதலில் உதாரணத்தைப் பாருங்கள்","\"👀 உதாரணத்தைப் பாருங்கள்\" அழுத்துங்கள். இரண்டு தக்காளிப் பயிர்களும் ஒரு மிளகாய்ப் பயிரும் உண்மையான மாதிரி எண்களுடன் காட்டும். அறிக்கையைப் பார்த்த பின் \"🗑️ உதாரணத்தை நீக்கு\" அழுத்துங்கள்."],
-  ["உங்கள் பயிரைச் சேருங்கள்","\"➕ புதிய பயிர்\" அழுத்தி தம்புள்ளை பட்டியலிலிருந்து பயிரைத் தேர்ந்தெடுங்கள். நடவுத் தேதி, ஏக்கர், எதிர்பார்க்கும் அறுவடையைச் சேருங்கள். சில தெரியாவிட்டாலும் தொடங்கலாம்."],
+  ["உங்கள் பயிரைச் சேருங்கள்","\"➕ புதிய பயிர்\" அழுத்தி தம்புள்ளை பட்டியலிலிருந்து பயிரைத் தேர்ந்தெடுங்கள். நடவுத் தேதி, ஏக்கர், எதிர்பார்க்கும் அறுவடையைச் சேருங்கள். சில தெரியாவிட்டாலும் தொடங்கலாம். \"🎯 வரவுசெலவு\" அழுத்தி செலவுகளைத் திட்டமிட்டு எதிர்பார்க்கும் இலாபத்தை முன்பே பாருங்கள்."],
   ["ஒவ்வொரு செலவையும் அன்றே எழுதுங்கள்","\"➖ செலவு\" அழுத்தி தொகையும் குறிப்பும் எழுதுங்கள். குறிப்பில் 'உரம்', 'விதை', 'லாரி' போன்ற சொல் இருந்தால் வகை தேர்ந்தெடுக்கப்படும். தவறெனில் மாற்றுங்கள். தேவையான வகை பட்டியலில் இல்லையெனில் \"➕ புதிய வகையைச் சேர்…\" தேர்ந்தெடுங்கள்."],
   ["வேலை மணி","\"⏱️ வேலை மணி\" அழுத்துங்கள். கூலித் தொழிலாளர்: நபர்கள் × மணி × கூலி செலவில் சேரும். உங்கள் / குடும்ப மணிகள் தனியாகக் கணக்கிடப்படும், செலவில் சேராது."],
   ["ஒவ்வொரு முறை விற்கும்போதும்","\"➕ விற்பனை\" அழுத்தி அளவு, விலை, யாருக்கு என்று எழுதுங்கள். அன்றைய தம்புள்ளை விலை உதவியாகக் காட்டும்."],
@@ -547,7 +548,7 @@ function migrateCrop(c){
   c.exp=Array.isArray(c.exp)?c.exp:[];c.inc=Array.isArray(c.inc)?c.inc:[];c.work=Array.isArray(c.work)?c.work:[];
   c.plan=c.plan&&typeof c.plan==="object"?c.plan:{};
   if(OLD_SEASON[c.season])c.season=OLD_SEASON[c.season];if(!['yala','maha','other',''].includes(c.season||''))c.season='';
-  if(!['kg','nut','bundle'].includes(c.unit))c.unit='kg';c.expQty=posNum(c.expQty);c.ownRate=posNum(c.ownRate);c.area=posNum(c.area)?String(posNum(c.area)):'';
+  if(!['kg','nut','bundle'].includes(c.unit))c.unit='kg';c.expQty=posNum(c.expQty);c.expPrice=posNum(c.expPrice);c.ownRate=posNum(c.ownRate);c.area=posNum(c.area)?String(posNum(c.area)):'';
   if(c.item!=null&&!/^\d{1,4}$/.test(String(c.item)))c.item=null;if(typeof c.e!=='string'||c.e.length>8)c.e='🌿';
   for(const k in c.plan){if(!/^[a-z0-9]{1,20}$/.test(k)||!(posNum(c.plan[k])>0))delete c.plan[k];}
   c.exp=c.exp.filter(x=>x&&posNum(x.amt)>0);c.inc=c.inc.filter(x=>x&&posNum(x.qty)>0&&parseFloat(x.price)>=0);c.work=c.work.filter(x=>x&&posNum(x.hours)>0);
@@ -620,20 +621,20 @@ document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>setLang(b.dat
 document.querySelectorAll("[data-pick]").forEach(b=>b.onclick=()=>{$("langModal").classList.add("hide");setLang(b.dataset.pick);});
 
 /* ================= VIEWS ================= */
-function show(v){VIEW=v;closeSheet();["list","form","crop","report","all","guide","backup"].forEach(x=>{const id="v"+x[0].toUpperCase()+x.slice(1);$(id).classList.toggle("hide",x!==v);});
-  const nv={form:"list",crop:"list",report:"list"}[v]||v;document.querySelectorAll("[data-nav]").forEach(b=>b.classList.toggle("on",b.dataset.nav===nv));
-  $("fab").classList.toggle("hide",!(v==="crop"||v==="list"));$("subTxt").classList.toggle("hide",v!=="list");window.scrollTo({top:0});render();}
+function show(v){VIEW=v;closeSheet();["list","form","crop","report","all","guide","backup","budget"].forEach(x=>{const id="v"+x[0].toUpperCase()+x.slice(1);$(id).classList.toggle("hide",x!==v);});
+  const nv={form:"list",crop:"list",report:"list",budget:"list"}[v]||v;document.querySelectorAll("[data-nav]").forEach(b=>b.classList.toggle("on",b.dataset.nav===nv));
+  $("fab").classList.toggle("hide",v!=="list");$("subTxt").classList.toggle("hide",v!=="list");window.scrollTo({top:0});render();}
 document.querySelectorAll("[data-nav]").forEach(b=>b.onclick=()=>{if(b.dataset.nav==="list")CUR=null;show(b.dataset.nav);});
 function fillCropPick(){const sel=$("sCrop");sel.innerHTML=DB.crops.map((c,i)=>`<option value="${i}">${esc((c.e||"🌿")+" "+displayName(c))}</option>`).join("");
   if(CUR==null||!DB.crops[CUR]){const r=DB.crops.findIndex(c=>!c.demo);CUR=r>=0?r:0;}sel.value=String(CUR);}
 function openSheet(tabId){const fromList=VIEW!=="crop";$("cropPickBox").classList.toggle("hide",!fromList||DB.crops.length<2);fillCropPick();
   $("sheetTitle").textContent=fromList?T("addT"):T("addT")+": "+displayName(DB.crops[CUR]);["eDate","iDate","wDate"].forEach(i=>{if(!$(i).value)$(i).value=today();});$("addCard").classList.add("open");$("sheetBg").classList.remove("hide");$("fab").classList.add("hide");if(tabId)$(tabId).click();}
-function closeSheet(){$("addCard").classList.remove("open");$("sheetBg").classList.add("hide");if(VIEW==="crop"||VIEW==="list")$("fab").classList.remove("hide");}
+function closeSheet(){$("addCard").classList.remove("open");$("sheetBg").classList.add("hide");if(VIEW==="list")$("fab").classList.remove("hide");}
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSheet();});
 function toast(m){const d=document.createElement("div");d.className="toast";d.textContent=m;document.body.appendChild(d);setTimeout(()=>d.remove(),1600);}
 function render(){
   $("demoBar").classList.toggle("hide",!hasDemo()||VIEW==="form");
-  if(VIEW==="list")renderList();else if(VIEW==="crop")renderCrop();else if(VIEW==="report")renderReport();else if(VIEW==="all")renderAll();else if(VIEW==="guide")renderGuide();else if(VIEW==="backup")renderBackup();
+  if(VIEW==="list")renderList();else if(VIEW==="crop")renderCrop();else if(VIEW==="report")renderReport();else if(VIEW==="all")renderAll();else if(VIEW==="guide")renderGuide();else if(VIEW==="backup")renderBackup();else if(VIEW==="budget")renderBudget();
 }
 
 /* ---- list ---- */
@@ -748,6 +749,7 @@ $("addInc").onclick=()=>{const q=parseFloat($("iQty").value),p=parseFloat($("iPr
   DB.crops[CUR].inc.push({date:$("iDate").value||today(),qty:q,price:p,where:$("iWhere").value.trim()});$("iQty").value="";$("iPrice").value="";$("iWhere").value="";save();render();closeSheet();toast(T("added"));};
 $("backBtn").onclick=()=>{CUR=null;show("list");};
 $("reportBtn").onclick=()=>show("report");
+$("budgetBtn").onclick=()=>show("budget");
 $("editBtn").onclick=()=>{const c=DB.crops[CUR];EDIT=CUR;$("formTitle").textContent=T("editT");$("fItem").value=c.item||"";$("fName").value=(c.item&&NAMES[c.item]&&c.name===NAMES[c.item].si)?"":c.name;$("fStart").value=c.start||"";$("fArea").value=parseFloat(c.area)||"";$("fSeason").value=c.season||"";$("fOwnRate").value=c.ownRate||"";$("fExp").value=c.expQty||"";$("fUnit").value=c.unit||"kg";show("form");};
 $("delCrop").onclick=function(){if(!this.dataset.armed){this.dataset.armed=1;this.textContent=T("delSure");setTimeout(()=>{delete this.dataset.armed;this.textContent=T("delCrop");},4000);return;}
   DB.crops.splice(CUR,1);CUR=null;save();show("list");};
@@ -842,6 +844,26 @@ function renderReport(){
 
   $("vReport").innerHTML=h;
   $("vReport").querySelectorAll(".pin").forEach(inp=>inp.onchange=()=>{const v=parseFloat(inp.value)||0;if(v>0)c.plan[inp.dataset.cat]=v;else delete c.plan[inp.dataset.cat];save();const y=window.scrollY;renderReport();window.scrollTo({top:y});});
+}
+
+/* ---- budget (crop plan) ---- */
+function renderBudget(){
+  const c=DB.crops[CUR];if(!c){show("list");return;}const t=totals(c),u=unitName(c.unit),r=todayRange(c),mid=r?Math.round((r.lo+r.hi)/2):0;
+  const ids=allCatIds();let P=0;ids.forEach(id=>P+=(+c.plan[id]||0));
+  const price=c.expPrice||mid,EI=c.expQty&&price?c.expQty*price:0,EP=EI-P;
+  let h=`<div class="card"><div class="row noprint" style="justify-content:space-between"><button class="btn" type="button" data-act="crop">${T("bBack")}</button><button class="btn" type="button" data-act="print">${T("rPrint")}</button></div>
+   <h2 style="font-size:22px;margin:12px 0 4px">${T("bTitle")}</h2><p class="note" style="margin:0 0 4px">${esc(c.e||"🌿")} ${esc(displayName(c))}</p><p class="note" style="margin:0">${T("bIntro")}</p></div>`;
+  h+=`<div class="card"><div class="sum"><div><span>${T("bPlanned")}</span><b>${nf(P)}</b></div><div><span>${T("bExpInc")}</span><b class="pos">${EI?nf(EI):"—"}</b></div><div><span>${T("bExpProf")}</span><b class="${EP>=0?"pos":"neg"}">${EI?nf(EP):"—"}</b></div></div>
+   ${P?`<div class="sbar"><i style="width:${Math.min(100,pct(t.cost,P))}%;background:${t.cost>P?"var(--up)":"var(--petrol)"}"></i></div><p class="note" style="margin:5px 0 12px">${T("bSpentAll",pct(t.cost,P))}</p>`:""}
+   <label for="bPrice">${T("bPriceL")}</label><input id="bPrice" class="noprint" type="number" inputmode="decimal" min="0" value="${c.expPrice||""}" placeholder="${mid?esc(T("bPricePh",mid)):""}">
+   <p class="note" style="margin:6px 0 0">${c.expQty?(EI?`${num(c.expQty)} ${u} × ${money(price)} ${c.expPrice?"":T("bByToday")}`:""):T("bNeedExp")}</p></div>`;
+  h+=`<div class="card"><h2>${T("bLimitsH")}</h2><p class="note" style="margin-top:-4px">${T("bLimitsNote")}</p>`+ids.map(id=>{const pl=+c.plan[id]||0,a=t.byCat[id]||0,ov=pl&&a>pl;
+     return `<div style="display:grid;grid-template-columns:1fr 120px;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #eee5d3"><div><b style="font-size:15px">${catName(id)}</b><div class="note">${T("bSpent",money(a))}${pl?` · <span class="${ov?"neg":""}">${ov?T("overBy",money(a-pl)):T("leftBy",money(pl-a))}</span>`:""}</div>${pl?`<div class="pb"><i class="${ov?"over":""}" style="width:${Math.min(100,pct(a,pl))}%"></i></div>`:""}</div>
+     <input class="bin pin" type="number" inputmode="numeric" min="0" data-cat="${id}" value="${pl||""}" placeholder="0" aria-label="${esc(T("thPlan"))}" style="width:120px"></div>`;}).join("")+`</div>`;
+  $("vBudget").innerHTML=h;
+  const keep=f=>{save();const y=window.scrollY;renderBudget();window.scrollTo({top:y});};
+  $("bPrice").onchange=()=>{c.expPrice=Math.max(0,parseFloat($("bPrice").value)||0);keep();};
+  $("vBudget").querySelectorAll(".bin").forEach(inp=>inp.onchange=()=>{const v=parseFloat(inp.value)||0;if(v>0)c.plan[inp.dataset.cat]=v;else delete c.plan[inp.dataset.cat];keep();});
 }
 
 /* ---- all crops ---- */
