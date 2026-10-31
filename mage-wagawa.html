@@ -874,7 +874,7 @@ async function sharePdf(src,btn){
     body.querySelectorAll(".noprint").forEach(e=>e.remove());
     body.querySelectorAll("input.pin").forEach(i=>{const sp=document.createElement("span");sp.textContent=i.value?nf(+i.value):"—";sp.style.fontFamily="JetBrains Mono,monospace";i.replaceWith(sp);});
     while(body.firstChild)wrap.appendChild(body.firstChild);
-    const foot=document.createElement("p");foot.className="note";foot.innerHTML=T("disc")+"<br>"+T("pdfBy")+" "+today()+" · topgoviya.lk/mage-wagawa.html";wrap.appendChild(foot);
+    const foot=document.createElement("p");foot.className="note";foot.innerHTML=T("disc")+"<br>"+T("pdfBy")+" "+today()+" · topgoviya.lk/mage-wagawa.html";foot.style.margin="14px 0 0";const lastCard=[...wrap.children].reverse().find(e=>e.classList.contains("card"));(lastCard||wrap).appendChild(foot);
     document.body.appendChild(wrap);
     const scale=2.5,canvas=await html2canvas(wrap,{scale,backgroundColor:"#f4efe4",useCORS:true,logging:false});
     /* split pages between cards, never through the middle of one if it fits */
