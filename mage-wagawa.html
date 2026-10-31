@@ -83,7 +83,10 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .bnav button{font:inherit;flex:1;max-width:120px;border:0;background:none;color:var(--muted);font-size:13px;font-weight:700;padding:6px 2px;border-radius:12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
 .bnav button span{font-size:22px;line-height:1}
 .bnav button.on{background:#e3efe6;color:var(--petrol)}
-.fab{position:fixed;right:18px;bottom:calc(92px + env(safe-area-inset-bottom,0px));width:62px;height:62px;border-radius:50%;border:0;background:var(--petrol);color:#fff;font-size:34px;line-height:1;cursor:pointer;box-shadow:0 10px 24px -8px rgba(14,79,74,.7);z-index:31}
+.fab{position:fixed;right:16px;bottom:calc(92px + env(safe-area-inset-bottom,0px));height:62px;padding:0 22px 0 14px;border-radius:31px;border:0;background:var(--petrol);color:#fff;font:inherit;font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 10px 24px -8px rgba(14,79,74,.7);z-index:31;display:flex;align-items:center;gap:8px}
+.fabPlus{font-size:36px;line-height:1;font-weight:400;margin-top:-3px}
+#vList{padding-bottom:76px}
+.tabs button{flex-direction:column;gap:2px;min-height:74px;padding:8px 6px}.tabs button b{font-size:15px}.tabs button small{font-size:12px;font-weight:600;opacity:.8;line-height:1.25}
 .sum{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:12px 0 8px}
 .sum span{display:block;font-size:13.5px;color:var(--muted)}.sum>div{min-width:0}.sum b{font-family:'JetBrains Mono',monospace;font-size:clamp(12px,4.6vw,18px);font-weight:800;white-space:nowrap;display:block;overflow:hidden;text-overflow:clip}
 .sbar{height:12px;background:#efe8d8;border-radius:8px;overflow:hidden}.sbar i{display:block;height:100%;background:var(--petrol);border-radius:8px}
@@ -96,7 +99,7 @@ details.more summary::-webkit-details-marker{display:none}
 #addCard.open{position:fixed;left:0;right:0;bottom:0;margin:0 auto;max-width:820px;z-index:41;border-radius:20px 20px 0 0;max-height:88vh;overflow-y:auto;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px));box-shadow:0 -20px 40px -20px rgba(0,0,0,.4)}
 #addCard:not(.open){display:none}
 .sheetHead{display:flex;justify-content:space-between;align-items:center;margin:0 0 10px}
-.toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:#fff;padding:9px 16px;border-radius:999px;font-weight:700;z-index:60;font-size:14px}
+.toast{position:fixed;left:50%;bottom:calc(168px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:#fff;padding:9px 16px;border-radius:999px;font-weight:700;z-index:60;font-size:14px}
 @media print{.bnav,.fab,.sheetBg{display:none!important}}
 @media print{.top,.noprint,.btn,.lang,.banner{display:none!important}body{background:#fff}.card{border:0;padding:0 0 10px}.pin{border:0}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
@@ -143,6 +146,7 @@ details.more summary::-webkit-details-marker{display:none}
     <p class="note" id="cMeta"></p>
     <div class="sum"><div><span id="lInc"></span><b id="mInc" class="pos">0</b></div><div><span id="lCost"></span><b id="mCost">0</b></div><div><span id="lProf"></span><b id="mProf">0</b></div></div>
     <div class="sbar"><i id="mBar" style="width:0%"></i></div><p class="note" id="mBarTxt" style="margin:5px 0 12px"></p>
+    <div class="row noprint" style="margin:0 0 10px;gap:10px"><button class="btn big" id="qExp" type="button" data-t="addCostBig" style="flex:1;justify-content:center;color:var(--up);border-color:#e6b9b1"></button><button class="btn big" id="qInc" type="button" data-t="addSaleBig" style="flex:1;justify-content:center;color:var(--dn);border-color:#b9d6c3"></button></div>
     <button class="btn gold big noprint" id="reportBtn" type="button" data-t="reportBtn" style="width:100%;justify-content:center;margin:0 0 6px"></button>
   </div>
   <div id="alerts"></div>
@@ -162,41 +166,6 @@ details.more summary::-webkit-details-marker{display:none}
     <div class="today" id="ownBox" style="background:var(--soft);border-color:var(--line)"></div>
     </details>
   </div>
-  <div id="sheetBg" class="sheetBg hide"></div>
-  <div class="card noprint" id="addCard">
-    <div class="sheetHead"><h2 style="margin:0" data-t="addT"></h2><button class="btn" id="sheetClose" type="button" aria-label="Close">✕</button></div>
-    <div class="tabs"><button class="btn solid" id="tExp" type="button" data-t="tExp"></button><button class="btn" id="tWork" type="button" data-t="tWork"></button><button class="btn" id="tInc" type="button" data-t="tInc"></button></div>
-    <div id="formExp">
-      <div class="grid2">
-        <div><label data-t="date"></label><input id="eDate" type="date"></div>
-        <div><label data-t="amt"></label><input id="eAmt" type="number" inputmode="decimal" min="0"></div>
-      </div>
-      <div style="margin-top:8px"><label data-t="noteL"></label><input id="eNote" data-tp="notePh"></div>
-      <div style="margin-top:8px"><label data-t="catL"></label><select id="eCat"></select><p class="hint" id="catHint"></p></div>
-      <button class="btn solid" id="addExp" type="button" data-t="addExp" style="margin-top:6px"></button>
-    </div>
-    <div id="formWork" class="hide">
-      <div class="grid3">
-        <div><label data-t="date"></label><input id="wDate" type="date"></div>
-        <div><label data-t="task"></label><select id="wTask"></select></div>
-        <div><label data-t="who"></label><select id="wWho"><option value="own"></option><option value="hired"></option></select></div>
-        <div><label data-t="people"></label><input id="wPeople" type="number" inputmode="numeric" min="1" value="1"></div>
-        <div><label data-t="hours"></label><input id="wHours" type="number" inputmode="decimal" min="0" step="0.5"></div>
-        <div><label id="wRateLbl"></label><input id="wRate" type="number" inputmode="decimal" min="0"></div>
-      </div>
-      <p class="note" id="wHint"></p>
-      <button class="btn solid" id="addWork" type="button" data-t="addWork" style="margin-top:6px"></button>
-    </div>
-    <div id="formInc" class="hide">
-      <div class="grid3">
-        <div><label data-t="date"></label><input id="iDate" type="date"></div>
-        <div><label data-t="qty"></label><input id="iQty" type="number" inputmode="decimal" min="0"></div>
-        <div><label data-t="price"></label><input id="iPrice" type="number" inputmode="decimal" min="0"></div>
-      </div>
-      <div style="margin-top:8px"><label data-t="where"></label><input id="iWhere" data-tp="wherePh"></div>
-      <button class="btn solid" id="addInc" type="button" data-t="addInc" style="margin-top:10px"></button>
-    </div>
-  </div>
   <div class="card">
     <h2 data-t="ledgerH"></h2>
     <div class="tw"><table><thead><tr><th data-t="thDate"></th><th data-t="thDesc"></th><th class="n" data-t="thRs"></th><th class="noprint"></th></tr></thead><tbody id="ledger"></tbody></table></div>
@@ -212,7 +181,44 @@ details.more summary::-webkit-details-marker{display:none}
 <p class="note" data-t="disc"></p>
 </main>
 
-<button class="fab noprint hide" id="fab" type="button" aria-label="Add">+</button>
+  <div id="sheetBg" class="sheetBg hide"></div>
+  <div class="card noprint" id="addCard">
+    <div class="sheetHead"><h2 style="margin:0" id="sheetTitle"></h2><button class="btn" id="sheetClose" type="button" aria-label="Close">✕</button></div>
+    <div id="cropPickBox" style="margin:0 0 12px"><label data-t="whichCrop"></label><select id="sCrop"></select></div>
+    <p class="note" style="margin:0 0 6px" data-t="whatAdd"></p>
+    <div class="tabs"><button class="btn solid" id="tExp" type="button"><b data-t="tExp"></b><small data-t="tExpD"></small></button><button class="btn" id="tInc" type="button"><b data-t="tInc"></b><small data-t="tIncD"></small></button><button class="btn" id="tWork" type="button"><b data-t="tWork"></b><small data-t="tWorkD"></small></button></div>
+    <div id="formExp">
+      <div class="grid2">
+        <div><label data-t="date"></label><input id="eDate" type="date"></div>
+        <div><label data-t="amt"></label><input id="eAmt" type="number" inputmode="decimal" min="0"></div>
+      </div>
+      <div style="margin-top:8px"><label data-t="noteL"></label><input id="eNote" data-tp="notePh"></div>
+      <div style="margin-top:8px"><label data-t="catL"></label><select id="eCat"></select><p class="hint" id="catHint"></p></div>
+      <button class="btn solid big" id="addExp" type="button" data-t="addExp" style="margin-top:12px;width:100%;justify-content:center"></button>
+    </div>
+    <div id="formWork" class="hide">
+      <div class="grid3">
+        <div><label data-t="date"></label><input id="wDate" type="date"></div>
+        <div><label data-t="task"></label><select id="wTask"></select></div>
+        <div><label data-t="who"></label><select id="wWho"><option value="own"></option><option value="hired"></option></select></div>
+        <div><label data-t="people"></label><input id="wPeople" type="number" inputmode="numeric" min="1" value="1"></div>
+        <div><label data-t="hours"></label><input id="wHours" type="number" inputmode="decimal" min="0" step="0.5"></div>
+        <div><label id="wRateLbl"></label><input id="wRate" type="number" inputmode="decimal" min="0"></div>
+      </div>
+      <p class="note" id="wHint"></p>
+      <button class="btn solid big" id="addWork" type="button" data-t="addWork" style="margin-top:12px;width:100%;justify-content:center"></button>
+    </div>
+    <div id="formInc" class="hide">
+      <div class="grid3">
+        <div><label data-t="date"></label><input id="iDate" type="date"></div>
+        <div><label data-t="qty"></label><input id="iQty" type="number" inputmode="decimal" min="0"></div>
+        <div><label data-t="price"></label><input id="iPrice" type="number" inputmode="decimal" min="0"></div>
+      </div>
+      <div style="margin-top:8px"><label data-t="where"></label><input id="iWhere" data-tp="wherePh"></div>
+      <button class="btn solid big" id="addInc" type="button" data-t="addInc" style="margin-top:12px;width:100%;justify-content:center"></button>
+    </div>
+  </div>
+<button class="fab noprint hide" id="fab" type="button"><span class="fabPlus">+</span><span data-t="fabTxt"></span></button>
 <nav class="bnav noprint" aria-label="Menu">
   <button type="button" data-nav="list"><span>🌾</span><em data-t="navCrops" style="font-style:normal"></em></button>
   <button type="button" data-nav="all"><span>📊</span><em data-t="navAll" style="font-style:normal"></em></button>
@@ -247,7 +253,7 @@ si:{
  bNever:"💾 තවම Backup එකක් ගත්තේ නැත",bDays:d=>`💾 දින ${d}ක් Backup එකක් ගත්තේ නැත`,
  bD:"ෆෝන් එක නැති වුණොත් දත්තත් නැති වෙනවා. Backup ගොනුව Google Drive හෝ WhatsApp එකට යවා තබාගන්න.",bNow:"💾 දැන් Backup ගන්න",
  imported:n=>`✔ වගා ${n}ක් ඇතුළත් විය`,badFile:"මෙය වලංගු Backup ගොනුවක් නොවේ",saveErr:"සුරැකීමට නොහැකි විය. Backup එකක් බාගන්න: ",
- listCost:"වියදම",listInc:"ආදායම",growing:"🌱 වගාව යමින් පවතී",growNote:"තවම විකුණුම් නැත — ලාභය විකුණුම් පටන් ගත් පසු පෙන්වයි.",profitShort:"ලාභය",shareBtn:"📤 Backup එක WhatsApp / Drive එකට යවන්න",bkHow:"මෙම ගොනුව විවෘත කරන්න අවශ්‍ය නැත — WhatsApp / Drive එකේ තබාගන්න පමණයි. අලුත් ෆෝන් එකේ \"📂 Backup එකක් ඇතුළත් කරන්න\" ඔබන්න.",fMine:"මගේ වගා",fDemo:"උදාහරණ",navCrops:"මගේ වගා",staleP:d=>`⚠️ දඹුල්ල මිල දින ${d}ක් පරණයි — අලුත් මිල තවම ලැබී නැත.`,privNote:"🔒 ඔබේ වගා දත්ත කිසිවෙකුටත් යවන්නේ නැත — ඒවා මෙම ෆෝන් එකේ පමණයි. පිටුව කී දෙනෙක් භාවිතා කරනවාද කියා ගණන් කිරීමට පමණක් නම් නොදැක්වෙන Google Analytics භාවිතා වේ.",sharePdf:"📤 WhatsApp එකට යවන්න (PDF)",pdfMaking:"⏳ PDF සකසමින්…",pdfFail:"PDF සෑදීමට නොහැකි විය. අන්තර්ජාලය තිබේදැයි බලා නැවත උත්සාහ කරන්න, නැත්නම් 🖨️ මුද්‍රණය භාවිතා කරන්න.",pdfSaved:"✔ PDF බාගත විය",pdfBy:"TopGoviya.lk · මගේ වගාව · සකස් කළේ",navAll:"සියල්ල",navBk:"Backup",navGuide:"උදව්",addT:"එකතු කරන්න",added:"✔ එකතු විය",more:"📋 වැඩි විස්තර",costShare:p=>`ආදායමෙන් ${p}%ක් වියදමට ගියා`,noSalesYet:"තවම විකුණුම් නැත",
+ listCost:"වියදම",listInc:"ආදායම",growing:"🌱 වගාව යමින් පවතී",growNote:"තවම විකුණුම් නැත — ලාභය විකුණුම් පටන් ගත් පසු පෙන්වයි.",profitShort:"ලාභය",shareBtn:"📤 Backup එක WhatsApp / Drive එකට යවන්න",bkHow:"මෙම ගොනුව විවෘත කරන්න අවශ්‍ය නැත — WhatsApp / Drive එකේ තබාගන්න පමණයි. අලුත් ෆෝන් එකේ \"📂 Backup එකක් ඇතුළත් කරන්න\" ඔබන්න.",fMine:"මගේ වගා",fDemo:"උදාහරණ",navCrops:"මගේ වගා",fabTxt:"වියදම / විකුණුම",whichCrop:"කුමන වගාවටද?",whatAdd:"ඔබ එකතු කරන්නේ මොකක්ද?",addCostBig:"➖ වියදමක් දාන්න",addSaleBig:"➕ විකුණුමක් දාන්න",tExpD:"පොහොර, පැළ, ප්‍රවාහනය…",tIncD:"අස්වැන්න විකුණුවා",tWorkD:"කුලී / පවුලේ වැඩ",staleP:d=>`⚠️ දඹුල්ල මිල දින ${d}ක් පරණයි — අලුත් මිල තවම ලැබී නැත.`,privNote:"🔒 ඔබේ වගා දත්ත කිසිවෙකුටත් යවන්නේ නැත — ඒවා මෙම ෆෝන් එකේ පමණයි. පිටුව කී දෙනෙක් භාවිතා කරනවාද කියා ගණන් කිරීමට පමණක් නම් නොදැක්වෙන Google Analytics භාවිතා වේ.",sharePdf:"📤 WhatsApp එකට යවන්න (PDF)",pdfMaking:"⏳ PDF සකසමින්…",pdfFail:"PDF සෑදීමට නොහැකි විය. අන්තර්ජාලය තිබේදැයි බලා නැවත උත්සාහ කරන්න, නැත්නම් 🖨️ මුද්‍රණය භාවිතා කරන්න.",pdfSaved:"✔ PDF බාගත විය",pdfBy:"TopGoviya.lk · මගේ වගාව · සකස් කළේ",navAll:"සියල්ල",navBk:"Backup",navGuide:"උදව්",addT:"එකතු කරන්න",added:"✔ එකතු විය",more:"📋 වැඩි විස්තර",costShare:p=>`ආදායමෙන් ${p}%ක් වියදමට ගියා`,noSalesYet:"තවම විකුණුම් නැත",
  newT:"➕ අලුත් වගාවක්",editT:"✏️ වගාව සංස්කරණය",fItem:"බෝගය (දඹුල්ල ලැයිස්තුවෙන්)",pick:"— තෝරන්න —",
  fName:"හෝ වෙනත් නමක්",fNamePh:"උදා: තක්කාලි – පිටිය 2",fStart:"වගා කළ දිනය",fArea:"ඉඩම (අක්කර, අවශ්‍ය නම්)",fAreaPh:"උදා: 1 (පර්චස් 40 = 0.25)",
  fSeason:"කන්නය",fOwnRate:"මගේ / පවුලේ වැඩ පැයක වටිනාකම (රු., අවශ්‍ය නම්)",fOwnRatePh:"උදා: 250 — හිස්ව තැබිය හැක",
@@ -333,7 +339,7 @@ en:{
  bNever:"💾 You haven't saved a backup yet",bDays:d=>`💾 No backup for ${d} days`,
  bD:"If the phone is lost, the data is lost too. Send the backup file to Google Drive or WhatsApp to keep it safe.",bNow:"💾 Back up now",
  imported:n=>`✔ ${n} crops restored`,badFile:"This is not a valid backup file",saveErr:"Could not save. Download a backup now: ",
- listCost:"Cost",listInc:"Income",growing:"🌱 Crop growing",growNote:"No sales yet — profit shows once you start selling.",profitShort:"Profit",shareBtn:"📤 Send backup to WhatsApp / Drive",bkHow:"You don't need to open this file — just keep it in WhatsApp or Drive. On a new phone tap \"📂 Restore a backup\".",fMine:"My crops",fDemo:"Examples",navCrops:"My crops",staleP:d=>`⚠️ The Dambulla price is ${d} days old — no newer price yet.`,privNote:"🔒 Your crop records are never sent anywhere — they stay on this phone only. Anonymous Google Analytics is used only to count how many people use the page.",sharePdf:"📤 Send on WhatsApp (PDF)",pdfMaking:"⏳ Making PDF…",pdfFail:"Could not make the PDF. Check your internet and try again, or use 🖨️ Print.",pdfSaved:"✔ PDF downloaded",pdfBy:"TopGoviya.lk · My Crop · made on",navAll:"All",navBk:"Backup",navGuide:"Guide",addT:"Add",added:"✔ Added",more:"📋 More details",costShare:p=>`${p}% of income went on costs`,noSalesYet:"No sales yet",
+ listCost:"Cost",listInc:"Income",growing:"🌱 Crop growing",growNote:"No sales yet — profit shows once you start selling.",profitShort:"Profit",shareBtn:"📤 Send backup to WhatsApp / Drive",bkHow:"You don't need to open this file — just keep it in WhatsApp or Drive. On a new phone tap \"📂 Restore a backup\".",fMine:"My crops",fDemo:"Examples",navCrops:"My crops",fabTxt:"Cost / Sale",whichCrop:"Which crop?",whatAdd:"What do you want to add?",addCostBig:"➖ Add a cost",addSaleBig:"➕ Add a sale",tExpD:"fertilizer, seeds, transport…",tIncD:"harvest sold",tWorkD:"hired / family work",staleP:d=>`⚠️ The Dambulla price is ${d} days old — no newer price yet.`,privNote:"🔒 Your crop records are never sent anywhere — they stay on this phone only. Anonymous Google Analytics is used only to count how many people use the page.",sharePdf:"📤 Send on WhatsApp (PDF)",pdfMaking:"⏳ Making PDF…",pdfFail:"Could not make the PDF. Check your internet and try again, or use 🖨️ Print.",pdfSaved:"✔ PDF downloaded",pdfBy:"TopGoviya.lk · My Crop · made on",navAll:"All",navBk:"Backup",navGuide:"Guide",addT:"Add",added:"✔ Added",more:"📋 More details",costShare:p=>`${p}% of income went on costs`,noSalesYet:"No sales yet",
  newT:"➕ New crop",editT:"✏️ Edit crop",fItem:"Crop (from Dambulla list)",pick:"— Choose —",
  fName:"Or another name",fNamePh:"e.g. Tomato – field 2",fStart:"Planting date",fArea:"Land (acres, optional)",fAreaPh:"e.g. 1 (40 perches = 0.25)",
  fSeason:"Season",fOwnRate:"Value of 1 hour of my / family work (Rs., optional)",fOwnRatePh:"e.g. 250 — can leave empty",
@@ -418,7 +424,7 @@ ta:{
  bNever:"💾 இன்னும் Backup எடுக்கவில்லை",bDays:d=>`💾 ${d} நாட்களாக Backup இல்லை`,
  bD:"தொலைபேசி தொலைந்தால் தரவும் தொலையும். Backup கோப்பை Google Drive அல்லது WhatsApp-க்கு அனுப்பி வையுங்கள்.",bNow:"💾 இப்போது Backup எடு",
  imported:n=>`✔ ${n} பயிர்கள் மீட்டெடுக்கப்பட்டன`,badFile:"இது சரியான Backup கோப்பு அல்ல",saveErr:"சேமிக்க முடியவில்லை. இப்போது Backup பதிவிறக்கவும்: ",
- listCost:"செலவு",listInc:"வருமானம்",growing:"🌱 பயிர் வளர்கிறது",growNote:"இன்னும் விற்பனை இல்லை — விற்கத் தொடங்கியதும் இலாபம் காட்டும்.",profitShort:"இலாபம்",shareBtn:"📤 Backup-ஐ WhatsApp / Drive-க்கு அனுப்பு",bkHow:"இந்தக் கோப்பைத் திறக்கத் தேவையில்லை — WhatsApp அல்லது Drive-இல் வைத்திருங்கள். புதிய தொலைபேசியில் \"📂 Backup-ஐ மீட்டெடு\" அழுத்துங்கள்.",fMine:"என் பயிர்கள்",fDemo:"உதாரணங்கள்",navCrops:"என் பயிர்கள்",staleP:d=>`⚠️ தம்புள்ளை விலை ${d} நாட்கள் பழையது — புதிய விலை இன்னும் வரவில்லை.`,privNote:"🔒 உங்கள் பயிர்ப் பதிவுகள் எங்கும் அனுப்பப்படுவதில்லை — இந்தத் தொலைபேசியில் மட்டுமே. பக்கத்தை எத்தனை பேர் பயன்படுத்துகிறார்கள் என்று எண்ண மட்டும் பெயரற்ற Google Analytics பயன்படுகிறது.",sharePdf:"📤 WhatsApp-இல் அனுப்பு (PDF)",pdfMaking:"⏳ PDF தயாராகிறது…",pdfFail:"PDF உருவாக்க முடியவில்லை. இணையத்தைச் சரிபார்த்து மீண்டும் முயலுங்கள், அல்லது 🖨️ அச்சு பயன்படுத்துங்கள்.",pdfSaved:"✔ PDF பதிவிறக்கப்பட்டது",pdfBy:"TopGoviya.lk · என் பயிர் · உருவாக்கியது",navAll:"எல்லாம்",navBk:"Backup",navGuide:"உதவி",addT:"சேர்",added:"✔ சேர்க்கப்பட்டது",more:"📋 மேலும் விவரம்",costShare:p=>`வருமானத்தில் ${p}% செலவுக்குப் போனது`,noSalesYet:"இன்னும் விற்பனை இல்லை",
+ listCost:"செலவு",listInc:"வருமானம்",growing:"🌱 பயிர் வளர்கிறது",growNote:"இன்னும் விற்பனை இல்லை — விற்கத் தொடங்கியதும் இலாபம் காட்டும்.",profitShort:"இலாபம்",shareBtn:"📤 Backup-ஐ WhatsApp / Drive-க்கு அனுப்பு",bkHow:"இந்தக் கோப்பைத் திறக்கத் தேவையில்லை — WhatsApp அல்லது Drive-இல் வைத்திருங்கள். புதிய தொலைபேசியில் \"📂 Backup-ஐ மீட்டெடு\" அழுத்துங்கள்.",fMine:"என் பயிர்கள்",fDemo:"உதாரணங்கள்",navCrops:"என் பயிர்கள்",fabTxt:"செலவு / விற்பனை",whichCrop:"எந்தப் பயிருக்கு?",whatAdd:"எதைச் சேர்க்கிறீர்கள்?",addCostBig:"➖ செலவைச் சேர்",addSaleBig:"➕ விற்பனையைச் சேர்",tExpD:"உரம், விதை, போக்குவரத்து…",tIncD:"அறுவடை விற்றது",tWorkD:"கூலி / குடும்ப வேலை",staleP:d=>`⚠️ தம்புள்ளை விலை ${d} நாட்கள் பழையது — புதிய விலை இன்னும் வரவில்லை.`,privNote:"🔒 உங்கள் பயிர்ப் பதிவுகள் எங்கும் அனுப்பப்படுவதில்லை — இந்தத் தொலைபேசியில் மட்டுமே. பக்கத்தை எத்தனை பேர் பயன்படுத்துகிறார்கள் என்று எண்ண மட்டும் பெயரற்ற Google Analytics பயன்படுகிறது.",sharePdf:"📤 WhatsApp-இல் அனுப்பு (PDF)",pdfMaking:"⏳ PDF தயாராகிறது…",pdfFail:"PDF உருவாக்க முடியவில்லை. இணையத்தைச் சரிபார்த்து மீண்டும் முயலுங்கள், அல்லது 🖨️ அச்சு பயன்படுத்துங்கள்.",pdfSaved:"✔ PDF பதிவிறக்கப்பட்டது",pdfBy:"TopGoviya.lk · என் பயிர் · உருவாக்கியது",navAll:"எல்லாம்",navBk:"Backup",navGuide:"உதவி",addT:"சேர்",added:"✔ சேர்க்கப்பட்டது",more:"📋 மேலும் விவரம்",costShare:p=>`வருமானத்தில் ${p}% செலவுக்குப் போனது`,noSalesYet:"இன்னும் விற்பனை இல்லை",
  newT:"➕ புதிய பயிர்",editT:"✏️ பயிரைத் திருத்து",fItem:"பயிர் (தம்புள்ளை பட்டியலிலிருந்து)",pick:"— தேர்ந்தெடுக்கவும் —",
  fName:"அல்லது வேறு பெயர்",fNamePh:"உ.ம்: தக்காளி – வயல் 2",fStart:"நடவு செய்த தேதி",fArea:"நிலம் (ஏக்கர், தேவையெனில்)",fAreaPh:"உ.ம்: 1 (40 பேர்ச் = 0.25)",
  fSeason:"போகம்",fOwnRate:"என் / குடும்ப வேலை ஒரு மணி நேர மதிப்பு (ரூ., தேவையெனில்)",fOwnRatePh:"உ.ம்: 250 — காலியாக விடலாம்",
@@ -616,10 +622,13 @@ document.querySelectorAll("[data-pick]").forEach(b=>b.onclick=()=>{$("langModal"
 /* ================= VIEWS ================= */
 function show(v){VIEW=v;closeSheet();["list","form","crop","report","all","guide","backup"].forEach(x=>{const id="v"+x[0].toUpperCase()+x.slice(1);$(id).classList.toggle("hide",x!==v);});
   const nv={form:"list",crop:"list",report:"list"}[v]||v;document.querySelectorAll("[data-nav]").forEach(b=>b.classList.toggle("on",b.dataset.nav===nv));
-  $("fab").classList.toggle("hide",v!=="crop");$("subTxt").classList.toggle("hide",v!=="list");window.scrollTo({top:0});render();}
+  $("fab").classList.toggle("hide",!(v==="crop"||v==="list"));$("subTxt").classList.toggle("hide",v!=="list");window.scrollTo({top:0});render();}
 document.querySelectorAll("[data-nav]").forEach(b=>b.onclick=()=>{if(b.dataset.nav==="list")CUR=null;show(b.dataset.nav);});
-function openSheet(tabId){["eDate","iDate","wDate"].forEach(i=>{if(!$(i).value)$(i).value=today();});$("addCard").classList.add("open");$("sheetBg").classList.remove("hide");$("fab").classList.add("hide");if(tabId)$(tabId).click();}
-function closeSheet(){$("addCard").classList.remove("open");$("sheetBg").classList.add("hide");if(VIEW==="crop")$("fab").classList.remove("hide");}
+function fillCropPick(){const sel=$("sCrop");sel.innerHTML=DB.crops.map((c,i)=>`<option value="${i}">${esc((c.e||"🌿")+" "+displayName(c))}</option>`).join("");
+  if(CUR==null||!DB.crops[CUR]){const r=DB.crops.findIndex(c=>!c.demo);CUR=r>=0?r:0;}sel.value=String(CUR);}
+function openSheet(tabId){const fromList=VIEW!=="crop";$("cropPickBox").classList.toggle("hide",!fromList||DB.crops.length<2);fillCropPick();
+  $("sheetTitle").textContent=fromList?T("addT"):T("addT")+": "+displayName(DB.crops[CUR]);["eDate","iDate","wDate"].forEach(i=>{if(!$(i).value)$(i).value=today();});$("addCard").classList.add("open");$("sheetBg").classList.remove("hide");$("fab").classList.add("hide");if(tabId)$(tabId).click();}
+function closeSheet(){$("addCard").classList.remove("open");$("sheetBg").classList.add("hide");if(VIEW==="crop"||VIEW==="list")$("fab").classList.remove("hide");}
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSheet();});
 function toast(m){const d=document.createElement("div");d.className="toast";d.textContent=m;document.body.appendChild(d);setTimeout(()=>d.remove(),1600);}
 function render(){
@@ -706,7 +715,9 @@ function renderCrop(){
 function confirmTwice(b){if(b.dataset.armed)return true;b.dataset.armed=1;b.textContent="✔?";setTimeout(()=>{delete b.dataset.armed;b.textContent="✕";},3000);return false;}
 function tab(n){[["tExp","formExp"],["tWork","formWork"],["tInc","formInc"]].forEach(([b,f])=>{$(b).classList.toggle("solid",b===n);$(f).classList.toggle("hide",b!==n);});}
 $("tExp").onclick=()=>tab("tExp");
-$("fab").onclick=()=>openSheet("tExp");$("sheetClose").onclick=closeSheet;$("sheetBg").onclick=closeSheet;
+$("fab").onclick=()=>{if(!DB.crops.length){newCrop();return;}openSheet("tExp");};
+$("sCrop").onchange=()=>{CUR=+$("sCrop").value;salePh();};
+$("qExp").onclick=()=>openSheet("tExp");$("qInc").onclick=()=>openSheet("tInc");$("sheetClose").onclick=closeSheet;$("sheetBg").onclick=closeSheet;
 $("tWork").onclick=()=>{tab("tWork");whoHint();};
 function whoHint(){const own=$("wWho").value==="own";$("wRateLbl").textContent=own?T("rateOwn"):T("rateHired");
   $("wRate").disabled=own;if(own)$("wRate").value="";$("wHint").textContent=own?T("hintOwn"):T("hintHired");}
