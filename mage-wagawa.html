@@ -98,6 +98,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .fab{position:fixed;right:16px;bottom:calc(92px + env(safe-area-inset-bottom,0px));height:62px;padding:0 22px 0 14px;border-radius:31px;border:0;background:var(--petrol);color:#fff;font:inherit;font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 10px 24px -8px rgba(14,79,74,.7);z-index:31;display:flex;align-items:center;gap:8px}
 .fabPlus{font-size:36px;line-height:1;font-weight:400;margin-top:-3px}
 #vList{padding-bottom:112px}
+.sumG{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.sumB{border-radius:14px;padding:12px 14px;border:1px solid var(--line);min-width:0}.sumB span{display:block;font-size:14px;color:var(--muted);font-weight:700}.sumB b{display:block;font-family:'JetBrains Mono',monospace;font-size:clamp(14px,4.2vw,22px);margin-top:4px;white-space:nowrap}.sumB.c{background:var(--cream)}.sumB.i{background:#e3efe6}.sumB.p{grid-column:1/-1;background:#e3efe6;border:2px solid var(--petrol)}.sumB.p.l{background:#f7e6e2;border-color:#b23a2e}.sumB.p b{font-size:clamp(26px,8vw,36px)}.sumB small{display:block;font-size:13px;color:var(--muted);margin-top:4px}
 .tabs button{flex-direction:column;gap:2px;min-height:74px;padding:8px 6px}.tabs button b{font-size:15px}.tabs button small{font-size:12px;font-weight:600;opacity:.8;line-height:1.25}
 .sum{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:12px 0 8px}
 .sum span{display:block;overflow-wrap:anywhere;font-size:13.5px;color:var(--muted)}.sum>div{min-width:0}.sum b{font-family:'JetBrains Mono',monospace;font-size:clamp(12px,4.6vw,18px);font-weight:800;white-space:nowrap;display:block;overflow:hidden;text-overflow:clip}
@@ -260,7 +261,7 @@ si:{
  title:"🌾 මගේ වගාව",
  sub:"වගාවේ වියදම්, අස්වැන්න හා ලාභය සටහන් කරන්න. අද දඹුල්ල මිලට විකුණුවොත් ලාභය කීයද බලන්න. නොමිලේ. ඔබේ දත්ත ඔබේ ෆෝන් එකේ පමණයි.",
  rs:"රු. ",hrs:"පැය",
- myCrops:"මගේ වගා",listSumH:"📊 සියලු වගා එකට",newCrop:"➕ අලුත් වගාවක්",seeDemo:"👀 උදාහරණය බලන්න",
+ myCrops:"මගේ වගා",listSumH:"📊 සියලු වගා එකට",sumCost:"මුළු වගා වියදම",sumInc:"මුළු ආදායම",sumProf:"දැනට ලැබූ ලාභය",sumLoss:"දැනට පාඩුව",sumF:"ආදායම − වියදම",newCrop:"➕ අලුත් වගාවක්",seeDemo:"👀 උදාහරණය බලන්න",
  emptyT:"තවම වගාවක් නැත",emptyD:"මුලින්ම උදාහරණය බලන්න. වියදම්, විකුණුම් හා වාර්තාව සැබෑ ලෙස පෙනෙන හැටි පෙන්වයි. පස්සේ ඔබේම වගාව එකතු කරන්න.",
  demoBanner:"👀 මේ <b>උදාහරණ දත්ත</b> — බලන්න පමණයි. ඔබේ සැබෑ වගාව පටන් ගන්න කලින් මකන්න.",demoDel:"🗑️ උදාහරණ මකන්න",demoTag:"උදාහරණය",
  allBtn:"📊 සියලු වගා එකට",guideBtn:"📖 භාවිතා කරන හැටි",
@@ -340,7 +341,7 @@ en:{
  title:"🌾 My Crop",
  sub:"Record your crop costs, harvest and profit. See your profit if you sell at today's Dambulla price. Free. Your data stays on your phone only.",
  rs:"Rs. ",hrs:"hrs",
- myCrops:"My crops",listSumH:"📊 All crops together",newCrop:"➕ New crop",seeDemo:"👀 See an example",
+ myCrops:"My crops",listSumH:"📊 All crops together",sumCost:"Total crop cost",sumInc:"Total income",sumProf:"Profit so far",sumLoss:"Loss so far",sumF:"Income − Cost",newCrop:"➕ New crop",seeDemo:"👀 See an example",
  emptyT:"No crops yet",emptyD:"Look at the example first. It shows how costs, sales and the report look with real-style numbers. Then add your own crop.",
  demoBanner:"👀 This is <b>example data</b>, just to look at. Delete it before you start your real crop.",demoDel:"🗑️ Delete example",demoTag:"example",
  allBtn:"📊 All crops together",guideBtn:"📖 How to use",
@@ -419,7 +420,7 @@ ta:{
  title:"🌾 என் பயிர்",
  sub:"பயிர் செலவு, அறுவடை, இலாபத்தைப் பதிவு செய்யுங்கள். இன்றைய தம்புள்ளை விலையில் விற்றால் இலாபம் எவ்வளவு என்று பாருங்கள். இலவசம். உங்கள் தரவு உங்கள் தொலைபேசியில் மட்டுமே.",
  rs:"ரூ. ",hrs:"மணி",
- myCrops:"என் பயிர்கள்",listSumH:"📊 எல்லா பயிர்களும் சேர்த்து",newCrop:"➕ புதிய பயிர்",seeDemo:"👀 உதாரணத்தைப் பாருங்கள்",
+ myCrops:"என் பயிர்கள்",listSumH:"📊 எல்லா பயிர்களும் சேர்த்து",sumCost:"மொத்தப் பயிர்ச் செலவு",sumInc:"மொத்த வருமானம்",sumProf:"இதுவரை இலாபம்",sumLoss:"இதுவரை நட்டம்",sumF:"வருமானம் − செலவு",newCrop:"➕ புதிய பயிர்",seeDemo:"👀 உதாரணத்தைப் பாருங்கள்",
  emptyT:"இன்னும் பயிர் இல்லை",emptyD:"முதலில் உதாரணத்தைப் பாருங்கள். செலவு, விற்பனை, அறிக்கை உண்மையில் எப்படித் தெரியும் என்று காட்டும். பிறகு உங்கள் பயிரைச் சேர்க்கவும்.",
  demoBanner:"👀 இது <b>உதாரணத் தரவு</b> — பார்ப்பதற்கு மட்டும். உங்கள் உண்மையான பயிரைத் தொடங்கும் முன் நீக்கவும்.",demoDel:"🗑️ உதாரணத்தை நீக்கு",demoTag:"உதாரணம்",
  allBtn:"📊 எல்லா பயிர்களும் ஒன்றாக",guideBtn:"📖 பயன்படுத்தும் முறை",
@@ -660,7 +661,7 @@ function backupBanner(){
 function renderList(){
   let h=(BROKEN?`<div class="banner red noprint"><b>${T("brokenH")}</b><br>${T("brokenD")}<div class="row"><button class="btn" type="button" data-act="brokenDl">${T("brokenBtn")}</button><button class="btn" type="button" data-nav-go="backup">💾 Backup</button></div></div>`:"")+backupBanner()+listAlerts();
   {const pool=realCrops().length?realCrops():DB.crops;if(pool.length>=2){let C=0,I=0;pool.forEach(c=>{const t=totals(c);C+=t.cost;I+=t.inc;});const P=I-C;
-    h+=`<div class="card" data-nav-go="all" style="cursor:pointer"><h2 style="margin:0">${T("listSumH")}</h2><div class="stats"><div class="st"><span>${T("listCost")}</span><b class="neg">${money(C)}</b></div><div class="st"><span>${T("listInc")}</span><b class="pos">${money(I)}</b></div><div class="st"><span>${T("profitShort")}</span><b class="${P>=0?"pos":"neg"}">${money(P)}</b></div></div></div>`;}}
+    h+=`<div class="card" data-nav-go="all" style="cursor:pointer"><h2 style="margin:0">${T("listSumH")}</h2><div class="sumG"><div class="sumB c"><span>${T("sumCost")}</span><b class="neg">${money(C)}</b></div><div class="sumB i"><span>${T("sumInc")}</span><b class="pos">${money(I)}</b></div><div class="sumB p${P<0?" l":""}"><span>${P<0?T("sumLoss"):T("sumProf")}</span><b class="${P>=0?"pos":"neg"}">${money(P)}</b><small>${T("sumF")}</small></div></div></div>`;}}
   h+=`<div class="card"><div class="row" style="justify-content:space-between"><h2 style="margin:0">${T("myCrops")}</h2><button class="btn solid" type="button" data-act="new">${T("newCrop")}</button></div><div class="crops" style="margin-top:12px">`;
   if(!DB.crops.length)h+=`<div class="crop" style="cursor:default"><div class="nm">${T("emptyT")}</div><p class="note" style="margin:4px 0 10px">${T("emptyD")}</p><button class="btn gold big" type="button" data-act="demo">${T("seeDemo")}</button></div>`;
   else h+=DB.crops.map((c,i)=>{const t=totals(c);return `<div class="crop" data-i="${i}"><div class="row" style="justify-content:space-between"><span class="nm">${esc(c.e||"🌿")} ${esc(displayName(c))}</span>${t.inc>0||!t.cost?`<span class="big ${t.prof>=0?"pos":"neg"}" style="font-size:18px">${money(t.prof)}</span>`:`<span class="grow">${T("growing")}</span>`}</div>
