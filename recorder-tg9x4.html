@@ -98,6 +98,8 @@ video.hid{position:absolute;left:-9999px;width:2px;height:2px}
     <h2>4️⃣ Export</h2>
     <label class="opt"><input type="radio" name="fmt" value="16:9" checked> 📺 YouTube (16:9 · 1920×1080)</label>
     <label class="opt"><input type="radio" name="fmt" value="9:16"> 📱 Shorts / Reels / TikTok (9:16 · 1080×1920)</label>
+    <label class="opt"><input type="checkbox" id="optUrl" checked> 🔒 උඩින් URL තීරුව පෙන්වන්න</label>
+    <input type="text" id="urlTxt" value="topgoviya.lk" style="width:100%;margin:0 0 6px;font-family:'JetBrains Mono',monospace">
     <label class="opt"><input type="checkbox" id="optIntro" checked> TopGoviya මාතෘකා පිටුව (තත්පර 3)</label>
     <input type="text" id="introTxt" value="topgoviya.lk භාවිතා කරන හැටි" style="width:100%;margin:0 0 6px">
     <label class="opt"><input type="checkbox" id="optOutro" checked> අවසාන පිටුව: topgoviya.lk + Subscribe (තත්පර 3)</label>
@@ -196,10 +198,23 @@ function srcRect(t,outAR){
 }
 
 /* ---------------- drawing ---------------- */
+const urlOn=()=>$("optUrl").checked;
+const barH=(CW,CH)=>urlOn()?Math.round(Math.min(CW,CH)*(CW<CH?.085:.062)):0;
+function urlBar(ctx,CW,bh){
+  ctx.fillStyle="#0e4f4a";ctx.fillRect(0,0,CW,bh);
+  ctx.fillStyle="#a9802a";ctx.fillRect(0,bh-Math.max(3,bh*.06),CW,Math.max(3,bh*.06));
+  const r=bh*.11,cy=bh*.47;["#e7d3a3","#c9b07a","#a9802a"].forEach((c,i)=>{ctx.fillStyle=c;ctx.beginPath();ctx.arc(bh*.42+i*r*3,cy,r,0,7);ctx.fill();});
+  const px=bh*.42+r*9,pw=CW-px-bh*.42,ph=bh*.6,py=cy-ph/2;
+  ctx.fillStyle="#fffdf7";ctx.beginPath();if(ctx.roundRect)ctx.roundRect(px,py,pw,ph,ph/2);else ctx.rect(px,py,pw,ph);ctx.fill();
+  let fs=ph*.52;const txt="🔒 "+($("urlTxt").value.trim()||"topgoviya.lk");
+  ctx.font="700 "+fs+"px 'JetBrains Mono',monospace";while(ctx.measureText(txt).width>pw-ph&&fs>8){fs-=1;ctx.font="700 "+fs+"px 'JetBrains Mono',monospace";}
+  ctx.fillStyle="#0e4f4a";ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(txt,px+ph*.5,cy+1);ctx.textBaseline="alphabetic";
+}
 function drawFrame(ctx,CW,CH,t){
   ctx.fillStyle="#0a3a36";ctx.fillRect(0,0,CW,CH);
-  const outAR=CW/CH,[sx,sy,sw,sh]=srcRect(t,outAR);
-  try{ctx.drawImage(vS,sx,sy,sw,sh,0,0,CW,CH);}catch(e){}
+  const bh=barH(CW,CH),[sx,sy,sw,sh]=srcRect(t,CW/(CH-bh));
+  try{ctx.drawImage(vS,sx,sy,sw,sh,0,bh,CW,CH-bh);}catch(e){}
+  if(bh)urlBar(ctx,CW,bh);
   if(camURL&&vC.readyState>=2){
     const d=Math.round(Math.min(CW,CH)*parseFloat($("camSize").value)),m=Math.round(Math.min(CW,CH)*.035),p=$("camPos").value;
     const x=p.includes("r")?CW-d-m:m,y=p.includes("b")?CH-d-m:m;
@@ -231,7 +246,7 @@ function drawPreview(){
   const W=vS.videoWidth||16,H=vS.videoHeight||9,sc=Math.min(1280/W,720/H),dw=W*sc,dh=H*sc,ox=(1280-dw)/2,oy=(720-dh)/2;
   try{g.drawImage(vS,ox,oy,dw,dh);}catch(e){}
   // show the output frame as a box
-  const outAR=document.querySelector('input[name=fmt]:checked').value==="9:16"?9/16:16/9,[sx,sy,sw,sh]=srcRect(t,outAR);
+  const nineP=document.querySelector('input[name=fmt]:checked').value==="9:16",PW=nineP?1080:1920,PH=nineP?1920:1080,[sx,sy,sw,sh]=srcRect(t,PW/(PH-barH(PW,PH)));
   g.strokeStyle="#d4ad55";g.lineWidth=3;g.setLineDash([10,6]);g.strokeRect(ox+sx*sc,oy+sy*sc,sw*sc,sh*sc);g.setLineDash([]);
   if(camURL){if(Math.abs(vC.currentTime-t-camOffset)>.3&&vS.paused)vC.currentTime=Math.max(0,t+camOffset);
     const d=Math.round(sh*sc*.24),x=ox+(sx+sw)*sc-d-10,y=oy+(sy+sh)*sc-d-10;g.save();g.beginPath();g.arc(x+d/2,y+d/2,d/2,0,7);g.clip();try{const c=Math.min(vC.videoWidth,vC.videoHeight);g.drawImage(vC,(vC.videoWidth-c)/2,(vC.videoHeight-c)/2,c,c,x,y,d,d);}catch(e){}g.restore();}
@@ -361,6 +376,7 @@ $("expBtn").onclick=async()=>{
   status("✔ ඩවුන්ලෝඩ් විය ("+ext.toUpperCase()+")");$("expInfo").textContent="✔ "+a.download+(ext==="webm"?" — මෙම browser එක MP4 සහාය නොදක්වයි; WebM ද YouTube එකට දැමිය හැක.":"");
 };
 document.querySelectorAll('input[name=fmt]').forEach(r=>r.onchange=drawPreview);
+$("optUrl").onchange=()=>{$("urlTxt").disabled=!urlOn();drawPreview();};
 </script>
 <div id="tg-copy-wrap" style="text-align:center;font-size:12px;line-height:1.6;color:#7a7264;max-width:900px;margin:8px auto 76px;padding:0 16px"><span id="tg-copy">© 2026 TopGoviya.lk · සියලු හිමිකම් ඇවිරිණි / All rights reserved · මිල දත්ත: මහ බැංකුව, HARTI, DEA (නිල මූලාශ්‍ර) / Price data: CBSL, HARTI &amp; DEA · <a href="/contact.html">සම්බන්ධ වන්න / Contact</a> · <a href="/useful-links.html">සබැඳි / Links</a></span></div>
 <script defer src="/events.js?v=1"></script>
