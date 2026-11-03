@@ -32,6 +32,8 @@ select,input[type=text]{font:inherit;font-size:14px;padding:6px 8px;border:1px s
 .tl .trim{position:absolute;top:0;bottom:0;background:rgba(14,79,74,.14);border-left:4px solid var(--petrol);border-right:4px solid var(--petrol)}
 .tl .ph{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--red)}
 .tl .zm{position:absolute;top:8px;height:30px;background:var(--gold);border-radius:6px;opacity:.85;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.tl .ct{position:absolute;top:0;bottom:0;z-index:2;cursor:pointer;background:repeating-linear-gradient(45deg,rgba(178,58,46,.6) 0 4px,rgba(178,58,46,.25) 4px 8px)}
+.tl .ct:hover{outline:2px solid var(--red)}
 .time{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted)}
 .zl{list-style:none;margin:0;padding:0;font-size:13px}.zl li{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:5px 0;border-bottom:1px dashed var(--line)}
 .rec-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--red);animation:bl 1s infinite}@keyframes bl{50%{opacity:.2}}
@@ -84,8 +86,16 @@ video.hid{position:absolute;left:-9999px;width:2px;height:2px}
       <span style="font-size:13px">කාලය</span><select id="zDur"><option value="2.5">2.5 s</option><option value="4" selected>4 s</option><option value="6">6 s</option></select></div>
     <ul class="zl" id="zList"><li style="color:var(--muted)">තවම zoom නැත</li></ul>
   </div>
+  <div class="card" style="margin-bottom:14px">
+    <h2>3️⃣ ✂️ Auto Cutter</h2>
+    <p class="hint" style="margin:0 0 8px">කතා නොකරන (නිශ්ශබ්ද) කොටස් ස්වයංක්‍රීයව හොයලා කපනවා. Zoom හා trim එලෙසම තියෙනවා.</p>
+    <div class="row"><span style="font-size:13px">අවම නිශ්ශබ්දය</span><select id="cutMin"><option value="0.5">0.5 s</option><option value="0.8" selected>0.8 s</option><option value="1.2">1.2 s</option><option value="2">2 s</option></select>
+      <span style="font-size:13px">කැපීම</span><select id="cutSens"><option value="0.2">මෘදු</option><option value="0.3" selected>මධ්‍යම</option><option value="0.42">තද</option></select></div>
+    <div class="row" style="margin:0"><button class="btn solid" id="cutBtn" type="button" disabled>✂️ නිශ්ශබ්ද කොටස් හොයන්න</button><button class="btn" id="cutClr" type="button" hidden>✕ ඔක්කොම ඉවත් කරන්න</button></div>
+    <p class="hint" id="cutInfo">වීඩියෝවක් record / open කළාට පස්සේ ඔබන්න.</p>
+  </div>
   <div class="card">
-    <h2>3️⃣ Export</h2>
+    <h2>4️⃣ Export</h2>
     <label class="opt"><input type="radio" name="fmt" value="16:9" checked> 📺 YouTube (16:9 · 1920×1080)</label>
     <label class="opt"><input type="radio" name="fmt" value="9:16"> 📱 Shorts / Reels / TikTok (9:16 · 1080×1920)</label>
     <label class="opt"><input type="checkbox" id="optIntro" checked> TopGoviya මාතෘකා පිටුව (තත්පර 3)</label>
@@ -103,7 +113,7 @@ video.hid{position:absolute;left:-9999px;width:2px;height:2px}
 <script>
 const $=id=>document.getElementById(id);
 const cv=$("cv"),g=cv.getContext("2d"),vS=$("vScreen"),vC=$("vCam");
-let lastRaw=null,recSeconds=0,screenURL=null,camURL=null,zooms=[],trimA=0,trimB=0,dur=0,exporting=false,camOffset=0;
+let cuts=[],lastRaw=null,recSeconds=0,screenURL=null,camURL=null,zooms=[],trimA=0,trimB=0,dur=0,exporting=false,camOffset=0;
 const LOGO=new Image();LOGO.src="icon-512x512.png";
 const fmt=s=>{s=Math.max(0,s);return Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0");};
 const status=t=>$("status").textContent=t;
@@ -161,8 +171,8 @@ async function loadScreen(blob,camBlob){
   if(camURL){await meta(vC);await fixDuration(vC,recSeconds);}
   if(!dur)dur=recSeconds||1;
   $("saveRaw").hidden=false;
-  trimA=0;trimB=dur;zooms=[];renderZooms();
-  ["playBtn","tStart","tEnd","expBtn"].forEach(id=>$(id).disabled=false);
+  trimA=0;trimB=dur;zooms=[];renderZooms();cuts=[];renderCuts();$("cutInfo").textContent="✂️ ඕන නම් නිශ්ශබ්ද කොටස් හොයන්න ඔබන්න.";
+  ["playBtn","tStart","tEnd","expBtn","cutBtn"].forEach(id=>$(id).disabled=false);
   status("✔ වීඩියෝව සූදානම් · "+fmt(dur));vS.currentTime=0;drawPreview();
 }
 
@@ -228,7 +238,13 @@ function drawPreview(){
   $("ph").style.left=(dur?t/dur*100:0)+"%";$("clock").textContent=fmt(t)+" / "+fmt(dur);
   $("trim").style.left=(dur?trimA/dur*100:0)+"%";$("trim").style.width=(dur?(trimB-trimA)/dur*100:0)+"%";
 }
-function loop(){if(!exporting)drawPreview();requestAnimationFrame(loop);}loop();
+function loop(){
+  if(!exporting){
+    if(!vS.paused&&!vS.seeking&&cuts.length){const c=cutAt(vS.currentTime);if(c){vS.currentTime=Math.min(c.b,dur);if(camURL)vC.currentTime=c.b+camOffset;}}
+    drawPreview();
+  }
+  requestAnimationFrame(loop);
+}loop();
 
 /* ---------------- editor controls ---------------- */
 $("playBtn").onclick=togglePlay;
@@ -236,8 +252,8 @@ function togglePlay(){if(!dur)return;if(vS.paused){if(vS.currentTime>=trimB-.05)
 vS.onended=()=>{vC.pause();$("playBtn").textContent="▶ Play";};
 document.addEventListener("keydown",e=>{if(e.code==="Space"&&e.target.tagName!=="INPUT"){e.preventDefault();togglePlay();}});
 $("tl").onclick=e=>{if(!dur)return;const r=$("tl").getBoundingClientRect();vS.currentTime=Math.max(0,Math.min(dur,(e.clientX-r.left)/r.width*dur));if(camURL)vC.currentTime=vS.currentTime+camOffset;};
-$("tStart").onclick=()=>{trimA=Math.min(vS.currentTime,trimB-1);};
-$("tEnd").onclick=()=>{trimB=Math.max(vS.currentTime,trimA+1);};
+$("tStart").onclick=()=>{trimA=Math.min(vS.currentTime,trimB-1);cutSummary();};
+$("tEnd").onclick=()=>{trimB=Math.max(vS.currentTime,trimA+1);cutSummary();};
 cv.onclick=e=>{if(!dur)return;const r=cv.getBoundingClientRect(),px=(e.clientX-r.left)/r.width*1280,py=(e.clientY-r.top)/r.height*720;
   const W=vS.videoWidth,H=vS.videoHeight,sc=Math.min(1280/W,720/H),ox=(1280-W*sc)/2,oy=(720-H*sc)/2;
   const x=(px-ox)/(W*sc),y=(py-oy)/(H*sc);if(x<0||x>1||y<0||y>1)return;
@@ -248,6 +264,54 @@ function renderZooms(){
   zooms.forEach(z=>{const d=document.createElement("div");d.className="zm";d.style.left=(z.t/dur*100)+"%";d.style.width=(z.d/dur*100)+"%";d.textContent="🔍";$("tl").appendChild(d);});
 }
 $("zList").onclick=e=>{const d=e.target.dataset;if(d.del!=null){zooms.splice(+d.del,1);renderZooms();}if(d.go!=null){vS.currentTime=Math.max(0,zooms[+d.go].t-.5);}};
+
+/* ---------------- auto cutter ---------------- */
+const cutAt=t=>cuts.find(c=>t>=c.a&&t<c.b);
+/* loudness (dB per window) -> list of silent parts to cut */
+function silencesFromDb(db,step,sens,minS){
+  const N=db.length;if(N<10)return null;
+  const sorted=Array.from(db).sort((a,b)=>a-b),floor=sorted[Math.floor(N*.1)],speech=sorted[Math.floor(N*.95)];
+  if(speech-floor<6)return null; // no clear voice in the recording
+  const thr=floor+(speech-floor)*sens,pad=.15,out=[];
+  // ignore tiny sound blips (< 0.15 s) inside silence
+  const q=Array.from(db,v=>v<thr),blip=Math.max(1,Math.round(.15/step));
+  for(let i=0;i<N;){if(q[i]){i++;continue;}let j=i;while(j<N&&!q[j])j++;if(j-i<blip&&i>0&&j<N&&q[i-1]&&q[j])for(let k=i;k<j;k++)q[k]=true;i=j;}
+  let st=-1;
+  for(let i=0;i<=N;i++){const quiet=i<N&&q[i];
+    if(quiet&&st<0)st=i;
+    if(!quiet&&st>=0){const a=st*step,b=i*step;if(b-a>=minS){const ca=st===0?0:a+pad,cb=i===N?b:b-pad;if(cb-ca>.2)out.push({a:+ca.toFixed(3),b:+cb.toFixed(3)});}st=-1;}}
+  return out;
+}
+async function findSilences(){
+  if(!lastRaw)return;
+  const btn=$("cutBtn");btn.disabled=true;btn.textContent="⏳ ශබ්දය පරීක්ෂා කරමින්…";status("⏳ ශබ්දය පරීක්ෂා කරමින්…");
+  try{
+    const oac=new OfflineAudioContext(1,1,8000),ab=await oac.decodeAudioData(await lastRaw.arrayBuffer());
+    const sr=ab.sampleRate,ch=ab.numberOfChannels,data=[];for(let c=0;c<ch;c++)data.push(ab.getChannelData(c));
+    const win=Math.max(1,Math.round(sr*.05)),N=Math.floor(ab.length/win),db=new Float32Array(N);
+    for(let i=0;i<N;i++){let s=0;for(let j=i*win,e=j+win;j<e;j++){let v=0;for(let c=0;c<ch;c++)v+=data[c][j];v/=ch;s+=v*v;}db[i]=10*Math.log10(s/win+1e-12);}
+    const res=silencesFromDb(db,win/sr,parseFloat($("cutSens").value),parseFloat($("cutMin").value));
+    if(res===null){cuts=[];renderCuts();$("cutInfo").textContent="⚠️ පැහැදිලි කටහඬක් හමු නොවුණා (මයික් එක off ද?). කපන්න දෙයක් නෑ.";}
+    else{cuts=res.filter(c=>c.a<dur).map(c=>({a:c.a,b:Math.min(c.b,dur)}));renderCuts();
+      if(!cuts.length)$("cutInfo").textContent="✔ කපන්න තරම් දිග නිශ්ශබ්ද කොටස් නැහැ.";}
+    status("✔ ශබ්ද පරීක්ෂාව ඉවරයි");
+  }catch(e){$("cutInfo").textContent="⚠️ ශබ්දය කියවන්න බැරි වුණා: "+e.message;status("⚠️ Auto Cutter දෝෂයක්");}
+  btn.disabled=false;btn.textContent="✂️ නැවත හොයන්න";
+}
+function keptLen(){let k=trimB-trimA;for(const c of cuts)k-=Math.max(0,Math.min(c.b,trimB)-Math.max(c.a,trimA));return Math.max(0,k);}
+function cutSummary(){
+  $("cutClr").hidden=!cuts.length;if(!cuts.length)return;
+  const saved=(trimB-trimA)-keptLen();
+  $("cutInfo").innerHTML=`✂️ තැන් <b>${cuts.length}</b>ක් කපනවා · තත්පර <b>${Math.round(saved)}</b>ක් ඉතුරුයි · අවසාන දිග <b>${fmt(keptLen())}</b><br>රතු ඉරි = කපන කොටස්. එකක් තියාගන්න ඕන නම් ඒ රතු කොටස මත <b>ක්ලික්</b> කරන්න.`;
+}
+function renderCuts(){
+  $("tl").querySelectorAll(".ct").forEach(e=>e.remove());
+  cuts.forEach((c,i)=>{const d=document.createElement("div");d.className="ct";d.style.left=(c.a/dur*100)+"%";d.style.width=Math.max(.25,(c.b-c.a)/dur*100)+"%";
+    d.title="ක්ලික් = මෙම කැපීම ඉවත් කරන්න ("+fmt(c.a)+")";d.onclick=e=>{e.stopPropagation();cuts.splice(i,1);renderCuts();if(!cuts.length)$("cutInfo").textContent="කැපීම් සියල්ල ඉවත් කළා.";};$("tl").appendChild(d);});
+  cutSummary();
+}
+$("cutBtn").onclick=findSilences;
+$("cutClr").onclick=()=>{cuts=[];renderCuts();$("cutInfo").textContent="කැපීම් සියල්ල ඉවත් කළා.";};
 
 /* ---------------- export ---------------- */
 let audioCtx=null,srcNode=null,expDest=null;
@@ -262,21 +326,31 @@ $("expBtn").onclick=async()=>{
   const ext=mime.startsWith("video/mp4")?"mp4":"webm",chunks=[];
   const rec=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:nine?9e6:10e6});rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);
   exporting=true;$("expBtn").disabled=true;status("⏳ Export වෙමින්…");
-  const intro=$("optIntro").checked?3:0,outro=$("optOutro").checked?3:0,body=trimB-trimA,total=intro+body+outro;
+  const intro=$("optIntro").checked?3:0,outro=$("optOutro").checked?3:0,body=keptLen(),total=intro+body+outro;
   try{await document.fonts.load("800 60px 'Noto Sans Sinhala'");await document.fonts.load("800 60px 'Hanken Grotesk'");}catch(e){}
-  vS.pause();vC.pause();vS.currentTime=trimA;if(camURL)vC.currentTime=trimA+camOffset;
+  vS.pause();vC.pause();let st0=trimA;const c0=cutAt(st0);if(c0)st0=c0.b;vS.currentTime=st0;if(camURL)vC.currentTime=st0+camOffset;
   await new Promise(r=>setTimeout(r,300));
-  rec.start(500);const t0=performance.now();let phase="intro",bodyStarted=false;
+  rec.start(500);const t0=performance.now();let bodyStarted=false,bodyDone=false,outroT=0,seeking=false,pausedMs=0,pauseT=0;
+  /* jump over a cut: pause the recorder while the video seeks, so the gap is not in the file */
+  function jumpTo(b){seeking=true;pauseT=performance.now();try{rec.pause();}catch(e){}
+    const fin=()=>{if(!seeking)return;seeking=false;vS.removeEventListener("seeked",fin);pausedMs+=performance.now()-pauseT;
+      drawFrame(ox,CW,CH,vS.currentTime);try{if(rec.state==="paused")rec.resume();}catch(e){}};
+    vS.addEventListener("seeked",fin);setTimeout(fin,1500);vS.currentTime=b;if(camURL)vC.currentTime=b+camOffset;}
+  function endBody(){vS.pause();vC.pause();bodyDone=true;outroT=performance.now();}
   await new Promise(done=>{
     function tick(){
-      const el=(performance.now()-t0)/1000;$("prog").style.width=Math.min(100,el/total*100)+"%";
+      const el=(performance.now()-t0-pausedMs)/1000;$("prog").style.width=Math.min(100,el/total*100)+"%";
       if(el<intro){card(ox,CW,CH,"intro",Math.min(1,el/.4,(intro-el)/.4));}
-      else if(el<intro+body){
+      else if(!bodyDone){
         if(!bodyStarted){bodyStarted=true;vS.play();if(camURL)vC.play();}
-        if(vS.currentTime>=trimB||vS.ended){vS.pause();vC.pause();}
-        drawFrame(ox,CW,CH,vS.currentTime);
-      }else if(el<total){vS.pause();vC.pause();card(ox,CW,CH,"outro",Math.min(1,(el-intro-body)/.4,(total-el)/.4));}
-      else{rec.stop();return;}
+        if(!seeking){const t=vS.currentTime;
+          if(t>=trimB-.02||vS.ended)endBody();
+          else{const c=cutAt(t);if(c){if(c.b>=trimB)endBody();else jumpTo(c.b);}}}
+        if(!bodyDone&&!seeking)drawFrame(ox,CW,CH,vS.currentTime);
+      }
+      if(bodyDone){const oe=(performance.now()-outroT)/1000;
+        if(oe<outro)card(ox,CW,CH,"outro",Math.min(1,oe/.4,(outro-oe)/.4));
+        else{rec.stop();return;}}
       requestAnimationFrame(tick);
     }
     rec.onstop=done;tick();
