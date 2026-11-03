@@ -38,8 +38,7 @@
   .sub{color:var(--gold);font-weight:700;margin:0 0 10px}
   .lead{margin:0;color:var(--soft);max-width:62ch}
   .neutral{margin:8px 0 0;font-size:14px;color:var(--soft);max-width:62ch}
-  .frompr{margin:0 0 12px;padding:12px 14px;border-radius:12px;background:var(--card);border:1px solid var(--line2);font-size:14.5px;line-height:1.5}
-  .frompr a{font-weight:700;color:var(--petrol)}
+  .state.fp{border-style:solid;border-color:var(--line2)}
   .hint a{color:var(--petrol);font-weight:700}
   .cathint{margin-top:8px;padding:10px 12px;background:#fdf3d9;border:1px solid #e6c97a;border-left:4px solid var(--gold);border-radius:10px;font-size:14.5px;color:var(--ink);line-height:1.5}
   .cathint::before{content:"💡 "}
@@ -165,7 +164,6 @@
   <button class="side" aria-pressed="false" data-side="Want"><span data-t="tabWant">🔍 සොයනවා</span><small id="nWant"></small></button>
 </div>
 
-<p class="frompr" id="fromPrice" hidden></p>
 <div class="tools" id="tools">
   <select id="fDist" aria-label="District"></select>
   <select id="fCat" aria-label="Category"></select>
@@ -520,8 +518,21 @@ var T = {
     });
     $("count").textContent = list.length ? t("showing").replace("%N", list.length) : "";
     if (!mine.length) { g.innerHTML = '<div class="state"><p>' + esc(t(side === "Sell" ? "emptySell" : "emptyWant")) + "</p></div>"; return; }
+    if (!list.length && FROM && q === FROM.item.toLowerCase() && !d && !c) {
+      var EM = { si: { seller: "තවම %N ගන්න සොයන දැන්වීම් නැහැ. ඔබේ %N දැන්වීම පළමු එක වෙන්න පුළුවන්.", buyer: "තවම %N විකිණීමට දැන්වීම් නැහැ. ඔබට %N ඕන බව දැන්වීමක් දාන්න, විකුණන අයට ඔබව හොයාගන්න පුළුවන්." },
+                 ta: { seller: "இன்னும் %N வாங்கத் தேடும் விளம்பரங்கள் இல்லை. உங்கள் %N விளம்பரம் முதலாவதாக இருக்கலாம்.", buyer: "இன்னும் %N விற்பனை விளம்பரங்கள் இல்லை. உங்களுக்குத் தேவை என்று விளம்பரம் இடுங்கள், விற்பவர்கள் உங்களைக் கண்டுபிடிப்பார்கள்." },
+                 en: { seller: "No one has posted a want-to-buy ad for %N yet. Your %N ad could be the first.", buyer: "No %N for sale yet. Post a want-to-buy ad so sellers can find you." } };
+      var em = (EM[lang] || EM.si)[FROM.as].replace(/%N/g, FROM.item);
+      g.innerHTML = '<div class="state"><p>' + esc(em) + '</p><a class="add" href="#add">' + esc(t("addBtn")) + "</a></div>"; return;
+    }
     if (!list.length) { g.innerHTML = '<div class="state"><p>' + esc(t("noMatch")) + "</p></div>"; return; }
     g.innerHTML = list.map(card).join("");
+    if (FROM && q === FROM.item.toLowerCase()) {
+      var IV = { si: { seller: "ඔබටත් %N විකුණන්න තියෙනවද? නොමිලේ දැන්වීමක් දාන්න.", buyer: "ඔබට ඕන %N හමු නොවුණාද? ගන්න ඕන බව නොමිලේ දැන්වීමක් දාන්න." },
+                 ta: { seller: "உங்களிடமும் %N விற்க உள்ளதா? இலவச விளம்பரம் இடுங்கள்.", buyer: "தேவையான %N கிடைக்கவில்லையா? இலவச \"வாங்க வேண்டும்\" விளம்பரம் இடுங்கள்." },
+                 en: { seller: "Have %N to sell too? Post a free ad.", buyer: "Didn't find the %N you need? Post a free want-to-buy ad." } };
+      g.innerHTML += '<div class="state fp"><p>' + esc((IV[lang] || IV.si)[FROM.as].replace(/%N/g, FROM.item)) + '</p><a class="add" href="#add">' + esc(t("addBtn")) + "</a></div>";
+    }
   }
   $("grid").addEventListener("click", function (e) {
     var p = e.target.closest(".itph");
@@ -655,16 +666,11 @@ var T = {
 
   applyLang(lang);
 
+  var FROM = null;
   /* ---------- arriving from a price page (?as=seller|buyer&i=item&c=category) ---------- */
   (function () {
     var as = qp.get("as"), item = (qp.get("i") || "").trim().slice(0, 60), c = qp.get("c") || "";
     if ((as !== "seller" && as !== "buyer") || !item) return;
-    var FP = {
-      si: { seller: "%N ගන්න සොයන අය පහළ තියෙනවා. ඔබේ %N විකිණීමට නොමිලේ දැන්වීමක් දාන්න: ", buyer: "%N විකුණන අය පහළ තියෙනවා. හමු නොවුණොත්, ඔබට ඕන බව නොමිලේ දැන්වීමක් දාන්න: ", go: "දැන්වීම දාන්න →" },
-      ta: { seller: "%N வாங்கத் தேடுபவர்கள் கீழே. உங்கள் %N விற்க இலவச விளம்பரம் இடுங்கள்: ", buyer: "%N விற்பவர்கள் கீழே. கிடைக்கவில்லை என்றால், உங்களுக்குத் தேவை என்று இலவச விளம்பரம் இடுங்கள்: ", go: "விளம்பரம் இடு →" },
-      en: { seller: "People looking to buy %N are listed below. Post a free ad to sell your %N: ", buyer: "People selling %N are listed below. Can't find it? Post a free \"want to buy\" ad: ", go: "Post an ad →" }
-    };
-    var f = FP[lang] || FP.si;
     var sideBtn = document.querySelector('.side[data-side="' + (as === "seller" ? "Want" : "Sell") + '"]');
     if (sideBtn) sideBtn.click();
     var radio = document.querySelector('input[name="type"][value="' + (as === "seller" ? "Sell" : "Want") + '"]');
@@ -672,10 +678,8 @@ var T = {
     $("fQ").value = item;
     $("item").value = item;
     if (c && CATS[c]) $("cat").value = c;
-    var box = $("fromPrice");
-    box.innerHTML = esc(f[as].replace(/%N/g, item)) + '<a href="#add">' + esc(f.go) + "</a>";
-    box.hidden = false;
-    setTimeout(function () { try { box.scrollIntoView({ behavior: "smooth", block: "start" }); } catch (e) {} }, 150);
+    FROM = { as: as, item: item };
+    setTimeout(function () { try { $("grid").scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) {} }, 150);
     track("pola_arrive_price", { item: item, as: as, language: lang });
     render();
   })();
