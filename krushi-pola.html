@@ -38,6 +38,8 @@
   .sub{color:var(--gold);font-weight:700;margin:0 0 10px}
   .lead{margin:0;color:var(--soft);max-width:62ch}
   .neutral{margin:8px 0 0;font-size:14px;color:var(--soft);max-width:62ch}
+  .frompr{margin:0 0 12px;padding:12px 14px;border-radius:12px;background:var(--card);border:1px solid var(--line2);font-size:14.5px;line-height:1.5}
+  .frompr a{font-weight:700;color:var(--petrol)}
   .hint a{color:var(--petrol);font-weight:700}
   .cathint{margin-top:8px;padding:10px 12px;background:#fdf3d9;border:1px solid #e6c97a;border-left:4px solid var(--gold);border-radius:10px;font-size:14.5px;color:var(--ink);line-height:1.5}
   .cathint::before{content:"💡 "}
@@ -163,7 +165,8 @@
   <button class="side" aria-pressed="false" data-side="Want"><span data-t="tabWant">🔍 සොයනවා</span><small id="nWant"></small></button>
 </div>
 
-<div class="tools">
+<p class="frompr" id="fromPrice" hidden></p>
+<div class="tools" id="tools">
   <select id="fDist" aria-label="District"></select>
   <select id="fCat" aria-label="Category"></select>
   <div class="qbox"><input id="fQ" type="search" autocomplete="off"><button type="button" class="mic" id="mic" hidden>🎤</button></div>
@@ -651,6 +654,31 @@ var T = {
   document.querySelectorAll('a[href="#howto"]').forEach(function (x) { x.addEventListener("click", function () { $("howto").open = true; }); });
 
   applyLang(lang);
+
+  /* ---------- arriving from a price page (?as=seller|buyer&i=item&c=category) ---------- */
+  (function () {
+    var as = qp.get("as"), item = (qp.get("i") || "").trim().slice(0, 60), c = qp.get("c") || "";
+    if ((as !== "seller" && as !== "buyer") || !item) return;
+    var FP = {
+      si: { seller: "%N ගන්න සොයන අය පහළ තියෙනවා. ඔබේ %N විකිණීමට නොමිලේ දැන්වීමක් දාන්න: ", buyer: "%N විකුණන අය පහළ තියෙනවා. හමු නොවුණොත්, ඔබට ඕන බව නොමිලේ දැන්වීමක් දාන්න: ", go: "දැන්වීම දාන්න →" },
+      ta: { seller: "%N வாங்கத் தேடுபவர்கள் கீழே. உங்கள் %N விற்க இலவச விளம்பரம் இடுங்கள்: ", buyer: "%N விற்பவர்கள் கீழே. கிடைக்கவில்லை என்றால், உங்களுக்குத் தேவை என்று இலவச விளம்பரம் இடுங்கள்: ", go: "விளம்பரம் இடு →" },
+      en: { seller: "People looking to buy %N are listed below. Post a free ad to sell your %N: ", buyer: "People selling %N are listed below. Can't find it? Post a free \"want to buy\" ad: ", go: "Post an ad →" }
+    };
+    var f = FP[lang] || FP.si;
+    var sideBtn = document.querySelector('.side[data-side="' + (as === "seller" ? "Want" : "Sell") + '"]');
+    if (sideBtn) sideBtn.click();
+    var radio = document.querySelector('input[name="type"][value="' + (as === "seller" ? "Sell" : "Want") + '"]');
+    if (radio) radio.checked = true;
+    $("fQ").value = item;
+    $("item").value = item;
+    if (c && CATS[c]) $("cat").value = c;
+    var box = $("fromPrice");
+    box.innerHTML = esc(f[as].replace(/%N/g, item)) + '<a href="#add">' + esc(f.go) + "</a>";
+    box.hidden = false;
+    setTimeout(function () { try { box.scrollIntoView({ behavior: "smooth", block: "start" }); } catch (e) {} }, 150);
+    track("pola_arrive_price", { item: item, as: as, language: lang });
+    render();
+  })();
   load();
 })();
 </script>
