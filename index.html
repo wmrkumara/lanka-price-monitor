@@ -91,6 +91,7 @@ h1{font-weight:700;font-size:clamp(28px,6vw,48px);line-height:1.12;margin:12px 0
 .mbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .btn{font:inherit;font-size:14px;font-weight:700;padding:9px 14px;border-radius:10px;border:1px solid var(--petrol);background:transparent;color:var(--petrol);cursor:pointer;text-decoration:none;display:inline-block}
 .btn.solid{background:var(--petrol);color:#fff}
+.ans{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--petrol);border-radius:10px;padding:10px 12px;margin:0 0 12px;font-size:15px;line-height:1.6}.ans b{color:var(--petrol)}.ans .src{display:block;margin-top:4px;font-size:12px;color:var(--muted)}
 .kp{border:1px dashed var(--line2);border-radius:12px;padding:12px;margin:0 0 14px;background:var(--paper)}.kp .kph{margin:0 0 8px;font-weight:700;font-size:15px;color:var(--petrol)}.kp .mbtns{display:flex;flex-wrap:wrap;gap:8px}.kp .kpn{margin:8px 0 0;font-size:12.5px;color:var(--muted)}
 .sheetimg{width:100%;border:1px solid var(--line);border-radius:10px;display:block;margin:4px 0 12px;background:#fff}
 #printArea{display:none}
@@ -760,6 +761,29 @@ function voiceFor(l){try{const v=speechSynthesis.getVoices();return v.find(x=>x.
 const KP_CAT={v:"vegetables",l:"vegetables",r:"vegetables",g:"grains",f:"fruits"};
 function kpName(m){return String(nameOf(m)||"").replace(/\s*[(（][^)）]*[)）]\s*/g," ").trim();}
 function kpUrl(it,as){return "krushi-pola.html?as="+as+"&i="+encodeURIComponent(kpName(it.m))+"&c="+(KP_CAT[it.m.c]||"")+"&lang="+lang;}
+/* ---------- today's answer: one clear, dated, sourced sentence (AI / Google friendly) ---------- */
+function answerHTML(it){
+  const td=it.today;if(!td||!LATEST)return "";
+  const n=esc(nameOf(it.m)),u=UNIT[it.m.u]?" "+UNIT[it.m.u][lang]:"",d=dateLabel(LATEST);
+  const r="Rs. "+fmt(td.min)+(td.max!==td.min?"–"+fmt(td.max):"")+u,a="Rs. "+fmt(td.mid);
+  const pv=it.dy!=null&&PREV?pct(it.dy):null,wk=it.wk!=null&&WEEK?pct(it.wk):null;
+  const early=EARLY_DAY&&LATEST===EARLY_DAY;
+  let s,src;
+  if(lang==="en"){
+    s=`On <b>${d}</b>, the wholesale price of <b>${n}</b> at the Dambulla Dedicated Economic Centre was <b>${r}</b> (average ${a})`
+     +(pv?`, ${pv} compared with the previous report (${shortDate(PREV)})`:"")+(wk?`${pv?" and":","} ${wk} compared with a week earlier (${shortDate(WEEK)})`:"")+".";
+    src=early?"Source: Dambulla DEC official daily price list (not yet on the DEC website).":"Source: Dambulla Dedicated Economic Centre (Dambulla DEC).";
+  }else if(lang==="ta"){
+    s=`<b>${d}</b> அன்று தம்புள்ள விசேட பொருளாதார மையத்தில் <b>${n}</b> மொத்த விலை <b>${r}</b> (சராசரி ${a})`
+     +(pv?`. முந்தைய அறிக்கையுடன் (${shortDate(PREV)}) ஒப்பிடுகையில் ${pv}`:"")+(wk?`${pv?",":"."} ஒரு வாரத்திற்கு முன்பை (${shortDate(WEEK)}) விட ${wk}`:"")+".";
+    src=early?"மூலம்: தம்புள்ள DEC அதிகாரப்பூர்வ தினசரி விலைப் பட்டியல் (இணையதளத்தில் இன்னும் இல்லை).":"மூலம்: தம்புள்ள விசேட பொருளாதார மையம் (Dambulla DEC).";
+  }else{
+    s=`<b>${d}</b> දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානයේ <b>${n}</b> තොග මිල <b>${r}</b> (සාමාන්‍ය ${a})`
+     +(pv?`. පෙර වාර්තාවට (${shortDate(PREV)}) සාපේක්ෂව ${pv}`:"")+(wk?`${pv?",":"."} සතියකට පෙර (${shortDate(WEEK)}) සාපේක්ෂව ${wk}`:"")+".";
+    src=early?"මූලාශ්‍රය: දඹුල්ල DEC නිල දෛනික මිල ලැයිස්තුව (DEC වෙබ් අඩවියේ තවම නැත).":"මූලාශ්‍රය: දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය (Dambulla DEC).";
+  }
+  return `<p class="ans" id="ans">📌 ${s}<span class="src">${src}</span></p>`;
+}
 function kpBox(it){const n=esc(kpName(it.m));return `<div class="kp"><p class="kph">${t("kpH")}</p><div class="mbtns"><a class="btn solid" data-kp="seller" href="${kpUrl(it,"seller")}">${t("kpSell").replace("%N",n)}</a><a class="btn" data-kp="buyer" href="${kpUrl(it,"buyer")}">${t("kpBuy").replace("%N",n)}</a></div><p class="kpn">${t("kpNote")}</p></div>`;}
 function openItem(pid,keep){
   cur=ITEMS.find(i=>i.pid===pid);if(!cur)return;const it=cur,td=it.today;
@@ -769,6 +793,7 @@ function openItem(pid,keep){
   $("#modal").innerHTML=`<div class="mh"><div class="t"><span class="ic">${icon(it).replace(/^<span class="ic"[^>]*>|<\/span>$/g,"")}</span><div><h3>${esc(nameOf(it.m))}</h3><div class="sub">${esc(subOf(it.m))} · ${esc(CATS[it.m.c][lang])} · ${td?dateLabel(LATEST):t("noPrice")}</div>${td?`<button class="favb bk${BASKET[it.pid]?" on":""}" id="bkb" type="button">${BASKET[it.pid]?t("bkIn"):t("bkAdd")}</button>`:""}<button class="favb${FAV.has(it.pid)?" on":""}" id="fav" aria-pressed="${FAV.has(it.pid)}" title="${FAV.has(it.pid)?t("favDel"):t("favAdd")}">${FAV.has(it.pid)?t("favOn"):t("favOff")}</button></div></div>
    <div class="hbtn">${canSay?`<button class="say" id="say" aria-label="${t("listen")}">🔊</button>`:""}<button class="x" id="x" aria-label="${t("close")}">✕</button></div></div>
   <div class="mb">
+    ${answerHTML(it)}
     <div class="stats">
       <div class="st"><div class="l">${t("todayRange")}</div><div class="v">${td?fmt(td.min)+"–"+fmt(td.max):"—"}</div></div>
       <div class="st"><div class="l">${t("avgPrice")}</div><div class="v">${td?fmt(td.mid):"—"}</div></div>
@@ -862,10 +887,11 @@ build();renderAll();
 // Early prices: entered from the DEC's official daily price list before the DEC website updates.
 // Used only for a day the robot has not collected yet; the robot's data always wins.
 const EARLY=["https://raw.githubusercontent.com/wmrkumara/lanka-price-monitor/main/dambulla_early.json","dambulla_early.json"];
+let EARLY_DAY=null;
 function mergeEarly(e){
   if(!e||!e.date||!e.prices||DB.days[e.date])return false;
   const last=Object.keys(DB.days).sort().pop();if(last&&e.date<last)return false;
-  DB.days[e.date]=e.prices;
+  DB.days[e.date]=e.prices;EARLY_DAY=e.date;
   for(const pid of Object.keys(e.prices)){if(!DB.products[pid]){const m=MASTER[pid];DB.products[pid]={name:m?m.en:pid,type:""};}}
   return true;
 }
