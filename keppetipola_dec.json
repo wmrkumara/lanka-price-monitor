@@ -444,7 +444,7 @@
    "en_sheet": "Coconut",
    "en": "Coconut",
    "unit": "kg",
-   "unit_check": "per nut?"
+   "unit_check": "Per nut? (sheet says kg)"
   },
   {
    "no": 50,
@@ -598,7 +598,7 @@
    "en_sheet": "Mukunuwenna",
    "en": "Mukunuwenna",
    "unit": "kg",
-   "unit_check": "per bundle?"
+   "unit_check": "Per bundle? (40 is low for 1 kg)"
   },
   {
    "no": 67,
@@ -608,7 +608,7 @@
    "en_sheet": "Gotukola",
    "en": "Gotukola",
    "unit": "kg",
-   "unit_check": "per bundle?"
+   "unit_check": "Per bundle? (65 is low for 1 kg)"
   },
   {
    "no": 68,
