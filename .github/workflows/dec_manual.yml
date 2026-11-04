@@ -2,7 +2,7 @@ name: Apply manual DEC prices
 on:
   push:
     branches: [main]
-    paths: ["dec_manual_prices.json"]
+    paths: ["dec_manual_prices.json", "keppetipola_dec.json"]
   workflow_dispatch:
 permissions:
   contents: write
