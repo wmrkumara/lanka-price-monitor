@@ -666,6 +666,90 @@ def dec_link(market, last):
             f'මිලක් වැරදි යැයි සිතේද? <a href="../contact.html?t=price">අපට දන්වන්න</a> / Spotted a wrong price? Tell us.</p>')
 
 
+
+# ---- Keppetipola full DEC price list (all items on the official sheet) ----------
+# keppetipola_dec.json holds every item on the Keppetipola DEC daily price list,
+# keyed by the sheet's own item number and kept in the sheet's order. Only prices
+# that passed the item-number + name check are in that file. HARTI data is untouched.
+KEP_FULL_FILE = "keppetipola_dec.json"
+KEP_CAT_EN = {"එළවළු (උඩරට)": "Up country vegetables", "පහතරට එළවළු": "Low country vegetables",
+              "අල වර්ග": "Yams & potatoes", "පලා වර්ග": "Leafy vegetables", "ධාන්‍ය": "Grains",
+              "පලතුරු": "Fruits"}
+KEP_CAT_SI = {"එළවළු (උඩරට)": "උඩරට එළවළු"}
+
+def kep_full_html():
+    """Full Keppetipola list (sheet order, sheet sections). Empty string if no file."""
+    if not os.path.exists(KEP_FULL_FILE):
+        return "", 0, None
+    try:
+        kd = json.load(open(KEP_FULL_FILE, encoding="utf-8"))
+    except Exception as ex:
+        print(f"  ⚠ {KEP_FULL_FILE} not read: {ex}")
+        return "", 0, None
+    days = sorted(k for k, v in (kd.get("days") or {}).items() if v)
+    if not days:
+        return "", 0, None
+    last = days[-1]
+    today = kd["days"][last]
+    prev_days = days[:-1]
+    main_prev = prev_days[-1] if prev_days else None
+    html, cur, n_price = "", None, 0
+    for it in sorted(kd.get("items", []), key=lambda x: x["no"]):
+        no = str(it["no"])
+        if it.get("cat") != cur:
+            if cur is not None:
+                html += "</tbody></table></div>"
+            cur = it.get("cat")
+            html += (f'<h2 class="cat">{e(KEP_CAT_SI.get(cur, cur))} <span>{e(KEP_CAT_EN.get(cur, ""))}</span></h2>'
+                     f'<div class="scroll"><table><thead><tr><th>භාණ්ඩය / Item</th>'
+                     f'<th class="n">අවම–උපරිම<br>Min–Max</th><th class="n">මධ්‍යගතය<br>Mid</th>'
+                     f'<th class="n">පෙර ලැයිස්තුව<br>Previous list'
+                     + (f'<br><span style="color:var(--gold)">({short_si(main_prev)})</span>' if main_prev else "")
+                     + '</th></tr></thead><tbody>')
+        name = (f'{e(it["si"])} <span style="color:var(--muted)">/ {e(it["en"])}</span>'
+                + (f' <small style="color:var(--muted)">({e(it["unit_check"])})</small>' if it.get("unit_check") else ""))
+        rng = today.get(no)
+        if not rng:
+            html += (f'<tr><td>{name}</td><td class="n" colspan="3" style="color:var(--muted)">'
+                     f'අද මිලක් නැත / no price today</td></tr>')
+            continue
+        n_price += 1
+        lo, hi = rng
+        mid = round((lo + hi) / 2)
+        pv, pdate = None, None
+        for pd in reversed(prev_days):
+            r2 = kd["days"][pd].get(no)
+            if r2:
+                pv, pdate = round((r2[0] + r2[1]) / 2), pd
+                break
+        if pv is not None and (d_(last) - d_(pdate)).days > 14:
+            pv, pdate = None, None
+        other = pdate and pdate != main_prev
+        prev = ((f'{"*" if other else ""}{money(pv)} {chg_badge(mid, pv)}'
+                 + (f'<br><small style="color:var(--muted)">({short_si(pdate)})</small>' if other else ""))
+                if pv is not None else "—")
+        html += (f'<tr><td>{name}</td><td class="n rng">{money(lo)}' + (f'–{money(hi)}' if hi != lo else "")
+                 + f'</td><td class="mid">{money(mid)}</td><td class="n">{prev}</td></tr>')
+    if cur is not None:
+        html += "</tbody></table></div>"
+    d = d_(last)
+    src_si = kd.get("source_si") or dec_name("Keppetipola", "si")
+    src_en = kd.get("source_en") or dec_name("Keppetipola", "en")
+    head = (f'<h2 id="all-items">කෑප්පෙටිපොළ — සියලු භාණ්ඩවල තොග මිල'
+            f'<span>All items, official daily price list, {fdate(d, "en")}</span></h2>'
+            f'<div class="story"><p>{fdate(d, "si")} {e(src_si)} නිල දෛනික මිල ලැයිස්තුවේ භාණ්ඩ {n_price}ක තොග මිල '
+            f'(රු./කි.ග්‍රෑ.), ලැයිස්තුවේ පිළිවෙළටම.</p>'
+            f'<p lang="en">Wholesale prices for {n_price} items from the official daily price list of the '
+            f'{e(src_en)}, {fdate(d, "en")} (Rs. per kg), in the same order as the list.</p></div>')
+    note = ('<p class="asof" style="margin-top:10px">රුපියල් / කි.ග්‍රෑ. · Rs. per kg · මධ්‍යගතය = (අවම + උපරිම) ÷ 2'
+            + (f' · පෙර ලැයිස්තුව = {fdate(d_(main_prev), "si")} (තනි දිනයක මිල / a single day)' if main_prev else "")
+            + ' · * = ළඟම පෙර දිනයේ මිල</p>'
+            f'<p class="asof" style="margin-top:6px">📑 මූලාශ්‍රය: {e(src_si)} දෛනික මිල ලැයිස්තුව — {fdate(d, "si")} · '
+            f'Source: {e(src_en)} daily price list. මිලක් වැරදි යැයි සිතේද? '
+            f'<a href="../contact.html?t=price">අපට දන්වන්න</a> / Spotted a wrong price? Tell us.</p>'
+            '<h2 style="margin-top:34px">සතියකට පෙර සමඟ සැසඳීම<span>Weekly comparison with other markets</span></h2>')
+    return head + html + note, n_price, last
+
 def market_page(market, hm, harti, cats, cbsl):
     info = MKT[market]
     si, ta, en = info["si"], info["ta"], men(market)
@@ -862,6 +946,7 @@ def market_page(market, hm, harti, cats, cbsl):
                + (f'<div class="g"><b>{cbsl_count}</b><span>CBSL තොග හා සිල්ලර / retail items</span></div>' if cbsl_count else "")
                + '</div>')
 
+    kep_full, kep_n, kep_last = kep_full_html() if market == "Keppetipola" else ("", 0, None)
     harti_h2 = (f'<h2>{"" if dec_day else "HARTI "}{e(si)} තොග මිල<span>{"Economic centre price list" if dec_day else "HARTI wholesale report"}, {fdate(d_(last),"en") if last else "—"}</span></h2>')
     others = "".join(f'<a href="{MKT[m]["slug"]}.html">📍 {e(MKT[m]["si"])} / {e(men(m))}</a>' for m in MKT if m != market)
 
@@ -892,6 +977,7 @@ def market_page(market, hm, harti, cats, cbsl):
   <p lang="en">{e(s_en)}</p>
   <p lang="ta">{e(s_ta)}</p>
 </div>
+{kep_full if market == 'Keppetipola' else ''}
 {table}
 {table_note if rows else ''}
 {dec_link(market, last) if dec_day else official_harti_link(harti, market, last)}
@@ -915,6 +1001,9 @@ def market_page(market, hm, harti, cats, cbsl):
         desc = (f"{en} market price today ({dtxt}): wholesale prices for {len(rows)} vegetables from the "
                 + (f"official {dec_name(market,'en')} daily price list" if dec_day else "HARTI report")
                 + (", plus CBSL Dambulla retail and wholesale" if cbsl_count else ""))
+    if kep_n:
+        desc = (f"{en} market price today ({fdate(d_(kep_last),'en')}): wholesale prices for {kep_n} items from the "
+                f"official {dec_name(market,'en')} daily price list")
     desc = (desc
             + f". {top3}. {si} එලවලු මිල අද{' (දබුල්ල)' if market == 'Dambulla' else ''} · {en.lower()} elawalu mila.")
     jsonld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
