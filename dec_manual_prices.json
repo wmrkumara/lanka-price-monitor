@@ -1183,17 +1183,13 @@
   },
   "2026-11-02": {
    "Dambulla": {
+    "Ash Plantains": [
+     150,
+     170
+    ],
     "Beans": [
      500,
      600
-    ],
-    "Carrot": [
-     330,
-     400
-    ],
-    "Leeks": [
-     280,
-     300
     ],
     "Beetroot": [
      320,
@@ -1203,85 +1199,77 @@
      350,
      400
     ],
-    "Knolkhol": [
-     250,
-     280
-    ],
-    "Raddish": [
-     160,
-     170
-    ],
-    "Cabbage (Kandy)": [
-     500,
-     550
-    ],
-    "Tomato": [
-     400,
-     500
-    ],
-    "Ladies Fingers": [
-     170,
-     200
-    ],
-    "Brinjals": [
-     350,
-     450
-    ],
-    "Capsicum": [
-     600,
-     650
-    ],
-    "Pumpkin": [
-     200,
-     230
-    ],
-    "Cucumber": [
-     150,
-     160
+    "Big Onion (Imported)": [
+     285,
+     290
     ],
     "Bitter Gourd": [
      550,
      600
     ],
-    "Snake Gourd": [
-     320,
-     330
+    "Brinjals": [
+     350,
+     450
+    ],
+    "Cabbage (Kandy)": [
+     500,
+     550
+    ],
+    "Capsicum": [
+     600,
+     650
+    ],
+    "Carrot": [
+     330,
+     400
+    ],
+    "Cucumber": [
+     150,
+     160
     ],
     "Drumstick": [
      350,
      400
     ],
-    "Luffa": [
-     350,
-     400
-    ],
-    "Long Beans": [
-     260,
-     350
-    ],
-    "Ash Plantains": [
-     150,
-     170
+    "Eggplant": [
+     250,
+     300
     ],
     "Green Chillies": [
      300,
      310
     ],
+    "Knolkhol": [
+     250,
+     280
+    ],
+    "Ladies Fingers": [
+     170,
+     200
+    ],
+    "Leeks": [
+     280,
+     300
+    ],
     "Lime": [
      1000,
      1100
     ],
-    "Sweet Potato": [
-     100,
-     150
+    "Long Beans": [
+     260,
+     350
+    ],
+    "Luffa": [
+     350,
+     400
     ],
     "Manioc": [
      90,
      120
     ],
-    "Eggplant": [
-     250,
-     300
+    "Potato (Imported)": [
+     180,
+     210
     ],
     "Potato (N.Eliya)": [
      250,
@@ -1291,13 +1279,25 @@
      200,
      230
     ],
-    "Potato (Imported)": [
-     180,
-     210
+    "Pumpkin": [
+     200,
+     230
     ],
-    "Big Onion (Imported)": [
-     285,
-     290
+    "Raddish": [
+     160,
+     170
+    ],
+    "Snake Gourd": [
+     320,
+     330
+    ],
+    "Sweet Potato": [
+     100,
+     150
+    ],
+    "Tomato": [
+     400,
+     500
     ]
    },
    "Keppetipola": {
@@ -1305,45 +1305,25 @@
      450,
      600
     ],
-    "Carrot": [
-     250,
-     350
-    ],
-    "Leeks": [
-     230,
-     300
-    ],
     "Beetroot (N.Eliya)": [
      270,
      350
-    ],
-    "Knolkhol": [
-     280,
-     300
-    ],
-    "Raddish": [
-     90,
-     150
-    ],
-    "Cabbage (N.Eliya)": [
-     420,
-     500
-    ],
-    "Tomato": [
-     500,
-     550
     ],
     "Brinjals": [
      250,
      350
     ],
+    "Cabbage (N.Eliya)": [
+     420,
+     500
+    ],
     "Capsicum": [
      600,
      700
     ],
-    "Pumpkin": [
-     240,
-     250
+    "Carrot": [
+     250,
+     350
     ],
     "Cucumber": [
      200,
@@ -1357,9 +1337,13 @@
      400,
      450
     ],
-    "Sweet Potato": [
-     200,
-     200
+    "Knolkhol": [
+     280,
+     300
+    ],
+    "Leeks": [
+     230,
+     300
     ],
     "Manioc": [
      120,
@@ -1368,22 +1352,34 @@
     "Potato (Welimada)": [
      200,
      250
+    ],
+    "Pumpkin": [
+     240,
+     250
+    ],
+    "Raddish": [
+     90,
+     150
+    ],
+    "Sweet Potato": [
+     200,
+     200
+    ],
+    "Tomato": [
+     500,
+     550
     ]
    }
   },
   "2026-11-03": {
    "Dambulla": {
+    "Ash Plantains": [
+     200,
+     220
+    ],
     "Beans": [
      550,
      700
-    ],
-    "Carrot": [
-     300,
-     420
-    ],
-    "Leeks": [
-     260,
-     280
     ],
     "Beetroot": [
      400,
@@ -1393,85 +1389,77 @@
      300,
      320
     ],
-    "Knolkhol": [
-     200,
-     250
-    ],
-    "Raddish": [
-     140,
-     160
-    ],
-    "Cabbage (Kandy)": [
-     450,
-     500
-    ],
-    "Tomato": [
-     450,
-     470
-    ],
-    "Ladies Fingers": [
-     150,
-     160
-    ],
-    "Brinjals": [
-     380,
-     400
-    ],
-    "Capsicum": [
-     650,
-     700
-    ],
-    "Pumpkin": [
-     160,
-     170
-    ],
-    "Cucumber": [
-     150,
-     160
+    "Big Onion (Imported)": [
+     280,
+     290
     ],
     "Bitter Gourd": [
      600,
      620
     ],
-    "Snake Gourd": [
+    "Brinjals": [
+     380,
+     400
+    ],
+    "Cabbage (Kandy)": [
+     450,
+     500
+    ],
+    "Capsicum": [
+     650,
+     700
+    ],
+    "Carrot": [
      300,
-     320
+     420
+    ],
+    "Cucumber": [
+     150,
+     160
     ],
     "Drumstick": [
      200,
      210
     ],
-    "Luffa": [
-     330,
-     380
-    ],
-    "Long Beans": [
-     250,
-     300
-    ],
-    "Ash Plantains": [
-     200,
-     220
+    "Eggplant": [
+     400,
+     450
     ],
     "Green Chillies": [
      250,
      300
     ],
+    "Knolkhol": [
+     200,
+     250
+    ],
+    "Ladies Fingers": [
+     150,
+     160
+    ],
+    "Leeks": [
+     260,
+     280
+    ],
     "Lime": [
      900,
      1000
     ],
-    "Sweet Potato": [
-     120,
-     180
+    "Long Beans": [
+     250,
+     300
+    ],
+    "Luffa": [
+     330,
+     380
     ],
     "Manioc": [
      130,
      140
     ],
-    "Eggplant": [
-     400,
-     450
+    "Potato (Imported)": [
+     160,
+     190
     ],
     "Potato (N.Eliya)": [
      250,
@@ -1481,13 +1469,25 @@
      200,
      230
     ],
-    "Potato (Imported)": [
+    "Pumpkin": [
      160,
-     190
+     170
     ],
-    "Big Onion (Imported)": [
-     280,
-     290
+    "Raddish": [
+     140,
+     160
+    ],
+    "Snake Gourd": [
+     300,
+     320
+    ],
+    "Sweet Potato": [
+     120,
+     180
+    ],
+    "Tomato": [
+     450,
+     470
     ]
    },
    "Keppetipola": {
@@ -1495,45 +1495,29 @@
      500,
      600
     ],
-    "Carrot": [
-     300,
-     370
-    ],
-    "Leeks": [
-     260,
-     300
-    ],
     "Beetroot (N.Eliya)": [
      300,
      400
     ],
-    "Knolkhol": [
-     300,
-     350
-    ],
-    "Raddish": [
-     100,
-     150
-    ],
-    "Cabbage (N.Eliya)": [
-     525,
-     550
-    ],
-    "Tomato": [
-     500,
-     550
+    "Big Onion (Imported)": [
+     280,
+     280
     ],
     "Brinjals": [
      300,
      380
     ],
+    "Cabbage (N.Eliya)": [
+     525,
+     550
+    ],
     "Capsicum": [
      600,
      700
     ],
-    "Pumpkin": [
-     240,
-     250
+    "Carrot": [
+     300,
+     370
     ],
     "Cucumber": [
      250,
@@ -1547,9 +1531,13 @@
      400,
      450
     ],
-    "Sweet Potato": [
-     180,
-     200
+    "Knolkhol": [
+     300,
+     350
+    ],
+    "Leeks": [
+     260,
+     300
     ],
     "Manioc": [
      120,
@@ -1559,9 +1547,93 @@
      200,
      250
     ],
-    "Big Onion (Imported)": [
-     280,
+    "Pumpkin": [
+     240,
+     250
+    ],
+    "Raddish": [
+     100,
+     150
+    ],
+    "Sweet Potato": [
+     180,
+     200
+    ],
+    "Tomato": [
+     500,
+     550
+    ]
+   }
+  },
+  "2026-11-04": {
+   "Keppetipola": {
+    "Beans": [
+     400,
+     500
+    ],
+    "Carrot": [
+     350,
+     420
+    ],
+    "Leeks": [
+     250,
      280
+    ],
+    "Beetroot (N.Eliya)": [
+     400,
+     450
+    ],
+    "Knolkhol": [
+     300,
+     420
+    ],
+    "Raddish": [
+     100,
+     150
+    ],
+    "Cabbage (N.Eliya)": [
+     500,
+     600
+    ],
+    "Tomato": [
+     500,
+     550
+    ],
+    "Brinjals": [
+     350,
+     420
+    ],
+    "Capsicum": [
+     700,
+     800
+    ],
+    "Pumpkin": [
+     260,
+     260
+    ],
+    "Cucumber": [
+     220,
+     220
+    ],
+    "Drumstick": [
+     280,
+     450
+    ],
+    "Green Chillies": [
+     400,
+     420
+    ],
+    "Sweet Potato": [
+     180,
+     220
+    ],
+    "Manioc": [
+     120,
+     150
+    ],
+    "Potato (Welimada)": [
+     200,
+     250
     ]
    }
   }
