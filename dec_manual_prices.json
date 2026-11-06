@@ -1571,45 +1571,25 @@
      400,
      500
     ],
-    "Carrot": [
-     350,
-     420
-    ],
-    "Leeks": [
-     250,
-     280
-    ],
     "Beetroot (N.Eliya)": [
      400,
      450
-    ],
-    "Knolkhol": [
-     300,
-     420
-    ],
-    "Raddish": [
-     100,
-     150
-    ],
-    "Cabbage (N.Eliya)": [
-     500,
-     600
-    ],
-    "Tomato": [
-     500,
-     550
     ],
     "Brinjals": [
      350,
      420
     ],
+    "Cabbage (N.Eliya)": [
+     500,
+     600
+    ],
     "Capsicum": [
      700,
      800
     ],
-    "Pumpkin": [
-     260,
-     260
+    "Carrot": [
+     350,
+     420
     ],
     "Cucumber": [
      220,
@@ -1623,9 +1603,13 @@
      400,
      420
     ],
-    "Sweet Potato": [
-     180,
-     220
+    "Knolkhol": [
+     300,
+     420
+    ],
+    "Leeks": [
+     250,
+     280
     ],
     "Manioc": [
      120,
@@ -1634,6 +1618,170 @@
     "Potato (Welimada)": [
      200,
      250
+    ],
+    "Pumpkin": [
+     260,
+     260
+    ],
+    "Raddish": [
+     100,
+     150
+    ],
+    "Sweet Potato": [
+     180,
+     220
+    ],
+    "Tomato": [
+     500,
+     550
+    ]
+   }
+  },
+  "2026-11-05": {
+   "Keppetipola": {
+    "Beans": [
+     450,
+     500
+    ],
+    "Beetroot (N.Eliya)": [
+     450,
+     470
+    ],
+    "Brinjals": [
+     400,
+     480
+    ],
+    "Cabbage (N.Eliya)": [
+     500,
+     550
+    ],
+    "Capsicum": [
+     800,
+     1100
+    ],
+    "Carrot": [
+     380,
+     450
+    ],
+    "Cucumber": [
+     210,
+     220
+    ],
+    "Drumstick": [
+     280,
+     450
+    ],
+    "Green Chillies": [
+     400,
+     450
+    ],
+    "Knolkhol": [
+     300,
+     380
+    ],
+    "Leeks": [
+     200,
+     240
+    ],
+    "Manioc": [
+     120,
+     150
+    ],
+    "Potato (Welimada)": [
+     200,
+     240
+    ],
+    "Pumpkin": [
+     250,
+     260
+    ],
+    "Raddish": [
+     100,
+     150
+    ],
+    "Sweet Potato": [
+     180,
+     220
+    ],
+    "Tomato": [
+     500,
+     550
+    ]
+   }
+  },
+  "2026-11-06": {
+   "Keppetipola": {
+    "Beans": [
+     400,
+     500
+    ],
+    "Carrot": [
+     350,
+     450
+    ],
+    "Leeks": [
+     200,
+     250
+    ],
+    "Beetroot (N.Eliya)": [
+     400,
+     450
+    ],
+    "Knolkhol": [
+     400,
+     450
+    ],
+    "Raddish": [
+     150,
+     200
+    ],
+    "Cabbage (N.Eliya)": [
+     450,
+     600
+    ],
+    "Tomato": [
+     500,
+     600
+    ],
+    "Brinjals": [
+     350,
+     400
+    ],
+    "Capsicum": [
+     1000,
+     1100
+    ],
+    "Pumpkin": [
+     250,
+     250
+    ],
+    "Cucumber": [
+     220,
+     220
+    ],
+    "Drumstick": [
+     380,
+     600
+    ],
+    "Green Chillies": [
+     350,
+     500
+    ],
+    "Sweet Potato": [
+     180,
+     200
+    ],
+    "Manioc": [
+     120,
+     140
+    ],
+    "Potato (Welimada)": [
+     200,
+     250
+    ],
+    "Big Onion (Imported)": [
+     320,
+     320
     ]
    }
   }
