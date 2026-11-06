@@ -253,6 +253,7 @@ details.more summary::-webkit-details-marker{display:none}
 
 <script>
 const $=id=>document.getElementById(id);
+const APP_VER="2026-11-07";
 const KEY="tg_mage_wagawa_v1",LKEY="tg_mage_wagawa_lang";
 
 /* ================= TEXT (3 languages) ================= */
@@ -676,7 +677,7 @@ function renderList(){
 function renderBackup(){
   let h=backupBanner();
   h+=`<div class="card noprint"><h2>${T("backupH")}</h2><p class="note">${T("backupNote")}</p><div class="row">${navigator.share?`<button class="btn solid" type="button" data-act="share">${T("shareBtn")}</button>`:""}<button class="btn" type="button" data-act="backup">${T("expBtn")}</button>
-    <label class="btn" style="margin:0;cursor:pointer;color:var(--petrol)">${T("impBtn")}<input type="file" id="impIn" accept=".json,application/json" hidden></label></div><p class="note neg" style="margin:10px 0 0">${T("bkWarn")}</p><p class="note" style="margin:10px 0 0">${T("bkHow")}</p><p class="note" style="margin:10px 0 0">${T("impNote")}</p><p class="note" style="margin:10px 0 0">${T("privNote")}</p></div>`+feedbackCard()+partnerCard();
+    <label class="btn" style="margin:0;cursor:pointer;color:var(--petrol)">${T("impBtn")}<input type="file" id="impIn" accept=".json,application/json" hidden></label></div><p class="note neg" style="margin:10px 0 0">${T("bkWarn")}</p><p class="note" style="margin:10px 0 0">${T("bkHow")}</p><p class="note" style="margin:10px 0 0">${T("impNote")}</p><p class="note" style="margin:10px 0 0">${T("privNote")}</p></div>`+feedbackCard()+partnerCard()+`<p class="note" style="text-align:center;margin:6px 0 0">🌾 මගේ වගාව · v${APP_VER}</p>`;
   $("vBackup").innerHTML=h;
   $("impIn").onchange=importFile;
 }
@@ -1101,7 +1102,7 @@ function renderGuide(){
      <button class="btn solid big noprint" type="button" id="readGuide" style="width:100%;justify-content:center">${T("vReadAll")}</button><div class="row noprint" style="margin-top:10px">${instBtn(true)}</div></div>`
    +G.map((s,i)=>`<div class="card gstep"><span class="gnum">${i+1}</span><div><div class="row" style="justify-content:space-between;align-items:flex-start;flex-wrap:nowrap;gap:8px"><h3>${esc(s[0])}</h3><button class="btn noprint" type="button" data-step="${i}" aria-label="${esc(T("vRead"))}" style="flex:none;padding:6px 10px">🔊</button></div><p>${esc(s[1])}</p></div></div>`).join("")
    +`<div class="row noprint" style="margin:0 0 14px"><button class="btn gold big" type="button" data-act="demo">${T("seeDemo")}</button><button class="btn solid big" type="button" data-act="new">${T("gStart")}</button></div>
-   <p class="note">${T("guideNote")}</p>`+feedbackCard()+weatherCard()+partnerCard();
+   <p class="note">${T("guideNote")}</p>`+feedbackCard()+weatherCard()+partnerCard()+`<p class="note" style="text-align:center;margin:6px 0 0">🌾 මගේ වගාව · v${APP_VER}</p>`;
   const say=s=>s.replace(/[\u2600-\u27BF\u{1F300}-\u{1FAFF}\uFE0F]/gu,"").replace(/\\?"/g,"");
   $("readGuide").onclick=function(){speak(G.map((s,i)=>`${i+1}. ${s[0]}. ${s[1]}`).map(say).join(" "),this);};
   $("vGuide").querySelectorAll("[data-step]").forEach(b=>b.onclick=function(){const s=G[+b.dataset.step];speak(say(`${+b.dataset.step+1}. ${s[0]}. ${s[1]}`),this);});
