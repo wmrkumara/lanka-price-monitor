@@ -203,6 +203,24 @@ def main():
     db["arrived"] = dict(sorted(db["arrived"].items()))
     db["empty_days"] = dict(sorted(db["empty_days"].items()))
     db["products"] = dict(sorted(db["products"].items(), key=lambda kv: int(kv[0])))
+    # days the DEC website never published, entered by hand from the DEC's own price-list sheet
+    # (dambulla_manual.json). Used only where the website has nothing; official data always wins.
+    try:
+        man = json.load(open("dambulla_manual.json", encoding="utf-8")).get("days", {})
+    except FileNotFoundError:
+        man = {}
+    except Exception as ex:
+        print("  dambulla_manual.json not read:", ex)
+        man = {}
+    for d, prices in sorted(man.items()):
+        arr = db["arrived"].get(d, "")
+        if prices and (d not in db["days"] or arr.startswith("manual")):
+            if db["days"].get(d) != prices:
+                db["days"][d] = prices
+                db["arrived"][d] = arr if arr.startswith("manual") else f"manual {STAMP}"
+                db["empty_days"].pop(d, None)
+                new_days += 1
+                print(f"  {d}: added from the price-list sheet ({len(prices)} items)")
     db["latest_date"] = max(db["days"]) if db["days"] else None
     db["oldest_date"] = min(db["days"]) if db["days"] else None
     db["updated_sl"] = STAMP
