@@ -10,6 +10,7 @@
 #   dambulla-whatsapp-YYYY-MM-DD.txt      ready WhatsApp message (paste the video ID into the youtu.be link)
 # Subscribe button: video-assets/subscribe.png (optional) — shown small on slide 2 and big on the end slide.
 # Titles/descriptions/tags start with romanized Sinhala ("Dambulla Elawalu Mila Ada"), the words people type on YouTube.
+# Animation on vegetable slides: photo pops in (small bounce), lowest/highest price counts up from 0.
 # Crop photos: video-assets/crops/<name>.png (same photos as the CBSL video). Missing photo = name box.
 import json, os, subprocess, sys, hashlib
 from datetime import date
@@ -40,7 +41,7 @@ if __name__ == "__main__" and "--check" in sys.argv:
     _quick_check()
     sys.exit(0)
 
-from PIL import Image, ImageDraw, features
+from PIL import Image, ImageDraw, ImageOps, features
 from build_pages import fdate, MONTHS
 import make_daily_video as V      # reuse fonts, colours, logo, photo box, music loop
 import short_kit
@@ -213,6 +214,86 @@ def item_slide(rep, r, i, n):
             ("සාමාන්‍ය මිල පෙර වාර්තාවට ", si(34, "SemiBold"), col),
             (f"{r['pct']:+.0f}%  ", mono(36), col),
             (f"({r['prev']:,.0f} → {r['mid']:,.0f})", mono(32, "Medium"), col)], True)
+    return im
+
+
+FPS = 30
+POP_SEC, COUNT_SEC = 0.6, 1.2          # animation lengths (seconds)
+BOX = (60, 200, 900, 960)
+
+
+def _photo_path(name):
+    for ext in (".jpg", ".jpeg", ".png", ".webp"):
+        f = os.path.join(V.CROPS, name + ext)
+        if os.path.exists(f):
+            return f
+    return None
+
+
+def photo_card(r):
+    """Photo cut to the rounded box (once per item). None if there is no photo."""
+    p = _photo_path(r.get("photo", ""))
+    if not p:
+        return None
+    x0, y0, x1, y1 = BOX
+    w, h = x1 - x0, y1 - y0
+    try:
+        ph = ImageOps.fit(Image.open(p).convert("RGB"), (w, h), Image.LANCZOS).convert("RGBA")
+    except Exception:
+        return None
+    mask = Image.new("L", (w, h), 0)
+    ImageDraw.Draw(mask).rounded_rectangle((0, 0, w - 1, h - 1), radius=30, fill=255)
+    ph.putalpha(mask)
+    return ph
+
+
+def item_base(rep, r, i, n, card):
+    """The slide without the price numbers (and without the photo when it will pop in)."""
+    im, dr = frame(rep)
+    if card is None:
+        V.photo_box(im, dr, r, BOX)          # no photo: name box, as before
+    dr.text((960, 190), f"{i} / {n}", font=mono(30), fill=MUT)
+    f = si(130)
+    while dr.textlength(r["si"], font=f) > 900 and f.size > 64:
+        f = si(f.size - 6)
+    dr.text((960, 225), r["si"], font=f, fill=PET)
+    dr.text((965, 400), f"{r['en']} · {unit_si(r)}", font=si(34, "Medium"), fill=MUT)
+    for x, label in ((960, "අවම"), (1420, "උපරිම")):
+        dr.rounded_rectangle((x, 470, x + 420, 760), radius=26, fill=CARD, outline=LINE, width=3)
+        dr.text((x + 210, 520), label, font=si(40, "SemiBold"), fill=MUT, anchor="mm")
+    ar, col, bg = V.change_style(r["pct"])
+    dr.rounded_rectangle((960, 800, 1840, 890), radius=20, fill=bg)
+    if r["pct"] is None:
+        V.segs(dr, 1400, 845, [(f"සාමාන්‍ය මිල රු. {r['mid']:,.0f}", si(34, "SemiBold"), col)], True)
+    else:
+        V.segs(dr, 1400, 845, [
+            (ar + " ", mono(36), col),
+            ("සාමාන්‍ය මිල පෙර වාර්තාවට ", si(34, "SemiBold"), col),
+            (f"{r['pct']:+.0f}%  ", mono(36), col),
+            (f"({r['prev']:,.0f} → {r['mid']:,.0f})", mono(32, "Medium"), col)], True)
+    return im
+
+
+def _ease_back(x):     # grows a little past full size, then settles
+    c1 = 1.70158; c3 = c1 + 1
+    return 1 + c3 * (x - 1) ** 3 + c1 * (x - 1) ** 2
+
+
+def item_frame(base, card, r, t):
+    """One frame t seconds into the slide: photo pop-in + price count-up."""
+    im = base.copy(); dr = ImageDraw.Draw(im)
+    if card is not None:
+        x0, y0, x1, y1 = BOX
+        sc = 0.45 + 0.55 * _ease_back(min(t / POP_SEC, 1.0))
+        w, h = max(1, int(card.width * sc)), max(1, int(card.height * sc))
+        c = card.resize((w, h), Image.LANCZOS)
+        im.paste(c, ((x0 + x1 - w) // 2, (y0 + y1 - h) // 2), c)
+    k = 1 - (1 - min(t / COUNT_SEC, 1.0)) ** 3
+    for x, val, col in ((960, r["lo"], INK), (1420, r["hi"], GOLD)):
+        fs = mono(120)
+        while dr.textlength(f"{val:,.0f}", font=fs) > 380:
+            fs = mono(fs.size - 6)
+        dr.text((x + 210, 650), f"{round(val * k):,.0f}", font=fs, fill=col, anchor="mm")
     return im
 
 
@@ -405,13 +486,24 @@ def main():
         sys.exit("Too few items for the video.")
     os.makedirs(OUT, exist_ok=True)
     tmp = os.path.join(OUT, "frames"); os.makedirs(tmp, exist_ok=True)
-    slides = [(title_slide(rep), SEC_TITLE), (mood_slide(rep, allr), SEC_MOOD), (movers_slide(rep, allr), SEC_MOVE)]
-    slides += [(item_slide(rep, r, i + 1, len(rows)), SEC_ITEM) for i, r in enumerate(rows)]
-    slides += [(end_slide(rep), SEC_END)]
-    lst = []
-    for k, (im, sec) in enumerate(slides):
-        p = os.path.join(tmp, f"s{k:02d}.png"); im.save(p)
-        lst.append(f"file '{os.path.abspath(p)}'\nduration {sec}")
+    lst, cnt, total = [], [0], [0.0]
+
+    def add(im, sec):
+        p = os.path.join(tmp, f"f{cnt[0]:05d}.png"); im.save(p, compress_level=1); cnt[0] += 1
+        lst.append(f"file '{os.path.abspath(p)}'\nduration {sec:.5f}"); total[0] += sec
+        return p
+
+    add(title_slide(rep), SEC_TITLE)
+    add(mood_slide(rep, allr), SEC_MOOD)
+    add(movers_slide(rep, allr), SEC_MOVE)
+    n_anim = int(max(POP_SEC, COUNT_SEC) * FPS)
+    for i, r in enumerate(rows, 1):          # animated vegetable slides
+        card = photo_card(r)
+        base = item_base(rep, r, i, len(rows), card)
+        for f in range(n_anim):
+            add(item_frame(base, card, r, f / FPS), 1 / FPS)
+        add(item_frame(base, card, r, 99), SEC_ITEM - n_anim / FPS)
+    p = add(end_slide(rep), SEC_END)
     lst.append(f"file '{os.path.abspath(p)}'")
     open(os.path.join(tmp, "list.txt"), "w").write("\n".join(lst) + "\n")
     iso = rep.isoformat()
@@ -419,7 +511,7 @@ def main():
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0",
                     "-i", os.path.join(tmp, "list.txt"), "-vf", "fps=30,format=yuv420p",
                     "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-movflags", "+faststart", mp4], check=True)
-    total = sum(s for _, s in slides)
+    total = total[0]
     try:
         track = short_kit.pick_track("music-5.wav", "music-2.wav", "music-4.wav")
         if track:
@@ -441,7 +533,7 @@ def main():
     for f in os.listdir(tmp): os.remove(os.path.join(tmp, f))
     os.rmdir(tmp)
     open(STATE, "w").write(st)
-    print(f"Made {mp4} ({total} seconds, {len(rows)} items) for {iso}")
+    print(f"Made {mp4} ({total:.0f} seconds, {len(rows)} items) for {iso}")
 
 
 if __name__ == "__main__":
