@@ -98,6 +98,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .bnav button span{font-size:22px;line-height:1}
 .bnav button.on{background:#e3efe6;color:var(--petrol)}
 .fab{position:fixed;right:16px;bottom:calc(92px + env(safe-area-inset-bottom,0px));height:62px;padding:0 22px 0 14px;border-radius:31px;border:0;background:var(--petrol);color:#fff;font:inherit;font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 10px 24px -8px rgba(14,79,74,.7);z-index:31;display:flex;align-items:center;gap:8px}
+.fab.mini{width:62px;padding:0;justify-content:center}.fab.mini span:not(.fabPlus){display:none}
 .fabPlus{font-size:36px;line-height:1;font-weight:400;margin-top:-3px}
 #vList{padding-bottom:140px}
 .tabs button{flex-direction:column;gap:2px;min-height:74px;padding:8px 6px}.tabs button b{font-size:15px}.tabs button small{font-size:12px;font-weight:600;opacity:.8;line-height:1.25}
@@ -256,7 +257,7 @@ details.more summary::-webkit-details-marker{display:none}
 
 <script>
 const $=id=>document.getElementById(id);
-const APP_VER="2026-11-07.4";
+const APP_VER="2026-11-07.5";
 const KEY="tg_mage_wagawa_v1",LKEY="tg_mage_wagawa_lang";
 
 /* ================= TEXT (3 languages) ================= */
@@ -653,7 +654,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSheet();});
 function toast(m){const d=document.createElement("div");d.className="toast";d.textContent=m;document.body.appendChild(d);setTimeout(()=>d.remove(),1600);}
 function renderHeader(){const el=$("subTxt");if(!el)return;const fresh=!realCrops().length||PREVIEW;
   el.innerHTML=fresh?`<p class="hdLine">${T("hdLine")}</p><div class="chips">${T("hdChips").map(c=>`<span>${c}</span>`).join("")}</div><p class="note" style="margin:0">${T("hdLock")}</p>`:`<p class="note" style="margin:0">${T("hdLine")}</p>`;}
-function render(){renderHeader();if(typeof showUpd==="function"&&UPD_NEW)showUpd();
+function render(){renderHeader();if(typeof fitFabSoon==="function")setTimeout(fitFabSoon,0);if(typeof showUpd==="function"&&UPD_NEW)showUpd();
   $("demoBar").classList.toggle("hide",!(PREVIEW||hasDemo())||(VIEW==="form"&&!PREVIEW));
   $("demoTxt").innerHTML=PREVIEW?T("prevBanner"):T("demoBanner");$("demoDel").textContent=PREVIEW?T("prevExit"):T("demoDel");$("demoDel").classList.toggle("red",!PREVIEW);$("demoDel").classList.toggle("solid",PREVIEW);
   if(VIEW==="list")renderList();else if(VIEW==="crop")renderCrop();else if(VIEW==="report")renderReport();else if(VIEW==="all")renderAll();else if(VIEW==="guide")renderGuide();else if(VIEW==="backup")renderBackup();else if(VIEW==="budget")renderBudget();
@@ -1224,6 +1225,13 @@ load();if(!BROKEN)save();applyLang();show("list");loadPrices();
 try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist();}catch(e){}
 /* use the site's existing offline helper so the tool opens without internet after the first visit */
 try{if(isStandalone())localStorage.setItem('tg_mw_installed','1');}catch(e){}
+/* ---- the + button shrinks to a small round + when it would cover another button ---- */
+function fitFab(){const f=$("fab");if(!f||f.classList.contains("hide"))return;f.classList.remove("mini");
+  const hit=()=>{const r=f.getBoundingClientRect();return [...document.querySelectorAll("#vList a,#vList button,#vList .crop")].some(e=>{const q=e.getBoundingClientRect();return q.width&&!(q.bottom<r.top||q.top>r.bottom||q.right<r.left||q.left>r.right);});};
+  if(hit())f.classList.add("mini");f.setAttribute("aria-label",T("fabTxt"));}
+var FAB_RAF=0;function fitFabSoon(){cancelAnimationFrame(FAB_RAF);FAB_RAF=requestAnimationFrame(fitFab);}
+window.addEventListener("scroll",fitFabSoon,{passive:true});window.addEventListener("resize",fitFabSoon);
+setTimeout(fitFab,300);
 /* ---- new-version check: compares this page's version with the one on the site ---- */
 var UPD_LAST=0,UPD_NEW=null;
 async function checkUpdate(){if(!/^https?:/.test(location.protocol)||Date.now()-UPD_LAST<15*60e3)return;UPD_LAST=Date.now();
