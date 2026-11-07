@@ -10,7 +10,8 @@
 #   dambulla-whatsapp-YYYY-MM-DD.txt      ready WhatsApp message (paste the video ID into the youtu.be link)
 # Subscribe button: video-assets/subscribe.png (optional) — shown small on slide 2 and big on the end slide.
 # Titles/descriptions/tags start with romanized Sinhala ("Dambulla Elawalu Mila Ada"), the words people type on YouTube.
-# Animation on vegetable slides: photo pops in (small bounce), lowest/highest price counts up from 0.
+# Animation on vegetable slides: the photo comes in a different way each slide (pop / spin / swing), then gently
+# 'breathes' (slow zoom + small sway) while the lowest/highest price counts up from 0.
 # Crop photos: video-assets/crops/<name>.png (same photos as the CBSL video). Missing photo = name box.
 import json, os, subprocess, sys, hashlib
 from datetime import date
@@ -217,8 +218,10 @@ def item_slide(rep, r, i, n):
     return im
 
 
-FPS = 30
-POP_SEC, COUNT_SEC = 0.6, 1.2          # animation lengths (seconds)
+FPS = 30                # entrance frames per second
+HOLD_FPS = 15           # gentle "breathing" frames per second after the entrance
+POP_SEC, COUNT_SEC = 0.8, 1.2          # animation lengths (seconds)
+ENTRANCES = ("pop", "spin", "swing")   # changes every slide
 BOX = (60, 200, 900, 960)
 
 
@@ -279,15 +282,36 @@ def _ease_back(x):     # grows a little past full size, then settles
     return 1 + c3 * (x - 1) ** 3 + c1 * (x - 1) ** 2
 
 
-def item_frame(base, card, r, t):
-    """One frame t seconds into the slide: photo pop-in + price count-up."""
+def _photo_layer(card, t, style):
+    """Scale, angle and x-offset of the photo at time t (entrance, then gentle breathing)."""
+    import math
+    if t < POP_SEC:
+        x = t / POP_SEC
+        if style == "spin":       # one full turn while growing
+            return 0.25 + 0.75 * (1 - (1 - x) ** 3), -360 * (1 - x) ** 2, 0
+        if style == "swing":      # comes in from the left, tilted, and settles
+            e = _ease_back(x)
+            return 0.9 + 0.1 * e, 18 * (1 - e), int(-700 * (1 - e))
+        return 0.45 + 0.55 * _ease_back(x), 0, 0      # pop
+    h = t - POP_SEC                                    # breathing (very small, so the price stays the focus)
+    return 1.0 + 0.025 * math.sin(h * 1.6), 1.5 * math.sin(h * 1.1), 0
+
+
+def item_frame(base, card, r, t, style="pop"):
+    """One frame t seconds into the slide."""
     im = base.copy(); dr = ImageDraw.Draw(im)
     if card is not None:
         x0, y0, x1, y1 = BOX
-        sc = 0.45 + 0.55 * _ease_back(min(t / POP_SEC, 1.0))
+        sc, ang, dx = _photo_layer(card, t, style)
         w, h = max(1, int(card.width * sc)), max(1, int(card.height * sc))
-        c = card.resize((w, h), Image.LANCZOS)
-        im.paste(c, ((x0 + x1 - w) // 2, (y0 + y1 - h) // 2), c)
+        c = card.resize((w, h), Image.BILINEAR)
+        if abs(ang) > 0.05:
+            c = c.rotate(ang, resample=Image.BICUBIC, expand=True)
+        # keep the moving photo inside its own area (never over the header, footer or price text)
+        ax0, ay0, ax1, ay1 = 0, 158, 935, 1000
+        area = Image.new("RGBA", (ax1 - ax0, ay1 - ay0), (0, 0, 0, 0))
+        area.paste(c, ((x0 + x1 - c.width) // 2 + dx - ax0, (y0 + y1 - c.height) // 2 - ay0), c)
+        im.paste(area, (ax0, ay0), area)
     k = 1 - (1 - min(t / COUNT_SEC, 1.0)) ** 3
     for x, val, col in ((960, r["lo"], INK), (1420, r["hi"], GOLD)):
         fs = mono(120)
@@ -489,7 +513,7 @@ def main():
     lst, cnt, total = [], [0], [0.0]
 
     def add(im, sec):
-        p = os.path.join(tmp, f"f{cnt[0]:05d}.png"); im.save(p, compress_level=1); cnt[0] += 1
+        p = os.path.join(tmp, f"f{cnt[0]:05d}.jpg"); im.save(p, quality=93); cnt[0] += 1   # jpg: ~10x faster than png
         lst.append(f"file '{os.path.abspath(p)}'\nduration {sec:.5f}"); total[0] += sec
         return p
 
@@ -500,9 +524,17 @@ def main():
     for i, r in enumerate(rows, 1):          # animated vegetable slides
         card = photo_card(r)
         base = item_base(rep, r, i, len(rows), card)
-        for f in range(n_anim):
-            add(item_frame(base, card, r, f / FPS), 1 / FPS)
-        add(item_frame(base, card, r, 99), SEC_ITEM - n_anim / FPS)
+        style = ENTRANCES[(i - 1) % len(ENTRANCES)]
+        for f in range(n_anim):              # entrance + count-up, smooth
+            add(item_frame(base, card, r, f / FPS, style), 1 / FPS)
+        t = n_anim / FPS
+        if card is None:                     # no photo: nothing moves, one still frame
+            add(item_frame(base, card, r, t, style), SEC_ITEM - t)
+        else:                                # gentle breathing until the slide ends
+            while t < SEC_ITEM - 1e-6:
+                step = min(1 / HOLD_FPS, SEC_ITEM - t)
+                add(item_frame(base, card, r, t, style), step)
+                t += step
     p = add(end_slide(rep), SEC_END)
     lst.append(f"file '{os.path.abspath(p)}'")
     open(os.path.join(tmp, "list.txt"), "w").write("\n".join(lst) + "\n")
