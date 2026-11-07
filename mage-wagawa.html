@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>🌾 මගේ වගාව — වගා වියදම හා ලාභය | TopGoviya.lk</title>
+<title>🌾 මගේ වගාව — TopGoviya Farm Manager | වගා වියදම, අයවැය හා ලාභය</title>
 <meta name="description" content="ඔබේ වගාවේ වියදම්, අස්වැන්න හා ලාභය සටහන් කරන්න. අද දඹුල්ල මිලට විකුණුවොත් ලාභය බලන්න. නොමිලේ.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="TopGoviya.lk">
-<meta property="og:title" content="🌾 මගේ වගාව — වගා වියදම, අයවැය හා ලාභය | TopGoviya.lk">
+<meta property="og:title" content="🌾 මගේ වගාව — TopGoviya Farm Manager">
 <meta property="og:description" content="වගාවේ වියදම්, අස්වැන්න හා ලාභය සටහන් කරන්න. අද දඹුල්ල මිලට ලාභය බලන්න. නොමිලේ · සිංහල · தமிழ் · English">
 <meta property="og:url" content="https://topgoviya.lk/mage-wagawa.html">
 <meta property="og:image" content="https://topgoviya.lk/mw-og.jpg">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="මගේ වගාව — TopGoviya.lk">
+<meta property="og:image:alt" content="මගේ වගාව — TopGoviya Farm Manager">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://topgoviya.lk/mw-og.jpg">
 <link rel="icon" href="/mw-icon-192.png"><meta name="theme-color" content="#0e4f4a">
 <link rel="manifest" href="/mage-wagawa.webmanifest">
@@ -64,6 +64,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:7px 6px;b
 .note{font-size:14px;color:var(--muted)}
 .tabs{display:flex;gap:6px;margin:0 0 10px}.tabs button{flex:1;justify-content:center}
 .hide{display:none!important}
+.brandTag{font:800 12.5px/1.2 "Hanken Grotesk",sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);margin:2px 0 0 4px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 6px}.chips span{background:#e3efe6;color:var(--petrol);border:1px solid #c5dccb;border-radius:999px;padding:4px 11px;font-size:13.5px;font-weight:700}
 .hdLine{font-size:16px;color:var(--ink);font-weight:600;margin:0}
 #vCrop{padding-bottom:76px}
@@ -124,7 +125,7 @@ details.more summary::-webkit-details-marker{display:none}
 <div class="top noprint"><a href="./" data-t="navHome">🥬 TopGoviya.lk</a><a href="./" data-t="navDam">🧺 දඹුල්ල මිල</a><a href="breakeven.html" data-t="navBe">🧮 Break-even</a></div>
 <main class="w">
 <div class="head">
-  <div><h1 data-t="title">🌾 මගේ වගාව</h1></div>
+  <div><h1 data-t="title">🌾 මගේ වගාව</h1><div class="brandTag">TopGoviya Farm Manager</div></div>
   <div class="lang noprint" role="group" aria-label="Language"><button type="button" data-lang="si">සිං</button><button type="button" data-lang="ta">தமிழ்</button><button type="button" data-lang="en">EN</button></div>
 </div>
 <div class="sub" id="subTxt"></div>
@@ -257,7 +258,7 @@ details.more summary::-webkit-details-marker{display:none}
 
 <script>
 const $=id=>document.getElementById(id);
-const APP_VER="2026-11-07.5";
+const APP_VER="2026-11-07.6";
 const KEY="tg_mage_wagawa_v1",LKEY="tg_mage_wagawa_lang";
 
 /* ================= TEXT (3 languages) ================= */
@@ -687,7 +688,7 @@ function renderList(){
 function renderBackup(){
   let h=backupBanner();
   h+=`<div class="card noprint"><h2>${T("backupH")}</h2><p class="note">${T("backupNote")}</p><div class="row">${navigator.share?`<button class="btn solid" type="button" data-act="share">${T("shareBtn")}</button>`:""}<button class="btn" type="button" data-act="backup">${T("expBtn")}</button>
-    <label class="btn" style="margin:0;cursor:pointer;color:var(--petrol)">${T("impBtn")}<input type="file" id="impIn" accept=".json,application/json" hidden></label></div><p class="note neg" style="margin:10px 0 0">${T("bkWarn")}</p><p class="note" style="margin:10px 0 0">${T("bkHow")}</p><p class="note" style="margin:10px 0 0">${T("impNote")}</p><p class="note" style="margin:10px 0 0">${T("bkSame")}</p>${isIOS()&&!isStandalone()?`<p class="note" style="margin:10px 0 0">${T("bkIOS")}</p>`:""}<p class="note" style="margin:10px 0 0">${T("privNote")}</p></div>`+feedbackCard()+partnerCard()+`<p class="note" style="text-align:center;margin:6px 0 0">🌾 මගේ වගාව · v${APP_VER}</p>`;
+    <label class="btn" style="margin:0;cursor:pointer;color:var(--petrol)">${T("impBtn")}<input type="file" id="impIn" accept=".json,application/json" hidden></label></div><p class="note neg" style="margin:10px 0 0">${T("bkWarn")}</p><p class="note" style="margin:10px 0 0">${T("bkHow")}</p><p class="note" style="margin:10px 0 0">${T("impNote")}</p><p class="note" style="margin:10px 0 0">${T("bkSame")}</p>${isIOS()&&!isStandalone()?`<p class="note" style="margin:10px 0 0">${T("bkIOS")}</p>`:""}<p class="note" style="margin:10px 0 0">${T("privNote")}</p></div>`+feedbackCard()+partnerCard()+`<p class="note" style="text-align:center;margin:6px 0 0">🌾 මගේ වගාව — TopGoviya Farm Manager · v${APP_VER}</p>`;
   $("vBackup").innerHTML=h;
   $("impIn").onchange=importFile;
 }
@@ -1112,7 +1113,7 @@ function renderGuide(){
      <button class="btn solid big noprint" type="button" id="readGuide" style="width:100%;justify-content:center">${T("vReadAll")}</button><div class="row noprint" style="margin-top:10px">${instBtn(true)}</div></div>`
    +G.map((s,i)=>`<div class="card gstep"><span class="gnum">${i+1}</span><div><div class="row" style="justify-content:space-between;align-items:flex-start;flex-wrap:nowrap;gap:8px"><h3>${esc(s[0])}</h3><button class="btn noprint" type="button" data-step="${i}" aria-label="${esc(T("vRead"))}" style="flex:none;padding:6px 10px">🔊</button></div><p>${esc(s[1])}</p></div></div>`).join("")
    +`<div class="row noprint" style="margin:0 0 14px"><button class="btn gold big" type="button" data-act="demo">${T("seeDemo")}</button><button class="btn solid big" type="button" data-act="new">${T("gStart")}</button></div>
-   <p class="note">${T("guideNote")}</p>`+feedbackCard()+weatherCard()+partnerCard()+`<p class="note" style="text-align:center;margin:6px 0 0">🌾 මගේ වගාව · v${APP_VER}</p>`;
+   <p class="note">${T("guideNote")}</p>`+feedbackCard()+weatherCard()+partnerCard()+`<p class="note" style="text-align:center;margin:6px 0 0">🌾 මගේ වගාව — TopGoviya Farm Manager · v${APP_VER}</p>`;
   const say=s=>s.replace(/[\u2600-\u27BF\u{1F300}-\u{1FAFF}\uFE0F]/gu,"").replace(/\\?"/g,"");
   $("readGuide").onclick=function(){speak(G.map((s,i)=>`${i+1}. ${s[0]}. ${s[1]}`).map(say).join(" "),this);};
   $("vGuide").querySelectorAll("[data-step]").forEach(b=>b.onclick=function(){const s=G[+b.dataset.step];speak(say(`${+b.dataset.step+1}. ${s[0]}. ${s[1]}`),this);});
