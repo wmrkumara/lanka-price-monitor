@@ -2,6 +2,7 @@
 # TEST: runs after each new Dambulla day, but only makes a video when the report date is Monday, Wednesday or Friday.
 # Make one any day: Actions → Dambulla fruit video → Run workflow → force = yes.
 # Download: Actions → Dambulla fruit video → top green run → F5 → Artifacts.
+# Or one click (always the newest): https://github.com/wmrkumara/lanka-price-monitor/releases/download/fruit-video/fruit-video-all.zip
 name: Dambulla fruit video
 
 on:
@@ -63,6 +64,23 @@ jobs:
           name: topgoviya-fruit-video-${{ steps.make.outputs.day }}
           path: dambulla_fruit_video/
           retention-days: 14
+
+      - name: Publish the latest fruit video for direct download
+        if: steps.check.outputs.need == 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p latest
+          cp dambulla_fruit_video/fruit-daily-*-music.mp4 latest/fruit-video-latest.mp4
+          cp "$(ls dambulla_fruit_video/fruit-daily-*.mp4 | grep -v music)" latest/fruit-video-latest-silent.mp4
+          cp dambulla_fruit_video/fruit-thumbnail-*.png latest/fruit-video-thumbnail.png
+          cp dambulla_fruit_video/fruit-youtube-*.txt   latest/fruit-video-youtube.txt
+          cp dambulla_fruit_video/fruit-whatsapp-*.txt  latest/fruit-video-whatsapp.txt
+          (cd dambulla_fruit_video && zip -q ../latest/fruit-video-all.zip *)
+          DAY=$(cut -d_ -f1 .dambulla_fruit_last)
+          gh release view fruit-video >/dev/null 2>&1 || gh release create fruit-video --title "Latest Dambulla fruit video" --notes "Newest Dambulla fruit video. Files are replaced each time."
+          gh release edit fruit-video --notes "Latest Dambulla fruit video: $DAY"
+          gh release upload fruit-video latest/* --clobber
 
       - name: Remember the day is done
         if: steps.check.outputs.need == 'yes'
