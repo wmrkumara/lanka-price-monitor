@@ -49,6 +49,7 @@ ITEMS = [  # (DEC product id, crop photo name) — in the site's popular order
     ("15", "potato"), ("26", "brinjal"), ("1", "cabbage"), ("6", "carrot"),
     ("4", "beans"), ("25", "pumpkin"), ("27", "lime"), ("23", "snake-gourd"),
 ]
+VEG_CATS = ("v", "r", "l")   # dambulla_items.json categories: v vegetables, r roots, l leafy (f fruits and g grains not used)
 SEC_TITLE, SEC_MOOD, SEC_ITEM, SEC_MOVE, SEC_END = 7, 9, 8, 10, 10
 si, mono = V.si, V.mono
 PET, PETD, GOLD, LG, CREAM, CARD, INK, MUT, LINE, W = V.PET, V.PETD, V.GOLD, V.LG, V.CREAM, V.CARD, V.INK, V.MUT, V.LINE, V.W
@@ -102,7 +103,8 @@ def build_rows(days, names):
         if r:
             r["photo"] = photo
             rows.append(r)
-    allr = [r for r in (item(p) for p in days[last]) if r]
+    # mood + movers use vegetables only (vegetables, roots/potatoes, leafy). Fruits have their own video; grains are left out.
+    allr = [r for r in (item(p) for p in days[last] if names.get(p, {}).get("cat") in VEG_CATS) if r]
     return date.fromisoformat(last), rows, allr
 
 
@@ -223,7 +225,7 @@ def movers(allr, k=3):
 
 def movers_slide(rep, allr):
     im, dr = frame(rep)
-    dr.text((960, 225), "අද වැඩිම වෙනස්වීම් · භාණ්ඩ 90+ අතරින්", font=si(64), fill=PET, anchor="mm")
+    dr.text((960, 225), f"අද එළවළු මිල වැඩිම වෙනස්වීම් · එළවළු {len(allr)} අතරින්", font=si(64), fill=PET, anchor="mm")
     ups, dns = movers(allr)
     for col_i, (lst, head, col, bg) in enumerate(((ups, "📈 ඉහළ ගිය", UP, UPBG), (dns, "📉 පහළ ගිය", DN, DNBG))):
         x0 = 100 + col_i * 880
