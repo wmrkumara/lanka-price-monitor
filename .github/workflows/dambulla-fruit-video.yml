@@ -1,0 +1,76 @@
+# TopGoviya.lk — Dambulla FRUIT price video (~2 minutes, 16:9) + thumbnail + YouTube text + WhatsApp message
+# TEST: runs after each new Dambulla day, but only makes a video when the report date is Monday, Wednesday or Friday.
+# Make one any day: Actions → Dambulla fruit video → Run workflow → force = yes.
+# Download: Actions → Dambulla fruit video → top green run → F5 → Artifacts.
+name: Dambulla fruit video
+
+on:
+  workflow_run:
+    workflows: ["Dambulla DEC prices"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Make the fruit video now (any day)"
+        type: choice
+        options:
+          - "no"
+          - "yes"
+        default: "no"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dambulla-fruit-video
+  cancel-in-progress: false
+
+jobs:
+  video:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - name: Is a fruit video due?
+        id: check
+        run: |
+          if [ "$(echo "${{ github.event.inputs.force }}" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')" = "yes" ]; then echo "need=yes" >> "$GITHUB_OUTPUT"; else python3 make_dambulla_fruit_video.py --check >> "$GITHUB_OUTPUT"; fi
+
+      - name: Install tools and fonts
+        if: steps.check.outputs.need == 'yes'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg libraqm0 libfribidi0 libharfbuzz0b
+          mkdir -p ~/.fonts
+          curl -sL -o ~/.fonts/NotoSansSinhala.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssinhala/NotoSansSinhala%5Bwdth,wght%5D.ttf"
+          curl -sL -o ~/.fonts/JetBrainsMono.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf"
+          pip install -q pillow
+
+      - name: Make the fruit video
+        if: steps.check.outputs.need == 'yes'
+        id: make
+        run: |
+          python3 make_dambulla_fruit_video.py --force
+          echo "day=$(cut -d_ -f1 .dambulla_fruit_last)" >> "$GITHUB_OUTPUT"
+
+      - name: Save for download
+        if: steps.check.outputs.need == 'yes'
+        uses: actions/upload-artifact@v4
+        with:
+          name: topgoviya-fruit-video-${{ steps.make.outputs.day }}
+          path: dambulla_fruit_video/
+          retention-days: 14
+
+      - name: Remember the day is done
+        if: steps.check.outputs.need == 'yes'
+        run: |
+          git config user.name  "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add .dambulla_fruit_last
+          if git diff --staged --quiet; then echo "Nothing to save."; else
+            git commit -m "Fruit video made ($(cut -d_ -f1 .dambulla_fruit_last))"
+            for i in 1 2 3; do git pull --rebase origin main && git push origin main && break; sleep 10; done
+          fi
