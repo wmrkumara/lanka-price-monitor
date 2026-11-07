@@ -7,6 +7,9 @@
 #   dambulla-thumbnail-YYYY-MM-DD.png     1280x720 YouTube thumbnail
 #   dambulla-youtube-YYYY-MM-DD.txt       title + description + tags
 #   dambulla-script-YYYY-MM-DD.txt        reading script for your voice, slide by slide
+#   dambulla-whatsapp-YYYY-MM-DD.txt      ready WhatsApp message (paste the video ID into the youtu.be link)
+# Subscribe button: video-assets/subscribe.png (optional) — shown small on slide 2 and big on the end slide.
+# Titles/descriptions/tags start with romanized Sinhala ("Dambulla Elawalu Mila Ada"), the words people type on YouTube.
 # Crop photos: video-assets/crops/<name>.png (same photos as the CBSL video). Missing photo = name box.
 import json, os, subprocess, sys, hashlib
 from datetime import date
@@ -51,6 +54,18 @@ si, mono = V.si, V.mono
 PET, PETD, GOLD, LG, CREAM, CARD, INK, MUT, LINE, W = V.PET, V.PETD, V.GOLD, V.LG, V.CREAM, V.CARD, V.INK, V.MUT, V.LINE, V.W
 UP, UPBG, DN, DNBG, FLAT, FLATBG = V.UP, V.UPBG, V.DN, V.DNBG, V.FLAT, V.FLATBG
 DAYS_SI = V.DAYS_SI
+SUB_PNG = os.path.join("video-assets", "subscribe.png")
+
+
+def add_subscribe(im, size, xy):
+    """Paste the Subscribe button (if the file exists). Never stops the video if it is missing."""
+    try:
+        if not os.path.exists(SUB_PNG):
+            return
+        b = Image.open(SUB_PNG).convert("RGBA").resize((size, size), Image.LANCZOS)
+        im.paste(b, xy, b)
+    except Exception as e:
+        print("Subscribe button skipped:", e)
 
 
 def load():
@@ -151,8 +166,19 @@ def mood_slide(rep, allr):
         cx = 300 + k * step
         dr.text((cx, 600), f"{cnt}", font=mono(110), fill=c, anchor="lm")
         V.segs(dr, cx, 700, [(lbl[0] + " ", mono(40), c), (lbl[2:], si(42, "SemiBold"), MUT)])
-    dr.text((960, 860), f"භාණ්ඩ {n}ක දඹුල්ල තොග මිල · පෙර වාර්තාවට සාපේක්ෂව", font=si(40, "Medium"), fill=MUT, anchor="mm")
+    dr.text((960, 790), f"භාණ්ඩ {n}ක දඹුල්ල තොග මිල · පෙර වාර්තාවට සාපේක්ෂව", font=si(36, "Medium"), fill=MUT, anchor="mm")
+    visit_pill(dr, 880, 900)
+    add_subscribe(im, 120, (1700, 815))
+    dr.text((1760, 962), "Subscribe කරන්න", font=si(26, "SemiBold"), fill=PET, anchor="mm")
     return im
+
+
+def visit_pill(dr, cx, cy):
+    """Gold pill: 'see the full price reports at topgoviya.lk'."""
+    parts = [("සම්පූර්ණ මිල වාර්තා බලන්න පිවිසෙන්න  ", si(40, "SemiBold"), W), ("topgoviya.lk", mono(42), W)]
+    tw = sum(dr.textlength(t, font=f) for t, f, c in parts)
+    dr.rounded_rectangle((cx - tw / 2 - 40, cy - 46, cx + tw / 2 + 40, cy + 46), radius=46, fill=GOLD)
+    V.segs(dr, cx, cy, parts, True)
 
 
 def item_slide(rep, r, i, n):
@@ -221,11 +247,11 @@ def end_slide(rep):
     im = Image.new("RGB", (1920, 1080), PET); dr = ImageDraw.Draw(im)
     b = V.logo_badge(180); im.paste(b, (870, 80), b)
     dr.text((960, 360), "දඹුල්ල භාණ්ඩ 90+ ක අද මිල", font=si(80), fill=W, anchor="mm")
-    dr.text((960, 470), "🛒 බාස්කට් එක · 🧮 ලාභ ගණකය · ⭐ මගේ භාණ්ඩ · නොමිලේ".replace("🛒 ", "").replace("🧮 ", "").replace("⭐ ", ""),
-            font=si(44, "SemiBold"), fill=LG, anchor="mm")
+    dr.text((960, 470), "සම්පූර්ණ මිල වාර්තා බලන්න පිවිසෙන්න", font=si(50, "SemiBold"), fill=LG, anchor="mm")
     dr.rounded_rectangle((560, 560, 1360, 680), radius=60, fill=GOLD)
     dr.text((960, 620), "topgoviya.lk", font=mono(70), fill=W, anchor="mm")
     dr.text((960, 790), "Subscribe කරන්න · හෙට නැවත හමුවෙමු", font=si(48, "SemiBold"), fill=W, anchor="mm")
+    add_subscribe(im, 200, (1560, 520))
     dr.text((960, 960), "මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.", font=si(34, "Medium"), fill=LG, anchor="mm")
     return im
 
@@ -255,12 +281,62 @@ def thumbnail(rep, allr):
     return im
 
 
+def make_title(rep):
+    """Romanized search words first (most people type these), then Sinhala + date. Max 100 characters."""
+    d = rep.strftime('%Y.%m.%d')
+    day = DAYS_SI[rep.weekday()]
+    for t in (f"Dambulla Elawalu Mila Ada | දඹුල්ල එලවලු මිල අද {d} {day} | Dambulla Market Vegetable Prices Today",
+              f"Dambulla Elawalu Mila Ada | දඹුල්ල එලවලු මිල අද {d} {day} | Dambulla Market Price Today",
+              f"Dambulla Elawalu Mila Ada | දඹුල්ල එලවලු මිල අද {d} {day} | Dambulla Market Price",
+              f"Dambulla Elawalu Mila Ada | දඹුල්ල එලවලු මිල අද {d} {day}"):
+        if len(t) <= 100:
+            return t
+    return t[:100]
+
+
+TAG_LIST = [  # most important first (from YouTube Analytics search terms); trimmed to YouTube's 500-character limit
+    "dambulla market vegetable prices today", "dambulla elawalu mila today", "දඹුල්ල එලවලු මිල අද",
+    "elawalu mila today", "ada dambulla elawalu mila", "dambulla elawalu mila", "එලවලු මිල අද",
+    "dambulla vegetable price", "dambulla market price today", "elawalu mila ada", "elawalu mila",
+    "dambulla wholesale price", "අද දඹුල්ල එළවළු මිල", "දඹුල්ල එළවළු මිල", "vegetable price today sri lanka",
+    "vegetable price sri lanka", "තොග මිල", "dambulla price today", "TopGoviya",
+]
+
+
+def make_tags():
+    out = []
+    for tag in TAG_LIST:
+        trial = ", ".join(out + [tag])
+        if len(trial) + 2 * len(out + [tag]) > 490:   # YouTube counts each tag's quotes/commas too; keep a safety margin
+            break
+        out.append(tag)
+    return ", ".join(out)
+
+
+def whatsapp_file(rep, rows, allr):
+    """Ready WhatsApp message. Link first (so the thumbnail preview shows), then a short summary."""
+    ups, dns = movers(allr, 2)
+    L = ["(1) Upload the video to YouTube. (2) Replace VIDEO_ID below with the video's ID.",
+         "(3) In WhatsApp paste the message, WAIT until the picture preview appears, then Send.",
+         "-----", "https://youtu.be/VIDEO_ID", "",
+         f"🥬 දඹුල්ල එලවලු මිල අද — {fdate(rep, 'si')} ({DAYS_SI[rep.weekday()]})", ""]
+    for r in ups:
+        L.append(f"📈 {r['si']}: රු. {r['lo']:,.0f}–{r['hi']:,.0f} (+{r['pct']:.0f}%)")
+    for r in dns:
+        L.append(f"📉 {r['si']}: රු. {r['lo']:,.0f}–{r['hi']:,.0f} (−{abs(r['pct']):.0f}%)")
+    L += ["", "👉 භාණ්ඩ 90+ ක අද මිල: https://topgoviya.lk",
+          "📊 මූලාශ්‍රය: දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය",
+          "⚠️ මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ."]
+    return "\n".join(L) + "\n"
+
+
 def text_file(rep, rows, allr):
     ups, dns = movers(allr)
     title_m, up, dn, same, n = mood_of(allr)
-    t = f"දඹුල්ල එලවලු මිල අද {rep.strftime('%Y.%m.%d')} {DAYS_SI[rep.weekday()]} | දඹුල්ල ආර්ථික මධ්‍යස්ථානයේ තොග මිල | Dambulla Market Price"
-    L = [f"TITLE:\n{t[:100]}", "", "DESCRIPTION:",
-         f"අද දඹුල්ල එළවළු තොග මිල — {fdate(rep, 'si')} ({DAYS_SI[rep.weekday()]}).",
+    t = make_title(rep)
+    L = [f"TITLE:\n{t}", "", "DESCRIPTION:",
+         f"Dambulla Elawalu Mila Ada — දඹුල්ල එලවලු මිල අද {rep.strftime('%Y.%m.%d')} ({DAYS_SI[rep.weekday()]})",
+         f"Dambulla market vegetable prices today · dambulla elawalu mila today · අද දඹුල්ල එළවළු තොග මිල — {fdate(rep, 'si')}.",
          f"{title_m.split(' ', 1)[1]}: භාණ්ඩ {up}ක් ඉහළ, {dn}ක් පහළ, {same}ක් වෙනසක් නැත"
          + (f", {n - up - dn - same}ක පෙර මිල නැත" if n - up - dn - same else "") + " (පෙර වාර්තාවට සාපේක්ෂව).",
          "දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානයේ තොග මිල පරාසය (අවම – උපරිම), රු.", ""]
@@ -274,11 +350,9 @@ def text_file(rep, rows, allr):
     L += ["", "👉 දඹුල්ල භාණ්ඩ 90+ ක අද මිල, ප්‍රස්ථාර, 🛒 බාස්කට් එක හා 🧮 ලාභ ගණකය: https://topgoviya.lk",
           "📊 මූලාශ්‍රය: දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය",
           "⚠️ මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.", "",
-          "#දඹුල්ල #එළවළුමිල #තොගමිල #DambullaPrice #TopGoviyaLK #SriLanka", "",
+          "#Dambulla #ElawaluMila #දඹුල්ල #එළවළුමිල #DambullaPrice #TopGoviyaLK", "",
           "TAGS (paste into the Tags box):",
-          "දඹුල්ල එලවලු මිල අද, දඹුල්ල ආර්ථික මධ්‍යස්ථානයේ එළවළු මිල, දඹුල්ලේ එලවලු මිල, එලවලු මිල අද, "
-          "දඹුල්ල එළවළු මිල, අද දඹුල්ල එළවළු මිල, දබුල්ල එලවලු මිල, dambulla market price today, dambulla vegetable price, "
-          "dambulla price today, එළවළු මිල, අද එළවළු මිල, තොග මිල, elawalu mila, elawalu mila ada, vegetable price sri lanka, TopGoviya",
+          make_tags(),
           "", "PLAYLIST:", "🥬 අද දඹුල්ල එළවළු මිල | Dambulla Market Price Daily",
           "", "SETTINGS:", "Category: Education · Video language: Sinhala · Location: Sri Lanka · Not made for kids"]
     return "\n".join(L) + "\n"
@@ -361,6 +435,7 @@ def main():
     open(os.path.join(OUT, f"dambulla-youtube-{iso}.txt"), "w", encoding="utf-8").write(
         text_file(rep, rows, allr) + "\nPINNED COMMENT (post it, then ⋮ → Pin):\n" + pin + "\n")
     open(os.path.join(OUT, f"dambulla-script-{iso}.txt"), "w", encoding="utf-8").write(script_file(rep, rows, allr))
+    open(os.path.join(OUT, f"dambulla-whatsapp-{iso}.txt"), "w", encoding="utf-8").write(whatsapp_file(rep, rows, allr))
     for f in os.listdir(tmp): os.remove(os.path.join(tmp, f))
     os.rmdir(tmp)
     open(STATE, "w").write(st)
