@@ -134,7 +134,7 @@ h2 small{font-weight:500;color:var(--muted);font-size:13px;margin-left:6px}
 .mic{font-size:18px;width:46px;border-radius:10px;border:1px solid var(--line2);background:var(--card);cursor:pointer;color:var(--ink)}
 .mic.on{background:var(--up);border-color:var(--up)}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
-@media(max-width:640px){.chips{flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chip{white-space:nowrap}.tools{gap:6px}}
+@media(max-width:640px){.chips{flex-wrap:nowrap;overflow-x:auto;max-width:100%;flex:1 1 100%;min-width:0;scrollbar-width:none}.sbox{flex:1 1 100%;min-width:0;max-width:100%}.sbox .mic{flex:none}.chips::-webkit-scrollbar{display:none}.chip{white-space:nowrap}.tools{gap:6px}}
 .chip{font:inherit;font-size:14px;font-weight:600;padding:8px 13px;border-radius:999px;border:1px solid var(--line2);background:var(--card);color:var(--soft);cursor:pointer}
 .chip.on{background:var(--petrol);border-color:var(--petrol);color:#fff}
 select.sort{font:inherit;font-size:14px;font-weight:600;padding:8px 10px;border-radius:999px;border:1px solid var(--line2);background:var(--card);color:var(--soft)}
