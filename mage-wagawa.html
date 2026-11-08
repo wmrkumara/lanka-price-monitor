@@ -28,12 +28,15 @@
 :root{--petrol:#0e4f4a;--gold:#a9802a;--cream:#f4efe4;--card:#fffdf7;--ink:#191d1a;--muted:#6f675a;--line:#e3d9c4;--up:#b23a2e;--dn:#2c7a52;--soft:#f7f1e3}
 *{box-sizing:border-box}
 body{margin:0;background:var(--cream);color:var(--ink);font-family:'Noto Sans Sinhala','Noto Sans Tamil','Hanken Grotesk',system-ui,sans-serif;line-height:1.5}
-.top{background:var(--petrol);padding:2px 16px;border-bottom:3px solid var(--gold)}.top a{color:#fff;text-decoration:none;font-weight:700;margin-right:14px;font-size:15px;display:inline-block;padding:10px 0}
+.top{background:var(--petrol);border-bottom:3px solid var(--gold);display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px max(14px,calc((100% - 820px)/2 + 14px));min-height:54px}.top a{color:#fff;text-decoration:none;font-weight:700}.tbrand{font-size:16px;white-space:nowrap;display:inline-flex;align-items:center;min-height:42px}.tlinks{display:flex;gap:8px;flex:none}.tl{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:7px 13px;font-size:14px;white-space:nowrap}.tl:hover{background:rgba(255,255,255,.22)}.ti{font-size:17px;line-height:1}
+@media(max-width:600px){.tl .tt{display:none}.tl{width:42px;height:42px;padding:0;justify-content:center}.ti{font-size:20px}}
 .w{max-width:820px;margin:0 auto;padding:14px}
-.head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
-h1{color:var(--petrol);font-size:28px;margin:6px 0 2px}.sub{color:var(--muted);margin:0 0 14px;font-size:14px}
-.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#fff;margin-top:10px}
-.lang button{font:inherit;font-size:14px;font-weight:700;border:0;background:none;color:var(--muted);padding:6px 13px;min-height:40px;min-width:44px;cursor:pointer}
+.head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:nowrap;padding:6px 2px 0}.head>div:first-child{min-width:0}
+h1{color:var(--petrol);font-size:28px;margin:0;line-height:1.15;white-space:nowrap}.sub{color:var(--muted);margin:12px 2px 14px;font-size:14px}
+@media(max-width:420px){h1{font-size:24px}.brandTag{font-size:11px!important;letter-spacing:.04em!important}}
+.lang{display:flex;flex:none;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#fff;margin:0}
+.lang button{font:inherit;font-size:14px;font-weight:700;border:0;background:none;color:var(--muted);padding:6px 11px;min-height:40px;min-width:40px;cursor:pointer}
+@media(max-width:380px){.lang button{padding:6px 8px;min-width:40px;font-size:13px}}
 .lang button.on{background:var(--petrol);color:#fff}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:0 0 14px}
 h2{font-size:18px;color:var(--petrol);margin:0 0 10px}
@@ -123,7 +126,7 @@ details.more summary::-webkit-details-marker{display:none}
 </style>
 </head>
 <body>
-<div class="top noprint"><a href="./" data-t="navHome">🥬 TopGoviya.lk</a><a href="./" data-t="navDam">🧺 දඹුල්ල මිල</a><a href="breakeven.html" data-t="navBe">🧮 Break-even</a></div>
+<div class="top noprint"><a class="tbrand" href="./" data-t="navHome">🥬 TopGoviya.lk</a><nav class="tlinks"><a class="tl" href="./" data-tnav="navDam"><span class="ti">🧺</span><span class="tt"></span></a><a class="tl" href="breakeven.html" data-tnav="navBe"><span class="ti">🧮</span><span class="tt"></span></a></nav></div>
 <main class="w">
 <div class="head">
   <div><h1 data-t="title">🌾 මගේ වගාව</h1><div class="brandTag">TopGoviya Farm Manager</div></div>
@@ -259,7 +262,7 @@ details.more summary::-webkit-details-marker{display:none}
 
 <script>
 const $=id=>document.getElementById(id);
-const APP_VER="2026-11-08.2";
+const APP_VER="2026-11-08.3";
 const KEY="tg_mage_wagawa_v1",LKEY="tg_mage_wagawa_lang";
 
 /* ================= TEXT (3 languages) ================= */
@@ -625,6 +628,7 @@ function applyLang(){
   document.querySelectorAll("[data-t]").forEach(e=>{const v=T(e.dataset.t);if(typeof v==="string")e.innerHTML=v;});
   document.querySelectorAll("[data-tp]").forEach(e=>e.placeholder=T(e.dataset.tp));
   document.querySelectorAll("[data-ta]").forEach(e=>e.setAttribute("aria-label",T(e.dataset.ta)));
+  document.querySelectorAll("[data-tnav]").forEach(e=>{const t=T(e.dataset.tnav).replace(/^\S+\s+/,"");e.querySelector(".tt").textContent=t;e.setAttribute("aria-label",t);e.title=t;});
   document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.lang===LG));
   $("fSeason").innerHTML=`<option value="">—</option>`+["yala","maha","other"].map(s=>`<option value="${s}">${T("seasons")[s]}</option>`).join("");
   $("fUnit").innerHTML=["kg","nut","bundle"].map(u=>`<option value="${u}">${unitName(u)}</option>`).join("");
