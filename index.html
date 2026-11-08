@@ -38,7 +38,7 @@ html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:'Noto Sans Sinhala','Noto Sans Tamil','Hanken Grotesk',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
 .topnav{background:#0a3a36;border-bottom:2px solid #a9802a}
-.topnav-inner{max-width:1160px;margin:0 auto;padding:0 22px;display:flex;align-items:center}
+.topnav-inner{max-width:1280px;margin:0 auto;padding:0 22px;display:flex;align-items:center}
 .topnav-brand{font-family:'Newsreader',serif;font-size:16px;font-weight:500;color:#fff;padding:12px 18px 12px 0;border-right:1px solid rgba(255,255,255,.18);margin-right:4px;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
 .topnav-brand em{font-style:italic;color:#ffd98a}
 .topnav-brand .lm{background:#f4efe4;border-radius:50%;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -52,6 +52,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .navlink.krushi{background:rgba(212,173,85,.22);color:#ffe3a3}
 .navlink.weather{background:rgba(100,200,220,.18);color:#a8dfe8}
 .navlink.breakeven{background:rgba(169,128,42,.25);color:#ffd98a}
+.navlink.wagawa{background:rgba(255,217,138,.14);color:#ffe9b8;box-shadow:inset 0 0 0 1px rgba(255,217,138,.55)}
+.navlink.wagawa:hover{background:rgba(255,217,138,.26);color:#fff}
+@media(min-width:601px){.navlink{padding:7px 11px;letter-spacing:.02em}}
+/* NEW badge — remove this line and the <span class="nl-new"> after a few weeks */
+.nl-new{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;background:#d9452b;color:#fff;font-size:10px;font-weight:800;letter-spacing:0;line-height:1.5;vertical-align:1px}
 @media(max-width:600px){.topnav-inner{flex-wrap:wrap;padding:0}.topnav-brand{padding:10px 16px;border-right:none;margin-right:0;width:100%;border-bottom:1px solid rgba(255,255,255,.12)}.navlinks{width:100%;padding:6px 8px;gap:5px;justify-content:center}.navlink{font-size:11px;padding:7px 10px}}
 .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
 header{padding:22px 0 16px;border-bottom:2px solid var(--ink)}
@@ -226,6 +231,7 @@ footer a{color:var(--petrol);font-weight:600}
   <a href="index.html" class="topnav-brand"><span class="lm"><img src="logo-mark.png" alt="TopGoviya"></span><span>Top<em>Goviya</em>.lk</span></a>
   <div class="navlinks">
     <a href="index.html" class="navlink dec" aria-current="page">🥬 දඹුල්ල</a>
+    <a href="mage-wagawa.html" class="navlink wagawa">🌾 මගේ වගාව<span class="nl-new">අලුත්</span></a>
     <a href="retail.html" class="navlink retail">📊 CBSL</a>
     <a href="krushi-pola.html" class="navlink krushi">🧺 කෘෂි පොළ</a>
     <a href="tea.html" class="navlink tea">🍃 තේ / Tea</a>
