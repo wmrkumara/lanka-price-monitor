@@ -1715,45 +1715,29 @@
      400,
      500
     ],
-    "Carrot": [
-     350,
-     450
-    ],
-    "Leeks": [
-     200,
-     250
-    ],
     "Beetroot (N.Eliya)": [
      400,
      450
     ],
-    "Knolkhol": [
-     400,
-     450
-    ],
-    "Raddish": [
-     150,
-     200
-    ],
-    "Cabbage (N.Eliya)": [
-     450,
-     600
-    ],
-    "Tomato": [
-     500,
-     600
+    "Big Onion (Imported)": [
+     320,
+     320
     ],
     "Brinjals": [
      350,
      400
     ],
+    "Cabbage (N.Eliya)": [
+     450,
+     600
+    ],
     "Capsicum": [
      1000,
      1100
     ],
-    "Pumpkin": [
-     250,
-     250
+    "Carrot": [
+     350,
+     450
     ],
     "Cucumber": [
      220,
@@ -1767,9 +1751,13 @@
      350,
      500
     ],
-    "Sweet Potato": [
-     180,
-     200
+    "Knolkhol": [
+     400,
+     450
+    ],
+    "Leeks": [
+     200,
+     250
     ],
     "Manioc": [
      120,
@@ -1779,9 +1767,97 @@
      200,
      250
     ],
+    "Pumpkin": [
+     250,
+     250
+    ],
+    "Raddish": [
+     150,
+     200
+    ],
+    "Sweet Potato": [
+     180,
+     200
+    ],
+    "Tomato": [
+     500,
+     600
+    ]
+   }
+  },
+  "2026-11-09": {
+   "Keppetipola": {
+    "Beans": [
+     400,
+     500
+    ],
+    "Carrot": [
+     500,
+     600
+    ],
+    "Leeks": [
+     200,
+     250
+    ],
+    "Beetroot (N.Eliya)": [
+     400,
+     450
+    ],
+    "Knolkhol": [
+     300,
+     400
+    ],
+    "Raddish": [
+     140,
+     200
+    ],
+    "Cabbage (N.Eliya)": [
+     500,
+     650
+    ],
+    "Tomato": [
+     500,
+     600
+    ],
+    "Brinjals": [
+     300,
+     350
+    ],
+    "Capsicum": [
+     1000,
+     1100
+    ],
+    "Pumpkin": [
+     250,
+     250
+    ],
+    "Cucumber": [
+     180,
+     180
+    ],
+    "Drumstick": [
+     380,
+     380
+    ],
+    "Green Chillies": [
+     350,
+     400
+    ],
+    "Sweet Potato": [
+     220,
+     220
+    ],
+    "Manioc": [
+     120,
+     120
+    ],
+    "Potato (Welimada)": [
+     200,
+     240
+    ],
     "Big Onion (Imported)": [
-     320,
-     320
+     310,
+     310
     ]
    }
   }
