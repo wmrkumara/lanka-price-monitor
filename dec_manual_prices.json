@@ -1791,45 +1791,29 @@
      400,
      500
     ],
-    "Carrot": [
-     500,
-     600
-    ],
-    "Leeks": [
-     200,
-     250
-    ],
     "Beetroot (N.Eliya)": [
      400,
      450
     ],
-    "Knolkhol": [
-     300,
-     400
-    ],
-    "Raddish": [
-     140,
-     200
-    ],
-    "Cabbage (N.Eliya)": [
-     500,
-     650
-    ],
-    "Tomato": [
-     500,
-     600
+    "Big Onion (Imported)": [
+     310,
+     310
     ],
     "Brinjals": [
      300,
      350
     ],
+    "Cabbage (N.Eliya)": [
+     500,
+     650
+    ],
     "Capsicum": [
      1000,
      1100
     ],
-    "Pumpkin": [
-     250,
-     250
+    "Carrot": [
+     500,
+     600
     ],
     "Cucumber": [
      180,
@@ -1843,9 +1827,13 @@
      350,
      400
     ],
-    "Sweet Potato": [
-     220,
-     220
+    "Knolkhol": [
+     300,
+     400
+    ],
+    "Leeks": [
+     200,
+     250
     ],
     "Manioc": [
      120,
@@ -1854,6 +1842,94 @@
     "Potato (Welimada)": [
      200,
      240
+    ],
+    "Pumpkin": [
+     250,
+     250
+    ],
+    "Raddish": [
+     140,
+     200
+    ],
+    "Sweet Potato": [
+     220,
+     220
+    ],
+    "Tomato": [
+     500,
+     600
+    ]
+   }
+  },
+  "2026-11-10": {
+   "Keppetipola": {
+    "Beans": [
+     400,
+     450
+    ],
+    "Carrot": [
+     450,
+     550
+    ],
+    "Leeks": [
+     210,
+     250
+    ],
+    "Beetroot (N.Eliya)": [
+     400,
+     450
+    ],
+    "Knolkhol": [
+     250,
+     350
+    ],
+    "Raddish": [
+     130,
+     200
+    ],
+    "Cabbage (N.Eliya)": [
+     550,
+     650
+    ],
+    "Tomato": [
+     450,
+     500
+    ],
+    "Brinjals": [
+     300,
+     350
+    ],
+    "Capsicum": [
+     900,
+     1000
+    ],
+    "Pumpkin": [
+     320,
+     320
+    ],
+    "Cucumber": [
+     180,
+     180
+    ],
+    "Drumstick": [
+     380,
+     400
+    ],
+    "Green Chillies": [
+     400,
+     450
+    ],
+    "Sweet Potato": [
+     220,
+     220
+    ],
+    "Manioc": [
+     110,
+     130
+    ],
+    "Potato (Welimada)": [
+     220,
+     250
     ],
     "Big Onion (Imported)": [
      310,
