@@ -130,6 +130,7 @@ body{width:1080px;height:1920px;background:#f4efe4;font-family:'Noto Sans Sinhal
 .top .b{font-size:52px;font-weight:800}.top .s{font-size:34px;color:#e7d3a3;margin-top:6px}
 .main{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 64px}
 .foot{background:#0b0b0b;color:#e7d3a3;text-align:center;padding:40px;font-size:32px;font-weight:600}
+.sub{background:#a9802a;color:#fff;text-align:center;padding:22px 20px;font-size:40px;font-weight:800;white-space:nowrap}
 .mono{font-family:'JetBrains Mono',monospace}
 .big{font-size:112px;font-weight:800;line-height:1.38;color:#0e4f4a}
 .date{display:inline-block;margin-top:44px;font-size:48px;font-weight:700;background:#0e4f4a;color:#fff;border-radius:999px;padding:18px 44px}
@@ -157,6 +158,7 @@ body{width:1080px;height:1920px;background:#f4efe4;font-family:'Noto Sans Sinhal
         return f"""<html><head><meta charset="utf-8"><style>{css}</style></head><body>
 <div class="top">{f'<img src="{logo}">' if logo else ''}<div><div class="b">TopGoviya.lk</div><div class="s">අද දඹුල්ල තොග මිල · {DAYS_SI[wd]}</div></div></div>
 <div class="main">{inner}</div>
+<div class="sub">🔔 හැමදාම මිල බලන්න · Subscribe කරන්න</div>
 <div class="foot">මූලාශ්‍රය: දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය · තොග මිල · {D}</div></body></html>"""
 
     def chip(c):
