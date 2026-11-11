@@ -137,6 +137,9 @@ details.more summary::-webkit-details-marker{display:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 .wrow{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:14px;padding:9px 10px;background:#fff;margin:0 0 8px}
 .wrow .wn{display:flex;flex-direction:column;min-width:0}.wrow .wn b{font-size:16px;overflow-wrap:anywhere}
+.scNum{font-family:'JetBrains Mono',monospace;font-size:30px;line-height:1}.scNum small{font-size:14px;opacity:.7}
+.scRow{display:grid;grid-template-columns:minmax(0,1.3fr) 1fr auto;gap:8px;align-items:center;margin:0 0 7px;font-size:14px}.scRow b{font-family:'JetBrains Mono',monospace;font-size:13.5px}
+.scBar{height:10px;border-radius:99px;background:#ece5d6;overflow:hidden}.scBar i{display:block;height:100%;border-radius:99px}
 .seg{display:flex;flex:none;border:1.5px solid var(--petrol);border-radius:12px;overflow:hidden}
 .seg button{font:inherit;font-weight:800;font-size:18px;min-width:50px;min-height:46px;border:0;border-left:1px solid var(--line);background:#fffdf7;color:var(--petrol);cursor:pointer}.seg button:first-child{border-left:0}
 .seg button.on{background:var(--petrol);color:#fff}.seg button.on.no{background:#8a8170}
@@ -192,6 +195,7 @@ details.more summary::-webkit-details-marker{display:none}
   </div>
   <div id="alerts"></div>
   <div id="remBox"></div>
+  <div id="scoreBox"></div>
   <div id="trend"></div>
   <div class="card">
     <details class="more" id="moreBox"><summary data-t="more"></summary>
@@ -284,7 +288,7 @@ details.more summary::-webkit-details-marker{display:none}
 
 <script>
 const $=id=>document.getElementById(id);
-const APP_VER="2026-11-11.11";
+const APP_VER="2026-11-11.12";
 const SHOW_KP=false; /* 🛒 Krushi Pola card — off during the farmer test; set true to bring it back */
 const KEY="tg_mage_wagawa_v1",LKEY="tg_mage_wagawa_lang";
 
@@ -708,7 +712,7 @@ function renderList(){
     <button class="btn gold" type="button" data-act="demo" style="width:100%;justify-content:center;margin-top:8px">${T("seeDemo")}</button>
     <div style="margin-top:12px;border-left:4px solid var(--gold);background:#fbf8f0;border-radius:10px;padding:8px 10px;opacity:.85"><div class="row" style="justify-content:space-between;flex-wrap:nowrap;gap:8px"><b style="font-size:14.5px">${T("sampleRem")}</b><span class="note" style="white-space:nowrap">${T("sampleTag")}</span></div><div class="note">${T("sampleRemD")}</div></div></div>`;
   else h+=DB.crops.map((c,i)=>{const t=totals(c);return `<div class="crop" data-i="${i}"><div class="row" style="justify-content:space-between"><span class="nm">${esc(c.e||"🌿")} ${esc(displayName(c))}</span>${t.inc>0||!t.cost?`<span class="big ${t.prof>=0?"pos":"neg"}" style="font-size:18px">${money(t.prof)}</span>`:`<span class="grow">${T("growing")}</span>`}</div>
-    <div class="mt">📅 ${esc(c.start||"—")}${c.season?" · "+T("seasons")[c.season]:""} · ${T("listCost")} ${money(t.cost)} · ${T("listInc")} ${money(t.inc)}</div></div>`;}).join("");
+    <div class="mt">📅 ${esc(c.start||"—")}${c.season?" · "+T("seasons")[c.season]:""} · ${T("listCost")} ${money(t.cost)} · ${T("listInc")} ${money(t.inc)}${(s=>s?` · <b style="white-space:nowrap">${T("scLv")[s.lv].split(" ")[0]} ${s.score}</b>`:"")(farmScore(c))}</div></div>`;}).join("");
   h+=`</div>`;
   if(!PREVIEW&&realCrops().length&&DB.lastBackup){const d=Math.floor((new Date(today())-new Date(DB.lastBackup))/864e5);h+=`<p class="note" style="margin:10px 0 0;cursor:pointer" data-nav-go="backup">${T("bLast",d)}</p>`;}
   h+=`</div>`;
@@ -919,7 +923,7 @@ function renderCrop(){
   if(ov.length)al.push(`<div class="alert red">${T("kpOver",ov.length)}<br><span class="note">${ov.map(catName).join(", ")}</span></div>`);
   if(!c.demo){const need=backupNeed();if(need)al.push(`<div class="alert noprint"><b>${need.t}</b><br><span class="note">${T("bD")}</span></div>`);}
   $("alerts").innerHTML=al.join("");
-  renderRem(c);
+  renderRem(c);$("scoreBox").innerHTML=scoreCard(c);
   const st=priceStats(c.item);
   if(st){const dv=Math.round((st.today-st.a30)/st.a30*100);
     $("trend").innerHTML=`<div class="card"><h2>${T("trH")}</h2><div class="stats" style="grid-template-columns:1fr 1fr;margin:0 0 10px">
@@ -1503,6 +1507,66 @@ $("vWorkers").addEventListener("click",e=>{const b=e.target.closest("[data-w]");
     PAY().push({id:wUid("p"),date:P.date||today(),wid:P.wid,amt,adv:P.adv?1:0,note:String(P.note||"").replace(/[<>&"]/g,"").trim().slice(0,80)});const ok=save();if(ok)toast(T("wkSaved"));WCUR=P.wid;WPAY=null;go("worker");}
   else if(a==="delRec"){if(!confirmTwice(b))return;if(b.dataset.ty==="att")DB.att=ATT().filter(x=>x.id!==id);else DB.pay=PAY().filter(x=>x.id!==id);save();render();}
 });
+
+/* ================= MY FARM SCORE (v12): how well the records are kept — never profit ================= */
+Object.assign(S.si,{scT:"🌾 මගේ වගාව Score",scLv:{gold:"🥇 රන් මට්ටම",silver:"🥈 රිදී මට්ටම",bronze:"🥉 ලෝකඩ මට්ටම",start:"🌱 පටන් ගත්තා"},
+ scPart:{rec:"සටහන් තබාගැනීම",bud:"අයවැය පාලනය",man:"වැඩ කළමනාකරණය"},
+ scStrong:{rec:"✅ හොඳම පැත්ත: සටහන් හොඳින් තියාගන්නවා.",bud:"✅ හොඳම පැත්ත: අයවැය ඇතුළත වියදම් කරනවා.",man:"✅ හොඳම පැත්ත: වැඩ වෙලාවට කරනවා, Backup එකත් තියෙනවා."},
+ scImprove:"ලකුණු වැඩි කරගන්න:",scAll:"✅ නියමයි! හැම දෙයක්ම හොඳින් කරනවා.",
+ scNote:"මේ ලකුණ ඔබ සටහන් තබාගන්නා හැටි ගැන පමණයි — ලාභය හෝ ගොවිතැන් දක්ෂතාව මනින්නේ නැහැ.",
+ scEmpty:"වියදම් හෝ විකුණුම් ලියන්න පටන් ගත්තාම ඔබේ ලකුණ මෙතන පෙන්වයි.",
+ scTipDet:"වගා කළ දිනය, ඉඩම හා බලාපොරොත්තු අස්වැන්න ලියන්න (✏️).",scTipCost:"පළමු වියදම ලියන්න.",scTipRecent:d=>`දින ${d}කින් සටහනක් නැහැ — අලුත් වියදම් හා විකුණුම් ලියන්න.`,
+ scTipBuyer:"හැම විකුණුමකටම ගැනුම්කරුගේ නම ලියන්න — හොඳම මිල දෙන කෙනා දැනගන්න.",scTipPlan:"අයවැයක් හදන්න (🎯 අයවැය).",scTipOver:p=>`වියදම අයවැයට වඩා ${p}%ක් වැඩියි — වැඩිපුර ගිය තැන් බලන්න.`,
+ scTipRem:"මතක් කිරීමක් එකතු කරන්න (පොහොර, ඉසීම).",scTipLate:n=>`පරක්කු වූ මතක් කිරීම් ${n}ක් — වැඩේ කළා නම් "✔ කළා" ඔබන්න.`,scTipBk:"Backup එකක් ගන්න — දින 14කට වරක්වත්."});
+Object.assign(S.en,{scT:"🌾 My Farm Score",scLv:{gold:"🥇 Gold",silver:"🥈 Silver",bronze:"🥉 Bronze",start:"🌱 Getting started"},
+ scPart:{rec:"Record keeping",bud:"Budget control",man:"Farm management"},
+ scStrong:{rec:"✅ Strongest: you keep your records well.",bud:"✅ Strongest: you spend within your budget.",man:"✅ Strongest: jobs done on time, and you have a backup."},
+ scImprove:"To raise your score:",scAll:"✅ Excellent! You are doing everything well.",
+ scNote:"This score is only about how you keep your records — it does not measure profit or farming skill.",
+ scEmpty:"Your score will show here once you start entering costs or sales.",
+ scTipDet:"Enter the planting date, land size and expected harvest (✏️).",scTipCost:"Enter your first cost.",scTipRecent:d=>`No entry for ${d} days — add your recent costs and sales.`,
+ scTipBuyer:"Write the buyer's name on every sale — so you know who pays best.",scTipPlan:"Make a budget (🎯 Budget).",scTipOver:p=>`Spending is ${p}% over your budget — check where it went.`,
+ scTipRem:"Add a reminder (fertilizer, spraying).",scTipLate:n=>`${n} reminder(s) are late — tap "✔ Done" if the job is done.`,scTipBk:"Take a backup — at least once every 14 days."});
+Object.assign(S.ta,{scT:"🌾 என் பயிர் Score",scLv:{gold:"🥇 தங்கம்",silver:"🥈 வெள்ளி",bronze:"🥉 வெண்கலம்",start:"🌱 தொடக்கம்"},
+ scPart:{rec:"பதிவுகள் வைத்தல்",bud:"வரவுசெலவுக் கட்டுப்பாடு",man:"வேலை மேலாண்மை"},
+ scStrong:{rec:"✅ சிறந்த பக்கம்: பதிவுகளை நன்றாக வைத்திருக்கிறீர்கள்.",bud:"✅ சிறந்த பக்கம்: வரவுசெலவுக்குள் செலவு செய்கிறீர்கள்.",man:"✅ சிறந்த பக்கம்: வேலைகள் நேரத்தில், Backup-உம் உள்ளது."},
+ scImprove:"மதிப்பெண்ணை உயர்த்த:",scAll:"✅ அருமை! எல்லாவற்றையும் நன்றாகச் செய்கிறீர்கள்.",
+ scNote:"இந்த மதிப்பெண் நீங்கள் பதிவுகளை வைக்கும் விதத்தைப் பற்றியது மட்டுமே — லாபத்தையோ விவசாயத் திறனையோ அளவிடாது.",
+ scEmpty:"செலவு அல்லது விற்பனையை எழுதத் தொடங்கியதும் உங்கள் மதிப்பெண் இங்கே காட்டப்படும்.",
+ scTipDet:"நடவு தேதி, நில அளவு, எதிர்பார்க்கும் விளைச்சல் ஆகியவற்றை எழுதவும் (✏️).",scTipCost:"முதல் செலவை எழுதவும்.",scTipRecent:d=>`${d} நாட்களாகப் பதிவு இல்லை — புதிய செலவு, விற்பனைகளை எழுதவும்.`,
+ scTipBuyer:"ஒவ்வொரு விற்பனைக்கும் வாங்குபவர் பெயரை எழுதவும் — நல்ல விலை தருபவரை அறியலாம்.",scTipPlan:"வரவுசெலவுத் திட்டம் உருவாக்கவும் (🎯).",scTipOver:p=>`செலவு திட்டத்தை விட ${p}% அதிகம் — எங்கே அதிகம் போனது என்று பாருங்கள்.`,
+ scTipRem:"நினைவூட்டல் ஒன்றைச் சேர்க்கவும் (உரம், தெளிப்பு).",scTipLate:n=>`${n} நினைவூட்டல் தாமதம் — வேலை முடிந்திருந்தால் "✔" அழுத்தவும்.`,scTipBk:"Backup எடுக்கவும் — 14 நாட்களுக்கு ஒருமுறையாவது."});
+function farmScore(c){const t=totals(c),td=today(),A=attOf(c),parts=[],tips=[];
+  const dates=[...c.exp,...c.inc,...c.work,...A].map(x=>x.date).filter(Boolean).sort(),last=dates[dates.length-1]||null,hasCost=!!(c.exp.length||c.work.length||A.length),any=hasCost||c.inc.length>0;
+  if(!any)return null;
+  const gap=last?Math.max(0,dayDiff(last,td)):0,finished=(c.expQty&&t.qty>0&&t.left===0)||(c.inc.length>0&&gap>45);
+  /* records: crop details 10 · costs written 10 · kept up to date 10 · buyer named on sales 10 (only once there are sales) */
+  let r=(c.start?3:0)+(posNum(c.area)?3:0)+(c.expQty?4:0),rm=30;if(r<10)tips.push(T("scTipDet"));
+  if(hasCost)r+=10;else tips.push(T("scTipCost"));
+  if(finished||gap<=14)r+=10;else tips.push(T("scTipRecent",gap));
+  if(c.inc.length){rm+=10;const w=c.inc.filter(x=>String(x.where||"").trim()).length;r+=Math.round(10*w/c.inc.length);if(w<c.inc.length)tips.push(T("scTipBuyer"));}
+  parts.push({k:"rec",e:"📒",v:r,m:rm});
+  /* budget: a plan exists, and spending against it */
+  const P=Object.values(c.plan||{}).reduce((s,v)=>s+(+v||0),0);let b=0;
+  if(!P)tips.push(T("scTipPlan"));else{const u=t.cost/P*100;b=u<=100?30:u<=110?25:u<=120?20:u<=130?12:6;if(u>100)tips.push(T("scTipOver",Math.round(u-100)));}
+  parts.push({k:"bud",e:"🎯",v:b,m:30});
+  /* management: reminders used 8 · none late 10 · backup in the last 14 days 12 */
+  let m=0;const rems=c.rem||[],late=rems.filter(x=>{const n=remNext(c,x);return n&&dayDiff(td,n)<0;}).length;
+  if(rems.length){m+=8+(late===0?10:late===1?5:0);if(late)tips.push(T("scTipLate",late));}else tips.push(T("scTipRem"));
+  const bd=DB.lastBackup?dayDiff(DB.lastBackup,td):null;if(bd!=null&&bd<=14)m+=12;else tips.push(T("scTipBk"));
+  parts.push({k:"man",e:"⏰",v:m,m:30});
+  const E=parts.reduce((s,p)=>s+p.v,0),M=parts.reduce((s,p)=>s+p.m,0),score=Math.round(E/M*100);
+  const best=parts.slice().sort((x,y)=>y.v/y.m-x.v/x.m)[0];
+  return {score,parts,tips,lv:score>=90?"gold":score>=75?"silver":score>=60?"bronze":"start",strong:best.v/best.m>=0.8?best.k:null};}
+function scoreCard(c){const s=farmScore(c);
+  if(!s)return `<div class="card noprint"><h2 style="margin:0 0 6px">${T("scT")}</h2><p class="note" style="margin:0">${T("scEmpty")}</p></div>`;
+  const col=s.lv==="gold"?"#8a6a1f":s.lv==="silver"?"#5f6b73":s.lv==="bronze"?"#8a5a2b":"#2c7a52";
+  return `<div class="card noprint"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><h2 style="margin:0">${T("scT")}</h2><b class="scNum" style="color:${col}">${s.score}<small>/100</small></b></div>
+    <p style="margin:2px 0 10px;font-weight:800;color:${col}">${T("scLv")[s.lv]}</p>
+    ${s.parts.map(p=>`<div class="scRow"><span>${p.e} ${T("scPart")[p.k]}</span><div class="scBar"><i style="width:${Math.round(p.v/p.m*100)}%;background:${p.v/p.m>=0.8?"#2c7a52":p.v/p.m>=0.5?"#a9802a":"#b23a2e"}"></i></div><b>${p.v}/${p.m}</b></div>`).join("")}
+    ${s.strong?`<p style="margin:10px 0 0;font-size:14.5px">${T("scStrong")[s.strong]}</p>`:""}
+    ${s.tips.length?`<p style="margin:8px 0 2px;font-size:14.5px;font-weight:700">⚠️ ${T("scImprove")}</p><ul style="margin:0;padding-left:20px;font-size:14.5px">${s.tips.slice(0,2).map(x=>`<li>${x}</li>`).join("")}</ul>`:`<p style="margin:8px 0 0;font-size:14.5px">${T("scAll")}</p>`}
+    <p class="note" style="margin:10px 0 0">${T("scNote")}</p></div>`;}
 
 /* ================= START ================= */
 load();if(!BROKEN)save();applyLang();show("list");loadPrices();
