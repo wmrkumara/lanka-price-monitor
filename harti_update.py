@@ -454,6 +454,11 @@ def build():
         latest=series_all[-1]
         mkt_p={MARKETS[i]:latest[i] if i<len(latest) else None for i in range(len(MARKETS))}
         primary=next((m for m in MARKETS if mkt_p.get(m) is not None),"Peliyagoda")
+        # Keep the item's usual market: the saved history holds that market's prices only,
+        # so switching market on a day it has no price would wipe the whole history.
+        if existing_data:
+            old_primary=next((c.get("primaryMarket") for c in existing_data.get("commodities",[]) if c.get("name")==name),None)
+            if old_primary in MARKETS: primary=old_primary
         pi=MARKETS.index(primary)
         series=[mid(s[pi]) if pi<len(s) else None for s in series_all]
         commodities.append({"id":idx,"name":name,"category":cat,"unit":"Rs./kg",
