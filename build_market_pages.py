@@ -1106,6 +1106,16 @@ def main():
             page = DAMBULLA_FORWARD
         else:
             made.append(MKT[m]["slug"])
+        if m == "Keppetipola":
+            # Keppetipola uses the same design as the Dambulla home page (official DEC price list);
+            # if that page can't be made for any reason, the normal page above is kept.
+            try:
+                import build_keppetipola_page
+                kp = build_keppetipola_page.page()
+                if kp:
+                    page = kp[0]
+            except Exception as ex:
+                print(f"WARN: Keppetipola page builder not used ({ex})")
         open(os.path.join(OUT_DIR, MKT[m]["slug"] + ".html"), "w", encoding="utf-8").write(page)
     latest_all = harti["dates"][-1]
     open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8").write(hub_page(summary, latest_all, harti))
