@@ -279,6 +279,20 @@ def cbsl_peliyagoda(cbsl):
 # How most people type some market names in Google (used in the title; the page keeps the official name)
 SEARCH_SI = {"Keppetipola": "කැප්පෙටිපොල"}
 
+# Extra English search words people type for some markets (from Search Console, Nov 2026)
+TITLE_EN = {
+    "Keppetipola": "Keppetipola Vegetable Market Price List Today Sri Lanka",
+    "Peliyagoda": "Peliyagoda Vegetable & Fish Market Price List Today (Pettah, Manning)",
+}
+DESC_LEAD = {
+    "Keppetipola": "Keppetipola economic centre vegetable market price list today",
+    "Peliyagoda": "Peliyagoda (Manning market) & Pettah vegetable and fish price list today",
+}
+ALT_EXTRA = {
+    "Keppetipola": "keppetipola economic centre vegetable price list today · PDF download",
+    "Peliyagoda": "peliyagoda &amp; pettah (manning market) vegetable and fish price list today · PDF download",
+}
+
 # ---------------------------------------------------------------- download / share buttons
 # The phone makes the image and PDF from this page's prices (nothing is stored on GitHub).
 DL_JS = r'''<script>
@@ -964,7 +978,7 @@ def market_page(market, hm, harti, cats, cbsl):
 <p class="crumb"><a href="../index.html">TopGoviya.lk</a> / <a href="index.html">වෙළඳපොළ මිල</a> / {e(si)}</p>
 {h1}
 {home_box}
-<p class="alt">{e(en)} market price today – vegetable wholesale prices · {e(si)}{" (දබුල්ල)" if market == "Dambulla" else ""}{(" · " + SEARCH_SI[market]) if market in SEARCH_SI else ""} එලවලු මිල<br>{e(en.lower())} elawalu mila ada · {e(en.lower())} market rate today<br>{e(ta)} சந்தை விலை இன்று</p>
+<p class="alt">{e(en)} market price today – vegetable wholesale prices · {e(si)}{" (දබුල්ල)" if market == "Dambulla" else ""}{(" · " + SEARCH_SI[market]) if market in SEARCH_SI else ""} එලවලු මිල<br>{e(en.lower())} elawalu mila ada · {e(en.lower())} market rate today<br>{e(ta)} சந்தை விலை இன்று{("<br>" + ALT_EXTRA[market]) if market in ALT_EXTRA else ""}</p>
 {cbsl_html if cbsl_first else ''}
 {harti_h2 if cbsl_first else ''}
 <p class="asof" style="margin-top:14px"><b>📦 තොග මිල / Wholesale</b> · 📍 {e(si)} ({e(en)}) · {fdate(d_(last),'si') if last else '—'} · {"DEC" if dec_day else "HARTI"}</p>
@@ -990,9 +1004,12 @@ def market_page(market, hm, harti, cats, cbsl):
     dtxt = fdate(d_(last), "en") if last else ""
     # The date in the title follows the newest price data on the page (never hardcoded)
     tday = kep_last if (market == "Keppetipola" and kep_last) else last
-    tdot = d_(tday).strftime("%Y.%m.%d") if tday else ""
+    tdate = d_(tday) if tday else None
+    if cbsl_first and cd and (tdate is None or cd > tdate):
+        tdate = cd  # CBSL prices on this page are newer than HARTI
+    tdot = tdate.strftime("%Y.%m.%d") if tdate else ""
     title = (f"{SEARCH_SI.get(market, si)} එලවලු මිල අද{(' ' + tdot) if tdot else ''} | "
-             f"{en} Vegetable Market Price Today Sri Lanka")
+             f"{TITLE_EN.get(market, en + ' Vegetable Market Price Today Sri Lanka')}")
     if market == "Dambulla":
         title = "දඹුල්ල HARTI සහ CBSL තොග මිල | Dambulla HARTI & CBSL Wholesale Report – TopGoviya"
     top3 = ", ".join(f"{r['name']} Rs. {money(r['mid'])}" for r in rows[:3])
@@ -1008,8 +1025,10 @@ def market_page(market, hm, harti, cats, cbsl):
     if kep_n:
         desc = (f"{en} market price today ({fdate(d_(kep_last),'en')}): wholesale prices for {kep_n} items from the "
                 f"official {dec_name(market,'en')} daily price list")
+    if market in DESC_LEAD:
+        desc = desc.replace(f"{en} market price today", DESC_LEAD[market], 1)
     desc = (desc
-            + f". {top3}. {si} එලවලු මිල අද{' (දබුල්ල)' if market == 'Dambulla' else ''} · {en.lower()} elawalu mila.")
+            + f". {top3}. Download the price list as PDF or image. {si} එලවලු මිල අද{' (දබුල්ල)' if market == 'Dambulla' else ''} · {en.lower()} elawalu mila.")
     jsonld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "TopGoviya.lk", "item": SITE + "/"},
         {"@type": "ListItem", "position": 2, "name": "Market prices", "item": f"{SITE}/{OUT_DIR}/"},
