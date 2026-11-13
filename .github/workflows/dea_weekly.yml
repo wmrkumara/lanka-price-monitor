@@ -1,23 +1,32 @@
 # File: .github/workflows/dea_weekly.yml
-# Upload to .github/workflows/ folder in your GitHub repo
 #
-# Runs automatically every Tuesday, Wednesday and Friday
-# at 5:00 PM Sri Lanka time (11:30 UTC)
+# DEA Spice Prices Weekly Update
 #
-# Tuesday  → DEA publishes new data
-# Wednesday → Safety net if DEA published late Tuesday
-# Friday    → Final check to confirm week's data is captured
+# 1) Manual week (main route, because the DEA website blocks the robot):
+#    paste the DEA page text into dea_manual_week.txt and commit it.
+#    That commit starts this robot by itself, it adds the week to
+#    dea_data.json, and then the spice video robots start.
 #
-# Script does NOTHING if data already exists — safe to run multiple times
+# 2) It also still tries the DEA website on Tue / Wed / Fri at 5:00 PM
+#    Sri Lanka time (in case the website lets it in again).
+#
+# Safe to run many times: a week that is already there is skipped.
 
 name: DEA Spice Prices Weekly Update
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'dea_manual_week.txt'
   schedule:
     - cron: '30 11 * * 2'   # Tuesday   5:00 PM Sri Lanka
     - cron: '30 11 * * 3'   # Wednesday 5:00 PM Sri Lanka
     - cron: '30 11 * * 5'   # Friday    5:00 PM Sri Lanka
   workflow_dispatch:          # Also allows manual run anytime
+
+permissions:
+  contents: write
 
 jobs:
   update:
@@ -36,7 +45,11 @@ jobs:
       - name: Install dependencies
         run: pip install beautifulsoup4
 
-      - name: Run DEA weekly update
+      - name: Add week from dea_manual_week.txt (pasted DEA text)
+        run: python3 dea_manual.py
+
+      - name: Try the DEA website too
+        continue-on-error: true
         run: python3 dea_update.py
 
       - name: Build small ticker file (dea_ticker_data.json)
@@ -49,5 +62,10 @@ jobs:
           git config user.email "bot@topgoviya.lk"
           git add dea_data.json
           git add dea_ticker_data.json || true
-          git diff --staged --quiet || git commit -m "DEA spice prices updated $(date +'%d %B %Y')"
-          git push
+          if git diff --staged --quiet; then
+            echo "Nothing new to save."
+          else
+            git commit -m "DEA spice prices updated $(date +'%d %B %Y')"
+            git pull --rebase --autostash || true
+            git push
+          fi
