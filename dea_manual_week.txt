@@ -1,0 +1,2 @@
+Paste the DEA page text here every week (Ctrl+A, Ctrl+C on the DEA prices page),
+replacing everything in this file, then Commit.
