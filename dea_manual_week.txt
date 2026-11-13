@@ -1,2 +1,294 @@
-Paste the DEA page text here every week (Ctrl+A, Ctrl+C on the DEA prices page),
-replacing everything in this file, then Commit.
+
+අපනයන කෘෂිකර්ම දෙපාර්තමේන්තුව
+ஏற்றுமதி விவசாயத் திணைக்களம்
+Department of Export Agriculture
+අතමිට සරු හෙට දිනකට - අපනයන කෘෂිකර්ම දෙපාර්තමේන්තුව - வளமான எதிர்காலத்திற்கு - ஏற்றுமதி விவசாயத் திணைக்களம் - FOR A PROSPOROUS - Department of Export Agriculture
+Arecanut Betel Cardamom Cinnamon Cinnamon Bark Oil Cinnamon Leaf Oil Citronella Oil Clove Cocoa Coffee Ginger Goraka Kithul Jaggery Lemon Grass Oil Mace Nutmeg Pepper Turmeric Vanilla
+Producers' Prices (Farm Gate) of EAC
+Date of collection :10.11.2026
+
+PEPPER
+(Rs./k.g.)
+District
+GR-1 (Highest Price)
+GR-1 (Average Price)
+GR-2 (Highest Price)
+GR-2 (Average Price)
+WHITE (Highest Price)
+WHITE (Average Price)
+Kandy	2,200.00	2,059.00	1,900.00	1,900.00	3,200.00	2,972.00
+Matale	2,200.00	2,137.00	-	-	3,200.00	3,108.00
+Nuwara_eliya	2,100.00	2,083.00	2,050.00	2,016.00	2,900.00	2,866.00
+Kegalle	2,200.00	2,100.00	-	-	2,700.00	2,566.00
+Ratnapura	2,120.00	2,100.00	2,020.00	2,000.00	-	-
+Badulla	2,220.00	2,159.00	-	-	2,800.00	2,800.00
+Kurunegala	2,100.00	2,033.00	-	-	-	-
+Colombo	2,100.00	1,913.00	-	-	-	-
+Gampaha	2,200.00	2,150.00	-	-	-	-
+Kalutara	2,100.00	2,000.00	-	-	-	-
+Galle	2,100.00	2,075.00	-	-	-	-
+Matara	2,100.00	2,071.00	-	-	-	-
+Hambantota	2,150.00	2,117.00	-	-	-	-
+Monaragala	2,220.00	2,190.00	-	-	3,100.00	3,066.00
+National	2,220.00	2,084.79	2,050.00	1,972.00	3,200.00	2,896.33
+CLOVE
+(Rs./k.g.)
+District
+CLOVE (Highest Price)
+CLOVE (Average Price)
+STEM (Highest Price)
+STEM (Average Price)
+Kandy	3,050.00	2,850.00	400.00	310.00
+Matale	2,800.00	2,754.00	350.00	285.00
+Nuwara_eliya	2,500.00	2,500.00	-	-
+Kegalle	2,700.00	2,600.00	300.00	283.00
+Ratnapura	2,800.00	2,700.00	300.00	300.00
+Badulla	2,500.00	2,383.00	-	-
+Kurunegala	3,000.00	2,867.00	350.00	350.00
+Colombo	2,800.00	2,625.00	-	-
+Gampaha	2,600.00	2,550.00	300.00	300.00
+Kalutara	2,500.00	2,250.00	-	-
+Galle	2,500.00	2,350.00	-	-
+Matara	2,800.00	2,643.00	300.00	291.00
+Hambantota	2,500.00	2,450.00	-	-
+Monaragala	3,400.00	2,700.00	-	-
+National	3,400.00	2,587.29	400.00	302.71
+COFFEE
+(Rs./k.g.)
+District
+GR 1 (Highest Price)
+GR 1 (Average Price)
+GR 2 (Highest Price)
+GR 2 (Average Price)
+PARCHMENT (Highest Price)
+PARCHMENT (Average Price)
+Kandy	1,600.00	1,471.00	-	-	3,000.00	2,750.00
+Matale	1,600.00	1,537.00	-	-	2,800.00	2,575.00
+Nuwara_eliya	2,300.00	2,266.00	2,000.00	2,000.00	-	-
+Kegalle	1,550.00	1,500.00	1,450.00	1,416.00	-	-
+Ratnapura	1,300.00	1,250.00	-	-	-	-
+Badulla	2,000.00	1,800.00	-	-	-	-
+Kurunegala	1,400.00	1,400.00	-	-	-	-
+Colombo	1,500.00	1,350.00	-	-	-	-
+Gampaha	1,500.00	1,450.00	-	-	-	-
+Kalutara	1,300.00	1,250.00	-	-	-	-
+Galle	1,250.00	1,225.00	-	-	-	-
+Matara	1,310.00	1,190.00	-	-	-	-
+Hambantota	1,200.00	1,150.00	-	-	-	-
+Monaragala	1,300.00	1,233.00	-	-	-	-
+National	2,300.00	1,433.71	2,000.00	1,708.00	3,000.00	2,662.50
+COCOA
+(Rs./k.g.)
+District
+GR 1 (Highest Price)
+GR 1 (Average Price)
+GR 2 (Highest Price)
+GR 2 (Average Price)
+GR 3 (Highest Price)
+GR 3 (Average Price)
+BLACK (Highest Price)
+BLACK (Average Price)
+Kandy	1,050.00	1,009.00	900.00	850.00	-	-	-	-
+Matale	1,100.00	1,004.00	900.00	864.00	800.00	744.00	-	-
+Nuwara_eliya	-	-	-	-	-	-	-	-
+Kegalle	1,000.00	983.00	950.00	933.00	-	-	-	-
+Ratnapura	-	-	-	-	-	-	-	-
+Badulla	1,000.00	1,000.00	-	-	-	-	-	-
+Kurunegala	1,100.00	1,050.00	900.00	900.00	-	-	-	-
+Colombo	-	-	-	-	-	-	-	-
+Gampaha	-	-	-	-	-	-	-	-
+Kalutara	-	-	-	-	-	-	-	-
+Galle	-	-	-	-	-	-	-	-
+Matara	-	-	-	-	-	-	-	-
+Hambantota	-	-	-	-	-	-	-	-
+Monaragala	1,100.00	1,100.00	1,050.00	1,050.00	-	-	-	-
+National	1,100.00	1,024.33	1,050.00	919.40	800.00	744.00	-	-
+CARDAMOM
+(Rs./k.g.)
+District
+LG (Highest Price)
+LG (Average Price)
+LLG1 (Highest Price)
+LLG1 (Average Price)
+LLG2 (Highest Price)
+LLG2 (Average Price)
+LB (Highest Price)
+LB (Average Price)
+LNS (Highest Price)
+LNS (Average Price)
+Kandy	18,000.00	18,000.00	12,000.00	12,000.00	-	-	6,000.00	6,000.00	-	-
+Matale	17,000.00	16,666.00	15,000.00	13,666.00	-	-	-	-	-	-
+Nuwara_eliya	-	-	-	-	-	-	-	-	-	-
+Kegalle	14,000.00	13,500.00	13,000.00	12,500.00	-	-	-	-	-	-
+Ratnapura	-	-	12,500.00	12,000.00	-	-	-	-	5,000.00	4,500.00
+Badulla	-	-	-	-	-	-	-	-	-	-
+Kurunegala	-	-	12,000.00	12,000.00	-	-	-	-	-	-
+Colombo	-	-	-	-	-	-	-	-	-	-
+Gampaha	-	-	-	-	-	-	-	-	-	-
+Kalutara	-	-	-	-	-	-	-	-	-	-
+Galle	-	-	-	-	-	-	-	-	-	-
+Matara	-	-	-	-	-	-	-	-	-	-
+Hambantota	-	-	-	-	-	-	-	-	-	-
+Monaragala	-	-	-	-	-	-	-	-	-	-
+National	18,000.00	16,055.33	15,000.00	12,433.20	-	-	6,000.00	6,000.00	5,000.00	4,500.00
+NUTMEG / MACE
+(Rs./k.g.)
+District
+NUTMEG No.1 (Highest Price)
+NUTMEG No.1 (Average Price)
+NUTMEG No.2 (Highest Price)
+NUTMEG No.2 (Average Price)
+NUTMEG BWP (Highest Price)
+NUTMEG BWP (Average Price)
+MACE No.1 (Highest Price)
+MACE No.1 (Average Price)
+MACE No.2 (Highest Price)
+MACE No.2 (Average Price)
+Kandy	1,200.00	1,075.00	950.00	883.00	850.00	733.00	6,300.00	6,075.00	5,000.00	3,950.00
+Matale	1,100.00	1,027.00	950.00	879.00	800.00	690.00	6,400.00	6,141.00	4,000.00	4,000.00
+Nuwara_eliya	850.00	816.00	-	-	-	-	4,000.00	4,000.00	-	-
+Kegalle	1,000.00	933.00	900.00	866.00	-	-	5,000.00	5,000.00	4,500.00	4,500.00
+Ratnapura	-	-	-	-	-	-	-	-	-	-
+Badulla	-	-	-	-	-	-	-	-	-	-
+Kurunegala	1,100.00	1,100.00	900.00	900.00	-	-	5,500.00	5,500.00	4,500.00	4,500.00
+Colombo	-	-	-	-	-	-	-	-	-	-
+Gampaha	-	-	-	-	-	-	-	-	-	-
+Kalutara	-	-	-	-	-	-	-	-	-	-
+Galle	-	-	-	-	-	-	-	-	-	-
+Matara	-	-	-	-	-	-	-	-	-	-
+Hambantota	-	-	-	-	-	-	-	-	-	-
+Monaragala	-	-	-	-	-	-	-	-	-	-
+National	1,200.00	990.20	950.00	882.00	850.00	711.50	6,400.00	5,343.20	5,000.00	4,237.50
+CINNAMON
+(Rs./k.g.)
+District
+Alba (Highest Price)
+Alba (Average Price)
+C-5 Sp (Highest Price)
+C-5 Sp (Average Price)
+C-5 (Highest Price)
+C-5 (Average Price)
+C-4 (Highest Price)
+C-4 (Average Price)
+M-5 (Highest Price)
+M-5 (Average Price)
+M-4 (Highest Price)
+M-4 (Average Price)
+H-1 (Highest Price)
+H-1 (Average Price)
+H-2 (Highest Price)
+H-2 (Average Price)
+H-Faq (Highest Price)
+H-Faq (Average Price)
+Heen (Highest Price)
+Heen (Average Price)
+Gorosu (Highest Price)
+Gorosu (Average Price)
+Ratnapura	7,500.00	7,500.00	6,000.00	5,850.00	5,550.00	5,500.00	5,450.00	5,400.00	-	-	-	-	5,100.00	5,000.00	4,700.00	4,600.00	-	-	-	-	-	-
+Badulla	-	-	-	-	5,600.00	5,600.00	5,400.00	5,400.00	-	-	-	-	4,400.00	4,400.00	4,200.00	4,200.00	-	-	4,000.00	3,750.00	3,500.00	2,750.00
+Kurunegala	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	3,000.00	3,000.00	2,500.00	2,500.00
+Colombo	-	-	6,200.00	6,200.00	5,800.00	5,800.00	5,600.00	5,600.00	-	-	-	-	4,600.00	4,600.00	4,300.00	4,300.00	-	-	-	-	-	-
+Gampaha	-	-	-	-	5,600.00	5,500.00	5,300.00	5,250.00	-	-	-	-	-	-	-	-	-	-	-	-	2,900.00	2,800.00
+Kalutara	7,500.00	7,200.00	6,300.00	6,100.00	5,600.00	5,600.00	5,500.00	5,350.00	5,200.00	5,200.00	5,000.00	5,000.00	4,300.00	4,300.00	-	-	-	-	-	-	-	-
+Galle	7,600.00	7,300.00	6,000.00	5,950.00	5,800.00	5,750.00	5,600.00	5,550.00	-	-	-	-	5,200.00	5,175.00	4,900.00	4,875.00	-	-	-	-	-	-
+Matara	7,600.00	7,550.00	6,500.00	6,300.00	5,800.00	5,625.00	5,600.00	5,457.00	5,500.00	5,200.00	5,200.00	5,133.00	5,100.00	5,087.00	5,100.00	4,920.00	4,800.00	4,575.00	-	-	-	-
+Hambantota	-	-	-	-	5,700.00	5,667.00	5,600.00	5,550.00	-	-	-	-	5,100.00	5,100.00	5,050.00	5,025.00	-	-	-	-	-	-
+Monaragala	-	-	-	-	-	-	4,800.00	4,650.00	-	-	-	-	-	-	-	-	-	-	3,000.00	2,800.00	2,400.00	2,200.00
+National	7,600.00	7,387.50	6,500.00	6,080.00	5,800.00	5,630.25	5,600.00	5,356.33	5,500.00	5,200.00	5,200.00	5,066.50	5,200.00	4,808.86	5,100.00	4,653.33	4,800.00	4,575.00	4,000.00	3,183.33	3,500.00	2,562.50
+Betel
+Betel for 1000 leaves
+District
+Export-Peedunu-Max
+Export-Peedunu-Min
+Export-Kanda Kola-Max
+Export-Kanda Kola-Min
+Local-Peedunu-(Highest Price)
+Local-Peedunu-(Average Price)
+Local-Keti-(Highest Price)
+Local-Keti-(Average Price)
+Local-korikan-(Highest Price)
+Local-korikan-(Average Price)
+Kandy	-	-	-	-	-	-	-	-	-	-
+Matale	-	-	-	-	-	-	-	-	-	-
+Nuwara_eliya	-	-	-	-	-	-	-	-	-	-
+Kegalle	-	-	-	-	-	-	-	-	-	-
+Ratnapura	-	-	-	-	5,000.00	5,000.00	-	-	-	-
+Badulla	-	-	-	-	-	-	-	-	-	-
+Kurunegala	15,000.00	13,000.00	12,000.00	10,000.00	6,000.00	5,000.00	4,000.00	3,000.00	2,000.00	1,500.00
+Colombo	-	-	-	-	4,000.00	4,000.00	3,000.00	3,000.00	-	-
+Gampaha	15,000.00	13,000.00	12,000.00	10,000.00	6,000.00	5,000.00	5,000.00	4,000.00	2,000.00	1,500.00
+Kalutara	-	-	-	-	-	-	-	-	-	-
+Galle	-	-	-	-	-	-	-	-	-	-
+Matara	-	-	-	-	-	-	-	-	-	-
+Hambantota	-	-	-	-	-	-	-	-	-	-
+Monaragala	-	-	-	-	-	-	-	-	-	-
+National	15,000.00	13,000.00	12,000.00	10,000.00	6,000.00	4,750.00	5,000.00	3,333.33	2,000.00	1,500.00
+Arecanut
+Arecanut(Rs./100 nuts)
+District
+Dried-(Karunka)-(Rs./k.g.) (Highest Price)
+Dried-(Karunka)-(Rs./k.g.) (Average Price)
+Fresh-(100 nuts) (Highest Price)
+Fresh-(100 nuts) (Average Price)
+Kandy	800.00	745.00	1,000.00	633.00
+Matale	760.00	749.00	800.00	662.00
+Nuwara_eliya	700.00	700.00	600.00	566.00
+Kegalle	800.00	770.00	500.00	500.00
+Ratnapura	750.00	700.00	900.00	850.00
+Badulla	750.00	734.00	900.00	900.00
+Kurunegala	850.00	850.00	500.00	500.00
+Colombo	850.00	775.00	500.00	500.00
+Gampaha	850.00	825.00	800.00	750.00
+Kalutara	830.00	810.00	500.00	500.00
+Galle	750.00	725.00	-	-
+Matara	760.00	734.00	700.00	700.00
+Hambantota	750.00	733.00	-	-
+Monaragala	750.00	733.00	1,200.00	850.00
+National	850.00	755.93	1,200.00	659.25
+Goraka, Ginger, Kithul Jaggery, Turmeric, Vanilla
+(Rs./k.g.)
+District
+Goraka (Highest Price)
+Goraka (Average Price)
+Ginger (Highest Price)
+Ginger (Average Price)
+Kithul Jaggery (Highest Price)
+Kithul Jaggery (Average Price)
+Turmeric (Highest Price)
+Turmeric (Average Price)
+Vanilla (Highest Price)
+Vanilla (Average Price)
+Kandy	350.00	306.00	750.00	653.00	-	-	300.00	253.00	-	-
+Matale	340.00	294.00	600.00	583.00	-	-	300.00	247.00	-	-
+Nuwara_eliya	280.00	273.00	300.00	283.00	-	-	150.00	150.00	-	-
+Kegalle	280.00	280.00	400.00	366.00	-	-	250.00	233.00	-	-
+Ratnapura	330.00	300.00	600.00	550.00	-	-	180.00	170.00	-	-
+Badulla	300.00	300.00	700.00	550.00	1,500.00	1,500.00	250.00	225.00	-	-
+Kurunegala	280.00	273.00	400.00	400.00	-	-	250.00	250.00	-	-
+Colombo	350.00	342.00	-	-	-	-	250.00	250.00	-	-
+Gampaha	320.00	315.00	500.00	450.00	-	-	240.00	235.00	-	-
+Kalutara	300.00	300.00	500.00	500.00	-	-	200.00	200.00	-	-
+Galle	400.00	340.00	-	-	-	-	-	-	-	-
+Matara	300.00	285.00	700.00	650.00	-	-	200.00	200.00	-	-
+Hambantota	300.00	300.00	-	-	-	-	-	-	-	-
+Monaragala	280.00	232.00	450.00	366.00	-	-	250.00	233.00	-	-
+National	400.00	295.71	750.00	486.45	1,500.00	1,500.00	300.00	220.50	-	-
+Cinnamon Bark Oil, Cinnamon Leaf Oil, Citronella Oil, Lemon Grass Oil
+(Rs./k.g.)
+District
+Cinnamon Bark Oil-60% (Highest Price)
+Cinnamon Bark Oil-60% (Average Price)
+Cinnamon Bark Oil-40% (Highest Price)
+Cinnamon Bark Oil-40% (Average Price)
+Cinnamon Leaf Oil (Highest Price)
+Cinnamon Leaf Oil (Average Price)
+Citronella Oil (Highest Price)
+Citronella Oil (Average Price)
+Ratnapura	-	-	-	-	-	-	-	-
+Galle	-	-	-	-	5,460.00	5,390.00	-	-
+Matara	-	-	-	-	5,400.00	5,400.00	-	-
+Hambantota	-	-	-	-	-	-	13,500.00	13,133.00
+National	-	-	-	-	5,460.00	5,395.00	13,500.00	13,133.00
+
+Data collected and Web published by the Economic Research Unit
+Department of Export Agriculture
