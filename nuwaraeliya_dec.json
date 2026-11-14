@@ -1,0 +1,757 @@
+{
+ "note": "Nuwara Eliya DEC official daily price list (Rs. per kg). Two prices per item: buy = ගැණුම් මිල (buying price), whs = තොග මිල (wholesale price). Never mix them. Items keyed by row number in the sheet's order (1-34); the sheet has no serial numbers, so an item is entered only when its row position AND the English name on the sheet both match this list. A missing item on a day means it was blank or doubtful on the sheet.",
+ "market": "Nuwara Eliya",
+ "source_si": "නුවරඑළිය විශේෂිත ආර්ථික මධ්‍යස්ථානය",
+ "source_en": "Nuwara Eliya Dedicated Economic Centre",
+ "sheet_time": "07:50",
+ "items": [
+  {
+   "no": 1,
+   "si_sheet": "ගෝවා",
+   "ta": "கோவா",
+   "en_sheet": "Cabbage",
+   "en": "Cabbage",
+   "si": "ගෝවා",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 2,
+   "si_sheet": "කැරට්",
+   "ta": "காரட்",
+   "en_sheet": "Carrots",
+   "en": "Carrot",
+   "si": "කැරට්",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 3,
+   "si_sheet": "ලීක්ස්",
+   "ta": "லீக்ஸ்",
+   "en_sheet": "Leeks",
+   "en": "Leeks",
+   "si": "ලීක්ස්",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 4,
+   "si_sheet": "රාබු",
+   "ta": "இராபு",
+   "en_sheet": "Radish",
+   "en": "Radish",
+   "si": "රාබු",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 5,
+   "si_sheet": "බීට්රූට්",
+   "ta": "பீட்ரூட்",
+   "en_sheet": "Beetroot",
+   "en": "Beetroot",
+   "si": "බීට්රූට්",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 6,
+   "si_sheet": "බීට්රූට්/කට්",
+   "ta": "பீட்ரூட் வெட்டியது",
+   "en_sheet": "Beetroot (Cut)",
+   "en": "Beetroot (cut)",
+   "si": "බීට්රූට් (කට්)",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 7,
+   "si_sheet": "අර්තාපල්",
+   "ta": "உருளைக்கிழங்கு",
+   "en_sheet": "Potatoes",
+   "en": "Potato",
+   "si": "අර්තාපල්",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 8,
+   "si_sheet": "අර්තාපල් රතු",
+   "ta": "சிவப்பு உருளைக்கிழங்கு",
+   "en_sheet": "Potatoes red",
+   "en": "Potato (red)",
+   "si": "අර්තාපල් (රතු)",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 9,
+   "si_sheet": "නෝකෝල්",
+   "ta": "நோக்கோல்",
+   "en_sheet": "Knolkhol",
+   "en": "Knolkhol",
+   "si": "නෝකෝල්",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 10,
+   "si_sheet": "බෙල්පෙපර් රතු",
+   "ta": "குடைமிளகாய் சிவப்பு",
+   "en_sheet": "Pepper- Red",
+   "en": "Bell pepper (red)",
+   "si": "බෙල්පෙපර් (රතු)",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 11,
+   "si_sheet": "කහ",
+   "ta": "குடைமிளகாய் மஞ்சள்",
+   "en_sheet": "Yellow",
+   "en": "Bell pepper (yellow)",
+   "si": "බෙල්පෙපර් (කහ)",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 12,
+   "si_sheet": "කොළ",
+   "ta": "குடைமிளகாய் பச்சை",
+   "en_sheet": "Green",
+   "en": "Bell pepper (green)",
+   "si": "බෙල්පෙපර් (කොළ)",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 13,
+   "si_sheet": "බැසිල්",
+   "ta": "பசில்",
+   "en_sheet": "Basil",
+   "en": "Basil",
+   "si": "බැසිල්",
+   "cat": "herb",
+   "unit": "kg"
+  },
+  {
+   "no": 14,
+   "si_sheet": "චයිනීස් කැබේජ්",
+   "ta": "சைனீஸ் கோவா",
+   "en_sheet": "Cabbage-Chinese",
+   "en": "Chinese cabbage",
+   "si": "චයිනීස් කැබේජ්",
+   "cat": "leafy",
+   "unit": "kg"
+  },
+  {
+   "no": 15,
+   "si_sheet": "රෙඩ් කැබේජ්",
+   "ta": "சிவப்பு கோவா",
+   "en_sheet": "Cabbage red",
+   "en": "Red cabbage",
+   "si": "රෙඩ් කැබේජ්",
+   "cat": "leafy",
+   "unit": "kg"
+  },
+  {
+   "no": 16,
+   "si_sheet": "සැල්දිරි",
+   "ta": "சல்திரி",
+   "en_sheet": "Celery",
+   "en": "Celery",
+   "si": "සැල්දිරි",
+   "cat": "herb",
+   "unit": "kg"
+  },
+  {
+   "no": 17,
+   "si_sheet": "කොත්තමල්ලි කොළ",
+   "ta": "கொத்தமல்லி",
+   "en_sheet": "Coriander-Leaves",
+   "en": "Coriander leaves",
+   "si": "කොත්තමල්ලි කොළ",
+   "cat": "herb",
+   "unit": "kg"
+  },
+  {
+   "no": 18,
+   "si_sheet": "අයිස්බර්ග්",
+   "ta": "ஐஸ் பேர்க்",
+   "en_sheet": "Iceberg",
+   "en": "Iceberg lettuce",
+   "si": "අයිස්බර්ග්",
+   "cat": "leafy",
+   "unit": "kg"
+  },
+  {
+   "no": 19,
+   "si_sheet": "සලාද",
+   "ta": "சலாது",
+   "en_sheet": "Lettuce",
+   "en": "Lettuce",
+   "si": "සලාද",
+   "cat": "leafy",
+   "unit": "kg"
+  },
+  {
+   "no": 20,
+   "si_sheet": "රතු සලාද",
+   "ta": "சிவப்பு சலாது",
+   "en_sheet": "Lettuce- Red",
+   "en": "Lettuce (red)",
+   "si": "රතු සලාද",
+   "cat": "leafy",
+   "unit": "kg"
+  },
+  {
+   "no": 21,
+   "si_sheet": "මින්ට්",
+   "ta": "மிஞ்சி",
+   "en_sheet": "Mint leaves",
+   "en": "Mint leaves",
+   "si": "මින්ට්",
+   "cat": "herb",
+   "unit": "kg"
+  },
+  {
+   "no": 22,
+   "si_sheet": "පාස්ලි",
+   "ta": "பாஸ்லி",
+   "en_sheet": "Parsleys",
+   "en": "Parsley",
+   "si": "පාස්ලි",
+   "cat": "herb",
+   "unit": "kg"
+  },
+  {
+   "no": 23,
+   "si_sheet": "රුබාබ්",
+   "ta": "ருவாப்",
+   "en_sheet": "Rhubarb",
+   "en": "Rhubarb",
+   "si": "රුබාබ්",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 24,
+   "si_sheet": "රෝස්මේරි",
+   "ta": "ரோஸ் மேரி",
+   "en_sheet": "Rosemary",
+   "en": "Rosemary",
+   "si": "රෝස්මේරි",
+   "cat": "herb",
+   "unit": "kg"
+  },
+  {
+   "no": 25,
+   "si_sheet": "බ්‍රොකොලි",
+   "ta": "ப்ரோக்கோலி",
+   "en_sheet": "Broccoli",
+   "en": "Broccoli",
+   "si": "බ්‍රොකොලි",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 26,
+   "si_sheet": "මල් ගෝවා",
+   "ta": "பூ கோவா",
+   "en_sheet": "Cauliflower N/E",
+   "en": "Cauliflower",
+   "si": "මල් ගෝවා",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 27,
+   "si_sheet": "රතු රාබු",
+   "ta": "சிவப்பு ராபு",
+   "en_sheet": "Radish-red",
+   "en": "Radish (red)",
+   "si": "රතු රාබු",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 28,
+   "si_sheet": "(blank)",
+   "ta": "பச்சோய்",
+   "en_sheet": "Pachchoy",
+   "en": "Pak choy",
+   "si": "පක් චෝයි",
+   "cat": "leafy",
+   "unit": "kg"
+  },
+  {
+   "no": 29,
+   "si_sheet": "(blank)",
+   "ta": "பச்சை வெள்ளரி",
+   "en_sheet": "Cucumber green",
+   "en": "Cucumber (green)",
+   "si": "පිපිඤ්ඤා (කොළ)",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 30,
+   "si_sheet": "සුකිනි",
+   "ta": "சுக்கினி பச்சை",
+   "en_sheet": "Zucchini –g",
+   "en": "Zucchini (green)",
+   "si": "සුකිනි (කොළ)",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 31,
+   "si_sheet": "කහ සුකිනි",
+   "ta": "மஞ்சள் சுக்கினி",
+   "en_sheet": "Z -yellow",
+   "en": "Zucchini (yellow)",
+   "si": "සුකිනි (කහ)",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 32,
+   "si_sheet": "දිග රාබු",
+   "ta": "நீண்ட ராபு",
+   "en_sheet": "Long radish",
+   "en": "Long radish",
+   "si": "දිග රාබු",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 33,
+   "si_sheet": "තක්කාලි(හරිතාගාර)",
+   "ta": "தக்காளி(பச்சை வீட)",
+   "en_sheet": "Tomato (green house)",
+   "en": "Tomato (greenhouse)",
+   "si": "තක්කාලි (හරිතාගාර)",
+   "cat": "veg",
+   "unit": "kg"
+  },
+  {
+   "no": 34,
+   "si_sheet": "මාලුමිරිස්",
+   "ta": "கறி மிளகாய்",
+   "en_sheet": "Capsicum",
+   "en": "Capsicum",
+   "si": "මාලු මිරිස්",
+   "cat": "veg",
+   "unit": "kg"
+  }
+ ],
+ "days": {
+  "2026-11-04": {
+   "1": {
+    "buy": 450,
+    "whs": 480
+   },
+   "2": {
+    "buy": 390,
+    "whs": 420
+   },
+   "3": {
+    "buy": 290,
+    "whs": 320
+   },
+   "4": {
+    "buy": 130,
+    "whs": 160
+   },
+   "5": {
+    "buy": 250,
+    "whs": 280
+   },
+   "6": {
+    "buy": 380,
+    "whs": 410
+   },
+   "7": {
+    "buy": 240,
+    "whs": 260
+   },
+   "8": {
+    "buy": 300,
+    "whs": 320
+   },
+   "9": {
+    "buy": 250,
+    "whs": 280
+   },
+   "10": {
+    "buy": 2500,
+    "whs": 2600
+   },
+   "12": {
+    "buy": 1400,
+    "whs": 1500
+   },
+   "13": {
+    "buy": 600,
+    "whs": 700
+   },
+   "14": {
+    "buy": 400,
+    "whs": 450
+   },
+   "15": {
+    "buy": 1000,
+    "whs": 1100
+   },
+   "16": {
+    "buy": 500,
+    "whs": 600
+   },
+   "17": {
+    "buy": 700,
+    "whs": 800
+   },
+   "18": {
+    "buy": 600,
+    "whs": 700
+   },
+   "19": {
+    "buy": 900,
+    "whs": 1000
+   },
+   "20": {
+    "buy": 500,
+    "whs": 550
+   },
+   "21": {
+    "buy": 900,
+    "whs": 1000
+   },
+   "22": {
+    "buy": 800,
+    "whs": 900
+   },
+   "23": {
+    "buy": 100,
+    "whs": 150
+   },
+   "24": {
+    "buy": 1000,
+    "whs": 1100
+   },
+   "25": {
+    "buy": 3300,
+    "whs": 3400
+   },
+   "26": {
+    "buy": 450,
+    "whs": 500
+   },
+   "27": {
+    "buy": 500,
+    "whs": 550
+   },
+   "28": {
+    "buy": 400,
+    "whs": 450
+   },
+   "29": {
+    "buy": 500,
+    "whs": 600
+   },
+   "30": {
+    "buy": 400,
+    "whs": 450
+   },
+   "31": {
+    "buy": 700,
+    "whs": 800
+   },
+   "32": {
+    "buy": 200,
+    "whs": 250
+   },
+   "33": {
+    "buy": 900,
+    "whs": 1000
+   },
+   "34": {
+    "buy": 600,
+    "whs": 650
+   }
+  },
+  "2026-11-05": {
+   "1": {
+    "buy": 470,
+    "whs": 500
+   },
+   "2": {
+    "buy": 450,
+    "whs": 480
+   },
+   "3": {
+    "buy": 270,
+    "whs": 300
+   },
+   "4": {
+    "buy": 130,
+    "whs": 160
+   },
+   "5": {
+    "buy": 250,
+    "whs": 280
+   },
+   "6": {
+    "buy": 380,
+    "whs": 410
+   },
+   "7": {
+    "buy": 250,
+    "whs": 270
+   },
+   "8": {
+    "buy": 300,
+    "whs": 320
+   },
+   "9": {
+    "buy": 300,
+    "whs": 330
+   },
+   "10": {
+    "buy": 2500,
+    "whs": 2600
+   },
+   "12": {
+    "buy": 1400,
+    "whs": 1500
+   },
+   "13": {
+    "buy": 600,
+    "whs": 700
+   },
+   "14": {
+    "buy": 400,
+    "whs": 450
+   },
+   "15": {
+    "buy": 1200,
+    "whs": 1300
+   },
+   "16": {
+    "buy": 500,
+    "whs": 600
+   },
+   "17": {
+    "buy": 700,
+    "whs": 800
+   },
+   "18": {
+    "buy": 600,
+    "whs": 700
+   },
+   "19": {
+    "buy": 900,
+    "whs": 1000
+   },
+   "20": {
+    "buy": 500,
+    "whs": 550
+   },
+   "21": {
+    "buy": 900,
+    "whs": 1000
+   },
+   "22": {
+    "buy": 800,
+    "whs": 900
+   },
+   "23": {
+    "buy": 100,
+    "whs": 150
+   },
+   "24": {
+    "buy": 1000,
+    "whs": 1100
+   },
+   "25": {
+    "buy": 3500,
+    "whs": 3600
+   },
+   "26": {
+    "buy": 450,
+    "whs": 500
+   },
+   "27": {
+    "buy": 500,
+    "whs": 550
+   },
+   "28": {
+    "buy": 400,
+    "whs": 450
+   },
+   "29": {
+    "buy": 500,
+    "whs": 600
+   },
+   "30": {
+    "buy": 400,
+    "whs": 450
+   },
+   "31": {
+    "buy": 700,
+    "whs": 800
+   },
+   "32": {
+    "buy": 250,
+    "whs": 300
+   },
+   "33": {
+    "buy": 900,
+    "whs": 1000
+   },
+   "34": {
+    "buy": 700,
+    "whs": 800
+   }
+  },
+  "2026-11-11": {
+   "1": {
+    "buy": 550,
+    "whs": 580
+   },
+   "2": {
+    "buy": 520,
+    "whs": 550
+   },
+   "3": {
+    "buy": 250,
+    "whs": 280
+   },
+   "4": {
+    "buy": 150,
+    "whs": 180
+   },
+   "5": {
+    "buy": 320,
+    "whs": 350
+   },
+   "6": {
+    "buy": 450,
+    "whs": 480
+   },
+   "7": {
+    "buy": 260,
+    "whs": 280
+   },
+   "8": {
+    "buy": 300,
+    "whs": 320
+   },
+   "9": {
+    "buy": 300,
+    "whs": 330
+   },
+   "10": {
+    "buy": 3200,
+    "whs": 3300
+   },
+   "11": {
+    "buy": 3100,
+    "whs": 3200
+   },
+   "12": {
+    "buy": 1700,
+    "whs": 1800
+   },
+   "13": {
+    "buy": 400,
+    "whs": 500
+   },
+   "14": {
+    "buy": 500,
+    "whs": 600
+   },
+   "15": {
+    "buy": 1200,
+    "whs": 1300
+   },
+   "16": {
+    "buy": 650,
+    "whs": 750
+   },
+   "17": {
+    "buy": 600,
+    "whs": 700
+   },
+   "18": {
+    "buy": 650,
+    "whs": 750
+   },
+   "19": {
+    "buy": 700,
+    "whs": 800
+   },
+   "20": {
+    "buy": 500,
+    "whs": 550
+   },
+   "21": {
+    "buy": 600,
+    "whs": 700
+   },
+   "22": {
+    "buy": 1000,
+    "whs": 1100
+   },
+   "23": {
+    "buy": 100,
+    "whs": 150
+   },
+   "24": {
+    "buy": 1000,
+    "whs": 1100
+   },
+   "25": {
+    "buy": 3500,
+    "whs": 3600
+   },
+   "26": {
+    "buy": 450,
+    "whs": 500
+   },
+   "27": {
+    "buy": 500,
+    "whs": 550
+   },
+   "28": {
+    "buy": 500,
+    "whs": 600
+   },
+   "29": {
+    "buy": 450,
+    "whs": 550
+   },
+   "30": {
+    "buy": 400,
+    "whs": 450
+   },
+   "31": {
+    "buy": 700,
+    "whs": 800
+   },
+   "32": {
+    "buy": 250,
+    "whs": 300
+   },
+   "33": {
+    "buy": 900,
+    "whs": 1000
+   },
+   "34": {
+    "buy": 900,
+    "whs": 1000
+   }
+  }
+ }
+}
