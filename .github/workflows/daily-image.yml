@@ -1,6 +1,7 @@
 # TopGoviya.lk — daily price image for WhatsApp / Facebook
 # Runs automatically after each "Update price data" or "Update HARTI wholesale data" run,
 # and only redraws an image when there is a new CBSL, HARTI or DEA report. Image: https://topgoviya.lk/share/today.png
+# JPEG for TikTok: https://topgoviya.lk/share/today-story.jpg
 
 name: Daily price image
 
@@ -39,7 +40,10 @@ jobs:
 
       - name: Make the image
         if: steps.check.outputs.need == 'yes'
-        run: python3 make_daily_image.py
+        run: |
+          python3 make_daily_image.py
+          # JPEG copies for TikTok auto-posting (TikTok does not accept PNG)
+          python3 -c "from PIL import Image; [Image.open(f'share/{n}.png').convert('RGB').save(f'share/{n}.jpg', quality=90) for n in ('today', 'today-story')]"
 
       - name: Save the image
         if: steps.check.outputs.need == 'yes'
