@@ -9,14 +9,19 @@ Data: dambulla_dec.json (robot, from the DEC website) + dambulla_early.json (ear
 from the official price list photo) - the newest day is used. Names: dambulla_items.json.
 Output: short/03-dambulla-DATE/ with video-with-music.mp4, video-silent.mp4,
         youtube.txt, tiktok.txt, facebook.txt   (same style as the other Shorts robots)
-Each day's video is different: real movers of the day + a category spotlight that
-changes with the weekday (so YouTube does not see look-alike videos).
+Design (Nov 2026): "price board first" - second 0 shows a huge date + the 14 most-wanted prices
+with red/green/grey up-down dots (rows slide in one by one, dots pop); then the next 14 items, the day's biggest movers, and the end card.
+Rows come in one at a time (ITEM_SEC each) so people can read them: about 35-40 seconds. Each day's video differs because the prices differ.
 """
 import json, base64, os, subprocess, sys
 from datetime import date
 import short_kit
 
-OUT = "short"; SLIDE_SEC = 4.0; FADE = 0.5
+OUT = "short"; FADE = 0.3; FPS = 30
+ITEM_SEC = 0.9      # time for each row: slide in + highlight, so people can read it (change to slow down/speed up)
+HOLD_SEC = 2.0      # full board stays on screen after the last row
+MOVER_SEC = 0.7     # each "biggest change" card
+END_SEC = 3.5       # last card (topgoviya.lk)
 STATE = ".dambulla_short_last"
 LOGO = "icon-512x512.png"
 SI_MONTHS = ["ජනවාරි", "පෙබරවාරි", "මාර්තු", "අප්‍රේල්", "මැයි", "ජූනි", "ජූලි", "අගෝස්තු",
@@ -124,111 +129,143 @@ def main():
 
     css = """
 *{margin:0;box-sizing:border-box}
-body{width:1080px;height:1920px;background:#f4efe4;font-family:'Noto Sans Sinhala',sans-serif;color:#191d1a;display:flex;flex-direction:column;overflow:hidden}
-.top{background:#0e4f4a;color:#fff;padding:70px 70px 60px;display:flex;align-items:center;gap:34px}
-.top img{width:150px;height:150px;border-radius:50%;border:5px solid #a9802a;background:#f4efe4}
-.top .b{font-size:52px;font-weight:800}.top .s{font-size:34px;color:#e7d3a3;margin-top:6px}
-.main{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 64px}
-.foot{background:#0b0b0b;color:#e7d3a3;text-align:center;padding:40px;font-size:32px;font-weight:600}
-.sub{background:#a9802a;color:#fff;text-align:center;padding:22px 20px;font-size:40px;font-weight:800;white-space:nowrap}
+body{width:1080px;height:1920px;background:#063027;font-family:'Noto Sans Sinhala',sans-serif;color:#faf6ec;display:flex;flex-direction:column;overflow:hidden}
 .mono{font-family:'JetBrains Mono',monospace}
-.big{font-size:112px;font-weight:800;line-height:1.38;color:#0e4f4a}
-.date{display:inline-block;margin-top:44px;font-size:48px;font-weight:700;background:#0e4f4a;color:#fff;border-radius:999px;padding:18px 44px}
-.note{font-size:38px;color:#7a7264;margin-top:44px;line-height:1.6}
-.lbl{font-size:66px;font-weight:800;margin-bottom:38px}
-.mood{font-size:62px;font-weight:800;margin-top:60px}
-.bar{display:flex;height:44px;border-radius:22px;overflow:hidden;margin-top:28px}
-.bar span{display:block;height:100%}
-.leg{display:flex;flex-wrap:wrap;gap:14px 34px;font-size:38px;color:#3a403a;margin-top:18px}.leg span{white-space:nowrap}
-.row{display:flex;align-items:center;gap:24px;background:#fffdf7;border:4px solid #e3d9c4;border-radius:30px;padding:34px 40px;margin-bottom:26px}
-.row .nm{font-size:58px;font-weight:800;line-height:1.2}
-.row .pr{font-size:42px;color:#3a403a;margin-top:8px}
-.chip{font-weight:800;padding:12px 24px;border-radius:20px;font-size:48px;white-space:nowrap}
-.up{background:#f7e6e2;color:#b23a2e}.down{background:#e3efe6;color:#2c7a52}.flat{background:#efeada;color:#8a8170}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.cell{background:#fffdf7;border:4px solid #e3d9c4;border-radius:28px;padding:30px 30px}
-.cell .n{font-size:46px;font-weight:800;color:#0e4f4a;line-height:1.2;min-height:112px}
-.cell .p{font-size:52px;font-weight:800;margin:8px 0}
-.cell .c{font-size:36px;font-weight:800}
-.cu{color:#b23a2e}.cd{color:#2c7a52}.cf{color:#8a8170}
-.url{font-size:92px;font-weight:800;color:#0e4f4a;margin-top:30px}
-""" + short_kit.CTA_CSS
+.hd{background:#0b4a3c;padding:34px 60px 36px;text-align:center}
+.hd .t{font-size:58px;font-weight:800;line-height:1.3}
+.dbox{margin-top:20px;background:#ffd43b;color:#063027;border-radius:28px;padding:10px 20px 18px}
+.dbox .d{font-size:118px;font-weight:800;line-height:1.1;letter-spacing:-2px}
+.dbox .w{font-size:44px;font-weight:800}
+.hd.sm .dbox .d{font-size:84px}.hd.sm .t{font-size:50px}
+.rows{flex:1;display:flex;flex-direction:column}
+.r{display:flex;align-items:center;padding:0 40px;height:86px;margin-bottom:4px}
+.r:nth-child(odd){background:#0f5c4a}.r:nth-child(even){background:#0a4235}
+.r .n{flex:1;font-size:52px;font-weight:800;white-space:nowrap;overflow:hidden}
+.r .n small{font-size:30px;font-weight:600;color:#bed7c8;margin-left:10px}
+.r .p{font-size:62px;font-weight:800;color:#fff;margin-right:26px;white-space:nowrap}
+.dot{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:34px;font-weight:800;flex:none}
+.u{background:#e23d34}.dn{background:#22a05a}.f{background:#96968c}
+.leg{display:flex;gap:44px;padding:16px 40px;font-size:36px;font-weight:600;align-items:center}
+.leg i{display:inline-block;width:34px;height:34px;border-radius:50%;margin-right:12px;vertical-align:middle}
+.ft{background:#0b4a3c;display:flex;align-items:center;gap:24px;padding:26px 60px}
+.ft img{width:100px;height:100px;border-radius:18px}
+.ft .s{font-size:66px;font-weight:800;color:#ffd43b;font-family:'JetBrains Mono',monospace}
+.ft .x{margin-left:auto;font-size:34px;font-weight:700;text-align:right;line-height:1.35}
+.mv{flex:1;padding:40px 50px;display:flex;flex-direction:column;justify-content:center}
+.mv .lbl{font-size:62px;font-weight:800;margin:10px 0 22px}
+.card{display:flex;align-items:center;border-radius:28px;padding:24px 34px;margin-bottom:20px;background:#0f5c4a}
+.card .n{flex:1;font-size:54px;font-weight:800;line-height:1.25}
+.card .p{font-size:40px;color:#e6efe9;margin-top:4px}
+.card .c{font-size:56px;font-weight:800;padding:10px 24px;border-radius:20px;color:#fff;white-space:nowrap}
+.end{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 60px;text-align:center}
+.end .big{font-size:80px;font-weight:800;line-height:1.35}
+.end .url{font-size:100px;font-weight:800;color:#ffd43b;margin:30px 0}
+.end .note{font-size:38px;color:#d7e6dc;line-height:1.6}
+.cta{margin-top:40px;background:#0f5c4a;border-radius:26px;padding:6px 30px;text-align:left}
+.ct{display:flex;align-items:center;gap:22px;padding:16px 0;font-size:40px;font-weight:700}
+.ct+.ct{border-top:2px solid #0a4235}.ci{font-size:48px;width:64px;text-align:center}
+@keyframes slideIn{0%{transform:translateX(105%);opacity:0}70%{transform:translateX(-3%);opacity:1}100%{transform:none;opacity:1}}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes drop{0%{transform:translateY(-60px);opacity:0}100%{transform:none;opacity:1}}
+@keyframes glow{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes hl{0%,100%{background:inherit;transform:none}15%,85%{background:#1f8a6c;transform:scale(1.035);box-shadow:0 0 0 5px #ffd43b inset}}
+.r,.card{animation:slideIn .4s ease-out both}
+.r{position:relative}
+.dot,.card .c{animation:pop .3s ease-out both}
+.dbox{animation:glow 1.6s ease-in-out .6s infinite}
+.mv .lbl,.end>*{animation:drop .35s ease-out both}
+"""
+    dotdate = f"{date.fromisoformat(last):%Y.%m.%d}"
 
-    def page(inner):
-        return f"""<html><head><meta charset="utf-8"><style>{css}</style></head><body>
-<div class="top">{f'<img src="{logo}">' if logo else ''}<div><div class="b">TopGoviya.lk</div><div class="s">අද දඹුල්ල තොග මිල · {DAYS_SI[wd]}</div></div></div>
-<div class="main">{inner}</div>
-<div class="sub">🔔 හැමදාම මිල බලන්න · Subscribe කරන්න</div>
-<div class="foot">මූලාශ්‍රය: දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය · තොග මිල · {D}</div></body></html>"""
+    def head(small=False):
+        return (f'<div class="hd{" sm" if small else ""}"><div class="t">අද දඹුල්ල එළවළු තොග මිල</div>'
+                f'<div class="dbox"><div class="d mono">{dotdate}</div><div class="w">{DAYS_SI[wd]} • 1kg රු.</div></div></div>')
 
-    def chip(c):
-        if c is None: return ""
-        k = "flat" if abs(c) < 0.5 else ("up" if c > 0 else "down")
-        return f'<span class="chip mono {k}">{ {"up":"▲","down":"▼","flat":"■"}[k]} {abs(c):.0f}%</span>'
+    img_tag = '<img src="' + logo + '">' if logo else ""
+    foot = (f'<div class="ft">{img_tag}<div class="s">TopGoviya.lk</div>'
+            '<div class="x">සම්පූර්ණ ලැයිස්තුව<br>🔔 Subscribe</div></div>')
+
+    def page(inner, small=False, header=True):
+        return (f'<html><head><meta charset="utf-8"><style>{css}</style></head><body>'
+                f'{head(small) if header else ""}{inner}{foot}</body></html>')
 
     def unit(i): return "" if i["kg"] else {"nut": " /ගෙඩිය", "bundle": " /මිටිය"}.get(i["unit"], "")
 
-    def rows(lst):
-        out = ""
-        for i in lst:
-            out += (f'<div class="row"><div style="flex:1"><div class="nm">{i["e"]} {i["si"]}</div>'
-                    f'<div class="pr mono">රු. {rs(i["lo"])} – {rs(i["hi"])}{unit(i)}</div></div>{chip(i["chg"])}</div>')
-        return out
+    def name(i):
+        n, _, o = i["si"].partition(" (")
+        return f'{n}<small>({o}</small>' if o else n
 
-    def cells(lst):
-        out = ""
-        for i in lst:
-            c = i["chg"]; k = "cf" if c is None or abs(c) < 0.5 else ("cu" if c > 0 else "cd")
-            a = "■" if k == "cf" else ("▲" if k == "cu" else "▼")
-            out += (f'<div class="cell"><div class="n">{i["e"]} {i["si"]}</div><div class="p mono">{rs(i["lo"])}–{rs(i["hi"])}{unit(i)}</div>'
-                    f'<div class="c mono {k}">{a} {"" if c is None else f"{abs(c):.0f}%"}</div></div>')
-        return out
+    def dot(c):
+        if c is None or abs(c) < 0.5: return '<span class="dot f">●</span>'
+        return '<span class="dot u">▲</span>' if c > 0 else '<span class="dot dn">▼</span>'
 
-    tot = max(len(moved), 1)
-    bar = (f'<div class="bar"><span style="width:{up/tot*100:.1f}%;background:#b23a2e"></span>'
-           f'<span style="width:{same/tot*100:.1f}%;background:#cdbf9f"></span><span style="width:{dn/tot*100:.1f}%;background:#2c7a52"></span></div>'
-           f'<div class="leg"><span>🔴 ඉහළ {up}</span><span>⚪ වෙනසක් නැත {same}</span><span>🟢 පහළ {dn}</span>'
-           + (f'<span>➖ පෙර මිල නැත {nonew}</span>' if nonew else '') + '</div>')
-    note = '<div class="note">රු. / කි.ග්‍රෑ. · අවම – උපරිම · ▲▼ පෙර වාර්තාවට සාපේක්ෂව</div>'
-    slides = [page(f'<div class="big">අද දඹුල්ල<br>එළවළු<br><span style="color:#a9802a">තොග</span> මිල</div>'
-                   f'<div><span class="date">{D}</span></div><div class="mood">{mood}</div>{bar}')]
-    if rises: slides.append(page(f'<div class="lbl" style="color:#b23a2e">📈 අද වැඩිම ඉහළ යාම</div>{rows(rises)}{note}'))
-    if falls: slides.append(page(f'<div class="lbl" style="color:#2c7a52">📉 අද වැඩිම පහළ යාම</div>{rows(falls)}{note}'))
-    slides.append(page(f'<div class="lbl" style="color:#0e4f4a">🛒 ජනප්‍රිය එළවළු</div><div class="grid">{cells(staples)}</div>{note}'))
-    if len(spot) >= 4:
-        slides.append(page(f'<div class="lbl" style="color:#0e4f4a">{spot_title}</div><div class="grid">{cells(spot)}</div>{note}'))
-    slides.append(page('<div class="big" style="font-size:94px">දඹුල්ල මිල<br>භාණ්ඩ 90+</div>'
-                       '<div class="url">👉 topgoviya.lk</div>'
-                       '<div class="note">🛒 බාස්කට් එක · 🧮 ලාභ ගණකය · ⭐ මගේ භාණ්ඩ<br>සිංහල · தமிழ் · English · නොමිලේ<br>'
-                       'මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.</div>'
-                       + short_kit.cta("ඔබේ ප්‍රදේශයේ මිල කමෙන්ට් කරන්න", "ගොවි හා වෙළෙන්දා මිතුරන්ට ෂෙයාර් කරන්න",
-                                       "සෑම දිනකම දඹුල්ල මිල සඳහා ෆලෝ කරන්න")))
+    def price(i):
+        return rs(i["lo"]) if i["lo"] == i["hi"] else f"{rs(i['lo'])}-{rs(i['hi'])}"
 
+    def board(lst):
+        return ('<div class="rows">' + "".join(
+            f'<div class="r" style="animation:slideIn .4s ease-out {k * ITEM_SEC:.2f}s both,hl {ITEM_SEC:.2f}s ease-in-out {k * ITEM_SEC + 0.35:.2f}s"><div class="n">{name(i)}</div><div class="p mono">{price(i)}<span style="font-size:32px">{unit(i)}</span></div>'
+            + dot(i["chg"]).replace('<span class="dot', f'<span style="animation-delay:{k * ITEM_SEC + 0.35:.2f}s" class="dot') + '</div>'
+            for k, i in enumerate(lst)) + '</div>'
+            '<div class="leg"><span><i class="u"></i>ඉහළ</span><span><i class="dn"></i>පහළ</span><span><i class="f"></i>වෙනසක් නැත</span></div>')
+
+    def cards(lst, cls):
+        return "".join(f'<div class="card" style="animation-delay:{0.4 + k * MOVER_SEC:.2f}s"><div style="flex:1"><div class="n">{i["e"]} {name(i)}</div>'
+                       f'<div class="p mono">රු. {price(i)}{unit(i)}</div></div>'
+                       f'<div class="c mono {cls}" style="animation-delay:{0.7 + k * MOVER_SEC:.2f}s">{"▲" if cls == "u" else "▼"} {abs(i["chg"]):.0f}%</div></div>'
+                       for k, i in enumerate(lst))
+
+    ranked = sorted(items, key=lambda i: i["pop"])
+    bsec = lambda n: n * ITEM_SEC + HOLD_SEC
+    b1 = ranked[:14]
+    slides = [page(board(b1))]; durs = [bsec(len(b1))]       # second 0: the prices, nothing else
+    if len(ranked) > 14:
+        b2 = ranked[14:28]
+        slides.append(page(board(b2), small=True)); durs.append(bsec(len(b2)))
+    if rises or falls:
+        mv_html = '<div class="mv">'
+        if rises: mv_html += f'<div class="lbl" style="color:#ff8a80">📈 අද වැඩිම ඉහළ යාම</div>{cards(rises[:3], "u")}'
+        if falls: mv_html += f'<div class="lbl" style="color:#7fe0a6">📉 අද වැඩිම පහළ යාම</div>{cards(falls[:3], "dn")}'
+        slides.append(page(mv_html + '</div>', small=True))
+        durs.append(0.4 + (len(rises[:3]) + len(falls[:3])) * MOVER_SEC + HOLD_SEC)
+    slides.append(page('<div class="end"><div class="big">දඹුල්ල භාණ්ඩ 90+ ක<br>අද මිල</div>'
+                       '<div class="url mono">topgoviya.lk</div>'
+                       '<div class="note">සිංහල · தமிழ் · English · නොමිලේ<br>මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.</div>'
+                       '<div class="cta">'
+                       '<div class="ct"><span class="ci">💬</span><span>ඔබේ ප්‍රදේශයේ මිල කමෙන්ට් කරන්න</span></div>'
+                       '<div class="ct"><span class="ci">📤</span><span>ගොවි මිතුරන්ට ෂෙයාර් කරන්න</span></div>'
+                       '<div class="ct"><span class="ci">🔔</span><span>හැමදාම මිල සඳහා Subscribe කරන්න</span></div>'
+                       '</div></div>', small=True))
+    durs.append(END_SEC)
     from playwright.sync_api import sync_playwright   # only needed when a video is made
     os.makedirs(OUT, exist_ok=True)
-    pngs = []
+    dirs = []
     with sync_playwright() as pw:
         b = pw.chromium.launch(); pg = b.new_page(viewport={"width": 1080, "height": 1920})
         for n, html in enumerate(slides):
-            pg.set_content(html); pg.wait_for_timeout(300)
-            f = f"{OUT}/dambulla{n:02d}.png"; pg.screenshot(path=f); pngs.append(f)
+            pg.set_content(html); pg.evaluate("document.fonts.ready"); pg.wait_for_timeout(300)
+            pg.evaluate("document.getAnimations().forEach(a => a.pause())")
+            fd = f"{OUT}/frames{n:02d}"; os.makedirs(fd, exist_ok=True); dirs.append(fd)
+            for f in range(int(durs[n] * FPS)):      # step the animation by hand: smooth 30 fps, same result every run
+                pg.evaluate(f"document.getAnimations().forEach(a => a.currentTime = {f * 1000 / FPS:.1f})")
+                pg.screenshot(path=f"{fd}/{f:04d}.jpg", type="jpeg", quality=92)
         b.close()
-    n = len(pngs); inputs = []
-    for f in pngs: inputs += ["-loop", "1", "-t", str(SLIDE_SEC), "-i", f]
+    n = len(dirs); inputs = []
+    for fd in dirs: inputs += ["-framerate", str(FPS), "-i", f"{fd}/%04d.jpg"]
     chain, lbl, off = [], "[0:v]", 0.0
     for k in range(1, n):
-        off += SLIDE_SEC - FADE
+        off += durs[k - 1] - FADE
         chain.append(f"{lbl}[{k}:v]xfade=transition=fade:duration={FADE}:offset={off:.2f}[v{k}]"); lbl = f"[v{k}]"
-    chain.append(f"{lbl}format=yuv420p,fps=30[outv]")
+    chain.append(f"{lbl}format=yuv420p,fps={FPS}[outv]")
     silent = f"{OUT}/dambulla-{TAG}-silent.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", *inputs, "-filter_complex", ";".join(chain),
                     "-map", "[outv]", "-c:v", "libx264", "-preset", "medium", "-crf", "20", silent], check=True)
-    seconds = n * SLIDE_SEC - (n - 1) * FADE
+    seconds = sum(durs) - (n - 1) * FADE
 
     mv = lambda i, a: f"{a} {i['si']}: රු. {rs(i['lo'])}–{rs(i['hi'])} ({'+' if i['chg']>0 else '−'}{abs(i['chg']):.0f}%)"
-    title = f"දඹුල්ල එලවලු මිල අද {D} | දඹුල්ල ආර්ථික මධ්‍යස්ථානයේ තොග මිල | Dambulla Price #shorts"
-    if len(title) > 100:   # YouTube limit (long month names)
-        title = title.replace(" | Dambulla Price", "")
+    title = f"අද {dotdate} {DAYS_SI[wd]} දඹුල්ල එලවලු මිල | Dambulla vegetable price today #shorts"
+    if len(title) > 100:   # YouTube limit
+        title = title.replace(" today", "")
     desc = (f"🥬 අද දඹුල්ල එළවළු තොග මිල (දඹුල්ල එලවලු මිල අද) — {D} ({DAYS_SI[wd]})\nදඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානයේ නිල තොග මිල.\n{mood.split(' ',1)[1]}: භාණ්ඩ {up}ක් ඉහළ, {dn}ක් පහළ, {same}ක් වෙනසක් නැත" + (f", {nonew}ක පෙර මිල නැත" if nonew else "") + " (පෙර වාර්තාවට සාපේක්ෂව).\n"
             + ("\nමිල ඉහළ ගිය:\n" + "\n".join(mv(i, "📈") for i in rises) + "\n" if rises else "")
             + ("\nමිල පහළ ගිය:\n" + "\n".join(mv(i, "📉") for i in falls) + "\n" if falls else "")
@@ -258,8 +295,10 @@ body{width:1080px;height:1920px;background:#f4efe4;font-family:'Noto Sans Sinhal
     open(f"{folder}/pin-comment.txt", "w", encoding="utf-8").write(pin + "\n")
     with open(f"{folder}/youtube.txt", "a", encoding="utf-8") as f:
         f.write("\nPINNED COMMENT (post it, then ⋮ → Pin):\n" + pin + "\n")
-    for f in pngs + [silent]:
-        if os.path.exists(f): os.remove(f)
+    import shutil
+    for fd in dirs:
+        shutil.rmtree(fd, ignore_errors=True)
+    if os.path.exists(silent): os.remove(silent)
     open(STATE, "w").write(st)
     print(f"Video for {last}: {n} slides, ~{seconds:.0f}s")
 
