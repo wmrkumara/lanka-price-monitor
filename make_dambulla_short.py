@@ -12,6 +12,9 @@ Output: short/03-dambulla-DATE/ with video-with-music.mp4, video-silent.mp4,
 Design (Nov 2026): "price board first" - second 0 shows a huge date + the 14 most-wanted prices
 with red/green/grey up-down dots (rows slide in one by one, dots pop); then the next 14 items, the day's biggest movers, and the end card.
 Rows come in one at a time (ITEM_SEC each) so people can read them: about 35-40 seconds. Each day's video differs because the prices differ.
+Mobile safe area (20 Nov 2026): all text stays inside x 120-860, y 300-1440 so YouTube's top bar, side buttons,
+caption and the side crop on tall phones never cover names or prices. Colours still fill the whole screen.
+  --preview   save one picture per slide (short/preview-N.png) with the YouTube danger zones marked, no video
 """
 import json, base64, os, subprocess, sys
 from datetime import date
@@ -34,6 +37,11 @@ SPOT = [("l", "🌿 අද පලා වර්ග මිල"), ("r", "🥔 අ�
 SHORT_TRACKS = ["short-1-the-new-me.mp3", "short-2-its-been-sold.mp3", "short-3-free-advice.mp3",
                 "short-4-thats-the-way.mp3", "music-5.wav"]   # files in the music/ folder, used in turn (one per day)
 STAPLES = ["11", "70", "67", "26", "4", "6"]          # tomato, big onion (imp), green chilli, brinjal, beans, carrot
+# YouTube Shorts safe area (1080x1920 video). Text only inside it; background colour fills the rest.
+SAFE_TOP, SAFE_BOTTOM = 300, 480    # top bar / channel name + caption
+SAFE_LEFT, SAFE_RIGHT = 120, 220    # side crop on tall phones / like-comment-share buttons
+ROWS_PER_BOARD = 7                  # 7 extra-big rows per screen (easy to read on cheap phones)
+MAX_ITEMS = 21                      # 3 boards x 7 most popular items (full list is on topgoviya.lk)
 
 
 def load():
@@ -133,69 +141,74 @@ def main():
 *{margin:0;box-sizing:border-box}
 body{width:1080px;height:1920px;background:#063027;font-family:'Noto Sans Sinhala',sans-serif;color:#faf6ec;display:flex;flex-direction:column;overflow:hidden}
 .mono{font-family:'JetBrains Mono',monospace}
-.hd{background:#0b4a3c;padding:34px 60px 36px;text-align:center}
-.hd .t{font-size:58px;font-weight:800;line-height:1.3}
-.dbox{margin-top:20px;background:#ffd43b;color:#063027;border-radius:28px;padding:10px 20px 18px}
-.dbox .d{font-size:118px;font-weight:800;line-height:1.1;letter-spacing:-2px}
-.dbox .w{font-size:44px;font-weight:800}
-.hd.sm .dbox .d{font-size:84px}.hd.sm .t{font-size:50px}
-.rows{flex:1;display:flex;flex-direction:column}
-.r{display:flex;align-items:center;padding:0 40px;height:86px;margin-bottom:4px}
+.topband{height:SAFE_TOPpx;flex:none;background:#0b4a3c;display:flex;align-items:flex-end;justify-content:center;padding:0 SAFE_RIGHTpx 14px SAFE_LEFTpx;font-size:48px;font-weight:800;text-align:center}
+.botband{height:SAFE_BOTTOMpx;flex:none;background:#0b4a3c;display:flex;align-items:flex-start;gap:24px;padding:40px SAFE_RIGHTpx 0 SAFE_LEFTpx;opacity:.55}
+.botband img{width:90px;height:90px;border-radius:18px}
+.botband .s{font-size:60px;font-weight:800;color:#ffd43b;font-family:'JetBrains Mono',monospace}
+.mid{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.hd{background:#0b4a3c;padding:6px SAFE_RIGHTpx 14px SAFE_LEFTpx;text-align:center}
+.hd .t{font-size:44px;font-weight:800;line-height:1.3}
+.dbox{margin-top:8px;background:#ffd43b;color:#063027;border-radius:24px;padding:4px 16px 10px}
+.dbox .d{font-size:112px;font-weight:800;line-height:1.1;letter-spacing:-2px}
+.dbox .w{font-size:42px;font-weight:800}
+.hd.sm .dbox .d{font-size:74px}.hd.sm .t{font-size:40px}.hd.sm .dbox .w{font-size:34px}
+.rows{flex:1;display:flex;flex-direction:column;padding-top:10px}
+.r{display:flex;align-items:center;padding:0 SAFE_RIGHTpx 0 SAFE_LEFTpx;height:110px;margin-bottom:5px}
 .r:nth-child(odd){background:#0f5c4a}.r:nth-child(even){background:#0a4235}
-.r .n{flex:1;font-size:52px;font-weight:800;white-space:nowrap;overflow:hidden}
-.r .n small{font-size:30px;font-weight:600;color:#bed7c8;margin-left:10px}
-.r .p{font-size:62px;font-weight:800;color:#fff;margin-right:26px;white-space:nowrap}
-.dot{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:34px;font-weight:800;flex:none}
+.r .n{flex:1;min-width:0;font-size:58px;font-weight:800;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.r .n.lg{font-size:46px}
+.r .n small{display:block;font-size:30px;font-weight:600;color:#bed7c8;line-height:1.1}
+.r .p{font-size:66px;font-weight:800;color:#fff;margin:0 16px 0 12px;white-space:nowrap}
+.dot{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:36px;font-weight:800;flex:none}
 .u{background:#e23d34}.dn{background:#22a05a}.f{background:#96968c}
-.leg{display:flex;gap:44px;padding:16px 40px;font-size:36px;font-weight:600;align-items:center}
-.leg i{display:inline-block;width:34px;height:34px;border-radius:50%;margin-right:12px;vertical-align:middle}
-.ft{background:#0b4a3c;display:flex;align-items:center;gap:24px;padding:26px 60px}
-.ft img{width:100px;height:100px;border-radius:18px}
-.ft .s{font-size:66px;font-weight:800;color:#ffd43b;font-family:'JetBrains Mono',monospace}
-.ft .x{margin-left:auto;font-size:34px;font-weight:700;text-align:right;line-height:1.35}
-.mv{flex:1;padding:40px 50px;display:flex;flex-direction:column;justify-content:center}
-.mv .lbl{font-size:62px;font-weight:800;margin:10px 0 22px}
-.card{display:flex;align-items:center;border-radius:28px;padding:24px 34px;margin-bottom:20px;background:#0f5c4a}
-.card .n{flex:1;font-size:54px;font-weight:800;line-height:1.25}
-.card .p{font-size:40px;color:#e6efe9;margin-top:4px}
-.card .c{font-size:56px;font-weight:800;padding:10px 24px;border-radius:20px;color:#fff;white-space:nowrap}
-.end{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 60px;text-align:center}
-.end .big{font-size:80px;font-weight:800;line-height:1.35}
-.end .url{font-size:100px;font-weight:800;color:#ffd43b;margin:30px 0}
-.end .note{font-size:38px;color:#d7e6dc;line-height:1.6}
-.cta{margin-top:40px;background:#0f5c4a;border-radius:26px;padding:6px 30px;text-align:left}
-.ct{display:flex;align-items:center;gap:22px;padding:16px 0;font-size:40px;font-weight:700}
-.ct+.ct{border-top:2px solid #0a4235}.ci{font-size:48px;width:64px;text-align:center}
+.leg{display:flex;gap:20px;padding:14px SAFE_RIGHTpx 14px SAFE_LEFTpx;font-size:32px;white-space:nowrap;font-weight:600;align-items:center;background:#0b4a3c}
+.leg i{display:inline-block;width:28px;height:28px;border-radius:50%;margin-right:8px;vertical-align:middle}
+.leg .s,.brand .s{margin-left:auto;font-size:36px;font-weight:800;color:#ffd43b;font-family:'JetBrains Mono',monospace}
+.brand{display:flex;padding:12px SAFE_RIGHTpx 12px SAFE_LEFTpx;background:#0b4a3c;align-items:center;font-size:32px;font-weight:700}
+.mv{flex:1;padding:8px SAFE_RIGHTpx 6px SAFE_LEFTpx;display:flex;flex-direction:column;justify-content:center}
+.mv .lbl{font-size:48px;font-weight:800;margin:4px 0 8px}
+.card{display:flex;align-items:center;border-radius:22px;padding:6px 20px;margin-bottom:8px;background:#0f5c4a}
+.card .n{flex:1;font-size:46px;font-weight:800;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .p{font-size:34px;color:#e6efe9;margin-top:0}
+.card .c{font-size:48px;font-weight:800;padding:8px 18px;border-radius:18px;color:#fff;white-space:nowrap;margin-left:12px}
+.end{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 SAFE_RIGHTpx 0 SAFE_LEFTpx;text-align:center}
+.end .big{font-size:64px;font-weight:800;line-height:1.35}
+.end .url{font-size:86px;font-weight:800;color:#ffd43b;margin:20px 0}
+.end .note{font-size:32px;color:#d7e6dc;line-height:1.6}
+.cta{margin-top:28px;background:#0f5c4a;border-radius:24px;padding:4px 24px;text-align:left}
+.ct{display:flex;align-items:center;gap:18px;padding:12px 0;font-size:34px;font-weight:700}
+.ct+.ct{border-top:2px solid #0a4235}.ci{font-size:42px;width:56px;text-align:center}
 @keyframes slideIn{0%{transform:translateX(105%);opacity:0}70%{transform:translateX(-3%);opacity:1}100%{transform:none;opacity:1}}
 @keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.3)}100%{transform:scale(1)}}
 @keyframes drop{0%{transform:translateY(-60px);opacity:0}100%{transform:none;opacity:1}}
-@keyframes glow{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-@keyframes hl{0%,100%{background:inherit;transform:none}15%,85%{background:#1f8a6c;transform:scale(1.035);box-shadow:0 0 0 5px #ffd43b inset}}
+@keyframes glow{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
+@keyframes hl{0%,100%{background:inherit;transform:none}15%,85%{background:#1f8a6c;transform:scale(1.02);box-shadow:0 0 0 5px #ffd43b inset}}
 .r,.card{animation:slideIn .4s ease-out both}
 .r{position:relative}
 .dot,.card .c{animation:pop .3s ease-out both}
 .dbox{animation:glow 1.6s ease-in-out .6s infinite}
 .mv .lbl,.end>*{animation:drop .35s ease-out both}
-"""
+""".replace("SAFE_TOP", str(SAFE_TOP)).replace("SAFE_BOTTOM", str(SAFE_BOTTOM)).replace("SAFE_LEFT", str(SAFE_LEFT)).replace("SAFE_RIGHT", str(SAFE_RIGHT))
     dotdate = f"{date.fromisoformat(last):%Y.%m.%d}"
 
     def head(small=False):
-        return (f'<div class="hd{" sm" if small else ""}"><div class="t">අද දඹුල්ල එළවළු තොග මිල</div>'
+        return (f'<div class="hd{" sm" if small else ""}">'
                 f'<div class="dbox"><div class="d mono">{dotdate}</div><div class="w">{DAYS_SI[wd]} • 1kg රු.</div></div></div>')
 
     img_tag = '<img src="' + logo + '">' if logo else ""
-    foot = (f'<div class="ft">{img_tag}<div class="s">TopGoviya.lk</div>'
-            '<div class="x">සම්පූර්ණ ලැයිස්තුව<br>🔔 Subscribe</div></div>')
+    # bottom band sits under YouTube's caption on phones (decoration only); the real brand line is inside the safe area
+    foot = f'<div class="botband">{img_tag}<div class="s">TopGoviya.lk</div></div>'
+    brand = '<div class="brand"><span>සම්පූර්ණ ලැයිස්තුව 👉</span><span class="s">TopGoviya.lk</span></div>'
 
     def page(inner, small=False, header=True):
-        return (f'<html><head><meta charset="utf-8"><style>{css}</style></head><body>'
-                f'{head(small) if header else ""}{inner}{foot}</body></html>')
+        return (f'<html><head><meta charset="utf-8"><style>{css}</style></head><body><div class="topband">අද දඹුල්ල එළවළු තොග මිල</div>'
+                f'<div class="mid">{head(small) if header else ""}{inner}</div>{foot}</body></html>')
 
     def unit(i): return "" if i["kg"] else {"nut": " /ගෙඩිය", "bundle": " /මිටිය"}.get(i["unit"], "")
 
     def name(i):
         n, _, o = i["si"].partition(" (")
-        return f'{n}<small>({o}</small>' if o else n
+        return f'{n}<small>({o}</small>' if o else n   # row: label goes on its own small line under the name
 
     def dot(c):
         if c is None or abs(c) < 0.5: return '<span class="dot f">●</span>'
@@ -206,10 +219,10 @@ body{width:1080px;height:1920px;background:#063027;font-family:'Noto Sans Sinhal
 
     def board(lst):
         return ('<div class="rows">' + "".join(
-            f'<div class="r" style="animation:slideIn .4s ease-out {k * ITEM_SEC:.2f}s both,hl {ITEM_SEC:.2f}s ease-in-out {k * ITEM_SEC + 0.35:.2f}s"><div class="n">{name(i)}</div><div class="p mono">{price(i)}<span style="font-size:32px">{unit(i)}</span></div>'
+            f'<div class="r" style="animation:slideIn .4s ease-out {k * ITEM_SEC:.2f}s both,hl {ITEM_SEC:.2f}s ease-in-out {k * ITEM_SEC + 0.35:.2f}s"><div class="n{" lg" if len(i["si"].partition(" (")[0]) > 9 else ""}">{name(i)}</div><div class="p mono">{price(i)}<span style="font-size:32px">{unit(i)}</span></div>'
             + dot(i["chg"]).replace('<span class="dot', f'<span style="animation-delay:{k * ITEM_SEC + 0.35:.2f}s" class="dot') + '</div>'
             for k, i in enumerate(lst)) + '</div>'
-            '<div class="leg"><span><i class="u"></i>ඉහළ</span><span><i class="dn"></i>පහළ</span><span><i class="f"></i>වෙනසක් නැත</span></div>')
+            '<div class="leg"><span><i class="u"></i>ඉහළ</span><span><i class="dn"></i>පහළ</span><span><i class="f"></i>සමාන</span><span class="s">TopGoviya.lk</span></div>')
 
     def cards(lst, cls):
         return "".join(f'<div class="card" style="animation-delay:{0.4 + k * MOVER_SEC:.2f}s"><div style="flex:1"><div class="n">{i["e"]} {name(i)}</div>'
@@ -219,16 +232,15 @@ body{width:1080px;height:1920px;background:#063027;font-family:'Noto Sans Sinhal
 
     ranked = sorted(items, key=lambda i: i["pop"])
     bsec = lambda n: n * ITEM_SEC + HOLD_SEC
-    b1 = ranked[:14]
-    slides = [page(board(b1))]; durs = [bsec(len(b1))]       # second 0: the prices, nothing else
-    if len(ranked) > 14:
-        b2 = ranked[14:28]
-        slides.append(page(board(b2), small=True)); durs.append(bsec(len(b2)))
+    slides, durs = [], []
+    for k in range(0, min(len(ranked), MAX_ITEMS), ROWS_PER_BOARD):   # second 0: the prices, nothing else
+        bl = ranked[k:k + ROWS_PER_BOARD]
+        slides.append(page(board(bl), small=k > 0)); durs.append(bsec(len(bl)))
     if rises or falls:
         mv_html = '<div class="mv">'
         if rises: mv_html += f'<div class="lbl" style="color:#ff8a80">📈 අද වැඩිම ඉහළ යාම</div>{cards(rises[:3], "u")}'
         if falls: mv_html += f'<div class="lbl" style="color:#7fe0a6">📉 අද වැඩිම පහළ යාම</div>{cards(falls[:3], "dn")}'
-        slides.append(page(mv_html + '</div>', small=True))
+        slides.append(page(mv_html + '</div>' + brand, small=True))
         durs.append(0.4 + (len(rises[:3]) + len(falls[:3])) * MOVER_SEC + HOLD_SEC)
     slides.append(page('<div class="end"><div class="big">දඹුල්ල භාණ්ඩ 90+ ක<br>අද මිල</div>'
                        '<div class="url mono">topgoviya.lk</div>'
@@ -240,6 +252,21 @@ body{width:1080px;height:1920px;background:#063027;font-family:'Noto Sans Sinhal
                        '</div></div>', small=True))
     durs.append(END_SEC)
     from playwright.sync_api import sync_playwright   # only needed when a video is made
+    if "--preview" in sys.argv:      # one still per slide + red danger zones, to check the layout on a phone
+        os.makedirs(OUT, exist_ok=True)
+        zones = (f'<div style="position:fixed;inset:0;pointer-events:none">'
+                 f'<div style="position:absolute;left:0;right:0;top:0;height:{SAFE_TOP}px;background:rgba(255,0,0,.35)"></div>'
+                 f'<div style="position:absolute;left:0;right:0;bottom:0;height:{SAFE_BOTTOM}px;background:rgba(255,0,0,.35)"></div>'
+                 f'<div style="position:absolute;left:0;top:{SAFE_TOP}px;bottom:{SAFE_BOTTOM}px;width:{SAFE_LEFT}px;background:rgba(255,0,0,.35)"></div>'
+                 f'<div style="position:absolute;right:0;top:{SAFE_TOP}px;bottom:{SAFE_BOTTOM}px;width:{SAFE_RIGHT}px;background:rgba(255,0,0,.35)"></div></div>')
+        with sync_playwright() as pw:
+            b = pw.chromium.launch(); pg = b.new_page(viewport={"width": 1080, "height": 1920})
+            for n, html in enumerate(slides):
+                pg.set_content(html.replace("</body>", zones + "</body>")); pg.evaluate("document.fonts.ready"); pg.wait_for_timeout(300)
+                pg.evaluate(f"document.getAnimations().forEach(a => {{a.pause(); a.currentTime = {durs[n] * 1000 - 50:.0f}}})")
+                pg.screenshot(path=f"{OUT}/preview-{n}.png")
+            b.close()
+        print(f"Preview saved: {len(slides)} pictures in {OUT}/"); return
     os.makedirs(OUT, exist_ok=True)
     dirs = []
     with sync_playwright() as pw:
