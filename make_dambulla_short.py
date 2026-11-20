@@ -31,6 +31,8 @@ DAYS_SI = ["සඳුදා", "අඟහරුවාදා", "බදාදා", 
 SPOT = [("l", "🌿 අද පලා වර්ග මිල"), ("r", "🥔 අද අල වර්ග මිල"), ("f", "🍌 අද පලතුරු මිල"),
         ("g", "🌾 අද ධාන්‍ය මිල"), ("v2", "🥒 තවත් එළවළු මිල"), ("f", "🍍 සති අන්ත පලතුරු මිල"),
         ("l", "🌿 පලා වර්ග සහ කොළ")]
+SHORT_TRACKS = ["short-1-the-new-me.mp3", "short-2-its-been-sold.mp3", "short-3-free-advice.mp3",
+                "short-4-thats-the-way.mp3", "music-5.wav"]   # files in the music/ folder, used in turn (one per day)
 STAPLES = ["11", "70", "67", "26", "4", "6"]          # tomato, big onion (imp), green chilli, brinjal, beans, carrot
 
 
@@ -287,7 +289,10 @@ body{width:1080px;height:1920px;background:#063027;font-family:'Noto Sans Sinhal
             "දඹුල්ල එළවළු මිල", "අද දඹුල්ල එළවළු මිල", "දබුල්ල එලවලු මිල", "dambulla market price today",
             "dambulla vegetable price", "dambulla price today", "එළවළු මිල", "අද එළවළු මිල", "තොග මිල",
             "elawalu mila", "elawalu mila ada", "vegetable price sri lanka", f"එළවළු මිල {date.fromisoformat(last).year}", "TopGoviya"]
-    track = short_kit.pick_track("music-5.wav", "music-2.wav", "music-1.wav")
+    # music test (Nov 2026): a different track each day, so we can compare views per song
+    found = [t for t in SHORT_TRACKS if os.path.exists(os.path.join("music", t))]
+    track = os.path.join("music", found[date.fromisoformat(last).toordinal() % len(found)]) if found else \
+        short_kit.pick_track("music-5.wav", "music-2.wav", "music-1.wav")
     short_kit.package(f"{OUT}/03-dambulla-{TAG}", silent, track, seconds, title, desc, tiktok, facebook,
                       tags, "🥬 අද දඹුල්ල එළවළු මිල | Dambulla Market Price Daily")
     pin = pin_comment(rises, falls, last)
@@ -295,6 +300,7 @@ body{width:1080px;height:1920px;background:#063027;font-family:'Noto Sans Sinhal
     open(f"{folder}/pin-comment.txt", "w", encoding="utf-8").write(pin + "\n")
     with open(f"{folder}/youtube.txt", "a", encoding="utf-8") as f:
         f.write("\nPINNED COMMENT (post it, then ⋮ → Pin):\n" + pin + "\n")
+        f.write("\nMUSIC USED (note the views after 2-3 days to see which song works best):\n" + (os.path.basename(track) if track else "none") + "\n")
     import shutil
     for fd in dirs:
         shutil.rmtree(fd, ignore_errors=True)
