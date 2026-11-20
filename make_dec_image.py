@@ -286,6 +286,11 @@ def write_cat_pages(db, last):
                 sm = re.sub(r"(<loc>" + re.escape(loc) + r"</loc>\s*<lastmod>)[^<]*", r"\g<1>" + last, sm)
             else:
                 sm = sm.replace("</urlset>", f"  <url><loc>{loc}</loc><lastmod>{last}</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>\n</urlset>")
+        # the home page and dambulla.html also show today's Dambulla prices: tell Google they changed today
+        # (20 Nov 2026: the home page date was stuck at 2026-09-29 although it changes every day)
+        for loc in ("https://topgoviya.lk/", "https://topgoviya.lk/dambulla.html"):
+            if "<loc>" + loc + "</loc>" in sm:
+                sm = re.sub(r"(<loc>" + re.escape(loc) + r"</loc>\s*<lastmod>)[^<]*", r"\g<1>" + last, sm)
         open("sitemap.xml", "w", encoding="utf-8").write(sm)
 
 
