@@ -308,8 +308,9 @@ body{width:1080px;height:1920px;background:#063027;font-family:'Noto Sans Sinhal
     tiktok = (f"අද දඹුල්ල එළවළු තොග මිල 🥬 {D}\n" + "\n".join(moves) +
               "\nසියලු මිල 👉 topgoviya.lk · දත්ත: දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය\nමිල ගණන් මඟපෙන්වීමක් පමණි.\n\n"
               "#දඹුල්ල #එළවළුමිල #DambullaPrice #TopGoviyaLK #fyp")
+    # Facebook link carries utm_ tags, so Google Analytics shows how many visitors come from the Facebook posts
     facebook = (f"🥬 අද දඹුල්ල එළවළු තොග මිල — {D}\n{mood}\n\n" + "\n".join(moves) +
-                "\n\n👉 භාණ්ඩ 90+ ක මිල, 🛒 බාස්කට් එක, 🧮 ලාභ ගණකය: https://topgoviya.lk\n"
+                "\n\n👉 භාණ්ඩ 90+ ක මිල, 🛒 බාස්කට් එක, 🧮 ලාභ ගණකය: https://topgoviya.lk/?d=" + last + "&utm_source=facebook&utm_medium=social&utm_campaign=dambulla_daily\n"
                 "📊 මූලාශ්‍රය: දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය\n⚠️ මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ.\n\n"
                 "#දඹුල්ල #එළවළුමිල #TopGoviyaLK")
     tags = ["දඹුල්ල එලවලු මිල අද", "දඹුල්ල ආර්ථික මධ්‍යස්ථානයේ එළවළු මිල", "දඹුල්ලේ එලවලු මිල", "එලවලු මිල අද",
