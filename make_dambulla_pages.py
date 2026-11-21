@@ -131,7 +131,8 @@ def head(title, desc, url, img, extra=""):
 
 
 FOOT = """<footer><b>🌐 topgoviya.lk</b> · මූලාශ්‍රය: දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය (Dambulla DEC) · <a href="../data-sources.html">මිල ලබාගන්නා ආකාරය</a><br>
-මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ. · © TopGoviya.lk</footer></body></html>
+මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ. · © TopGoviya.lk</footer>
+<script defer src="/events.js?v=1"></script></body></html>
 """
 
 

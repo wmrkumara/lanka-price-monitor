@@ -72,7 +72,8 @@ def head(title, desc, url):
 
 
 FOOT = f"""<footer><b>🌐 topgoviya.lk</b> · මූලාශ්‍රය: {MARKET_FULL_SI} (Keppetipola DEC) · <a href="../data-sources.html">මිල ලබාගන්නා ආකාරය</a><br>
-මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ. · © TopGoviya.lk</footer></body></html>
+මිල ගණන් මඟපෙන්වීමක් පමණි. ඔබේ තීරණ ඔබේ වගකීම වේ. · © TopGoviya.lk</footer>
+<script defer src="/events.js?v=1"></script></body></html>
 """
 
 
