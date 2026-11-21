@@ -30,11 +30,14 @@ jobs:
       - name: Rebuild market pages with the new HARTI prices
         run: python build_market_pages.py
 
+      - name: Build seasonal price summary (vegetable price seasons page)
+        run: python make_seasonal.py
+
       - name: Commit if data changed
         run: |
           git config user.name  "price-bot"
           git config user.email "price-bot@users.noreply.github.com"
-          git add harti_data.json harti_market_series.json harti_market_history.json harti_pdfs/ market/ sitemap.xml || true
+          git add harti_data.json harti_market_series.json harti_market_history.json seasonal_prices.json harti_pdfs/ market/ sitemap.xml || true
           if git diff --staged --quiet; then
             echo "No HARTI changes today."
           else
