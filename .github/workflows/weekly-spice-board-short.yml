@@ -1,0 +1,96 @@
+# TopGoviya.lk — Weekly spice Short in the Dambulla "price board" style
+# Runs after "DEA Spice Prices Weekly Update". Makes a video only when a NEW DEA week arrives.
+# Download: Actions → Weekly spice board Short → top green run → F5 → Artifacts
+#           or the direct link: https://github.com/wmrkumara/lanka-price-monitor/releases/tag/spice-board-short
+name: Weekly spice board Short
+
+on:
+  workflow_run:
+    workflows: ["DEA Spice Prices Weekly Update"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Make the video again even if this week is done"
+        type: choice
+        options:
+          - "no"
+          - "yes"
+        default: "yes"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: spice-board-short
+  cancel-in-progress: false
+
+jobs:
+  short:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - name: Is there a new DEA week?
+        id: check
+        run: |
+          if [ "${{ github.event.inputs.force }}" = "yes" ]; then echo "need=yes" >> "$GITHUB_OUTPUT"; else python3 make_spice_board_short.py --check >> "$GITHUB_OUTPUT"; fi
+
+      - name: Install video tools and fonts
+        if: steps.check.outputs.need == 'yes'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-noto-core fonts-noto-color-emoji
+          mkdir -p ~/.fonts
+          curl -sL -o ~/.fonts/NotoSansSinhala.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssinhala/NotoSansSinhala%5Bwdth,wght%5D.ttf"
+          curl -sL -o ~/.fonts/JetBrainsMono.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf"
+          fc-cache -f
+          pip install -q playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Make the video
+        if: steps.check.outputs.need == 'yes'
+        id: make
+        run: |
+          python3 make_spice_board_short.py --force
+          echo "week=$(cut -d_ -f1 .spice_board_last)" >> "$GITHUB_OUTPUT"
+
+      - name: Save for download
+        if: steps.check.outputs.need == 'yes'
+        uses: actions/upload-artifact@v4
+        with:
+          name: topgoviya-spice-board-short-${{ steps.make.outputs.week }}
+          path: short/
+          retention-days: 30
+
+      - name: Publish the latest video for direct download
+        if: steps.check.outputs.need == 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          F=$(ls -d short/04-spice-board-*)
+          mkdir -p latest
+          cp "$F/video-with-music.mp4" latest/spice-board-short-latest.mp4
+          cp "$F/video-silent.mp4"     latest/spice-board-short-silent.mp4
+          cp "$F/youtube.txt"          latest/spice-board-short-youtube.txt
+          cp "$F/facebook.txt"         latest/spice-board-short-facebook.txt
+          cp "$F/tiktok.txt"           latest/spice-board-short-tiktok.txt
+          cp "$F/thumbnail.png"        latest/spice-board-short-thumbnail.png
+          gh release view spice-board-short >/dev/null 2>&1 || gh release create spice-board-short --title "Latest weekly spice Short" --notes "Newest weekly spice board Short. Files are replaced every week."
+          gh release edit spice-board-short --notes "Latest spice Short: DEA week ${{ steps.make.outputs.week }}"
+          gh release upload spice-board-short latest/* --clobber
+
+      - name: Remember this week is done
+        if: steps.check.outputs.need == 'yes'
+        run: |
+          git config user.name  "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add .spice_board_last
+          if git diff --staged --quiet; then echo "Nothing to save."; else
+            git commit -m "Spice board Short made (DEA week ${{ steps.make.outputs.week }})"
+            for i in 1 2 3; do git pull --rebase origin main && git push origin main && break; sleep 10; done
+          fi
