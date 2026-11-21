@@ -21,7 +21,7 @@ OUT_DIR = "share"
 WIDE = os.path.join(OUT_DIR, "dambulla-wide.png")
 STATE = os.path.join(OUT_DIR, "dambulla-wide.json")
 PAGES = ["index.html"]          # pages whose og:image is refreshed
-STYLE_VERSION = "13"                # change to force a redraw after a design change
+STYLE_VERSION = "14"                # change to force a redraw after a design change
 ROWS = 8
 
 # DEC product id -> (Sinhala name, emoji), in popular order. Coconut is left out
@@ -339,6 +339,19 @@ def en_page_html(db, names, last):
     same = len(moves) - up - dn
     hi_m = max(moves, key=lambda x: x[0]) if moves else None
     lo_m = min(moves, key=lambda x: x[0]) if moves else None
+    # market mood bar (same idea as the home page): average change of all items
+    avg = sum(max(-100, min(100, x[0])) for x in moves) / len(moves) if moves else 0
+    mood_t = "🔴 A higher-price day" if avg >= 3 else "🟢 A lower-price day" if avg <= -3 else "🟡 A normal day"
+    nn = len(moves) or 1
+    w = lambda n: f"{n / nn * 100:.1f}%"
+    new_items = total - len(moves)
+    mood_html = (f'<div class="mood"><p class="mt">{mood_t}</p><div class="gbar">'
+                 f'<span style="width:{w(up)};background:#b23a2e"></span><span style="width:{w(same)};background:#cdbf9f"></span>'
+                 f'<span style="width:{w(dn)};background:#2c7a52"></span></div><div class="glab">'
+                 f'<span><i style="background:#b23a2e"></i>Up {up}</span><span><i style="background:#cdbf9f"></i>Unchanged {same}</span>'
+                 f'<span><i style="background:#2c7a52"></i>Down {dn}</span>'
+                 + (f'<span><i style="background:transparent;border:1px dashed #cdbf9f"></i>No previous price {new_items}</span>' if new_items > 0 else "")
+                 + '</div></div>')
     summ = [f"Compared with the previous report ({en_date(prev) if prev else '—'}): <b>{up}</b> items up, <b>{dn}</b> down, <b>{same}</b> unchanged."]
     if hi_m and hi_m[0] >= 0.5:
         summ.append(f"📈 Biggest rise: <b>{hi_m[1]['en']}</b> Rs. {money(hi_m[2])}–{money(hi_m[3])} ({hi_m[0]:+.0f}%)")
@@ -378,6 +391,9 @@ body{{margin:0;background:#f4efe4;color:#191d1a;font-family:'Hanken Grotesk','No
 .w{{max-width:860px;margin:0 auto;padding:16px}}h1{{color:#0e4f4a;font-size:30px;line-height:1.2;margin:8px 0 4px}}
 .sub{{color:#6f675a;margin:0 0 12px}}.pill{{display:inline-block;background:#fffdf7;border:1px solid #e3d9c4;border-radius:999px;padding:5px 12px;margin:0 6px 6px 0;font-size:14px}}
 .ans{{background:#fffdf7;border:1px solid #e3d9c4;border-left:4px solid #0e4f4a;border-radius:10px;padding:10px 12px;margin:8px 0 12px}}
+.mood{{background:#fffdf7;border:1px solid #cdbf9f;border-radius:14px;padding:12px 14px;margin:0 0 10px}}.mood .mt{{font-size:19px;font-weight:700;margin:0 0 8px}}
+.gbar{{display:flex;height:12px;border-radius:7px;overflow:hidden;background:#ece4d2}}.gbar span{{display:block;height:100%}}
+.glab{{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:#6f675a;margin-top:6px}}.glab i{{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}}
 .sum{{background:#fffdf7;border:1px solid #e3d9c4;border-radius:12px;padding:12px 14px;margin:0 0 6px;line-height:1.8}}
 .tw{{overflow-x:auto}}table{{width:100%;border-collapse:collapse;background:#fffdf7;border:1px solid #e3d9c4}}
 th,td{{padding:9px 10px;border-bottom:1px solid #eee5d3;text-align:left;font-size:15px}}th{{background:#efe8d8;font-size:13px}}
@@ -394,6 +410,7 @@ h2{{color:#0e4f4a;font-size:20px;margin:22px 0 8px}}h2 small{{color:#6f675a;font
 <p class="sub">Dambulla vegetable price list · Sri Lanka wholesale prices · {en_date(last)}</p>
 <span class="pill">Latest report: <b>{en_date(last)}</b></span><span class="pill">{total} items</span><span class="pill">Rs. per kg (coconut per nut)</span>
 <p class="ans">📌 On <b>{en_date(last)}</b>, wholesale prices at the Dambulla Dedicated Economic Centre included {top_txt} (Rs. per kg; coconut per nut).</p>
+{mood_html}
 <div class="sum">{"<br>".join(summ)}</div>
 {"".join(tables)}
 <a class="cta" href="../">📈 Charts, price history and profit calculator →</a><a class="cta g" href="../">සිංහලෙන් බලන්න →</a>
