@@ -54,6 +54,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .navlink.tea{background:linear-gradient(135deg,#2f9a5c,#1d7a45);color:#fff}
 .navlink.spices{background:rgba(180,80,40,.25);color:#ffb899}
 .navlink.krushi{background:rgba(212,173,85,.22);color:#fff;font-weight:800}
+/* menu language (si / ta / en follows the language buttons) */
+.navlink .lt,.navlink .le{display:none}html[lang="ta"] .navlink .ls,html[lang="en"] .navlink .ls{display:none}html[lang="ta"] .navlink .lt,html[lang="en"] .navlink .le{display:inline}
 .navlink.english{background:#fff;color:#0a3a36;font-weight:800}
 .navlink.weather{background:rgba(100,200,220,.18);color:#a8dfe8}
 .navlink.breakeven{background:rgba(169,128,42,.25);color:#ffd98a}
@@ -237,20 +239,20 @@ footer a{color:var(--petrol);font-weight:600}
 <nav class="topnav" role="navigation"><div class="topnav-inner">
   <a href="index.html" class="topnav-brand"><span class="lm"><img src="logo-mark.png" alt="TopGoviya"></span><span>Top<em>Goviya</em>.lk</span></a>
   <div class="navlinks">
-    <a href="index.html" class="navlink dec" aria-current="page">🥬 දඹුල්ල</a>
-    <a href="market/keppetipola.html" class="navlink kep">🥕 කැප්පෙටිපොළ</a>
-    <a href="mage-wagawa.html" class="navlink wagawa" title="මගේ වගාව — TopGoviya Farm Manager: වගා වියදම් හා ලාභය සටහන් කරන නොමිලේ app එක">📱 මගේ වගාව App<span class="nl-new">අලුත්</span></a>
-    <a href="wee-mila.html" class="navlink breakeven">🌾 වී මිල<span class="nl-new">අලුත්</span></a>
-    <a href="elawalu-mila-kalaya.html" class="navlink breakeven">📅 මිල වැඩි මාස<span class="nl-new">අලුත්</span></a>
-    <a href="retail.html" class="navlink retail">📊 සිල්ලර මිල</a>
-    <a href="krushi-pola.html" class="navlink krushi">🧺 කෘෂි පොළ</a>
-    <a href="tea.html" class="navlink tea">🍃 තේ / Tea</a>
-    <a href="breakeven.html" class="navlink breakeven">🧮 ලාභ අලාභ</a>
-    <a href="reports.html" class="navlink reports">📄 මිල වාර්තා</a>
-    <a href="spices.html" class="navlink spices">🌶️ කුළුබඩු මිල</a>
-    <a href="weather.html" class="navlink weather">🌤️ කාලගුණය</a>
-    <a href="wholesale.html" class="navlink wholesale">📦 තොග මිල</a>
-    <a href="en/dambulla-market-price-today.html" class="navlink english" lang="en" hreflang="en">🌐 English</a>
+    <a href="index.html" class="navlink dec" aria-current="page">🥬 <span class="ls">දඹුල්ල</span><span class="lt">தம்புள்ள</span><span class="le">Dambulla</span></a>
+    <a href="market/keppetipola.html" class="navlink kep">🥕 <span class="ls">කැප්පෙටිපොළ</span><span class="lt">கெப்பெட்டிபொல</span><span class="le">Keppetipola</span></a>
+    <a href="mage-wagawa.html" class="navlink wagawa" title="මගේ වගාව — TopGoviya Farm Manager: වගා වියදම් හා ලාභය සටහන් කරන නොමිලේ app එක">📱 <span class="ls">මගේ වගාව App</span><span class="lt">என் பயிர் App</span><span class="le">My Farm App</span><span class="nl-new"><span class="ls">අලුත්</span><span class="lt">புதிது</span><span class="le">New</span></span></a>
+    <a href="wee-mila.html" class="navlink breakeven">🌾 <span class="ls">වී මිල</span><span class="lt">நெல் விலை</span><span class="le">Paddy price</span><span class="nl-new"><span class="ls">අලුත්</span><span class="lt">புதிது</span><span class="le">New</span></span></a>
+    <a href="elawalu-mila-kalaya.html" class="navlink breakeven">📅 <span class="ls">මිල වැඩි මාස</span><span class="lt">விலை உயரும் மாதங்கள்</span><span class="le">High-price months</span><span class="nl-new"><span class="ls">අලුත්</span><span class="lt">புதிது</span><span class="le">New</span></span></a>
+    <a href="retail.html" class="navlink retail">📊 <span class="ls">සිල්ලර මිල</span><span class="lt">சில்லறை விலை</span><span class="le">Retail prices</span></a>
+    <a href="krushi-pola.html" class="navlink krushi">🧺 <span class="ls">කෘෂි පොළ</span><span class="lt">க்ருஷி பொல</span><span class="le">Krushi Pola</span></a>
+    <a href="tea.html" class="navlink tea">🍃 <span class="ls">තේ / Tea</span><span class="lt">தேயிலை / Tea</span><span class="le">Tea prices</span></a>
+    <a href="breakeven.html" class="navlink breakeven">🧮 <span class="ls">ලාභ අලාභ</span><span class="lt">இலாப நட்டம்</span><span class="le">Break-even</span></a>
+    <a href="reports.html" class="navlink reports">📄 <span class="ls">මිල වාර්තා</span><span class="lt">விலை அறிக்கைகள்</span><span class="le">Price reports</span></a>
+    <a href="spices.html" class="navlink spices">🌶️ <span class="ls">කුළුබඩු මිල</span><span class="lt">வாசனைப் பொருள் விலை</span><span class="le">Spice prices</span></a>
+    <a href="weather.html" class="navlink weather">🌤️ <span class="ls">කාලගුණය</span><span class="lt">காலநிலை</span><span class="le">Weather</span></a>
+    <a href="wholesale.html" class="navlink wholesale">📦 <span class="ls">තොග මිල</span><span class="lt">மொத்த விலை</span><span class="le">Wholesale</span></a>
+    <a href="en/dambulla-market-price-today.html" class="navlink english" lang="en" hreflang="en">🌐 <span class="ls">English</span><span class="lt">English</span><span class="le">English page</span></a>
   </div>
 </div></nav>
 <div class="wrap">
