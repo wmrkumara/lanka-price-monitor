@@ -21,7 +21,7 @@ OUT_DIR = "share"
 WIDE = os.path.join(OUT_DIR, "dambulla-wide.png")
 STATE = os.path.join(OUT_DIR, "dambulla-wide.json")
 PAGES = ["index.html"]          # pages whose og:image is refreshed
-STYLE_VERSION = "12"                # change to force a redraw after a design change
+STYLE_VERSION = "13"                # change to force a redraw after a design change
 ROWS = 8
 
 # DEC product id -> (Sinhala name, emoji), in popular order. Coconut is left out
@@ -149,7 +149,8 @@ def seo_today_html(db, last):
     en_date = f"{d.day} {d.strftime('%B')} {d.year}"
     en = ('<p lang="en"><b>Dambulla market price today — ' + en_date + "</b> (Dambulla Dedicated Economic Centre wholesale price list, "
           "min–max, today's vegetable prices in Sri Lanka): " + " · ".join(en_parts)
-          + " — full Dambulla market price list of " + str(len(day)) + " items above (tap EN at the top for English).</p>")
+          + " — full Dambulla market price list of " + str(len(day)) + " items above (tap EN at the top for English)."
+          + ' <a href="en/dambulla-market-price-today.html">Dambulla market price today in English →</a></p>')
     return ("<p><b>දඹුල්ල එලවලු මිල අද — " + si_date(last) + "</b> (දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය, තොග මිල, අවම–උපරිම): "
             + " · ".join(parts) + " — භාණ්ඩ " + str(len(day)) + " ක සම්පූර්ණ ලැයිස්තුව ඉහත.</p>" + en
             + '<p>🍍 <a href="dambulla-fruit-price.html">දඹුල්ල පලතුරු මිල අද</a> (Dambulla fruit price today)</p>')
@@ -164,6 +165,9 @@ def refresh_pages(last, db=None):
         d = date.fromisoformat(last)
         new_title = f"දඹුල්ල එලවලු මිල අද {d.year}.{d.month:02d}.{d.day:02d} | Dambulla Market Price Today | TopGoviya"
         s2 = re.sub(r"<title>[^<]*</title>", "<title>" + new_title + "</title>", s2, count=1)
+        if p == "index.html" and 'hreflang="en"' not in s2:
+            s2 = s2.replace('<link rel="canonical" href="https://topgoviya.lk/">',
+                            '<link rel="canonical" href="https://topgoviya.lk/">\n' + HREFLANG, 1)
         if db is not None:
             seo = seo_today_html(db, last)
             if seo:
@@ -278,6 +282,151 @@ td small{{color:#6f675a}}.n{{text-align:right;font-family:'JetBrains Mono',monos
 """
 
 
+# ---------------------------------------------------------------- English Dambulla page (Nov 2026 pilot)
+EN_FILE = "en/dambulla-market-price-today.html"
+EN_URL = "https://topgoviya.lk/" + EN_FILE
+HREFLANG = ('<link rel="alternate" hreflang="si" href="https://topgoviya.lk/">\n'
+            '<link rel="alternate" hreflang="en" href="' + EN_URL + '">\n'
+            '<link rel="alternate" hreflang="x-default" href="https://topgoviya.lk/">')
+EN_CATS = [("v", "🥬 Vegetables"), ("l", "🌿 Leafy vegetables"), ("r", "🥔 Potatoes & roots"),
+           ("g", "🌾 Grains & pulses"), ("f", "🍍 Fruits")]
+EN_UNIT = {"kg": "kg", "nut": "nut", "bundle": "bundle"}
+
+
+def en_date(iso):
+    d = date.fromisoformat(iso)
+    return f"{d.day} {d.strftime('%B')} {d.year}"
+
+
+def en_slug(en):
+    return re.sub(r"[^a-z0-9]+", "-", en.lower()).strip("-")
+
+
+def en_page_html(db, names, last):
+    order = sorted(db["days"])
+    i = order.index(last)
+    prev = order[i - 1] if i > 0 else None
+    day, pday = db["days"][last], (db["days"][prev] if prev else {})
+    known = set(os.listdir("dambulla")) if os.path.isdir("dambulla") else set()
+    tables, moves, total = [], [], 0
+    for c, label in EN_CATS:
+        rows = []
+        for k, m in sorted(names.items(), key=lambda kv: kv[1].get("pop_cat", 999)):
+            if m.get("cat") != c or not day.get(k):
+                continue
+            lo, hi = day[k]
+            mid = (lo + hi) / 2
+            ch, pc = "—", None
+            if pday.get(k) and sum(pday[k]):
+                pc = (mid - sum(pday[k]) / 2) / (sum(pday[k]) / 2) * 100
+                cls = "up" if pc >= 0.5 else "dn" if pc <= -0.5 else "fl"
+                ch = f'<span class="{cls}">{"▲" if cls == "up" else "▼" if cls == "dn" else "■"} {pc:+.0f}%</span>'
+                moves.append((pc, m, lo, hi))
+            nm = m["en"]
+            sl = en_slug(m["en"]) + ".html"
+            if sl in known:
+                nm = f'<a href="../dambulla/{sl}">{m["en"]}</a>'
+            u = EN_UNIT.get(m.get("unit"), "kg")
+            rows.append(f'<tr><td>{m.get("e", "")} {nm} <small>{m["si"]}</small></td><td class="n">{money(lo)} – {money(hi)}'
+                        f'<small> /{u}</small></td><td class="n">{money(mid)}</td><td class="n">{ch}</td></tr>')
+        if rows:
+            total += len(rows)
+            tables.append(f'<h2>{label} <small>({len(rows)})</small></h2><div class="tw"><table><thead><tr><th>Item</th>'
+                          f'<th class="n">Min – Max (Rs.)</th><th class="n">Average</th><th class="n">vs previous</th></tr></thead>'
+                          f'<tbody>{"".join(rows)}</tbody></table></div>')
+    up = sum(1 for x in moves if x[0] >= 0.5)
+    dn = sum(1 for x in moves if x[0] <= -0.5)
+    same = len(moves) - up - dn
+    hi_m = max(moves, key=lambda x: x[0]) if moves else None
+    lo_m = min(moves, key=lambda x: x[0]) if moves else None
+    summ = [f"Compared with the previous report ({en_date(prev) if prev else '—'}): <b>{up}</b> items up, <b>{dn}</b> down, <b>{same}</b> unchanged."]
+    if hi_m and hi_m[0] >= 0.5:
+        summ.append(f"📈 Biggest rise: <b>{hi_m[1]['en']}</b> Rs. {money(hi_m[2])}–{money(hi_m[3])} ({hi_m[0]:+.0f}%)")
+    if lo_m and lo_m[0] <= -0.5:
+        summ.append(f"📉 Biggest fall: <b>{lo_m[1]['en']}</b> Rs. {money(lo_m[2])}–{money(lo_m[3])} ({lo_m[0]:+.0f}%)")
+    top = sorted((v["pop"], k) for k, v in names.items() if day.get(k))[:6]
+    top_txt = ", ".join(f"{names[k]['en']} Rs. {money(day[k][0])}–{money(day[k][1])}" for _, k in top)
+    d = date.fromisoformat(last)
+    ds = f"{d.day} {d.strftime('%b')} {d.year}"
+    title = f"Dambulla Market Price Today – {ds} | Vegetable Price List Sri Lanka | TopGoviya"
+    desc = (f"Dambulla market price today ({en_date(last)}): wholesale prices of {total} vegetables, fruits, roots and grains at the "
+            f"Dambulla Dedicated Economic Centre, Sri Lanka — min–max, average and change since the previous report.")
+    ld = json.dumps({"@context": "https://schema.org", "@type": "WebPage", "name": f"Dambulla market price today — {en_date(last)}",
+                     "url": EN_URL, "inLanguage": "en", "dateModified": last,
+                     "isPartOf": {"@type": "WebSite", "name": "TopGoviya.lk", "url": "https://topgoviya.lk/"},
+                     "about": {"@type": "Place", "name": "Dambulla Dedicated Economic Centre",
+                               "address": {"@type": "PostalAddress", "addressLocality": "Dambulla", "addressCountry": "LK"}}},
+                    ensure_ascii=False)
+    return f"""<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content="{desc}">
+<link rel="canonical" href="{EN_URL}">
+{HREFLANG}
+<meta property="og:title" content="{title}"><meta property="og:description" content="{desc}">
+<meta property="og:url" content="{EN_URL}"><meta property="og:type" content="website"><meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://topgoviya.lk/share/dambulla-wide.png?v={last}">
+<link rel="icon" href="../icon-192x192.png"><meta name="theme-color" content="#0e4f4a">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZBN8Z32S4J"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-ZBN8Z32S4J');</script>
+<script type="application/ld+json">{ld}</script>
+<style>
+body{{margin:0;background:#f4efe4;color:#191d1a;font-family:'Hanken Grotesk','Noto Sans Sinhala',system-ui,sans-serif;line-height:1.55}}
+.top{{background:#0a3a36;border-bottom:2px solid #a9802a;padding:10px 14px;display:flex;flex-wrap:wrap;gap:6px}}
+.top a{{color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.1)}}
+.top a.b{{background:#a9802a}}
+.w{{max-width:860px;margin:0 auto;padding:16px}}h1{{color:#0e4f4a;font-size:30px;line-height:1.2;margin:8px 0 4px}}
+.sub{{color:#6f675a;margin:0 0 12px}}.pill{{display:inline-block;background:#fffdf7;border:1px solid #e3d9c4;border-radius:999px;padding:5px 12px;margin:0 6px 6px 0;font-size:14px}}
+.ans{{background:#fffdf7;border:1px solid #e3d9c4;border-left:4px solid #0e4f4a;border-radius:10px;padding:10px 12px;margin:8px 0 12px}}
+.sum{{background:#fffdf7;border:1px solid #e3d9c4;border-radius:12px;padding:12px 14px;margin:0 0 6px;line-height:1.8}}
+.tw{{overflow-x:auto}}table{{width:100%;border-collapse:collapse;background:#fffdf7;border:1px solid #e3d9c4}}
+th,td{{padding:9px 10px;border-bottom:1px solid #eee5d3;text-align:left;font-size:15px}}th{{background:#efe8d8;font-size:13px}}
+td small{{color:#6f675a;font-size:12px}}.n{{text-align:right;font-family:'JetBrains Mono',monospace;white-space:nowrap}}
+.up{{color:#b23a2e}}.dn{{color:#2c7a52}}.fl{{color:#8a8170}}
+h2{{color:#0e4f4a;font-size:20px;margin:22px 0 8px}}h2 small{{color:#6f675a;font-size:14px;font-weight:500}}
+.cta{{display:inline-block;margin:16px 8px 0 0;background:#0e4f4a;color:#fff;padding:11px 16px;border-radius:10px;text-decoration:none;font-weight:700}}
+.cta.g{{background:#a9802a}}.note{{font-size:13px;color:#6f675a}}a{{color:#0e4f4a}}
+@media(max-width:520px){{th:nth-child(3),td:nth-child(3){{display:none}}th,td{{padding:8px 6px;font-size:14px}}h1{{font-size:25px}}}}
+</style></head><body>
+<nav class="top"><a class="b" href="../">🥬 TopGoviya.lk</a><a href="../market/keppetipola.html">Keppetipola</a><a href="../spices.html">Spices</a><a href="../tea.html">Tea</a><a href="../">සිංහල</a></nav>
+<main class="w">
+<h1>Dambulla Market Price Today</h1>
+<p class="sub">Dambulla vegetable price list · Sri Lanka wholesale prices · {en_date(last)}</p>
+<span class="pill">Latest report: <b>{en_date(last)}</b></span><span class="pill">{total} items</span><span class="pill">Rs. per kg (coconut per nut)</span>
+<p class="ans">📌 On <b>{en_date(last)}</b>, wholesale prices at the Dambulla Dedicated Economic Centre included {top_txt} (Rs. per kg; coconut per nut).</p>
+<div class="sum">{"<br>".join(summ)}</div>
+{"".join(tables)}
+<a class="cta" href="../">📈 Charts, price history and profit calculator →</a><a class="cta g" href="../">සිංහලෙන් බලන්න →</a>
+<h2>About these prices</h2>
+<p><b>What is the Dambulla market price?</b> It is the daily wholesale price range (minimum – maximum) published by the Dambulla Dedicated Economic Centre, one of Sri Lanka's main wholesale vegetable markets. Average = (min + max) ÷ 2.</p>
+<p><b>Are these retail prices?</b> No. Shop (retail) prices are higher because of transport and other costs. For retail prices see <a href="../retail.html">CBSL retail prices</a>.</p>
+<p><b>How often is it updated?</b> Every day, including weekends. The date above is the date of the latest report.</p>
+<p>Other markets: <a href="../market/keppetipola.html">Keppetipola market price today</a> · <a href="../market/peliyagoda.html">Peliyagoda</a> · <a href="../dambulla-fruit-price.html">Dambulla fruit price today</a> · <a href="../wholesale.html">HARTI wholesale prices</a></p>
+<p class="note">Source: Dambulla Dedicated Economic Centre (Dambulla DEC) · <a href="../data-sources.html">How we get prices</a><br>
+Prices are indicative only. Decisions are your responsibility. · © TopGoviya.lk</p>
+</main><script defer src="/events.js?v=1"></script></body></html>
+"""
+
+
+def write_en_page(db, last):
+    try:
+        names = json.load(open("dambulla_items.json", encoding="utf-8"))["items"]
+    except Exception as ex:
+        print("English page skipped:", ex)
+        return
+    os.makedirs("en", exist_ok=True)
+    with open(EN_FILE, "w", encoding="utf-8") as f:
+        f.write(en_page_html(db, names, last))
+    print("Wrote", EN_FILE)
+    if os.path.exists("sitemap.xml"):
+        sm = open("sitemap.xml", encoding="utf-8").read()
+        if EN_URL in sm:
+            sm = re.sub(r"(<loc>" + re.escape(EN_URL) + r"</loc>\s*<lastmod>)[^<]*", r"\g<1>" + last, sm)
+        else:
+            sm = sm.replace("</urlset>", f"  <url><loc>{EN_URL}</loc><lastmod>{last}</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>\n</urlset>")
+        open("sitemap.xml", "w", encoding="utf-8").write(sm)
+
+
 def write_cat_pages(db, last):
     try:
         names = json.load(open("dambulla_items.json", encoding="utf-8"))["items"]
@@ -325,6 +474,7 @@ def main():
         b.close()
     refresh_pages(last, db)
     write_cat_pages(db, last)
+    write_en_page(db, last)
     with open(STATE, "w", encoding="utf-8") as f:
         json.dump(state_now(db), f)
     print(f"Made {WIDE} for {last} ({len(rows)} items).")
