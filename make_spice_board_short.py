@@ -137,6 +137,15 @@ body{width:1080px;height:1920px;background:#3a1f0d;font-family:'Noto Sans Sinhal
 .cta{margin-top:28px;background:#6b3815;border-radius:24px;padding:4px 24px;text-align:left}
 .ct{display:flex;align-items:center;gap:18px;padding:12px 0;font-size:34px;font-weight:700}
 .ct+.ct{border-top:2px solid #4f2a10}.ci{font-size:42px;width:56px;text-align:center}
+.th{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 SAFE_RIGHTpx 0 SAFE_LEFTpx;text-align:center}
+.th .emo{font-size:110px;line-height:1.05}
+.th .h{font-size:96px;font-weight:800;line-height:1.15;color:#fff}
+.th .pr{margin:16px 0 8px;background:#ffd43b;color:#3a1f0d;border-radius:30px;padding:10px 10px 18px}
+.th .pr .v{font-size:116px;font-weight:800;line-height:1.1;letter-spacing:-3px;white-space:nowrap}
+.th .pr .v b{font-size:80px;vertical-align:middle}
+.th .pr .l{font-size:38px;font-weight:800}
+.th .dt{font-size:42px;font-weight:800;color:#ffd43b;margin-bottom:8px}
+.th .o{display:flex;justify-content:space-between;background:#6b3815;border-radius:18px;padding:4px 22px;margin-top:8px;font-size:42px;font-weight:800}
 @keyframes slideIn{0%{transform:translateX(105%);opacity:0}70%{transform:translateX(-3%);opacity:1}100%{transform:none;opacity:1}}
 @keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.3)}100%{transform:scale(1)}}
 @keyframes drop{0%{transform:translateY(-60px);opacity:0}100%{transform:none;opacity:1}}
@@ -202,6 +211,17 @@ body{width:1080px;height:1920px;background:#3a1f0d;font-family:'Noto Sans Sinhal
                        '<div class="ct"><span class="ci">🔔</span><span>සෑම සතියකම මිල සඳහා Subscribe කරන්න</span></div>'
                        '</div></div>', small=True))
     durs.append(END_SEC)
+    # Thumbnail: last 1.2 s of the video (choose this frame in YouTube's thumbnail picker) + thumbnail.png
+    pep = items[0]
+    pick = (("කුරුඳු", "Alba"), ("කරාබු නැටි", ""), ("එනසාල්", "LG"))
+    others = "".join(f'<div class="o"><span>{i["e"]} {i["si"]}</span><span class="mono">{rs(i["v"])}</span></div>'
+                     for i in items if (i["si"], i["g"]) in pick)
+    arrow = "" if pep["chg"] is None or abs(pep["chg"]) < 0.5 else (' <b style="color:#c62828">▲</b>' if pep["chg"] > 0 else ' <b style="color:#1b7a43">▼</b>')
+    thumb = page(f'<div class="th"><div class="emo">🌶️</div><div class="h">ගම්මිරිස් මිල<br>අද</div>'
+                 f'<div class="pr"><div class="v mono">රු. {rs(pep["v"])}{arrow}</div><div class="l">කළු ගම්මිරිස් GR-1 • 1kg</div></div>'
+                 f'<div class="dt mono">මේ සතිය • {dotdate}</div>{others}</div>', header=False)
+    thumb = thumb.replace('class="topband">මේ සතියේ කුළුබඩු මිල<', 'class="topband">TopGoviya.lk<')
+    slides.append(thumb); durs.append(1.2)
 
     from playwright.sync_api import sync_playwright
     os.makedirs(OUT, exist_ok=True)
@@ -280,9 +300,16 @@ body{width:1080px;height:1920px;background:#3a1f0d;font-family:'Noto Sans Sinhal
     pin = ("📌 සෑම සතියකම කුළුබඩු මිල සඳහා Subscribe කරන්න 🔔\n"
            "👉 කුළුබඩු 11ක මිල, දිස්ත්‍රික්ක 14ක් අනුව: https://topgoviya.lk/spice-price-guide.html" + q +
            f"\n📊 මූලාශ්‍රය: අපනයන කෘෂිකර්ම දෙපාර්තමේන්තුව · {dotdate}")
+    with sync_playwright() as pw:
+        b = pw.chromium.launch(); pg = b.new_page(viewport={"width": 1080, "height": 1920})
+        pg.set_content(thumb); pg.evaluate("document.fonts.ready"); pg.wait_for_timeout(300)
+        pg.evaluate("document.getAnimations().forEach(a => {a.pause(); a.currentTime = 5000})")
+        pg.screenshot(path=f"{folder}/thumbnail.png"); b.close()
     open(f"{folder}/pin-comment.txt", "w", encoding="utf-8").write(pin + "\n")
     with open(f"{folder}/youtube.txt", "a", encoding="utf-8") as f:
         f.write("\nPINNED COMMENT (post it, then ⋮ → Pin):\n" + pin + "\n")
+        f.write("\nTHUMBNAIL:\nthumbnail.png is also the LAST frame of the video. Phone app: thumbnail picker → slide to the very end. "
+                "Computer (YouTube Studio): Thumbnail → Upload file → thumbnail.png (only if your channel has this option).\n")
         f.write("\nMUSIC USED:\n" + (os.path.basename(track) if track else "none") + "\n")
     for fd in dirs: shutil.rmtree(fd, ignore_errors=True)
     if os.path.exists(silent): os.remove(silent)
