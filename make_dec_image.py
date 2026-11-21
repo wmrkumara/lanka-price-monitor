@@ -21,7 +21,7 @@ OUT_DIR = "share"
 WIDE = os.path.join(OUT_DIR, "dambulla-wide.png")
 STATE = os.path.join(OUT_DIR, "dambulla-wide.json")
 PAGES = ["index.html"]          # pages whose og:image is refreshed
-STYLE_VERSION = "11"                # change to force a redraw after a design change
+STYLE_VERSION = "12"                # change to force a redraw after a design change
 ROWS = 8
 
 # DEC product id -> (Sinhala name, emoji), in popular order. Coconut is left out
@@ -139,8 +139,19 @@ def seo_today_html(db, last):
     for _, k in rows[:30]:
         lo, hi = day[k]
         parts.append(f"{names[k]['si']} රු. {money(lo)}–{money(hi)} / {unit.get(names[k]['unit'], 'කි.ග්‍රෑ.')}")
+    # English line (Nov 2026): for English searches like "dambulla market price today" / "dambulla market price list today"
+    unit_en = {"kg": "kg", "nut": "nut", "bundle": "bundle"}
+    en_parts = []
+    for _, k in rows[:20]:
+        lo, hi = day[k]
+        en_parts.append(f"{names[k]['en']} Rs. {money(lo)}–{money(hi)} / {unit_en.get(names[k]['unit'], 'kg')}")
+    d = date.fromisoformat(last)
+    en_date = f"{d.day} {d.strftime('%B')} {d.year}"
+    en = ('<p lang="en"><b>Dambulla market price today — ' + en_date + "</b> (Dambulla Dedicated Economic Centre wholesale price list, "
+          "min–max, today's vegetable prices in Sri Lanka): " + " · ".join(en_parts)
+          + " — full Dambulla market price list of " + str(len(day)) + " items above (tap EN at the top for English).</p>")
     return ("<p><b>දඹුල්ල එලවලු මිල අද — " + si_date(last) + "</b> (දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය, තොග මිල, අවම–උපරිම): "
-            + " · ".join(parts) + " — භාණ්ඩ " + str(len(day)) + " ක සම්පූර්ණ ලැයිස්තුව ඉහත.</p>"
+            + " · ".join(parts) + " — භාණ්ඩ " + str(len(day)) + " ක සම්පූර්ණ ලැයිස්තුව ඉහත.</p>" + en
             + '<p>🍍 <a href="dambulla-fruit-price.html">දඹුල්ල පලතුරු මිල අද</a> (Dambulla fruit price today)</p>')
 
 
