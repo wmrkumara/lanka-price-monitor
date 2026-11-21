@@ -567,6 +567,55 @@ let _rt; window.addEventListener('resize',()=>{clearTimeout(_rt);_rt=setTimeout(
 load();
 </script>
 
+<!-- Follow box: shows once the farmer has used the tool; never blocks the page -->
+<style>
+#fbox{position:fixed;left:10px;right:10px;bottom:10px;max-width:420px;margin:0 auto;z-index:60;background:#fffdf7;border:1px solid #e3d9c4;border-top:4px solid #0e4f4a;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,.18);padding:14px 14px 12px;font-size:14px;transform:translateY(130%);transition:transform .35s ease}
+#fbox.show{transform:none}
+#fbox b{display:block;font-size:15.5px;margin:0 26px 4px 0;line-height:1.4}
+#fbox p{margin:0 0 10px;color:#5d574c;line-height:1.5}
+#fbox .row{display:flex;gap:8px;flex-wrap:wrap}
+#fbox a{flex:1 1 120px;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 8px;border-radius:10px;color:#fff;font-weight:700;text-decoration:none;font-size:14px}
+#fbox .yt{background:#d62e1f}#fbox .fb{background:#1b6fd8}
+#fbox .later{display:block;margin:10px auto 0;background:none;border:0;color:#5d574c;font-size:14.5px;font-weight:600;padding:6px 18px;cursor:pointer;text-decoration:underline;font-family:inherit}
+#fbox .x{position:absolute;top:6px;right:8px;background:none;border:0;font-size:22px;line-height:1;color:#7a7264;cursor:pointer;padding:4px 8px}
+</style>
+<div id="fbox" role="dialog" aria-live="polite" hidden>
+  <button class="x" type="button" aria-label="close">×</button>
+  <b id="fb-t"></b><p id="fb-s"></p>
+  <div class="row">
+    <a class="yt" id="fb-yt" href="https://www.youtube.com/@TopGoviyaLK?sub_confirmation=1" target="_blank" rel="noopener">▶ <span></span></a>
+    <a class="fb" id="fb-fb" href="https://www.facebook.com/TopGoviyaLK" target="_blank" rel="noopener">f <span></span></a>
+  </div>
+  <button class="later" type="button"></button>
+</div>
+<script>
+(function(){
+  var K='tg_follow_until', L={
+    si:['📺 දිනපතා එළවළු මිල — නොමිලේ','සෑම උදෑසනකම දඹුල්ල මිල YouTube Short එකක් සහ Facebook පෝස්ට් එකක්. මිල අහිමි නොවෙන්න.','Subscribe','Follow','පසුව'],
+    ta:['📺 தினசரி காய்கறி விலை — இலவசம்','ஒவ்வொரு காலையிலும் தம்புள்ள விலை YouTube Short மற்றும் Facebook பதிவு.','Subscribe','Follow','பின்னர்'],
+    en:['📺 Daily vegetable prices — free','A Dambulla price Short on YouTube and a Facebook post every morning.','Subscribe','Follow','Later']};
+  function get(){try{return +localStorage.getItem(K)||0;}catch(e){return 0;}}
+  function snooze(d){try{localStorage.setItem(K,Date.now()+d*864e5);}catch(e){}}
+  if(get()>Date.now()) return;
+  var box=document.getElementById('fbox'), shown=false;
+  function fill(){var t=L[document.documentElement.lang]||L.si;
+    document.getElementById('fb-t').textContent=t[0];document.getElementById('fb-s').textContent=t[1];
+    document.querySelector('#fb-yt span').textContent=t[2];document.querySelector('#fb-fb span').textContent=t[3];
+    box.querySelector('.later').textContent=t[4];}
+  function show(){if(shown)return;shown=true;fill();box.hidden=false;requestAnimationFrame(function(){box.classList.add('show');});
+    if(window.gtag)gtag('event','follow_box_shown');}
+  function hide(d){box.classList.remove('show');snooze(d);setTimeout(function(){box.hidden=true;},400);}
+  box.querySelector('.x').onclick=function(){hide(7);};
+  box.querySelector('.later').onclick=function(){hide(7);};
+  ['yt','fb'].forEach(function(p){document.getElementById('fb-'+p).addEventListener('click',function(){
+    if(window.gtag)gtag('event','follow_click',{platform:p==='yt'?'youtube':'facebook'}); hide(60);});});
+  document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('.lang button')&&shown)fill();});
+  var target=document.getElementById('mkts');
+  if(target&&'IntersectionObserver' in window){new IntersectionObserver(function(en,o){if(en[0].isIntersecting){o.disconnect();setTimeout(show,1500);}}).observe(target);}
+  setTimeout(show,45000);
+})();
+</script>
+
 <script src="/events.js?v=1"></script>
 </body>
 </html>
