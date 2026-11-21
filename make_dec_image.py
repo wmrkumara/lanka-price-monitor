@@ -21,7 +21,7 @@ OUT_DIR = "share"
 WIDE = os.path.join(OUT_DIR, "dambulla-wide.png")
 STATE = os.path.join(OUT_DIR, "dambulla-wide.json")
 PAGES = ["index.html"]          # pages whose og:image is refreshed
-STYLE_VERSION = "14"                # change to force a redraw after a design change
+STYLE_VERSION = "15"                # change to force a redraw after a design change
 ROWS = 8
 
 # DEC product id -> (Sinhala name, emoji), in popular order. Coconut is left out
@@ -308,7 +308,7 @@ def en_page_html(db, names, last):
     prev = order[i - 1] if i > 0 else None
     day, pday = db["days"][last], (db["days"][prev] if prev else {})
     known = set(os.listdir("dambulla")) if os.path.isdir("dambulla") else set()
-    tables, moves, total = [], [], 0
+    tables, moves, total, say = [], [], 0, []
     for c, label in EN_CATS:
         rows = []
         for k, m in sorted(names.items(), key=lambda kv: kv[1].get("pop_cat", 999)):
@@ -327,11 +327,12 @@ def en_page_html(db, names, last):
             if sl in known:
                 nm = f'<a href="../dambulla/{sl}">{m["en"]}</a>'
             u = EN_UNIT.get(m.get("unit"), "kg")
-            rows.append(f'<tr><td>{m.get("e", "")} {nm} <small>{m["si"]}</small></td><td class="n">{money(lo)} – {money(hi)}'
+            say.append([c, m["en"], lo, hi, u])
+            rows.append(f'<tr data-s="{len(say) - 1}"><td>{m.get("e", "")} {nm} <small>{m["si"]}</small></td><td class="n">{money(lo)} – {money(hi)}'
                         f'<small> /{u}</small></td><td class="n">{money(mid)}</td><td class="n">{ch}</td></tr>')
         if rows:
             total += len(rows)
-            tables.append(f'<h2>{label} <small>({len(rows)})</small></h2><div class="tw"><table><thead><tr><th>Item</th>'
+            tables.append(f'<h2>{label} <small>({len(rows)})</small> <button class="sayc" type="button" data-c="{c}" hidden>🔊</button></h2><div class="tw"><table><thead><tr><th>Item</th>'
                           f'<th class="n">Min – Max (Rs.)</th><th class="n">Average</th><th class="n">vs previous</th></tr></thead>'
                           f'<tbody>{"".join(rows)}</tbody></table></div>')
     up = sum(1 for x in moves if x[0] >= 0.5)
@@ -391,6 +392,13 @@ body{{margin:0;background:#f4efe4;color:#191d1a;font-family:'Hanken Grotesk','No
 .w{{max-width:860px;margin:0 auto;padding:16px}}h1{{color:#0e4f4a;font-size:30px;line-height:1.2;margin:8px 0 4px}}
 .sub{{color:#6f675a;margin:0 0 12px}}.pill{{display:inline-block;background:#fffdf7;border:1px solid #e3d9c4;border-radius:999px;padding:5px 12px;margin:0 6px 6px 0;font-size:14px}}
 .ans{{background:#fffdf7;border:1px solid #e3d9c4;border-left:4px solid #0e4f4a;border-radius:10px;padding:10px 12px;margin:8px 0 12px}}
+.tools{{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}}.tb{{font:inherit;font-size:14.5px;font-weight:700;padding:9px 14px;border-radius:10px;border:1px solid #0e4f4a;background:#fffdf7;color:#0e4f4a;cursor:pointer}}
+#sayAll{{background:#0e4f4a;color:#fff}}.tip{{font-size:13.5px;background:#fbf3dc;border-radius:9px;padding:8px 12px;margin:0 0 10px}}
+.sayc{{font-size:15px;border:1px solid #cdbf9f;background:#fffdf7;border-radius:8px;padding:2px 8px;cursor:pointer;vertical-align:2px}}
+tr.on td{{background:#fbf3dc}}
+@media print{{*{{-webkit-print-color-adjust:exact;print-color-adjust:exact}}body{{background:#fff}}body>*:not(main){{display:none!important}}.tools,.tip,.cta,.sayc{{display:none!important}}.w{{max-width:none;padding:0}}
+h1{{font-size:22px}}th,td{{padding:4px 6px;font-size:11.5px}}th:nth-child(3),td:nth-child(3){{display:table-cell!important}}tr{{break-inside:avoid}}h2{{font-size:15px;margin:12px 0 4px;break-after:avoid}}a{{color:#191d1a;text-decoration:none}}
+@page{{margin:10mm}}}}
 .mood{{background:#fffdf7;border:1px solid #cdbf9f;border-radius:14px;padding:12px 14px;margin:0 0 10px}}.mood .mt{{font-size:19px;font-weight:700;margin:0 0 8px}}
 .gbar{{display:flex;height:12px;border-radius:7px;overflow:hidden;background:#ece4d2}}.gbar span{{display:block;height:100%}}
 .glab{{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:#6f675a;margin-top:6px}}.glab i{{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}}
@@ -410,6 +418,9 @@ h2{{color:#0e4f4a;font-size:20px;margin:22px 0 8px}}h2 small{{color:#6f675a;font
 <p class="sub">Dambulla vegetable price list · Sri Lanka wholesale prices · {en_date(last)}</p>
 <span class="pill">Latest report: <b>{en_date(last)}</b></span><span class="pill">{total} items</span><span class="pill">Rs. per kg (coconut per nut)</span>
 <p class="ans">📌 On <b>{en_date(last)}</b>, wholesale prices at the Dambulla Dedicated Economic Centre included {top_txt} (Rs. per kg; coconut per nut).</p>
+<div class="tools"><button class="tb" id="sayAll" type="button" hidden>🔊 Listen to today's prices</button><button class="tb" id="sayStop" type="button" hidden>⏹ Stop</button>
+<button class="tb" type="button" onclick="window.print()">🖨️ Print</button><button class="tb" type="button" id="pdfBtn">⬇️ Download PDF</button></div>
+<p class="tip" id="pdfTip" hidden>In the print window, choose <b>Save as PDF</b> (on a phone: Printer → Save as PDF), then press Save / Download.</p>
 {mood_html}
 <div class="sum">{"<br>".join(summ)}</div>
 {"".join(tables)}
@@ -421,7 +432,30 @@ h2{{color:#0e4f4a;font-size:20px;margin:22px 0 8px}}h2 small{{color:#6f675a;font
 <p>Other markets: <a href="../market/keppetipola.html">Keppetipola market price today</a> · <a href="../market/peliyagoda.html">Peliyagoda</a> · <a href="../dambulla-fruit-price.html">Dambulla fruit price today</a> · <a href="../wholesale.html">HARTI wholesale prices</a></p>
 <p class="note">Source: Dambulla Dedicated Economic Centre (Dambulla DEC) · <a href="../data-sources.html">How we get prices</a><br>
 Prices are indicative only. Decisions are your responsibility. · © TopGoviya.lk</p>
-</main><script defer src="/events.js?v=1"></script></body></html>
+</main>
+<script>
+(function(){{
+  var SAY={json.dumps(say, ensure_ascii=False)},HEAD={json.dumps("Dambulla market wholesale prices for " + en_date(last) + ". " + mood_t.split(" ",1)[1] + ".")};
+  var U={{kg:"per kilo",nut:"per nut",bundle:"per bundle"}};
+  document.getElementById("pdfBtn").onclick=function(){{document.getElementById("pdfTip").hidden=false;setTimeout(function(){{window.print();}},400);}};
+  if(!("speechSynthesis" in window))return;
+  var ss=window.speechSynthesis,all=document.getElementById("sayAll"),stop=document.getElementById("sayStop");
+  function voice(){{var v=ss.getVoices();return v.find(function(x){{return /^en[-_](GB|IN|LK)/i.test(x.lang);}})||v.find(function(x){{return /^en/i.test(x.lang);}});}}
+  function mark(i){{document.querySelectorAll("tr.on").forEach(function(r){{r.classList.remove("on");}});
+    if(i==null)return;var r=document.querySelector('tr[data-s="'+i+'"]');if(r){{r.classList.add("on");r.scrollIntoView({{block:"center",behavior:"smooth"}});}}}}
+  function speak(txt,i,last){{var u=new SpeechSynthesisUtterance(txt);var v=voice();if(v)u.voice=v;u.lang=v?v.lang:"en-GB";u.rate=0.95;
+    u.onstart=function(){{mark(i);}};if(last)u.onend=function(){{mark(null);stop.hidden=true;}};ss.speak(u);}}
+  function play(list){{ss.cancel();stop.hidden=false;speak(HEAD,null,false);
+    list.forEach(function(k,n){{var x=SAY[k];speak(x[1]+": "+x[2]+" to "+x[3]+" rupees "+U[x[4]]+".",k,n===list.length-1);}});
+    try{{gtag("event","listen_prices",{{page:"en_dambulla",items:list.length}});}}catch(e){{}}}}
+  all.hidden=false;
+  all.onclick=function(){{play(SAY.map(function(_,k){{return k;}}).filter(function(k){{return SAY[k][0]==="v";}}).slice(0,15));}};
+  document.querySelectorAll(".sayc").forEach(function(b){{b.hidden=false;b.title="Listen";b.onclick=function(){{
+    play(SAY.map(function(_,k){{return k;}}).filter(function(k){{return SAY[k][0]===b.dataset.c;}}));}};}});
+  stop.onclick=function(){{ss.cancel();mark(null);stop.hidden=true;}};
+}})();
+</script>
+<script defer src="/events.js?v=1"></script></body></html>
 """
 
 
