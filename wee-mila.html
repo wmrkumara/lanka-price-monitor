@@ -198,7 +198,10 @@ footer{margin:46px 0 30px;padding-top:22px;border-top:1px solid var(--line-stron
 .gapbig{font-size:18px;font-weight:700;color:var(--ink);line-height:1.4}
 .gapbig .n{font-family:'JetBrains Mono',monospace;color:var(--up)}
 .chartbox{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px 10px 8px;box-shadow:var(--shadow);overflow-x:auto}
-.chartbox svg{display:block;width:100%;height:auto}
+.chartbox{position:relative}
+.chartbox svg{display:block;width:100%;height:auto;touch-action:pan-y;cursor:crosshair}
+.ctip{position:absolute;top:10px;background:#fffdf7;border:1px solid var(--line-strong);border-radius:10px;padding:8px 11px;font-size:13px;line-height:1.5;box-shadow:var(--shadow);pointer-events:none;white-space:nowrap;z-index:2}
+.ctip b{font-size:13.5px}.ctip .m{font-family:'JetBrains Mono',monospace;font-weight:700}.ctip small{color:var(--muted)}
 .lg{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-soft);padding:6px 6px 0}
 .lg i{display:inline-block;width:18px;height:3px;vertical-align:middle;margin-right:6px;border-radius:2px}
 .bars .b{margin:10px 0}
@@ -276,7 +279,7 @@ details.faq p{margin:8px 0 2px;color:var(--ink-soft);font-size:14.5px}
 
   <!-- 3. Trend chart -->
   <div class="section-h"><h2 data-k="hChart">මාසික වී මිල ප්‍රවණතාව</h2><div class="rule"></div></div>
-  <div class="chartbox"><div id="chart"></div>
+  <div class="chartbox"><div id="chart"></div><div class="ctip" id="ctip" hidden></div>
     <div class="lg"><span><i style="background:#0e4f4a"></i><span data-k="lgSamba">සම්බා (ගොවිපළ)</span></span><span><i style="background:#a9802a"></i><span data-k="lgNadu">නාඩු (ගොවිපළ)</span></span><span><i style="background:repeating-linear-gradient(90deg,#b23a2e 0 5px,transparent 5px 8px)"></i><span data-k="lgGov">රජයේ සහතික මිල (සම්බා 130 / නාඩු 120)</span></span></div>
     <div class="lg" style="color:var(--muted);font-size:12px" data-k="chartHint">සෑම ලක්ෂ්‍යයක්ම = එම මාසයේ මහ බැංකු වාර්තාවේ නවතම මිල (2026 මැයි පෙර වාර්තාවල මිල සාමාන්‍යයෙන් පෙර මාසයේ)</div>
   </div>
@@ -356,7 +359,7 @@ const T={
   govNote:'මේ මිල වී අලෙවි මණ්ඩලය (PMB) මිලදී ගන්නා <b>අවම සහතික මිලයි</b>. සාමාන්‍යයෙන් <b>තෙතමනය 14% සහ බොල් වී 9%ට අඩු</b> ප්‍රමිතියේ වී සඳහායි; ප්‍රමිතියට නොගැලපෙන (තෙත) වී සඳහා අඩු මිලක් ලැබිය හැකිය. ඔබේ ප්‍රදේශයේ මිලදී ගැනීම ගැන ප්‍රාදේශීය ලේකම් කාර්යාලයෙන් හෝ ගොවිජන සේවා මධ්‍යස්ථානයෙන් විමසන්න.',
   gapTxt:(s,g,d)=>`<div class="gapbig">වෙළඳපොළේ සම්බා වී මිල (රු. ${s}) රජයේ සහතික මිලට (රු. ${g}) වඩා <span class="n">රු. ${d}</span> අඩුයි.</div><div style="margin-top:6px">සැලකිය යුතුයි: ගොවිපළ මිලට අස්වැන්න කපා කෙලින්ම විකුණන <b>තෙත වී</b> ද ඇතුළත්. රජයේ මිල වියළි වී සඳහායි. එබැවින් වෙනසේ කොටසක් තෙතමනය නිසාය.</div>`,
   gapUp:(s,g,d)=>`<div class="gapbig">වෙළඳපොළේ සම්බා වී මිල (රු. ${s}) රජයේ සහතික මිලට (රු. ${g}) වඩා රු. ${d} වැඩියි.</div>`,
-  hChart:'මාසික වී මිල ප්‍රවණතාව',chartHint:'සෑම ලක්ෂ්‍යයක්ම = එම මාසයේ මහ බැංකු වාර්තාවේ නවතම මිල (2026 මැයි පෙර වාර්තාවල මිල සාමාන්‍යයෙන් පෙර මාසයේ)',
+  hChart:'මාසික වී මිල ප්‍රවණතාව',tipSrc:'මහ බැංකු වාර්තාව',tipHint:'👆 මිල බලන්න ප්‍රස්තාරය මත ස්පර්ශ කරන්න',chartHint:'සෑම ලක්ෂ්‍යයක්ම = එම මාසයේ මහ බැංකු වාර්තාවේ නවතම මිල (2026 මැයි පෙර වාර්තාවල මිල සාමාන්‍යයෙන් පෙර මාසයේ)',
   lgSamba:'සම්බා (ගොවිපළ)',lgNadu:'නාඩු (ගොවිපළ)',lgGov:'රජයේ සහතික මිල (සම්බා 130 / නාඩු 120)',
   hRice:'ගොවියාට ලැබෙන මිල සහ කඩේ සහල් මිල',paddyFarm:'වී — ගොවියාට',riceShop:'සහල් — කඩේ මිල',
   riceNote:'වී කිලෝවකින් සහල් කිලෝවක් නොලැබේ; ඇඹරීම, ප්‍රවාහනය සහ ගබඩා වියදම් ද ඇත. එබැවින් මේ වෙනස සම්පූර්ණයෙන්ම ලාභයක් නොවේ — නමුත් ගොවියාට ලැබෙන කොටස කොපමණද යන්න මෙයින් පෙනේ.',
@@ -382,7 +385,7 @@ const T={
   govNote:'இது நெல் சந்தைப்படுத்தல் சபை (PMB) கொள்வனவு செய்யும் <b>குறைந்தபட்ச உத்தரவாத விலை</b>. பொதுவாக <b>ஈரப்பதம் 14% மற்றும் பதர் 9%க்கு குறைவான</b> தரமான நெல்லுக்கு; தரத்திற்கு பொருந்தாத (ஈர) நெல்லுக்கு குறைந்த விலை கிடைக்கலாம். உங்கள் பகுதியின் கொள்வனவு பற்றி பிரதேச செயலகம் அல்லது கமநல சேவை நிலையத்தில் கேளுங்கள்.',
   gapTxt:(s,g,d)=>`<div class="gapbig">சந்தை சம்பா நெல் விலை (ரூ. ${s}) அரசு உத்தரவாத விலையை (ரூ. ${g}) விட <span class="n">ரூ. ${d}</span> குறைவு.</div><div style="margin-top:6px">கவனிக்க: பண்ணை விலையில் நேரடியாக விற்கப்படும் <b>ஈர நெல்</b>லும் அடங்கும். அரசு விலை உலர்ந்த நெல்லுக்கானது; எனவே வேறுபாட்டின் ஒரு பகுதி ஈரப்பதத்தால் ஏற்படுகிறது.</div>`,
   gapUp:(s,g,d)=>`<div class="gapbig">சந்தை சம்பா நெல் விலை (ரூ. ${s}) அரசு உத்தரவாத விலையை (ரூ. ${g}) விட ரூ. ${d} அதிகம்.</div>`,
-  hChart:'மாதாந்திர நெல் விலை போக்கு',chartHint:'ஒவ்வொரு புள்ளியும் = அந்த மாத மத்திய வங்கி அறிக்கையின் சமீபத்திய விலை (2026 மேக்கு முந்தைய அறிக்கைகளில் பொதுவாக முந்தைய மாத விலை)',
+  hChart:'மாதாந்திர நெல் விலை போக்கு',tipSrc:'மத்திய வங்கி அறிக்கை',tipHint:'👆 விலையைப் பார்க்க வரைபடத்தைத் தொடவும்',chartHint:'ஒவ்வொரு புள்ளியும் = அந்த மாத மத்திய வங்கி அறிக்கையின் சமீபத்திய விலை (2026 மேக்கு முந்தைய அறிக்கைகளில் பொதுவாக முந்தைய மாத விலை)',
   lgSamba:'சம்பா (பண்ணை)',lgNadu:'நாடு (பண்ணை)',lgGov:'அரசு உத்தரவாத விலை (சம்பா 130 / நாடு 120)',
   hRice:'விவசாயிக்கு கிடைக்கும் விலை மற்றும் கடை அரிசி விலை',paddyFarm:'நெல் — விவசாயிக்கு',riceShop:'அரிசி — கடை விலை',
   riceNote:'ஒரு கிலோ நெல்லிலிருந்து ஒரு கிலோ அரிசி கிடைக்காது; அரைத்தல், போக்குவரத்து மற்றும் சேமிப்பு செலவுகளும் உள்ளன. எனவே இந்த வேறுபாடு முழுவதும் லாபம் அல்ல — ஆனால் விவசாயியின் பங்கு எவ்வளவு என்பதைக் காட்டுகிறது.',
@@ -408,7 +411,7 @@ const T={
   govNote:'This is the <b>minimum guaranteed price</b> at which the Paddy Marketing Board (PMB) buys paddy, for paddy meeting the standard of <b>14% moisture and less than 9% chaff</b>; paddy below standard (wet) may get a lower price. Ask your Divisional Secretariat or Agrarian Service Centre about purchasing in your area.',
   gapTxt:(s,g,d)=>`<div class="gapbig">The market Samba paddy price (Rs. ${s}) is <span class="n">Rs. ${d}</span> below the government guaranteed price (Rs. ${g}).</div><div style="margin-top:6px">Note: the farm gate price includes <b>wet paddy</b> sold straight after harvest, while the government price is for dried paddy, so part of the gap is due to moisture.</div>`,
   gapUp:(s,g,d)=>`<div class="gapbig">The market Samba paddy price (Rs. ${s}) is Rs. ${d} above the government guaranteed price (Rs. ${g}).</div>`,
-  hChart:'Monthly paddy price trend',chartHint:'Each point = latest price in that month\'s CBSL bulletin (bulletins before May 2026 usually show the previous month)',
+  hChart:'Monthly paddy price trend',tipSrc:'CBSL bulletin',tipHint:'👆 Tap or hover on the chart to see prices',chartHint:'Each point = latest price in that month\'s CBSL bulletin (bulletins before May 2026 usually show the previous month)',
   lgSamba:'Samba (farm gate)',lgNadu:'Nadu (farm gate)',lgGov:'Guaranteed price (Samba 130 / Nadu 120)',
   hRice:'What the farmer gets vs shop rice price',paddyFarm:'Paddy — to farmer',riceShop:'Rice — shop price',
   riceNote:'One kg of paddy does not give one kg of rice, and there are milling, transport and storage costs, so this gap is not all profit — but it shows how small the farmer\'s share is.',
@@ -460,7 +463,18 @@ function renderChart(){
     let s=`<path d="${d}" fill="none" stroke="${c}" stroke-width="3" stroke-linejoin="round"/>`;
     PTS.forEach((p,i)=>s+=`<circle cx="${x(i)}" cy="${y(p[k])}" r="3.5" fill="${c}"><title>${monthName(p.m,1)}: Rs. ${fmt(p[k])}</title></circle>`);
     const L=PTS[n-1]; s+=`<text x="${x(n-1)-6}" y="${y(L[k])+(k==='samba'?-12:18)}" font-size="12" font-weight="700" text-anchor="end" fill="${c}">${fmt(L[k])}</text>`; return s; };
-  document.getElementById('chart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${T[lang].hChart}">${g}${line('samba','#0e4f4a')}${line('nadu','#a9802a')}</svg>`;
+  document.getElementById('chart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${T[lang].hChart}">${g}<line id="cguide" x1="0" x2="0" y1="${pt}" y2="${H-pb}" stroke="#191d1a" stroke-width="1" stroke-dasharray="3 3" opacity="0"/>${line('samba','#0e4f4a')}${line('nadu','#a9802a')}<circle id="cdotS" r="7" fill="none" stroke="#0e4f4a" stroke-width="2.5" opacity="0"/><circle id="cdotN" r="7" fill="none" stroke="#a9802a" stroke-width="2.5" opacity="0"/></svg><div class="lg" style="justify-content:center;color:var(--muted);font-size:12px;padding-top:2px">${T[lang].tipHint}</div>`;
+  const svg=box.querySelector('svg'), tip=document.getElementById('ctip'), gl=svg.querySelector('#cguide'), dS=svg.querySelector('#cdotS'), dN=svg.querySelector('#cdotN');
+  const show=ev=>{ const r=svg.getBoundingClientRect(), sx=(ev.clientX-r.left)*W/r.width;
+    const i=Math.max(0,Math.min(n-1,Math.round((sx-pl)/((W-pl-pr)/Math.max(1,n-1))))), p=PTS[i], t=T[lang];
+    gl.setAttribute('x1',x(i)); gl.setAttribute('x2',x(i)); gl.setAttribute('opacity','.5');
+    dS.setAttribute('cx',x(i)); dS.setAttribute('cy',y(p.samba)); dS.setAttribute('opacity','1');
+    dN.setAttribute('cx',x(i)); dN.setAttribute('cy',y(p.nadu)); dN.setAttribute('opacity','1');
+    tip.innerHTML=`<b>${monthName(p.m,1)}</b> <small>· ${t.tipSrc}</small><br><span style="color:#0e4f4a">● ${t.samba}: <span class="m">Rs. ${fmt(p.samba)}</span></span><br><span style="color:#a9802a">● ${t.nadu}: <span class="m">Rs. ${fmt(p.nadu)}</span></span>`;
+    tip.hidden=false; const bx=box.parentElement.getBoundingClientRect(), px=r.left-bx.left+x(i)*r.width/W, tw=tip.offsetWidth;
+    let left=px+12; if(left+tw>bx.width-6) left=px-tw-12; tip.style.left=Math.max(6,left)+'px'; };
+  const hide=()=>{ tip.hidden=true; [gl,dS,dN].forEach(e=>e.setAttribute('opacity','0')); };
+  svg.addEventListener('pointermove',show); svg.addEventListener('pointerdown',show); svg.addEventListener('pointerleave',hide);
 }
 function renderRice(){
   const t=T[lang], r=LAST.rice&&LAST.rice.retail_rs_per_kg, L=PTS[PTS.length-1]; if(!r){document.getElementById('rice').innerHTML='—';return;}
