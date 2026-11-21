@@ -54,6 +54,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .navlink.tea{background:linear-gradient(135deg,#2f9a5c,#1d7a45);color:#fff}
 .navlink.spices{background:rgba(180,80,40,.25);color:#ffb899}
 .navlink.krushi{background:rgba(212,173,85,.22);color:#fff;font-weight:800}
+.navlink.english{background:#fff;color:#0a3a36;font-weight:800}
 .navlink.weather{background:rgba(100,200,220,.18);color:#a8dfe8}
 .navlink.breakeven{background:rgba(169,128,42,.25);color:#ffd98a}
 .navlink.wagawa{background:rgba(255,217,138,.14);color:#ffe9b8;box-shadow:inset 0 0 0 1px rgba(255,217,138,.55)}
@@ -226,6 +227,8 @@ footer a{color:var(--petrol);font-weight:600}
 .res .neg b{color:var(--up)}
 .warn{margin-top:10px;background:var(--warnbg);border-radius:9px;padding:9px 12px;font-size:13px;color:var(--soft)}
 .share{display:inline-block;margin-top:12px;background:#1f8f4e;color:#fff;text-decoration:none;font-weight:700;font-size:14.5px;padding:10px 16px;border-radius:10px}
+.item.saying{outline:3px solid var(--gold);outline-offset:1px;background:var(--warnbg)}
+.sayl{white-space:nowrap}
 .loading{padding:40px 0;text-align:center;color:var(--muted)}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://topgoviya.lk/#website", "url": "https://topgoviya.lk/", "name": "TopGoviya.lk", "inLanguage": ["si", "ta", "en"], "description": "Sri Lanka agricultural price information — Dambulla, CBSL, HARTI, spices and tea."}, {"@type": "Organization", "@id": "https://topgoviya.lk/#org", "name": "TopGoviya.lk", "url": "https://topgoviya.lk/", "logo": "https://topgoviya.lk/icon-512x512.png", "sameAs": ["https://www.facebook.com/TopGoviyaLK", "https://www.youtube.com/@TopGoviyaLK"], "areaServed": {"@type": "Country", "name": "Sri Lanka"}}, {"@type": "WebPage", "@id": "https://topgoviya.lk/#webpage", "url": "https://topgoviya.lk/", "name": "දඹුල්ල එලවලු මිල අද — Dambulla vegetable price today", "isPartOf": {"@id": "https://topgoviya.lk/#website"}, "publisher": {"@id": "https://topgoviya.lk/#org"}, "inLanguage": "si", "about": {"@type": "Place", "name": "Dambulla Dedicated Economic Centre (දඹුල්ල විශේෂිත ආර්ථික මධ්‍යස්ථානය)", "address": {"@type": "PostalAddress", "addressLocality": "Dambulla", "addressRegion": "Central Province", "addressCountry": "LK"}}}, {"@type": "Dataset", "name": "Dambulla daily wholesale vegetable and fruit prices (දඹුල්ල දෛනික තොග මිල)", "description": "Daily minimum and maximum wholesale prices for 90+ vegetables, fruits, roots, leafy vegetables and grains at the Dambulla Dedicated Economic Centre, Sri Lanka, as published by the centre, with day-to-day change.", "url": "https://topgoviya.lk/", "creator": {"@id": "https://topgoviya.lk/#org"}, "isAccessibleForFree": true, "spatialCoverage": {"@type": "Place", "name": "Dambulla, Sri Lanka"}, "temporalCoverage": "2025-01-01/..", "keywords": ["දඹුල්ල එලවලු මිල", "දඹුල්ල එළවළු මිල", "තොග මිල", "Dambulla vegetable price", "Sri Lanka wholesale vegetable prices"]}]}</script>
@@ -247,6 +250,7 @@ footer a{color:var(--petrol);font-weight:600}
     <a href="spices.html" class="navlink spices">🌶️ කුළුබඩු මිල</a>
     <a href="weather.html" class="navlink weather">🌤️ කාලගුණය</a>
     <a href="wholesale.html" class="navlink wholesale">📦 තොග මිල</a>
+    <a href="en/dambulla-market-price-today.html" class="navlink english" lang="en" hreflang="en">🌐 English</a>
   </div>
 </div></nav>
 <div class="wrap">
@@ -272,7 +276,7 @@ footer a{color:var(--petrol);font-weight:600}
   <div class="gbar" id="gbar"></div>
   <div class="glab" id="glab"></div>
   <p id="moodText"></p>
-  <div class="mbtns"><button class="btn solid" id="sheetBtn" type="button"></button><button class="btn" id="waShare" type="button"></button><button class="btn" id="fbShare" type="button"></button><button class="btn" id="copyMood" type="button"></button></div>
+  <div class="mbtns"><button class="btn solid" id="sheetBtn" type="button"></button><button class="btn" id="waShare" type="button"></button><button class="btn" id="fbShare" type="button"></button><button class="btn" id="copyMood" type="button"></button><button class="btn solid" id="sayAllBtn" type="button" hidden></button></div><p class="legend" id="sayNote" hidden></p>
 </section>
 <section class="basket" id="basket"></section>
 <div class="explain">
@@ -302,6 +306,7 @@ footer a{color:var(--petrol);font-weight:600}
   <div class="sbox"><input id="q" type="search" autocomplete="off"><button class="mic" id="mic" type="button" hidden>🎤</button></div>
   <div class="chips" id="cats"></div>
   <select class="sort" id="sort"></select>
+  <button class="chip sayl" id="sayListBtn" type="button" hidden></button>
 </div>
 <div class="count" id="count"></div>
 <div class="grid" id="grid"><div class="loading">…</div></div>
@@ -743,7 +748,41 @@ function dateStrip(){
   if(ip)ip.onchange=()=>{let v=ip.value;if(!v)return;if(!have.has(v)){const e=ALLDATES.filter(x=>x<=v).pop();if(!e)return;v=e;try{alert(t("noDay"));}catch(_){}}setView(v);};
   const on=box.querySelector(".dd.on");if(on)on.scrollIntoView({block:"nearest",inline:"center"});
 }
-function renderAll(){applyLang();chips();mood();renderBasket();movers();grid();if(cur&&$("#scrim").classList.contains("open"))openItem(cur.pid,true);}
+/* ---------- read prices aloud, same style as the English page (Nov 2026) ---------- */
+const SAYALL={si:{b:"🔊 මම මිල කියවන්නද?",l:"🔊 මේ ලැයිස්තුව කියවන්න",s:"⏹ නවත්වන්න",i:"%N, රුපියල් %A සිට %B %U.",n:"ඔබේ ෆෝන් එකේ සිංහල හඬක් නැති නිසා English වලින් කියවයි.",u:{kg:"කිලෝවට",nut:"ගෙඩියට",bundle:"මිටියට"}},
+ ta:{b:"🔊 விலைகளை வாசிக்கவா?",l:"🔊 இந்தப் பட்டியலை வாசி",s:"⏹ நிறுத்து",i:"%N, ரூபாய் %A முதல் %B வரை %U.",n:"உங்கள் போனில் தமிழ் குரல் இல்லை, ஆங்கிலத்தில் வாசிக்கப்படும்.",u:{kg:"கிலோவுக்கு",nut:"காய்க்கு",bundle:"கட்டுக்கு"}},
+ en:{b:"🔊 Read the prices aloud",l:"🔊 Read this list",s:"⏹ Stop",i:"%N: %A to %B rupees %U.",n:"",u:{kg:"per kilo",nut:"per nut",bundle:"per bundle"}}};
+let SAYING=null;
+function sayAllSetup(){
+  const ok=("speechSynthesis" in window)&&!!LATEST;
+  [["#sayAllBtn","all","b"],["#sayListBtn","list","l"]].forEach(([id,k,lab])=>{const b=$(id);if(!b)return;b.hidden=!ok;b.textContent=SAYING===k?SAYALL[lang].s:SAYALL[lang][lab];});
+}
+function sayMark(pid){
+  document.querySelectorAll("#grid .item.saying").forEach(e=>e.classList.remove("saying"));
+  if(!pid)return;const e=document.querySelector('#grid .item[data-i="'+pid+'"]');
+  if(e){e.classList.add("saying");e.scrollIntoView({block:"center",behavior:"smooth"});}
+}
+function sayStop(){try{speechSynthesis.cancel();}catch(e){}SAYING=null;sayMark(null);sayAllSetup();const n=$("#sayNote");if(n)n.hidden=true;}
+function sayRun(kind,list){
+  if(SAYING){const was=SAYING;sayStop();if(was===kind)return;}
+  const ss=window.speechSynthesis,note=$("#sayNote");
+  let L=lang,v=voiceFor(lang);
+  if(!v&&lang!=="en"){L="en";v=voiceFor("en");note.textContent=SAYALL[lang].n;note.hidden=false;}else note.hidden=true;
+  const enDate=new Date(LATEST+"T00:00:00").toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
+  const head=($("#moodTitle").textContent||"").replace(/^\S+\s*/,"");
+  const first=L==="en"?"Dambulla wholesale prices, "+enDate+".":t("cardSub")+", "+dateLabel(LATEST)+". "+(kind==="all"?head:"");
+  const say=(x,pid,last)=>{const u=new SpeechSynthesisUtterance(x);if(v)u.voice=v;u.lang=v?v.lang:LOCALE[L];u.rate=0.95;
+    u.onstart=()=>sayMark(pid);if(last)u.onend=()=>{if(SAYING===kind){SAYING=null;sayMark(null);sayAllSetup();}};ss.speak(u);};
+  ss.cancel();SAYING=kind;sayAllSetup();
+  say(first,null,!list.length);
+  list.forEach((i,k)=>say(SAYALL[L].i.replace("%N",L==="en"?i.m.en:nameOf(i.m)).replace("%A",fmt(i.today.min)).replace("%B",fmt(i.today.max)).replace("%U",SAYALL[L].u[i.m.u]||""),i.pid,k===list.length-1));
+  try{gtag("event","listen_prices",{page:"home",kind:kind,language:L,items:list.length});}catch(e){}
+}
+$("#sayAllBtn").onclick=()=>{cat="all";q="";$("#q").value="";sort="pop";$("#sort").value="pop";chips();grid();
+  sayRun("all",ITEMS.filter(i=>i.today).sort((a,b)=>(a.m.p||999)-(b.m.p||999)).slice(0,15));};
+$("#sayListBtn").onclick=()=>{const ids=[...document.querySelectorAll("#grid .item")].map(e=>e.dataset.i);
+  sayRun("list",ids.map(id=>ITEMS.find(i=>i.pid===id)).filter(i=>i&&i.today));};
+function renderAll(){applyLang();chips();mood();sayAllSetup();renderBasket();movers();grid();if(cur&&$("#scrim").classList.contains("open"))openItem(cur.pid,true);}
 
 /* ---------- popup ---------- */
 function rangePts(it,key){
