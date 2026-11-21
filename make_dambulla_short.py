@@ -10,7 +10,7 @@ from the official price list photo) - the newest day is used. Names: dambulla_it
 Output: short/03-dambulla-DATE/ with video-with-music.mp4, video-silent.mp4,
         youtube.txt, tiktok.txt, facebook.txt   (same style as the other Shorts robots)
 Design (Nov 2026): "price board first" - second 0 shows a huge date + the 14 most-wanted prices
-with red/green/grey up-down dots (rows slide in one by one, dots pop); then the next 14 items, the day's biggest movers, and the end card.
+with red/green/grey up-down dots (rows slide in one by one, dots pop); then the next 14 items, the day's biggest movers, the end card, and a 1.2 s thumbnail frame (also saved as thumbnail.png).
 Rows come in one at a time (ITEM_SEC each) so people can read them: about 35-40 seconds. Each day's video differs because the prices differ.
 Mobile safe area (20 Nov 2026): all text stays inside x 120-860, y 300-1440 so YouTube's top bar, side buttons,
 caption and the side crop on tall phones never cover names or prices. Colours still fill the whole screen.
@@ -178,6 +178,16 @@ body{width:1080px;height:1920px;background:#063027;font-family:'Noto Sans Sinhal
 .cta{margin-top:28px;background:#0f5c4a;border-radius:24px;padding:4px 24px;text-align:left}
 .ct{display:flex;align-items:center;gap:18px;padding:12px 0;font-size:34px;font-weight:700}
 .ct+.ct{border-top:2px solid #0a4235}.ci{font-size:42px;width:56px;text-align:center}
+.th{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 SAFE_RIGHTpx 0 SAFE_LEFTpx;text-align:center}
+.th .emo{font-size:100px;line-height:1.05}
+.th .h{font-size:92px;font-weight:800;line-height:1.15;color:#fff}
+.th .db{margin:14px 0 10px;background:#ffd43b;color:#063027;border-radius:26px;padding:4px 10px 10px}
+.th .db .d{font-size:96px;font-weight:800;line-height:1.1;letter-spacing:-2px}
+.th .db .w{font-size:36px;font-weight:800}
+.th .o{display:flex;align-items:center;background:#0f5c4a;border-radius:18px;padding:4px 18px;margin-top:8px;font-size:46px;font-weight:800;text-align:left}
+.th .o .nm{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.th .o .v{margin:0 12px}
+.th .o .dot{width:48px;height:48px;font-size:26px}
 @keyframes slideIn{0%{transform:translateX(105%);opacity:0}70%{transform:translateX(-3%);opacity:1}100%{transform:none;opacity:1}}
 @keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.3)}100%{transform:scale(1)}}
 @keyframes drop{0%{transform:translateY(-60px);opacity:0}100%{transform:none;opacity:1}}
@@ -251,6 +261,13 @@ body{width:1080px;height:1920px;background:#063027;font-family:'Noto Sans Sinhal
                        '<div class="ct"><span class="ci">🔔</span><span>හැමදාම මිල සඳහා Subscribe කරන්න</span></div>'
                        '</div></div>', small=True))
     durs.append(END_SEC)
+    # Thumbnail (Nov 2026): last 1.2 s of the video (pick this frame in YouTube's thumbnail picker) + thumbnail.png
+    th_rows = "".join(f'<div class="o"><span class="nm">{i["e"]} {i["si"].partition(" (")[0]}</span><span class="v mono">{price(i)}</span>{dot(i["chg"])}</div>'
+                      for i in staples[:5])
+    thumb = page(f'<div class="th"><div class="emo">🥬🍅🧅</div><div class="h">දඹුල්ල එළවළු<br>මිල අද</div>'
+                 f'<div class="db"><div class="d mono">{dotdate}</div><div class="w">{DAYS_SI[wd]} • 1kg රු.</div></div>{th_rows}</div>', header=False)
+    thumb = thumb.replace('class="topband">අද දඹුල්ල එළවළු තොග මිල<', 'class="topband">TopGoviya.lk<')
+    slides.append(thumb); durs.append(1.2)
     from playwright.sync_api import sync_playwright   # only needed when a video is made
     if "--preview" in sys.argv:      # one still per slide + red danger zones, to check the layout on a phone
         os.makedirs(OUT, exist_ok=True)
@@ -325,9 +342,16 @@ body{width:1080px;height:1920px;background:#063027;font-family:'Noto Sans Sinhal
                       tags, "🥬 අද දඹුල්ල එළවළු මිල | Dambulla Market Price Daily")
     pin = pin_comment(rises, falls, last)
     folder = f"{OUT}/03-dambulla-{TAG}"
+    with sync_playwright() as pw:
+        b = pw.chromium.launch(); pg = b.new_page(viewport={"width": 1080, "height": 1920})
+        pg.set_content(thumb); pg.evaluate("document.fonts.ready"); pg.wait_for_timeout(300)
+        pg.evaluate("document.getAnimations().forEach(a => {a.pause(); a.currentTime = 5000})")
+        pg.screenshot(path=f"{folder}/thumbnail.png"); b.close()
     open(f"{folder}/pin-comment.txt", "w", encoding="utf-8").write(pin + "\n")
     with open(f"{folder}/youtube.txt", "a", encoding="utf-8") as f:
         f.write("\nPINNED COMMENT (post it, then ⋮ → Pin):\n" + pin + "\n")
+        f.write("\nTHUMBNAIL:\nthumbnail.png is also the LAST frame of the video. Phone app: thumbnail picker → slide to the very end. "
+                "Computer (YouTube Studio): Thumbnail → Upload file → thumbnail.png (only if your channel has this option).\n")
         f.write("\nMUSIC USED (note the views after 2-3 days to see which song works best):\n" + (os.path.basename(track) if track else "none") + "\n")
     import shutil
     for fd in dirs:
