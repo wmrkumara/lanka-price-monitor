@@ -168,6 +168,14 @@ def build():
     out = sub1(r'<script type="application/ld\+json">.*?</script>',
                '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>", out, re.S)
 
+    # ---------- English version: point to the Keppetipola English page, not Dambulla (Nov 2026) ----------
+    out = re.sub(r'<link rel="alternate" hreflang="si"[^>]*>\s*<link rel="alternate" hreflang="en"[^>]*>\s*<link rel="alternate" hreflang="x-default"[^>]*>',
+                 '<link rel="alternate" hreflang="si" href="' + URL + '">\n'
+                 '<link rel="alternate" hreflang="en" href="' + SITE + '/en/keppetipola-market-price-today.html">\n'
+                 '<link rel="alternate" hreflang="x-default" href="' + URL + '">', out, count=1)
+    out = out.replace('href="en/dambulla-market-price-today.html" class="navlink english"',
+                      'href="en/keppetipola-market-price-today.html" class="navlink english"')
+
     # ---------- menu: Keppetipola button next to Dambulla ----------
     out = out.replace(' aria-current="page"', "")
     if 'href="market/keppetipola.html" class="navlink' in out:
