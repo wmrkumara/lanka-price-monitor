@@ -245,6 +245,8 @@ def build():
   return {source:EMBEDDED.source,unit_note:EMBEDDED.unit_note,products:P,days:D};}
 const SITE=''', code)
     code = code.replace('"https://topgoviya.lk/"', '"https://topgoviya.lk/market/keppetipola.html"')
+    # read-aloud: count Keppetipola listens separately in Google Analytics (Nov 2026)
+    code = code.replace('gtag("event","listen_prices",{page:"home"', 'gtag("event","listen_prices",{page:"keppetipola"')
     # starter basket: same crops as Dambulla's, by Keppetipola item number
     sm = re.search(r"const STARTER=(\[.*?\]);", code)
     if sm:
