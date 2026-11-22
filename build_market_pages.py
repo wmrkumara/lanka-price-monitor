@@ -277,12 +277,12 @@ def cbsl_peliyagoda(cbsl):
     return d_(dates[-1]), fish, pettah
 
 # How most people type some market names in Google (used in the title; the page keeps the official name)
-SEARCH_SI = {"Keppetipola": "කැප්පෙටිපොල"}
+SEARCH_SI = {"Keppetipola": "කැප්පෙටිපොල", "Peliyagoda": "පැලියගොඩ"}   # Peliyagoda: most people type ැ (Search Console, Nov 2026)
 
 # Extra English search words people type for some markets (from Search Console, Nov 2026)
 TITLE_EN = {
     "Keppetipola": "Keppetipola Vegetable Market Price List Today Sri Lanka",
-    "Peliyagoda": "Peliyagoda Vegetable & Fish Market Price List Today (Pettah, Manning)",
+    "Peliyagoda": "පැලියගොඩ මාළු මිල | Peliyagoda Vegetable & Fish Market Price List Today (Manning)",
 }
 DESC_LEAD = {
     "Keppetipola": "Keppetipola economic centre vegetable market price list today",
@@ -891,6 +891,7 @@ def market_page(market, hm, harti, cats, cbsl):
     cbsl_count = 0
     cbsl_first = False
     cd = None
+    crow = []
     if market == "Dambulla" and cbsl:
         cd, crow = cbsl_dambulla(cbsl)
         # Show the CBSL table first when it is newer than the HARTI report
@@ -977,7 +978,7 @@ def market_page(market, hm, harti, cats, cbsl):
     body = f"""
 <p class="crumb"><a href="../index.html">TopGoviya.lk</a> / <a href="index.html">වෙළඳපොළ මිල</a> / {e(si)}</p>
 {h1}
-{home_box}
+{home_box}{peli_answer(rows, last, crow, cd) if market == "Peliyagoda" else ""}
 <p class="alt">{e(en)} market price today – vegetable wholesale prices · {e(si)}{" (දබුල්ල)" if market == "Dambulla" else ""}{(" · " + SEARCH_SI[market]) if market in SEARCH_SI else ""} එලවලු මිල<br>{e(en.lower())} elawalu mila ada · {e(en.lower())} market rate today<br>{e(ta)} சந்தை விலை இன்று{("<br>" + ALT_EXTRA[market]) if market in ALT_EXTRA else ""}</p>
 {cbsl_html if cbsl_first else ''}
 {harti_h2 if cbsl_first else ''}
@@ -1029,11 +1030,32 @@ def market_page(market, hm, harti, cats, cbsl):
         desc = desc.replace(f"{en} market price today", DESC_LEAD[market], 1)
     desc = (desc
             + f". {top3}. Download the price list as PDF or image. {si} එලවලු මිල අද{' (දබුල්ල)' if market == 'Dambulla' else ''} · {en.lower()} elawalu mila.")
+    if market == "Peliyagoda":
+        desc += " පැලියගොඩ එළවළු මිල අද · පැලියගොඩ මාළු මිල අද."
     jsonld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "TopGoviya.lk", "item": SITE + "/"},
         {"@type": "ListItem", "position": 2, "name": "Market prices", "item": f"{SITE}/{OUT_DIR}/"},
         {"@type": "ListItem", "position": 3, "name": f"{en} market price", "item": url}]}
     return shell(title, desc, url, body, jsonld), last, len(rows)
+
+# ---------------------------------------------------------------- Peliyagoda "today's answer" (Nov 2026)
+def peli_answer(rows, last, crow, cd):
+    """One clear dated sentence at the top (Google / AI search friendly). Uses only the prices on this page."""
+    bits = []
+    if rows and last:
+        veg = ", ".join(f"{hsi(r['name'])} රු. {money(r['min'])}–{money(r['max'])}" for r in rows[:5])
+        bits.append(f"HARTI තොග මිල ({fdate(d_(last), 'si')}): {veg}")
+    fish = [(c, w) for c, w, r in (crow or []) if c.get("category") == "Fish" and w is not None][:3]
+    if fish and cd:
+        fl = ", ".join(f"{(CBSL_NAMES.get(c['name']) or {}).get('si', c['name'])} රු. {money(w)}" for c, w in fish)
+        bits.append(f"මාළු තොග මිල ({fdate(cd, 'si')}, මහ බැංකුව): {fl}")
+    if not bits:
+        return ""
+    return ('<p style="background:var(--card,#fffdf7);border:1px solid var(--line,#e3d9c4);border-left:4px solid #0e4f4a;'
+            'border-radius:10px;padding:10px 12px;margin:8px 0 12px;font-size:15px;line-height:1.6">📌 <b>පැලියගොඩ (පෑලියගොඩ) වෙළඳපොළ මිල අද</b> — '
+            + " · ".join(e(b) for b in bits)
+            + ' <span style="display:block;margin-top:4px;font-size:12px;color:var(--muted,#6f675a)">කි.ග්‍රෑ. එකක මිල (රු.) · '
+              'මූලාශ්‍රය: HARTI, ශ්‍රී ලංකා මහ බැංකුව · Peliyagoda market price today.</span></p>')
 
 # ---------------------------------------------------------------- hub page
 def hub_page(summary, latest_all, harti=None):
