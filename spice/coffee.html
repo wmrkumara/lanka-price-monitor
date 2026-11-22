@@ -88,6 +88,10 @@ footer a{font-weight:700}
 .tgt{position:absolute;pointer-events:none;background:#191d1a;color:#f4efe4;font-family:'JetBrains Mono',monospace;font-size:12px;
      font-weight:600;padding:5px 9px;border-radius:8px;white-space:nowrap;transform:translate(-50%,-135%);opacity:0;transition:opacity .12s;z-index:3}
 .tgt b{color:#ffd98a}
+.sayb{display:inline-flex;align-items:center;gap:6px;border:0;background:var(--petrol);color:#fff;font:600 15px 'Hanken Grotesk','Noto Sans Sinhala',sans-serif;
+      padding:11px 18px;border-radius:12px;cursor:pointer;margin:10px 0 4px;min-height:44px}
+.sayb.on{background:var(--up)}
+.sayn{font-size:12.5px;color:var(--muted);margin:2px 0 6px}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "TopGoviya.lk", "item": "https://topgoviya.lk/"}, {"@type": "ListItem", "position": 2, "name": "Spice prices", "item": "https://topgoviya.lk/spices.html"}, {"@type": "ListItem", "position": 3, "name": "Coffee price", "item": "https://topgoviya.lk/spice/coffee.html"}]}, {"@type": "Dataset", "name": "Coffee farm gate price in Sri Lanka – weekly, by district", "description": "Weekly farm gate (producers') prices of coffee in Sri Lanka by grade and district, from the Department of Export Agriculture, 3 January 2023 to 17 November 2026. Latest GR 1 national average Rs. 1,450 per kg.", "url": "https://topgoviya.lk/spice/coffee.html", "inLanguage": ["si", "en", "ta"], "spatialCoverage": "Sri Lanka", "temporalCoverage": "2023-01-03/2026-11-17", "dateModified": "2026-11-17", "variableMeasured": "Coffee farm gate price (Rs./kg)", "isBasedOn": "https://exagri.info/mkt/index.html", "creator": {"@type": "Organization", "name": "TopGoviya.lk", "url": "https://topgoviya.lk/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the coffee price today in Sri Lanka?", "acceptedAnswer": {"@type": "Answer", "text": "For the week of 17 November 2026, GR 1 averaged Rs. 1,450 per kg at the farm gate nationally (highest Rs. 2,400), per DEA."}}, {"@type": "Question", "name": "Did the coffee price go up or down?", "acceptedAnswer": {"@type": "Answer", "text": "From Rs. 1,434 (week of 10 November 2026) to Rs. 1,450 (▲ +1.1%)."}}, {"@type": "Question", "name": "Which district had the highest coffee price?", "acceptedAnswer": {"@type": "Answer", "text": "Nuwara Eliya — GR 1 average Rs. 2,333. Actual prices depend on quality and transport."}}, {"@type": "Question", "name": "Highest and lowest coffee price since 2023?", "acceptedAnswer": {"@type": "Answer", "text": "GR 1 national average: highest Rs. 1,450 (17 November 2026), lowest Rs. 803 (6 June 2023)."}}, {"@type": "Question", "name": "What are coffee GR 1, GR 2 and parchment?", "acceptedAnswer": {"@type": "Answer", "text": "GR 1 and GR 2 are grades of cleaned coffee beans. Parchment coffee still has its inner husk and is reported separately by DEA."}}, {"@type": "Question", "name": "Where do these prices come from?", "acceptedAnswer": {"@type": "Answer", "text": "From the Department of Export Agriculture (DEA) weekly farm gate price report. These are prices paid to growers — not export (FOB) or retail prices."}}]}]}</script>
 </head>
@@ -100,6 +104,8 @@ footer a{font-weight:700}
 <p class="alt">Coffee price today in Sri Lanka · kopi mila ada · කෝපි මිල today · කෝපි කිලෝවක මිල<br>கோப்பி விலை இன்று</p>
 <p class="asof" style="margin-top:14px"><b>🌾 ගොවිපළ දොරටු මිල / Farm gate price</b> · DEA සතිපතා වාර්තාව · 2026 නොවැම්බර් 17 සතිය · රු./කි.ග්‍රෑ.</p>
 <div class="duo"><div class="r"><b>රු. 1,450</b><span>GR 1 · සාමාන්‍ය / avg per kg · <span class="chg up" style="font-size:11px;padding:1px 6px">▲ +1.1%</span></span></div><div class="w"><b>රු. 1,400</b><span>GR 2 · සාමාන්‍ය / avg per kg · <span class="chg down" style="font-size:11px;padding:1px 6px">▼ -18.0%</span></span></div><div class="w"><b>රු. 2,500</b><span>පාච්මන්ට් (Parchment) · සාමාන්‍ය / avg per kg · <span class="chg down" style="font-size:11px;padding:1px 6px">▼ -6.1%</span></span></div></div>
+<button class="sayb" id="sayBtn" type="button" data-lang="si" data-slug="coffee" data-stop="⏹ නවත්වන්න" data-si="කෝපි මිල. 2026 නොවැම්බර් 17 සතියේ DEA වාර්තාව අනුව, GR 1 කිලෝවක ගොවිපළ මිල රුපියල් 1,450.|පෙර DEA වාර්තාවට වඩා රුපියල් 16 කින් ඉහළ ගොස් ඇත.|GR 2, කිලෝවක රුපියල් 1,400.|පාච්මන්ට් (Parchment), කිලෝවක රුපියල් 2,500." data-en="Coffee price. In the DEA report for the week of 17 November 2026, GR 1 was 1,450 rupees per kilo at the farm gate.|Up 16 rupees from the previous DEA report.|GR 2, 1,400 rupees per kilo.|Parchment, 2,500 rupees per kilo.">🔊 මිල කියවන්න</button>
+<p class="sayn" id="sayNote" hidden>ඔබේ ෆෝන් එකේ සිංහල හඬක් නැති නිසා English වලින් කියවයි.</p>
 <div class="story">
   <p>2026 නොවැම්බර් 17 සතියේ DEA වාර්තාව අනුව GR 1 කි.ග්‍රෑ. එකක ජාතික සාමාන්‍ය ගොවිපළ මිල රු. 1,450 (ඉහළම රු. 2,400). පෙර DEA වාර්තාවට (2026 නොවැම්බර් 10 සතිය) සාපේක්ෂව රු. 1,434 සිට ඉහළ ගොස් ඇත (▲ +1.1%). වසරකට පෙර (2025 නොවැම්බර් 18) මිල රු. 1,075 විය.</p>
   <p lang="en">In the DEA report for the week of 17 November 2026, the national average farm gate price of GR 1 was Rs. 1,450 per kg (highest Rs. 2,400). That is up from Rs. 1,434 in the previous DEA report (week of 10 November 2026) (▲ +1.1%). A year earlier (18 November 2025) it was Rs. 1,075.</p>
@@ -147,6 +153,30 @@ document.querySelectorAll(".tgc").forEach(function (box) {
   svg.addEventListener("touchstart", function (ev) { show(ev.touches[0].clientX); }, {passive: true});
   svg.addEventListener("touchmove", function (ev) { show(ev.touches[0].clientX); }, {passive: true});
 });
+</script>
+<script>
+/* read the price aloud (Nov 2026) - Sinhala voice if the phone has one, otherwise English */
+(function () {
+  var b = document.getElementById("sayBtn"); if (!b) return;
+  if (!("speechSynthesis" in window)) { b.hidden = true; return; }
+  var ss = window.speechSynthesis, on = false, lab = b.textContent, note = document.getElementById("sayNote");
+  try { ss.getVoices(); ss.onvoiceschanged = function () {}; } catch (x) {}
+  function voice(l) { var v = ss.getVoices(); for (var i = 0; i < v.length; i++) if (v[i].lang && v[i].lang.toLowerCase().indexOf(l) === 0) return v[i]; return null; }
+  function done() { on = false; b.textContent = lab; b.classList.remove("on"); }
+  b.onclick = function () {
+    if (on) { ss.cancel(); done(); return; }
+    var want = b.getAttribute("data-lang"), L = want, v = voice(want);
+    if (!v && want !== "en") { L = "en"; v = voice("en"); if (note) note.hidden = false; } else if (note) note.hidden = true;
+    var parts = (b.getAttribute("data-" + L) || "").split("|");
+    ss.cancel(); on = true; b.textContent = b.getAttribute("data-stop"); b.classList.add("on");
+    parts.forEach(function (p, k) {
+      var u = new SpeechSynthesisUtterance(p); if (v) u.voice = v; u.lang = v ? v.lang : (L === "si" ? "si-LK" : "en-GB"); u.rate = 0.95;
+      if (k === parts.length - 1) { u.onend = done; u.onerror = done; }
+      ss.speak(u);
+    });
+    try { gtag("event", "listen_prices", {page: "spice", kind: b.getAttribute("data-slug"), language: L}); } catch (x) {}
+  };
+})();
 </script>
 <footer><span id="tg-copy">© 2026 TopGoviya.lk · සියලු හිමිකම් ඇවිරිණි / All rights reserved · මිල දත්ත: මහ බැංකුව, HARTI, DEA (නිල මූලාශ්‍ර) / Price data: CBSL, HARTI &amp; DEA · <a href="/contact.html">සම්බන්ධ වන්න / Contact</a> · <a href="/useful-links.html">සබැඳි / Links</a></span><br>Design &amp; development by <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a> · Built in Gampola, Sri Lanka</footer>
 </div>

@@ -90,6 +90,10 @@ footer a{font-weight:700}
 .tgt{position:absolute;pointer-events:none;background:#191d1a;color:#f4efe4;font-family:'JetBrains Mono',monospace;font-size:12px;
      font-weight:600;padding:5px 9px;border-radius:8px;white-space:nowrap;transform:translate(-50%,-135%);opacity:0;transition:opacity .12s;z-index:3}
 .tgt b{color:#ffd98a}
+.sayb{display:inline-flex;align-items:center;gap:6px;border:0;background:var(--petrol);color:#fff;font:600 15px 'Hanken Grotesk','Noto Sans Sinhala',sans-serif;
+      padding:11px 18px;border-radius:12px;cursor:pointer;margin:10px 0 4px;min-height:44px}
+.sayb.on{background:var(--up)}
+.sayn{font-size:12.5px;color:var(--muted);margin:2px 0 6px}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "TopGoviya.lk", "item": "https://topgoviya.lk/"}, {"@type": "ListItem", "position": 2, "name": "Spice prices", "item": "https://topgoviya.lk/spices.html"}, {"@type": "ListItem", "position": 3, "name": "Ceylon Cinnamon Price Today", "item": "https://topgoviya.lk/spice/ceylon-cinnamon-price.html"}]}, {"@type": "Dataset", "name": "Ceylon cinnamon farm gate price in Sri Lanka – weekly, by grade and district", "description": "Weekly farm gate prices of Ceylon cinnamon in Sri Lanka by grade and district from the Department of Export Agriculture, 3 January 2023 to 17 November 2026, with US$ reference prices. Latest C-5 Rs. 5,624 per kg.", "url": "https://topgoviya.lk/spice/ceylon-cinnamon-price.html", "inLanguage": "en", "spatialCoverage": "Sri Lanka", "temporalCoverage": "2023-01-03/2026-11-17", "dateModified": "2026-11-17", "variableMeasured": "Ceylon cinnamon farm gate price (LKR per kg)", "isBasedOn": "https://exagri.info/mkt/index.html", "creator": {"@type": "Organization", "name": "TopGoviya.lk", "url": "https://topgoviya.lk/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the Ceylon cinnamon price today?", "acceptedAnswer": {"@type": "Answer", "text": "For the week of 17 November 2026, C-5 averaged Rs. 5,624 per kg at the farm gate in Sri Lanka (about US$ 16.90 per kg), according to the Department of Export Agriculture."}}, {"@type": "Question", "name": "Is this the export (FOB) price?", "acceptedAnswer": {"@type": "Answer", "text": "No. These are farm gate prices — what growers receive. Export (FOB) prices are higher because they include processing, grading, cleaning, fumigation, packing, transport and the exporter's margin."}}, {"@type": "Question", "name": "What were the highest and lowest prices since 2023?", "acceptedAnswer": {"@type": "Answer", "text": "C-5 national average: highest Rs. 5,730 (15 September 2026), lowest Rs. 3,071 (14 November 2023)."}}, {"@type": "Question", "name": "How are the US$ prices calculated?", "acceptedAnswer": {"@type": "Answer", "text": "US$ prices use the Central Bank of Sri Lanka indicative USD/LKR spot rate of Rs. 332.74 (17 November 2026), for reference only."}}, {"@type": "Question", "name": "Where does the data come from, and how often is it updated?", "acceptedAnswer": {"@type": "Answer", "text": "From the Department of Export Agriculture (DEA), Sri Lanka, weekly producers' (farm gate) price report. This page is updated each week when DEA publishes a new report. TopGoviya.lk is independent and does not buy or sell spices."}}]}]}</script>
 </head>
@@ -104,6 +108,8 @@ footer a{font-weight:700}
 <div class="duo"><div class="r"><b>Rs. 5,624</b><span>C-5 · national average
  · <span class="chg flat" style="font-size:11px;padding:1px 6px">■ -0.1%</span></span></div>
 <div class="w"><b>US$ 16.90</b><span>per kg · at CBSL rate Rs. 332.74</span></div></div>
+<button class="sayb" id="sayBtn" type="button" data-lang="en" data-slug="cinnamon" data-stop="⏹ Stop" data-si="" data-en="Ceylon Cinnamon Price Today. In the DEA report for the week of 17 November 2026, C-5 averaged 5,624 rupees per kilo at the farm gate, about 16.90 US dollars.|Down 6 rupees from the previous DEA report.|Alba, 7,269 rupees per kilo.|C-5 Special, 6,260 rupees per kilo.|C-4, 5,232 rupees per kilo.|M-5, 5,300 rupees per kilo.|M-4, 5,133 rupees per kilo.|H-1, 4,858 rupees per kilo.|H-2, 4,699 rupees per kilo.|H-FAQ, 4,587 rupees per kilo.|Heen, 3,125 rupees per kilo.|Gorosu, 2,767 rupees per kilo.">🔊 Read the price aloud</button>
+
 <div class="story"><p lang="en">In the Department of Export Agriculture (DEA) report for the week of 17 November 2026, Ceylon cinnamon (C-5) averaged <b>Rs. 5,624 per kg</b> at the farm gate across Sri Lanka (≈ <b>US$ 16.90</b>/kg), highest Rs. 6,000. That is unchanged from Rs. 5,630 in the previous DEA report (week of 10 November 2026). A year earlier (18 November 2025) it was Rs. 3,981.</p></div>
 <h2>Prices by grade<span>Week of 17 November 2026 · national average, per kg</span></h2>
 <div class="scroll"><table><thead><tr><th>Grade</th><th class="n">LKR / kg</th><th class="n">≈ US$ / kg</th>
@@ -152,6 +158,30 @@ document.querySelectorAll(".tgc").forEach(function (box) {
   svg.addEventListener("touchstart", function (ev) { show(ev.touches[0].clientX); }, {passive: true});
   svg.addEventListener("touchmove", function (ev) { show(ev.touches[0].clientX); }, {passive: true});
 });
+</script>
+<script>
+/* read the price aloud (Nov 2026) - Sinhala voice if the phone has one, otherwise English */
+(function () {
+  var b = document.getElementById("sayBtn"); if (!b) return;
+  if (!("speechSynthesis" in window)) { b.hidden = true; return; }
+  var ss = window.speechSynthesis, on = false, lab = b.textContent, note = document.getElementById("sayNote");
+  try { ss.getVoices(); ss.onvoiceschanged = function () {}; } catch (x) {}
+  function voice(l) { var v = ss.getVoices(); for (var i = 0; i < v.length; i++) if (v[i].lang && v[i].lang.toLowerCase().indexOf(l) === 0) return v[i]; return null; }
+  function done() { on = false; b.textContent = lab; b.classList.remove("on"); }
+  b.onclick = function () {
+    if (on) { ss.cancel(); done(); return; }
+    var want = b.getAttribute("data-lang"), L = want, v = voice(want);
+    if (!v && want !== "en") { L = "en"; v = voice("en"); if (note) note.hidden = false; } else if (note) note.hidden = true;
+    var parts = (b.getAttribute("data-" + L) || "").split("|");
+    ss.cancel(); on = true; b.textContent = b.getAttribute("data-stop"); b.classList.add("on");
+    parts.forEach(function (p, k) {
+      var u = new SpeechSynthesisUtterance(p); if (v) u.voice = v; u.lang = v ? v.lang : (L === "si" ? "si-LK" : "en-GB"); u.rate = 0.95;
+      if (k === parts.length - 1) { u.onend = done; u.onerror = done; }
+      ss.speak(u);
+    });
+    try { gtag("event", "listen_prices", {page: "spice", kind: b.getAttribute("data-slug"), language: L}); } catch (x) {}
+  };
+})();
 </script>
 <footer><span id="tg-copy">© 2026 TopGoviya.lk · සියලු හිමිකම් ඇවිරිණි / All rights reserved · මිල දත්ත: මහ බැංකුව, HARTI, DEA (නිල මූලාශ්‍ර) / Price data: CBSL, HARTI &amp; DEA · <a href="/contact.html">සම්බන්ධ වන්න / Contact</a> · <a href="/useful-links.html">සබැඳි / Links</a></span><br>Design &amp; development by <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a> · Built in Gampola, Sri Lanka</footer>
 </div>
