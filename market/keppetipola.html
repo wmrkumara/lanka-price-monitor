@@ -274,7 +274,7 @@ footer a{color:var(--petrol);font-weight:600}
   <div class="gbar" id="gbar"></div>
   <div class="glab" id="glab"></div>
   <p id="moodText"></p>
-  <div class="mbtns"><button class="btn solid" id="sheetBtn" type="button"></button><button class="btn" id="waShare" type="button"></button><button class="btn" id="fbShare" type="button"></button><button class="btn" id="copyMood" type="button"></button><button class="btn solid" id="sayAllBtn" type="button" hidden></button></div><p class="legend" id="sayNote" hidden></p>
+  <div class="mbtns"><button class="btn solid" id="sheetBtn" type="button"></button><button class="btn" id="waShare" type="button"></button><button class="btn" id="fbShare" type="button"></button><button class="btn" id="copyMood" type="button"></button><button class="btn solid" id="sayAllBtn" type="button" hidden></button><button class="btn solid" id="sayEveryBtn" type="button" hidden></button></div><p class="legend" id="sayNote" hidden></p>
 </section>
 <section class="basket" id="basket"></section>
 <div class="explain">
@@ -749,13 +749,13 @@ function dateStrip(){
   const on=box.querySelector(".dd.on");if(on)on.scrollIntoView({block:"nearest",inline:"center"});
 }
 /* ---------- read prices aloud, same style as the English page (Nov 2026) ---------- */
-const SAYALL={si:{b:"🔊 මම මිල කියවන්නද?",l:"🔊 මේ ලැයිස්තුව කියවන්න",s:"⏹ නවත්වන්න",i:"%N, රුපියල් %A සිට %B %U.",n:"ඔබේ ෆෝන් එකේ සිංහල හඬක් නැති නිසා English වලින් කියවයි.",u:{kg:"කිලෝවට",nut:"ගෙඩියට",bundle:"මිටියට"}},
- ta:{b:"🔊 விலைகளை வாசிக்கவா?",l:"🔊 இந்தப் பட்டியலை வாசி",s:"⏹ நிறுத்து",i:"%N, ரூபாய் %A முதல் %B வரை %U.",n:"உங்கள் போனில் தமிழ் குரல் இல்லை, ஆங்கிலத்தில் வாசிக்கப்படும்.",u:{kg:"கிலோவுக்கு",nut:"காய்க்கு",bundle:"கட்டுக்கு"}},
- en:{b:"🔊 Read the prices aloud",l:"🔊 Read this list",s:"⏹ Stop",i:"%N: %A to %B rupees %U.",n:"",u:{kg:"per kilo",nut:"per nut",bundle:"per bundle"}}};
+const SAYALL={si:{a:"🔊 සියල්ල කියවන්න",b:"🔊 මම මිල කියවන්නද?",l:"🔊 මේ ලැයිස්තුව කියවන්න",s:"⏹ නවත්වන්න",i:"%N, රුපියල් %A සිට %B %U.",n:"ඔබේ ෆෝන් එකේ සිංහල හඬක් නැති නිසා English වලින් කියවයි.",u:{kg:"කිලෝවට",nut:"ගෙඩියට",bundle:"මිටියට"}},
+ ta:{a:"🔊 அனைத்தையும் வாசி",b:"🔊 விலைகளை வாசிக்கவா?",l:"🔊 இந்தப் பட்டியலை வாசி",s:"⏹ நிறுத்து",i:"%N, ரூபாய் %A முதல் %B வரை %U.",n:"உங்கள் போனில் தமிழ் குரல் இல்லை, ஆங்கிலத்தில் வாசிக்கப்படும்.",u:{kg:"கிலோவுக்கு",nut:"காய்க்கு",bundle:"கட்டுக்கு"}},
+ en:{a:"🔊 Read all",b:"🔊 Read the prices aloud",l:"🔊 Read this list",s:"⏹ Stop",i:"%N: %A to %B rupees %U.",n:"",u:{kg:"per kilo",nut:"per nut",bundle:"per bundle"}}};
 let SAYING=null;
 function sayAllSetup(){
   const ok=("speechSynthesis" in window)&&!!LATEST;
-  [["#sayAllBtn","all","b"],["#sayListBtn","list","l"]].forEach(([id,k,lab])=>{const b=$(id);if(!b)return;b.hidden=!ok;b.textContent=SAYING===k?SAYALL[lang].s:SAYALL[lang][lab];});
+  [["#sayAllBtn","all","b"],["#sayEveryBtn","every","a"],["#sayListBtn","list","l"]].forEach(([id,k,lab])=>{const b=$(id);if(!b)return;b.hidden=!ok;b.textContent=SAYING===k?SAYALL[lang].s:SAYALL[lang][lab];});
 }
 function sayMark(pid){
   document.querySelectorAll("#grid .item.saying").forEach(e=>e.classList.remove("saying"));
@@ -775,11 +775,14 @@ function sayRun(kind,list){
     u.onstart=()=>sayMark(pid);if(last)u.onend=()=>{if(SAYING===kind){SAYING=null;sayMark(null);sayAllSetup();}};ss.speak(u);};
   ss.cancel();SAYING=kind;sayAllSetup();
   say(first,null,!list.length);
-  list.forEach((i,k)=>say(SAYALL[L].i.replace("%N",L==="en"?i.m.en:nameOf(i.m)).replace("%A",fmt(i.today.min)).replace("%B",fmt(i.today.max)).replace("%U",SAYALL[L].u[i.m.u]||""),i.pid,k===list.length-1));
+  list.forEach((i,k)=>i.head?say(CATS[i.head][L]+".",null,k===list.length-1):say(SAYALL[L].i.replace("%N",L==="en"?i.m.en:nameOf(i.m)).replace("%A",fmt(i.today.min)).replace("%B",fmt(i.today.max)).replace("%U",SAYALL[L].u[i.m.u]||""),i.pid,k===list.length-1));
   try{gtag("event","listen_prices",{page:"home",kind:kind,language:L,items:list.length});}catch(e){}
 }
 $("#sayAllBtn").onclick=()=>{cat="all";q="";$("#q").value="";sort="pop";$("#sort").value="pop";chips();grid();
   sayRun("all",ITEMS.filter(i=>i.today).sort((a,b)=>(a.m.p||999)-(b.m.p||999)).slice(0,15));};
+$("#sayEveryBtn").onclick=()=>{cat="all";q="";$("#q").value="";chips();grid();
+  const L=[];["v","l","r","g","f"].forEach(c=>{const g=ITEMS.filter(i=>i.today&&i.m.c===c).sort((a,b)=>(a.m.pc||999)-(b.m.pc||999));if(g.length){L.push({head:c});L.push(...g);}});
+  sayRun("every",L);};
 $("#sayListBtn").onclick=()=>{const ids=[...document.querySelectorAll("#grid .item")].map(e=>e.dataset.i);
   sayRun("list",ids.map(id=>ITEMS.find(i=>i.pid===id)).filter(i=>i&&i.today));};
 function renderAll(){applyLang();chips();mood();sayAllSetup();renderBasket();movers();grid();if(cur&&$("#scrim").classList.contains("open"))openItem(cur.pid,true);}
