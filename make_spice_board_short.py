@@ -221,6 +221,24 @@ body{width:1080px;height:1920px;background:#3a1f0d;font-family:'Noto Sans Sinhal
                  f'<div class="pr"><div class="v mono">රු. {rs(pep["v"])}{arrow}</div><div class="l">කළු ගම්මිරිස් GR-1 • 1kg</div></div>'
                  f'<div class="dt mono">මේ සතිය • {dotdate}</div>{others}</div>', header=False)
     thumb = thumb.replace('class="topband">මේ සතියේ කුළුබඩු මිල<', 'class="topband">TopGoviya.lk<')
+    # Thumbnail uses the full picture (no Shorts safe-area margins): bigger heading, price and rows.
+    # The price line shrinks itself to fit the width, so 5-digit prices still fit on one line.
+    big = ('<style>'
+           '.topband{height:170px;padding:0 50px 18px;font-size:58px}'
+           '.botband{height:230px;padding:40px 60px 0;opacity:.95;align-items:center}'
+           '.botband img{width:130px;height:130px;border-radius:24px}.botband .s{font-size:86px}'
+           '.th{padding:0 46px}.th .emo{font-size:130px}'
+           '.th .h{font-size:132px;line-height:1.12}'
+           '.th .pr{margin:30px 0 18px;border-radius:40px;padding:14px 16px 26px}'
+           '.th .pr .v{font-size:200px;letter-spacing:-6px;display:inline-block}'
+           '.th .pr .v b{font-size:120px}.th .pr .l{font-size:62px}'
+           '.th .dt{font-size:62px;margin-bottom:10px}'
+           '.th .o{font-size:62px;padding:8px 34px;margin-top:14px;border-radius:26px}'
+           '</style>')
+    fit = ('<script>document.fonts.ready.then(()=>{const v=document.querySelector(".th .pr .v");'
+           'if(!v)return;let f=200;const max=v.parentElement.clientWidth-30;'
+           'while(v.scrollWidth>max&&f>90){f-=4;v.style.fontSize=f+"px";}});</script>')
+    thumb = thumb.replace("</head>", big + "</head>").replace("</body>", fit + "</body>")
     slides.append(thumb); durs.append(1.2)
 
     from playwright.sync_api import sync_playwright
