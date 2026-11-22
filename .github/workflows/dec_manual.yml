@@ -34,11 +34,14 @@ jobs:
       - name: Build Keppetipola item pages (keppetipola/<item>.html)
         run: python make_keppetipola_pages.py
 
+      - name: Build English Keppetipola page (en/keppetipola-market-price-today.html)
+        run: python make_en_keppetipola.py
+
       - name: Commit if pages changed
         run: |
           git config user.name  "price-bot"
           git config user.email "price-bot@users.noreply.github.com"
-          git add harti_market_history.json market/ keppetipola/ sitemap.xml || true
+          git add harti_market_history.json market/ keppetipola/ en/ sitemap.xml || true
           if git diff --staged --quiet; then
             echo "No changes."
           else
