@@ -21,7 +21,7 @@ OUT_DIR = "share"
 WIDE = os.path.join(OUT_DIR, "dambulla-wide.png")
 STATE = os.path.join(OUT_DIR, "dambulla-wide.json")
 PAGES = ["index.html"]          # pages whose og:image is refreshed
-STYLE_VERSION = "15"                # change to force a redraw after a design change
+STYLE_VERSION = "16"                # change to force a redraw after a design change
 ROWS = 8
 
 # DEC product id -> (Sinhala name, emoji), in popular order. Coconut is left out
@@ -418,7 +418,7 @@ h2{{color:#0e4f4a;font-size:20px;margin:22px 0 8px}}h2 small{{color:#6f675a;font
 <p class="sub">Dambulla vegetable price list · Sri Lanka wholesale prices · {en_date(last)}</p>
 <span class="pill">Latest report: <b>{en_date(last)}</b></span><span class="pill">{total} items</span><span class="pill">Rs. per kg (coconut per nut)</span>
 <p class="ans">📌 On <b>{en_date(last)}</b>, wholesale prices at the Dambulla Dedicated Economic Centre included {top_txt} (Rs. per kg; coconut per nut).</p>
-<div class="tools"><button class="tb" id="sayAll" type="button" hidden>🔊 Listen to today's prices</button><button class="tb" id="sayStop" type="button" hidden>⏹ Stop</button>
+<div class="tools"><button class="tb" id="sayAll" type="button" hidden>🔊 Listen to today's prices</button><button class="tb" id="sayEvery" type="button" hidden>🔊 Read all</button><button class="tb" id="sayStop" type="button" hidden>⏹ Stop</button>
 <button class="tb" type="button" onclick="window.print()">🖨️ Print</button><button class="tb" type="button" id="pdfBtn">⬇️ Download PDF</button></div>
 <p class="tip" id="pdfTip" hidden>In the print window, choose <b>Save as PDF</b> (on a phone: Printer → Save as PDF), then press Save / Download.</p>
 {mood_html}
@@ -436,7 +436,7 @@ Prices are indicative only. Decisions are your responsibility. · © TopGoviya.l
 <script>
 (function(){{
   var SAY={json.dumps(say, ensure_ascii=False)},HEAD={json.dumps("Dambulla market wholesale prices for " + en_date(last) + ". " + mood_t.split(" ",1)[1] + ".")};
-  var U={{kg:"per kilo",nut:"per nut",bundle:"per bundle"}};
+  var U={{kg:"per kilo",nut:"per nut",bundle:"per bundle"}},CN={{v:"Vegetables",l:"Leafy vegetables",r:"Potatoes and roots",g:"Grains and pulses",f:"Fruits"}};
   document.getElementById("pdfBtn").onclick=function(){{document.getElementById("pdfTip").hidden=false;setTimeout(function(){{window.print();}},400);}};
   if(!("speechSynthesis" in window))return;
   var ss=window.speechSynthesis,all=document.getElementById("sayAll"),stop=document.getElementById("sayStop");
@@ -446,9 +446,10 @@ Prices are indicative only. Decisions are your responsibility. · © TopGoviya.l
   function speak(txt,i,last){{var u=new SpeechSynthesisUtterance(txt);var v=voice();if(v)u.voice=v;u.lang=v?v.lang:"en-GB";u.rate=0.95;
     u.onstart=function(){{mark(i);}};if(last)u.onend=function(){{mark(null);stop.hidden=true;}};ss.speak(u);}}
   function play(list){{ss.cancel();stop.hidden=false;speak(HEAD,null,false);
-    list.forEach(function(k,n){{var x=SAY[k];speak(x[1]+": "+x[2]+" to "+x[3]+" rupees "+U[x[4]]+".",k,n===list.length-1);}});
+    list.forEach(function(k,n){{var last=n===list.length-1;if(typeof k==="string"){{speak(CN[k]+".",null,last);return;}}var x=SAY[k];speak(x[1]+": "+x[2]+" to "+x[3]+" rupees "+U[x[4]]+".",k,last);}});
     try{{gtag("event","listen_prices",{{page:"en_dambulla",items:list.length}});}}catch(e){{}}}}
-  all.hidden=false;
+  all.hidden=false;var ev=document.getElementById("sayEvery");ev.hidden=false;
+  ev.onclick=function(){{var L=[];["v","l","r","g","f"].forEach(function(c){{var g=SAY.map(function(_,k){{return k;}}).filter(function(k){{return SAY[k][0]===c;}});if(g.length){{L.push(c);L=L.concat(g);}}}});play(L);}};
   all.onclick=function(){{play(SAY.map(function(_,k){{return k;}}).filter(function(k){{return SAY[k][0]==="v";}}).slice(0,15));}};
   document.querySelectorAll(".sayc").forEach(function(b){{b.hidden=false;b.title="Listen";b.onclick=function(){{
     play(SAY.map(function(_,k){{return k;}}).filter(function(k){{return SAY[k][0]===b.dataset.c;}}));}};}});
