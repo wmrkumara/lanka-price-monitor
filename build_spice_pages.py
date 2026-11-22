@@ -178,6 +178,10 @@ def shell(title, desc, canonical, body, jsonld, image="", lang="si", alternates=
 .tgt{{position:absolute;pointer-events:none;background:#191d1a;color:#f4efe4;font-family:'JetBrains Mono',monospace;font-size:12px;
      font-weight:600;padding:5px 9px;border-radius:8px;white-space:nowrap;transform:translate(-50%,-135%);opacity:0;transition:opacity .12s;z-index:3}}
 .tgt b{{color:#ffd98a}}
+.sayb{{display:inline-flex;align-items:center;gap:6px;border:0;background:var(--petrol);color:#fff;font:600 15px 'Hanken Grotesk','Noto Sans Sinhala',sans-serif;
+      padding:11px 18px;border-radius:12px;cursor:pointer;margin:10px 0 4px;min-height:44px}}
+.sayb.on{{background:var(--up)}}
+.sayn{{font-size:12.5px;color:var(--muted);margin:2px 0 6px}}
 </style>
 <script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>
 </head>
@@ -211,12 +215,67 @@ document.querySelectorAll(".tgc").forEach(function (box) {{
   svg.addEventListener("touchmove", function (ev) {{ show(ev.touches[0].clientX); }}, {{passive: true}});
 }});
 </script>
+<script>
+/* read the price aloud (Nov 2026) - Sinhala voice if the phone has one, otherwise English */
+(function () {{
+  var b = document.getElementById("sayBtn"); if (!b) return;
+  if (!("speechSynthesis" in window)) {{ b.hidden = true; return; }}
+  var ss = window.speechSynthesis, on = false, lab = b.textContent, note = document.getElementById("sayNote");
+  try {{ ss.getVoices(); ss.onvoiceschanged = function () {{}}; }} catch (x) {{}}
+  function voice(l) {{ var v = ss.getVoices(); for (var i = 0; i < v.length; i++) if (v[i].lang && v[i].lang.toLowerCase().indexOf(l) === 0) return v[i]; return null; }}
+  function done() {{ on = false; b.textContent = lab; b.classList.remove("on"); }}
+  b.onclick = function () {{
+    if (on) {{ ss.cancel(); done(); return; }}
+    var want = b.getAttribute("data-lang"), L = want, v = voice(want);
+    if (!v && want !== "en") {{ L = "en"; v = voice("en"); if (note) note.hidden = false; }} else if (note) note.hidden = true;
+    var parts = (b.getAttribute("data-" + L) || "").split("|");
+    ss.cancel(); on = true; b.textContent = b.getAttribute("data-stop"); b.classList.add("on");
+    parts.forEach(function (p, k) {{
+      var u = new SpeechSynthesisUtterance(p); if (v) u.voice = v; u.lang = v ? v.lang : (L === "si" ? "si-LK" : "en-GB"); u.rate = 0.95;
+      if (k === parts.length - 1) {{ u.onend = done; u.onerror = done; }}
+      ss.speak(u);
+    }});
+    try {{ gtag("event", "listen_prices", {{page: "spice", kind: b.getAttribute("data-slug"), language: L}}); }} catch (x) {{}}
+  }};
+}})();
+</script>
 <footer>{COPYRIGHT}<br>Design &amp; development by <a href="https://ebooklanka.com" target="_blank" rel="noopener">ebooklanka.com</a> · Built in Gampola, Sri Lanka</footer>
 </div>
 <script defer src="/events.js?v=1"></script>
 </body>
 </html>
 """
+
+
+SAY_UNIT_SI = {"kg": "කිලෝවක", "100 nuts": "ගෙඩි 100ක"}
+SAY_UNIT_EN = {"kg": "per kilo", "100 nuts": "per 100 nuts"}
+
+
+def say_button(slug, lang, si_parts, en_parts):
+    """Big 'listen' button. Sentences are joined with | and read one by one."""
+    lab, stop = ("🔊 මිල කියවන්න", "⏹ නවත්වන්න") if lang == "si" else ("🔊 Read the price aloud", "⏹ Stop")
+    note = ('<p class="sayn" id="sayNote" hidden>ඔබේ ෆෝන් එකේ සිංහල හඬක් නැති නිසා English වලින් කියවයි.</p>'
+            if lang == "si" else "")
+    return (f'<button class="sayb" id="sayBtn" type="button" data-lang="{lang}" data-slug="{slug}" data-stop="{stop}" '
+            f'data-si="{e("|".join(si_parts))}" data-en="{e("|".join(en_parts))}">{lab}</button>\n{note}')
+
+
+def say_change_si(now, old):
+    if not now or not old:
+        return ""
+    d = round(now) - round(old)
+    if d == 0:
+        return "පෙර DEA වාර්තාවට වඩා වෙනසක් නැත."
+    return f"පෙර DEA වාර්තාවට වඩා රුපියල් {abs(d):,} කින් {'ඉහළ ගොස් ඇත' if d > 0 else 'පහළ ගොස් ඇත'}."
+
+
+def say_change_en(now, old):
+    if not now or not old:
+        return ""
+    d = round(now) - round(old)
+    if d == 0:
+        return "Unchanged from the previous DEA report."
+    return f"{'Up' if d > 0 else 'Down'} {abs(d):,} rupees from the previous DEA report."
 
 
 def spice_page(dea, sp):
@@ -330,6 +389,17 @@ def spice_page(dea, sp):
                           f'<p style="margin:0">{e(a_)}</p><p lang="en" style="margin:2px 0 0;color:var(--soft)">{e(b_)}</p>'
                           for qs, qe, a_, b_ in faq) + '</div>')
 
+    say_si = [f"{si} මිල. {fdate(d,'si')} සතියේ DEA වාර්තාව අනුව, {main_si} {SAY_UNIT_SI[main_unit]} ගොවිපළ මිල රුපියල් {money(g1)}.",
+              say_change_si(g1, g1p)]
+    say_en = [f"{en} price. In the DEA report for the week of {fdate(d,'en')}, {main_en} was {money(g1)} rupees {SAY_UNIT_EN[main_unit]} at the farm gate.",
+              say_change_en(g1, g1p)]
+    for key, gsi, gen, unit in G[1:]:
+        a_ = N(cur, key)
+        if a_:
+            say_si.append(f"{gsi}, {SAY_UNIT_SI[unit]} රුපියල් {money(a_)}.")
+            say_en.append(f"{gen}, {money(a_)} rupees {SAY_UNIT_EN[unit]}.")
+    say_html = say_button(sp["slug"], "si", [x for x in say_si if x], [x for x in say_en if x])
+
     others = "".join(f'<a href="{o["slug"]}.html">{o["emo"]} {e(o["si"])} / {e(o["en"])}</a>' for o in SPICES if o["slug"] != sp["slug"])
     body = f"""
 <p class="crumb"><a href="../index.html">TopGoviya.lk</a> / <a href="../spices.html">කුළුබඩු මිල</a> / {e(si)}</p>
@@ -337,6 +407,7 @@ def spice_page(dea, sp):
 <p class="alt">{e(en)} price today in Sri Lanka · {e(sl)} mila ada · {e(si)} මිල today · {e(sp['alt_si'])}<br>{e(ta)} விலை இன்று</p>
 <p class="asof" style="margin-top:14px"><b>🌾 ගොවිපළ දොරටු මිල / Farm gate price</b> · DEA සතිපතා වාර්තාව · {fdate(d,'si')} සතිය · රු./{U_si}</p>
 <div class="duo">{cards}</div>
+{say_html}
 <div class="story">
   <p>{e(s_si)}</p>
   <p lang="en">{e(s_en)}</p>
@@ -568,6 +639,14 @@ def spice_page_en(dea, sp, cfg, dei):
     faq_html = ('<h2>Frequently asked questions</h2><div class="story" style="font-size:14.5px">'
                 + "".join(f'<h3 style="font-size:15.5px;margin:12px 0 4px">{e(q)}</h3><p style="margin:0">{e(a)}</p>' for q, a in faq) + '</div>')
 
+    say_en = [f"{cfg['h1']}. In the DEA report for the week of {fdate(d,'en')}, {main_name} averaged {money(g1)} rupees per kilo at the farm gate"
+              + (f", about {g1 / rate:,.2f} US dollars." if (g1 and rate) else "."), say_change_en(g1, g1p)]
+    for key, name, note in cfg["grades"]:
+        a = N(cur, key)
+        if a and key != main:
+            say_en.append(f"{name}, {money(a)} rupees per kilo.")
+    say_html = say_button(sp["slug"], "en", [], [x for x in say_en if x])
+
     si_url = f"{SITE}/{OUT_DIR}/{sp['slug']}.html"
     body = f"""
 <p class="crumb"><a href="../index.html">TopGoviya.lk</a> / <a href="../spices.html">Spice prices</a> / {e(cfg['name'])}</p>
@@ -577,6 +656,7 @@ def spice_page_en(dea, sp, cfg, dei):
 <div class="duo"><div class="r"><b>Rs. {money(g1)}</b><span>{e(main_name)} · national average
 {f' · <span class="chg {cls_main}" style="font-size:11px;padding:1px 6px">{t_main}</span>' if t_main else ''}</span></div>
 <div class="w"><b>{usd(g1, rate)}</b><span>per kg · at CBSL rate {f"Rs. {rate:,.2f}" if rate else ""}</span></div></div>
+{say_html}
 <div class="story"><p lang="en">{story}</p></div>
 <h2>Prices by grade<span>Week of {fdate(d,'en')} · national average, per kg</span></h2>
 <div class="scroll"><table><thead><tr><th>Grade</th><th class="n">LKR / kg</th><th class="n">≈ US$ / kg</th>
