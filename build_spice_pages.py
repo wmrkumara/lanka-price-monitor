@@ -436,6 +436,59 @@ Hamburg (H) groups. The table above shows how the price falls as the quills get 
 }
 
 
+# More English pages (Nov 2026): the two English spice pages above already bring Google visitors,
+# so the same page is made for four more spices. Only this list was added; the page builder is unchanged.
+EN_PAGES.update({
+ "cardamom": {
+  "file": "sri-lanka-cardamom-price", "name": "Sri Lankan cardamom", "emo": "🟢",
+  "h1": "Sri Lanka Cardamom Price Today",
+  "title": "Sri Lanka Cardamom Price Today – Farm Gate Price per kg (LKR & USD) | TopGoviya",
+  "grades": [("LG", "LG", "the top cardamom grade reported by DEA"),
+             ("LLG1", "LLG1", "next grade"),
+             ("LLG2", "LLG2", "lower grade"),
+             ("LB", "LB", "lower grade")],
+  "main": "LG",
+  "extra": """<h2>About Sri Lankan cardamom grades</h2><div class="story" style="font-size:14.5px">
+<p>The Department of Export Agriculture (DEA) reports green cardamom from Sri Lankan growers in several grades. <b>LG</b> is the
+top grade, followed by <b>LLG1</b>, <b>LLG2</b> and <b>LB</b>, which sell at lower prices. The table above shows the weekly
+national average for each grade.</p></div>""",
+ },
+ "clove": {
+  "file": "sri-lanka-clove-price", "name": "Sri Lankan clove", "emo": "🌰",
+  "h1": "Sri Lanka Clove Price Today",
+  "title": "Sri Lanka Clove Price Today – Farm Gate Price per kg (LKR & USD) | TopGoviya",
+  "grades": [("CLOVE", "Clove", "dried flower buds"),
+             ("STEM", "Clove stem", "stems — a by-product, priced far lower")],
+  "main": "CLOVE",
+  "extra": """<h2>Clove and clove stem</h2><div class="story" style="font-size:14.5px">
+<p><b>Clove</b> is the dried flower bud of the clove tree. <b>Clove stems</b> are a by-product of drying and sell for much less per kg,
+so compare the two prices separately.</p></div>""",
+ },
+ "nutmeg": {
+  "file": "sri-lanka-nutmeg-price", "name": "Sri Lankan nutmeg", "emo": "🟤",
+  "h1": "Sri Lanka Nutmeg & Mace Price Today",
+  "title": "Sri Lanka Nutmeg & Mace Price Today – Farm Gate Price per kg (LKR & USD) | TopGoviya",
+  "grades": [("NUTMEG No.1", "Nutmeg No.1", "top nutmeg grade"),
+             ("NUTMEG No.2", "Nutmeg No.2", "second nutmeg grade"),
+             ("NUTMEG BWP", "Nutmeg BWP", "broken, wormy and punky nuts"),
+             ("MACE No.1", "Mace No.1", "top mace grade"),
+             ("MACE No.2", "Mace No.2", "second mace grade")],
+  "main": "NUTMEG No.1",
+  "extra": """<h2>Nutmeg and mace</h2><div class="story" style="font-size:14.5px">
+<p><b>Nutmeg</b> is the seed of the nutmeg fruit; <b>mace</b> is the red, lace-like covering around the seed. Both come from the same
+fruit, but mace sells for much more per kg. DEA reports both in grades.</p></div>""",
+ },
+ "ginger": {
+  "file": "sri-lanka-ginger-price", "name": "Sri Lankan ginger", "emo": "🫚",
+  "h1": "Sri Lanka Ginger Price Today",
+  "title": "Sri Lanka Ginger Price Today – Farm Gate Price per kg (LKR & USD) | TopGoviya",
+  "grades": [("Ginger", "Ginger", "as reported by DEA")],
+  "main": "Ginger",
+  "extra": "",
+ },
+})
+
+
 def usd_rate_for(dei, day):
     """CBSL indicative USD/LKR spot rate for the DEA week (nearest earlier day), with its date."""
     recs = [r for r in (dei or {}).get("records", []) if r.get("usd_lkr_spot") or r.get("usd_lkr")]
@@ -511,7 +564,7 @@ def spice_page_en(dea, sp, cfg, dei):
             rate_txt or "US$ prices are not available this week."),
            ("Where does the data come from, and how often is it updated?",
             "From the Department of Export Agriculture (DEA), Sri Lanka, weekly producers' (farm gate) price report. "
-            "This page updates automatically when DEA publishes a new week. TopGoviya.lk is independent and does not buy or sell spices.")]
+            "This page is updated each week when DEA publishes a new report. TopGoviya.lk is independent and does not buy or sell spices.")]
     faq_html = ('<h2>Frequently asked questions</h2><div class="story" style="font-size:14.5px">'
                 + "".join(f'<h3 style="font-size:15.5px;margin:12px 0 4px">{e(q)}</h3><p style="margin:0">{e(a)}</p>' for q, a in faq) + '</div>')
 
