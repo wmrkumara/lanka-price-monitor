@@ -182,6 +182,9 @@ def shell(title, desc, canonical, body, jsonld, image="", lang="si", alternates=
       padding:11px 18px;border-radius:12px;cursor:pointer;margin:10px 0 4px;min-height:44px}}
 .sayb.on{{background:var(--up)}}
 .sayn{{font-size:12.5px;color:var(--muted);margin:2px 0 6px}}
+.yt-box{{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:22px 0}}
+.yt-box span{{font-size:13px;color:var(--muted)}}
+.yt-box a{{background:#e23d34;color:#fff!important;text-decoration:none;font-weight:800;padding:10px 18px;border-radius:999px;font-size:14px}}
 </style>
 <script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>
 </head>
@@ -362,6 +365,18 @@ def season_box(hist, si, en):
            re.sub("<[^>]+>", "", verdict_en) + " This is not a forecast.")
     return html, faq
 
+
+# YouTube box under the FAQ on every spice page (Nov 2026) - same look as the blog posts
+YT_URL = "https://www.youtube.com/@TopGoviyaLK?sub_confirmation=1"
+def yt_box(lang, slug):
+    if lang == "si":
+        t, sub, btn = "▶️ වීඩියෝවෙන් බලන්න / Watch on video", "සතිපතා කුළුබඩු මිල Shorts — @TopGoviyaLK", "YouTube Subscribe කරන්න →"
+    else:
+        t, sub, btn = "▶️ Watch on video", "Weekly Sri Lanka spice price Shorts — @TopGoviyaLK", "Subscribe on YouTube →"
+    return (f'<div class="yt-box"><div><strong>{t}</strong><br><span>{sub}</span></div>'
+            f'<a href="{YT_URL}" target="_blank" rel="noopener" '
+            f'onclick="try{{gtag(\'event\',\'youtube_click\',{{page:\'spice\',kind:\'{slug}\',language:\'{lang}\'}})}}catch(x){{}}">{btn}</a></div>')
+
 def spice_page(dea, sp):
     c, G = sp["c"], sp["grades"]
     main, main_si, main_en, main_unit = G[0]
@@ -511,6 +526,7 @@ def spice_page(dea, sp):
 <th class="n">වෙනස<br>vs prev. report</th></tr></thead><tbody>{wk_rows}</tbody></table></div>
 <p class="asof" style="margin-top:8px">වෙනස = එක් DEA වාර්තාවක් ඊට පෙර වාර්තාවට සාපේක්ෂව (සාමාන්‍යයක් නොවේ). DEA සමහර සතිවල වාර්තා නිකුත් නොකරයි.</p>
 {faq_html}
+{yt_box('si', sp['slug'])}
 <p class="asof" style="margin-top:14px">📑 <a href="{DEA_URL}" rel="noopener">DEA නිල වාර්තාව / Official DEA report</a> ·
 <a href="../spice-price-guide.html">ගොවිපළ, FOB හා සිල්ලර මිල පැහැදිලි කිරීම →</a></p>
 <a class="cta" href="../spice-report.html?spice={sp['slug']}">📊 සම්පූර්ණ වාර්තාව — ශ්‍රේණි, වසරින් වසර සැසඳීම, දිස්ත්‍රික්ක / Full report →</a>
@@ -758,6 +774,7 @@ def spice_page_en(dea, sp, cfg, dei):
 <div class="scroll"><table><thead><tr><th>District</th><th class="n">LKR / kg</th><th class="n">≈ US$ / kg</th></tr></thead><tbody>{dtrs}</tbody></table></div>
 {cfg['extra']}
 {faq_html}
+{yt_box('en', sp['slug'])}
 <p class="asof" style="margin-top:14px">📑 <a href="{DEA_URL}" rel="noopener">Official DEA report</a> ·
 <a href="../spice-report.html?spice={sp['slug']}">📊 Full report: all grades, year-on-year</a> · <a href="{sp['slug']}.html">සිංහල පිටුව</a></p>
 <a class="cta" href="../spices.html">All Sri Lanka spice prices →</a>
