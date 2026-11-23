@@ -278,6 +278,90 @@ def say_change_en(now, old):
     return f"{'Up' if d > 0 else 'Down'} {abs(d):,} rupees from the previous DEA report."
 
 
+
+# ---------------------------------------------------------------- best month to sell (Nov 2026)
+MON_SI = ["ජන", "පෙබ", "මාර්", "අප්‍රේ", "මැයි", "ජූනි", "ජූලි", "අගෝ", "සැප්", "ඔක්", "නොවැ", "දෙසැ"]
+MON_SI_FULL = ["ජනවාරි", "පෙබරවාරි", "මාර්තු", "අප්‍රේල්", "මැයි", "ජූනි", "ජූලි", "අගෝස්තු", "සැප්තැම්බර්", "ඔක්තෝබර්", "නොවැම්බර්", "දෙසැම්බර්"]
+MON_EN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+MON_EN_FULL = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+
+def season_stats(hist):
+    """Month pattern from FULL calendar years only: each month's average vs that year's average (%).
+    Returns None when there are fewer than 2 full years."""
+    by = {}
+    for d, v in hist:
+        by.setdefault(d.year, {}).setdefault(d.month, []).append(v)
+    years = sorted(y for y, m in by.items() if len(m) == 12)
+    if len(years) < 2:
+        return None
+    rel = {m: [] for m in range(1, 13)}
+    for y in years:
+        mavg = {m: sum(v) / len(v) for m, v in by[y].items()}
+        ya = sum(mavg.values()) / len(mavg)
+        for m, a in mavg.items():
+            rel[m].append(a / ya * 100 - 100)
+    avg = {m: (sum(r) / len(r) if r else None) for m, r in rel.items()}
+    ok = [m for m in avg if avg[m] is not None]
+    hi = sorted(ok, key=lambda m: -avg[m])[:2]
+    lo = sorted(ok, key=lambda m: avg[m])[:2]
+    spread = avg[hi[0]] - avg[lo[0]]
+    beat = sum(1 for r in rel[hi[0]] if r > 0)
+    return {"years": years, "avg": avg, "hi": hi, "lo": lo, "spread": spread, "beat": beat, "n": len(rel[hi[0]])}
+
+
+def season_box(hist, si, en):
+    S = season_stats(hist)
+    if not S:
+        return "", None
+    a, hi, lo, sp = S["avg"], S["hi"], S["lo"], S["spread"]
+    y0, y1 = S["years"][0], S["years"][-1]
+    W, H, base = 480, 200, 100
+    bw = (W - 8) / 12
+    mx = max(abs(v) for v in a.values() if v is not None) or 1
+    k = 70 / mx
+    g = f'<line x1="4" x2="{W-4}" y1="{base}" y2="{base}" stroke="#3a403a" stroke-width="1.2"/>'
+    for m in range(1, 13):
+        v = a[m]
+        x0 = 4 + (m - 1) * bw + 3
+        if v is not None:
+            h = max(abs(v) * k, 1.5)
+            c = "#2c7a52" if v >= 0 else "#b23a2e"
+            g += f'<rect x="{x0:.1f}" y="{(base - h) if v >= 0 else base:.1f}" width="{bw-6:.1f}" height="{h:.1f}" rx="3" fill="{c}" opacity=".85"/>'
+            ty = base - h - 5 if v >= 0 else base + h + 13
+            g += f'<text x="{x0+(bw-6)/2:.1f}" y="{ty:.1f}" text-anchor="middle" font-size="11.5" font-weight="700" fill="{c}">{("+" if v > 0 else "") + f"{v:.0f}" if abs(v) >= 0.5 else "0"}%</text>'
+        g += f'<text x="{x0+(bw-6)/2:.1f}" y="194" text-anchor="middle" font-size="12" fill="#3a403a">{MON_SI[m-1]}</text>'
+    svg = f'<svg viewBox="0 0 {W} {H}" style="width:100%;height:auto;display:block" role="img" aria-label="{e(en)} price by month">{g}</svg>'
+    his = " සහ ".join(MON_SI_FULL[m - 1] for m in hi); hie = " and ".join(MON_EN_FULL[m - 1] for m in hi)
+    los = " සහ ".join(MON_SI_FULL[m - 1] for m in lo); loe = " and ".join(MON_EN_FULL[m - 1] for m in lo)
+    if sp < 6:
+        verdict_si = (f"⚠️ මාසය අනුව {si} මිල වෙනස <b>ඉතා කුඩායි</b> (±{sp/2:.0f}% පමණ). ගබඩා කර තබාගෙන මාසය බලා විකිණීමෙන් "
+                      f"ලොකු ලාභයක් බලාපොරොත්තු වෙන්න එපා — වියළීමෙන් බර අඩුවීම සහ ගබඩා වියදම මේ වෙනසට වඩා වැඩි විය හැක.")
+        verdict_en = (f"The month-to-month difference for {en.lower()} is <b>very small</b> (about ±{sp/2:.0f}%). Don't expect much from "
+                      f"storing and waiting — weight loss and storage costs can be larger than this gap.")
+        cls = "flat"
+    else:
+        strong = S["beat"] == S["n"] and sp >= 8
+        verdict_si = (f"සාමාන්‍යයෙන් මිල ඉහළම <b>{his}</b>; අඩුම <b>{los}</b> (වෙනස ~{sp:.0f}%). "
+                      f"{MON_SI_FULL[hi[0]-1]} මාසය වසරේ සාමාන්‍යයට වඩා ඉහළ වූයේ වසර {S['n']}න් {S['beat']}ක.")
+        verdict_en = (f"On average prices were highest in <b>{hie}</b> and lowest in <b>{loe}</b> (a gap of ~{sp:.0f}%). "
+                      f"{MON_EN_FULL[hi[0]-1]} was above the yearly average in {S['beat']} of {S['n']} years.")
+        if S["beat"] < S["n"]:
+            verdict_si += " රටාව සෑම වසරකම එක ලෙස සිදු නොවේ."
+            verdict_en += " The pattern does not repeat every year."
+        cls = "up" if strong else "flat"
+    html = (f'<h2>විකුණන්න හොඳම මාසය?<span>Best month to sell — {e(en)} · {y0}–{y1}</span></h2>'
+            f'<div class="chart">{svg}</div>'
+            f'<p class="asof" style="margin-top:4px">එක් එක් මාසයේ ජාතික සාමාන්‍ය මිල, එම වසරේ සාමාන්‍යයට වඩා කොපමණ ඉහළ/පහළද ({y0}–{y1} සම්පූර්ණ වසර) · '
+            f'Each month vs that year\'s average</p>'
+            f'<div class="story"><p>{verdict_si}</p><p lang="en">{verdict_en}</p>'
+            f'<p style="font-size:13.5px;color:var(--muted)">මෙය පසුගිය වසරවල සාමාන්‍ය රටාව පමණි, අනාවැකියක් නොවේ. වසර පුරා මිල ක්‍රමයෙන් ඉහළ යන විට අවසාන මාස ද ඉහළින් පෙනේ. ලෝක වෙළඳපොළ, කාලගුණය සහ අස්වැන්න අනුව මිල වෙනස් වේ. '
+            f'<span lang="en">Past pattern only, not a forecast; a steady rise during a year also lifts the later months.</span></p></div>')
+    faq = (f"{si} විකුණන්න හොඳම මාසය කුමක්ද?", f"What is the best month to sell {en.lower()}?",
+           re.sub("<[^>]+>", "", verdict_si) + " මෙය අනාවැකියක් නොවේ.",
+           re.sub("<[^>]+>", "", verdict_en) + " This is not a forecast.")
+    return html, faq
+
 def spice_page(dea, sp):
     c, G = sp["c"], sp["grades"]
     main, main_si, main_en, main_unit = G[0]
@@ -313,6 +397,7 @@ def spice_page(dea, sp):
     hi_d, hi_v = max(hist, key=lambda t: t[1])
     lo_d, lo_v = min(hist, key=lambda t: t[1])
     yr = [t for t in hist if t[0] >= d - timedelta(days=365)]
+    season_html, season_faq = season_box(hist, si, en)
 
     hi_txt_si = f" (ඉහළම රු. {money(g1h)})" if g1h else ""
     hi_txt_en = f" (highest Rs. {money(g1h)})" if g1h else ""
@@ -379,6 +464,8 @@ def spice_page(dea, sp):
     faq.append(("2023 සිට ඉහළම හා අඩුම මිල?", f"Highest and lowest {en.lower()} price since 2023?",
                 f"{main_si} ජාතික සාමාන්‍ය: ඉහළම රු. {money(hi_v)} ({fdate(hi_d,'si')}), අඩුම රු. {money(lo_v)} ({fdate(lo_d,'si')}).",
                 f"{main_en} national average: highest Rs. {money(hi_v)} ({fdate(hi_d,'en')}), lowest Rs. {money(lo_v)} ({fdate(lo_d,'en')})."))
+    if season_faq:
+        faq.append(season_faq)
     if sp.get("faq_grades"):
         faq.append(sp["faq_grades"])
     faq.append(("මෙම මිල ගණන් කොහෙන්ද?", "Where do these prices come from?",
@@ -418,6 +505,7 @@ def spice_page(dea, sp):
 <div class="chart">{svg_line(hist)}</div>
 <p class="asof">2023 සිට ඉහළම රු. {money(hi_v)} ({fdate(hi_d,'si')}) · අඩුම රු. {money(lo_v)} ({fdate(lo_d,'si')})
  · පසුගිය වසර: රු. {money(min(v for _, v in yr))} – {money(max(v for _, v in yr))}</p>
+{season_html}
 <h2>පසුගිය DEA වාර්තා 12<span>Last 12 DEA reports · national average</span></h2>
 <div class="scroll"><table><thead><tr><th>සතිය / Week</th><th class="n">{e(main_si)}</th>{f'<th class="n">{e(g2[1])}</th>' if g2 else ''}
 <th class="n">වෙනස<br>vs prev. report</th></tr></thead><tbody>{wk_rows}</tbody></table></div>
