@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
+<title>TopGoviya මිල සහායකයා – Dambulla DEC තොග මිල</title>
+<meta name="description" content="එළවළු, පළතුරු මිල අහන්න – Sinhala, English, Singlish. දඹුල්ල ආර්ථික මධ්‍යස්ථානයේ (Dambulla DEC) අද තොග මිල.">
+<meta name="theme-color" content="#14532d">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI","Noto Sans Sinhala","Iskoola Pota",Roboto,Arial,sans-serif;background:#eef3ee;color:#1b2a1f;font-size:16px;line-height:1.5}
+.app{max-width:560px;margin:0 auto;height:100vh;height:100dvh;display:flex;flex-direction:column;background:#f7faf7;box-shadow:0 0 0 1px #dbe6db}
+header{background:#14532d;color:#fff;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+header b{font-size:17px;display:block;line-height:1.2}
+header span{font-size:13px;opacity:.85}
+header a{color:#fff;font-size:13px;text-decoration:none;border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:5px 12px;white-space:nowrap}
+.status{font-size:12.5px;padding:6px 14px;background:#e3efe3;color:#245c33;border-bottom:1px solid #d3e3d3}
+.status.warn{background:#fff4d6;color:#7a5a00;border-color:#f1e1a8}
+.status.err{background:#fde4e1;color:#8a2a20;border-color:#f3c5bf}
+main{flex:1;overflow-y:auto;padding:12px 12px 6px;-webkit-overflow-scrolling:touch}
+.msg{max-width:92%;margin:0 0 10px;padding:9px 12px;border-radius:14px;word-wrap:break-word}
+.msg.user{margin-left:auto;background:#16a34a;color:#fff;border-bottom-right-radius:4px}
+.msg.bot{background:#fff;border:1px solid #dbe6db;border-bottom-left-radius:4px;max-width:100%}
+.msg.bot p{margin:0 0 8px}
+.msg.bot p:last-child{margin-bottom:0}
+.card{border:1px solid #cfe0cf;border-radius:12px;margin:8px 0;overflow:hidden;background:#fbfdfb}
+.gh{background:#e6f1e6;color:#14532d;font-weight:700;padding:7px 12px;font-size:16px}
+.r{padding:8px 12px;border-top:1px solid #e3ece3;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px}
+.r:first-of-type{border-top:0}
+.n{flex:1 1 100%;font-size:13px;color:#4a5d4e}
+.p{font-size:20px;font-weight:700;color:#14532d}
+.p small{font-size:12px;font-weight:400;color:#5b6d5f;margin-left:4px}
+.c{font-size:13px;color:#33433a;background:#eef3ee;border-radius:999px;padding:1px 9px}
+.c small{color:#6a7b6e}
+.stale{flex:1 1 100%;font-size:12.5px;color:#8a5a00}
+.nodata{color:#8a2a20;font-size:14px}
+.dt{font-size:12.5px;color:#5b6d5f;padding:6px 12px;border-top:1px solid #e3ece3;background:#f3f8f3}
+.note{font-size:12.5px;color:#5b6d5f}
+.note a,.msg a{color:#0f6b34}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:6px 12px;white-space:nowrap;-webkit-overflow-scrolling:touch}
+.chip,.cin{font:inherit;font-size:14px;border:1px solid #9fcba9;background:#fff;color:#14532d;border-radius:999px;padding:8px 14px;cursor:pointer}
+.cin{margin:4px 6px 0 0;display:inline-block}
+.chip:active,.cin:active{background:#dff0e2}
+form{display:flex;gap:8px;padding:8px 12px calc(10px + env(safe-area-inset-bottom));border-top:1px solid #dbe6db;background:#fff}
+input{flex:1;font:inherit;font-size:16px;padding:10px 14px;border:1px solid #b9cfbd;border-radius:999px;min-width:0}
+input:focus{outline:2px solid #16a34a;border-color:#16a34a}
+button.mic{font-size:20px;width:46px;flex:none;border:1px solid #9fcba9;background:#fff;border-radius:999px;cursor:pointer;padding:0;line-height:1}
+button.mic.on{background:#dc2626;border-color:#dc2626;animation:pulse 1s infinite}
+button.lg{font:inherit;font-size:13px;font-weight:600;flex:none;border:1px solid #9fcba9;background:#fff;color:#14532d;border-radius:999px;padding:0 10px;cursor:pointer}
+button.mic[hidden],button.lg[hidden]{display:none}
+@keyframes pulse{50%{opacity:.55}}
+button.send{font:inherit;font-weight:600;background:#16a34a;color:#fff;border:0;border-radius:999px;padding:0 18px;cursor:pointer}
+button.send:disabled{opacity:.5}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div><b>TopGoviya මිල සහායකයා</b><span>Dambulla DEC තොග මිල</span></div>
+    <a href="https://topgoviya.lk/" target="_blank" rel="noopener">TopGoviya.lk</a>
+  </header>
+  <div id="status" class="status">මිල දත්ත load වෙමින්…</div>
+  <main id="chat" aria-live="polite"></main>
+  <div id="chips" class="chips"></div>
+  <form id="f" autocomplete="off">
+    <input id="q" type="text" inputmode="text" enterkeyhint="send" placeholder="උදා: කැරට් මිල කීයද?" aria-label="මිල ප්‍රශ්නය">
+    <button class="lg" id="langBtn" type="button" hidden aria-label="කටහඬ භාෂාව">සිං</button>
+    <button class="mic" id="micBtn" type="button" hidden aria-label="කතා කරලා අහන්න">🎤</button>
+    <button class="send" id="sendBtn" type="submit">යවන්න</button>
+  </form>
+</div>
+
+<script>
+/* ============ CORE (no DOM here – this part is tested separately) ============ */
+/* CORE-START */
+var SOURCE_URL = 'https://raw.githubusercontent.com/wmrkumara/lanka-price-monitor/main/dambulla_dec.json';
+var SITE_URL = 'https://topgoviya.lk/';
+
+/* [ids, Sinhala label, English label, aliases (comma separated), unit('kg' default | 'nut')] */
+var GROUPS = [
+ [[1],'ගෝවා','Cabbage','ගෝවා,gova,gowa,cabbage'],
+ [[3],'රතු ගෝවා','Red Cabbage','රතු ගෝවා,rathu gova,red cabbage'],
+ [[2],'මල් ගෝවා','Cauliflower','මල් ගෝවා,mal gova,malgova,cauliflower'],
+ [[4],'බෝංචි','Beans','බෝංචි,බෝන්චි,bonchi,boonchi,beans,green beans'],
+ [[6,7],'කැරට්','Carrot','කැරට්,කැරොට්,carrot,carrots,karat,gajar,ගජර්'],
+ [[8,9,10],'බීට්රූට්','Beetroot','බීට්රූට්,බීට් රූට්,බීට්,beetroot,beet root,beet'],
+ [[11],'තක්කාලි','Tomato','තක්කාලි,thakkali,takkali,thakali,takali,tomato,tomatoes'],
+ [[13],'රාබු','Radish','රාබු,rabu,radish,raddish'],
+ [[14],'පිපිඤ්ඤා','Cucumber','පිපිඤ්ඤා,pipinna,pipinja,cucumber'],
+ [[19],'ලීක්ස්','Leeks','ලීක්ස්,leeks,leek'],
+ [[21],'වැටකොලු','Ridge Gourd','වැටකොලු,watakolu,wetakolu,වැටකොළු,ridge gourd'],
+ [[22],'බණ්ඩක්කා','Okra (Lady\'s Fingers)','බණ්ඩක්කා,bandakka,bandaka,okra,ladys fingers,lady fingers,ladies fingers'],
+ [[23],'පතෝල','Snake Gourd','පතෝල,pathola,patola,snake gourd'],
+ [[24],'කරවිල','Bitter Gourd','කරවිල,karawila,karavila,karawilla,bitter gourd'],
+ [[25,52],'වට්ටක්කා','Pumpkin','වට්ටක්කා,wattakka,wattaka,pumpkin'],
+ [[26,57,58],'වම්බටු','Brinjal (Eggplant)','වම්බටු,wambatu,wambattu,brinjal,eggplant'],
+ [[27],'දෙහි','Lime','දෙහි,dehi,lime,lemon'],
+ [[28],'ඉඟුරු','Ginger','ඉඟුරු,ඉගුරු,inguru,ginger'],
+ [[29],'කහ','Turmeric','කහ,kaha,turmeric'],
+ [[30],'කොස්','Jackfruit','කොස්,පොලොස්,kos,polos,jackfruit'],
+ [[31,69],'රතු ලූණු','Red Onion','රතු ලූණු,rathu lunu,rathulunu,red onion'],
+ [[48,70],'ලොකු ලූණු','Big Onion','ලොකු ලූණු,loku lunu,lokulunu,big onion,bombay onion'],
+ [[31,69,48,70],'ලූණු','Onion','ලූණු,lunu,onion,onions'],
+ [[47],'සුදු ලූණු','Garlic','සුදු ලූණු,sudu lunu,sudulunu,garlic'],
+ [[49],'වියළි මිරිස්','Dry Chillies','වියළි මිරිස්,ශුෂ්ක මිරිස්,dry chilli,dry chillies,dry chili,dried chilli,dried chili'],
+ [[67],'කොළ මිරිස්','Green Chilli','කොළ මිරිස්,kola miris,green chilli,green chili,green chillies'],
+ [[68],'නයි මිරිස්','Nai Miris','නයි මිරිස්,නායි මිරිස්,nai miris'],
+ [[67,49,68],'මිරිස්','Chilli','මිරිස්,miris,mirisa,chilli,chili,chilly,chillie'],
+ [[50],'ගම්මිරිස්','Black Pepper','ගම්මිරිස්,gammiris,gammirris,black pepper,pepper'],
+ [[66],'කැප්සිකම්','Capsicum','කැප්සිකම්,මාළු මිරිස්,malu miris,capsicum'],
+ [[61],'මුරුංගා','Drumsticks','මුරුංගා,murunga,drumstick'],
+ [[62],'අලකෙසෙල්','Ash Plantain','අලකෙසෙල්,alakesel,ala kesel,alukesel,alu kesel,අල කෙසෙල්,අළු කෙසෙල්,අළුකෙසෙල්,ash plantain'],
+ [[63],'කෙසෙල් මල්','Plantain Flower','කෙසෙල් මල්,kesel mal,plantain flower,banana flower'],
+ [[64],'ඇඹරැල්ලා','Ambarella','ඇඹරැල්ලා,amberella,ambarella,ඇඹරල්ලා,අඹරැල්ලා,ඇඹරැල්ල'],
+ [[65],'චව් චව්','Chow Chow','චව් චව්,chow chow,chowchow,chaw chaw'],
+ [[54],'තුඹකරවිල','Thumbakarawila','තුඹකරවිල,thumbakarawila,thumba karawila,tumba karawila,තුඹ කරවිල'],
+ [[56],'තිබ්බටු','Thithbatu','තිබ්බටු,thibbatu,thithbatu,thithabatu,thith batu,thiththabatu'],
+ [[59],'දඹල','Winged Bean','දඹල,dambala,winged bean'],
+ [[89],'කංකුං','Water Spinach','කංකුං,kankun,kankung,kangkung,කංකුන්,water spinach'],
+ [[32],'ගොටුකොළ','Gotukola','ගොටුකොළ,gotukola,gotu kola,ගොටු කොළ'],
+ [[92],'කරපිංචා','Curry Leaves','කරපිංචා,karapincha,curry leaves,curry leaf'],
+ [[93],'ලෙටිස්','Lettuce','ලෙටිස්,සලාද කොළ,lettuce'],
+ [[94],'මුකුණුවැන්න','Mukunuwenna','මුකුණුවැන්න,mukunuwenna'],
+ [[95],'ලූණු කොළ','Onion Leaves','ලූණු කොළ,lunu kola,onion leaves,spring onion'],
+ [[97],'බතල','Sweet Potato','බතල,batala,sweet potato'],
+ [[98],'මඤ්ඤොක්කා','Manioc (Cassava)','මඤ්ඤොක්කා,manyokka,මඤ්ඤොක්ක,manioc,cassava'],
+ [[99],'කිරිඅල','Kiriala','කිරිඅල,කිරි අල,kiriala,kiri ala'],
+ [[100],'කොහිල','Kohila','කොහිල,kohila'],
+ [[101],'නෙළුම් අල','Lotus Roots','නෙළුම් අල,nelum ala,lotus root'],
+ [[15,16,18,20,96],'අර්තාපල් (අල)','Potatoes','අර්තාපල්,අල,ala,artapal,aratapal,potato,potatoes'],
+ [[40],'අම්බුන් කෙසෙල්','Banana - Ambun','අම්බුන්,ambun'],
+ [[41],'සීනි කෙසෙල්','Banana - Sini','සීනි කෙසෙල්,seeni kesel,sini kesel'],
+ [[44],'ඇබුල් කෙසෙල්','Banana - Abul','ඇබුල්,abul'],
+ [[71],'කොලිකුට්ටු කෙසෙල්','Banana - Kolikuttu','කොලිකුට්ටු,kolikuttu'],
+ [[72],'රතු කෙසෙල්','Red Banana','රතු කෙසෙල්,rathu kesel,red banana'],
+ [[40,41,44,71,72],'කෙසෙල්','Banana','කෙසෙල්,kesel,banana'],
+ [[42,73,74,75],'අඹ','Mango','අඹ,amba,mango'],
+ [[43,76],'පැෂන් ෆෲට්','Passion Fruit','පැෂන්,passion,passion fruit'],
+ [[33],'අලිගැටපේර','Avocado','අලිගැටපේර,aligata pera,avocado,avacado'],
+ [[34],'පේර','Guava','පේර,pera,guava'],
+ [[35],'කොමඩු','Watermelon','කොමඩු,komadu,watermelon'],
+ [[36],'පැපොල්','Papaya','පැපොල්,papol,papaya,pawpaw,papaw,paw paw'],
+ [[37],'කටු අනෝදා','Soursop','කටු අනෝදා,katu anoda,soursop'],
+ [[38],'අන්නාසි','Pineapple','අන්නාසි,anasi,annasi,pineapple'],
+ [[39],'දිවුල්','Woodapple','දිවුල්,diwul,woodapple,wood apple'],
+ [[45],'රටකජු','Peanuts','රටකජු,රට කජු,rata kaju,ratakaju,peanut,groundnut'],
+ [[79],'තැඹිලි','King Coconut','තැඹිලි,thambili,king coconut','nut'],
+ [[46],'පොල්','Coconut','පොල්,pol,coconut','nut'],
+ [[77],'නෙල්ලි','Gooseberry','නෙල්ලි,nelli,gooseberry'],
+ [[78],'බෙලි','Indian Bael','බෙලි,beli,bael'],
+ [[80],'කඩල','Gram','කඩල,kadala,gram,chickpea'],
+ [[81],'කුරක්කන්','Finger Millet','කුරක්කන්,kurakkan,finger millet'],
+ [[82],'කව්පි','Cowpea','කව්පි,kaupi,cowpea'],
+ [[83],'මුං ඇට','Green Gram','මුං ඇට,මුං,mung,mun,green gram'],
+ [[84],'තල','Sesame','තල,thala,sesame'],
+ [[85],'සියඹලා','Tamarind','සියඹලා,siyambala,tamarind'],
+ [[86],'සෝයා','Soya Bean','සෝයා,soya,soya bean'],
+ [[87],'බඩ ඉරිඟු','Corn','බඩ ඉරිඟු,bada irigu,corn,maize']
+];
+
+var STOP = {};
+('price prices today todays rate rates mila mil kiyada kiyadha kiyda kiyak mokakda mokada what how much the for ada dawase dambulla dec list latest show tell per eke eka of is me please pls wholesale').split(' ').forEach(function(w){STOP[w]=1;});
+
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function sing(w){
+  if(w.length<=3) return w;
+  if(/ies$/.test(w)) return w.slice(0,-3)+'y';
+  if(/oes$/.test(w)) return w.slice(0,-2);
+  if(/(ss|us)$/.test(w)) return w;
+  if(/s$/.test(w)) return w.slice(0,-1);
+  return w;
+}
+function norm(s){
+  s=String(s||'').toLowerCase().replace(/[​-‍﻿]/g,'');
+  s=s.replace(/ූ/g,'ු');               /* ූ and ු treated the same (ලූණු / ලුණු) */
+  s=s.replace(/['’`]/g,'');
+  s=s.replace(/([a-z0-9])([඀-෿])/g,'$1 $2').replace(/([඀-෿])([a-z0-9])/g,'$1 $2');
+  s=s.replace(/[^a-z0-9඀-෿]+/g,' ').trim();
+  return s.split(' ').map(function(w){return /^[a-z]+$/.test(w)?sing(w):w;}).join(' ');
+}
+function isSi(s){return /[඀-෿]/.test(s);}
+function lev(a,b){
+  var m=a.length,n=b.length,i,j,prev=[],cur;
+  for(j=0;j<=n;j++)prev[j]=j;
+  for(i=1;i<=m;i++){cur=[i];for(j=1;j<=n;j++){cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a[i-1]===b[j-1]?0:1));}prev=cur;}
+  return prev[n];
+}
+
+/* Build the search index once the product list is known */
+function buildIndex(products){
+  var groups=[],claimed={},auto=[];
+  GROUPS.forEach(function(g,gi){
+    var ids=g[0].map(String).filter(function(id){return products[id];});
+    if(!ids.length) return;
+    var grp={ids:ids,si:g[1],en:g[2],unit:g[4]||'kg',aliases:g[3].split(',').map(norm).filter(Boolean)};
+    ids.forEach(function(id){
+      if(!claimed[id]){claimed[id]=grp; grp.aliases.push(norm(products[id].name));}
+    });
+    groups.push(grp);
+  });
+  Object.keys(products).forEach(function(id){
+    if(claimed[id]) return;
+    var nm=products[id].name;
+    var grp={ids:[id],si:nm,en:nm,unit:'kg',aliases:[norm(nm)]};
+    groups.push(grp);
+  });
+  var pairs=[];
+  groups.forEach(function(g){
+    var seen={};
+    g.aliases.forEach(function(a){ if(a && !seen[a]){seen[a]=1; pairs.push({a:a,g:g,si:isSi(a)});} });
+  });
+  pairs.sort(function(x,y){return y.a.length-x.a.length;});
+  return {groups:groups,pairs:pairs};
+}
+
+/* Find product groups mentioned in the question (longest alias first, several allowed) */
+function matchGroups(query,idx){
+  var q=' '+norm(query)+' ', out=[], i, p, pos, len;
+  for(i=0;i<idx.pairs.length && out.length<6;i++){
+    p=idx.pairs[i];
+    if(p.si && p.a.length>3){ pos=q.indexOf(p.a); len=p.a.length; }
+    else { pos=q.indexOf(' '+p.a+' '); len=p.a.length; if(pos>=0)pos+=1; }
+    if(pos<0) continue;
+    q=q.slice(0,pos)+new Array(len+1).join(' ')+q.slice(pos+len);
+    if(out.indexOf(p.g)<0) out.push(p.g);
+  }
+  return out;
+}
+
+/* Typo tolerance for English / Singlish words (carot -> carrot) */
+function fuzzyList(query,idx,maxDist){
+  var toks=norm(query).split(' ').filter(function(t){return /^[a-z]+$/.test(t)&&t.length>=3&&!STOP[t]&&!STOP[t+'s'];});
+  var best={},res=[];
+  toks.forEach(function(t){
+    idx.pairs.forEach(function(p){
+      if(p.si||p.a.indexOf(' ')>=0||p.a.length<3) return;
+      var lim=Math.min(maxDist,t.length<=4?1:(t.length<=6?1:2));
+      if(Math.abs(p.a.length-t.length)>lim) return;
+      var d=lev(t,p.a);
+      if(d<=lim && (best[p.g.ids.join()]===undefined||d<best[p.g.ids.join()].d)) best[p.g.ids.join()]={d:d,g:p.g};
+    });
+  });
+  Object.keys(best).forEach(function(k){res.push(best[k]);});
+  res.sort(function(a,b){return a.d-b.d;});
+  return res.map(function(r){return r.g;});
+}
+
+/* Prepare the downloaded JSON */
+function prepare(raw){
+  if(!raw||typeof raw!=='object'||!raw.products||!raw.days||!raw.latest_date) throw new Error('bad-json');
+  var dates=Object.keys(raw.days).filter(function(d){return d<=raw.latest_date;}).sort();
+  if(!dates.length||!raw.days[raw.latest_date]) throw new Error('bad-json');
+  var db={products:raw.products,days:raw.days,dates:dates,latest_date:raw.latest_date,updated_sl:raw.updated_sl||'',source_url:raw.source_url||''};
+  db.index=buildIndex(db.products);
+  return db;
+}
+function rangeOf(v){
+  if(Array.isArray(v)&&v.length>=2&&isFinite(v[0])&&isFinite(v[1])&&v[0]>0&&v[1]>0) return [+v[0],+v[1]];
+  if(typeof v==='number'&&isFinite(v)&&v>0) return [v,v];
+  return null;
+}
+/* Latest price of one product + the previous price before it */
+function lastRec(db,id){
+  var i,r,cur=null;
+  for(i=db.dates.length-1;i>=0;i--){
+    var day=db.days[db.dates[i]];
+    if(!day||typeof day!=='object') continue;
+    r=rangeOf(day[id]);
+    if(!r) continue;
+    if(!cur){cur={date:db.dates[i],min:r[0],max:r[1]};}
+    else return {cur:cur,prev:{date:db.dates[i],min:r[0],max:r[1]}};
+  }
+  return cur?{cur:cur,prev:null}:null;
+}
+
+var I18N={
+ si:{
+  hello:'ආයුබෝවන්! 👋 මම TopGoviya මිල සහායකයා. දඹුල්ල ආර්ථික මධ්‍යස්ථානයේ (Dambulla DEC) අලුත්ම තොග මිල කියන්නම්. එළවළු/පළතුරු නමක් අහන්න – Sinhala, English, Singlish ඕනෑම එකකින්.',
+  tryAsk:'මේ වගේ අහන්න:',
+  notFound:'"%Q" සඳහා මිල හොයාගන්න බැරි වුණා.',
+  didYou:'මේවායින් එකක්ද?',
+  popular:'මේ වගේ අහලා බලන්න:',
+  fuzzy:'මම හිතන්නේ ඔයා ඇහුවේ:',
+  whole:'තොග මිල · Dambulla DEC',
+  dataDate:'දත්ත දිනය',
+  last:'අන්තිම මිල',
+  oldTag:'(පරණ දත්ත)',
+  vs:'%D ට වඩා',
+  noRecent:'මෑත දත්ත නැහැ (අන්තිම මිල දිනය: %D)',
+  same:'වෙනසක් නැහැ',
+  noData:'Dambulla DEC ලැයිස්තුවේ මේ item එකට මිලක් නැහැ (කුළුබඩු මිල TopGoviya.lk හි බලන්න)',
+  kg:'කිලෝවකට',
+  nut:'ගෙඩියකට',
+  disc:'මිල දවස තුළ වෙනස් විය හැක. මේවා තොග මිල ගණන් – මාර්ගෝපදේශයක් ලෙස පමණක් බලන්න.',
+  more:'තවත් මිල ගණන්:',
+  loading:'මිල දත්ත load වෙමින්…',
+  loaded:'දත්ත දිනය: %D',
+  cached:'සුරැකි දත්ත (%D) පෙන්වයි – අලුත් දත්ත බාගනිමින්…',
+  listening:'🎤 අහගෙන ඉන්නවා… දැන් කතා කරන්න',
+  micDenied:'Microphone අවසරය දෙන්න (browser settings → Site permissions → Microphone)',
+  noSpeech:'කටහඬ ඇහුණේ නැහැ. නැවත 🎤 ඔබලා උත්සාහ කරන්න.',
+  micNet:'කටහඬින් අහන්න Internet ඕන.',
+  micFail:'කටහඬ හඳුනාගන්න බැරි වුණා. ටයිප් කරලා අහන්න.',
+  langNo:'මේ phone එකේ සිංහල කටහඬ support නැහැ – English (EN) වෙත මාරු කළා.',
+  offline:'Internet නැහැ – සුරැකි දත්ත පෙන්වයි (%D)',
+  fail:'මිල දත්ත ගන්න බැරි වුණා. Internet එක බලලා පිටුව refresh කරන්න.',
+  ph:'උදා: කැරට් මිල කීයද?'
+ },
+ en:{
+  hello:'Hello! 👋 I\'m the TopGoviya price assistant. I give the latest wholesale prices from the Dambulla Dedicated Economic Centre (DEC). Ask about any vegetable or fruit in Sinhala, English or Singlish.',
+  tryAsk:'Try asking:',
+  notFound:'I couldn\'t find a price for "%Q".',
+  didYou:'Did you mean one of these?',
+  popular:'Try one of these:',
+  fuzzy:'I think you asked about:',
+  whole:'Wholesale price · Dambulla DEC',
+  dataDate:'Data date',
+  last:'Last price',
+  oldTag:'(old data)',
+  vs:'vs %D',
+  noRecent:'No recent data (last price: %D)',
+  same:'no change',
+  noData:'No price listed for this item on the Dambulla DEC list (spice prices: see TopGoviya.lk)',
+  kg:'per kg',
+  nut:'per nut',
+  disc:'Prices can change during the day. These are wholesale prices – use as a guide only.',
+  more:'More prices:',
+  loading:'Loading price data…',
+  loaded:'Data date: %D',
+  cached:'Showing saved data (%D) – downloading fresh data…',
+  listening:'🎤 Listening… speak now',
+  micDenied:'Please allow the microphone in browser settings.',
+  noSpeech:'Did not hear anything. Tap 🎤 and try again.',
+  micNet:'Voice search needs internet.',
+  micFail:'Could not recognise speech. Please type instead.',
+  langNo:'Sinhala voice is not supported on this phone – switched to English.',
+  offline:'Offline – showing saved data (%D)',
+  fail:'Could not load price data. Check your internet and refresh the page.',
+  ph:'e.g. carrot price today'
+ }
+};
+var CHIPS=['කැරට්','බෝංචි','තක්කාලි','රතු ලූණු','ඉඟුරු','පොල්','Banana price','thakkali mila'];
+
+function detectLang(q){
+  if(/[඀-෿]/.test(q)) return 'si';
+  if(/\b(mila|mil|kiyada|kiyadha|kiyda|kiyak|mokakda|mokada|eka|eke|ada|dawase|thiyenawada|kohomada|neda|wage|saha|thiyanawada|kiyanna|mata)\b/i.test(q)) return 'si';
+  return 'en';
+}
+function isGreeting(q){
+  var n=norm(q);
+  if(!n) return true;
+  if(/^(hi|hello|hey|help|ayubowan|hii|hy)( |$)/.test(n)) return true;
+  if(/^(ආයුබෝවන්|හෙලෝ|කොහොමද|උදව්)/.test(n)) return true;
+  return false;
+}
+function daysBetween(a,b){return Math.round((Date.parse(b)-Date.parse(a))/86400000);}
+function fmtRange(a,b){return a===b?('Rs. '+a):('Rs. '+a+'–'+b);}
+function chipBtn(text){return '<button type="button" class="cin" data-q="'+esc(text)+'">'+esc(text)+'</button>';}
+function label(g,lang){return lang==='si'?g.si:g.en;}
+
+function changeHtml(rec,T){
+  if(!rec.prev) return '';
+  var m1=(rec.cur.min+rec.cur.max)/2, m0=(rec.prev.min+rec.prev.max)/2, d=Math.round(m1-m0);
+  var txt=d===0?('● '+T.same):((d>0?'▲ +':'▼ −')+Math.abs(d));
+  return '<span class="c">'+txt+' <small>'+T.vs.replace('%D',esc(rec.prev.date))+'</small></span>';
+}
+function groupCard(g,db,lang,T){
+  var rows='',multi=g.ids.length>1,unitTxt=g.unit==='nut'?T.nut:T.kg,i,id,rec,nm,showName;
+  for(i=0;i<g.ids.length;i++){
+    id=g.ids[i]; nm=db.products[id].name; rec=lastRec(db,id);
+    showName=multi||nm.toLowerCase()!==label(g,lang).toLowerCase();
+    var nameDiv=showName?'<div class="n">'+esc(nm)+'</div>':'';
+    if(!rec){rows+='<div class="r">'+nameDiv+'<div class="nodata">'+T.noData+'</div></div>';continue;}
+    var age=daysBetween(rec.cur.date,db.latest_date);
+    if(age>30){rows+='<div class="r">'+nameDiv+'<div class="nodata">'+T.noRecent.replace('%D',esc(rec.cur.date))+'</div></div>';continue;}
+    rows+='<div class="r">'+nameDiv+
+      '<div class="p">'+fmtRange(rec.cur.min,rec.cur.max)+'<small>/ '+unitTxt+'</small></div>'+(age>0?'':changeHtml(rec,T))+
+      (age>0?'<div class="stale">'+T.last+': '+esc(rec.cur.date)+' '+T.oldTag+'</div>':'')+'</div>';
+  }
+  return '<div class="card"><div class="gh">'+esc(label(g,lang))+'</div>'+rows+'<div class="dt">'+T.dataDate+': '+esc(db.latest_date)+' · '+T.whole+'</div></div>';
+}
+function helpHtml(T){
+  return '<p>'+T.hello+'</p><p class="note">'+T.tryAsk+'</p><p>'+['කැරට් මිල කීයද?','carrot price today','thakkali mila kiyada','බෝංචි, තක්කාලි'].map(chipBtn).join('')+'</p>';
+}
+function suggestGroups(query,db){
+  var f=fuzzyList(query,db.index,2).slice(0,4);
+  return f;
+}
+function buildReply(query,db){
+  var lang=detectLang(query),T=I18N[lang],idx=db.index,groups=matchGroups(query,idx),fuzzy=false,html='';
+  if(!groups.length){
+    if(isGreeting(query)) return {kind:'help',lang:lang,html:helpHtml(T)};
+    var f=fuzzyList(query,idx,1);
+    if(f.length&&f.length<=2){groups=f.slice(0,2);fuzzy=true;}
+  }
+  if(!groups.length){
+    var sug=suggestGroups(query,db),list,head;
+    if(sug.length){head=T.didYou;list=sug.map(function(g){return chipBtn(label(g,lang));});}
+    else{head=T.popular;list=CHIPS.map(chipBtn);}
+    return {kind:'notfound',lang:lang,html:'<p>'+T.notFound.replace('%Q',esc(query.trim().slice(0,60)))+'</p><p class="note">'+head+'</p><p>'+list.join('')+'</p>'};
+  }
+  if(fuzzy) html+='<p class="note">'+T.fuzzy+' <b>'+groups.map(function(g){return esc(label(g,lang));}).join(', ')+'</b></p>';
+  groups.forEach(function(g){html+=groupCard(g,db,lang,T);});
+  html+='<p class="note">'+T.disc+'<br>'+T.more+' <a href="'+SITE_URL+'" target="_blank" rel="noopener">TopGoviya.lk</a></p>';
+  return {kind:'price',lang:lang,fuzzy:fuzzy,groups:groups,html:html};
+}
+/* CORE-END */
+
+/* ============ PAGE (DOM, loading, cache) ============ */
+(function(){
+  if(typeof document==='undefined') return;
+  var chat=document.getElementById('chat'),statusEl=document.getElementById('status'),
+      form=document.getElementById('f'),input=document.getElementById('q'),
+      chipsEl=document.getElementById('chips'),btn=document.getElementById('sendBtn');
+  var db=null,pending=null,loadFailed=false,CACHE_KEY='tg_dec_cache_v1';
+
+  var lastStatus={t:'',c:''};
+  function setStatus(t,cls){lastStatus={t:t,c:cls||''};statusEl.textContent=t;statusEl.className='status'+(cls?' '+cls:'');}
+  function tmpStatus(t,cls){statusEl.textContent=t;statusEl.className='status'+(cls?' '+cls:'');}
+  function restoreStatus(){statusEl.textContent=lastStatus.t;statusEl.className='status'+(lastStatus.c?' '+lastStatus.c:'');}
+  function addMsg(role,html,isText){
+    var d=document.createElement('div');d.className='msg '+role;
+    if(isText)d.textContent=html;else d.innerHTML=html;
+    chat.appendChild(d);
+    while(chat.children.length>60&&chat.removeChild){chat.removeChild(chat.children[0]);}
+    chat.scrollTop=chat.scrollHeight;return d;
+  }
+  function slimForCache(raw){
+    var dates=Object.keys(raw.days).sort().slice(-60),days={};
+    dates.forEach(function(d){days[d]=raw.days[d];});
+    return {products:raw.products,days:days,latest_date:raw.latest_date,updated_sl:raw.updated_sl,source_url:raw.source_url};
+  }
+  function saveCache(raw){try{localStorage.setItem(CACHE_KEY,JSON.stringify(slimForCache(raw)));}catch(e){}}
+  function readCache(){try{var s=localStorage.getItem(CACHE_KEY);return s?JSON.parse(s):null;}catch(e){return null;}}
+
+  /* download fresh data; the 20-second limit covers the whole download, not just the headers */
+  function fetchFresh(){
+    var ctl=typeof AbortController!=='undefined'?new AbortController():null;
+    var timer=ctl?setTimeout(function(){ctl.abort();},20000):null;
+    return fetch(SOURCE_URL,ctl?{signal:ctl.signal}:{})
+      .then(function(r){if(!r.ok)throw new Error('http '+r.status);return r.json();})
+      .then(function(raw){
+        if(timer)clearTimeout(timer);
+        var d=prepare(raw);saveCache(raw);return d;
+      },function(err){if(timer)clearTimeout(timer);throw err;});
+  }
+
+  function answer(text){
+    var r=buildReply(text,db);
+    addMsg('bot',r.html);
+  }
+  function ask(text){
+    text=(text||'').trim();
+    if(!text) return;
+    addMsg('user',text,true);
+    input.value='';
+    if(db){answer(text);return;}
+    if(loadFailed){addMsg('bot','<p>'+I18N.si.fail+'</p>');return;}
+    pending=text;                                   /* answered as soon as data arrives */
+    addMsg('bot','<p>'+I18N.si.loading+'</p>');
+  }
+  function runPending(){
+    if(pending&&db){var t=pending;pending=null;answer(t);}
+  }
+
+  form.addEventListener('submit',function(e){e.preventDefault();ask(input.value);});
+  chat.addEventListener('click',function(e){var b=e.target.closest?e.target.closest('[data-q]'):null;if(b)ask(b.getAttribute('data-q'));});
+  chipsEl.addEventListener('click',function(e){var b=e.target.closest?e.target.closest('[data-q]'):null;if(b)ask(b.getAttribute('data-q'));});
+  chipsEl.innerHTML=CHIPS.map(function(c){return '<button type="button" class="chip" data-q="'+esc(c)+'">'+esc(c)+'</button>';}).join('');
+
+  addMsg('bot',helpHtml(I18N.si));
+
+  /* ---- voice search (Chrome / Android; button hidden where the browser has no speech support) ---- */
+  var SR=(typeof window!=='undefined')?(window.SpeechRecognition||window.webkitSpeechRecognition):null;
+  var micBtn=document.getElementById('micBtn'),langBtn=document.getElementById('langBtn');
+  var vLang='si-LK',rec=null,listening=false;
+  try{var sv=localStorage.getItem('tg_voice_lang');if(sv==='si-LK'||sv==='en-US')vLang=sv;}catch(e){}
+  function showLang(){langBtn.textContent=vLang==='si-LK'?'සිං':'EN';}
+  function setVLang(v){vLang=v;showLang();try{localStorage.setItem('tg_voice_lang',v);}catch(e){}}
+  if(SR&&micBtn&&langBtn){
+    micBtn.hidden=false;langBtn.hidden=false;showLang();
+    langBtn.addEventListener('click',function(){setVLang(vLang==='si-LK'?'en-US':'si-LK');});
+    micBtn.addEventListener('click',function(){
+      if(listening&&rec){try{rec.stop();}catch(e){}return;}
+      var failed=false;
+      rec=new SR();
+      rec.lang=vLang;rec.interimResults=true;rec.maxAlternatives=5;rec.continuous=false;
+      rec.onstart=function(){listening=true;micBtn.classList.add('on');tmpStatus(I18N.si.listening,'warn');};
+      rec.onresult=function(e){
+        var res=e.results[e.results.length-1],alts=[],i;
+        for(i=0;i<res.length;i++)alts.push(res[i].transcript);
+        if(!res.isFinal){input.value=alts[0]||'';return;}
+        var chosen=alts[0]||'';
+        if(db){for(i=0;i<alts.length;i++){if(buildReply(alts[i],db).kind==='price'){chosen=alts[i];break;}}}
+        input.value='';
+        ask(chosen);
+      };
+      rec.onerror=function(e){
+        failed=true;var er=e&&e.error;
+        if(er==='aborted')return;
+        if(er==='not-allowed'||er==='service-not-allowed')tmpStatus(I18N.si.micDenied,'err');
+        else if(er==='no-speech')tmpStatus(I18N.si.noSpeech,'warn');
+        else if(er==='network')tmpStatus(I18N.si.micNet,'err');
+        else if(er==='language-not-supported'){setVLang('en-US');tmpStatus(I18N.si.langNo,'warn');}
+        else tmpStatus(I18N.si.micFail,'err');
+        setTimeout(restoreStatus,4000);
+      };
+      rec.onend=function(){
+        listening=false;micBtn.classList.remove('on');
+        if(!failed)restoreStatus();
+      };
+      try{rec.start();}catch(e){tmpStatus(I18N.si.micFail,'err');setTimeout(restoreStatus,4000);}
+    });
+  }
+
+  /* 1) saved copy first, so the chat works immediately even on a slow connection */
+  var cachedRaw=readCache();
+  if(cachedRaw){
+    try{db=prepare(cachedRaw);setStatus(I18N.si.cached.replace('%D',db.latest_date),'warn');}catch(e){db=null;}
+  }
+  var urlQ=null;try{urlQ=new URLSearchParams(location.search).get('q');}catch(e){}
+  if(urlQ&&db){ask(urlQ);urlQ=null;}
+
+  /* 2) fresh data in the background */
+  fetchFresh().then(function(fresh){
+    db=fresh;setStatus(I18N.si.loaded.replace('%D',db.latest_date));
+    runPending();
+    if(urlQ){ask(urlQ);urlQ=null;}
+  }).catch(function(){
+    if(db){setStatus(I18N.si.offline.replace('%D',db.latest_date),'warn');runPending();}
+    else{loadFailed=true;setStatus(I18N.si.fail,'err');addMsg('bot','<p>'+I18N.si.fail+'</p>');pending=null;}
+  });
+})();
+</script>
+</body>
+</html>
