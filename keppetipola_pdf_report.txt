@@ -1,1 +1,3 @@
+❌ 26-11-26-KEPPETIPOLA.pdf: no date found inside the PDF — skipped
 ✅ price-list-2026-11-25.pdf: date 2026-11-25, 73 prices entered, 12 with no price (---)
+   ℹ️ 2026-11-25 already existed — replaced by this PDF
