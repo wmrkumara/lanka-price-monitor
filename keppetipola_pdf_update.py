@@ -171,7 +171,14 @@ def main():
     for path in pdfs:
         fname = os.path.basename(path)
         try:
-            day, rows = parse(read_pdf_text(path))
+            text = read_pdf_text(path)
+            if len(text.strip()) < 50:
+                # A photo saved as a PDF has no text inside. Reading pictures is not safe
+                # (wrong digits = wrong farmer prices), so the robot leaves it alone.
+                report.append(f"📷 {fname}: this PDF is a PHOTO (no text inside) — robot cannot read pictures safely, skipped. "
+                              f"Add this day with the photo method (Claude chat).")
+                continue
+            day, rows = parse(text)
         except Exception as ex:  # unreadable file
             report.append(f"❌ {fname}: could not read the PDF ({ex.__class__.__name__}) — skipped")
             failed = True
