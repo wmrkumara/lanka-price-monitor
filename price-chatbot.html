@@ -40,6 +40,10 @@ main{flex:1;overflow-y:auto;padding:12px 12px 6px;-webkit-overflow-scrolling:tou
 .dt.old{background:#fff9e0;border-top-color:#f1e1a8;color:#6b5200}
 .dt.old .dd{background:#ffe27a;color:#5c4300}
 .dt .nt{display:block;margin-top:3px;font-weight:600;color:#7a5a00}
+.sayrow{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:8px 12px;border-top:1px solid #e3ece3}
+.say{font:inherit;font-size:14px;border:1px solid #9fcba9;background:#fff;color:#14532d;border-radius:999px;padding:7px 14px;cursor:pointer}
+.say.on{background:#14532d;color:#fff}
+.saynote{font-size:12px;color:#7a5a00}
 .note{font-size:12.5px;color:#5b6d5f}
 .note a,.msg a{color:#0f6b34}
 .chips{display:flex;gap:6px;overflow-x:auto;padding:6px 12px;white-space:nowrap;-webkit-overflow-scrolling:touch}
@@ -288,6 +292,10 @@ var I18N={
   fuzzy:'මම හිතන්නේ ඔයා ඇහුවේ:',
   whole:'තොග මිල · Dambulla DEC',
   notToday:'අද මිල තවම නැත',
+  sayBtn:'කියවන්න',
+  sayStop:'නවත්වන්න',
+  sayNoSi:'මෙම දුරකථනයේ සිංහල හඬ නැත – English වලින් කියවයි',
+  sayNo:'මෙම දුරකථනයේ කියවීම (හඬ) නැත',
   dataDate:'දත්ත දිනය',
   last:'අන්තිම මිල',
   oldTag:'(පරණ දත්ත)',
@@ -321,6 +329,10 @@ var I18N={
   fuzzy:'I think you asked about:',
   whole:'Wholesale price · Dambulla DEC',
   notToday:"Today's prices not published yet",
+  sayBtn:'Read aloud',
+  sayStop:'Stop',
+  sayNoSi:'No Sinhala voice on this phone – reading in English',
+  sayNo:'Read-aloud is not supported on this phone',
   dataDate:'Data date',
   last:'Last price',
   oldTag:'(old data)',
@@ -371,7 +383,15 @@ function changeHtml(rec,T){
   var txt=d===0?('● '+T.same):((d>0?'▲ +':'▼ −')+Math.abs(d));
   return '<span class="c">'+txt+' <small>'+T.vs.replace('%D',esc(rec.prev.date))+'</small></span>';
 }
+var SAY_MONTH={si:['ජනවාරි','පෙබරවාරි','මාර්තු','අප්‍රේල්','මැයි','ජූනි','ජූලි','අගෝස්තු','සැප්තැම්බර්','ඔක්තෝබර්','නොවැම්බර්','දෙසැම්බර්'],
+  en:['January','February','March','April','May','June','July','August','September','October','November','December']};
+function spokenDate(iso,L){var p=String(iso).split('-'),m=+p[1]-1,d=+p[2];return (SAY_MONTH[L][m]||'')+' '+d;}
+function spokenRange(a,b,L){
+  if(L==='si') return a===b?('රුපියල් '+a):('රුපියල් '+a+' සිට '+b+' දක්වා');
+  return a===b?(a+' rupees'):(a+' to '+b+' rupees');
+}
 function groupCard(g,db,lang,T){
+  var saySi=[],sayEn=[];
   var rows='',multi=g.ids.length>1,unitTxt=g.unit==='nut'?T.nut:T.kg,i,id,rec,nm,showName;
   for(i=0;i<g.ids.length;i++){
     id=g.ids[i]; nm=db.products[id].name; rec=lastRec(db,id);
@@ -380,12 +400,21 @@ function groupCard(g,db,lang,T){
     if(!rec){rows+='<div class="r">'+nameDiv+'<div class="nodata">'+T.noData+'</div></div>';continue;}
     var age=daysBetween(rec.cur.date,db.latest_date);
     if(age>30){rows+='<div class="r">'+nameDiv+'<div class="nodata">'+T.noRecent.replace('%D',esc(rec.cur.date))+'</div></div>';continue;}
+    var spNm=multi?nm:label(g,'si'),spNmEn=multi?nm:label(g,'en'),uSi=g.unit==='nut'?I18N.si.nut:I18N.si.kg,uEn=g.unit==='nut'?I18N.en.nut:I18N.en.kg;
+    saySi.push(spNm+', '+uSi+', '+spokenRange(rec.cur.min,rec.cur.max,'si')+(age>0?' ('+spokenDate(rec.cur.date,'si')+' මිල)':'')+'.');
+    sayEn.push(spNmEn+', '+uEn+', '+spokenRange(rec.cur.min,rec.cur.max,'en')+(age>0?' (price of '+spokenDate(rec.cur.date,'en')+')':'')+'.');
     rows+='<div class="r">'+nameDiv+
       '<div class="p">'+fmtRange(rec.cur.min,rec.cur.max)+'<small>/ '+unitTxt+'</small></div>'+(age>0?'':changeHtml(rec,T))+
       (age>0?'<div class="stale">'+T.last+': '+esc(rec.cur.date)+' '+T.oldTag+'</div>':'')+'</div>';
   }
   var isToday=db.latest_date===new Date(Date.now()+19800000).toISOString().slice(0,10); /* Sri Lanka date */
-  return '<div class="card"><div class="gh">'+esc(label(g,lang))+'</div>'+rows+'<div class="dt'+(isToday?'':' old')+'">'+T.dataDate+': <b class="dd">'+esc(db.latest_date)+'</b> · '+T.whole+(isToday?'':'<span class="nt">⏳ '+T.notToday+'</span>')+'</div></div>';
+  var sayRow='';
+  if(saySi.length){
+    var tSi=saySi.join(' ')+' දත්ත දිනය '+spokenDate(db.latest_date,'si')+'.'+(isToday?'':' '+I18N.si.notToday+'.');
+    var tEn=sayEn.join(' ')+' Data date '+spokenDate(db.latest_date,'en')+'.'+(isToday?'':" Today's prices are not published yet.");
+    sayRow='<div class="sayrow"><button type="button" class="say" data-si="'+esc(tSi)+'" data-en="'+esc(tEn)+'" data-go="'+esc(T.sayBtn)+'" data-stop="'+esc(T.sayStop)+'" data-nosi="'+esc(T.sayNoSi)+'" data-no="'+esc(T.sayNo)+'">🔊 '+esc(T.sayBtn)+'</button><span class="saynote"></span></div>';
+  }
+  return '<div class="card"><div class="gh">'+esc(label(g,lang))+'</div>'+rows+sayRow+'<div class="dt'+(isToday?'':' old')+'">'+T.dataDate+': <b class="dd">'+esc(db.latest_date)+'</b> · '+T.whole+(isToday?'':'<span class="nt">⏳ '+T.notToday+'</span>')+'</div></div>';
 }
 function helpHtml(T){
   return '<p>'+T.hello+'</p><p class="note">'+T.tryAsk+'</p><p>'+['කැරට් මිල කීයද?','carrot price today','thakkali mila kiyada','බෝංචි, තක්කාලි'].map(chipBtn).join('')+'</p>';
@@ -492,6 +521,29 @@ function buildReply(query,db){
 
   form.addEventListener('submit',function(e){e.preventDefault();ask(input.value);});
   chat.addEventListener('click',function(e){var b=e.target.closest?e.target.closest('[data-q]'):null;if(b)ask(b.getAttribute('data-q'));});
+  /* 🔊 read-aloud: uses the phone's own voice. Sinhala if the phone has it, otherwise English (with a note). */
+  function sayNote(btn,t){var n=btn.parentNode&&btn.parentNode.querySelector?btn.parentNode.querySelector('.saynote'):null;if(n)n.textContent=t||'';}
+  function sayVoice(list,pre){for(var i=0;i<list.length;i++){var l=(list[i].lang||'').toLowerCase().replace('_','-');if(l.indexOf(pre)===0)return list[i];}return null;}
+  function sayReset(btn){btn.classList.remove('on');btn.textContent='🔊 '+btn.getAttribute('data-go');}
+  chat.addEventListener('click',function(e){
+    var b=e.target.closest?e.target.closest('.say'):null;if(!b)return;
+    var ss=window.speechSynthesis;
+    if(!ss||typeof SpeechSynthesisUtterance==='undefined'){sayNote(b,b.getAttribute('data-no'));return;}
+    var was=b.classList.contains('on');
+    try{ss.cancel();}catch(x){}
+    var all=chat.querySelectorAll('.say.on');for(var i=0;i<all.length;i++)sayReset(all[i]);
+    sayNote(b,'');
+    if(was)return;                                   /* second tap = stop */
+    var voices=[];try{voices=ss.getVoices()||[];}catch(x){}
+    var si=sayVoice(voices,'si'),useSi=!!si||voices.length===0;
+    var u=new SpeechSynthesisUtterance(b.getAttribute(useSi?'data-si':'data-en'));
+    if(useSi){if(si)u.voice=si;u.lang='si-LK';}
+    else{var en=sayVoice(voices,'en');if(en)u.voice=en;u.lang='en-US';sayNote(b,b.getAttribute('data-nosi'));}
+    u.rate=0.9;
+    u.onend=u.onerror=function(){sayReset(b);};
+    b.classList.add('on');b.textContent='⏹ '+b.getAttribute('data-stop');
+    setTimeout(function(){try{ss.speak(u);}catch(x){sayReset(b);}},60);
+  });
   chipsEl.addEventListener('click',function(e){var b=e.target.closest?e.target.closest('[data-q]'):null;if(b)ask(b.getAttribute('data-q'));});
   chipsEl.innerHTML=CHIPS.map(function(c){return '<button type="button" class="chip" data-q="'+esc(c)+'">'+esc(c)+'</button>';}).join('');
 
