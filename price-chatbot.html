@@ -434,15 +434,34 @@ function buildReply(query,db){
   function saveCache(raw){try{localStorage.setItem(CACHE_KEY,JSON.stringify(slimForCache(raw)));}catch(e){}}
   function readCache(){try{var s=localStorage.getItem(CACHE_KEY);return s?JSON.parse(s):null;}catch(e){return null;}}
 
+  /* the newest day can be in dambulla_early.json (official list copied by hand before the DEC site has it);
+     the website page already uses it, so the bot must too */
+  var EARLY_URL='https://raw.githubusercontent.com/wmrkumara/lanka-price-monitor/main/dambulla_early.json';
+  function mergeEarly(raw,ear){
+    try{
+      if(ear&&ear.date&&ear.prices&&raw&&raw.days&&!raw.days[ear.date]&&(!raw.latest_date||ear.date>raw.latest_date)){
+        raw.days[ear.date]=ear.prices;raw.latest_date=ear.date;
+      }
+    }catch(e){}
+    return raw;
+  }
+  function fetchEarly(opts){
+    return fetch(EARLY_URL,opts).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});
+  }
+
   /* download fresh data; the 20-second limit covers the whole download, not just the headers */
   function fetchFresh(){
     var ctl=typeof AbortController!=='undefined'?new AbortController():null;
     var timer=ctl?setTimeout(function(){ctl.abort();},20000):null;
-    return fetch(SOURCE_URL,ctl?{signal:ctl.signal}:{})
+    var opts=ctl?{signal:ctl.signal}:{};
+    return fetch(SOURCE_URL,opts)
       .then(function(r){if(!r.ok)throw new Error('http '+r.status);return r.json();})
       .then(function(raw){
-        if(timer)clearTimeout(timer);
-        var d=prepare(raw);saveCache(raw);return d;
+        return fetchEarly(opts).then(function(ear){
+          if(timer)clearTimeout(timer);
+          raw=mergeEarly(raw,ear);
+          var d=prepare(raw);saveCache(raw);return d;
+        });
       },function(err){if(timer)clearTimeout(timer);throw err;});
   }
 
