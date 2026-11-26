@@ -36,6 +36,10 @@ main{flex:1;overflow-y:auto;padding:12px 12px 6px;-webkit-overflow-scrolling:tou
 .stale{flex:1 1 100%;font-size:12.5px;color:#8a5a00}
 .nodata{color:#8a2a20;font-size:14px}
 .dt{font-size:12.5px;color:#5b6d5f;padding:6px 12px;border-top:1px solid #e3ece3;background:#f3f8f3}
+.dt .dd{font-weight:700;padding:1px 7px;border-radius:6px;background:#cfe8d2;color:#1d5a2d}
+.dt.old{background:#fff9e0;border-top-color:#f1e1a8;color:#6b5200}
+.dt.old .dd{background:#ffe27a;color:#5c4300}
+.dt .nt{display:block;margin-top:3px;font-weight:600;color:#7a5a00}
 .note{font-size:12.5px;color:#5b6d5f}
 .note a,.msg a{color:#0f6b34}
 .chips{display:flex;gap:6px;overflow-x:auto;padding:6px 12px;white-space:nowrap;-webkit-overflow-scrolling:touch}
@@ -283,6 +287,7 @@ var I18N={
   popular:'මේ වගේ අහලා බලන්න:',
   fuzzy:'මම හිතන්නේ ඔයා ඇහුවේ:',
   whole:'තොග මිල · Dambulla DEC',
+  notToday:'අද මිල තවම නැත',
   dataDate:'දත්ත දිනය',
   last:'අන්තිම මිල',
   oldTag:'(පරණ දත්ත)',
@@ -315,6 +320,7 @@ var I18N={
   popular:'Try one of these:',
   fuzzy:'I think you asked about:',
   whole:'Wholesale price · Dambulla DEC',
+  notToday:"Today's prices not published yet",
   dataDate:'Data date',
   last:'Last price',
   oldTag:'(old data)',
@@ -378,7 +384,8 @@ function groupCard(g,db,lang,T){
       '<div class="p">'+fmtRange(rec.cur.min,rec.cur.max)+'<small>/ '+unitTxt+'</small></div>'+(age>0?'':changeHtml(rec,T))+
       (age>0?'<div class="stale">'+T.last+': '+esc(rec.cur.date)+' '+T.oldTag+'</div>':'')+'</div>';
   }
-  return '<div class="card"><div class="gh">'+esc(label(g,lang))+'</div>'+rows+'<div class="dt">'+T.dataDate+': '+esc(db.latest_date)+' · '+T.whole+'</div></div>';
+  var isToday=db.latest_date===new Date(Date.now()+19800000).toISOString().slice(0,10); /* Sri Lanka date */
+  return '<div class="card"><div class="gh">'+esc(label(g,lang))+'</div>'+rows+'<div class="dt'+(isToday?'':' old')+'">'+T.dataDate+': <b class="dd">'+esc(db.latest_date)+'</b> · '+T.whole+(isToday?'':'<span class="nt">⏳ '+T.notToday+'</span>')+'</div></div>';
 }
 function helpHtml(T){
   return '<p>'+T.hello+'</p><p class="note">'+T.tryAsk+'</p><p>'+['කැරට් මිල කීයද?','carrot price today','thakkali mila kiyada','බෝංචි, තක්කාලි'].map(chipBtn).join('')+'</p>';
