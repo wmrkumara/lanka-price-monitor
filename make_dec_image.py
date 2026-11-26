@@ -44,7 +44,18 @@ def si_date(iso):
 
 def load():
     with open(DATA, encoding="utf-8") as f:
-        return json.load(f)
+        db = json.load(f)
+    # Newest day may only be in dambulla_early.json (same rule as the website page and make_dambulla_pages.py)
+    try:
+        with open("dambulla_early.json", encoding="utf-8") as f:
+            ear = json.load(f)
+        days = db.setdefault("days", {})
+        if ear.get("date") and ear.get("prices") and ear["date"] not in days and (not days or ear["date"] > max(days)):
+            days[ear["date"]] = ear["prices"]
+            db["latest_date"] = ear["date"]
+    except Exception:
+        pass
+    return db
 
 
 def state_now(db):
