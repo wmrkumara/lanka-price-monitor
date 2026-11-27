@@ -1,91 +1,91 @@
 {
  "source": "Department of Export Agriculture (DEA), Sri Lanka",
  "type": "National average farm gate price (Rs.)",
- "date": "2026-11-17",
- "prev_date": "2026-11-10",
+ "date": "2026-11-25",
+ "prev_date": "2026-11-17",
  "items": [
   {
    "id": "pepper",
    "grade": "GR-1",
-   "price": 2110.29,
-   "prev": 2084.79,
+   "price": 2129.07,
+   "prev": 2110.29,
    "unit": "kg"
   },
   {
    "id": "cinnamon",
    "grade": "C-5",
-   "price": 5624.0,
-   "prev": 5630.25,
+   "price": 5703.13,
+   "prev": 5624.0,
    "unit": "kg"
   },
   {
    "id": "clove",
    "grade": "CLOVE",
-   "price": 2555.07,
-   "prev": 2587.29,
+   "price": 2556.86,
+   "prev": 2555.07,
    "unit": "kg"
   },
   {
    "id": "cardamom",
    "grade": "LG",
-   "price": 14666.67,
-   "prev": 16055.33,
+   "price": 16583.33,
+   "prev": 14666.67,
    "unit": "kg"
   },
   {
    "id": "nutmeg",
    "grade": "NUTMEG No.1",
-   "price": 988.6,
-   "prev": 990.2,
+   "price": 978.8,
+   "prev": 988.6,
    "unit": "kg"
   },
   {
    "id": "mace",
    "grade": "MACE No.1",
-   "price": 5581.6,
-   "prev": 5343.2,
+   "price": 5543.2,
+   "prev": 5581.6,
    "unit": "kg"
   },
   {
    "id": "coffee",
    "grade": "GR 1",
-   "price": 1449.93,
-   "prev": 1433.71,
+   "price": 1418.5,
+   "prev": 1449.93,
    "unit": "kg"
   },
   {
    "id": "cocoa",
    "grade": "GR 1",
-   "price": 1008.83,
-   "prev": 1024.33,
+   "price": 1017.33,
+   "prev": 1008.83,
    "unit": "kg"
   },
   {
    "id": "arecanut",
    "grade": "Dried",
-   "price": 760.64,
-   "prev": 755.93,
+   "price": 757.36,
+   "prev": 760.64,
    "unit": "kg"
   },
   {
    "id": "goraka",
    "grade": "Goraka",
-   "price": 298.36,
-   "prev": 295.71,
+   "price": 303.5,
+   "prev": 298.36,
    "unit": "kg"
   },
   {
    "id": "ginger",
    "grade": "Ginger",
-   "price": 491.55,
-   "prev": 486.45,
+   "price": 497.27,
+   "prev": 491.55,
    "unit": "kg"
   },
   {
    "id": "turmeric",
    "grade": "Turmeric",
-   "price": 224.5,
-   "prev": 220.5,
+   "price": 222.42,
+   "prev": 224.5,
    "unit": "kg"
   }
  ]
