@@ -1,3 +1,4 @@
-❌ 26-11-26-KEPPETIPOLA.pdf: no date found inside the PDF — skipped
+📷 26-11-26-KEPPETIPOLA.pdf: this PDF is a PHOTO (no text inside) — robot cannot read pictures safely, skipped. Add this day with the photo method (Claude chat).
 ✅ price-list-2026-11-25.pdf: date 2026-11-25, 73 prices entered, 12 with no price (---)
    ℹ️ 2026-11-25 already existed — replaced by this PDF
+✅ price-list-2026-11-27.pdf: date 2026-11-27, 63 prices entered, 20 with no price (---)
