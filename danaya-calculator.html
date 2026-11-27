@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>දානයකට උයන ප්‍රමාණ සහ වියදම් ගණකය | Danaya &amp; Event Calculator - TopGoviya.lk</title>
+  <!-- TEMPORARY: keeps Google from indexing this page while the starting prices are still samples.
+       When real prices are in, DELETE the next line, then request indexing in Search Console. -->
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="Calculate rice, dhal, vegetables, coconuts, spices, meat/fish quantities and an estimated LKR budget for 15 to 150 guests for Danaya, Sanghika Danaya, and events in Sri Lanka." />
+  <meta name="keywords" content="දානයකට උයන ප්‍රමාණ, දානමය වියදම් ගණකය, දානයකට එළවළු ප්‍රමාණ, danaya quantity calculator sri lanka, event food budget calculator lkr, cooking quantities for 50 100 people sri lanka" />
+  <link rel="canonical" href="https://topgoviya.lk/danaya-calculator.html" />
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://topgoviya.lk/danaya-calculator.html" />
+  <meta property="og:title" content="දානයකට උයන ප්‍රමාණ සහ වියදම් ගණකය | TopGoviya.lk" />
+  <meta property="og:description" content="Enter guest count (15–150+) and meal style to get instant Sinhala/English cooking quantities and estimated LKR market cost." />
+
+  <!-- Structured Data: WebApplication + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "දානයකට උයන ප්‍රමාණ සහ වියදම් ගණකය (Danaya & Event Calculator)",
+        "url": "https://topgoviya.lk/danaya-calculator.html",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "inLanguage": ["si", "en"],
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "LKR" },
+        "publisher": {
+          "@type": "Organization",
+          "name": "TopGoviya.lk",
+          "url": "https://topgoviya.lk/"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "දානයකට හෝ සාදයකට පිරිස 50කට කොපමණ හාල් සහ එළවළු අවශ්‍යද?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "සාමාන්‍ය දානයකට හෝ බත් වේලකට පිරිස 50කට ආසන්න වශයෙන් හාල් 7–7.5 kg පමණ, පරිප්පු 2.5 kg, අල 4 kg, අනෙකුත් එළවළු 3.5–4 kg සහ පොල් ගෙඩි 14–16ක් පමණ අවශ්‍ය වේ. මෙනු වර්ගය සහ පිසීමේ ක්‍රමය අනුව මෙය සුළු වශයෙන් වෙනස් විය හැක."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much rice and dhal is needed for 100 people in Sri Lanka?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For roughly 100 guests on a Sri Lankan rice and curry spread, plan for around 13.5 to 15 kg of raw rice (the calculator adds a 10% serving buffer) and about 5 kg of red dhal (parippu), adjusted for whether you serve one or multiple rice dishes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "පිරිස 25කට හෝ 100කට පොල් ගෙඩි කීයක් අවශ්‍ය වේද?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "කිරි හොදි, තෙල් දැමීම් සහ සම්බෝල සඳහා පුද්ගලයෙකුට දළ වශයෙන් පොල් ගෙඩි 0.25–0.30 බැගින් ගණනය කළ විට, පිරිස 25කට පොල් ගෙඩි 7–8ක් සහ 100කට පොල් ගෙඩි 28–30ක් පමණ සෑහේ."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How accurate is the estimated LKR budget on TopGoviya.lk?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The budget is an approximate estimate calculated from ingredient quantities and typical market rates. Actual spending varies by district, wholesale vs. retail buying, dish count, and daily price fluctuations."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #f7f5ee;
+      --card: #ffffff;
+      --ink: #17261f;
+      --muted: #55665e;
+      --primary: #154c3b;
+      --primary-light: #e7f1ed;
+      --border: #dcd8ca;
+      --whatsapp: #16a34a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Sinhala", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    .wrap {
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+    }
+    .top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .back-link {
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 700;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+    .badge {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+    }
+    h1 {
+      margin: 0 0 6px;
+      font-size: clamp(1.35rem, 3vw, 1.95rem);
+      color: var(--primary);
+    }
+    h2 {
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+      color: var(--primary);
+    }
+    h3 {
+      margin: 16px 0 6px;
+      font-size: 1.02rem;
+      color: var(--ink);
+    }
+    .subtitle {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 8px rgba(23, 38, 31, 0.04);
+      scroll-margin-top: 12px;
+    }
+    .card.precheck {
+      border: 2px solid var(--primary);
+      background: #fbfdfb;
+    }
+    .precheck-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .precheck-head h2 { margin: 0; }
+    .precheck-intro {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .preset-btn {
+      border: 1px solid var(--border);
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .preset-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+    select, input[type="number"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      background: #fff;
+      color: var(--ink);
+    }
+    select:disabled { background: #f2efe4; color: var(--muted); }
+    .protein-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border);
+      font-size: 14px;
+    }
+    .protein-row label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      margin: 0;
+      cursor: pointer;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .stat {
+      background: var(--primary);
+      color: #fff;
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .stat.alt {
+      background: var(--primary-light);
+      color: var(--ink);
+      border: 1px solid var(--border);
+    }
+    .stat .k {
+      font-size: 12px;
+      opacity: 0.85;
+      font-weight: 600;
+    }
+    .stat .v {
+      font-size: 20px;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .btn {
+      border: none;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-whatsapp { background: var(--whatsapp); color: #fff; }
+    .btn-secondary { background: #f2efe4; color: var(--ink); border: 1px solid var(--border); }
+    .btn-small { padding: 6px 12px; font-size: 12.5px; }
+    .table-wrap {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      padding: 10px 10px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      white-space: nowrap;
+    }
+    td:first-child { white-space: normal; }
+    th {
+      background: #f2efe4;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .num { text-align: right; font-variant-numeric: tabular-nums; }
+    .note {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin: 10px 0 0;
+    }
+    a.inline-link {
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .rate-input {
+      width: 76px;
+      padding: 5px 6px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      background: #fbfaf5;
+      color: var(--ink);
+    }
+    .rate-input.edited {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      font-weight: 700;
+    }
+    .unit { font-size: 12px; color: var(--muted); margin-left: 3px; }
+    .price-hint { margin: 0 0 8px; font-size: 13px; color: var(--muted); }
+    @media print {
+      .rate-input { border: none; background: transparent; padding: 0; width: auto; }
+      .price-hint, #resetPricesBtn { display: none; }
+      .top-bar, .precheck, .presets, .protein-row, .actions, .seo-section { display: none; }
+      body { background: #fff; }
+      .card { box-shadow: none; border-color: #ccc; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top-bar">
+      <a class="back-link" href="index.html">← අද මිල ගණන් &amp; My Basket</a>
+      <span class="badge">TopGoviya.lk • Event &amp; Danaya Planner</span>
+    </div>
+
+    <h1>දානයකට උයන ප්‍රමාණ සහ වියදම් ගණකය</h1>
+    <p class="subtitle">Danaya &amp; Event Cooking Quantity + Estimated LKR Market Cost Calculator (15–150+ Guests)</p>
+
+    <noscript>
+      <p class="note">මේ Calculator එක වැඩ කරන්න JavaScript ඕන. පහළ වගුවෙන් (15–150 පිරිස) ප්‍රමාණ බලාගන්න. / This calculator needs JavaScript; see the reference table below.</p>
+    </noscript>
+
+    <!-- Pre-Calculator Quick Questions -->
+    <div class="card precheck" id="preCheckCard">
+      <div class="precheck-head">
+        <h2>ගණනයට පෙර කෙටි ප්‍රශ්න 4ක් (Quick Setup)</h2>
+        <button type="button" class="btn btn-secondary btn-small" id="skipQuestionsBtn">කෙලින්ම Calculator එකට යන්න ↓</button>
+      </div>
+      <p class="precheck-intro">ඔබේ දානයට හෝ උත්සවයට වඩාත් ගැළපෙන ඇස්තමේන්තුව සකස් කරගන්න මේ කරුණු 4 තෝරන්න:</p>
+
+      <div class="controls">
+        <div>
+          <label for="qGuests">1. පිරිස කීයක් පමණද?</label>
+          <select id="qGuests">
+            <option value="15">පිරිස 15</option>
+            <option value="25">පිරිස 25</option>
+            <option value="50" selected>පිරිස 50</option>
+            <option value="100">පිරිස 100</option>
+            <option value="150">පිරිස 150</option>
+            <option value="custom">වෙනත් (පහළින් type කරන්න)</option>
+          </select>
+        </div>
+        <div>
+          <label for="qOccasion">2. මොන වගේ අවස්ථාවක්ද?</label>
+          <select id="qOccasion">
+            <option value="danaya_full" selected>දවල් / සංඝික දානය</option>
+            <option value="heel_breakfast">හීල් දානය (උදේ ආහාරය)</option>
+            <option value="party_lunch">උත්සවයක් / සාදයක්</option>
+          </select>
+        </div>
+        <div>
+          <label for="qVariety">3. ව්‍යංජන වර්ග කීයක් පමණද?</label>
+          <select id="qVariety">
+            <option value="standard" selected>සාමාන්‍ය (4–5 ව්‍යංජන)</option>
+            <option value="many">වැඩි ව්‍යංජන ගණනක් (6+)</option>
+            <option value="few">අඩු ව්‍යංජන ගණනක් (2–3)</option>
+          </select>
+        </div>
+        <div>
+          <label for="qProtein">4. මස් / මාළු / බිත්තර?</label>
+          <select id="qProtein">
+            <option value="chicken" selected>Chicken (කුකුල් මස්)</option>
+            <option value="fish">Fish (මාළු)</option>
+            <option value="both">Chicken + Fish</option>
+            <option value="none">නැහැ (Vegetarian)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="actions" style="margin-bottom:0;">
+        <button type="button" class="btn btn-primary" id="applyQuestionsBtn">ප්‍රමාණ සහ වියදම බලන්න →</button>
+      </div>
+    </div>
+
+    <!-- Interactive Calculator Inputs -->
+    <div class="card" id="calcCard">
+      <div class="presets" id="guestPresets">
+        <button type="button" class="preset-btn" data-guests="15">15 Guests</button>
+        <button type="button" class="preset-btn" data-guests="25">25 Guests</button>
+        <button type="button" class="preset-btn active" data-guests="50">50 Guests</button>
+        <button type="button" class="preset-btn" data-guests="100">100 Guests</button>
+        <button type="button" class="preset-btn" data-guests="150">150 Guests</button>
+      </div>
+
+      <div class="controls">
+        <div>
+          <label for="guestsInput">පිරිස (Number of Guests)</label>
+          <input type="number" id="guestsInput" min="5" max="1000" value="50" inputmode="numeric" />
+        </div>
+        <div>
+          <label for="menuType">මෙනු වර්ගය (Meal / Danaya Type)</label>
+          <select id="menuType">
+            <option value="danaya_full">සංඝික / දවල් දානය (Full Spread)</option>
+            <option value="heel_breakfast">හීල් දානය / උදේ ආහාරය (Breakfast - කිරිබත්, ලුණුමිරිස්, තේ)</option>
+            <option value="party_lunch">උත්සව / සාද දිවා ආහාරය (Event / Party Lunch)</option>
+          </select>
+        </div>
+        <div>
+          <label for="bufferPct">අමතර ප්‍රමාණය (Cooking Buffer %)</label>
+          <select id="bufferPct">
+            <option value="0">0% (Exact)</option>
+            <option value="10" selected>10% (Recommended)</option>
+            <option value="15">15% (Safe Margin)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="protein-row">
+        <label><input type="checkbox" id="incChicken" checked /> Chicken (කුකුල් මස්)</label>
+        <label><input type="checkbox" id="incFish" /> Fish (මාළු)</label>
+        <label><input type="checkbox" id="incEggs" /> Eggs (බිත්තර)</label>
+      </div>
+    </div>
+
+    <!-- Dynamic Output Card -->
+    <div class="card" id="resultCard">
+      <div class="summary-grid">
+        <div class="stat alt">
+          <div class="k">තෝරාගත් පිරිස (Guests)</div>
+          <div class="v" id="sumGuests">50</div>
+        </div>
+        <div class="stat alt">
+          <div class="k">මුළු හාල් ප්‍රමාණය (Rice)</div>
+          <div class="v" id="sumRice">7.50 kg</div>
+        </div>
+        <div class="stat">
+          <div class="k">ඇස්තමේන්තු මුළු වියදම (Est. Cost)</div>
+          <div class="v" id="sumCost" aria-live="polite">Rs. 0</div>
+        </div>
+        <div class="stat alt">
+          <div class="k">එක් අයෙකුට වියදම (Per Guest)</div>
+          <div class="v" id="sumPerGuest">Rs. 0</div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-whatsapp" id="shareWaBtn">WhatsApp මගින් යවන්න</button>
+        <button type="button" class="btn btn-secondary" id="copyListBtn">බඩු ලැයිස්තුව Copy කරන්න</button>
+        <button type="button" class="btn btn-secondary" onclick="window.print()">Print / Save PDF</button>
+        <span id="copyMsg" role="status" style="align-self:center; font-size:13px; font-weight:700; color:var(--primary);"></span>
+      </div>
+
+      <p class="price-hint">
+        ✏️ <strong>ඒකක මිල ඔබට වෙනස් කළ හැක.</strong> ඔබේ ප්‍රදේශයේ මිල ටයිප් කළාම මුළු වියදම ඉබේම වෙනස් වේ.
+        <button type="button" class="btn btn-secondary btn-small" id="resetPricesBtn">මුල් මිල වලට යන්න (Reset)</button>
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ද්‍රව්‍යය (Ingredient)</th>
+              <th class="num">අවශ්‍ය ප්‍රමාණය (Qty)</th>
+              <th class="num">ඒකක මිල (Rate LKR) ✏️</th>
+              <th class="num">ආසන්න වියදම (Est. LKR)</th>
+            </tr>
+          </thead>
+          <tbody id="calcBody"></tbody>
+        </table>
+      </div>
+      <p class="note">
+        * වෙළඳපොළෙන් මිලදී ගැනීමට පහසු වන පරිදි ප්‍රමාණ 250g ඒකක වලට වටයා ඇත. මෙය සැලසුම් කිරීම සඳහා වන දළ ඇස්තමේන්තුවකි (approximate estimate). මස් සහ මාළු ප්‍රමාණ මිලදී ගන්නා (raw) බර ය; කුකුල් මස් ඇටත් සමඟ (bone-in).
+      </p>
+      <p class="note" id="breakfastNote" hidden>
+        * හීල් දානය (උදේ ආහාරය): කිරිබත්, ලුණුමිරිස් / පොල් සම්බෝල, කෙසෙල්, රසකැවිලි සහ තේ සඳහා ගණනය කර ඇත. පිට්ටු, ව්‍යංජන වගේ වෙනත් දේවල් ඔබේ ප්‍රදේශයේ දානයට ඇතුළත් නම් ඒවා වෙනම එකතු කරගන්න. රසකැවිලි කඩෙන් ගන්නා (ready-made) ඒවා ලෙස ගණනය කර ඇත.
+      </p>
+      <p class="note" id="priceNote">
+        * ආරම්භක ඒකක මිල ගණන් සාමාන්‍ය ආසන්න (typical) මිල ය; ඔබේ මිල දැමූ විට ඒවා ඔබේ browser එකේ පමණක් සුරැකේ. ඔබේ ප්‍රදේශයේ අද මිල සඳහා <a class="inline-link" href="index.html">අද මිල ගණන්</a> බලන්න.
+      </p>
+    </div>
+
+    <!-- Static SEO Reference Chart (15 to 150 Guests) -->
+    <section class="card seo-section" aria-labelledby="refChartHeading">
+      <h2 id="refChartHeading">පිරිස 15 සිට 150 දක්වා දානයකට / සාදයකට උයන සම්මත ප්‍රමාණ වගුව</h2>
+      <p style="margin-top:0; color:var(--muted); font-size:14px;">
+        සාමාන්‍ය ශ්‍රී ලාංකික බත් සහ ව්‍යංජන (Rice &amp; Curry) වේලක් සඳහා මූලික මාර්ගෝපදේශය. ඉහත Calculator එක 10% අමතර ප්‍රමාණයක් එකතු කරන නිසා එහි අගයන් මීට තරමක් වැඩි විය හැක (Buffer 0% තෝරලා බැලුවොත් මේ අගයන්ට ආසන්න වේ):
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ද්‍රව්‍යය (Ingredient)</th>
+              <th class="num">15 Guests</th>
+              <th class="num">25 Guests</th>
+              <th class="num">50 Guests</th>
+              <th class="num">100 Guests</th>
+              <th class="num">150 Guests</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>හාල් (Raw Rice - Samba/Nadu)</strong></td><td class="num">2.0 kg</td><td class="num">3.5 kg</td><td class="num">7.0 kg</td><td class="num">13.5 kg</td><td class="num">20.0 kg</td></tr>
+            <tr><td><strong>මයිසූර් පරිප්පු (Red Dhal)</strong></td><td class="num">750 g</td><td class="num">1.25 kg</td><td class="num">2.5 kg</td><td class="num">5.0 kg</td><td class="num">7.5 kg</td></tr>
+            <tr><td><strong>අල (Potatoes)</strong></td><td class="num">1.25 kg</td><td class="num">2.0 kg</td><td class="num">4.0 kg</td><td class="num">8.0 kg</td><td class="num">12.0 kg</td></tr>
+            <tr><td><strong>ප්‍රධාන එළවළු (Beans / Carrot / Leeks)</strong></td><td class="num">1.25 kg</td><td class="num">2.0 kg</td><td class="num">3.5–4.0 kg</td><td class="num">7.5 kg</td><td class="num">11.0 kg</td></tr>
+            <tr><td><strong>අමතර ව්‍යංජන (Brinjal Moju / Polos)</strong></td><td class="num">1.0 kg</td><td class="num">1.75 kg</td><td class="num">3.5 kg</td><td class="num">6.5 kg</td><td class="num">10.0 kg</td></tr>
+            <tr><td><strong>මැල්ලුම් / සලාද (Gotukola / Greens)</strong></td><td class="num">600 g</td><td class="num">1.0 kg</td><td class="num">2.0 kg</td><td class="num">4.0 kg</td><td class="num">6.0 kg</td></tr>
+            <tr><td><strong>පොල් ගෙඩි (Coconuts)</strong></td><td class="num">4–5 nuts</td><td class="num">7–8 nuts</td><td class="num">14–16 nuts</td><td class="num">28–30 nuts</td><td class="num">42–45 nuts</td></tr>
+            <tr><td><strong>රතු / බී ළූණු (Onions)</strong></td><td class="num">500 g</td><td class="num">750 g</td><td class="num">1.5 kg</td><td class="num">3.0 kg</td><td class="num">4.5 kg</td></tr>
+            <tr><td><strong>තක්කාලි (Tomatoes)</strong></td><td class="num">250 g</td><td class="num">500 g</td><td class="num">1.0 kg</td><td class="num">2.0 kg</td><td class="num">3.0 kg</td></tr>
+            <tr><td><strong>අමු මිරිස් (Green Chilies)</strong></td><td class="num">100 g</td><td class="num">150 g</td><td class="num">250 g</td><td class="num">500 g</td><td class="num">750 g</td></tr>
+            <tr><td><strong>සුදු ළූණු සහ ඉඟුරු (Garlic &amp; Ginger)</strong></td><td class="num">100 g</td><td class="num">200 g</td><td class="num">350–400 g</td><td class="num">750 g</td><td class="num">1.1 kg</td></tr>
+            <tr><td><strong>තුනපහ සහ මිරිස් කුඩු (Curry &amp; Chili Powder)</strong></td><td class="num">100 g</td><td class="num">200 g</td><td class="num">350–400 g</td><td class="num">700 g</td><td class="num">1.0 kg</td></tr>
+            <tr><td><strong>පොල් තෙල් (Cooking Oil)</strong></td><td class="num">300 ml</td><td class="num">500 ml</td><td class="num">1.0 L</td><td class="num">2.0 L</td><td class="num">3.0 L</td></tr>
+            <tr><td><strong>කුකුල් මස් (Chicken - Bone-in)</strong></td><td class="num">2.5 kg</td><td class="num">4.0 kg</td><td class="num">8.0 kg</td><td class="num">16.0 kg</td><td class="num">24.0 kg</td></tr>
+            <tr><td><strong>මාළු (Fish - Thalapath / Kelawalla)</strong></td><td class="num">2.0 kg</td><td class="num">3.25 kg</td><td class="num">6.5 kg</td><td class="num">13.0 kg</td><td class="num">19.5 kg</td></tr>
+            <tr><td><strong>බිත්තර (Eggs)</strong></td><td class="num">15 eggs</td><td class="num">25 eggs</td><td class="num">50 eggs</td><td class="num">100 eggs</td><td class="num">150 eggs</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- On-Page SEO Guide & FAQ Section -->
+    <section class="card seo-section" aria-labelledby="seoGuideHeading">
+      <h2 id="seoGuideHeading">දානයකට සහ උත්සවයකට අවශ්‍ය ප්‍රමාණ සැලසුම් කරන විදිහ (Guide)</h2>
+      <p>
+        දානයක් (සංඝික දානය, දවල් දානය හෝ හීල් දානය), පවුලේ උත්සවයක් හෝ සාදයක් සැලසුම් කිරීමේදී පිරිසට සරිලන ලෙස <strong>හාල්, පරිප්පු, එළවළු, පොල් සහ කුළුබඩු</strong> ප්‍රමාණ කල්තියා ගණනය කිරීමෙන් අනවශ්‍ය වියදම් සහ ආහාර අපතේ යාම අඩු කරගත හැක.
+      </p>
+      <ul style="padding-left:20px; margin:10px 0 16px;">
+        <li><strong>ව්‍යංජන ගණන අනුව සකස් කරන්න:</strong> ව්‍යංජන වර්ග ගණන වැඩි වන විට එක් එක් එළවළුවෙන් බෙදෙන ප්‍රමාණය සාමාන්‍යයෙන් ටිකක් අඩු වේ.</li>
+        <li><strong>10%–15% Buffer එකක් තබන්න:</strong> දෙවන වර බෙදීමට හෝ පිසීමේදී සිදුවන සුළු අඩුපාඩු සඳහා සුළු අතිරික්තයක් තබා ගැනීම ප්‍රායෝගික ය.</li>
+        <li><strong>වෙළඳපොළ මිල සමඟ සසඳන්න:</strong> දෛනික මිල වෙනස්වීම් අනුව මුළු ඇස්තමේන්තු වියදම වෙනස් විය හැකි බැවින් මිලදී ගැනීමට පෙර <a class="inline-link" href="index.html">අද මිල ගණන්</a> පරීක්ෂා කරන්න.</li>
+      </ul>
+
+      <h3>නිතර අසන ප්‍රශ්න (FAQ)</h3>
+      <p style="margin:6px 0;"><strong>ප්‍රශ්නය:</strong> දානයකට හෝ සාදයකට පිරිස 50කට කොපමණ හාල් සහ එළවළු අවශ්‍යද?<br/>
+      <strong>පිළිතුර:</strong> සාමාන්‍ය දානයකට හෝ බත් වේලකට පිරිස 50කට ආසන්න වශයෙන් හාල් 7–7.5 kg පමණ, පරිප්පු 2.5 kg, අල 4 kg, අනෙකුත් එළවළු 3.5–4 kg සහ පොල් ගෙඩි 14–16ක් පමණ අවශ්‍ය වේ.</p>
+      <p style="margin:6px 0;"><strong>ප්‍රශ්නය:</strong> පිරිස 25කට හෝ 100කට පොල් ගෙඩි කීයක් අවශ්‍ය වේද?<br/>
+      <strong>පිළිතුර:</strong> කිරි හොදි, තෙල් දැමීම් සහ සම්බෝල සඳහා පුද්ගලයෙකුට දළ වශයෙන් පොල් ගෙඩි 0.25–0.30 බැගින් ගණනය කළ විට, පිරිස 25කට පොල් ගෙඩි 7–8ක් සහ 100කට පොල් ගෙඩි 28–30ක් පමණ සෑහේ.</p>
+      <p style="margin:6px 0;"><strong>ප්‍රශ්නය:</strong> මේ ගණනය කිරීම් ස්ථිර මිලක්ද?<br/>
+      <strong>පිළිතුර:</strong> නැත, මෙය සැලසුම් කිරීම සඳහා වන දළ ඇස්තමේන්තුවක් (estimate) පමණි. තොග හෝ සිල්ලර මිලදී ගැනීම් සහ පළාත අනුව වියදම වෙනස් විය හැක.</p>
+      <p style="margin:6px 0;"><strong>Question:</strong> How much rice and dhal is needed for 100 people in Sri Lanka?<br/>
+      <strong>Answer:</strong> For roughly 100 guests on a Sri Lankan rice and curry spread, plan for around 13.5 to 15 kg of raw rice (the calculator adds a 10% serving buffer) and about 5 kg of red dhal (parippu), adjusted for whether you serve one or multiple rice dishes.</p>
+      <p style="margin:6px 0;"><strong>Question:</strong> How accurate is the estimated LKR budget on TopGoviya.lk?<br/>
+      <strong>Answer:</strong> The budget is an approximate estimate calculated from ingredient quantities and typical market rates. Actual spending varies by district, wholesale vs. retail buying, dish count, and daily price fluctuations.</p>
+    </section>
+  </div>
+
+  <script>
+    // ============================================================
+    // PRICES — typical sample rates (LKR). Update these whenever you
+    // want, or later connect them to your daily TopGoviya price data.
+    // ============================================================
+    const PRICES_LKR = {
+      rice_per_kg: 230,
+      dhal_per_kg: 320,
+      potato_per_kg: 360,
+      green_veg_per_kg: 380,
+      side_veg_per_kg: 300,
+      greens_per_kg: 180,
+      coconut_each: 120,
+      onion_per_kg: 340,
+      tomato_per_kg: 320,
+      green_chili_per_kg: 650,
+      ginger_garlic_per_kg: 950,
+      curry_powder_per_kg: 2200,
+      chili_powder_per_kg: 1800,
+      other_spices_per_guest: 8,
+      oil_per_l: 680,
+      chicken_per_kg: 1150,
+      fish_per_kg: 1650,
+      egg_each: 45,
+      // Heel danaya (breakfast) items
+      banana_each: 25,
+      sweet_each: 40,
+      tea_per_kg: 2400,
+      sugar_per_kg: 330,
+      milk_powder_per_kg: 1900,
+      breakfast_other_per_guest: 5
+    };
+
+    // Copy of the starting prices (used by the "Reset prices" button)
+    const PRICES_DEFAULT = Object.assign({}, PRICES_LKR);
+    // Change this text whenever you update the prices above, so visitors' old saved prices are cleared
+    const PRICES_VERSION = "2026-11-27-sample";
+
+    // ============================================================
+    // HEEL DANAYA (BREAKFAST) — amount per guest. Change these
+    // numbers any time if your experience says otherwise.
+    // ============================================================
+    const BREAKFAST_PER_GUEST = {
+      rice_g: 70,            // raw rice for kiribath
+      coconut_nuts: 0.15,    // kiribath milk + pol sambol
+      onion_g: 15,           // red onion for lunu miris
+      dried_chili_g: 2,      // chili flakes for lunu miris
+      bananas: 1,            // pieces
+      sweets_pieces: 2,      // kavum / kokis / aggala etc. (ready-made)
+      tea_leaves_g: 2,
+      sugar_g: 12,
+      milk_powder_g: 8
+    };
+
+    const guestsInput = document.getElementById("guestsInput");
+    const menuTypeEl = document.getElementById("menuType");
+    const bufferPctEl = document.getElementById("bufferPct");
+    const incChickenEl = document.getElementById("incChicken");
+    const incFishEl = document.getElementById("incFish");
+    const incEggsEl = document.getElementById("incEggs");
+    const calcBody = document.getElementById("calcBody");
+
+    const qGuests = document.getElementById("qGuests");
+    const qOccasion = document.getElementById("qOccasion");
+    const qVariety = document.getElementById("qVariety");
+    const qProtein = document.getElementById("qProtein");
+    const applyQuestionsBtn = document.getElementById("applyQuestionsBtn");
+    const skipQuestionsBtn = document.getElementById("skipQuestionsBtn");
+
+    function roundUp250g(kg) {
+      return Math.ceil(kg * 4 - 1e-9) / 4;
+    }
+
+    // Finer rounding for small quantities (chilies, ginger/garlic, spice powders)
+    function roundUpTo(kg, step) {
+      return Math.ceil(kg / step - 1e-9) * step;
+    }
+
+    // Show quantities under 1 kg in grams ("0.10 kg" -> "100 g")
+    function prettyQty(label) {
+      const m = String(label).match(/^(\d+(?:\.\d+)?) kg$/);
+      if (m && Number(m[1]) < 1) return Math.round(Number(m[1]) * 1000) + " g";
+      return label;
+    }
+
+    function formatLkr(n) {
+      return "Rs. " + Math.round(n).toLocaleString("en-LK");
+    }
+
+    function buildBreakfast(guests, buffer) {
+      const B = BREAKFAST_PER_GUEST;
+      const P = PRICES_LKR;
+      const g = guests * buffer;
+      const riceKg = roundUp250g((g * B.rice_g) / 1000);
+      const coconuts = Math.ceil(g * B.coconut_nuts - 1e-9);
+      const onionKg = roundUp250g((g * B.onion_g) / 1000);
+      const chiliKg = roundUpTo((g * B.dried_chili_g) / 1000, 0.05);
+      const bananas = Math.ceil(g * B.bananas - 1e-9);
+      const sweets = Math.ceil(g * B.sweets_pieces - 1e-9);
+      const teaKg = roundUpTo((g * B.tea_leaves_g) / 1000, 0.05);
+      const sugarKg = roundUp250g((g * B.sugar_g) / 1000);
+      const milkKg = roundUp250g((g * B.milk_powder_g) / 1000);
+
+      const rows = [
+        { name: "කිරිබත් සඳහා හාල් (Rice for Kiribath)", qtyLabel: `${riceKg.toFixed(2)} kg`, key: "rice_per_kg", unit: "/kg", cost: riceKg * P.rice_per_kg },
+        { name: "පොල් ගෙඩි (Coconuts: Kiribath milk + Pol Sambol)", qtyLabel: `${coconuts} nuts`, key: "coconut_each", unit: "/nut", cost: coconuts * P.coconut_each },
+        { name: "රතු ළූණු (Red Onions - Lunu Miris)", qtyLabel: `${onionKg.toFixed(2)} kg`, key: "onion_per_kg", unit: "/kg", cost: onionKg * P.onion_per_kg },
+        { name: "කෑලි මිරිස් (Dried Chili Flakes)", qtyLabel: `${chiliKg.toFixed(2)} kg`, key: "chili_powder_per_kg", unit: "/kg", cost: chiliKg * P.chili_powder_per_kg },
+        { name: "කෙසෙල් (Bananas)", qtyLabel: `${bananas} pcs`, key: "banana_each", unit: "/pc", cost: bananas * P.banana_each },
+        { name: "රසකැවිලි (Sweets: Kavum / Kokis / Aggala - ready-made)", qtyLabel: `${sweets} pcs`, key: "sweet_each", unit: "/pc", cost: sweets * P.sweet_each },
+        { name: "තේ කොළ (Tea Leaves)", qtyLabel: `${teaKg.toFixed(2)} kg`, key: "tea_per_kg", unit: "/kg", cost: teaKg * P.tea_per_kg },
+        { name: "සීනි (Sugar)", qtyLabel: `${sugarKg.toFixed(2)} kg`, key: "sugar_per_kg", unit: "/kg", cost: sugarKg * P.sugar_per_kg },
+        { name: "කිරි පිටි (Milk Powder)", qtyLabel: `${milkKg.toFixed(2)} kg`, key: "milk_powder_per_kg", unit: "/kg", cost: milkKg * P.milk_powder_per_kg },
+        { name: "ලුණු, දෙහි සහ අනෙකුත් (Salt, Lime & Other)", qtyLabel: "Bundle", key: "breakfast_other_per_guest", unit: "/guest", cost: g * P.breakfast_other_per_guest }
+      ];
+      return { riceKg, rows };
+    }
+
+    function renderResult(guests, riceKg, rows) {
+      const totalCost = rows.reduce((sum, r) => sum + r.cost, 0);
+
+      document.getElementById("sumGuests").textContent = guests;
+      document.getElementById("sumRice").textContent = `${riceKg.toFixed(2)} kg`;
+      document.getElementById("sumCost").textContent = formatLkr(totalCost);
+      document.getElementById("sumPerGuest").textContent = formatLkr(totalCost / guests);
+      document.getElementById("breakfastNote").hidden = menuTypeEl.value !== "heel_breakfast";
+
+      // Remember which price box the person is typing in, so typing is not interrupted
+      const ae = document.activeElement;
+      const focusKey = ae && ae.classList && ae.classList.contains("rate-input") ? ae.dataset.key : null;
+
+      calcBody.innerHTML = rows.map(r => {
+        const price = PRICES_LKR[r.key];
+        const edited = Math.abs(price - PRICES_DEFAULT[r.key]) > 1e-9;
+        return `
+        <tr>
+          <td>${r.name}</td>
+          <td class="num">${prettyQty(r.qtyLabel)}</td>
+          <td class="num"><input class="rate-input${edited ? " edited" : ""}" type="text" inputmode="decimal" data-key="${r.key}" value="${price}" aria-label="ඒකක මිල (Rs.)" /><span class="unit">${r.unit}</span></td>
+          <td class="num"><strong>${formatLkr(r.cost)}</strong></td>
+        </tr>`;
+      }).join("");
+
+      if (focusKey) {
+        const el = calcBody.querySelector('.rate-input[data-key="' + focusKey + '"]');
+        if (el) {
+          el.focus();
+          try { el.setSelectionRange(el.value.length, el.value.length); } catch (e) {}
+        }
+      }
+
+      return { guests, totalCost, rows };
+    }
+
+    function calculate() {
+      const guests = Math.min(1000, Math.max(5, Number(guestsInput.value) || 0));
+      const buffer = 1 + (Number(bufferPctEl.value) || 0) / 100;
+      const mode = menuTypeEl.value;
+
+      // Dish-variety answer from the quick questions: more dishes = smaller portion of each veg
+      const varietyFactor = qVariety.value === "many" ? 0.9 : qVariety.value === "few" ? 1.1 : 1.0;
+
+      const ricePerG = mode === "party_lunch" ? 150 : 135;
+      const vegFactor = (mode === "danaya_full" ? 0.9 : 1.0) * varietyFactor;
+      const dhalFactor = mode === "party_lunch" ? 0.75 : 1.0;
+      const cocoFactor = mode === "party_lunch" ? 0.75 : 1.0;
+
+      const isVeg = mode === "heel_breakfast";
+      if (isVeg) {
+        incChickenEl.checked = false;
+        incFishEl.checked = false;
+        incEggsEl.checked = false;
+      }
+      incChickenEl.disabled = isVeg;
+      incFishEl.disabled = isVeg;
+      incEggsEl.disabled = isVeg;
+
+      const hasChicken = !isVeg && incChickenEl.checked;
+      const hasFish = !isVeg && incFishEl.checked;
+      const hasEggs = !isVeg && incEggsEl.checked;
+      const splitFactor = hasChicken && hasFish ? 0.65 : 1.0;
+
+      // Heel danaya = breakfast: its own list (not rice & curry)
+      if (isVeg) {
+        const b = buildBreakfast(guests, buffer);
+        return renderResult(guests, b.riceKg, b.rows);
+      }
+
+      const riceKg = roundUp250g(((guests * ricePerG) / 1000) * buffer);
+      const dhalKg = roundUp250g(((guests * 50 * dhalFactor) / 1000) * buffer);
+      const potatoKg = roundUp250g(((guests * 80 * vegFactor) / 1000) * buffer);
+      const greenVegKg = roundUp250g(((guests * 75 * vegFactor) / 1000) * buffer);
+      const sideVegKg = roundUp250g(((guests * 65 * vegFactor) / 1000) * buffer);
+      const greensKg = roundUp250g(((guests * 40 * vegFactor) / 1000) * buffer);
+      const coconuts = Math.ceil(guests * 0.27 * cocoFactor * buffer - 1e-9);
+      const onionKg = roundUp250g(((guests * 30) / 1000) * buffer);
+      const tomatoKg = roundUp250g(((guests * 20) / 1000) * buffer);
+      const chiliKg = roundUpTo(((guests * 5) / 1000) * buffer, 0.05);
+      const ggKg = roundUpTo(((guests * 7.5) / 1000) * buffer, 0.1);
+      const oilL = Math.max(0.25, Math.ceil(((guests * 18) / 1000) * buffer * 4) / 4);
+      const curryKg = roundUpTo(((guests * 3.5) / 1000) * buffer, 0.05);
+      const chiliPowderKg = roundUpTo(((guests * 3.5) / 1000) * buffer, 0.05);
+      const otherSpicesCost = guests * PRICES_LKR.other_spices_per_guest * buffer;
+
+      const rows = [
+        { name: "හාල් (Raw Rice)", qtyLabel: `${riceKg.toFixed(2)} kg`, key: "rice_per_kg", unit: "/kg", cost: riceKg * PRICES_LKR.rice_per_kg },
+        { name: "මයිසූර් පරිප්පු (Red Dhal)", qtyLabel: `${dhalKg.toFixed(2)} kg`, key: "dhal_per_kg", unit: "/kg", cost: dhalKg * PRICES_LKR.dhal_per_kg },
+        { name: "අල (Potatoes)", qtyLabel: `${potatoKg.toFixed(2)} kg`, key: "potato_per_kg", unit: "/kg", cost: potatoKg * PRICES_LKR.potato_per_kg },
+        { name: "ප්‍රධාන එළවළු (Beans / Carrot / Leeks)", qtyLabel: `${greenVegKg.toFixed(2)} kg`, key: "green_veg_per_kg", unit: "/kg", cost: greenVegKg * PRICES_LKR.green_veg_per_kg },
+        { name: "අමතර ව්‍යංජන (Brinjal / Polos / Etc.)", qtyLabel: `${sideVegKg.toFixed(2)} kg`, key: "side_veg_per_kg", unit: "/kg", cost: sideVegKg * PRICES_LKR.side_veg_per_kg },
+        { name: "මැල්ලුම් / සලාද (Leafy Greens)", qtyLabel: `${greensKg.toFixed(2)} kg`, key: "greens_per_kg", unit: "/kg", cost: greensKg * PRICES_LKR.greens_per_kg },
+        { name: "පොල් ගෙඩි (Coconuts)", qtyLabel: `${coconuts} nuts`, key: "coconut_each", unit: "/nut", cost: coconuts * PRICES_LKR.coconut_each },
+        { name: "රතු & බී ළූණු (Onions)", qtyLabel: `${onionKg.toFixed(2)} kg`, key: "onion_per_kg", unit: "/kg", cost: onionKg * PRICES_LKR.onion_per_kg },
+        { name: "තක්කාලි (Tomatoes)", qtyLabel: `${tomatoKg.toFixed(2)} kg`, key: "tomato_per_kg", unit: "/kg", cost: tomatoKg * PRICES_LKR.tomato_per_kg },
+        { name: "අමු මිරිස් (Green Chilies)", qtyLabel: `${chiliKg.toFixed(2)} kg`, key: "green_chili_per_kg", unit: "/kg", cost: chiliKg * PRICES_LKR.green_chili_per_kg },
+        { name: "ඉඟුරු & සුදු ළූණු (Ginger & Garlic)", qtyLabel: `${ggKg.toFixed(2)} kg`, key: "ginger_garlic_per_kg", unit: "/kg", cost: ggKg * PRICES_LKR.ginger_garlic_per_kg },
+        { name: "පොල් තෙල් (Cooking Oil)", qtyLabel: `${oilL.toFixed(2)} L`, key: "oil_per_l", unit: "/L", cost: oilL * PRICES_LKR.oil_per_l },
+        { name: "තුනපහ කුඩු (Curry Powder)", qtyLabel: `${curryKg.toFixed(2)} kg`, key: "curry_powder_per_kg", unit: "/kg", cost: curryKg * PRICES_LKR.curry_powder_per_kg },
+        { name: "මිරිස් කුඩු (Chili Powder)", qtyLabel: `${chiliPowderKg.toFixed(2)} kg`, key: "chili_powder_per_kg", unit: "/kg", cost: chiliPowderKg * PRICES_LKR.chili_powder_per_kg },
+        { name: "කහ, අබ, උළුහාල්, ලුණු වගේ අනෙකුත් (Other Spices & Salt)", qtyLabel: "Bundle", key: "other_spices_per_guest", unit: "/guest", cost: otherSpicesCost }
+      ];
+
+      if (hasChicken) {
+        const chickKg = roundUp250g(((guests * 160 * splitFactor) / 1000) * buffer);
+        rows.push({ name: "කුකුල් මස් (Chicken, bone-in)", qtyLabel: `${chickKg.toFixed(2)} kg`, key: "chicken_per_kg", unit: "/kg", cost: chickKg * PRICES_LKR.chicken_per_kg });
+      }
+      if (hasFish) {
+        const fishKg = roundUp250g(((guests * 130 * splitFactor) / 1000) * buffer);
+        rows.push({ name: "මාළු (Fish, raw weight)", qtyLabel: `${fishKg.toFixed(2)} kg`, key: "fish_per_kg", unit: "/kg", cost: fishKg * PRICES_LKR.fish_per_kg });
+      }
+      if (hasEggs) {
+        const eggs = Math.ceil(guests * buffer);
+        rows.push({ name: "බිත්තර (Eggs)", qtyLabel: `${eggs} eggs`, key: "egg_each", unit: "/egg", cost: eggs * PRICES_LKR.egg_each });
+      }
+
+      return renderResult(guests, riceKg, rows);
+    }
+
+    function buildShareText() {
+      const data = calculate();
+      const lines = [
+        `TopGoviya.lk — දානමය / උත්සව බඩු ලැයිස්තුව (${data.guests} Guests)`,
+        `ආසන්න මුළු වියදම: ${formatLkr(data.totalCost)}`,
+        "---",
+        ...data.rows.map(r => `• ${r.name}: ${prettyQty(r.qtyLabel)} (${formatLkr(r.cost)})`),
+        "---",
+        "https://topgoviya.lk/danaya-calculator.html"
+      ];
+      return lines.join("\n");
+    }
+
+    // ---------- Quick questions (pre-check) ----------
+    function syncProteinLock() {
+      const isVeg = qOccasion.value === "heel_breakfast";
+      if (isVeg) qProtein.value = "none";
+      qProtein.disabled = isVeg;
+      qVariety.disabled = isVeg;
+    }
+
+    function applyQuestions() {
+      const occ = qOccasion.value;
+      const prot = qProtein.value;
+
+      if (qGuests.value !== "custom") {
+        guestsInput.value = qGuests.value;
+        markActivePreset();
+      }
+
+      menuTypeEl.value = occ;
+
+      if (occ === "heel_breakfast") {
+        incChickenEl.checked = false;
+        incFishEl.checked = false;
+        incEggsEl.checked = false;
+      } else {
+        incChickenEl.checked = (prot === "chicken" || prot === "both");
+        incFishEl.checked = (prot === "fish" || prot === "both");
+        if (prot === "none") incEggsEl.checked = false;
+      }
+      calculate();
+    }
+
+    function scrollToEl(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    applyQuestionsBtn.addEventListener("click", () => {
+      applyQuestions();
+      scrollToEl("resultCard");
+    });
+
+    skipQuestionsBtn.addEventListener("click", () => {
+      scrollToEl("calcCard");
+    });
+
+    qOccasion.addEventListener("change", () => {
+      syncProteinLock();
+      applyQuestions();
+    });
+    qProtein.addEventListener("change", applyQuestions);
+    qVariety.addEventListener("change", calculate);
+
+    // Keep the quick-question box in step when the main menu type is changed by hand
+    menuTypeEl.addEventListener("change", () => {
+      qOccasion.value = menuTypeEl.value;
+      syncProteinLock();
+    });
+
+    // ---------- Guest presets & main controls ----------
+    function markActivePreset() {
+      const v = String(Number(guestsInput.value));
+      document.querySelectorAll(".preset-btn").forEach(b => {
+        b.classList.toggle("active", b.dataset.guests === v);
+      });
+      const hasPreset = Array.from(qGuests.options).some(o => o.value === v);
+      qGuests.value = hasPreset ? v : "custom";
+    }
+
+    qGuests.addEventListener("change", () => {
+      if (qGuests.value === "custom") {
+        guestsInput.focus();
+        return;
+      }
+      guestsInput.value = qGuests.value;
+      markActivePreset();
+      calculate();
+    });
+
+    document.querySelectorAll(".preset-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        guestsInput.value = btn.dataset.guests;
+        markActivePreset();
+        calculate();
+      });
+    });
+
+    guestsInput.addEventListener("input", markActivePreset);
+
+    // When the user leaves the box, show the same number the calculator really uses (5–1000)
+    guestsInput.addEventListener("change", () => {
+      const n = Math.min(1000, Math.max(5, Number(guestsInput.value) || 50));
+      guestsInput.value = n;
+      markActivePreset();
+    });
+
+    [guestsInput, menuTypeEl, bufferPctEl, incChickenEl, incFishEl, incEggsEl].forEach(el => {
+      el.addEventListener("input", calculate);
+      el.addEventListener("change", calculate);
+    });
+
+    document.getElementById("copyListBtn").addEventListener("click", async () => {
+      const text = buildShareText();
+      try {
+        await navigator.clipboard.writeText(text);
+        const msg = document.getElementById("copyMsg");
+        msg.textContent = "✓ Copy වුණා!";
+        setTimeout(() => { msg.textContent = ""; }, 2500);
+      } catch (e) {
+        window.prompt("මෙය Copy කරගන්න:", text);
+      }
+    });
+
+    document.getElementById("shareWaBtn").addEventListener("click", () => {
+      const url = "https://wa.me/?text=" + encodeURIComponent(buildShareText());
+      window.open(url, "_blank", "noopener");
+    });
+
+    // ---------- Editable prices (saved only in this visitor's own browser) ----------
+    const STORE_KEY = "tg_danaya_prices";
+
+    function savePrices() {
+      try {
+        const changed = {};
+        Object.keys(PRICES_DEFAULT).forEach(k => {
+          if (Math.abs(PRICES_LKR[k] - PRICES_DEFAULT[k]) > 1e-9) changed[k] = PRICES_LKR[k];
+        });
+        localStorage.setItem(STORE_KEY, JSON.stringify({ v: PRICES_VERSION, prices: changed }));
+      } catch (e) { /* private mode etc. - fine, prices just aren't remembered */ }
+    }
+
+    function loadPrices() {
+      try {
+        const raw = localStorage.getItem(STORE_KEY);
+        if (!raw) return;
+        const saved = JSON.parse(raw);
+        if (!saved || saved.v !== PRICES_VERSION) {
+          localStorage.removeItem(STORE_KEY);
+          return;
+        }
+        Object.keys(saved.prices || {}).forEach(k => {
+          const n = Number(saved.prices[k]);
+          if (k in PRICES_DEFAULT && isFinite(n) && n >= 0) PRICES_LKR[k] = n;
+        });
+      } catch (e) { /* ignore */ }
+    }
+
+    calcBody.addEventListener("input", (e) => {
+      const el = e.target;
+      if (!el.classList || !el.classList.contains("rate-input")) return;
+      const raw = el.value.replace(/,/g, "").trim();
+      const n = Number(raw);
+      if (raw === "" || !isFinite(n) || n < 0) return;   // wait until it is a valid number
+      PRICES_LKR[el.dataset.key] = n;
+      savePrices();
+      calculate();
+    });
+
+    // Typed something invalid and left the box? Put the last good price back (without redrawing the table).
+    calcBody.addEventListener("focusout", (e) => {
+      const el = e.target;
+      if (el.classList && el.classList.contains("rate-input")) {
+        el.value = PRICES_LKR[el.dataset.key];
+      }
+    });
+
+    document.getElementById("resetPricesBtn").addEventListener("click", () => {
+      Object.keys(PRICES_DEFAULT).forEach(k => { PRICES_LKR[k] = PRICES_DEFAULT[k]; });
+      try { localStorage.removeItem(STORE_KEY); } catch (e) {}
+      calculate();
+    });
+
+    loadPrices();
+    syncProteinLock();
+    calculate();
+  </script>
+</body>
+</html>
