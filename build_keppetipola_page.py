@@ -176,18 +176,21 @@ def build():
     out = out.replace('href="en/dambulla-market-price-today.html" class="navlink english"',
                       'href="en/keppetipola-market-price-today.html" class="navlink english"')
 
-    # ---------- menu: Keppetipola button next to Dambulla ----------
-    out = out.replace(' aria-current="page"', "")
-    if 'href="market/keppetipola.html" class="navlink' in out:
-        out = re.sub(r'(<a href="market/keppetipola\.html" class="navlink[^"]*")', r'\1 aria-current="page"', out, count=1)
-    else:
-        dm = re.search(r'<a href="index\.html" class="navlink dec">[^<]*</a>', out)
-        if not dm:
-            raise Miss("Dambulla menu button not found")
-        out = out.replace(dm.group(0), dm.group(0).replace('href="index.html"', 'href="/"')
-                          + '\n    <a href="market/keppetipola.html" class="navlink kep" aria-current="page">🥕 කැප්පෙටිපොළ</a>', 1)
-    if ".navlink.kep{" not in out:
-        out = rep1(".navlink.dec{", ".navlink.kep{background:#5f7f24;color:#fff}\n.navlink.dec{", out)
+    # ---------- menu ----------
+    # New shared menu (menu.js) highlights the current page and picks the English link by itself.
+    # The old per-page menu code below only runs if the home page still has the old menu.
+    if 'id="tgNav"' not in out:
+        out = out.replace(' aria-current="page"', "")
+        if 'href="market/keppetipola.html" class="navlink' in out:
+            out = re.sub(r'(<a href="market/keppetipola\.html" class="navlink[^"]*")', r'\1 aria-current="page"', out, count=1)
+        else:
+            dm = re.search(r'<a href="index\.html" class="navlink dec">[^<]*</a>', out)
+            if not dm:
+                raise Miss("Dambulla menu button not found")
+            out = out.replace(dm.group(0), dm.group(0).replace('href="index.html"', 'href="/"')
+                              + '\n    <a href="market/keppetipola.html" class="navlink kep" aria-current="page">🥕 කැප්පෙටිපොළ</a>', 1)
+        if ".navlink.kep{" not in out:
+            out = rep1(".navlink.dec{", ".navlink.kep{background:#5f7f24;color:#fff}\n.navlink.dec{", out)
 
     # ---------- heading ----------
     out = sub1(r'<h1 id="tH1">[^<]*</h1>', '<h1 id="tH1">කෑප්පෙටිපොළ එළවළු මිල අද</h1>', out)
