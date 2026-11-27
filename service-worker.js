@@ -7,8 +7,10 @@
 /* Updated: 07 Oct 2026 — v16: pages + data always re-checked with the server (no 10-minute browser copy); /market/ pages added */
 /* Updated: 16 Oct 2026 — v17: Krushi Pola (Google Apps Script) requests and all POST requests bypass the service worker */
 
-const CACHE_NAME = 'topgoviya-v18';
-const DATA_CACHE = 'topgoviya-data-v18';
+/* Updated: 27 Nov 2026 — v19: shared menu file /menu.js (network-first, so menu changes show at once) */
+
+const CACHE_NAME = 'topgoviya-v19';
+const DATA_CACHE = 'topgoviya-data-v19';
 
 /* ── Static files to cache for offline use ── */
 const STATIC_ASSETS = [
@@ -35,6 +37,7 @@ const STATIC_ASSETS = [
   '/market/',
   '/market/dambulla.html',
   '/market/peliyagoda.html',
+  '/menu.js',
   '/manifest.json',
   '/icon-72x72.png',
   '/icon-96x96.png',
@@ -136,6 +139,22 @@ self.addEventListener('fetch', event => {
       fetch(event.request).catch(() =>
         new Response('{}', { headers: { 'Content-Type': 'application/json' } })
       )
+    );
+    return;
+  }
+
+  /* Shared top menu file — network first, so a menu change shows on every page at once */
+  if (url.origin === self.location.origin && url.pathname === '/menu.js') {
+    event.respondWith(
+      freshFetch(event.request)
+        .then(response => {
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          }
+          return response;
+        })
+        .catch(() => caches.match(event.request))
     );
     return;
   }
