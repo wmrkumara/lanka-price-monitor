@@ -358,6 +358,24 @@ footer a{color:var(--petrol);font-weight:600}
     <span class="pill" id="updTime" hidden></span>
   </div>
 </header>
+<!-- Price Chatbot promo banner (remove this block, or its <style>, to take it off the home page) -->
+<style>
+.tgb{margin:14px 0 4px;background:var(--card);border:1px solid var(--line2);border-left:5px solid var(--petrol);border-radius:14px;padding:14px 16px}
+.tgb-t{margin:0 0 4px;font-size:16.5px;font-weight:800;line-height:1.4;color:var(--petrol2)}
+.tgb-s{margin:0 0 10px;font-size:14px;line-height:1.55;color:var(--soft)}
+.tgb-e{margin:0 0 6px;font-size:12.5px;font-weight:700;color:var(--muted)}
+.tgb-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.tgb-chip{display:inline-block;padding:7px 12px;border:1px solid var(--line2);border-radius:999px;background:#fff;color:var(--ink);font-size:13.5px;font-weight:600;text-decoration:none}
+.tgb-go{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:999px;background:var(--petrol);color:#fff!important;font-size:14.5px;font-weight:800;text-decoration:none}
+.tgb-chip:active,.tgb-go:active{transform:scale(.97)}
+</style>
+<section class="tgb" aria-label="Price Chatbot">
+  <p class="tgb-t">🥬 අද දඹුල්ල තොග එළවළු සහ පළතුරු මිල දැනගන්න දැන් පහසුයි!</p>
+  <p class="tgb-s">ඔබට අවශ්‍ය භාණ්ඩයේ නම Type කරලා (Android වල 🎤 කතා කරලත්) අපේ නොමිලේ Price Chatbot එකෙන් මිල විමසන්න.</p>
+  <p class="tgb-e">උදාහරණ:</p>
+  <div class="tgb-chips"><a class="tgb-chip" href="/price-chatbot.html?q=%E0%B6%9A%E0%B7%90%E0%B6%BB%E0%B6%A7%E0%B7%8A%20%E0%B6%B8%E0%B7%92%E0%B6%BD%20%E0%B6%9A%E0%B7%93%E0%B6%BA%E0%B6%AF%3F">කැරට් මිල කීයද?</a><a class="tgb-chip" href="/price-chatbot.html?q=%E0%B6%85%E0%B6%AF%20%E0%B6%AD%E0%B6%9A%E0%B7%8A%E0%B6%9A%E0%B7%8F%E0%B6%BD%E0%B7%92%20%E0%B6%B8%E0%B7%92%E0%B6%BD%3F">අද තක්කාලි මිල?</a><a class="tgb-chip" href="/price-chatbot.html?q=Beans%20price%20today%3F">Beans price today?</a></div>
+  <a class="tgb-go" href="/price-chatbot.html">👇 Price Chatbot එකට පිවිසෙන්න</a>
+</section>
 <section class="mood" id="mood" hidden>
   <p class="mt" id="moodTitle"></p>
   <div class="gbar" id="gbar"></div>
