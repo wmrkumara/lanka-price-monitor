@@ -54,7 +54,9 @@
   var TXT = {
     all:   { si: 'සියලු පිටු', ta: 'அனைத்தும்', en: 'All pages' },
     title: { si: 'සියලු පිටු', ta: 'அனைத்து பக்கங்கள்', en: 'All pages' },
-    isNew: { si: 'අලුත්', ta: 'புதிது', en: 'New' }
+    isNew: { si: 'අලුත්', ta: 'புதிது', en: 'New' },
+    wa:    { si: 'WhatsApp හරහා අපට කතා කරන්න', ta: 'WhatsApp மூலம் எங்களைத் தொடர்பு கொள்ளுங்கள்', en: 'Chat with us on WhatsApp' },
+    waS:   { si: 'මිලක් වැරදිද? ගැටලුවක්ද? පණිවිඩයක් එවන්න', ta: 'விலை தவறா? பிரச்சனையா? செய்தி அனுப்புங்கள்', en: 'Wrong price? Any problem? Send us a message' }
   };
 
   /* ---------- 2. HELPERS ---------- */
@@ -104,6 +106,12 @@
     '.tgn-pt{font-family:"Newsreader","Noto Sans Sinhala",serif;font-size:22px;font-weight:600;color:#0a3a36;margin:0}' +
     '.tgn-x{border:0;background:#e9e0cb;color:#3a403a;width:40px;height:40px;border-radius:11px;font-size:18px;cursor:pointer;flex:0 0 auto}' +
     '.tgn-x:hover{background:#f2d9d4;color:#b23a2e}' +
+    '.tgn-wa{display:flex;align-items:center;gap:12px;margin:10px 0 2px;padding:12px 14px;background:#15803d;color:#fff;border-radius:14px;text-decoration:none;box-shadow:0 6px 16px -8px rgba(21,128,61,.7);-webkit-tap-highlight-color:transparent}' +
+    '.tgn-wa:active{transform:scale(.985)}' +
+    '.tgn-wa .tgn-wi{flex:0 0 auto;width:42px;height:42px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center}' +
+    '.tgn-wa .tgn-wt{display:flex;flex-direction:column;gap:2px;min-width:0}' +
+    '.tgn-wa .tgn-wt b{font-size:15.5px;font-weight:800;line-height:1.3}' +
+    '.tgn-wa .tgn-wt small{font-size:12.5px;line-height:1.35;opacity:.95}' +
     '.tgn-gh{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#7a7264;margin:18px 2px 8px}' +
     '.tgn-gr{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}' +
     '.tgn-tile{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;text-align:center;padding:14px 6px 12px;min-height:92px;background:#fffdf7;border:1px solid #e3d9c4;border-radius:14px;color:#191d1a;text-decoration:none;font-size:13px;font-weight:700;line-height:1.3;transition:transform .15s,border-color .15s,box-shadow .15s}' +
@@ -171,9 +179,21 @@
   ov.innerHTML =
     '<div class="tgn-pn">' +
       '<div class="tgn-ph"><h2 class="tgn-pt">' + sp(TXT.title) + '</h2>' +
-      '<button type="button" class="tgn-x" id="tgnClose" aria-label="Close">&#10005;</button></div>' + gh +
+      '<button type="button" class="tgn-x" id="tgnClose" aria-label="Close">&#10005;</button></div>' +
+      '<a class="tgn-wa" id="tgnWa" href="#" target="_blank" rel="noopener"><span class="tgn-wi"><svg width="26" height="26" viewBox="0 0 24 24" fill="#25D366" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span><span class="tgn-wt"><b>' + sp(TXT.wa) + '</b><small>' + sp(TXT.waS) + '</small></span></a>' + gh +
     '</div>';
   document.body.appendChild(ov);
+
+  /* WhatsApp banner: number + ready message in the visitor's language (change the number here if it ever changes) */
+  var WA_NUM = '94701500743';
+  var WA_MSG = { si: 'ආයුබෝවන්, TopGoviya.lk ගැන: ', ta: 'வணக்கம், TopGoviya.lk பற்றி: ', en: 'Hello, about TopGoviya.lk: ' };
+  var waA = document.getElementById('tgnWa');
+  function setWa() {
+    var l = document.documentElement.lang; if (!WA_MSG[l]) l = 'si';
+    waA.href = 'https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(WA_MSG[l]);
+  }
+  setWa();
+  waA.addEventListener('click', setWa);
 
   /* ---------- 6. OPEN / CLOSE ---------- */
   var openBtn = document.getElementById('tgnOpen');
