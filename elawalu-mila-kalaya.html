@@ -284,7 +284,7 @@ details.faq summary{font-weight:700;cursor:pointer}details.faq p{margin:8px 0 2p
   <div class="chartbox"><div id="chIdx"></div></div>
 
   <!-- 4. Week by week -->
-  <div class="section-h"><h2 data-k="hWeek">සතිපතා මිල — මේ වසර සහ පෙර වසරවල සාමාන්‍යය</h2><div class="rule"></div></div>
+  <div class="section-h"><h2 data-k="hWeek">සතිපතා මිල — මේ වසර සහ පසුගිය වසර 2හි සාමාන්‍යය</h2><div class="rule"></div></div>
   <div class="grid" id="weekCards"></div>
   <div class="chartbox" style="margin-top:12px"><div id="chWeek"></div></div>
 
@@ -348,8 +348,8 @@ const T={
   yAvg:v=>`වසරේ සාමාන්‍ය මිල: <b>Rs. ${fmt(v)}</b>/කි.ග්‍රෑ. (සියලු මාසවල සාමාන්‍යය)`,
   sumNote:(m,ys)=>`${m} තොග මිල, වසර ${ys.length} ක (${ys.join(', ')}) දත්ත අනුව. <b>මෙය ඉතිහාසයයි — අනාවැකියක් නොවේ.</b> කාලගුණය, සැපයුම සහ ආනයන අනුව සෑම වසරකම මිල වෙනස් විය හැකිය.`,
   hMonth:'මාසික සාමාන්‍ය මිල — වසර අනුව',hIdx:'මාසය අනුව සාමාන්‍ය මිල (Rs./කි.ග්‍රෑ.)',idxNote:'🔴 රතු = වසරේ සාමාන්‍ය මිලට වඩා වැඩි මාස · 🟢 කොළ = අඩු මාස · ඉරි ඉර = වසරේ සාමාන්‍ය මිල',avgLbl:'සාමාන්‍යය',
-  hWeek:'සතිපතා මිල — මේ වසර සහ පෙර වසරවල සාමාන්‍යය',thisYr:y=>`${y} (මේ වසර)`,usual:'පෙර වසරවල සාමාන්‍යය',wk:'සතිය',
-  wkThis:(w,y)=>`නවතම සතිය (${y} සති ${w})`,wkUsual:'පෙර වසරවල එම සතියේ',wkDiff:'වෙනස',
+  hWeek:'සතිපතා මිල — මේ වසර සහ පසුගිය වසර 2හි සාමාන්‍යය',thisYr:y=>`${y} (මේ වසර)`,lastYr:ys=>`පසුගිය වසර 2 සාමාන්‍යය (${ys})`,usual:'පෙර වසරවල සාමාන්‍යය',wk:'සතිය',
+  wkThis:(w,y)=>`නවතම සතිය (${y} සති ${w})`,wkUsual:'පෙර වසරවල එම සතියේ',wkLast:(w,ys)=>`පසුගිය වසර 2හි එම සතියේ සාමාන්‍යය (${ys} සති ${w})`,wkDiff:'වෙනස',
   hPlan:'අස්වැන්න නෙළන මාසය අනුව — පැරණි මිල',planLbl:'ඔබේ අස්වැන්න නෙළන්නේ කුමන මාසයේද?',
   planTxt:(c,m,mk,avg,p)=>`<div class="s" style="font-size:15px">${m} මාසයේ ${mk} ${c} සාමාන්‍ය තොග මිල: <b style="font-family:'JetBrains Mono',monospace;font-size:20px">Rs. ${fmt(avg)}</b>/කි.ග්‍රෑ.${p!=null?' — '+T.si.vsAvg(p):''}</div>`,
   planYears:'වසර අනුව:',planBest:(m,v)=>`ඉතිහාසය අනුව මිල වැඩිම මාසය: <b>${m}</b> (සාමාන්‍යයෙන් Rs. ${fmt(v)})`,
@@ -372,8 +372,8 @@ const T={
   yAvg:v=>`ஆண்டு சராசரி விலை: <b>Rs. ${fmt(v)}</b>/கி.கி. (எல்லா மாதங்களின் சராசரி)`,
   sumNote:(m,ys)=>`${m} மொத்த விலை, ${ys.length} ஆண்டுகளின் (${ys.join(', ')}) தரவின்படி. <b>இது வரலாறு — முன்னறிவிப்பு அல்ல.</b> வானிலை, விநியோகம் மற்றும் இறக்குமதியால் ஒவ்வொரு ஆண்டும் விலை மாறலாம்.`,
   hMonth:'மாதாந்திர சராசரி விலை — ஆண்டு வாரியாக',hIdx:'மாதவாரியான சராசரி விலை (Rs./கி.கி.)',idxNote:'🔴 சிவப்பு = ஆண்டு சராசரியை விட அதிக விலை மாதங்கள் · 🟢 பச்சை = குறைவு · கோடு = ஆண்டு சராசரி விலை',avgLbl:'சராசரி',
-  hWeek:'வாராந்திர விலை — இந்த ஆண்டு மற்றும் முந்தைய ஆண்டுகளின் சராசரி',thisYr:y=>`${y} (இந்த ஆண்டு)`,usual:'முந்தைய ஆண்டுகளின் சராசரி',wk:'வாரம்',
-  wkThis:(w,y)=>`சமீபத்திய வாரம் (${y} வாரம் ${w})`,wkUsual:'முந்தைய ஆண்டுகளில் அதே வாரம்',wkDiff:'வேறுபாடு',
+  hWeek:'வாராந்திர விலை — இந்த ஆண்டு மற்றும் கடந்த 2 ஆண்டுகளின் சராசரி',thisYr:y=>`${y} (இந்த ஆண்டு)`,lastYr:ys=>`கடந்த 2 ஆண்டுகளின் சராசரி (${ys})`,usual:'முந்தைய ஆண்டுகளின் சராசரி',wk:'வாரம்',
+  wkThis:(w,y)=>`சமீபத்திய வாரம் (${y} வாரம் ${w})`,wkUsual:'முந்தைய ஆண்டுகளில் அதே வாரம்',wkLast:(w,ys)=>`கடந்த 2 ஆண்டுகளில் அதே வாரத்தின் சராசரி (${ys} வாரம் ${w})`,wkDiff:'வேறுபாடு',
   hPlan:'அறுவடை மாதத்தின்படி — பழைய விலை',planLbl:'உங்கள் அறுவடை எந்த மாதத்தில்?',
   planTxt:(c,m,mk,avg,p)=>`<div class="s" style="font-size:15px">${m} மாதத்தில் ${mk} ${c} சராசரி மொத்த விலை: <b style="font-family:'JetBrains Mono',monospace;font-size:20px">Rs. ${fmt(avg)}</b>/கி.கி.${p!=null?' — '+T.ta.vsAvg(p):''}</div>`,
   planYears:'ஆண்டு வாரியாக:',planBest:(m,v)=>`வரலாற்றின்படி அதிக விலை மாதம்: <b>${m}</b> (சராசரி Rs. ${fmt(v)})`,
@@ -396,8 +396,8 @@ const T={
   yAvg:v=>`Yearly average price: <b>Rs. ${fmt(v)}</b>/kg (average of all months)`,
   sumNote:(m,ys)=>`${m} wholesale prices, based on ${ys.length} years of data (${ys.join(', ')}). <b>This is history — not a forecast.</b> Weather, supply and imports can change prices in any year.`,
   hMonth:'Monthly average price — by year',hIdx:'Average price by month (Rs./kg)',idxNote:'🔴 Red = months above the yearly average price · 🟢 Green = below · dashed line = yearly average price',avgLbl:'average',
-  hWeek:'Weekly price — this year vs previous years\' average',thisYr:y=>`${y} (this year)`,usual:'Previous years\' average',wk:'Week',
-  wkThis:(w,y)=>`Latest week (${y} week ${w})`,wkUsual:'Same week in previous years',wkDiff:'Difference',
+  hWeek:'Weekly price — this year vs last 2 years\' average',thisYr:y=>`${y} (this year)`,lastYr:ys=>`Last 2 years' average (${ys})`,usual:'Previous years\' average',wk:'Week',
+  wkThis:(w,y)=>`Latest week (${y} week ${w})`,wkUsual:'Same week in previous years',wkLast:(w,ys)=>`Same week, last 2 years' average (${ys} week ${w})`,wkDiff:'Difference',
   hPlan:'By harvest month — past prices',planLbl:'Which month will you harvest?',
   planTxt:(c,m,mk,avg,p)=>`<div class="s" style="font-size:15px">Average ${mk} wholesale price of ${c} in ${m}: <b style="font-family:'JetBrains Mono',monospace;font-size:20px">Rs. ${fmt(avg)}</b>/kg${p!=null?' — '+T.en.vsAvg(p):''}</div>`,
   planYears:'By year:',planBest:(m,v)=>`Highest-price month in the record: <b>${m}</b> (usually Rs. ${fmt(v)})`,
@@ -490,14 +490,17 @@ function render(){
     // weekly: latest year vs average of the earlier years
     const ly=yrs[yrs.length-1], wk=IT.w[MK], prev=yrs.filter(y=>y!==ly);
     const usual=[...Array(53).keys()].map(i=>{const m=mean(prev.map(y=>wk[y][i]));return m==null?null:Math.round(m*10)/10;});
+    const pys=[String(+ly-2),String(+ly-1)].filter(y=>wk[y]);   // the 2 years before the latest year
+    const ysTxt=pys.length>1?pys[0]+'–'+pys[1]:(pys[0]||'');
+    const usual2=[...Array(53).keys()].map(i=>{const m=mean(pys.map(y=>wk[y][i]));return m==null?null:Math.round(m*10)/10;});
     lineChart(document.getElementById('chWeek'), [...Array(53).keys()].map(i=>String(i+1)),
-      [{name:t.thisYr(ly),color:'#b23a2e',vals:wk[ly],w:3},{name:t.usual,color:'#0e4f4a',vals:usual,w:2.2,dash:'6 4'}],
+      [{name:t.thisYr(ly),color:'#b23a2e',vals:wk[ly],w:3},{name:t.lastYr(ysTxt),color:'#0e4f4a',vals:usual2,w:2.2,dash:'6 4'}],
       {title:t.hWeek,every:4,lastLabel:true,tipLabel:i=>t.wk+' '+(i+1)});
     let li=-1; wk[ly].forEach((v,i)=>{ if(v!=null) li=i; });
-    if(li>=0){ const a=wk[ly][li], b=usual[li], d=b?((a-b)/b*100):null;
+    if(li>=0){ const a=wk[ly][li], b=usual2[li], d=b?((a-b)/b*100):null;
       document.getElementById('weekCards').innerHTML=
         `<div class="card"><div class="l">${t.wkThis(li+1,ly)}</div><div class="v">Rs. ${fmt(a)}<small>/kg</small></div></div>`+
-        `<div class="card"><div class="l">${t.wkUsual}</div><div class="v">${b==null?'—':'Rs. '+fmt(b)}<small>/kg</small></div></div>`+
+        `<div class="card"><div class="l">${t.wkLast(li+1,ysTxt)}</div><div class="v">${b==null?'—':'Rs. '+fmt(b)}<small>/kg</small></div></div>`+
         `<div class="card nw"><div class="l">${t.wkDiff}</div><div class="v">${d==null?'—':Math.abs(d)<3?'≈':(d>=0?'▲ ':'▼ ')+Math.abs(d).toFixed(0)+'%'}</div></div>`; }
     else document.getElementById('weekCards').innerHTML='';
   } else { ['chMonth','chIdx','chWeek'].forEach(id=>document.getElementById(id).innerHTML=`<div class="hint">${t.noData}</div>`); document.getElementById('weekCards').innerHTML=''; }
