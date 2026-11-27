@@ -131,7 +131,8 @@
     tabsHtml += '<a class="tgn-tab' + (t.hot ? ' hot' : '') + (cur ? ' on' : '') + '" href="' + t.h + '"' + (cur ? ' aria-current="page"' : '') + '>' +
       '<span class="tgn-ic" aria-hidden="true">' + t.i + '</span><span>' + sp(t) + '</span></a>';
   }
-  var enHref = onEn ? '/index.html' : '/en/dambulla-market-price-today.html';
+  var isKep = here.indexOf('keppetipola') !== -1;
+  var enHref = onEn ? (isKep ? '/market/keppetipola.html' : '/index.html') : (isKep ? '/en/keppetipola-market-price-today.html' : '/en/dambulla-market-price-today.html');
   var enTxt = onEn ? 'සිං' : 'EN';
   var enLang = onEn ? 'si' : 'en';
 
