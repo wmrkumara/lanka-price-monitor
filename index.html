@@ -392,6 +392,24 @@ footer a{color:var(--petrol);font-weight:600}
 
 <h2><span id="tMovers"></span> <small id="tMoversSub"></small></h2>
 <div class="movers" id="movers"><div class="loading">…</div></div>
+<!--OTHER-MARKETS--><style>
+.omk{margin:22px 0 4px;background:var(--card);border:1px solid var(--line2);border-left:5px solid var(--gold);border-radius:14px;padding:14px 16px}
+.omk h2{margin:0 0 2px;font-size:18px}
+.omk .oms{margin:0 0 10px;font-size:13px;color:var(--muted)}
+.omk .om-list{display:flex;flex-wrap:wrap;gap:8px}
+.om-chip{display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;border:1px solid var(--line2);border-radius:999px;background:#fff;color:var(--petrol);font-weight:700;font-size:14.5px;text-decoration:none}
+.om-chip:hover{border-color:var(--petrol)}
+.om-chip.hot{background:var(--petrol);border-color:var(--petrol);color:#fff}
+.om-chip.all{background:var(--paper);border-style:dashed}
+.om-ta,.om-en{display:none}
+html[lang="ta"] .om-si,html[lang="en"] .om-si{display:none}
+html[lang="ta"] .om-ta,html[lang="en"] .om-en{display:inline}
+</style>
+<section class="omk" aria-label="Other market prices">
+  <h2>🏪 <span class="om-si">වෙනත් වෙළඳපොළ මිල</span><span class="om-ta">பிற சந்தை விலைகள்</span><span class="om-en">Other market prices</span></h2>
+  <p class="oms"><span class="om-si">පෑලියගොඩ, මීගොඩ, මහනුවර ඇතුළු තොග වෙළඳපොළ — HARTI දත්ත</span><span class="om-ta">பெலியகொட, மீகொட, கண்டி உட்பட மொத்த சந்தைகள் — HARTI தரவு</span><span class="om-en">Wholesale markets incl. Peliyagoda, Meegoda, Kandy — HARTI data</span></p>
+  <div class="om-list"><a class="om-chip hot" href="market/peliyagoda.html"><span class="om-si">පෑලියගොඩ</span><span class="om-ta">பெலியகொட</span><span class="om-en">Peliyagoda</span></a><a class="om-chip" href="market/keppetipola.html"><span class="om-si">කැප්පෙටිපොල</span><span class="om-ta">கப்பெட்டிபொல</span><span class="om-en">Keppetipola</span></a><a class="om-chip" href="market/meegoda.html"><span class="om-si">මීගොඩ</span><span class="om-ta">மீகொட</span><span class="om-en">Meegoda</span></a><a class="om-chip" href="market/kandy.html"><span class="om-si">මහනුවර</span><span class="om-ta">கண்டி</span><span class="om-en">Kandy</span></a><a class="om-chip" href="market/thambuththegama.html"><span class="om-si">තඹුත්තේගම</span><span class="om-ta">தம்புத்தேகம</span><span class="om-en">Thambuththegama</span></a><a class="om-chip" href="market/nuwara-eliya.html"><span class="om-si">නුවරඑළිය</span><span class="om-ta">நுவரெலியா</span><span class="om-en">Nuwara Eliya</span></a><a class="om-chip" href="market/bandarawela.html"><span class="om-si">බණ්ඩාරවෙල</span><span class="om-ta">பண்டாரவளை</span><span class="om-en">Bandarawela</span></a><a class="om-chip" href="market/veyangoda.html"><span class="om-si">වේයන්ගොඩ</span><span class="om-ta">வேயங்கொடை</span><span class="om-en">Veyangoda</span></a><a class="om-chip" href="market/norochchole.html"><span class="om-si">නොරොච්චෝල</span><span class="om-ta">நொரோச்சோலை</span><span class="om-en">Norochchole</span></a><a class="om-chip all" href="wholesale.html">📦 <span class="om-si">සියලු තොග මිල</span><span class="om-ta">அனைத்து மொத்த விலை</span><span class="om-en">All wholesale prices</span></a></div>
+</section><!--/OTHER-MARKETS-->
 <!--KP-PROMO--><style>
 .kpHome{display:block;text-decoration:none;text-align:center;margin:22px 0 4px;padding:16px 18px 14px;border-radius:16px;background:linear-gradient(135deg,#c9992e,#a9802a);color:#fff;border:1px solid #a9802a;animation:kpGlow 2.6s ease-in-out infinite;box-sizing:border-box}
 .kpHome .kq{font-weight:800;font-size:17px;line-height:1.35}.kpHome .kb{display:inline-block;margin:10px 0 6px;background:#fff;color:#7a5a12;font-weight:800;font-size:17px;padding:9px 22px;border-radius:999px}.kpHome .kd{font-size:13.5px;opacity:.95;line-height:1.45}
