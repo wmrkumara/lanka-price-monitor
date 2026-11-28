@@ -156,17 +156,17 @@ def official_harti_link(harti, market, last):
     f = harti_pdf_for(report)
     if not f:
         return ""
-    # The PDFs are not part of the published website (_config.yml), so link to GitHub's copy.
-    return (f'<p class="asof" style="margin-top:6px">📑 <a href="https://raw.githubusercontent.com/wmrkumara/lanka-price-monitor/main/harti_pdfs/{quote(f)}" rel="noopener">'
-            f'HARTI මුල් වාර්තාව (නිල PDF) — {fdate(d_(report), "si")}</a> · Official HARTI report. '
+    # Small source line only (no PDF link): visitors stay on the site. Sources are listed once on data-sources.html.
+    return (f'<p class="asof" style="margin-top:6px;font-size:12.5px">📑 HARTI වාර්තාව — {fdate(d_(report), "si")} · Source: HARTI · '
+            f'<a href="../data-sources.html">දත්ත මූලාශ්‍ර / Data sources</a> · '
             f'මිලක් වැරදි යැයි සිතේද? <a href="../contact.html?t=price">අපට දන්වන්න</a> / Spotted a wrong price? Tell us.</p>')
 
 def official_cbsl_link(cd):
     f = f"price_report_{cd.strftime('%Y%m%d')}_e.pdf"
     if not os.path.exists(os.path.join("pdfs", f)):
         return ""
-    return (f'<p class="asof" style="margin-top:6px">📑 <a href="../pdfs/{f}" rel="noopener">'
-            f'මහ බැංකු මුල් වාර්තාව (නිල PDF) — {fdate(cd, "si")}</a> · Official Central Bank report.</p>')
+    return (f'<p class="asof" style="margin-top:6px;font-size:12.5px">📑 මහ බැංකු වාර්තාව — {fdate(cd, "si")} · Source: Central Bank of Sri Lanka · '
+            f'<a href="../data-sources.html">දත්ත මූලාශ්‍ර / Data sources</a></p>')
 
 def in_latest_report(harti, market):
     return any(isinstance((c.get("markets") or {}).get(market), dict) and c["markets"][market].get("mid") is not None
